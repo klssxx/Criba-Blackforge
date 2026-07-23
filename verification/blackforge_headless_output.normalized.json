@@ -1,0 +1,678 @@
+{
+  "causal_axes_represented": [
+    "authority_source",
+    "authorization_rule",
+    "decision_owner",
+    "evidence_required",
+    "failure_default",
+    "incentive_structure",
+    "resource_dependency"
+  ],
+  "cosmetic_rejected": 0,
+  "ideas": [
+    {
+      "blackforge_id": "BF-CYB-M800-0561",
+      "causal_axis_primary": "authorization_rule",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "authorization_rule": "authorization_rule"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "Verificar cada acceso sin confiar por ubicación o identidad previa.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Ciberseguridad"
+        ],
+        "mechanism": [
+          "trust_identity_access"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF01",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 64,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Zero Trust"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0566",
+      "causal_axis_primary": "failure_default",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "failure_default": "failure_default"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "Ejecutar cambios en entornos desechables.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Ciberseguridad"
+        ],
+        "mechanism": [
+          "failure_resilience"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF02",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 58,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Aislamiento por ejecución"
+    },
+    {
+      "blackforge_id": "BF-CYB-L600-1511",
+      "causal_axis_primary": "authority_source",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "authority_source": "authority_source"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "vincular cambios a identidades criptográficas verificables.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Lentes 1501-1550"
+        ],
+        "mechanism": [
+          "supply_chain_build"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF03",
+      "pipeline_stage": "CARTOGRAFIAR",
+      "quality_score_v2": 61,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Lente de firma de commits"
+    },
+    {
+      "blackforge_id": "BF-CYB-L600-1507",
+      "causal_axis_primary": "resource_dependency",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "resource_dependency": "resource_dependency"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "buscar componentes indirectos que entran sin ser elegidos explícitamente.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Lentes 1501-1550"
+        ],
+        "mechanism": [
+          "supply_chain_build"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF04",
+      "pipeline_stage": "DESCOMPONER",
+      "quality_score_v2": 67,
+      "safety_class": "S0_CONCEPTUAL",
+      "title": "Lente de dependencia transitiva"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0554",
+      "causal_axis_primary": "decision_owner",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "decision_owner": "decision_owner"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "Someter decisiones a principios superiores verificables.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "IA y automatización"
+        ],
+        "mechanism": [
+          "agents_ai_devtools"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF05",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 60,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Agente constitucional"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0545",
+      "causal_axis_primary": "evidence_required",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "evidence_required": "evidence_required"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "Hacer que modelos independientes revisen resultados.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "IA y automatización"
+        ],
+        "mechanism": [
+          "agents_ai_devtools"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF06",
+      "pipeline_stage": "EVALUAR",
+      "quality_score_v2": 60,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Verificación cruzada"
+    },
+    {
+      "blackforge_id": "BF-CYB-R1000-0461",
+      "causal_axis_primary": "failure_default",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "failure_default": "failure_default"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "prueba propagación limitada.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Fallo y resiliencia"
+        ],
+        "mechanism": [
+          "failure_resilience"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "evidence_based"
+        ]
+      },
+      "id": "BF07",
+      "pipeline_stage": "ROMPER",
+      "quality_score_v2": 58,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Fallo contagioso controlado"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0312",
+      "causal_axis_primary": "failure_default",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "failure_default": "failure_default"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "Aislar información inconsistente sin detener todo el sistema.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Fracaso y resiliencia"
+        ],
+        "mechanism": [
+          "failure_resilience"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF08",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 50,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Tolerancia al dato corrupto"
+    },
+    {
+      "blackforge_id": "BF-CYB-R1000-0314",
+      "causal_axis_primary": "resource_dependency",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "resource_dependency": "resource_dependency"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "revela cadenas ocultas.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Descomposición"
+        ],
+        "mechanism": [
+          "supply_chain_build"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF09",
+      "pipeline_stage": "DESCOMPONER",
+      "quality_score_v2": 54,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Descomposición por dependencia"
+    },
+    {
+      "blackforge_id": "BF-CYB-S800-0702",
+      "causal_axis_primary": "incentive_structure",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "incentive_structure": "incentive_structure"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "intenta invalidar su propia recompensa.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Agentes, razonamiento y aprendizaje"
+        ],
+        "mechanism": [
+          "agents_ai_devtools"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF10",
+      "pipeline_stage": "ATACAR",
+      "quality_score_v2": 60,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Agente con objetivo adversarial"
+    },
+    {
+      "blackforge_id": "BF-CYB-S800-0838",
+      "causal_axis_primary": "evidence_required",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "evidence_required": "evidence_required"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3,
+        "novelty": 1.0,
+        "value_score": 0.5,
+        "viability": 0.8
+      },
+      "description": "sustituye actores con permisos iguales.",
+      "extreme": false,
+      "genome": {
+        "actor": [
+          "Experimentos, pruebas y verificación"
+        ],
+        "mechanism": [
+          "trust_identity_access"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "evidence_based"
+        ]
+      },
+      "id": "BF11",
+      "pipeline_stage": "MATERIALIZAR",
+      "quality_score_v2": 58,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Prueba de invariancia de identidad"
+    }
+  ],
+  "mean_value_score": 0.5,
+  "metrics": {
+    "controlled_risk": 48,
+    "divergence": 100,
+    "feasibility": 60,
+    "mean_value_score": 0.5,
+    "potential_novelty": 100,
+    "reversibility": 74,
+    "uncertainty": 56
+  },
+  "query": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+  "real_divergent_count": 11,
+  "safety_report": [
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-M800-0561",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-M800-0566",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-L600-1511",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "analysis_and_ideation",
+      "decision": "ALLOW_CONCEPTUAL",
+      "item_id": "BF-CYB-L600-1507",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-M800-0554",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-M800-0545",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-R1000-0461",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-M800-0312",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-R1000-0314",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-S800-0702",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    },
+    {
+      "allowed_scope": "none",
+      "decision": "DENY",
+      "item_id": "BF-CYB-M800-0295",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "Objetivo externo prohibido: ejecución contra terceros no permitida."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": [
+        "external_target_scanning"
+      ]
+    },
+    {
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "item_id": "BF-CYB-S800-0838",
+      "policy_version": "BF-SAFE-2.0.0",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "session_id": "blackforge-headless",
+      "unmet_requirements": []
+    }
+  ],
+  "schema": "blackforge_headless_packet",
+  "schema_version": "2.1.0",
+  "selection": {
+    "allowed_tiers": [
+      "essential",
+      "core"
+    ],
+    "compliance": {
+      "mandatory_stages": {
+        "actual": [
+          "ATACAR",
+          "DIVERGIR",
+          "EVALUAR",
+          "ROMPER"
+        ],
+        "ok": true,
+        "required": [
+          "ROMPER",
+          "DIVERGIR",
+          "ATACAR",
+          "EVALUAR"
+        ]
+      },
+      "max_per_primary_category": {
+        "limit": 3,
+        "ok": true
+      },
+      "max_per_source_family": {
+        "limit": 2,
+        "ok": true
+      },
+      "max_unknown_causal_axis": {
+        "limit": 2,
+        "ok": true
+      },
+      "min_causal_axes": {
+        "actual": 8,
+        "ok": true,
+        "required": 4
+      },
+      "min_primary_categories": {
+        "actual": 5,
+        "ok": true,
+        "required": 5
+      },
+      "min_source_catalogs": {
+        "actual": 4,
+        "ok": true,
+        "required": 3
+      },
+      "s3_cap": {
+        "actual": 0,
+        "cap": 0,
+        "ok": true
+      },
+      "session_size_met": true
+    },
+    "failure": null,
+    "profile_used": "hybrid",
+    "s3_allowed": false,
+    "s3_count": 0,
+    "seed": 1,
+    "selected_count": 12,
+    "selected_ids": [
+      "BF-CYB-M800-0561",
+      "BF-CYB-M800-0566",
+      "BF-CYB-L600-1511",
+      "BF-CYB-L600-1507",
+      "BF-CYB-M800-0554",
+      "BF-CYB-M800-0545",
+      "BF-CYB-R1000-0461",
+      "BF-CYB-M800-0312",
+      "BF-CYB-R1000-0314",
+      "BF-CYB-S800-0702",
+      "BF-CYB-M800-0295",
+      "BF-CYB-S800-0838"
+    ],
+    "session_size": 12,
+    "status": "OK"
+  },
+  "session_id": "blackforge-headless",
+  "status": "OK",
+  "top_ideas": [
+    "BF01",
+    "BF02",
+    "BF03"
+  ]
+}

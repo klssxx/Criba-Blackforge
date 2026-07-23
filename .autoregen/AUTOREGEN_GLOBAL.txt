@@ -1,0 +1,194 @@
+PROTOCOLO GLOBAL DE AUTOSUPERVISIÓN Y AUTORREGENERACIÓN
+=======================================================
+
+Este protocolo está SIEMPRE ACTIVO durante toda la tarea.
+
+Lee primero 01_TAREA_ACTUAL.txt. Si existen HANDOFF.md,
+.autoregen/session_handoff.json y RESUME_NEXT_SESSION.txt, léelos después,
+verifica el estado desde archivos y pruebas y continúa solo desde la siguiente
+acción exacta.
+
+SALUD DE SESIÓN
+---------------
+
+GREEN:
+- progreso verificable;
+- recuerdas fase, rutas, contratos e invariantes;
+- no repites acciones sin cambios.
+
+YELLOW:
+- contexto aproximado entre 65 % y 77 %;
+- primera repetición;
+- pérdida leve de precisión;
+- estás a punto de iniciar una fase extensa.
+
+En YELLOW:
+1. no empieces una fase extensa;
+2. termina la subfase actual;
+3. ejecuta su gate una sola vez;
+4. actualiza HANDOFF.md;
+5. actualiza .autoregen/session_handoff.json;
+6. reduce narrativa y archivos cargados.
+
+RED:
+- contexto aproximado igual o superior al 78 %;
+- dos comprobaciones equivalentes sin cambios;
+- contradicción con HANDOFF, archivos, pruebas o decisiones cerradas;
+- pérdida de rutas, funciones, contratos o estado;
+- intento de repetir una fase VERIFIED;
+- dos errores atribuibles a saturación;
+- no puedes indicar la siguiente acción exacta.
+
+En RED:
+1. detén nuevas modificaciones;
+2. ejecuta una sola vez el gate de los últimos cambios;
+3. distingue suite, gate, test aislado y ad-hoc;
+4. actualiza HANDOFF.md;
+5. escribe .autoregen/session_handoff.json;
+6. escribe RESUME_NEXT_SESSION.txt;
+7. escribe .autoregen/regeneration_request.json;
+8. termina con CONTEXT_REGENERATION_REQUIRED.
+
+ANTIBUCLE
+---------
+No repitas un comando si:
+- es equivalente al anterior;
+- no hubo cambios de archivos;
+- el resultado anterior fue PASS.
+
+Registra REPEATED_VERIFICATION_BLOCKED.
+
+HANDOFF
+-------
+HANDOFF.md debe contener:
+
+# AUTOREGENERATION_CHECKPOINT
+
+Timestamp:
+Motivo:
+Última fase completamente verificada:
+Fase actual:
+Estado: VERIFIED / PARTIAL / FAILED
+Trabajo completado:
+Trabajo no verificado:
+Archivos creados:
+Archivos modificados:
+Último comando:
+Resultado:
+Tests pasados:
+Tests fallidos:
+Tests no ejecutados:
+Invariantes protegidos:
+Decisiones cerradas:
+Riesgos:
+Deuda técnica:
+Próxima acción exacta:
+Próximo comando:
+Próximo test:
+Criterio para declarar VERIFIED:
+
+ESTADO ESTRUCTURADO
+-------------------
+Escribe .autoregen/session_handoff.json:
+
+{
+  "handoff_schema_version": "1.0.0",
+  "reason": "context_saturation",
+  "last_verified_phase": "",
+  "current_phase": "",
+  "current_status": "partial",
+  "last_modified_files": [],
+  "created_files": [],
+  "last_command": "",
+  "last_result": "",
+  "tests_passed": [],
+  "tests_failed": [],
+  "tests_not_run": [],
+  "protected_invariants": [],
+  "next_exact_action": "",
+  "next_exact_command": "",
+  "next_required_test": ""
+}
+
+REANUDACIÓN
+-----------
+Escribe RESUME_NEXT_SESSION.txt con instrucciones autosuficientes para:
+
+1. leer 01_TAREA_ACTUAL.txt;
+2. leer .autoregen/AUTOREGEN_GLOBAL.txt;
+3. leer HANDOFF.md;
+4. leer .autoregen/session_handoff.json;
+5. verificar el estado real;
+6. no repetir fases VERIFIED;
+7. continuar desde next_exact_action.
+
+Escribe .autoregen/regeneration_request.json:
+
+{
+  "signal": "CONTEXT_REGENERATION_REQUIRED",
+  "reason": "",
+  "last_verified_phase": "",
+  "next_action": "",
+  "handoff": "HANDOFF.md",
+  "state": ".autoregen/session_handoff.json",
+  "resume": "RESUME_NEXT_SESSION.txt"
+}
+
+Termina exactamente con:
+
+CONTEXT_REGENERATION_REQUIRED
+HANDOFF=<ruta absoluta>
+STATE=<ruta absoluta>
+RESUME=<ruta absoluta>
+REASON=<motivo>
+LAST_VERIFIED_PHASE=<fase>
+NEXT_ACTION=<acción exacta>
+
+FINALIZACIÓN
+------------
+Solo cuando toda la misión esté terminada con gates reproducibles, escribe:
+
+.autoregen/project_completed.json
+
+{
+  "signal": "PROJECT_COMPLETED",
+  "final_gate": "PASS",
+  "handoff": "HANDOFF.md"
+}
+
+Y termina exactamente con:
+
+PROJECT_COMPLETED
+
+No afirmes haber abierto una sesión nueva. El supervisor PowerShell realiza el
+reinicio real. No uses --continue ni --resume.DECISIÓN HUMANA BLOQUEANTE
+--------------------------
+Cuando la tarea exija una decisión humana que no deba resolverse por inferencia:
+
+1. detén nuevas modificaciones;
+2. actualiza HANDOFF.md;
+3. escribe .autoregen/session_handoff.json;
+4. escribe .autoregen/human_decision_required.json:
+
+{
+  "signal": "HUMAN_DECISION_REQUIRED",
+  "reason": "",
+  "decision_needed": "",
+  "alternatives": [],
+  "recommended_alternative": "",
+  "current_filesystem_state": "",
+  "next_action_after_authorization": ""
+}
+
+5. termina con una línea que empiece exactamente por:
+
+HUMAN_DECISION_REQUIRED
+
+Si la tarea exige una señal más específica, como
+BASELINE_DECISION_REQUIRED, utiliza esa señal.
+
+IMPORTANTE:
+- no menciones CONTEXT_REGENERATION_REQUIRED como parte de una frase final;
+- después de emitir una señal terminal no ejecutes herramientas;
+- no repitas verificaciones;
+- no añadas más texto.

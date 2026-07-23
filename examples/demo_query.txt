@@ -1,0 +1,2 @@
+¿Cómo podríamos diseñar un sistema de aprobación para agentes de programación que sea seguro sin depender de una autoridad central permanente?
+

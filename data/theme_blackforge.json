@@ -1,0 +1,111 @@
+{
+  "$schema_note": "BLACKFORGE visual contract tokens v1.0.0 (2026-07-24). Fuente unica de verdad para colores, radios, espaciado, sombras, tipografia e iconos de BLACKFORGE. Hermanado con CRIBA (theme_criba.json) pero firma cromatica propia: negro carbón + naranja intenso. Los docs en docs/*_BLACKFORGE.md explican el uso. Si divergen, manda este JSON.",
+  "version": "1.0.0",
+  "sibling_of": "theme_criba.json",
+  "relationship": "Mismo nivel de calidad visual y sistemas de tokens que CRIBA; distinta firma cromatica (naranja en vez de cian/violeta) y distinto tono emocional (especializacion dura, tecnica, controlada, exclusiva). No rompe CRIBA.",
+  "color": {
+    "bg": {
+      "app": "#0C0A08",
+      "panel": "#15110D",
+      "card": "#1D1712",
+      "card_hover": "#271F17",
+      "hero": "#0A0806",
+      "inset": "#120E0A"
+    },
+    "border": {
+      "soft": "#3A2E22",
+      "active": "#FF7A1A"
+    },
+    "text": {
+      "primary": "#FBF3EA",
+      "secondary": "#C9B8A6",
+      "muted": "#8A7866"
+    },
+    "accent": {
+      "orange": "#FF7A1A",
+      "orange_dim": "#C2410C",
+      "orange_glow": "#FF9A3D"
+    },
+    "success": "#3DDC84",
+    "warning": "#F5A623",
+    "error": "#FF4D4D",
+    "chart": {
+      "orange": "#FF7A1A",
+      "neutral": "#5C4B39",
+      "green": "#3DDC84",
+      "red": "#FF4D4D"
+    }
+  },
+  "gradient": {
+    "brand": ["#FF7A1A", "#FFB15C"],
+    "cta": ["#FF7A1A", "#FF5A1A"],
+    "herald": ["#FF9A3D", "#FFE0B0"]
+  },
+  "radius": {
+    "sm": 6,
+    "md": 10,
+    "lg": 14,
+    "xl": 20
+  },
+  "spacing": {
+    "4": 4,
+    "8": 8,
+    "12": 12,
+    "16": 16,
+    "20": 20,
+    "24": 24,
+    "32": 32
+  },
+  "shadow": {
+    "sm": "0 1px 3px rgba(0,0,0,0.55)",
+    "md": "0 4px 16px rgba(0,0,0,0.65)",
+    "glow_1": {
+      "blur": 14,
+      "color": "rgba(255,122,26,0.32)",
+      "note": "elemento activo/hover destacado; via QGraphicsDropShadowEffect"
+    },
+    "glow_2": {
+      "blur": 26,
+      "color": "rgba(255,154,61,0.40)",
+      "note": "SOLO el gauge central 'FORGE_INTEGRITY' / hero activo"
+    }
+  },
+  "typography": {
+    "family": "\"Inter\", \"Segoe UI Variable\", \"Segoe UI\", sans-serif",
+    "display": { "size_px": 28, "weight": 800 },
+    "h1": { "size_px": 22, "weight": 700 },
+    "h2": { "size_px": 17, "weight": 700 },
+    "h3": { "size_px": 14, "weight": 600 },
+    "body": { "size_px": 13, "weight": 400 },
+    "caption": { "size_px": 11, "weight": 500 },
+    "numbers": "tabular (tnum); hora e IDs pueden usar monoespaciada"
+  },
+  "icon": {
+    "size": {
+      "sm": 16,
+      "md": 20,
+      "lg": 28
+    },
+    "style": "lineal, stroke 1.5-2px, un solo set; coherente con el set lineal de CRIBA"
+  },
+  "layout": {
+    "sidebar_width": 240,
+    "sidebar_width_min": 216,
+    "topbar_height": 72,
+    "right_column_width": 340,
+    "right_column_width_min": 300,
+    "footer_height": 36,
+    "gutter": 16,
+    "outer_margin": 20,
+    "nav_button_height": 54,
+    "table_row_height": 44,
+    "gauge_diameter": 170,
+    "hero_aspect_ratio": "dominante central; conserva render de la criba",
+    "resolutions_target": ["1360x768", "1680x1050"]
+  },
+  "hero": {
+    "image": "data/assets/blackforge_hero.png",
+    "note": "Render 3D de la criba (chasis naranja sobre negro). Activo iconic central. Reinterpretado como laboratorio/superficie de ataque simulada, nunca como panel SCADA literal.",
+    "overlay_tokens": ["grad.herald", "color.text.primary", "color.bg.hero"]
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "package": "HERMES_AUTOREGENERACION_V3_CORREGIDO",
+  "version": "3.0.0",
+  "files": [
+    {
+      "path": ".autoregen/AUTOREGEN_GLOBAL.txt",
+      "size_bytes": 4930,
+      "sha256": "757dae25e56237b893bd8d45aa4500788f3a2d26e42c76b951770ce03e0b8d6b"
+    },
+    {
+      "path": ".autoregen/Supervisor-Hermes-AutoRegen.ps1",
+      "size_bytes": 13273,
+      "sha256": "99edf5fdb60fc35df276a4ea06648baa2bec9a377b20690b1abfe681d5602796"
+    },
+    {
+      "path": ".autoregen/logs/.gitkeep",
+      "size_bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "00_DIAGNOSTICO_HERMES.cmd",
+      "size_bytes": 359,
+      "sha256": "6bf4ecea8cd1cc85e6eaf182cbf99d3dc56e1388ec7c956114a17297e445523c"
+    },
+    {
+      "path": "01_TAREA_ACTUAL_PLANTILLA.txt",
+      "size_bytes": 158,
+      "sha256": "6ca21a436808203a72b201aa4205d1b7b4c9bdf8722a6324914056f852256e67"
+    },
+    {
+      "path": "02_INICIAR_AUTOREGENERACION.cmd",
+      "size_bytes": 602,
+      "sha256": "59e1132792b06845c0f2df53bd81a49e9b05b83fe1af8186ad7d741354312a0a"
+    },
+    {
+      "path": "03_REINICIAR_ESTADO.cmd",
+      "size_bytes": 439,
+      "sha256": "f5e0cea2622c32b869b86e29fe2e191410d2c986aac6172448aced40548be6f0"
+    },
+    {
+      "path": "04_AUTORIZAR_ALTERNATIVA_C.txt",
+      "size_bytes": 1894,
+      "sha256": "69628d67f2320591cdffec809e6531a367bc52c7dcc095ea25ae6330eae81d74"
+    },
+    {
+      "path": "README_PRIMERO_V3.txt",
+      "size_bytes": 1263,
+      "sha256": "248e4488843e9e2728d66415be01a00f7b328dec2af2c86db67161624fb08db4"
+    }
+  ]
+}

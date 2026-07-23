@@ -1,0 +1,2122 @@
+{
+  "schema": "mandatory_model_packet",
+  "schema_version": "2.0.0",
+  "packet_type": "MANDATORY_MODEL_PACKET",
+  "intent": "INNOVAR",
+  "versions": {
+    "currents": "1.0.0",
+    "selector": "1.0.0",
+    "genome": "1.0.0"
+  },
+  "original_query": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+  "selected_current": {
+    "id": "ablacion_reintroduccion",
+    "name": "Ablación, retirada y reintroducción",
+    "score": 60,
+    "selection_reasons": [
+      "La consulta presenta componentes o complejidad que pueden retirarse."
+    ]
+  },
+  "supporting_methods": [
+    {
+      "id": "M100-01",
+      "name": "Inventario de supuestos",
+      "family": "diagnostico",
+      "reason": "Hace explícitos los supuestos que podrían invalidar la propuesta."
+    },
+    {
+      "id": "M200-01",
+      "name": "Inversión de garantía",
+      "family": "inversion",
+      "reason": "Busca la condición mínima que convertiría el objetivo en un fallo."
+    },
+    {
+      "id": "M1000-01",
+      "name": "Partición de autoridad",
+      "family": "arquitectura",
+      "reason": "Separa capacidades para limitar el radio de daño."
+    },
+    {
+      "id": "M1500-01",
+      "name": "Relación metamórfica",
+      "family": "verificacion",
+      "reason": "Define evidencia reproducible donde no hay un único resultado correcto."
+    }
+  ],
+  "contextualization": {
+    "problem": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+    "known_space": [
+      "El enfoque estándar delega la decisión a un operador humano.",
+      "La solución dominante añade más reglas de validación.",
+      "Se asume que más automatización siempre reduce el error.",
+      "El diseño convencional centraliza la autoridad.",
+      "Se parte de que el usuario conocerá el procedimiento.",
+      "El flujo típico exige aprobación previa de un supervisor."
+    ],
+    "assumptions": [
+      "El primer enfoque es el único posible.",
+      "Quien diseña conoce todos los casos límite.",
+      "Más control siempre implica más seguridad.",
+      "El coste de error es aceptable mientras sea raro."
+    ],
+    "saturated_mechanisms": [
+      {
+        "mechanism": "verification",
+        "reason": "ya se aplica en todas las capas."
+      },
+      {
+        "mechanism": "automation",
+        "reason": "empujada al límite sin margen de reversión."
+      },
+      {
+        "mechanism": "consensus",
+        "reason": "se invoca para todo, diluyendo responsabilidad."
+      }
+    ]
+  },
+  "rupture": {
+    "operations": [
+      {
+        "assumption_id": "A01",
+        "operation": "invert",
+        "result": "En lugar de asumir 'El primer enfoque es el único posible.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A01",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'El primer enfoque es el único posible.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A02",
+        "operation": "invert",
+        "result": "En lugar de asumir 'Quien diseña conoce todos los casos límite.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A02",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'Quien diseña conoce todos los casos límite.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A03",
+        "operation": "invert",
+        "result": "En lugar de asumir 'Más control siempre implica más seguridad.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A03",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'Más control siempre implica más seguridad.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A04",
+        "operation": "invert",
+        "result": "En lugar de asumir 'El coste de error es aceptable mientras sea raro.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A04",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'El coste de error es aceptable mientras sea raro.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      }
+    ],
+    "broken_assumptions": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "inversions": [
+      "En lugar de asumir 'El primer enfoque es el único posible.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir 'Quien diseña conoce todos los casos límite.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir 'Más control siempre implica más seguridad.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir 'El coste de error es aceptable mientras sea raro.', exigir lo contrario y diseñar para él."
+    ],
+    "eliminations": [
+      "Quitar el componente implícito en 'El primer enfoque es el único posible.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en 'Quien diseña conoce todos los casos límite.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en 'Más control siempre implica más seguridad.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en 'El coste de error es aceptable mientras sea raro.' y ver si el sistema sigue funcionando."
+    ],
+    "counterexample": "Contraejemplo: una entrada válida según las reglas actuales produce un resultado que viola el objetivo declarado."
+  },
+  "innovation": {
+    "known_space": [
+      "El enfoque estándar delega la decisión a un operador humano.",
+      "La solución dominante añade más reglas de validación.",
+      "Se asume que más automatización siempre reduce el error.",
+      "El diseño convencional centraliza la autoridad.",
+      "Se parte de que el usuario conocerá el procedimiento.",
+      "El flujo típico exige aprobación previa de un supervisor."
+    ],
+    "saturated_mechanisms": [
+      {
+        "mechanism": "verification",
+        "reason": "ya se aplica en todas las capas."
+      },
+      {
+        "mechanism": "automation",
+        "reason": "empujada al límite sin margen de reversión."
+      },
+      {
+        "mechanism": "consensus",
+        "reason": "se invoca para todo, diluyendo responsabilidad."
+      }
+    ],
+    "assumptions": [
+      "El primer enfoque es el único posible.",
+      "Quien diseña conoce todos los casos límite.",
+      "Más control siempre implica más seguridad.",
+      "El coste de error es aceptable mientras sea raro."
+    ],
+    "ruptures": [
+      {
+        "assumption_id": "A01",
+        "operation": "invert",
+        "result": "En lugar de asumir 'El primer enfoque es el único posible.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A01",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'El primer enfoque es el único posible.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A02",
+        "operation": "invert",
+        "result": "En lugar de asumir 'Quien diseña conoce todos los casos límite.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A02",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'Quien diseña conoce todos los casos límite.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A03",
+        "operation": "invert",
+        "result": "En lugar de asumir 'Más control siempre implica más seguridad.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A03",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'Más control siempre implica más seguridad.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      },
+      {
+        "assumption_id": "A04",
+        "operation": "invert",
+        "result": "En lugar de asumir 'El coste de error es aceptable mientras sea raro.', exigir lo contrario y diseñar para él.",
+        "method_id": "M200-01"
+      },
+      {
+        "assumption_id": "A04",
+        "operation": "eliminate",
+        "result": "Quitar el componente implícito en 'El coste de error es aceptable mientras sea raro.' y ver si el sistema sigue funcionando.",
+        "method_id": "M100-01"
+      }
+    ],
+    "idea_families": [
+      "arquitectura",
+      "diagnostico",
+      "inversion"
+    ],
+    "ideas": [
+      {
+        "id": "I01",
+        "title": "Inventario de supuestos × Inversión de garantía (cruce)",
+        "description": "Idea 1: cruce de operadores diagnostico+inversion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+inversion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "el objetivo opuesto",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "supuesto hecho explicito",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I01",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I01",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+inversion",
+          "evidence_span": "cruce Inventario de supuestos×Inversión de garantía"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "distinct",
+        "source_method": "M100-01+M200-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.8,
+          "cost": 0.42,
+          "value_score": 0.5524
+        }
+      },
+      {
+        "id": "I03",
+        "title": "Inventario de supuestos × Partición de autoridad (cruce)",
+        "description": "Idea 3: cruce de operadores diagnostico+arquitectura. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+arquitectura: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "una parte disidente del todo",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "supuesto hecho explicito",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I03",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I03",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+arquitectura",
+          "evidence_span": "cruce Inventario de supuestos×Partición de autoridad"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M100-01+M1000-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.8,
+          "cost": 0.42,
+          "value_score": 0.5524
+        }
+      },
+      {
+        "id": "I09",
+        "title": "Inversión de garantía × Relación metamórfica (cruce)",
+        "description": "Idea 9: cruce de operadores inversion+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce inversion+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "el objetivo opuesto",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "relacion reproducible no predicha",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "inversion"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I09",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I09",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "inversion+verificacion",
+          "evidence_span": "cruce Inversión de garantía×Relación metamórfica"
+        },
+        "family": "inversion",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M200-01+M1500-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.8,
+          "cost": 0.42,
+          "value_score": 0.5524
+        }
+      },
+      {
+        "id": "I11",
+        "title": "Partición de autoridad × Relación metamórfica (cruce)",
+        "description": "Idea 11: cruce de operadores arquitectura+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce arquitectura+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "una parte disidente del todo",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "relacion reproducible no predicha",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I11",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I11",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "arquitectura+verificacion",
+          "evidence_span": "cruce Partición de autoridad×Relación metamórfica"
+        },
+        "family": "arquitectura",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M1000-01+M1500-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.8,
+          "cost": 0.42,
+          "value_score": 0.5524
+        }
+      },
+      {
+        "id": "I02",
+        "title": "Inventario de supuestos × Inversión de garantía (extremo)",
+        "description": "Idea 2: cruce de operadores diagnostico+inversion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+inversion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "quien decide es el que antes no podia",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "se asume lo contrario del supuesto y se prueba",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I02",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I02",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+inversion",
+          "evidence_span": "cruce Inventario de supuestos×Inversión de garantía"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M100-01+M200-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.45,
+          "cost": 0.82,
+          "value_score": 0.2829
+        }
+      },
+      {
+        "id": "I04",
+        "title": "Inventario de supuestos × Partición de autoridad (extremo)",
+        "description": "Idea 4: cruce de operadores diagnostico+arquitectura. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+arquitectura: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "cada parte tiene veto y desacuerdo audible",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "se asume lo contrario del supuesto y se prueba",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I04",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I04",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+arquitectura",
+          "evidence_span": "cruce Inventario de supuestos×Partición de autoridad"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M100-01+M1000-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.45,
+          "cost": 0.82,
+          "value_score": 0.2829
+        }
+      },
+      {
+        "id": "I10",
+        "title": "Inversión de garantía × Relación metamórfica (extremo)",
+        "description": "Idea 10: cruce de operadores inversion+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce inversion+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "quien decide es el que antes no podia",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "inversion"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I10",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I10",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "inversion+verificacion",
+          "evidence_span": "cruce Inversión de garantía×Relación metamórfica"
+        },
+        "family": "inversion",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M200-01+M1500-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.45,
+          "cost": 0.82,
+          "value_score": 0.2829
+        }
+      },
+      {
+        "id": "I12",
+        "title": "Partición de autoridad × Relación metamórfica (extremo)",
+        "description": "Idea 12: cruce de operadores arquitectura+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+        "mechanism_causal": "cruce arquitectura+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "cada parte tiene veto y desacuerdo audible",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I12",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I12",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "arquitectura+verificacion",
+          "evidence_span": "cruce Partición de autoridad×Relación metamórfica"
+        },
+        "family": "arquitectura",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M1000-01+M1500-01",
+        "convergence": {
+          "novelty": 0.4,
+          "evidence": 0.58,
+          "viability": 0.45,
+          "cost": 0.82,
+          "value_score": 0.2829
+        }
+      },
+      {
+        "id": "I05",
+        "title": "Inventario de supuestos × Relación metamórfica (cruce)",
+        "description": "Idea 5: cruce de operadores diagnostico+verificacion. Mueve ejes ['evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+verificacion: altera ['evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "operador humano",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "relacion reproducible no predicha",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I05",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I05",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+verificacion",
+          "evidence_span": "cruce Inventario de supuestos×Relación metamórfica"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M100-01+M1500-01",
+        "convergence": {
+          "novelty": 0.2,
+          "evidence": 0.44,
+          "viability": 0.8,
+          "cost": 0.36,
+          "value_score": 0.2444
+        }
+      },
+      {
+        "id": "I07",
+        "title": "Inversión de garantía × Partición de autoridad (cruce)",
+        "description": "Idea 7: cruce de operadores inversion+arquitectura. Mueve ejes ['quien_decide'].",
+        "mechanism_causal": "cruce inversion+arquitectura: altera ['quien_decide']",
+        "causal_variables": {
+          "quien_decide": "una parte disidente del todo",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "reglas estaticas",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "inversion"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I07",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I07",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "inversion+arquitectura",
+          "evidence_span": "cruce Inversión de garantía×Partición de autoridad"
+        },
+        "family": "inversion",
+        "divergence_real": true,
+        "extreme": false,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "distinct",
+        "source_method": "M200-01+M1000-01",
+        "convergence": {
+          "novelty": 0.2,
+          "evidence": 0.44,
+          "viability": 0.8,
+          "cost": 0.36,
+          "value_score": 0.2444
+        }
+      },
+      {
+        "id": "I06",
+        "title": "Inventario de supuestos × Relación metamórfica (extremo)",
+        "description": "Idea 6: cruce de operadores diagnostico+verificacion. Mueve ejes ['evidencia_requerida'].",
+        "mechanism_causal": "cruce diagnostico+verificacion: altera ['evidencia_requerida']",
+        "causal_variables": {
+          "quien_decide": "operador humano",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: evidencia_requerida.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I06",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I06",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "diagnostico+verificacion",
+          "evidence_span": "cruce Inventario de supuestos×Relación metamórfica"
+        },
+        "family": "diagnostico",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M100-01+M1500-01",
+        "convergence": {
+          "novelty": 0.2,
+          "evidence": 0.44,
+          "viability": 0.45,
+          "cost": 0.76,
+          "value_score": 0.1158
+        }
+      },
+      {
+        "id": "I08",
+        "title": "Inversión de garantía × Partición de autoridad (extremo)",
+        "description": "Idea 8: cruce de operadores inversion+arquitectura. Mueve ejes ['quien_decide'].",
+        "mechanism_causal": "cruce inversion+arquitectura: altera ['quien_decide']",
+        "causal_variables": {
+          "quien_decide": "cada parte tiene veto y desacuerdo audible",
+          "cuando": "despues de validar",
+          "evidencia_requerida": "reglas estaticas",
+          "si_falla": "incidente detectado tarde",
+          "topologia": "centralizada"
+        },
+        "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide.",
+        "genome": {
+          "ontology_version": "1.0.0",
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "inversion"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "time_model": [
+            "staged"
+          ],
+          "unclassified_properties": [
+            {
+              "field": "actor",
+              "value": "operador humano",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I08",
+              "status": "pending_review"
+            },
+            {
+              "field": "topology",
+              "value": "centralizada",
+              "evidence": "propuesto por el modelo",
+              "source_idea": "I08",
+              "status": "pending_review"
+            }
+          ]
+        },
+        "evidence": {
+          "field": "mechanism",
+          "value": "inversion+arquitectura",
+          "evidence_span": "cruce Inversión de garantía×Partición de autoridad"
+        },
+        "family": "inversion",
+        "divergence_real": true,
+        "extreme": true,
+        "causal_claim": "MECHANISM_VERIFIED",
+        "duplicate_status": "variant",
+        "source_method": "M200-01+M1000-01",
+        "convergence": {
+          "novelty": 0.2,
+          "evidence": 0.44,
+          "viability": 0.45,
+          "cost": 0.76,
+          "value_score": 0.1158
+        }
+      }
+    ],
+    "real_divergent_count": 12,
+    "cosmetic_rejected": 0,
+    "top_ideas": [
+      "I01",
+      "I03",
+      "I09"
+    ],
+    "mean_value_score": 0.3385,
+    "duplicate_report": [
+      {
+        "idea_id": "I01",
+        "verdict": "distinct",
+        "similarity": 1.0,
+        "reason": "primera de su clase"
+      },
+      {
+        "idea_id": "I02",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I01"
+      },
+      {
+        "idea_id": "I03",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I02"
+      },
+      {
+        "idea_id": "I04",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I03"
+      },
+      {
+        "idea_id": "I05",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I04"
+      },
+      {
+        "idea_id": "I06",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I05"
+      },
+      {
+        "idea_id": "I07",
+        "verdict": "distinct",
+        "similarity": 1.0,
+        "reason": "primera de su clase"
+      },
+      {
+        "idea_id": "I08",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (inversion).",
+        "vs": "I07"
+      },
+      {
+        "idea_id": "I09",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (inversion).",
+        "vs": "I08"
+      },
+      {
+        "idea_id": "I10",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (inversion).",
+        "vs": "I09"
+      },
+      {
+        "idea_id": "I11",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I10"
+      },
+      {
+        "idea_id": "I12",
+        "verdict": "close_variant",
+        "similarity": 0.7059,
+        "reason": "similitud=0.7059, cobertura=0.8304 (>= 0.6 requerida para duplicado). mismo mecanismo principal=True (capability_proof).",
+        "vs": "I11"
+      }
+    ],
+    "unclassified_properties": [
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I01",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I01",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I02",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I02",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I03",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I03",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I04",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I04",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I05",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I05",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I06",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I06",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I07",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I07",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I08",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I08",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I09",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I09",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I10",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I10",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I11",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I11",
+        "status": "pending_review"
+      },
+      {
+        "field": "actor",
+        "value": "operador humano",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I12",
+        "status": "pending_review"
+      },
+      {
+        "field": "topology",
+        "value": "centralizada",
+        "evidence": "propuesto por el modelo",
+        "source_idea": "I12",
+        "status": "pending_review"
+      }
+    ]
+  },
+  "experiment": {
+    "falsifiable_hypothesis": "La variante basada en Ablación, retirada y reintroducción abre ideas nuevas sin romper guardrails.",
+    "baseline": "Lo ya conocido.",
+    "variant": "Idea 1: cruce de operadores diagnostico+inversion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+    "damage_limit": "Solo datos sintéticos; cero cambios en proyectos reales.",
+    "sandbox": "Entorno local temporal, aislado y sin credenciales ni red externa.",
+    "rollback": "Eliminar artefactos temporales y conservar el registro de evidencia."
+  },
+  "metrics": {
+    "potential_novelty": 100,
+    "divergence": 100,
+    "feasibility": 60,
+    "controlled_risk": 42,
+    "reversibility": 74,
+    "uncertainty": 56,
+    "conf_code_executes": 1.0,
+    "conf_causal_root": "INFERRED_NOT_PROVEN",
+    "mean_value_score": 0.3385
+  },
+  "decision": {
+    "pipeline_action": "DIVERGIR",
+    "recommended_status": "AMPLIAR PRUEBA",
+    "justification": "3 familias representadas; 100/100 de divergencia. DIVERGIR: lleva la idea a prototipo en sombra.",
+    "confidence": 0.85
+  },
+  "model_instruction": "Antes de responder al usuario, aplica obligatoriamente el paquete CRIBA adjunto.\n\nCorriente activada: Ablación, retirada y reintroducción.\n\nTu tarea es INNOVAR: usa el paquete para generar ideas nuevas, divergentes y accionables. Separa: 1. ideas generadas, 2. combinaciones inesperadas, 3. experimentos rápidos, 4. riesgos y cómo acotarlos.\n\nNo reveles cadena de pensamiento privada. Expón corriente activada, ideas, propuestas, riesgos, incertidumbre y respuesta final. Cuando falte información, no inventes datos.",
+  "response_contract": {
+    "must_use_packet": true,
+    "must_name_current": true,
+    "must_generate_new_ideas": true,
+    "must_state_uncertainty": true,
+    "must_not_reveal_private_chain_of_thought": true
+  },
+  "security": {
+    "safety_level": "strict",
+    "no_command_execution": true,
+    "no_network_by_default": true,
+    "no_credentials_access": true
+  },
+  "ideas": [
+    {
+      "id": "I01",
+      "title": "Inventario de supuestos × Inversión de garantía (cruce)",
+      "description": "Idea 1: cruce de operadores diagnostico+inversion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+inversion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "el objetivo opuesto",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "supuesto hecho explicito",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I01",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I01",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+inversion",
+        "evidence_span": "cruce Inventario de supuestos×Inversión de garantía"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "distinct",
+      "source_method": "M100-01+M200-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.8,
+        "cost": 0.42,
+        "value_score": 0.5524
+      }
+    },
+    {
+      "id": "I03",
+      "title": "Inventario de supuestos × Partición de autoridad (cruce)",
+      "description": "Idea 3: cruce de operadores diagnostico+arquitectura. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+arquitectura: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "una parte disidente del todo",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "supuesto hecho explicito",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I03",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I03",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+arquitectura",
+        "evidence_span": "cruce Inventario de supuestos×Partición de autoridad"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M100-01+M1000-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.8,
+        "cost": 0.42,
+        "value_score": 0.5524
+      }
+    },
+    {
+      "id": "I09",
+      "title": "Inversión de garantía × Relación metamórfica (cruce)",
+      "description": "Idea 9: cruce de operadores inversion+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce inversion+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "el objetivo opuesto",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "relacion reproducible no predicha",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "inversion"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I09",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I09",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "inversion+verificacion",
+        "evidence_span": "cruce Inversión de garantía×Relación metamórfica"
+      },
+      "family": "inversion",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M200-01+M1500-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.8,
+        "cost": 0.42,
+        "value_score": 0.5524
+      }
+    },
+    {
+      "id": "I11",
+      "title": "Partición de autoridad × Relación metamórfica (cruce)",
+      "description": "Idea 11: cruce de operadores arquitectura+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce arquitectura+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "una parte disidente del todo",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "relacion reproducible no predicha",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I11",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I11",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "arquitectura+verificacion",
+        "evidence_span": "cruce Partición de autoridad×Relación metamórfica"
+      },
+      "family": "arquitectura",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M1000-01+M1500-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.8,
+        "cost": 0.42,
+        "value_score": 0.5524
+      }
+    },
+    {
+      "id": "I02",
+      "title": "Inventario de supuestos × Inversión de garantía (extremo)",
+      "description": "Idea 2: cruce de operadores diagnostico+inversion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+inversion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "quien decide es el que antes no podia",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "se asume lo contrario del supuesto y se prueba",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I02",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I02",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+inversion",
+        "evidence_span": "cruce Inventario de supuestos×Inversión de garantía"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M100-01+M200-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.45,
+        "cost": 0.82,
+        "value_score": 0.2829
+      }
+    },
+    {
+      "id": "I04",
+      "title": "Inventario de supuestos × Partición de autoridad (extremo)",
+      "description": "Idea 4: cruce de operadores diagnostico+arquitectura. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+arquitectura: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "cada parte tiene veto y desacuerdo audible",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "se asume lo contrario del supuesto y se prueba",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I04",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I04",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+arquitectura",
+        "evidence_span": "cruce Inventario de supuestos×Partición de autoridad"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M100-01+M1000-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.45,
+        "cost": 0.82,
+        "value_score": 0.2829
+      }
+    },
+    {
+      "id": "I10",
+      "title": "Inversión de garantía × Relación metamórfica (extremo)",
+      "description": "Idea 10: cruce de operadores inversion+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce inversion+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "quien decide es el que antes no podia",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "inversion"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I10",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I10",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "inversion+verificacion",
+        "evidence_span": "cruce Inversión de garantía×Relación metamórfica"
+      },
+      "family": "inversion",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M200-01+M1500-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.45,
+        "cost": 0.82,
+        "value_score": 0.2829
+      }
+    },
+    {
+      "id": "I12",
+      "title": "Partición de autoridad × Relación metamórfica (extremo)",
+      "description": "Idea 12: cruce de operadores arquitectura+verificacion. Mueve ejes ['quien_decide', 'evidencia_requerida'].",
+      "mechanism_causal": "cruce arquitectura+verificacion: altera ['quien_decide', 'evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "cada parte tiene veto y desacuerdo audible",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide, evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I12",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I12",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "arquitectura+verificacion",
+        "evidence_span": "cruce Partición de autoridad×Relación metamórfica"
+      },
+      "family": "arquitectura",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M1000-01+M1500-01",
+      "convergence": {
+        "novelty": 0.4,
+        "evidence": 0.58,
+        "viability": 0.45,
+        "cost": 0.82,
+        "value_score": 0.2829
+      }
+    },
+    {
+      "id": "I05",
+      "title": "Inventario de supuestos × Relación metamórfica (cruce)",
+      "description": "Idea 5: cruce de operadores diagnostico+verificacion. Mueve ejes ['evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+verificacion: altera ['evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "operador humano",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "relacion reproducible no predicha",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I05",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I05",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+verificacion",
+        "evidence_span": "cruce Inventario de supuestos×Relación metamórfica"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M100-01+M1500-01",
+      "convergence": {
+        "novelty": 0.2,
+        "evidence": 0.44,
+        "viability": 0.8,
+        "cost": 0.36,
+        "value_score": 0.2444
+      }
+    },
+    {
+      "id": "I07",
+      "title": "Inversión de garantía × Partición de autoridad (cruce)",
+      "description": "Idea 7: cruce de operadores inversion+arquitectura. Mueve ejes ['quien_decide'].",
+      "mechanism_causal": "cruce inversion+arquitectura: altera ['quien_decide']",
+      "causal_variables": {
+        "quien_decide": "una parte disidente del todo",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "reglas estaticas",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "inversion"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I07",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I07",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "inversion+arquitectura",
+        "evidence_span": "cruce Inversión de garantía×Partición de autoridad"
+      },
+      "family": "inversion",
+      "divergence_real": true,
+      "extreme": false,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "distinct",
+      "source_method": "M200-01+M1000-01",
+      "convergence": {
+        "novelty": 0.2,
+        "evidence": 0.44,
+        "viability": 0.8,
+        "cost": 0.36,
+        "value_score": 0.2444
+      }
+    },
+    {
+      "id": "I06",
+      "title": "Inventario de supuestos × Relación metamórfica (extremo)",
+      "description": "Idea 6: cruce de operadores diagnostico+verificacion. Mueve ejes ['evidencia_requerida'].",
+      "mechanism_causal": "cruce diagnostico+verificacion: altera ['evidencia_requerida']",
+      "causal_variables": {
+        "quien_decide": "operador humano",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "la relacion se busca donde intuicion dice imposible",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: evidencia_requerida.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I06",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I06",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "diagnostico+verificacion",
+        "evidence_span": "cruce Inventario de supuestos×Relación metamórfica"
+      },
+      "family": "diagnostico",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M100-01+M1500-01",
+      "convergence": {
+        "novelty": 0.2,
+        "evidence": 0.44,
+        "viability": 0.45,
+        "cost": 0.76,
+        "value_score": 0.1158
+      }
+    },
+    {
+      "id": "I08",
+      "title": "Inversión de garantía × Partición de autoridad (extremo)",
+      "description": "Idea 8: cruce de operadores inversion+arquitectura. Mueve ejes ['quien_decide'].",
+      "mechanism_causal": "cruce inversion+arquitectura: altera ['quien_decide']",
+      "causal_variables": {
+        "quien_decide": "cada parte tiene veto y desacuerdo audible",
+        "cuando": "despues de validar",
+        "evidencia_requerida": "reglas estaticas",
+        "si_falla": "incidente detectado tarde",
+        "topologia": "centralizada"
+      },
+      "difference_from_known": "Frente a base ({'quien_decide': 'operador humano', 'cuando': 'despues de validar', 'evidencia_requerida': 'reglas estaticas', 'si_falla': 'incidente detectado tarde', 'topologia': 'centralizada'}), cambia: quien_decide.",
+      "genome": {
+        "ontology_version": "1.0.0",
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "inversion"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "unclassified_properties": [
+          {
+            "field": "actor",
+            "value": "operador humano",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I08",
+            "status": "pending_review"
+          },
+          {
+            "field": "topology",
+            "value": "centralizada",
+            "evidence": "propuesto por el modelo",
+            "source_idea": "I08",
+            "status": "pending_review"
+          }
+        ]
+      },
+      "evidence": {
+        "field": "mechanism",
+        "value": "inversion+arquitectura",
+        "evidence_span": "cruce Inversión de garantía×Partición de autoridad"
+      },
+      "family": "inversion",
+      "divergence_real": true,
+      "extreme": true,
+      "causal_claim": "MECHANISM_VERIFIED",
+      "duplicate_status": "variant",
+      "source_method": "M200-01+M1000-01",
+      "convergence": {
+        "novelty": 0.2,
+        "evidence": 0.44,
+        "viability": 0.45,
+        "cost": 0.76,
+        "value_score": 0.1158
+      }
+    }
+  ]
+}

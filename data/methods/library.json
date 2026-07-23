@@ -1,0 +1,18 @@
+[
+ {"id":"M100-01","name":"Inventario de supuestos","family":"diagnostico","selection_reason":"Hace explícitos los supuestos que podrían invalidar la propuesta.","template":"Liste supuestos observables y marque cuál debe comprobarse primero."},
+ {"id":"M200-01","name":"Inversión de garantía","family":"inversion","selection_reason":"Busca la condición mínima que convertiría el objetivo en un fallo.","template":"Invierta el objetivo y diseñe el fallo mínimo plausible."},
+ {"id":"M300-01","name":"Retirada de dependencia","family":"sustraccion","selection_reason":"Prueba si una dependencia o autoridad es realmente necesaria.","template":"Retire una dependencia en sandbox y mida el cambio."},
+ {"id":"M400-01","name":"Presupuesto de complejidad","family":"restricciones","selection_reason":"Obliga a una solución con límites explícitos de coste y coordinación.","template":"Fije una restricción productiva y rediseñe bajo ella."},
+ {"id":"M500-01","name":"Mapa de roles","family":"actores_roles","selection_reason":"Aclara facultades, responsabilidades y conflictos entre actores.","template":"Defina roles, privilegios, incentivos y conflictos."},
+ {"id":"M600-01","name":"Matriz de incentivos","family":"incentivos","selection_reason":"Expone comportamientos racionales no deseados.","template":"Compare incentivo individual, colectivo y de largo plazo."},
+ {"id":"M700-01","name":"Matriz morfológica","family":"morfologia","selection_reason":"Genera alternativas por combinaciones de dimensiones independientes.","template":"Combine dimensiones funcionales sin repetir mecanismo."},
+ {"id":"M800-01","name":"Recombinación limitada","family":"recombinacion","selection_reason":"Sintetiza como máximo dos mecanismos para conservar trazabilidad.","template":"Combine dos propuestas compatibles y nombre su mecanismo."},
+ {"id":"M900-01","name":"Analogía causal","family":"analogias","selection_reason":"Importa una regla verificable de otro dominio, no una metáfora.","template":"Trasplante una regla causal y defina la métrica equivalente."},
+ {"id":"M1000-01","name":"Partición de autoridad","family":"arquitectura","selection_reason":"Separa capacidades para limitar el radio de daño.","template":"Divida funciones, umbrales y rutas de revocación."},
+ {"id":"M1100-01","name":"Constitución operativa","family":"gobernanza","selection_reason":"Fija reglas de cambio, excepción y rendición de cuentas.","template":"Defina reglas de quórum, apelación y registro."},
+ {"id":"M1200-01","name":"Historia de abuso","family":"diseno_adversarial","selection_reason":"Convierte una amenaza en un caso verificable de abuso.","template":"Escriba una historia de abuso y su guardrail."},
+ {"id":"M1300-01","name":"Escenario de frontera","family":"escenarios","selection_reason":"Prueba decisiones en condiciones de límite y transición.","template":"Diseñe casos justo dentro, en y fuera del límite."},
+ {"id":"M1400-01","name":"Prototipo de baja autoridad","family":"prototipado","selection_reason":"Permite aprender sin conceder control real.","template":"Construya un prototipo sombra y registre desacuerdos."},
+ {"id":"M1500-01","name":"Relación metamórfica","family":"verificacion","selection_reason":"Define evidencia reproducible donde no hay un único resultado correcto.","template":"Defina una transformación y la relación que debe preservar."},
+ {"id":"M1600-01","name":"Registro de reversibilidad","family":"decision_riesgo","selection_reason":"Hace explícitos guardrails, rollback y umbrales de abandono.","template":"Fije daño máximo, rollback y criterio de parada antes de probar."}
+]

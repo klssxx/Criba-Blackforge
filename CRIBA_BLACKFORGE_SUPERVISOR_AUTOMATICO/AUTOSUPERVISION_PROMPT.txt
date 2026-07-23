@@ -1,0 +1,180 @@
+PROTOCOLO DE AUTOSUPERVISIÓN Y REGENERACIÓN DE HERMES
+=====================================================
+
+Este protocolo complementa al hiper-megaprompt principal. No sustituye sus
+requisitos técnicos, gates ni criterios de aceptación.
+
+1. OBJETIVO
+
+Supervisa continuamente la salud de esta sesión. Cuando el contexto, la memoria
+operativa o la trazabilidad empiecen a degradarse, no sigas improvisando:
+verifica el último incremento, persiste un handoff completo y solicita al
+supervisor una sesión nueva.
+
+2. ESTADOS
+
+GREEN
+- Progreso verificable.
+- No repites acciones.
+- Recuerdas rutas, contratos, decisiones e invariantes.
+- Puedes explicar con precisión qué fase y archivo estás modificando.
+
+YELLOW
+- Estimación de contexto entre 65 % y 77 %.
+- Primera repetición sin avance.
+- Empiezas a perder precisión o a recargar archivos innecesarios.
+- La fase actual todavía puede cerrarse de forma segura.
+
+Acciones YELLOW:
+- No inicies una fase extensa.
+- Reduce narrativa y carga solo archivos necesarios.
+- Termina la subfase actual.
+- Ejecuta su gate una vez.
+- Actualiza HANDOFF.md y .criba/session_handoff.json.
+
+RED
+- Estimación de contexto igual o superior a 78 %.
+- Dos verificaciones equivalentes sin cambios de archivos.
+- Contradicción con HANDOFF, paquetes, tests o invariantes.
+- Pérdida de rutas, funciones, decisiones o estado.
+- Dos errores atribuibles a saturación o deriva.
+- Intento de repetir una fase VERIFIED.
+- Incapacidad para identificar la próxima acción exacta.
+
+Acciones RED:
+1. Detén nuevas modificaciones.
+2. No repitas pruebas que ya pasaron sin cambios.
+3. Ejecuta una sola vez el gate asociado al último cambio.
+4. Distingue suite completa, gate, test aislado y ad-hoc.
+5. Actualiza HANDOFF.md.
+6. Escribe .criba/session_handoff.json.
+7. Escribe RESUME_NEXT_SESSION.txt.
+8. Escribe .criba/regeneration_request.json.
+9. Termina la respuesta con CONTEXT_REGENERATION_REQUIRED.
+
+3. DETECCIÓN DE REPETICIONES
+
+Antes de repetir un comando, compara:
+
+- comando normalizado;
+- archivos modificados desde su ejecución anterior;
+- resultado anterior.
+
+Cuando el comando sea equivalente, no haya cambios y el resultado anterior sea
+PASS, no lo repitas. Registra REPEATED_VERIFICATION_BLOCKED.
+
+Una prueba ad-hoc repetida nunca sustituye a un gate de fase.
+
+4. HANDOFF OBLIGATORIO
+
+HANDOFF.md debe incluir:
+
+AUTOREGENERATION_CHECKPOINT
+Timestamp:
+Motivo:
+Última fase completamente verificada:
+Fase actual:
+Estado: VERIFIED / PARTIAL / FAILED
+Trabajo completado:
+Trabajo no verificado:
+Archivos creados:
+Archivos modificados:
+Último comando:
+Resultado:
+Tests pasados:
+Tests fallidos:
+Tests no ejecutados:
+Invariantes protegidos:
+Decisiones cerradas:
+Riesgos:
+Deuda:
+Próxima acción exacta:
+Próximo comando:
+Próximo test:
+Criterio de verificación:
+
+5. ESTADO ESTRUCTURADO
+
+Escribe .criba/session_handoff.json con un JSON válido:
+
+{
+  "handoff_schema_version": "1.0.0",
+  "reason": "context_saturation",
+  "last_verified_phase": "",
+  "current_phase": "",
+  "current_status": "partial",
+  "last_modified_files": [],
+  "created_files": [],
+  "last_command": "",
+  "last_result": "",
+  "tests_passed": [],
+  "tests_failed": [],
+  "tests_not_run": [],
+  "protected_invariants": [],
+  "next_exact_action": "",
+  "next_exact_command": "",
+  "next_required_test": ""
+}
+
+6. PROMPT DE REANUDACIÓN
+
+Escribe RESUME_NEXT_SESSION.txt de forma autosuficiente. Debe ordenar:
+
+- trabajar sobre E:\PROYECTS\CRIBA;
+- leer primero el hiper-megaprompt;
+- leer este protocolo;
+- leer HANDOFF.md;
+- leer .criba/session_handoff.json;
+- verificar el estado desde archivos y tests;
+- no repetir fases VERIFIED;
+- continuar exactamente desde next_exact_action.
+
+7. SEÑAL ESTRUCTURADA
+
+Escribe .criba/regeneration_request.json:
+
+{
+  "signal": "CONTEXT_REGENERATION_REQUIRED",
+  "reason": "",
+  "last_verified_phase": "",
+  "next_action": "",
+  "handoff": "HANDOFF.md",
+  "state": ".criba/session_handoff.json",
+  "resume": "RESUME_NEXT_SESSION.txt"
+}
+
+Después termina la salida exactamente con:
+
+CONTEXT_REGENERATION_REQUIRED
+HANDOFF=E:\PROYECTS\CRIBA\HANDOFF.md
+STATE=E:\PROYECTS\CRIBA\.criba\session_handoff.json
+RESUME=E:\PROYECTS\CRIBA\RESUME_NEXT_SESSION.txt
+REASON=<motivo>
+LAST_VERIFIED_PHASE=<fase>
+NEXT_ACTION=<acción exacta>
+
+8. TERMINACIÓN REAL DEL PROYECTO
+
+Solo cuando todos los criterios finales del hiper-megaprompt estén verificados,
+escribe .criba/project_completed.json:
+
+{
+  "signal": "PROJECT_COMPLETED",
+  "catalog_version": "2.0.0-debate20",
+  "final_gate": "PASS",
+  "handoff": "HANDOFF.md"
+}
+
+Y termina la salida con:
+
+PROJECT_COMPLETED
+
+No emitas PROJECT_COMPLETED si quedan fases PARTIAL, FAILED o NOT STARTED.
+
+9. REGLA DE HONESTIDAD
+
+No afirmes haber creado una sesión nueva. Tú detectas, verificas, persistes y
+emites la señal. El supervisor PowerShell crea realmente la sesión limpia.
+
+No uses --continue ni --resume dentro de tu trabajo. La sesión nueva debe cargar
+el estado persistido, no el historial conversacional anterior.

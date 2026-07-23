@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "criba-current-engine"
+version = "0.1.0"
+description = "Local, deterministic CRIBA pre-response engine"
+requires-python = ">=3.10"
+authors = [{name = "CRIBA Current Engine"}]
+
+[project.scripts]
+criba = "criba.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+

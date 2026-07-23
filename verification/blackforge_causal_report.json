@@ -1,0 +1,92 @@
+{
+  "phase": "FASE 4 — CAUSAL",
+  "engine_module": "src/criba/blackforge_causal.py (integrated from imports/blackforge_v2/causal_engine.py)",
+  "rejection_code": "CAUSAL_PROPOSAL_REJECTED",
+  "rejection_codes_supported": [
+    "UNKNOWN_VARIABLE_ID",
+    "UNKNOWN_OUTCOME_ID",
+    "UNKNOWN_OPERATION",
+    "FROM_OUTSIDE_ALLOWED_VALUES",
+    "TO_OUTSIDE_ALLOWED_VALUES",
+    "DIRECTION_OUTSIDE_ALLOWED_VALUES",
+    "MISSING_FROM_VALUE",
+    "MISSING_TO_VALUE",
+    "NOOP_INTERVENTION",
+    "PRIMARY_NOT_IN_INTERVENTIONS",
+    "DUPLICATE_INTERVENTION"
+  ],
+  "samples": {
+    "a_vs_b": {
+      "classification": "structurally_distinct",
+      "similarity": 0.5555555555555556,
+      "coverage": 0.8999999999999999,
+      "profile_id": "general-causal-distance",
+      "profile_version": "1.0.0",
+      "exact_signature_match": false,
+      "critical_differences": [],
+      "features": {
+        "primary_variable": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "primary_transition": {
+          "similarity": 0.0,
+          "comparable": true
+        },
+        "intervention_set": {
+          "similarity": 0.0,
+          "comparable": true
+        },
+        "outcome_set": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "failure_behavior": {
+          "similarity": 0.0,
+          "comparable": false
+        }
+      }
+    },
+    "a_vs_a": {
+      "classification": "causal_duplicate",
+      "similarity": 1.0,
+      "coverage": 0.8999999999999999,
+      "profile_id": "general-causal-distance",
+      "profile_version": "1.0.0",
+      "exact_signature_match": true,
+      "critical_differences": [],
+      "features": {
+        "primary_variable": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "primary_transition": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "intervention_set": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "outcome_set": {
+          "similarity": 1.0,
+          "comparable": true
+        },
+        "failure_behavior": {
+          "similarity": 0.0,
+          "comparable": false
+        }
+      }
+    }
+  },
+  "frozen_fingerprint": "7591dfe85545326f920bb8d775398da7889395e017dc227abbb3328d40ed71e0",
+  "contracts_checked": [
+    "rejection code CAUSAL_PROPOSAL_REJECTED on invalid proposals (no silent repair)",
+    "None/str tuples never sorted together",
+    "causally-equal proposals with different wording -> same hash",
+    "NFKC/casefold/bool/numeric(0=='0'=='0.0')/key-order normalization",
+    "frozen model fingerprint stable",
+    "critical axes force structural difference",
+    "sensitivity analysis +/-10% per feature"
+  ]
+}

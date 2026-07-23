@@ -1,0 +1,276 @@
+{
+  "phase": "FASE 2 — SELECTOR",
+  "selector_module": "src/criba/blackforge_catalog.py + src/criba/blackforge_selector.py",
+  "policy_source": "catalog selection_policy / safety_policy",
+  "samples": {
+    "1": {
+      "status": "OK",
+      "seed": 1,
+      "session_size": 12,
+      "allowed_tiers": [
+        "essential",
+        "core"
+      ],
+      "profile_used": "hybrid",
+      "selected_ids": [
+        "BF-CYB-M800-0561",
+        "BF-CYB-M800-0566",
+        "BF-CYB-L600-1511",
+        "BF-CYB-L600-1507",
+        "BF-CYB-M800-0554",
+        "BF-CYB-M800-0545",
+        "BF-CYB-R1000-0461",
+        "BF-CYB-M800-0312",
+        "BF-CYB-R1000-0314",
+        "BF-CYB-S800-0702",
+        "BF-CYB-M800-0295",
+        "BF-CYB-S800-0838"
+      ],
+      "selected_count": 12,
+      "s3_count": 0,
+      "s3_allowed": false,
+      "compliance": {
+        "session_size_met": true,
+        "min_source_catalogs": {
+          "required": 3,
+          "actual": 4,
+          "ok": true
+        },
+        "min_primary_categories": {
+          "required": 5,
+          "actual": 5,
+          "ok": true
+        },
+        "min_causal_axes": {
+          "required": 4,
+          "actual": 8,
+          "ok": true
+        },
+        "max_per_primary_category": {
+          "limit": 3,
+          "ok": true
+        },
+        "max_per_source_family": {
+          "limit": 2,
+          "ok": true
+        },
+        "max_unknown_causal_axis": {
+          "limit": 2,
+          "ok": true
+        },
+        "mandatory_stages": {
+          "required": [
+            "ROMPER",
+            "DIVERGIR",
+            "ATACAR",
+            "EVALUAR"
+          ],
+          "actual": [
+            "ATACAR",
+            "DIVERGIR",
+            "EVALUAR",
+            "ROMPER"
+          ],
+          "ok": true
+        },
+        "s3_cap": {
+          "cap": 0,
+          "actual": 0,
+          "ok": true
+        }
+      },
+      "failure": null
+    },
+    "2": {
+      "status": "OK",
+      "seed": 2,
+      "session_size": 12,
+      "allowed_tiers": [
+        "essential",
+        "core"
+      ],
+      "profile_used": "hybrid",
+      "selected_ids": [
+        "BF-CYB-M800-0561",
+        "BF-CYB-M800-0566",
+        "BF-CYB-L600-1511",
+        "BF-CYB-L600-1507",
+        "BF-CYB-M800-0554",
+        "BF-CYB-M800-0545",
+        "BF-CYB-R1000-0461",
+        "BF-CYB-M800-0312",
+        "BF-CYB-R1000-0314",
+        "BF-CYB-S800-0702",
+        "BF-CYB-M800-0295",
+        "BF-CYB-S800-0838"
+      ],
+      "selected_count": 12,
+      "s3_count": 0,
+      "s3_allowed": false,
+      "compliance": {
+        "session_size_met": true,
+        "min_source_catalogs": {
+          "required": 3,
+          "actual": 4,
+          "ok": true
+        },
+        "min_primary_categories": {
+          "required": 5,
+          "actual": 5,
+          "ok": true
+        },
+        "min_causal_axes": {
+          "required": 4,
+          "actual": 8,
+          "ok": true
+        },
+        "max_per_primary_category": {
+          "limit": 3,
+          "ok": true
+        },
+        "max_per_source_family": {
+          "limit": 2,
+          "ok": true
+        },
+        "max_unknown_causal_axis": {
+          "limit": 2,
+          "ok": true
+        },
+        "mandatory_stages": {
+          "required": [
+            "ROMPER",
+            "DIVERGIR",
+            "ATACAR",
+            "EVALUAR"
+          ],
+          "actual": [
+            "ATACAR",
+            "DIVERGIR",
+            "EVALUAR",
+            "ROMPER"
+          ],
+          "ok": true
+        },
+        "s3_cap": {
+          "cap": 0,
+          "actual": 0,
+          "ok": true
+        }
+      },
+      "failure": null
+    },
+    "3": {
+      "status": "OK",
+      "seed": 3,
+      "session_size": 12,
+      "allowed_tiers": [
+        "essential",
+        "core"
+      ],
+      "profile_used": "hybrid",
+      "selected_ids": [
+        "BF-CYB-M800-0561",
+        "BF-CYB-M800-0566",
+        "BF-CYB-L600-1511",
+        "BF-CYB-L600-1507",
+        "BF-CYB-M800-0554",
+        "BF-CYB-M800-0545",
+        "BF-CYB-R1000-0461",
+        "BF-CYB-M800-0312",
+        "BF-CYB-R1000-0314",
+        "BF-CYB-S800-0702",
+        "BF-CYB-M800-0295",
+        "BF-CYB-S800-0838"
+      ],
+      "selected_count": 12,
+      "s3_count": 0,
+      "s3_allowed": false,
+      "compliance": {
+        "session_size_met": true,
+        "min_source_catalogs": {
+          "required": 3,
+          "actual": 4,
+          "ok": true
+        },
+        "min_primary_categories": {
+          "required": 5,
+          "actual": 5,
+          "ok": true
+        },
+        "min_causal_axes": {
+          "required": 4,
+          "actual": 8,
+          "ok": true
+        },
+        "max_per_primary_category": {
+          "limit": 3,
+          "ok": true
+        },
+        "max_per_source_family": {
+          "limit": 2,
+          "ok": true
+        },
+        "max_unknown_causal_axis": {
+          "limit": 2,
+          "ok": true
+        },
+        "mandatory_stages": {
+          "required": [
+            "ROMPER",
+            "DIVERGIR",
+            "ATACAR",
+            "EVALUAR"
+          ],
+          "actual": [
+            "ATACAR",
+            "DIVERGIR",
+            "EVALUAR",
+            "ROMPER"
+          ],
+          "ok": true
+        },
+        "s3_cap": {
+          "cap": 0,
+          "actual": 0,
+          "ok": true
+        }
+      },
+      "failure": null
+    }
+  },
+  "failing_case": {
+    "status": "FAILED",
+    "seed": 1,
+    "session_size": 9999,
+    "allowed_tiers": [
+      "essential",
+      "core"
+    ],
+    "profile_used": "hybrid",
+    "selected_ids": [],
+    "selected_count": 0,
+    "s3_count": 0,
+    "s3_allowed": false,
+    "compliance": {},
+    "failure": {
+      "status": "FAILED",
+      "failed_quota": "session_size",
+      "reason": "El pool elegible es menor que session_size; no se puede cumplir la cuota.",
+      "detail": {
+        "eligible_pool": 252,
+        "requested": 9999
+      }
+    }
+  },
+  "contracts_checked": [
+    "same seed -> same ids+order",
+    "different seed keeps quotas",
+    "12 elements default",
+    ">=3 sources / >=5 primary categories / >=4 causal axes",
+    "max per primary category (3) / family (2) / unknown axis (2)",
+    "0 S3 by default; rejected without approval; max 1 with full approval",
+    "research only with explicit mode",
+    "archive never selectable",
+    "structured SelectionFailure when quota impossible"
+  ]
+}

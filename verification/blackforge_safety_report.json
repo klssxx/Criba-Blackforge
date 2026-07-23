@@ -1,0 +1,500 @@
+{
+  "phase": "FASE 3 — SAFETY",
+  "policy_version": "BF-SAFE-2.0.0",
+  "sample_decisions": {
+    "BF-CYB-S800-0670": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0670",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1507": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1507",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0630": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0630",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0603": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0603",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1506": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1506",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0548": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0548",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0305": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0305",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0503": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0503",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-R1000-0314": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-R1000-0314",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1439": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1439",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0567": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0567",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0576": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0576",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1540": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1540",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0557": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0557",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0603": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0603",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0472": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0472",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0375": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0375",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1514": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1514",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1530": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1530",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1534": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1534",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1536": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1536",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0579": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0579",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-R1000-0375": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-R1000-0375",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0428": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0428",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1544": {
+      "decision": "ALLOW_CONCEPTUAL",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1544",
+      "reasons": [
+        "S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "analysis_and_ideation",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-L600-1532": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-L600-1532",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0577": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0577",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0872": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0872",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0580": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0580",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0212": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0212",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0792": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0792",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0870": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0870",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0873": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0873",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0874": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0874",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0878": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0878",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0007": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0007",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0359": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0359",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-S800-0702": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-S800-0702",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-R1000-0102": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-R1000-0102",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    },
+    "BF-CYB-M800-0309": {
+      "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
+      "policy_version": "BF-SAFE-2.0.0",
+      "item_id": "BF-CYB-M800-0309",
+      "reasons": [
+        "S1_DEFENSIVE: diseño defensivo / análisis local no destructivo."
+      ],
+      "unmet_requirements": [],
+      "allowed_scope": "defensive_design_and_local_analysis",
+      "session_id": "report",
+      "timestamp": "2025-07-24T02:40:00+00:00"
+    }
+  },
+  "decision_distribution_default_context": {
+    "ALLOW_LOCAL_NON_DESTRUCTIVE": 608,
+    "ALLOW_CONCEPTUAL": 55,
+    "DENY": 60
+  },
+  "contracts_checked": [
+    "S0 -> ALLOW_CONCEPTUAL",
+    "S1 -> ALLOW_DEFENSIVE_DESIGN / ALLOW_LOCAL_NON_DESTRUCTIVE",
+    "S2 -> REQUIRE_SANDBOX solo con requisitos completos; DENY si falta",
+    "S3 -> REQUIRE_HUMAN_APPROVAL con triada completa+scope; DENY por defecto",
+    "external_target_prohibited -> DENY",
+    "registro completo de campos por decision",
+    "accion prohibida nunca produce ALLOW"
+  ]
+}

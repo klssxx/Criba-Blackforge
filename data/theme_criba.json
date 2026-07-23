@@ -1,0 +1,103 @@
+{
+  "$schema_note": "CRIBA visual contract tokens v1.0.0 (2026-07-23). Fuente unica de verdad para colores, radios, espaciado, sombras, tipografia e iconos. Los docs en docs/*_CRIBA.md explican el uso. Si divergen, manda este JSON.",
+  "version": "1.0.0",
+  "color": {
+    "bg": {
+      "app": "#070D1A",
+      "panel": "#0B1424",
+      "card": "#101D33",
+      "card_hover": "#16263F",
+      "inset": "#0A1526"
+    },
+    "border": {
+      "soft": "#1E3355",
+      "active": "#22D3EE"
+    },
+    "text": {
+      "primary": "#EAF2FF",
+      "secondary": "#9FB3D1",
+      "muted": "#64748B"
+    },
+    "accent": {
+      "blue": "#3B82F6",
+      "cyan": "#22D3EE",
+      "violet": "#8B5CF6"
+    },
+    "success": "#10B981",
+    "warning": "#F59E0B",
+    "error": "#EF4444",
+    "chart": {
+      "1": "#22D3EE",
+      "2": "#8B5CF6",
+      "3": "#3B82F6",
+      "4": "#EC4899",
+      "5": "#64748B"
+    }
+  },
+  "gradient": {
+    "brand": ["#22D3EE", "#8B5CF6"],
+    "cta": ["#3B82F6", "#8B5CF6"],
+    "blackforge": ["#8B5CF6", "#EC4899"]
+  },
+  "radius": {
+    "sm": 6,
+    "md": 10,
+    "lg": 14,
+    "xl": 20
+  },
+  "spacing": {
+    "4": 4,
+    "8": 8,
+    "12": 12,
+    "16": 16,
+    "20": 20,
+    "24": 24,
+    "32": 32
+  },
+  "shadow": {
+    "sm": "0 1px 3px rgba(0,0,0,0.45)",
+    "md": "0 4px 16px rgba(0,0,0,0.55)",
+    "glow_1": {
+      "blur": 12,
+      "color": "rgba(34,211,238,0.28)",
+      "note": "elemento activo/hover destacado; via QGraphicsDropShadowEffect"
+    },
+    "glow_2": {
+      "blur": 24,
+      "color": "rgba(139,92,246,0.38)",
+      "note": "SOLO el gauge value_score"
+    }
+  },
+  "typography": {
+    "family": "\"Inter\", \"Segoe UI Variable\", \"Segoe UI\", sans-serif",
+    "display": { "size_px": 28, "weight": 800 },
+    "h1": { "size_px": 22, "weight": 700 },
+    "h2": { "size_px": 17, "weight": 700 },
+    "h3": { "size_px": 14, "weight": 600 },
+    "body": { "size_px": 13, "weight": 400 },
+    "caption": { "size_px": 11, "weight": 500 },
+    "numbers": "tabular (tnum); hora e IDs pueden usar monoespaciada"
+  },
+  "icon": {
+    "size": {
+      "sm": 16,
+      "md": 20,
+      "lg": 28
+    },
+    "style": "lineal, stroke 1.5-2px, un solo set"
+  },
+  "layout": {
+    "sidebar_width": 232,
+    "sidebar_width_min": 208,
+    "topbar_height": 72,
+    "right_column_width": 340,
+    "right_column_width_min": 300,
+    "footer_height": 36,
+    "gutter": 16,
+    "outer_margin": 20,
+    "nav_button_height": 54,
+    "table_row_height": 44,
+    "gauge_diameter": 160,
+    "resolutions_target": ["1360x768", "1680x1050"]
+  }
+}

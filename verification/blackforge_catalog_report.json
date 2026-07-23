@@ -1,0 +1,92 @@
+{
+  "phase": "FASE 1 — INGESTA DEL CATÁLOGO",
+  "catalog_source": "imports/blackforge_v2/criba_blackforge_catalogo_final_debate20.json",
+  "validated_against": "catalog-embedded taxonomy_policy/safety_policy/selection_policy",
+  "contracts": {
+    "record_count": 723,
+    "meta_record_count": 723,
+    "unique_blackforge_id": 723,
+    "unique_source_ref": 723,
+    "unique_canonical_item_id": 718,
+    "blackforge_id_duplicates": [],
+    "source_ref_duplicates": [],
+    "canonical_item_id_duplicates": {
+      "BF-CYB-M800-0545": 2,
+      "BF-CYB-M800-0294": 2,
+      "BF-CYB-S800-0807": 2,
+      "BF-CYB-M800-0387": 2,
+      "BF-CYB-M800-0383": 2
+    },
+    "activation_tier_counts": {
+      "essential": 72,
+      "core": 180,
+      "extended": 277,
+      "research": 150,
+      "archive": 44
+    },
+    "meta_tier_counts": {
+      "essential": 72,
+      "core": 180,
+      "extended": 277,
+      "research": 150,
+      "archive": 44
+    },
+    "tier_quota_matches_activation_tier": true,
+    "tier_field_counts": {
+      "core": 294,
+      "extended": 429
+    },
+    "tier_field_vs_activation_tier_mismatch": 454,
+    "safety_class_out_of_enum": [],
+    "pipeline_stage_out_of_enum": [],
+    "stage_primary_out_of_enum": [],
+    "functional_category_out_of_enum": [],
+    "valid_safety_classes": [
+      "S0_CONCEPTUAL",
+      "S1_DEFENSIVE",
+      "S2_SANDBOX",
+      "S3_HIGH_CONTROL"
+    ],
+    "valid_pipeline_stages": [
+      "ATACAR",
+      "CARTOGRAFIAR",
+      "DELIMITAR",
+      "DESCOMPONER",
+      "DIVERGIR",
+      "EVALUAR",
+      "EVOLUCIONAR",
+      "MATERIALIZAR",
+      "ROMPER"
+    ],
+    "valid_functional_categories": [
+      "adversarial_threat",
+      "agents_ai_devtools",
+      "architecture_topology",
+      "causal_state_transitions",
+      "cross_domain_transfer",
+      "data_privacy_provenance",
+      "decision_risk",
+      "evidence_verification",
+      "experimentation_benchmarks",
+      "failure_resilience",
+      "general_innovation",
+      "governance_incentives",
+      "human_factors",
+      "human_legal_ethics",
+      "novelty_diversity",
+      "supply_chain_build",
+      "trust_identity_access"
+    ]
+  },
+  "summary": {
+    "records": 723,
+    "blackforge_id_unique": true,
+    "source_ref_unique": true,
+    "tier_quota_ok": true,
+    "safety_enum_ok": true,
+    "stage_enum_ok": true,
+    "fcat_enum_ok": true,
+    "tier_field_vs_activation_tier_mismatch": 454,
+    "canonical_item_id_nonunique_groups": 5
+  }
+}

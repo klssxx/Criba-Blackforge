@@ -1,0 +1,148 @@
+{
+  "selection_policy": {
+    "policy_version": "BF-SELECT-2.0.0",
+    "default_session_size": 12,
+    "allowed_tiers_default": [
+      "essential",
+      "core"
+    ],
+    "constraints": {
+      "minimum_source_catalogs": 3,
+      "minimum_primary_categories": 5,
+      "minimum_causal_axes": 4,
+      "maximum_per_primary_category": 3,
+      "maximum_per_source_family": 2,
+      "maximum_unknown_causal_axis": 2,
+      "maximum_s3_high_control": 1,
+      "minimum_stage_presence": [
+        "ROMPER",
+        "DIVERGIR",
+        "ATACAR",
+        "EVALUAR"
+      ]
+    },
+    "tie_break_order": [
+      "quality_score_v2 desc",
+      "diversity_contribution_v2 desc",
+      "selection_weight desc",
+      "blackforge_id asc"
+    ]
+  },
+  "safety_policy": {
+    "policy_version": "BF-SAFE-2.0.0",
+    "authorization_scope": "authorized_defensive_only",
+    "classes": {
+      "S0_CONCEPTUAL": {
+        "automatic_execution": false,
+        "allowed": "analysis_and_ideation"
+      },
+      "S1_DEFENSIVE": {
+        "automatic_execution": "local_non_destructive_only",
+        "allowed": "defensive_design_and_local_analysis"
+      },
+      "S2_SANDBOX": {
+        "automatic_execution": false,
+        "required": [
+          "explicit_authorization",
+          "sandbox",
+          "rollback",
+          "logging",
+          "stop_condition"
+        ]
+      },
+      "S3_HIGH_CONTROL": {
+        "automatic_execution": false,
+        "required": [
+          "explicit_authorization",
+          "isolated_sandbox",
+          "human_approval",
+          "rollback",
+          "full_logging",
+          "stop_condition"
+        ]
+      }
+    },
+    "prohibited_automatic_actions": [
+      "external_target_scanning",
+      "credential_collection",
+      "persistence",
+      "malware_deployment",
+      "data_exfiltration",
+      "unauthorized_access",
+      "destructive_testing"
+    ]
+  },
+  "taxonomy_policy": {
+    "policy_version": "BF-TAXONOMY-2.0.0",
+    "pipeline_stages": [
+      "DELIMITAR",
+      "CARTOGRAFIAR",
+      "DESCOMPONER",
+      "ROMPER",
+      "DIVERGIR",
+      "ATACAR",
+      "EVOLUCIONAR",
+      "MATERIALIZAR",
+      "EVALUAR"
+    ],
+    "activation_tiers": [
+      "essential",
+      "core",
+      "extended",
+      "research",
+      "archive"
+    ],
+    "safety_classes": [
+      "S0_CONCEPTUAL",
+      "S1_DEFENSIVE",
+      "S2_SANDBOX",
+      "S3_HIGH_CONTROL"
+    ],
+    "functional_categories": [
+      "adversarial_threat",
+      "agents_ai_devtools",
+      "architecture_topology",
+      "causal_state_transitions",
+      "cross_domain_transfer",
+      "data_privacy_provenance",
+      "decision_risk",
+      "evidence_verification",
+      "experimentation_benchmarks",
+      "failure_resilience",
+      "governance_incentives",
+      "human_factors",
+      "human_legal_ethics",
+      "novelty_diversity",
+      "supply_chain_build",
+      "trust_identity_access",
+      "general_innovation"
+    ],
+    "causal_axes": [
+      "authority_source",
+      "authorization_rule",
+      "constraint_scope",
+      "coordination_rule",
+      "data_flow",
+      "decision_owner",
+      "decision_trigger",
+      "evidence_required",
+      "failure_default",
+      "feedback_source",
+      "human_behavior",
+      "incentive_structure",
+      "observability",
+      "resource_dependency",
+      "rollback_authority",
+      "state_duration",
+      "topology",
+      "unknown"
+    ],
+    "evidence_levels": [
+      "none",
+      "conceptual",
+      "testable",
+      "adversarial",
+      "reproducible"
+    ]
+  }
+}

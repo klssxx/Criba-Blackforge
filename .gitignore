@@ -1,0 +1,40 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+coverage.json
+htmlcov/
+
+# Controlled pytest temp dirs
+.tmp_pytest/
+.pytest-tmp/
+.pytest-temp/
+
+# Build outputs (PyInstaller / setuptools)
+build/
+dist/
+
+# Local runtime artifacts
+artifacts/*.sqlite3
+artifacts/*.json
+
+# Editor / OS
+.DS_Store
+*.swp
+
+# Hermes tmp
+.hermes-tmp.*
+src/**/.hermes-tmp.*

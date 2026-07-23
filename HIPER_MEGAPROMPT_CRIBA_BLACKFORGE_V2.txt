@@ -1,0 +1,1419 @@
+HIPER-MEGAPROMPT DE IMPLEMENTACIÓN
+CRIBA + BLACKFORGE v2.0.0-debate20
+Integración incremental, verificable y compatible con el backend actual
+
+======================================================================
+0. ROL Y NORMA DE TRABAJO
+======================================================================
+
+Actúa como un equipo senior coordinado compuesto por:
+
+- arquitecto principal de software;
+- ingeniero Python/PySide6;
+- ingeniero de datos y esquemas;
+- arquitecto de seguridad defensiva;
+- modelador causal;
+- ingeniero de pruebas y regresión;
+- auditor de compatibilidad;
+- diseñador de producto técnico;
+- mantenedor de aplicaciones Windows portables.
+
+Trabaja directamente sobre:
+
+E:\PROYECTS\CRIBA
+
+No empieces rediseñando la GUI. No sustituyas la arquitectura actual por una
+aplicación nueva. No borres comportamiento verificado. Integra BLACKFORGE como
+una extensión aislada y aditiva de CRIBA.
+
+El resultado debe ser código real, pruebas reales, persistencia real, ejecución
+headless real y, solo al final, una ampliación mínima de la GUI existente.
+
+No declares PASS por razonamiento, inspección visual o una ejecución ad-hoc.
+Cada fase necesita un gate reproducible.
+
+Si una fase falla:
+
+1. detén el avance a la fase siguiente;
+2. diagnostica la causa;
+3. corrige;
+4. vuelve a ejecutar el gate;
+5. documenta el resultado.
+
+Si alcanzas el límite de contexto, actualiza HANDOFF.md con el último estado
+verificado y termina de forma recuperable. No resumas tareas pendientes como
+si estuvieran terminadas.
+
+======================================================================
+1. ESTADO ACTUAL QUE DEBES PRESERVAR
+======================================================================
+
+Lee antes de modificar:
+
+- HANDOFF.md
+- cualquier checkpoint vigente;
+- src/criba/engine.py
+- src/criba/storage.py
+- src/criba/gui.py
+- modelos/esquemas actuales;
+- tests relacionados con causalidad, convergencia, paquetes y golden master;
+- scripts de verificación existentes.
+
+El estado comunicado por la sesión anterior es:
+
+- La capa de CONVERGENCIA está implementada.
+- _evaluate_idea(idea) evalúa ideas ya generadas.
+- La fórmula actual es:
+
+  value_score = evidencia * novedad / coste
+
+- La novedad procede de la capa de MEDICIÓN.
+- Los ejes no actúan como generadores.
+- Los operadores no actúan como medidores.
+- CCA conserva su función de detectar cambios cosméticos.
+- innovation.top_ideas, innovation.mean_value_score y metrics.mean_value_score
+  existen.
+- Cada idea posee convergence y flag extreme.
+- El último gate comunicado fue 51 passed.
+- BLACKFORGE todavía está aislado y pendiente de activación.
+
+No confíes ciegamente en este resumen. Antes de tocar código:
+
+1. ejecuta la suite base;
+2. registra comando, commit/estado y resultado;
+3. confirma la fórmula y las fronteras generador/medidor;
+4. crea un checkpoint recuperable.
+
+PROHIBICIONES:
+
+- No cambies la fórmula de convergencia en esta integración.
+- No uses un eje como generador.
+- No uses un operador como medidor.
+- No reinterpretes CCA.
+- No regenere el golden master antes de comprobar por qué cambia.
+- No mezcles BLACKFORGE con el flujo CRIBA normal por defecto.
+- No actives ninguna ejecución ofensiva real.
+- No mantengas dos colecciones mutables de ideas.
+
+======================================================================
+2. ARCHIVOS DE ENTRADA Y PRECEDENCIA
+======================================================================
+
+Los archivos se encontrarán en una carpeta local del proyecto, recomendada:
+
+E:\PROYECTS\CRIBA\imports\blackforge_v2\
+
+Archivos obligatorios:
+
+1. criba_blackforge_catalogo_final_debate20.json
+2. criba_blackforge_politicas_v2.json
+3. causal_engine.py
+4. test_causal_engine.py
+
+Archivos recomendados:
+
+5. criba_blackforge_debate_20_rondas.md
+6. criba_blackforge_cambios_debate20.csv
+
+Archivos opcionales, solo para inspección humana:
+
+7. criba_blackforge_catalogo_final_debate20.csv
+8. criba_blackforge_catalogo_final_debate20.xlsx
+
+PRECEDENCIA DE FUENTES:
+
+1. El JSON final es la fuente de verdad de los 723 registros.
+2. El JSON de políticas es la fuente de verdad de selección, seguridad y enums.
+3. causal_engine.py es una implementación de referencia que debe revisarse,
+   probarse y adaptarse; no copiarse ciegamente.
+4. El debate explica el porqué de las decisiones.
+5. El CSV de cambios sirve para auditoría, no para cargar runtime.
+6. El CSV/XLSX final es una vista de inspección, no una segunda base canónica.
+7. Los cuatro catálogos originales de 800/1000/800/600 elementos no deben
+   cargarse ni reprocesarse durante esta integración. Solo se consultarán si
+   aparece una discrepancia concreta de procedencia.
+
+No pegues los millones de caracteres de los archivos en prompts. Inspecciónalos
+desde disco de forma selectiva y programática.
+
+======================================================================
+3. OBJETIVO FINAL
+======================================================================
+
+Integrar BLACKFORGE como modo opcional de CRIBA para innovación sobre:
+
+- herramientas de desarrollo;
+- aplicaciones de ciberseguridad;
+- seguridad de agentes;
+- análisis defensivo;
+- pruebas adversariales autorizadas;
+- prototipos y experimentos en sandbox.
+
+CRIBA normal debe seguir funcionando como antes.
+
+BLACKFORGE debe:
+
+1. cargar y validar el catálogo final de 723 registros;
+2. seleccionar técnicas de manera determinista y diversa;
+3. imponer políticas de seguridad antes de cualquier ejecución;
+4. trabajar con variables e intervenciones causales congeladas;
+5. detectar duplicados por firma causal antes que por genoma o redacción;
+6. preservar la capa actual de medición y convergencia;
+7. persistir versiones, selección, decisiones y evidencia;
+8. funcionar headless;
+9. exponer una GUI simple únicamente después de que el backend esté verde.
+
+BLACKFORGE no es una herramienta para atacar terceros. Es un laboratorio de
+ideación, diseño defensivo, análisis local y experimentación aislada y
+autorizada.
+
+======================================================================
+4. ARQUITECTURA OBLIGATORIA
+======================================================================
+
+No conviertas engine.py en un monolito.
+
+Estructura recomendada:
+
+src/criba/
+  blackforge/
+    __init__.py
+    enums.py
+    models.py
+    catalog.py
+    selector.py
+    safety.py
+    causal.py
+    pipeline.py
+    hooks.py
+    packet.py
+    persistence.py
+
+data/
+  blackforge/
+    catalog.v2.json
+    policies.v2.json
+
+docs/
+  blackforge/
+    DEBATE_20_ROUNDS.md
+    CHANGELOG_AUDIT.csv
+    INTEGRATION.md
+
+verification/
+  blackforge_catalog_report.json
+  blackforge_selection_sample.json
+  blackforge_headless_output.json
+  blackforge_headless_output.normalized.json
+
+tests/
+  blackforge/
+    test_catalog_contract.py
+    test_catalog_integrity.py
+    test_selector.py
+    test_selection_diversity.py
+    test_safety_gate.py
+    test_causal_validation.py
+    test_causal_signature.py
+    test_causal_distance.py
+    test_packet_compatibility.py
+    test_storage_roundtrip.py
+    test_blackforge_headless.py
+    test_criba_regression.py
+
+Adapta esta estructura a la estructura real del repositorio sin duplicar
+módulos existentes. Si ya hay módulos equivalentes, extiéndelos.
+
+Responsabilidades:
+
+- catalog.py:
+  carga inmutable, validación, índices y consultas.
+
+- selector.py:
+  selección determinista con cuotas y reporte de cumplimiento.
+
+- safety.py:
+  decisiones de seguridad previas a cualquier hook o ejecución.
+
+- causal.py:
+  modelo congelado, normalización, validación, firma, distancia y sensibilidad.
+
+- pipeline.py:
+  orquestación de etapas BLACKFORGE.
+
+- hooks.py:
+  interfaces de generación. La implementación local actual debe ser
+  determinista y sustituible por HY3/API sin reescribir el motor.
+
+- packet.py:
+  extensión aditiva del paquete canónico.
+
+- persistence.py:
+  guardado y reapertura reproducible de sesiones.
+
+engine.py solo debe coordinar las interfaces públicas.
+
+======================================================================
+5. CONTRATO DEL CATÁLOGO
+======================================================================
+
+El catálogo final esperado declara:
+
+- catalog_schema_version: "2.0.0"
+- catalog_version: "2.0.0-debate20"
+- record_count: 723
+
+Cuotas exactas:
+
+- essential: 72
+- core: 180
+- extended: 277
+- research: 150
+- archive: 44
+
+Clases de seguridad esperadas:
+
+- S0_CONCEPTUAL: 55
+- S1_DEFENSIVE: 608
+- S2_SANDBOX: 51
+- S3_HIGH_CONTROL: 9
+
+Fases esperadas:
+
+- DELIMITAR: 28
+- CARTOGRAFIAR: 106
+- DESCOMPONER: 33
+- ROMPER: 81
+- DIVERGIR: 183
+- ATACAR: 76
+- EVOLUCIONAR: 39
+- MATERIALIZAR: 48
+- EVALUAR: 129
+
+El loader debe comprobar:
+
+- exactamente 723 registros;
+- blackforge_id único;
+- source_ref único;
+- versiones correctas;
+- tier permitido;
+- fase permitida;
+- categoría permitida;
+- clase de seguridad permitida;
+- eje causal permitido o unknown;
+- record_hash presente;
+- source_fingerprint presente;
+- source_text presente;
+- operational_prompt presente;
+- input_contract y output_artifact presentes;
+- ningún S3 habilitado por defecto;
+- S2/S3 requieren sandbox;
+- authorization_scope es authorized_defensive_only.
+
+No recalcules record_hash en el primer incremento sin documentar y reproducir
+exactamente la canonicalización con la que fue creado. Trátalo inicialmente
+como token de procedencia. Sí puedes verificar source_fingerprint si replicas
+su algoritmo de forma exacta y probada.
+
+Modelo recomendado:
+
+BlackforgeCatalogItem
+- blackforge_id
+- source_ref
+- source_catalog
+- source_kind
+- source_family
+- title
+- description
+- source_text
+- activation_tier
+- default_enabled
+- selection_weight
+- stage_primary
+- stage_secondary
+- functional_category_primary
+- functional_category_secondary
+- domain_primary
+- domain_secondary
+- causal_axis_primary
+- causal_axis_secondary
+- evidence_level
+- verification_method
+- safety_class
+- execution_scope_v2
+- operational_prompt
+- input_contract
+- output_artifact
+- use_when
+- avoid_when
+- prerequisites
+- profile_offensive_research
+- profile_defensive_engineering
+- profile_devtools
+- profile_hybrid
+- review_status
+- record_hash
+- source_fingerprint
+- metadata_extra
+
+Preserva campos no consumidos mediante metadata_extra o configuración
+equivalente. No pierdas información al cargar y serializar.
+
+El catálogo cargado debe ser inmutable durante una sesión.
+
+======================================================================
+6. SELECTOR DETERMINISTA
+======================================================================
+
+Implementa:
+
+select_blackforge_items(config, catalog, policy, seed) -> SelectionResult
+
+BlackforgeSelectionConfig debe aceptar:
+
+- profile:
+  - defensive_engineering
+  - offensive_research
+  - devtools
+  - hybrid
+
+- intensity:
+  - standard
+  - deep
+  - radical
+  - adversarial
+
+- session_size, por defecto 12;
+- seed;
+- allowed_tiers;
+- allowed_safety_classes;
+- required_stages;
+- explicit_high_control_approval;
+- authorized_scope_confirmed;
+- sandbox_available.
+
+Reglas predeterminadas del archivo de políticas:
+
+- cargar solo essential + core;
+- mínimo 3 catálogos fuente;
+- mínimo 5 categorías primarias;
+- mínimo 4 ejes causales;
+- máximo 3 registros por categoría primaria;
+- máximo 2 por source_family;
+- máximo 2 con causal_axis_primary=unknown;
+- presencia mínima de:
+  - ROMPER
+  - DIVERGIR
+  - ATACAR
+  - EVALUAR
+
+Regla adicional de seguridad:
+
+- S3 permitido: 0 por defecto.
+- Máximo 1 S3 únicamente si:
+  - explicit_high_control_approval=True;
+  - authorized_scope_confirmed=True;
+  - sandbox_available=True.
+- S2 puede seleccionarse, pero no ejecutarse fuera del safety gate.
+
+La selección debe:
+
+1. ser reproducible con la misma semilla;
+2. usar puntuación de perfil adecuada;
+3. respetar cuotas;
+4. conservar diversidad;
+5. producir un SelectionReport detallado;
+6. no relajar silenciosamente una restricción.
+
+Si las restricciones no pueden cumplirse:
+
+- devuelve SelectionFailure estructurado;
+- identifica exactamente qué cuota fue imposible;
+- no inventes una selección aparentemente válida.
+
+Pruebas mínimas:
+
+- misma semilla -> mismos IDs y orden;
+- semilla distinta -> puede variar conservando cuotas;
+- 12 elementos;
+- 3 fuentes mínimas;
+- 5 categorías mínimas;
+- 4 ejes mínimos;
+- máximos por categoría y familia;
+- 0 S3 por defecto;
+- S3 rechazado sin aprobación;
+- research solo con modo explícito;
+- archive nunca seleccionable;
+- fallo estructurado cuando las cuotas son imposibles.
+
+======================================================================
+7. SAFETY GATE
+======================================================================
+
+Implementa un gate antes de cualquier hook que pueda materializar, probar,
+simular o atacar:
+
+evaluate_blackforge_safety(item, session_context) -> SafetyDecision
+
+Decisiones permitidas:
+
+- ALLOW_CONCEPTUAL
+- ALLOW_DEFENSIVE_DESIGN
+- ALLOW_LOCAL_NON_DESTRUCTIVE
+- REQUIRE_SANDBOX
+- REQUIRE_HUMAN_APPROVAL
+- DENY
+
+S0_CONCEPTUAL:
+- solo análisis e ideación;
+- no ejecución automática.
+
+S1_DEFENSIVE:
+- diseño defensivo;
+- análisis local no destructivo;
+- sin objetivos externos.
+
+S2_SANDBOX:
+- autorización explícita;
+- sandbox;
+- rollback;
+- logging;
+- stop condition;
+- sin objetivos externos.
+
+S3_HIGH_CONTROL:
+- todo lo anterior;
+- sandbox aislado;
+- aprobación humana;
+- logging completo;
+- nunca habilitado por defecto.
+
+Acciones automáticas prohibidas:
+
+- escaneo de objetivos externos;
+- recolección de credenciales;
+- persistencia;
+- despliegue de malware;
+- exfiltración;
+- acceso no autorizado;
+- pruebas destructivas;
+- ejecución contra terceros.
+
+BLACKFORGE puede describir, modelar o simular conceptos dual-use dentro de un
+entorno seguro. No debe ejecutar ni preparar automáticamente operaciones reales
+contra terceros.
+
+Cada decisión debe guardar:
+
+- decision;
+- policy_version;
+- item_id;
+- reasons;
+- unmet_requirements;
+- allowed_scope;
+- timestamp/clock inyectable;
+- session_id.
+
+======================================================================
+8. MODELO CAUSAL Y FIRMA
+======================================================================
+
+Integra la implementación de referencia causal_engine.py después de revisarla y
+ejecutar test_causal_engine.py.
+
+No sustituyas la causalidad por similitud de títulos, embeddings o genoma.
+
+Jerarquía de decisión:
+
+1. firma causal;
+2. intervenciones y variables;
+3. resultados afectados;
+4. genoma estructural;
+5. similitud semántica;
+6. título/redacción.
+
+Crea primero un PROBLEM_CAUSAL_MODEL congelado.
+
+Variables permitidas, como mínimo:
+
+- decision_owner
+- decision_trigger
+- evidence_required
+- authority_source
+- authorization_rule
+- constraint_scope
+- coordination_rule
+- state_duration
+- failure_default
+- rollback_authority
+- feedback_source
+- resource_dependency
+- affected_outcome
+- data_flow
+- topology
+- human_behavior
+- incentive_structure
+- observability
+
+Cada variable debe contener:
+
+- id estable;
+- axis;
+- question;
+- baseline_value;
+- allowed_values;
+- source_span;
+- linked_outcomes.
+
+Una vez congelado, HY3/hook no puede:
+
+- crear IDs arbitrarios;
+- modificar allowed_values;
+- redefinir baseline;
+- inventar outcomes sin mandarlos a unclassified_properties.
+
+Implementa:
+
+validate_against_frozen_model(
+    proposal,
+    model,
+    *,
+    require_from_matches_baseline=False
+) -> NormalizedProposal
+
+En error debe lanzar una excepción específica o devolver un rechazo estructurado
+con código principal:
+
+CAUSAL_PROPOSAL_REJECTED
+
+Códigos mínimos:
+
+- UNKNOWN_VARIABLE_ID
+- UNKNOWN_OUTCOME_ID
+- UNKNOWN_OPERATION
+- FROM_OUTSIDE_ALLOWED_VALUES
+- TO_OUTSIDE_ALLOWED_VALUES
+- DIRECTION_OUTSIDE_ALLOWED_VALUES
+- MISSING_FROM_VALUE
+- MISSING_TO_VALUE
+- NOOP_INTERVENTION
+- PRIMARY_NOT_IN_INTERVENTIONS
+- DUPLICATE_INTERVENTION
+
+La propuesta inconsistente se rechaza. No se repara silenciosamente.
+
+Implementa normalización canónica para:
+
+- Unicode NFKC;
+- espacios;
+- casefold de enums e IDs;
+- bool;
+- números;
+- 0, 0.0, Decimal("0"), "0" y "0.0" equivalentes cuando el campo es numérico;
+- orden de claves;
+- orden de intervenciones;
+- orden de outcomes.
+
+No uses sorted() sobre tuplas que puedan mezclar None y str.
+
+Firma recomendada:
+
+- canonical JSON;
+- sort_keys=True;
+- separadores estables;
+- UTF-8;
+- SHA-256;
+- proposal_id, título y prosa fuera de la firma.
+
+Dos propuestas causalmente iguales con distinta redacción deben obtener el
+mismo hash.
+
+El campo textual causal_mechanism es una vista derivada. La fuente canónica es:
+
+- interventions[]
+- affected_outcomes[]
+- primary_intervention
+
+======================================================================
+9. DISTANCIA CAUSAL VERSIONADA
+======================================================================
+
+No uses pesos mágicos incrustados.
+
+Implementa CausalWeightProfile con:
+
+- profile_id;
+- version;
+- domain;
+- weights;
+- duplicate_threshold;
+- close_variant_threshold;
+- minimum_coverage;
+- critical_axes.
+
+Características iniciales:
+
+- primary_variable
+- primary_transition
+- intervention_set
+- outcome_set
+- failure_behavior
+
+Perfil general inicial:
+
+- primary_variable: 0.35
+- primary_transition: 0.25
+- intervention_set: 0.15
+- outcome_set: 0.15
+- failure_behavior: 0.10
+
+Perfil cybersecurity inicial:
+
+- primary_variable: 0.25
+- primary_transition: 0.20
+- intervention_set: 0.15
+- outcome_set: 0.15
+- failure_behavior: 0.25
+
+Ejes críticos iniciales para cybersecurity:
+
+- failure_default
+- rollback_authority
+- authorization_rule
+
+Si dos ideas difieren en un eje crítico, pueden ser structurally_distinct aunque
+la similitud ponderada sea alta.
+
+Clasificaciones:
+
+- exact_causal_duplicate
+- causal_duplicate
+- close_variant
+- structurally_distinct
+- insufficient_evidence
+
+Devuelve:
+
+- similarity;
+- coverage;
+- profile_id;
+- profile_version;
+- exact_signature_match;
+- feature_scores;
+- matching_features;
+- different_features;
+- critical_differences;
+- classification;
+- reason.
+
+Añade análisis de sensibilidad:
+
+- variar cada peso ±10 %;
+- renormalizar;
+- repetir clasificación;
+- marcar stable=False si un caso límite cambia.
+
+No descartes automáticamente una idea si la clasificación es inestable.
+
+======================================================================
+10. GENOMA: SEÑAL SECUNDARIA
+======================================================================
+
+El genoma no desaparece, pero deja de ser juez principal.
+
+Esquema mínimo cerrado:
+
+- actor
+- mechanism
+- topology
+- trust_model
+- time_model
+
+Reglas:
+
+- enum inválido -> unknown;
+- concepto nuevo -> unclassified_properties;
+- nunca ampliar enums automáticamente;
+- evidence_span requerido para clasificación;
+- unknown no suma coincidencia;
+- unknown se excluye del denominador Jaccard multivalor;
+- dos genomas casi vacíos deben producir similitud baja;
+- coverage mínima para declarar duplicado.
+
+Mantén o crea pruebas para:
+
+- dos genomas all unknown -> similitud 0;
+- unknown no eleva numerador;
+- conjuntos vacíos efectivos -> 0, no 1;
+- misma estructura con redacción distinta;
+- genomas distintos no ocultan la misma firma causal;
+- mismo enum de mechanism puede albergar intervenciones causales distintas.
+
+======================================================================
+11. PAQUETE CANÓNICO ÚNICO
+======================================================================
+
+No crees BLACKFORGE_PACKET como segunda fuente persistente.
+
+MANDATORY_MODEL_PACKET sigue siendo el único contrato canónico.
+
+Haz una ampliación aditiva, preferiblemente schema_version "2.1.0", solo después
+de verificar migraciones y compatibilidad.
+
+Estructura orientativa:
+
+{
+  "schema": "mandatory_model_packet",
+  "schema_version": "2.1.0",
+  "mode": "criba | blackforge",
+  "activation_id": "...",
+  "original_query": "...",
+
+  "selected_current": {},
+  "supporting_methods": [],
+  "contextualization": {},
+  "rupture": {},
+  "ideas": [],
+
+  "innovation": {
+    "...campos actuales...": "...",
+    "ideas": [],
+
+    "blackforge": null | {
+      "enabled": true,
+      "catalog_version": "2.0.0-debate20",
+      "selection_policy_version": "BF-SELECT-2.0.0",
+      "safety_policy_version": "BF-SAFE-2.0.0",
+      "taxonomy_policy_version": "BF-TAXONOMY-2.0.0",
+
+      "session_config": {},
+      "selected_item_ids": [],
+      "selection_report": {},
+      "safety_report": {},
+      "frozen_problem_model": {},
+      "stage_outputs": {
+        "DELIMITAR": {},
+        "CARTOGRAFIAR": {},
+        "DESCOMPONER": {},
+        "ROMPER": {},
+        "DIVERGIR": {},
+        "ATACAR": {},
+        "EVOLUCIONAR": {},
+        "MATERIALIZAR": {},
+        "EVALUAR": {}
+      },
+      "causal_proposals": [],
+      "causal_validation_report": {},
+      "causal_duplicate_report": {},
+      "unclassified_properties": []
+    }
+  },
+
+  "experiment": {},
+  "decision": {},
+  "model_instruction": "",
+  "response_contract": {},
+  "metrics": {}
+}
+
+Reglas:
+
+- mode=criba debe producir el mismo comportamiento anterior.
+- innovation.blackforge debe ser null/ausente en CRIBA normal.
+- BLACKFORGE no debe modificar la capa de convergencia existente.
+- packet["ideas"] es una vista derivada de
+  packet["innovation"]["ideas"].
+- Nunca mantener ambas listas como fuentes mutables.
+
+Gate obligatorio:
+
+- misma longitud;
+- mismos IDs;
+- mismo orden;
+- mismo contenido por ID.
+
+El test se ejecuta en cada gate local, no solo una vez.
+
+Compatibilidad:
+
+- cargar paquetes v1 reales;
+- cargar paquetes 2.0 actuales;
+- migrar a 2.1 de forma aditiva;
+- no inventar datos BLACKFORGE en sesiones antiguas;
+- persistir y reabrir;
+- reconstruir prompt anterior;
+- exportar JSON estable.
+
+======================================================================
+12. PIPELINE BLACKFORGE
+======================================================================
+
+Fases:
+
+1. DELIMITAR
+2. CARTOGRAFIAR
+3. DESCOMPONER
+4. ROMPER
+5. DIVERGIR
+6. ATACAR
+7. EVOLUCIONAR
+8. MATERIALIZAR
+9. EVALUAR
+
+No conviertas las nueve fases en nueve llamadas obligatorias a HY3.
+
+Usa una interfaz neutral:
+
+class BlackforgeHooks:
+    delimit(...)
+    cartograph_and_decompose(...)
+    break_frame(...)
+    diverge(...)
+    attack(...)
+    evolve(...)
+    materialize(...)
+    evaluate(...)
+
+Implementación inicial:
+
+- local;
+- determinista;
+- semilla fija;
+- sin red;
+- basada en datos reales del catálogo;
+- sustituible por adaptador HY3/API.
+
+Agrupación futura recomendada:
+
+- llamada A:
+  DELIMITAR + CARTOGRAFIAR + DESCOMPONER + ROMPER
+
+- llamada B:
+  generar planes causales para DIVERGIR
+
+- llamada C opcional:
+  ATACAR + EVOLUCIONAR sobre ideas seleccionadas
+
+- llamada D opcional:
+  MATERIALIZAR + EVALUAR
+
+El motor no debe depender de que HY3 exista para pasar tests.
+
+Flujo:
+
+Consulta
+-> configuración
+-> selección de operadores
+-> safety gate
+-> modelo causal congelado
+-> ruptura
+-> 16 planes causales
+-> validación local
+-> firma causal
+-> deduplicación causal
+-> conservar 8-12 propuestas distintas
+-> redactar ideas
+-> medir
+-> CCA
+-> convergencia existente
+-> ranking
+-> persistencia
+
+Criterios iniciales de diversidad:
+
+- 16 propuestas recibidas;
+- mínimo 10 válidas;
+- mínimo 8 firmas no duplicadas;
+- mínimo 4 variables causales primarias;
+- mínimo 3 tipos de operación causal;
+- ninguna variable primaria domina más del 40 %;
+- no más del 25 % de ideas por misma familia;
+- ninguna idea se considera nueva solo por título o genoma.
+
+Novedad declarada:
+
+- current_session;
+- project_history.
+
+No afirmar novedad mundial sin investigación externa.
+
+======================================================================
+13. PERSISTENCIA
+======================================================================
+
+Persistir por sesión:
+
+- mode;
+- catalog_version;
+- policy versions;
+- seed;
+- selected_item_ids y orden;
+- SelectionReport;
+- safety decisions;
+- frozen problem model;
+- causal proposals normalizadas;
+- causal signatures;
+- distance profile y versión;
+- sensitivity results;
+- idea IDs;
+- convergence;
+- metrics;
+- timestamps mediante reloj inyectable;
+- hashes relevantes.
+
+Una reapertura debe reconstruir exactamente:
+
+- selección;
+- orden;
+- pipeline;
+- ideas;
+- scores;
+- decisiones de seguridad.
+
+No dupliques el catálogo completo dentro de cada sesión. Guarda versión + IDs +
+snapshots mínimos necesarios para reproducibilidad.
+
+Añade migración aditiva y rollback de almacenamiento.
+
+======================================================================
+14. GATES POR FASE
+======================================================================
+
+FASE 0 — BASELINE
+
+- Suite actual completa en verde.
+- Resultado guardado.
+- Checkpoint creado.
+- Fórmula de convergencia verificada.
+- CCA verificado.
+- Frontera generador/medidor verificada.
+
+FASE 1 — INGESTA DEL CATÁLOGO
+
+- 723 registros.
+- IDs y source_refs únicos.
+- cuotas exactas por tier;
+- clases de seguridad exactas;
+- fases exactas;
+- enums válidos;
+- loader inmutable;
+- informe:
+  verification/blackforge_catalog_report.json
+
+FASE 2 — SELECTOR
+
+- determinismo;
+- cuotas;
+- perfiles;
+- SelectionFailure;
+- S3 bloqueado;
+- selección de ejemplo versionada.
+
+FASE 3 — SAFETY
+
+- todas las clases;
+- requisitos faltantes;
+- deny;
+- prohibiciones;
+- ninguna ejecución antes del gate.
+
+FASE 4 — CAUSAL
+
+- tests de la implementación de referencia;
+- validación contra modelo congelado;
+- normalización;
+- hash;
+- None no rompe sorted;
+- transiciones nulas rechazadas;
+- ejes críticos;
+- sensibilidad.
+
+FASE 5 — PACKET Y PERSISTENCIA
+
+- v1 real;
+- 2.0 actual;
+- 2.1 nuevo;
+- invariante de ideas;
+- roundtrip;
+- no fragmentación.
+
+FASE 6 — PIPELINE HEADLESS
+
+Consulta de referencia:
+
+¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones
+de agentes autónomos sin depender de una autoridad central permanente?
+
+Guardar:
+
+verification/blackforge_headless_output.json
+verification/blackforge_headless_output.normalized.json
+
+Normalizar:
+
+- UUID;
+- timestamp;
+- rutas;
+- orden de claves;
+- elementos no deterministas.
+
+Comprobar:
+
+- misma semilla -> mismo resultado normalizado;
+- selección cumple política;
+- safety report;
+- frozen problem model;
+- propuestas válidas;
+- duplicados causales;
+- 8-12 ideas supervivientes;
+- medición;
+- CCA;
+- convergencia;
+- top_ideas;
+- mean_value_score.
+
+FASE 7 — REGRESIÓN CRIBA
+
+- mode=criba no carga BLACKFORGE;
+- no cambia resultados base inesperadamente;
+- 51 tests anteriores siguen verdes o su equivalente actualizado;
+- cambios de golden explicados;
+- portable no roto.
+
+Solo después: GUI.
+
+======================================================================
+15. GUI SIMPLE
+======================================================================
+
+No rediseñes toda la aplicación.
+
+Añade un selector:
+
+MODO
+[ CRIBA ] [ BLACKFORGE ]
+
+Cuando BLACKFORGE está desactivado:
+- comportamiento anterior;
+- ningún coste adicional;
+- ningún panel BLACKFORGE visible.
+
+Cuando está activado, mostrar únicamente:
+
+- Perfil:
+  Defensive Engineering
+  Offensive Research
+  DevTools
+  Hybrid
+
+- Intensidad:
+  Standard
+  Deep
+  Radical
+  Adversarial
+
+- Entorno:
+  Conceptual
+  Local Analysis
+  Sandbox
+
+- Semilla
+- Cantidad de ideas
+- Confirmación de alcance autorizado
+- Indicador de disponibilidad de sandbox
+
+Widget tree recomendado:
+
+QMainWindow
+└── centralWidget QWidget
+    └── QHBoxLayout
+        ├── Sidebar QFrame [220-230 px]
+        └── Main QFrame
+            └── QVBoxLayout
+                ├── Header QFrame [64-72 px]
+                ├── ConfigCard QFrame
+                ├── PipelineFrame QFrame
+                ├── BodySplitter QSplitter(Qt.Horizontal)
+                │   ├── MainScrollArea QScrollArea
+                │   │   ├── KnownSpaceCard
+                │   │   ├── RuptureCard
+                │   │   └── IdeaPortfolio
+                │   └── SummaryScrollArea QScrollArea [280-320 px]
+                │       ├── SelectionSummary
+                │       ├── DiversitySummary
+                │       ├── SafetySummary
+                │       └── ConvergenceSummary
+                └── StatusFrame [30-36 px]
+
+Pipeline visual:
+
+DELIMITAR
+-> CARTOGRAFIAR
+-> DESCOMPONER
+-> ROMPER
+-> DIVERGIR
+-> ATACAR
+-> EVOLUCIONAR
+-> MATERIALIZAR
+-> EVALUAR
+
+En 1360x768:
+
+- sidebar 230;
+- summary 280 mínimo;
+- área central sin scroll horizontal global;
+- tarjetas de ideas en dos columnas;
+- tres columnas solo cuando haya anchura suficiente.
+
+Mostrar en cada idea:
+
+- título;
+- mecanismo causal derivado;
+- variable primaria;
+- firma abreviada;
+- tier;
+- safety class;
+- evidencia;
+- novelty/convergence/value_score;
+- duplicate status.
+
+Botones:
+
+- Generar
+- Atacar y evolucionar
+- Pasar a experimento
+
+Reglas:
+
+- Atacar y evolucionar solo con ideas seleccionadas.
+- Pasar a experimento exige safety gate.
+- S2/S3 muestran requisitos.
+- S3 exige confirmación humana.
+- Ningún botón debe fingir una ejecución no implementada.
+
+======================================================================
+16. PRUEBAS OBLIGATORIAS
+======================================================================
+
+Además de la suite existente, cubrir:
+
+CATÁLOGO
+- count 723;
+- IDs únicos;
+- refs únicas;
+- tiers exactos;
+- safety exacto;
+- fases exactas;
+- enums;
+- source_text;
+- operational_prompt;
+- políticas.
+
+SELECTOR
+- determinismo;
+- diversidad;
+- perfiles;
+- fallos estructurados;
+- research/archive;
+- seguridad.
+
+CAUSAL
+- None/str no rompe ordenación;
+- valor fuera del modelo rechazado;
+- variable desconocida;
+- outcome desconocido;
+- no-op;
+- firma idéntica con redacción distinta;
+- 0 frente a "0";
+- orden de claves irrelevante;
+- ejes críticos;
+- sensibilidad ±10 %;
+- cobertura insuficiente.
+
+GENOMA
+- unknown excluido;
+- all unknown -> 0;
+- cobertura;
+- duplicado causal domina a genoma.
+
+PAQUETE
+- v1 real;
+- 2.0;
+- 2.1;
+- ideas invariant;
+- serialización;
+- prompt anterior.
+
+PIPELINE
+- CRIBA normal;
+- BLACKFORGE local;
+- seguridad;
+- persistencia;
+- golden normalizado;
+- consulta vacía;
+- Unicode;
+- consulta larga;
+- semilla.
+
+GUI
+- arranque sin BLACKFORGE;
+- activación;
+- visualización de datos reales;
+- botones bloqueados según seguridad;
+- reapertura;
+- 1360x768;
+- 1680x1050.
+
+No uses mocks para afirmar integración completa cuando sea posible ejecutar
+componentes reales locales. Los hooks remotos pueden simularse, pero loader,
+selector, safety, causalidad, paquete, persistencia y GUI deben ser reales.
+
+======================================================================
+17. SCRIPTS DE VERIFICACIÓN
+======================================================================
+
+Crea o actualiza:
+
+scripts/verify-criba.ps1
+scripts/verify-blackforge.ps1
+scripts/verify-all.ps1
+
+verify-blackforge debe ejecutar al menos:
+
+1. tests de catálogo;
+2. selector;
+3. safety;
+4. causalidad;
+5. paquete;
+6. persistencia;
+7. headless;
+8. golden.
+
+verify-all debe:
+
+1. ejecutar baseline CRIBA;
+2. ejecutar BLACKFORGE;
+3. ejecutar integración;
+4. comprobar artefactos;
+5. devolver código distinto de cero ante cualquier fallo.
+
+No ejecutes pytest dentro de la aplicación final. Los gates pertenecen a scripts
+de desarrollo/verificación.
+
+======================================================================
+18. DOCUMENTACIÓN Y HANDOFF
+======================================================================
+
+Actualiza:
+
+HANDOFF.md
+docs/blackforge/INTEGRATION.md
+docs/blackforge/SECURITY_MODEL.md
+docs/blackforge/DATA_CONTRACT.md
+
+HANDOFF debe incluir:
+
+- baseline;
+- checkpoint;
+- archivos creados;
+- archivos modificados;
+- migraciones;
+- versión de catálogo;
+- políticas;
+- pruebas;
+- resultados;
+- artefactos;
+- riesgos;
+- deuda;
+- siguiente acción exacta.
+
+Formato obligatorio por fase:
+
+FASE N — VERIFIED / PARTIAL / FAILED / NOT STARTED
+Objetivo:
+Archivos:
+Comandos:
+Resultado:
+Evidencia:
+Pendiente:
+Siguiente acción:
+
+Si el contexto termina, no dejes frases generales como “casi hecho”.
+
+======================================================================
+19. CRITERIOS FINALES DE ACEPTACIÓN
+======================================================================
+
+La integración se considera terminada únicamente si:
+
+- CRIBA normal conserva comportamiento;
+- la suite base está verde;
+- el catálogo de 723 carga y valida;
+- essential/core/extended/research/archive coinciden;
+- el selector es determinista;
+- las cuotas se respetan o se devuelve fallo;
+- S3 no está habilitado por defecto;
+- S2/S3 no pueden saltarse el safety gate;
+- no existe ejecución externa automática;
+- el modelo causal está congelado;
+- propuestas inválidas se rechazan;
+- firmas causales son canónicas;
+- duplicados causales se detectan pese a títulos/genomas distintos;
+- pesos y perfiles están versionados;
+- sensibilidad existe;
+- MANDATORY_MODEL_PACKET sigue siendo único;
+- ideas legacy e innovation.ideas no divergen;
+- v1 y 2.0 siguen abriendo;
+- salida headless es determinista;
+- persistencia/reapertura funciona;
+- GUI muestra datos reales;
+- portable abre, cierra y reabre;
+- HANDOFF refleja evidencia real;
+- no hay afirmaciones de PASS basadas solo en confianza.
+
+======================================================================
+20. ORDEN DE EJECUCIÓN AHORA
+======================================================================
+
+Empieza ya y sigue este orden:
+
+1. Inspecciona repo y HANDOFF.
+2. Ejecuta baseline completo.
+3. Crea checkpoint.
+4. Copia/importa los assets a data/docs sin alterar originales.
+5. Implementa modelos y loader.
+6. Ejecuta gate de catálogo.
+7. Implementa selector.
+8. Ejecuta gate de selección.
+9. Implementa safety.
+10. Ejecuta gate de seguridad.
+11. Integra causal_engine.
+12. Ejecuta gate causal.
+13. Amplía paquete y persistencia.
+14. Ejecuta migraciones y roundtrip.
+15. Implementa pipeline headless local.
+16. Genera y verifica golden.
+17. Ejecuta regresión completa CRIBA.
+18. Solo entonces modifica GUI.
+19. Ejecuta smoke test real.
+20. Actualiza HANDOFF y entrega informe final.
+
+Al finalizar, informa exactamente:
+
+- baseline inicial;
+- estado final de cada fase;
+- archivos creados;
+- archivos modificados;
+- migraciones;
+- conteo de tests;
+- gates;
+- artefactos de verification;
+- compatibilidad CRIBA;
+- estado BLACKFORGE;
+- limitaciones reales;
+- deuda técnica;
+- siguiente incremento recomendado.
+
+No preguntes si debes continuar entre fases. Continúa mientras el gate anterior
+esté verde. Si una decisión menor no está especificada, toma la opción más
+conservadora, compatible y reversible.

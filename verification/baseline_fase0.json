@@ -1,0 +1,16 @@
+{
+  "generated": "2026-07-24T01:57:40.897655",
+  "command": "python -m pytest -p no:cacheprovider -q",
+  "python": "3.12.10",
+  "pytest": "9.1.1",
+  "result": {
+    "passed": 137,
+    "failed": 0,
+    "skipped": 0,
+    "warnings": 1,
+    "return_code": 0,
+    "duration_s": 2.91
+  },
+  "tmp_env": ".tmp_pytest under project root",
+  "notes": "Baseline measured before any code change. .git was present but empty (invalid repo); reinitialized."
+}

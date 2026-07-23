@@ -1,0 +1,250 @@
+{
+  "packet_type": "MANDATORY_MODEL_PACKET",
+  "activation_id": "3f2649aa-6071-498a-935c-ce6795c17081",
+  "timestamp": "2026-07-23T15:13:00.383468+00:00",
+  "versions": {
+    "currents": "1.0.0",
+    "selector": "1.0.0"
+  },
+  "original_query": "Disenar sistema de aprobacion para agentes IA seguro y reversible",
+  "selected_current": {
+    "id": "coevolucion_atacante_defensor",
+    "name": "Coevolución atacante-defensor",
+    "score": 69,
+    "selection_reasons": [
+      "Hay un actor estratégico o una superficie adversarial.",
+      "Los agentes requieren analizar adaptación y generalización."
+    ]
+  },
+  "selection": {
+    "selected_current": "coevolucion_atacante_defensor",
+    "score": 69,
+    "confidence": 0.69,
+    "selection_reasons": [
+      "Hay un actor estratégico o una superficie adversarial.",
+      "Los agentes requieren analizar adaptación y generalización."
+    ],
+    "rejected_currents": [
+      {
+        "current": "falsacion_invariantes",
+        "score": 68,
+        "reason": "La consulta contiene una garantía o afirmación absoluta."
+      },
+      {
+        "current": "fronteras_estados_transiciones",
+        "score": 68,
+        "reason": "La consulta contiene aprobaciones, permisos, flujos o transiciones."
+      },
+      {
+        "current": "ablacion_reintroduccion",
+        "score": 60,
+        "reason": "La consulta presenta componentes o complejidad que pueden retirarse."
+      },
+      {
+        "current": "metamorficas_diferenciales",
+        "score": 57,
+        "reason": "La consulta menciona IA, modelos o agentes sin un oráculo único."
+      },
+      {
+        "current": "ejecucion_sombra",
+        "score": 20,
+        "reason": "El flujo permite observar desacuerdos sin conceder control."
+      },
+      {
+        "current": "factores_humanos",
+        "score": 20,
+        "reason": "Los pasos de un flujo pueden depender de conocimiento tácito."
+      },
+      {
+        "current": "causal_contrafactual",
+        "score": 15,
+        "reason": "No hay señales dominantes; se aplica el baseline determinista."
+      },
+      {
+        "current": "deriva_longitudinal",
+        "score": 15,
+        "reason": "No hay señales dominantes; se aplica el baseline determinista."
+      },
+      {
+        "current": "metaexperimento_jueces",
+        "score": 15,
+        "reason": "No hay señales dominantes; se aplica el baseline determinista."
+      },
+      {
+        "current": "novedad_diversidad",
+        "score": 15,
+        "reason": "No hay señales dominantes; se aplica el baseline determinista."
+      },
+      {
+        "current": "trasplante_interdisciplinar",
+        "score": 15,
+        "reason": "No hay señales dominantes; se aplica el baseline determinista."
+      }
+    ],
+    "signals": {
+      "absolute": true,
+      "causal": false,
+      "novelty": false,
+      "adversary": true,
+      "ai": true,
+      "baseline": false,
+      "ablation": true,
+      "states": true,
+      "time": false,
+      "human": false,
+      "transfer": false,
+      "meta": false
+    }
+  },
+  "supporting_methods": [
+    {
+      "id": "M100-01",
+      "name": "Inventario de supuestos",
+      "family": "diagnostico",
+      "reason": "Hace explícitos los supuestos que podrían invalidar la propuesta."
+    },
+    {
+      "id": "M200-01",
+      "name": "Inversión de garantía",
+      "family": "inversion",
+      "reason": "Busca la condición mínima que convertiría el objetivo en un fallo."
+    },
+    {
+      "id": "M1000-01",
+      "name": "Partición de autoridad",
+      "family": "arquitectura",
+      "reason": "Separa capacidades para limitar el radio de daño."
+    },
+    {
+      "id": "M1500-01",
+      "name": "Relación metamórfica",
+      "family": "verificacion",
+      "reason": "Define evidencia reproducible donde no hay un único resultado correcto."
+    }
+  ],
+  "contextualization": {
+    "problem": "Disenar sistema de aprobacion para agentes IA seguro y reversible",
+    "actor": "No especificado",
+    "desired_result": "Disenar una respuesta o decision verificable.",
+    "baseline": "No aportado; establecer baseline antes de promover.",
+    "constraints": [
+      "No ejecutar acciones destructivas ni usar datos reales sin consentimiento."
+    ],
+    "assumptions": [
+      "La consulta no aporta todos los datos operativos necesarios."
+    ],
+    "invariants": [
+      "La propiedad de seguridad declarada debe mantenerse bajo casos limite."
+    ],
+    "primary_metric": "Tasa de cumplimiento de la hipotesis bajo prueba.",
+    "guardrail_metrics": [
+      "Incidentes de seguridad",
+      "Radio de dano",
+      "Reversibilidad"
+    ],
+    "uncertainties": [
+      "Contexto empirico insuficiente; las propuestas son hipotesis."
+    ]
+  },
+  "rupture": {
+    "diagnostic_methods": [
+      "Inventario de supuestos",
+      "Inversión de garantía"
+    ],
+    "main_assumption_attacked": "La propiedad de seguridad declarada debe mantenerse bajo casos limite.",
+    "counterexample": "Caso minimo: una entrada o transicion valida produce un resultado que viola 'La propiedad de seguridad declarada debe mantenerse bajo casos limite.'.",
+    "rival_hypothesis": "El resultado depende de una condicion no observada o de incentivos desalineados.",
+    "adversarial_case": "Un actor intenta maximizar beneficio propio dentro de las reglas; la prueba se limita a datos simulados."
+  },
+  "ideas": [
+    {
+      "method": "Inventario de supuestos",
+      "method_id": "M100-01",
+      "proposal": "Aplicar Inventario de supuestos al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+      "causal_mechanism": "exponer supuestos medibles",
+      "difference_from_existing": "Aporta el mecanismo 'diagnostico', distinto de las demas propuestas.",
+      "genealogy": [
+        "coevolucion_atacante_defensor",
+        "M100-01"
+      ]
+    },
+    {
+      "method": "Inversión de garantía",
+      "method_id": "M200-01",
+      "proposal": "Aplicar Inversión de garantía al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+      "causal_mechanism": "buscar el fallo minimo",
+      "difference_from_existing": "Aporta el mecanismo 'inversion', distinto de las demas propuestas.",
+      "genealogy": [
+        "coevolucion_atacante_defensor",
+        "M200-01"
+      ]
+    },
+    {
+      "method": "Partición de autoridad",
+      "method_id": "M1000-01",
+      "proposal": "Aplicar Partición de autoridad al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+      "causal_mechanism": "compartimentar autoridad",
+      "difference_from_existing": "Aporta el mecanismo 'arquitectura', distinto de las demas propuestas.",
+      "genealogy": [
+        "coevolucion_atacante_defensor",
+        "M1000-01"
+      ]
+    },
+    {
+      "method": "Relación metamórfica",
+      "method_id": "M1500-01",
+      "proposal": "Aplicar Relación metamórfica al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+      "causal_mechanism": "comprobar una relacion reproducible",
+      "difference_from_existing": "Aporta el mecanismo 'verificacion', distinto de las demas propuestas.",
+      "genealogy": [
+        "coevolucion_atacante_defensor",
+        "M1500-01"
+      ]
+    }
+  ],
+  "synthesis": {
+    "selected_proposal": "Aplicar Inventario de supuestos al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+    "combined_methods": [
+      "Inventario de supuestos",
+      "Inversión de garantía"
+    ],
+    "why_selected": "Combina el supuesto mas critico con el mecanismo mas reversible; no se adopta sin evidencia."
+  },
+  "experiment": {
+    "falsifiable_hypothesis": "La variante basada en Coevolución atacante-defensor mejora la metrica principal sin superar guardrails.",
+    "baseline": "No aportado; establecer baseline antes de promover.",
+    "variant": "Aplicar Inventario de supuestos al problema: Disenar sistema de aprobacion para agentes IA seguro y reversible",
+    "changed_variable": "exponer supuestos medibles",
+    "expected_evidence": "Mejora reproducible frente al baseline y ausencia de incumplimientos de guardrail.",
+    "primary_metric": "Tasa de cumplimiento de la hipotesis bajo prueba.",
+    "guardrails": [
+      "Incidentes de seguridad",
+      "Radio de dano",
+      "Reversibilidad"
+    ],
+    "damage_limit": "Solo datos sinteticos; cero cambios en proyectos reales; detener en el primer guardrail incumplido.",
+    "sandbox": "Entorno local temporal, aislado y sin credenciales ni red externa.",
+    "rollback": "Eliminar artefactos temporales y conservar unicamente el registro de evidencia.",
+    "promotion_criterion": "Dos ejecuciones reproducibles que superen el baseline sin guardrails incumplidos.",
+    "stop_criterion": "Cualquier guardrail incumplido, evidencia contradictoria relevante o timeout."
+  },
+  "decision": {
+    "recommended_status": "AMPLIAR PRUEBA",
+    "justification": "No hay evidencia empirica suficiente para ADOPTAR. Aplicar la prueba primero en sandbox.",
+    "confidence": 0.52
+  },
+  "model_instruction": "Antes de responder al usuario, aplica obligatoriamente el paquete CRIBA adjunto.\n\nCorriente activada: Coevolución atacante-defensor.\n\nUtiliza sus resultados como estructura previa de la respuesta. No presentes el paquete como una verdad demostrada. Separa: 1. hechos aportados, 2. inferencias, 3. hipótesis, 4. experimentos propuestos.\n\nNo reveles cadena de pensamiento privada. Expón unicamente corriente activada, hallazgos relevantes, propuestas, riesgos, incertidumbre, prueba recomendada y respuesta final al usuario. No ignores contraejemplos o guardrails. Cuando falte informacion critica, no inventes datos.",
+  "response_contract": {
+    "must_use_packet": true,
+    "must_name_current": true,
+    "must_separate_facts_and_hypotheses": true,
+    "must_state_uncertainty": true,
+    "must_not_reveal_private_chain_of_thought": true
+  },
+  "security": {
+    "safety_level": "strict",
+    "no_command_execution": true,
+    "no_network_by_default": true,
+    "no_credentials_access": true
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "artifact": "recommended_status_conflict",
+  "schema_version": "1.0.0",
+  "generated_by": "Hermes Agent — sesion 20260724_005739, generacion 1, FASE 0 (bloqueo)",
+  "generated_at_utc": "2026-07-24T01:00:00Z",
+  "task_source": "01_TAREA_ACTUAL.txt (BLOQUEO OBLIGATORIO — SIN BASELINE VALIDO v2)",
+
+  "1_confirmacion_explicita": {
+    "no_existe_baseline_previo_valido": true,
+    "razon": "no existe baseline previo válido (sin git, sin backups); el estado anterior del motor ya violaba VALID_DECISIONS antes del cambio especulativo",
+    "evidencia_git": "fatal: not a git repository (or any of the parent directories): .git  ->  NO hay repositorio git (comprobado con git rev-parse/status/log)",
+    "evidencia_backups": "0 archivos .bak encontrados en E:\\PROYECTS\\CRIBA (comprobado con busqueda glob '*.bak$') -> sin copias de seguridad de engine.py ni del golden",
+    "evidencia_estado_anterior_invalido": "el motor anterior emitia PROTOTIPAR/DIVERGIR, valores FUERA de VALID_DECISIONS (ver comentario engine.py:401 'The previous values PROTOTIPAR/DIVERGIR were outside the enum'); por tanto ya incumplia el contrato antes del cambio especulativo",
+    "conclusion": "NO existe ningun baseline (motor+test+golden) que haya sido correcto y verificado de forma independiente en algun momento"
+  },
+
+  "2_valor_emitido_motor": {
+    "motor_anterior": {
+      "valores_posibles": ["PROTOTIPAR", "DIVERGIR"],
+      "estado_respecto_a_contrato": "INVALIDO — ambos fuera de VALID_DECISIONS",
+      "fuente": "comentario engine.py:401 + diagnostico 01_TAREA_ACTUAL.txt:9-11"
+    },
+    "motor_actual": {
+      "formula": "status = 'ADOPTAR' if len(families) >= 4 else 'AMPLIAR PRUEBA'",
+      "linea": "src/criba/engine.py:403",
+      "valor_verificado_headless": "AMPLIAR PRUEBA",
+      "familias_verificadas": 3,
+      "familias_lista": ["arquitectura", "diagnostico", "inversion"],
+      "query_usada": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+      "coherencia_con_golden": "MATCH=True (golden verification/mvp_output_sample.normalized.json recomienda 'AMPLIAR PRUEBA')",
+      "estado_respecto_a_contrato": "VALIDO — ambos valores estan dentro de VALID_DECISIONS"
+    },
+    "diferencia": "El motor anterior producia estados no enumerados (PROTOTIPAR/DIVERGIR); el motor actual los sustituye por ADOPTAR/AMPLIAR PRUEBA, que SI pertenecen a VALID_DECISIONS. La correccion de valores es internamente coherente, pero el MOTIVO de por que len(families)>=4 justifica ADOPTAR nunca fue ratificado por humano."
+  },
+
+  "3_contenido_exacto_VALID_DECISIONS": {
+    "archivo": "src/criba/constants.py:11",
+    "valor": ["ADOPTAR", "AMPLIAR PRUEBA", "ABANDONAR", "ARCHIVAR PARA RECOMBINAR"],
+    "nota": "NO incluye PROTOTIPAR ni DIVERGIR. Por tanto el motor anterior era invalido por construccion."
+  },
+
+  "4_expectativa_del_test": {
+    "referencia_tarea": "test_engine.py:14",
+    "ruta_real": "tests/unit/test_engine.py:14",
+    "contenido_linea": "packet=activate(QUERY); assert packet['packet_type']=='MANDATORY_MODEL_PACKET'; assert len(packet['supporting_methods'])==4; assert packet['decision']['recommended_status']=='AMPLIAR PRUEBA'; assert 'cadena de pensamiento privada' in build_prompt(packet)",
+    "expectativa_recommended_status": "AMPLIAR PRUEBA",
+    "coherencia": "El motor actual SATISFACE esta expectativa (emite AMPLIAR PRUEBA). El test golden condicion 16 (tests/test_mvp_golden_output.py) tambien espera coherencia con el golden normalizado que contiene AMPLIAR PRUEBA.",
+    "nota": "La tarea cita 'test_engine.py:14' pero el archivo real esta en tests/unit/test_engine.py (no en raiz). El hecho de que el test espere AMPLIAR PRUEBA confirma que el golden YA fue regenerado para el motor modificado."
+  },
+
+  "5_referencias_en_codigo_tests_docs_HANDOFF": {
+    "AMPLIAR PRUEBA": [
+      "01_TAREA_ACTUAL.txt (lineas 8, 22, 34, 39, 41, 46)",
+      "src/criba/engine.py:403 (valor emitido)",
+      "src/criba/constants.py:11 (VALID_DECISIONS)",
+      "tests/unit/test_engine.py:14 (EXPECTATIVA del test)",
+      "tests/unit/test_innovation_mvp.py:33,42",
+      "tests/fixtures/mandatory_model_packet_v1.json:232",
+      "tests/test_mvp_golden_output.py (via golden normalizado)",
+      "verification/mvp_output_sample.normalized.json:36 (golden)",
+      "verification/mvp_output_sample.json:1311 (golden)",
+      "docs/INTEGRATION.md:7"
+    ],
+    "DIVERGIR": [
+      "01_TAREA_ACTUAL.txt (lineas 9, 34, 43, 45)",
+      "src/criba/engine.py:401 (comentario 'previous values PROTOTIPAR/DIVERGIR were outside the enum')",
+      "HIPER_MEGAPROMPT_CRIBA_BLACKFORGE_V2.txt (lineas 287, 406, 799, 857, 892, 1154) — dominio BlackForge, no del motor CRIBA",
+      "imports/blackforge_v2/criba_blackforge_politicas_v2.json:19,82 — dominio BlackForge",
+      "imports/blackforge_v2/criba_blackforge_cambios_debate20.csv — multiples filas DIVERGIR (dominio BlackForge)"
+    ],
+    "PROTOTIPAR": [
+      "01_TAREA_ACTUAL.txt (lineas 9, 34, 43, 45)",
+      "src/criba/engine.py:401 (comentario 'previous values PROTOTIPAR/DIVERGIR were outside the enum')"
+    ],
+    "ADOPTAR": [
+      "01_TAREA_ACTUAL.txt (lineas 8, 22, 34, 39, 41, 46)",
+      "src/criba/engine.py:403 (valor emitido si len(families)>=4)",
+      "src/criba/constants.py:11 (VALID_DECISIONS)",
+      "tests/fixtures/mandatory_model_packet_v1.json:232 (justificacion menciona ADOPTAR)",
+      "docs/INTEGRATION.md:7"
+    ],
+    "ABANDONAR": [
+      "01_TAREA_ACTUAL.txt (lineas 34, 46)",
+      "src/criba/constants.py:11 (VALID_DECISIONS)",
+      "docs/INTEGRATION.md:7"
+    ],
+    "ARCHIVAR PARA RECOMBINAR": [
+      "01_TAREA_ACTUAL.txt (lineas 34, 46)",
+      "src/criba/constants.py:11 (VALID_DECISIONS)",
+      "docs/INTEGRATION.md:7"
+    ],
+    "nota_dominio": "DIVERGIR/PROTOTIPAR aparecen como estados de decision en el subsistema BLACKFORGE (imports/blackforge_v2/*, HIPER_MEGAPROMPT), que es un dominio DISTINTO al motor CRIBA (src/criba/engine.py + VALID_DECISIONS). El motor CRIBA nunca uso DIVERGIR/PROTOTIPAR como recommended_status VALIDO; el diagnostico los cita como el 'comportamiento anterior' invalidado."
+  },
+
+  "6_impacto_alternativas": {
+    "A_motor_actual_bien": {
+      "descripcion": "ADOPTAR/AMPLIAR PRUEBA se adopta como decision oficial, pero requiere ratificacion humana explicita de que len(families)>=4 realmente justifica ADOPTAR.",
+      "impacto": "Minimo en codigo (ya implementado y coherente con test+golden). Riesgo semantico: la frontera ADOPTAR<->AMPLIAR PRUEBA se apoya en un umbral (4 familias) no validado por nadie. Si la justificacion es debil, ADOPTAR podria sobre-otorgarse.",
+      "requiere_accion_humana": true
+    },
+    "B_VALID_DECISIONS_incompleto": {
+      "descripcion": "VALID_DECISIONS se amplia para incluir PROTOTIPAR y DIVERGIR como estados validos.",
+      "impacto": "Modifica constants.py y storage.record_decision (que valida contra VALID_DECISIONS). Revive los valores del motor anterior como validos. Riesgo: confunde 'que hacer despues' (accion de pipeline) con 'estado de la idea' (decision). Aumenta la superficie de estados sin separar conceptos.",
+      "requiere_accion_humana": true
+    },
+    "C_separar_conceptos": {
+      "descripcion": "Separar pipeline_action (PROTOTIPAR/DIVERGIR = que hacer despues) de recommended_status (ADOPTAR/AMPLIAR PRUEBA/ABANDONAR/ARCHIVAR PARA RECOMBINAR = estado de la idea).",
+      "impacto": "Menor perdida semantica. Resuelve la raiz conceptual: el motor mezclaba dos dimensiones distintas. recommended_status queda acotado a VALID_DECISIONS (ya valido) y se anade un campo pipeline_action para la accion de siguiente paso. No rompe el test ni el golden (ambos usan recommended_status).",
+      "requiere_accion_humana": true,
+      "recomendada": true
+    }
+  },
+
+  "7_recomendacion": {
+    "alternativa_recomendada": "C",
+    "razon": "El error de fondo es conceptual, no solo de valores: el motor anterior mezclaba 'accion de pipeline' con 'estado de decision'. Separar ambas dimensiones es la opcion de menor perdida semantica y no rompe el contrato actual (test + golden + VALID_DECISIONS siguen validos). NO se aplica sin autorizacion humana."
+  },
+
+  "8_estado": {
+    "filesystem": "SIN CAMBIOS — engine.py, test, golden y VALID_DECISIONS quedan EXACTAMENTE como estan",
+    "ratificado": false,
+    "marcado_como": "NO RATIFICADO (no como 'correcto')",
+    "fase": "FASE 0 — BLOCKED_NO_VALID_BASELINE",
+    "siguiente_paso": "Requerir autorizacion humana (A/B/C) antes de avanzar a la carga del catalogo o cualquier otra fase."
+  }
+}
