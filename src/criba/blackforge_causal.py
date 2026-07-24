@@ -66,14 +66,14 @@ def normalize_scalar(value: Any) -> str | None:
             raise ValueError("Non-finite float")
         return _decimal(str(value))
     if isinstance(value, str):
-        value = _text(value)
-        if not value:
+        text: str = _text(value)
+        if not text:
             return None
-        lowered = value.casefold()
+        lowered: str = text.casefold()
         if lowered in {"true", "false"}:
             return lowered
-        if _NUMERIC_RE.fullmatch(value):
-            return _decimal(value)
+        if _NUMERIC_RE.fullmatch(text):
+            return _decimal(text)
         return lowered
     raise TypeError(f"Unsupported scalar type: {type(value).__name__}")
 
