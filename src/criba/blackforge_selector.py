@@ -22,7 +22,7 @@ from __future__ import annotations
 import random
 from collections import Counter, defaultdict
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Mapping, Optional
 
 from .blackforge_catalog import load as _load_catalog
 
@@ -32,9 +32,9 @@ class SelectionFailure:
     """Structured, honest failure: names the impossible quota, doesn't fake it."""
     reason: str
     failed_quota: str
-    detail: Dict = field(default_factory=dict)
+    detail: Dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return {"status": "FAILED", "failed_quota": self.failed_quota,
                 "reason": self.reason, "detail": self.detail}
 
@@ -45,7 +45,7 @@ class SelectionReport:
     session_size: int
     allowed_tiers: List[str]
     selected_ids: List[str]
-    compliance: Dict
+    compliance: Dict[str, Any]
     profile_used: str
     s3_count: int
     s3_allowed: bool
@@ -54,7 +54,7 @@ class SelectionReport:
     def status_ok(self) -> bool:
         return self.failure is None
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return {
             "status": "OK" if self.failure is None else "FAILED",
             "seed": self.seed,
@@ -119,7 +119,7 @@ def select_blackforge(
     s3_cap = 1 if s3_allowed else 0
 
     # Candidate pool respecting hard tier/safety gates.
-    def _eligible(r) -> bool:
+    def _eligible(r: Mapping[str, Any]) -> bool:
         if r.get("activation_tier") not in allowed_tiers:
             return False
         if r.get("safety_class") == _S3_CLASS:
@@ -133,38 +133,38 @@ def select_blackforge(
     # session size, the quota is impossible to meet — never return a silently
     # truncated selection.
     if len(candidates) < session_size:
-        failure = SelectionFailure(
-            reason="El pool elegible es menor que session_size; no se puede cumplir la cuota.",
-            failed_quota="session_size",
-            detail={"eligible_pool": len(candidates), "requested": session_size},
-        )
         return SelectionReport(
             seed=seed, session_size=session_size, allowed_tiers=allowed_tiers,
             selected_ids=[], compliance={}, profile_used=profile,
-            s3_count=0, s3_allowed=s3_allowed, failure=failure,
+            s3_count=0, s3_allowed=s3_allowed,
+            failure=SelectionFailure(
+                reason="El pool elegible es menor que session_size; no se puede cumplir la cuota.",
+                failed_quota="session_size",
+                detail={"eligible_pool": len(candidates), "requested": session_size},
+            ),
         )
 
     # Deterministic ranking: by chosen profile score desc, then diversity
     # contribution desc, then selection_weight desc, then blackforge_id asc.
-    def _key(r):
+    def _key(r: Mapping[str, Any]) -> tuple[Any, ...]:
         return (
             -(r.get(profile_field, 0) or 0),
             -(r.get("diversity_contribution_v2", 0) or 0),
             -(r.get("selection_weight", 0) or 0),
-            r["blackforge_id"],
+            str(r["blackforge_id"]),
         )
 
     ordered = sorted(candidates, key=_key)
 
     # Greedy quota-respecting fill (stable, deterministic).
-    selected: List[dict] = []
-    per_primary_cat: Counter = Counter()
-    per_source_family: Counter = Counter()
+    selected: List[Mapping[str, Any]] = []
+    per_primary_cat: Counter[str] = Counter()
+    per_source_family: Counter[str] = Counter()
     per_causal_unknown = 0
-    sources_seen: set = set()
-    primary_cats_seen: set = set()
-    causal_axes_seen: set = set()
-    stages_present: set = set()
+    sources_seen: set[Any] = set()
+    primary_cats_seen: set[Any] = set()
+    causal_axes_seen: set[Any] = set()
+    stages_present: set[Any] = set()
     s3_count = 0
 
     max_per_primary = constraints.get("maximum_per_primary_category", 3)
@@ -177,8 +177,8 @@ def select_blackforge(
     for r in ordered:
         if len(selected) >= session_size:
             break
-        fcat = r.get("functional_category_primary") or r.get("functional_category")
-        fam = r.get("source_family")
+        fcat = r.get("functional_category_primary") or r.get("functional_category") or ""
+        fam = r.get("source_family") or ""
         axis = r.get("causal_axis_primary")
         is_unknown_axis = (axis in (None, "", "unknown"))
         is_s3 = r.get("safety_class") == _S3_CLASS
@@ -236,11 +236,13 @@ def select_blackforge(
         )
     else:
         for name in ("min_source_catalogs", "min_primary_categories", "min_causal_axes", "mandatory_stages"):
-            if not compliance[name]["ok"]:
+            entry = compliance[name]
+            assert isinstance(entry, dict)
+            if not entry["ok"]:
                 failure = SelectionFailure(
                     reason=f"Cuota imposible: {name}.",
                     failed_quota=name,
-                    detail=compliance[name],
+                    detail=entry,
                 )
                 break
 
