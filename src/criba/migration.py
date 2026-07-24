@@ -8,7 +8,7 @@ This module owns ONLY migration (separation of concerns, condition 5).
 """
 from __future__ import annotations
 import copy
-from typing import Dict
+from typing import Any
 
 from .genome import Genome, ONTOLOGY_VERSION
 from .similarity import MIN_DUPLICATE_COVERAGE
@@ -16,7 +16,7 @@ from .similarity import MIN_DUPLICATE_COVERAGE
 SCHEMA_VERSION = "2.0.0"
 
 
-def migrate_v1_to_v2(packet_v1: dict) -> dict:
+def migrate_v1_to_v2(packet_v1: dict[str, Any]) -> dict[str, Any]:
     """Return a v2 packet. Legacy fields preserved verbatim. innovation added."""
     p = copy.deepcopy(packet_v1)
     orig_schema = p.get("schema_version", "1.x")
