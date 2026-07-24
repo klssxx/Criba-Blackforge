@@ -19,7 +19,11 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from types import MappingProxyType
-from typing import Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Mapping, Optional, Tuple
+
+# Immutable view types over the frozen BLACKFORGE catalog.
+_FrozenRecord = MappingProxyType[str, Any]
+_FrozenCatalog = Tuple[_FrozenRecord, Tuple[_FrozenRecord, ...]]
 
 from .constants import PACKAGE_ROOT
 
@@ -32,14 +36,14 @@ _CATALOG_PATH = (
 )
 
 # Module-level cache (parsed exactly once per process).
-_cache: Optional[Tuple[MappingProxyType, Tuple[MappingProxyType, ...]]] = None
+_cache: Optional[_FrozenCatalog] = None
 
 
 class CatalogValidationError(ValueError):
     """Raised when the catalog violates its own embedded policy contracts."""
 
 
-def _load_raw() -> dict:
+def _load_raw() -> dict[str, Any]:
     if not _CATALOG_PATH.exists():
         raise FileNotFoundError(f"Catálogo BLACKFORGE no encontrado: {_CATALOG_PATH}")
     try:
@@ -53,12 +57,12 @@ def _load_raw() -> dict:
     return payload
 
 
-def _freeze_record(rec: dict) -> MappingProxyType:
+def _freeze_record(rec: dict[str, Any]) -> _FrozenRecord:
     """Return an immutable view of a single record (deep-frozen at top level)."""
     return MappingProxyType({k: (tuple(v) if isinstance(v, list) else v) for k, v in rec.items()})
 
 
-def _get_catalog() -> Tuple[MappingProxyType, Tuple[MappingProxyType, ...]]:
+def _get_catalog() -> _FrozenCatalog:
     """Load + freeze the catalog once. Returns (meta, frozen_records)."""
     global _cache
     if _cache is not None:
@@ -76,17 +80,17 @@ def reset_cache() -> None:
     _cache = None
 
 
-def load() -> Tuple[MappingProxyType, Tuple[MappingProxyType, ...]]:
+def load() -> _FrozenCatalog:
     """Immutable (meta, records) view. Records are MappingProxyType, never mutable."""
     return _get_catalog()
 
 
-def records() -> Tuple[MappingProxyType, ...]:
+def records() -> Tuple[_FrozenRecord, ...]:
     """Frozen tuple of immutable records (read-only)."""
     return _get_catalog()[1]
 
 
-def get(blackforge_id: str) -> Optional[MappingProxyType]:
+def get(blackforge_id: str) -> Optional[_FrozenRecord]:
     """Return an immutable record view by blackforge_id, or None if absent."""
     for r in _get_catalog()[1]:
         if r["blackforge_id"] == blackforge_id:
@@ -94,7 +98,7 @@ def get(blackforge_id: str) -> Optional[MappingProxyType]:
     return None
 
 
-def to_dict() -> dict:
+def to_dict() -> dict[str, Any]:
     """Defensive deep-ish copy for callers that truly need a mutable dict."""
     meta, recs = _get_catalog()
     return {
@@ -103,6 +107,6 @@ def to_dict() -> dict:
     }
 
 
-def policies() -> MappingProxyType:
+def policies() -> _FrozenRecord:
     """Embedded taxonomy/safety/selection policies (immutable view)."""
     return _get_catalog()[0]
