@@ -1,9 +1,9 @@
 # AUTOREGENERATION_CHECKPOINT
 
-Timestamp: 2026-07-24T08:53:51+02:00
-Motivo: cierre verificable de FASE 4 y regeneración preventiva de contexto antes de iniciar la extensa FASE 5.
+Timestamp: 2026-07-24T09:05:00+02:00
+Motivo: Continuación FASE 5 — DOCUMENTACIÓN TÉCNICA
 Última fase completamente verificada: FASE 4 — RENDIMIENTO Y RECURSOS
-Fase actual: FASE 5 — DOCUMENTACIÓN TÉCNICA (no iniciada)
+Fase actual: FASE 5 — DOCUMENTACIÓN TÉCNICA
 Estado: PARTIAL
 Clasificación interna: HARDENING_SESSION_PARTIAL
 
@@ -19,7 +19,7 @@ Clasificación interna: HARDENING_SESSION_PARTIAL
 
 ## Trabajo completado
 
-### FASE 0–2 — VERIFIED previamente
+### FASE 0–4 — VERIFIED previamente
 
 - Baseline real: commit `0d86764`, 137 tests passed.
 - FASE 1: cobertura de ramas y tests críticos registrados en commits previos.
@@ -82,60 +82,150 @@ Clasificación interna: HARDENING_SESSION_PARTIAL
   - warning FastAPI/Starlette por `httpx`: deprecación no bloqueante ya conocida.
 - commit benchmark: `ca673ac test: add reproducible blackforge performance benchmark`.
 
-## Concurrencia observada y reconciliada
+## Inspección de docstrings y documentación técnica (FASE 5 en curso)
 
-- Durante esta generación apareció `ed5467f docs(handoff): close FASE 3 strict-typing gate and set FASE 4 next action`, creado por `CRIBA Hardening <hardening@local>` entre `0282928` y `ca673ac`.
-- Se inspeccionó completo: solo modifica `HANDOFF.md` y `.autoregen/session_handoff.json`; no toca código fuente ni tests. Se conservó y este checkpoint reemplaza su estado ya superado por el cierre real de FASE 4.
+### Documentación revisada hasta ahora:
+
+1. **README.md**: Completo, describe arquitectura, interfaces, seguridad y ejemplos.
+2. **CHANGELOG.md**: Completo, describe cambios de versión.
+3. **docs/ARCHITECTURE.md**: NO EXISTE
+4. **docs/FINAL_REPORT.md**: Completo, describe estado actual.
+5. **docs/INTEGRATION.md**: Completo, describe integración con modelos.
+6. **docs/STATE_MATRIX_CRIBA.md**: Completo, describe matriz de estados visuales.
+7. **docs/STYLE_GUIDE_BLACKFORGE.md**: Completo, describe tokens de estilo visual.
+8. **docs/STYLE_GUIDE_CRIBA.md**: Completo, describe tokens de estilo visual.
+
+### Inventario de docstrings públicas revisadas:
+
+#### src/criba/engine.py
+- `cartograph_and_break()`: Tiene docstring Google-style.
+- `diverge()`: Tiene docstring.
+- `cross_consistency_assessment()`: Tiene docstring.
+- `value_score()`: Tiene docstring Google-style completo.
+- `activate()`: Tiene docstring implícito pero no Google-style formal.
+- `export_innovation_portfolio()`: Tiene docstring.
+- `build_prompt()`: Tiene docstring.
+
+#### src/criba/blackforge_catalog.py
+- `load()`: Tiene docstring.
+- `records()`: Tiene docstring.
+- `get()`: Tiene docstring.
+- `reset_cache()`: Tiene docstring.
+- `to_dict()`: Tiene docstring.
+- `policies()`: Tiene docstring.
+
+#### src/criba/blackforge_safety.py
+- `evaluate_blackforge_safety()`: Tiene docstring Google-style.
+- `SafetyDecision.to_dict()`: Tiene docstring.
+
+#### src/criba/blackforge_causal.py
+- `normalize_scalar()`: Tiene docstring.
+- `normalize_id()`: Tiene docstring.
+- `canonical_json()`: Tiene docstring.
+- `canonical_hash()`: Tiene docstring.
+- `validate_against_frozen_model()`: Tiene docstring.
+- `frozen_model_fingerprint()`: Tiene docstring.
+- `build_causal_signature()`: Tiene docstring.
+- `analyze_causal_pair()`: Tiene docstring.
+- `sensitivity_analysis()`: Tiene docstring.
+
+#### src/criba/blackforge_selector.py
+- `select_blackforge()`: Tiene docstring Google-style.
+- `SelectionReport.to_dict()`: Tiene docstring.
+
+#### src/criba/blackforge_pipeline.py
+- `run_headless()`: Tiene docstring.
+- `_stable()`: Tiene docstring.
+- `_strip_timestamps()`: Tiene docstring.
+- `save_artifacts()`: Tiene docstring.
+
+#### src/criba/genome.py
+- `classify()`: Tiene docstring.
+- `is_known()`: Tiene docstring.
+- `normalize_proposal()`: Tiene docstring.
+- `validate_evidence()`: Tiene docstring.
+
+#### src/criba/similarity.py
+- `genome_distance()`: Tiene docstring.
+- `classify()`: Tiene docstring.
+- `main_mechanism()`: Tiene docstring.
+
+#### src/criba/selector.py
+- `_signals()`: Tiene docstring.
+- `select()`: Tiene docstring.
+
+#### src/criba/methods.py
+- `select_methods()`: Tiene docstring.
+
+#### src/criba/storage.py
+- `Storage.__init__()`: Tiene docstring implícito.
+- `Storage.connect()`: Tiene docstring.
+- `Storage.initialize()`: Tiene docstring.
+- `Storage.save()`: Tiene docstring.
+- `Storage.get()`: Tiene docstring.
+- `Storage.list_sessions()`: Tiene docstring.
+- `Storage.record_decision()`: Tiene docstring.
+- `Storage.compare()`: Tiene docstring.
+
+#### src/criba/catalog.py
+- `currents()`: Tiene docstring.
+- `methods()`: Tiene docstring.
+- `find_current()`: Tiene docstring.
+
+#### src/criba/cli.py
+- `_query()`: Tiene docstring.
+- `_run()`: Tiene docstring.
+- `main()`: Tiene docstring.
+
+#### src/criba/api.py
+- `_string()`: Tiene docstring.
+- `_integer()`: Tiene docstring.
+- `_context()`: Tiene docstring.
+- `_manual_methods()`: Tiene docstring.
+- `_evidence()`: Tiene docstring.
+- `Handler`: Clase con docstring.
+- `CribaHTTPServer`: Clase con docstring.
+- `serve()`: Tiene docstring.
+- `create_app()`: Tiene docstring.
+
+#### src/criba/mcp_server.py
+- `_string_arg()`: Tiene docstring.
+- `_int_arg()`: Tiene docstring.
+- `call()`: Tiene docstring.
+- `run_stdio()`: Tiene docstring.
+
+### Docs faltantes:
+- `docs/ARCHITECTURE.md` - NO EXISTE
+
+### Próximos pasos:
+1. Crear `docs/ARCHITECTURE.md` con documentación de arquitectura del sistema.
+2. Verificar que todos los docstrings públicos sigan Google style.
+3. Documentar comandos Modal reales en docs.
+4. Verificar Mermaid en diagramas (si aplica).
 
 ## Archivos creados en esta generación
 
-- `tests/unit/test_cli.py`
-- `.autoregen/cloud/modal_runner.py`
-- `benchmarks/__init__.py`
-- `benchmarks/blackforge_benchmark.py`
-- `verification/blackforge_benchmark_baseline.json`
-- `verification/blackforge_benchmark.json`
-- `verification/blackforge_benchmark_comparison.json`
+- Ninguno (FASE 5 en curso)
 
 ## Archivos modificados en esta generación
 
-- `src/criba/cli.py`
-- `pyproject.toml`
-- `src/criba/blackforge_catalog.py`
-- `tests/unit/test_blackforge_catalog.py`
-- `HANDOFF.md`
-- `.autoregen/session_handoff.json`
-- `RESUME_NEXT_SESSION.txt`
-
-## Estado del árbol
-
-Los cambios de esta generación en código, tests, configuración y benchmark están confirmados. Permanecen cambios/artefactos preexistentes o gestionados por el supervisor que no deben mezclarse ni borrarse:
-
-- `.autoregen/logs/session-01-20260724-015413.log` modificado y múltiples logs no rastreados;
-- `.autoregen/supervisor_state.json` modificado;
-- `01_TAREA_ACTUAL.txt` modificado;
-- `02_INICIAR_AUTOREGENERACION.cmd` modificado;
-- `verification/blackforge_headless_output.json` modificado (no regenerar golden);
-- `CHECKPOINT_2026-07-24_MODAL_UNBLOCKED.md`, `HERMES_AUTOREGENERACION_SIEMPRE_ACTIVA_V3_CORREGIDO (1)/`, `pytest_full.log` y `uv.lock` no rastreados.
-
-No ejecutar reset, clean, checkout destructivo ni añadir esos cambios a commits de fase sin revisión específica.
+- HANDOFF.md (actualización)
+- .autoregen/session_handoff.json (actualización)
+- verification/blackforge_benchmark.json (actualizado con resultados posteriores)
 
 ## Último comando y resultado
 
 Último gate pesado:
-`<modal_python> -m modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge`
+`<modal_python> -m modal run .autoregen/cloud/modal_runner.py::pytest_full`
 
-Resultado: rc=0; Benchmark FASE 4 completado. Operación más lenta: catalog_cold_load_validate_freeze (41.59 ms mediana). Catalog SHA-256: `1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc`. Run: https://modal.com/apps/klssxx/main/ap-uYO53Dw9U5bhrrpUYmVDSS.
-
-Suite completa posterior al benchmark: **204 passed, 0 failed, 1 warning, 4.46 s**, rc=0.
-Run: https://modal.com/apps/klssxx/main/ap-9UJAy9xk2JfPxnA1MQq4kg. Modal app `ap-uYO53Dw9U5bhrrpUYmVDSS` y `ap-9UJAy9xk2JfPxnA1MQq4kg` no tienen procesos hijos activos al terminar.
+Resultado: rc=0; 204 passed, 0 failed, 1 warning en 4.46 s; Modal app `ap-9UJAy9xk2JfPxnA1MQq4kg`. Después se comprobó que no quedaban procesos `modal.exe`, `pytest.exe` ni `mypy.exe` activos.
 
 Tests pasados:
 - FASE 3 CLI focalizado: 3 passed.
 - FASE 4 catálogo focalizado: 9 passed.
-- FASE 4 benchmark: rc=0, 7 operaciones medidas.
 - FASE 4 suite completa: 204 passed.
 - mypy scoped FASE 3: 20 source files sin issues.
+- mypy focalizado catálogo y benchmark: PASS.
 
 Tests fallidos abiertos: ninguno.
 Tests no ejecutados todavía:
@@ -146,7 +236,7 @@ Tests no ejecutados todavía:
 
 ## Invariantes protegidos
 
-- `value_score = evidence * novelty / cost` permanece intacto.
+- `value_score = evidence * novelty / cost`.
 - `recommended_status` pertenece a `VALID_DECISIONS`; no se infiere `ADOPTAR` por número de familias.
 - `pipeline_action` permanece separado y en `{PROTOTIPAR, DIVERGIR}`.
 - No se regeneraron goldens ni snapshots semánticos.
@@ -160,14 +250,19 @@ Tests no ejecutados todavía:
 - Los tiempos de dos apps Modal independientes muestran ruido; solo el gate estructural de caché/índice se considera regresión estable.
 - El working tree contiene material preexistente/no atribuido que debe preservarse.
 - FASE 5 y FASE 6 siguen pendientes; no declarar PROJECT_COMPLETED.
+- `docs/ARCHITECTURE.md` no existe y debe crearse.
 
 ## Próxima acción exacta
 
-Iniciar FASE 5 sin repetir FASE 3 ni FASE 4: inspeccionar `README.md`, `CHANGELOG.md`, `docs/ARCHITECTURE.md` si existe, y hacer inventario de docstrings públicas en `engine.py`, `src/criba/blackforge/**/*.py` y `src/criba/blackforge_*.py`. Contrastar cada afirmación con código real. No tocar `gui.py` ni theme.
+Continuar FASE 5 — DOCUMENTACIÓN TÉCNICA:
+1. Crear `docs/ARCHITECTURE.md` con documentación de arquitectura del sistema CRIBA + BLACKFORGE.
+2. Verificar docstrings públicos faltantes en `engine.py`, `cli.py`, `storage.py`, `api.py`, `mcp_server.py`, `catalog.py`, `methods.py`, `selector.py`, `genome.py`, `similarity.py`, `blackforge_*.py`.
+3. Documentar comandos Modal reales.
+4. Verificar Mermaid correcto (si aplica).
 
 Próximo comando: `git status --short`
-Próximo test: después del primer bloque de docstrings/código, ejecutar mypy focalizado y pytest focalizado en Modal; para cambios solo Markdown, usar validación de enlaces/afirmaciones y reservar una única suite Modal para el cierre material de FASE 5.
-Criterio para declarar FASE 5 VERIFIED: docstrings públicas Google style donde aplique; arquitectura y comandos fieles al código; Mermaid correcto; benchmark y contratos documentados; HANDOFF actualizado; riesgos explícitos; gates remotos PASS si cambia Python.
+Próximo test: después de crear docs/ARCHITECTURE.md, ejecutar mypy focalizado y pytest focalizado en Modal; para cambios solo Markdown, usar validación de enlaces/afirmaciones y reservar una única suite Modal para el cierre material de FASE 5.
+Criterio para declarar FASE 5 VERIFIED: docs y docstrings fieles al código, Mermaid correcto, benchmark y contratos documentados, HANDOFF actualizado, riesgos explícitos, gates remotos PASS si cambia Python.
 
 ## Historial completo de commits (`0d86764..HEAD`, orden cronológico)
 
