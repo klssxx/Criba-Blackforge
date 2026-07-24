@@ -58,7 +58,6 @@ QScrollBar:vertical{{width:10px;background:{BG_PANEL}}}
 QScrollBar::handle:vertical{{background:{BORDER};border-radius:5px}}
 QToolTip{{background:#0d1830;color:#e6edf8;border:1px solid {BORDER};border-radius:6px;padding:8px;font-size:12px}}
 """
-"""
 
 
 def _metric_bar(name: str, value: int) -> "QFrame":
@@ -302,15 +301,18 @@ class Window(QMainWindow):
         self._fill_card(self.card_methods, "Métodos auxiliares", ms, ACCENT_2)
         # experiment card
         ex = p["experiment"]
-        rows = [("Hipótesis falsable", ex["falsifiable_hypothesis"]), ("Baseline", ex["baseline"]),
-                ("Variante", ex["variant"]), ("Variable clave", ex["changed_variable"]), ("Métrica principal", ex["primary_metric"])]
+        rows = [("Hipótesis falsable", ex.get("falsifiable_hypothesis", "—")), ("Baseline", ex.get("baseline", "—")),
+                ("Variante", ex.get("variant", "—")), ("Límite de daño", ex.get("damage_limit", "—")),
+                ("Sandbox", ex.get("sandbox", "—")), ("Rollback", ex.get("rollback", "—"))]
         tbl = "<table cellpadding='4'>" + "".join(f"<tr><td style='color:{TEXT_DIM}'>{k}</td><td>{v}</td></tr>" for k, v in rows) + "</table>"
         self._fill_card(self.card_experiment, "Diseño de experimento", tbl, GREEN)
         # rupture + ideas
         rp = p["rupture"]
-        ideas = "\n".join(f"{i+1}. {d['proposal']}" for i, d in enumerate(p["ideas"]))
-        rupture = (f"<b>Ruptura de supuestos</b>\n• Principal: {rp['main_assumption_attacked']}\n• Contraejemplo: {rp['counterexample']}\n"
-                   f"• Hipótesis rival: {rp['rival_hypothesis']}\n• Caso adversarial: {rp['adversarial_case']}\n\n<b>Ideas generadas</b>\n{ideas}")
+        ideas = "\n".join(f"{i+1}. {d.get('title') or d.get('description', '')}" for i, d in enumerate(p["ideas"]))
+        ops = rp.get("operations", [])
+        first_op = ops[0].get("result", "") if ops else "—"
+        rupture = (f"<b>Ruptura de supuestos</b>\n• Supuestos rotos: {', '.join(rp.get('broken_assumptions', [])) or '—'}\n"
+                   f"• Operación principal: {first_op}\n• Contraejemplo: {rp.get('counterexample', '—')}\n\n<b>Ideas generadas</b>\n{ideas}")
         self._fill_card(self.card_rupture, "Ruptura de supuestos e ideas", rupture, AMBER)
         # summary card
         old = self.sum_card.layout()

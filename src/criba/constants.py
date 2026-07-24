@@ -1,9 +1,16 @@
 from pathlib import Path
+import os
 import sys
 
 PACKAGE_ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
 DATA_ROOT = PACKAGE_ROOT / "data"
-DEFAULT_DB = PACKAGE_ROOT / "artifacts" / "criba.sqlite3"
+if getattr(sys, "frozen", False):
+    # Portable executable: keep the SQLite store in a persistent, user-writable
+    # location (the frozen bundle dir is ephemeral / read-only on some setups).
+    _DB_BASE = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
+    DEFAULT_DB = _DB_BASE / "criba.sqlite3"
+else:
+    DEFAULT_DB = PACKAGE_ROOT / "artifacts" / "criba.sqlite3"
 MAX_QUERY_CHARS = 20_000
 SELECTOR_VERSION = "1.0.0"
 CURRENT_CATALOG_VERSION = "1.0.0"
