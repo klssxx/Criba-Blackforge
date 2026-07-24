@@ -16,7 +16,7 @@ can replace the local implementation later without touching the rest.
 from __future__ import annotations
 import json, uuid
 from datetime import datetime, timezone
-from typing import Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from .catalog import find_current
 from .constants import MAX_QUERY_CHARS, VALID_MODES, CURRENT_CATALOG_VERSION, SELECTOR_VERSION, VALID_DECISIONS, VALID_PIPELINE_ACTIONS
@@ -40,8 +40,8 @@ No reveles cadena de pensamiento privada. Expón corriente activada, ideas, prop
 # Injectable generation hooks (condition 4). Local deterministic implementations
 # today; swap for an HY3 adapter later without rewriting the orchestrator.
 # ---------------------------------------------------------------------------
-CartographFn = Callable[[str, dict, dict], dict]
-DivergeFn = Callable[[dict, dict, dict, list, str], list]
+CartographFn = Callable[[str, dict[str, Any], dict[str, Any]], dict[str, Any]]
+DivergeFn = Callable[[dict[str, Any], dict[str, Any], dict[str, Any], list[Any], str], list[Any]]
 
 
 def _novelty_verbs(query: str) -> bool:
@@ -51,7 +51,7 @@ def _novelty_verbs(query: str) -> bool:
                                        "raro", "diferente", "original", "reinvent", "romper"))
 
 
-def cartograph_and_break(query: str, context: dict, selection: dict) -> dict:
+def cartograph_and_break(query: str, context: dict[str, Any], selection: dict[str, Any]) -> dict[str, Any]:
     """Phase 1+2 (Cartografiar + Romper). Local, deterministic.
 
     Returns {known_space, assumptions, saturated_mechanisms, ruptures}.
@@ -147,7 +147,7 @@ _VALID_MECH = {"elimination", "inversion", "isolation", "verification", "delegat
                "market_exchange", "capability_proof"}
 
 
-def _apply_family(family: str, base: dict, extreme: bool) -> dict:
+def _apply_family(family: str, base: dict[str, str], extreme: bool) -> dict[str, str]:
     """Apply ONE operator family to a causal-vector base (the REAL mutation used
     by diverge). Returns a new vector. Used directly by tests so they exercise the
     actual generator, not a replica."""
@@ -157,7 +157,7 @@ def _apply_family(family: str, base: dict, extreme: bool) -> dict:
     return cv
 
 
-def diverge(carto: dict, rupture: dict, selected: dict, methods: list, query: str) -> list:
+def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, Any], methods: list[Any], query: str) -> list[Any]:
     """Phase 3 (Divergir). Local, deterministic, two-layer:
     OPERATORS generate candidates via PAIRWISE recombination (combinatorial
     divergence over the 5 causal axes). CAUSAL VARIABLES measure real divergence.
@@ -199,7 +199,7 @@ def diverge(carto: dict, rupture: dict, selected: dict, methods: list, query: st
                 "time_model": ["ephemeral_per_operation" if "ephemeral" in cv["topologia"] else "staged"],
             }
             from .genome import normalize_proposal
-            g, _ = normalize_proposal(genome, source_idea=f"I{seq:02d}")
+            g, _ = normalize_proposal(dict(genome), source_idea=f"I{seq:02d}")
             idea = {
                 "id": f"I{seq:02d}",
                 "title": f"{ma['name']} × {mb['name']} ({'extremo' if extreme else 'cruce'})",
@@ -220,7 +220,7 @@ def diverge(carto: dict, rupture: dict, selected: dict, methods: list, query: st
     return ideas
 
 
-def cross_consistency_assessment(ideas: list) -> list:
+def cross_consistency_assessment(ideas: list[Any]) -> Tuple[list[Any], int]:
     """CCA filter: mark cosmetic candidates (no causal axis moved) and drop them
     from the divergent set so they never count as real innovation."""
     real = []
@@ -237,9 +237,9 @@ def cross_consistency_assessment(ideas: list) -> list:
 # ---------------------------------------------------------------------------
 # Duplicate detection (condition 6/7) — uses criba.similarity
 # ---------------------------------------------------------------------------
-def _detect_duplicates(ideas: list) -> list:
-    report = []
-    seen = []
+def _detect_duplicates(ideas: list[Any]) -> list[dict[str, Any]]:
+    report: list[dict[str, Any]] = []
+    seen: list[Any] = []
     for idea in ideas:
         g = idea["genome"]
         matched = None
@@ -317,7 +317,7 @@ def value_score(evidence: float, novelty: float, cost: float) -> float:
     return round((evidence * novelty) / cost, 4)
 
 
-def _evaluate_idea(idea: dict) -> dict:
+def _evaluate_idea(idea: dict[str, Any]) -> dict[str, Any]:
     """Convergence scoring. Input = what the OPERATOR generated (title,
     description, causal_variables, extreme). Novelty comes from the measurement
     layer (count of axes the operator perturbed vs base)."""
@@ -357,8 +357,8 @@ def _evaluate_idea(idea: dict) -> dict:
 # Orchestration (condition 2/3/10/11)
 # ---------------------------------------------------------------------------
 def activate(query: str, current: str = "auto", mode: str = "balanced", supporting_methods: int = 4,
-             context: dict | None = None, safety_level: str = "strict", manual_methods: list[str] | None = None,
-             cartograph_fn: Optional[CartographFn] = None, diverge_fn: Optional[DivergeFn] = None) -> dict:
+             context: dict[str, Any] | None = None, safety_level: str = "strict", manual_methods: list[str] | None = None,
+             cartograph_fn: Optional[CartographFn] = None, diverge_fn: Optional[DivergeFn] = None) -> dict[str, Any]:
     if not isinstance(query, str) or not query.strip():
         raise ValueError("La consulta no puede estar vacía.")
     if len(query) > MAX_QUERY_CHARS:
@@ -409,7 +409,7 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     top_ideas = [i["id"] for i in kept[:3]]
     mean_value = round(sum(i["convergence"]["value_score"] for i in kept) / max(1, len(kept)), 4)
 
-    innovation = {
+    innovation: dict[str, Any] = {
         "known_space": carto["known_space"],
         "saturated_mechanisms": carto["saturated_mechanisms"],
         "assumptions": carto["assumptions"],
@@ -460,7 +460,7 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
         "confidence": round(min(0.85, 0.4 + metrics["potential_novelty"] / 250 + metrics["divergence"] / 400), 2),
     }
 
-    packet = {
+    packet: dict[str, Any] = {
         "schema": SCHEMA,
         "schema_version": SCHEMA_VERSION,
         "packet_type": "MANDATORY_MODEL_PACKET",
@@ -502,7 +502,7 @@ def _clamp(v: int) -> int:
     return max(0, min(100, v))
 
 
-def export_innovation_portfolio(packet: dict) -> dict:
+def export_innovation_portfolio(packet: dict[str, Any]) -> dict[str, Any]:
     """INNOVATION_PORTFOLIO_PACKET is ONLY an exported view, never a persisted model."""
     inv = packet.get("innovation", {})
     return {
@@ -520,7 +520,7 @@ def export_innovation_portfolio(packet: dict) -> dict:
     }
 
 
-def build_prompt(packet: dict) -> str:
+def build_prompt(packet: dict[str, Any]) -> str:
     return "\n\n".join([
         "# Consulta original\n" + packet["original_query"],
         "# Intención CRIBA\n" + packet.get("intent", "INNOVAR"),
