@@ -1,63 +1,135 @@
-INSTRUCCIONES DE REANUDACION — CRIBA + BLACKFORGE HARDENING
-(generacion 1 -> siguiente generacion, contexto limpio)
+REANUDACIÓN AUTORIZADA — GENERACIÓN SIGUIENTE — FASE 5
 
-Ruta de trabajo: E:\PROYECTS\CRIBA
-Trabaja como UNICO escritor. NO uses --continue ni --resume. NO hagas push.
+Workspace único: E:\PROYECTS\CRIBA
+Autorregeneración: SIEMPRE ACTIVA
 
-PASOS DE ARRANQUE (en orden):
-1. Lee E:\PROYECTS\CRIBA\01_TAREA_ACTUAL.txt (el hiper-megaprompt completo).
-2. Lee E:\PROYECTS\CRIBA\.autoregen\AUTOREGEN_GLOBAL.txt (protocolo de salud/senales).
-3. Lee E:\PROYECTS\CRIBA\HANDOFF.md (estado detallado de esta generacion).
-4. Lee E:\PROYECTS\CRIBA\.autoregen\session_handoff.json (estado estructurado).
-5. VERIFICA el estado real antes de continuar (no confies solo en el handoff):
-   - git log --oneline 0d86764..HEAD   (deben existir 9 commits sobre el baseline)
-   - git status --short                 (arbol limpio salvo el log de sesion vivo)
-   - python -m pytest -p no:cacheprovider -q   (debe dar 189 passed, rc=0)
-   IMPORTANTE en Windows: exporta TMP/TEMP a un dir bajo el proyecto para evitar
-   PermissionError:  set TMP=E:\PROYECTS\CRIBA\.tmp_pytest  (o via env en subprocess).
-   NOTA DE ENTORNO: en esta sesion la tool `terminal` NO existia; los comandos de
-   shell se ejecutaron via Python subprocess (execute_code). Adapta segun tu entorno.
+Lee completos, en este orden:
 
-NO REPITAS fases ya VERIFIED: FASE 0, FASE 1 y FASE 2 estan completas y verificadas.
+1. E:\PROYECTS\CRIBA\01_TAREA_ACTUAL.txt
+2. E:\PROYECTS\CRIBA\.autoregen\AUTOREGEN_GLOBAL.txt
+3. E:\PROYECTS\CRIBA\HANDOFF.md
+4. E:\PROYECTS\CRIBA\.autoregen\session_handoff.json
+5. E:\PROYECTS\CRIBA\RESUME_NEXT_SESSION.txt
 
-CONTINUA DESDE next_exact_action (FASE 3 — TIPADO):
-- Baseline ya capturado: verification/mypy_baseline_fase3.json (76 errores con
-  mypy --strict, mypy 2.3.0 ya instalado).
-- Empieza por los BUGS DE TIPOS REALES (no solo anotaciones):
-    * src/criba/blackforge_selector.py:228  -> `failure` redefinido (no-redef)
-    * src/criba/blackforge_selector.py:239/243 -> `detail` es object (index/arg-type)
-    * src/criba/engine.py:234 -> cross_consistency_assessment retorna tuple,
-      anotado como list (return-value); corrige la anotacion de retorno.
-- Luego los errores type-arg (parametrizar genericos: dict[str, Any], etc.).
-- Evita Any salvo frontera externa inevitable y documentada. No añadas cientos de
-  ignores para conseguir verde. Encapsula fronteras sin tipos con exclusion minima.
-- Convierte a TypedDict/dataclass/enum solo contratos estables y RATIFICADOS,
-  conservando EXACTAMENTE la forma JSON serializada (añade tests de compatibilidad).
-- Commit atomico por modulo (refactor: ... / chore: enable strict mypy for ...).
-- RE-EJECUTA la suite completa tras CADA fix: 0 regresiones, 189+ passed.
+Después verifica el estado real con `git status --short`. No uses `--continue` ni
+`--resume`. No hagas push, reset, clean ni checkout destructivo.
 
-Proximo comando exacto:   python -m mypy --strict src/criba/blackforge_selector.py
-Proximo test exacto:      python -m pytest -p no:cacheprovider -q tests/unit/test_blackforge_selector.py tests/unit/test_blackforge_selector_branches.py
+ESTADO CIERTO
 
-INVARIANTES QUE NO SE TOCAN:
-- value_score = evidence * novelty / cost (ya con contrato ValueScoreError).
-- recommended_status ∈ {ADOPTAR, AMPLIAR PRUEBA, ABANDONAR, ARCHIVAR PARA RECOMBINAR};
-  nunca ADOPTAR solo por numero de familias.
-- pipeline_action ∈ {PROTOTIPAR, DIVERGIR}: dimension separada, NO de negocio.
-- No regenerar goldens sin ratificacion humana.
-- gui.py / theme: NO modificar (KI-001: gui.py tiene SyntaxError preexistente,
-  fuera del alcance ratificado del core).
+- FASE 0–4 están cerradas; no repetir gates PASS sin cambios relevantes.
+- FASE 3: mypy strict `src/criba` = 20 source files sin issues.
+- FASE 4: benchmark real de 723 registros ejecutado en Modal, caché/índice
+  inmutables implementados, test estructural estable y suite completa cerrada.
+- Última suite Modal: 204 passed, 0 failed, 1 warning, 4.46 s, rc=0.
+  https://modal.com/apps/klssxx/main/ap-9UJAy9xk2JfPxnA1MQq4kg
+- Último commit de producto/evidencia: `ca673ac test: add reproducible blackforge performance benchmark`.
+- `ed5467f` apareció concurrentemente durante la generación; fue inspeccionado:
+  solo cambió HANDOFF/session_handoff, sin solapar código/tests, y se conservó.
+- No hay procesos modal.exe, pytest.exe ni mypy.exe remanentes tras el último gate.
 
-FASES PENDIENTES tras FASE 3:
-- FASE 4: benchmark reproducible con el catalogo real de 723 registros (mediana,
-  varias repeticiones), inmutabilidad, regresion de performance no fragil.
-- FASE 5: docstrings Google style, docs/ARCHITECTURE.md + Mermaid, HANDOFF final.
-- FASE 6: TODO/FIXME/XXX -> resolver o known_issues.json; property-based testing
-  (instalar hypothesis como dev tool si hay red); revision de empaquetado.
+EJECUCIÓN PESADA
 
-CRITERIO DE CIERRE (PROJECT_COMPLETED) — solo cuando TODO esto se cumpla:
-FASE 0-5 completas, FASE 6 ejecutada/documentada, commits atomicos, arbol limpio,
-suite verde, cobertura registrada, mypy strict verde en codigo propio, sin goldens
-regenerados sin ratificacion, JSON compatible, pipeline_action/recommended_status
-separados, value_score intacto, benchmark registrado, docs actualizadas, HANDOFF
-y RESUME actualizados, sin decision humana bloqueante, project_completed.json valido.
+Todo pytest, mypy, coverage, Hypothesis y benchmark debe ejecutarse SOLO en Modal
+workspace `klssxx` mediante `.autoregen/cloud/modal_runner.py`.
+
+Launcher:
+C:\Users\KLSX\AppData\Local\Programs\Python\Python312\python.exe
+
+Variables obligatorias:
+PYTHONUTF8=1
+PYTHONIOENCODING=utf-8
+
+Entrypoints:
+- suite: `::pytest_full`
+- test focalizado: `::pytest_file --path <ruta>`
+- mypy focalizado: `::mypy_strict --target <ruta>`
+- mypy scope: `::mypy_scoped`
+- coverage: `::coverage_run`
+- benchmark: `::benchmark_blackforge --repetitions 3`
+
+El runner ya propaga return codes remotos no cero. Nunca interpretes el mensaje
+"App completed" como PASS si el bloque `[cloud] exit_code` o el proceso externo
+es no cero.
+
+NO REPETIR / NO TOCAR
+
+- No repetir FASE 3 ni FASE 4 sin cambios que invaliden su evidencia.
+- No regenerar goldens ni snapshots.
+- No tocar `gui.py` ni theme: KI-001 preexistente y fuera de alcance.
+- No añadir a commits los logs/estado del supervisor ni cambios preexistentes de
+  `01_TAREA_ACTUAL.txt`, `02_INICIAR_AUTOREGENERACION.cmd` o
+  `verification/blackforge_headless_output.json` sin revisión específica.
+- Conservar archivos no rastreados indicados en HANDOFF.md.
+
+SIGUIENTE ACCIÓN EXACTA
+
+Inicia únicamente FASE 5 — DOCUMENTACIÓN TÉCNICA:
+
+1. Inspecciona `README.md`, `CHANGELOG.md` y `docs/ARCHITECTURE.md` si existe.
+2. Inventaría funciones públicas y docstrings de `engine.py`,
+   `src/criba/blackforge/**/*.py` y `src/criba/blackforge_*.py`.
+3. Contrasta toda afirmación documental con el código real.
+4. Añade docstrings Google style solo donde falten y sin cambiar comportamiento.
+5. Documenta arquitectura implementada/experimental/planificada, comandos Modal
+   reales, benchmark, riesgos y el Mermaid obligatorio.
+6. Para Python: mypy y pytest focalizados en Modal. Para Markdown puro: valida
+   enlaces/afirmaciones y reserva una suite Modal para el cierre material.
+7. Haz commits atómicos Conventional Commits y actualiza los handoffs.
+
+Próximo comando exacto: `git status --short`
+Próximo test: mypy + pytest focalizados en Modal después del primer bloque Python.
+Criterio de cierre FASE 5: docs y docstrings fieles al código, Mermaid correcto,
+comandos reales, benchmark/contratos documentados, riesgos explícitos y gates PASS.
+
+PENDIENTE DESPUÉS
+
+- FASE 5 completa.
+- FASE 6: TODO/FIXME/XXX/HACK, pendientes no ratificados, Hypothesis, packaging.
+- Gate final desde cero: suite, coverage, mypy strict, JSON, benchmark, smoke
+  headless, compileall, diff check, status e historial.
+- Solo entonces evaluar PROJECT_COMPLETED.
+
+INVARIANTES
+
+- `value_score = evidence * novelty / cost`.
+- `recommended_status` pertenece a `VALID_DECISIONS`; ADOPTAR no depende solo
+  del número de familias.
+- `pipeline_action` es independiente y solo `PROTOTIPAR` o `DIVERGIR`.
+- catálogo canónico: 723 registros, SHA-256
+  `1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc`.
+
+HISTORIAL COMPLETO 0d86764..ca673ac (orden cronológico)
+
+0d86764 chore: capture pre-hardening baseline with 137 passing tests
+638dbad test: cover engine decision boundaries and alternativa C separation
+fc532ea fix: surface unconfirmed authorized scope in S3 safety denial
+81cbe4a test: cover blackforge safety and selector branch paths
+034054e test: cover causal acceptance and rejection paths
+b596085 test: record FASE 1 branch coverage report
+6581467 fix: reject non-positive cost in value score
+3bbc541 docs: record hardening fixes in changelog
+c015771 test: add malformed input coverage for public APIs
+82cbb99 chore: record mypy strict baseline and gui.py known issue
+9a8b8f2 docs: checkpoint generation 1 handoff before FASE 3
+1b34889 refactor: type blackforge selector to pass mypy --strict (real bugs fixed)
+49764a0 refactor: type criba engine and fix cross_consistency_assessment return annotation
+ceb3797 refactor: type blackforge catalog with immutable MappingProxyType aliases
+8fc7a52 fix: prevent infinite loop in blackforge safety gate
+368227b refactor: type blackforge_causal normalize_scalar for strict mypy
+7ad3ede refactor: type blackforge_safety evaluate/decision contracts for strict mypy
+9f5a82d refactor: type genome validators and use model_validate for strict mypy
+322e4fd refactor: type JSON-backed catalog records for strict mypy
+2152f02 refactor: type supporting method selection records
+7b14adf refactor: type selector result serialization boundary
+b58e92b refactor: type v1 migration JSON contract
+e6941b3 refactor: type genome similarity contracts
+c757e6a refactor: type and validate local agentic adapter
+129959e refactor: type preserved v1 audit engine contracts
+f4c4cc4 refactor: type SQLite persistence JSON boundaries
+f425519 refactor: validate and type MCP JSON-RPC boundary
+5b0fe6f refactor: harden and type loopback API boundaries
+098a312 refactor: type CLI activation boundaries
+6c6bd2a chore: enable strict mypy for criba modules
+0282928 perf: cache immutable blackforge catalog index
+ed5467f docs(handoff): close FASE 3 strict-typing gate and set FASE 4 next action
+ca673ac test: add reproducible blackforge performance benchmark
