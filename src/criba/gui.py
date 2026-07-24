@@ -401,6 +401,17 @@ def run(database=None):
     if QApplication is None:
         print("PySide6 no está instalado. Instala requirements-optional.txt para usar 'criba gui'.", file=sys.stderr)
         return 2
+    from .ui.main_window import CribaMainWindow
+    app = QApplication.instance() or QApplication(sys.argv)
+    window = CribaMainWindow(database); window.show()
+    return app.exec()
+
+
+def run_legacy(database=None):
+    """Pantalla anterior (CRIBA Current Engine). Conservada como fallback."""
+    if QApplication is None:
+        print("PySide6 no está instalado. Instala requirements-optional.txt para usar 'criba gui'.", file=sys.stderr)
+        return 2
     app = QApplication.instance() or QApplication(sys.argv)
     window = Window(database); window.show()
     return app.exec()

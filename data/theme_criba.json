@@ -97,7 +97,7 @@
     "outer_margin": 20,
     "nav_button_height": 54,
     "table_row_height": 44,
-    "gauge_diameter": 160,
+    "gauge_diameter": 144,
     "resolutions_target": ["1360x768", "1680x1050"]
   }
 }
