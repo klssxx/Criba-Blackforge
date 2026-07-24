@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional
+from typing import Any, Callable, Dict, List, Mapping, Optional
 
 from .blackforge_catalog import load as _load_catalog
 
@@ -54,7 +54,7 @@ class SafetyDecision:
     session_id: str
     timestamp: str
 
-    def to_dict(self) -> dict:
+    def to_dict(self) -> Dict[str, Any]:
         return {
             "decision": self.decision,
             "policy_version": self.policy_version,
@@ -68,9 +68,9 @@ class SafetyDecision:
 
 
 def evaluate_blackforge_safety(
-    item: dict,
-    session_context: Optional[dict] = None,
-    clock=time.time,
+    item: Mapping[str, Any],
+    session_context: Optional[Mapping[str, Any]] = None,
+    clock: Callable[[], float] = time.time,
     session_id: str = "default-session",
 ) -> SafetyDecision:
     """Evaluate one catalog item against the session safety context.
@@ -79,7 +79,7 @@ def evaluate_blackforge_safety(
       explicit_authorization, sandbox, rollback, logging, stop_condition,
       isolated_sandbox, human_approval, authorized_scope_confirmed.
     """
-    ctx = session_context or {}
+    ctx: Dict[str, Any] = dict(session_context or {})
     item_id = item.get("blackforge_id") or item.get("canonical_item_id") or "?"
     safety_class = item.get("safety_class")
     reasons: List[str] = []
@@ -87,7 +87,7 @@ def evaluate_blackforge_safety(
 
     # 1) Hard prohibitions -> DENY unconditionally.
     meta, _ = _load_catalog()
-    prohibited = set(meta.get("safety_policy", {}).get("prohibited_automatic_actions", []))
+    prohibited: set[str] = set(meta.get("safety_policy", {}).get("prohibited_automatic_actions", []))
     # Map a few item-level red flags to the prohibited set for defensive depth.
     flag_fields = {
         "external_target_prohibited": "external_target_scanning",
@@ -180,13 +180,13 @@ def evaluate_blackforge_safety(
     )
 
 
-def _iso(clock) -> str:
+def _iso(clock: Callable[[], float]) -> str:
     try:
         return _iso_from_ts(clock())
     except Exception:
         return str(clock())
 
 
-def _iso_from_ts(ts) -> str:
+def _iso_from_ts(ts: float) -> str:
     import datetime
     return datetime.datetime.fromtimestamp(ts, datetime.timezone.utc).isoformat()
