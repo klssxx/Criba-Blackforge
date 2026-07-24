@@ -1,50 +1,88 @@
-# CRIBA CURRENT ENGINE
+# CRIBA + BLACKFORGE
 
-Motor local, determinista y explicable que prepara un paquete de análisis antes de que otro modelo responda. El paquete no contiene cadena de pensamiento: contiene supuestos, contraejemplos, hipótesis falsables, propuestas trazables, guardrails y una decisión provisional.
+**C**urrent **R**ebels **I**nnovation **B**reakthrough **A**rchitecture — motor de
+innovación estructural determinista, con el pipeline **BLACKFORGE** (catálogo
+inmutable de 723 registros, selector determinista, safety gate S0–S3, firma
+causal, salida packet 2.1).
 
-## Inicio rápido en Windows
+> Estado: funcional end-to-end con **GUI de escritorio PySide6 incluida** en el
+> release portable. Suite de **213 tests** en verde y `mypy --strict` rc=0 sobre
+> 20 archivos fuente (ver `artifacts/finalization/TEST_EVIDENCE.md`). El defecto
+> KI-001 (`SyntaxError` en `gui.py`) está **resuelto**.
 
-Desde PowerShell:
+## Arquitectura
+
+Ver `docs/ARCHITECTURE.md` (diagrama Mermaid, contratos y flujos).
+
+- **Motor CRIBA** (`src/criba/engine.py`): `activate()` → selección de corriente,
+  métodos, rupturas, divergencia por 5 ejes causales, cross-consistency,
+  similitud, scoring (`value_score = evidence*novelty/cost`), decisión.
+- **Pipeline BLACKFORGE** (`src/criba/blackforge_pipeline.py`): `run_headless()`
+  sobre catálogo inmutable → selector + safety + firma causal + convergencia →
+  packet 2.1.
+- **GUI** (`src/criba/gui.py`): app PySide6/Qt6, tema oscuro premium.
+- **Entrypoints**: GUI (`criba.gui:run`), CLI (`criba.cli:main`), API loopback
+  (`api.py`), MCP stdio (`mcp_server.py`).
+
+## Desarrollo
+
+```bash
+# Entorno (Windows 11 x64, .venv local del proyecto)
+python -m pip install -e ".[gui,api,mcp,dev,build]"
+python -m pytest                     # suite: 213 passed
+python -m mypy src/criba             # tipado strict: 0 issues
+```
+
+## Build portable (Windows)
+
+El build usa PyInstaller `onedir` (windowed, con Qt/PySide6 empaquetado) desde
+`CRIBA-Blackforge.spec`:
 
 ```powershell
-.\scripts\criba.ps1 activate --query "¿Cómo diseñar aprobaciones seguras para agentes?" --current auto
-.\scripts\criba.ps1 serve
-.\scripts\criba.ps1 gui
+.\scripts\build-portable.ps1
+# equivalente a:
+.\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean CRIBA-Blackforge.spec
 ```
 
-La API queda ligada exclusivamente a `127.0.0.1:8765`; OpenAPI/Swagger está en `http://127.0.0.1:8765/docs`.
+Salida: `dist\CRIBA-Blackforge\CRIBA-Blackforge.exe`.
 
-## Interfaces
+## Download the Windows portable build
 
-- CLI: `activate`, `run`, `build-prompt`, `list-currents`, `explain`, `compare`, `serve`, `mcp`, `gui`.
-- API: `POST /v1/activate`, `/v1/run`, `/v1/build-prompt`, `/v1/compare`, `/v1/decisions`; `GET /v1/currents`, `/v1/methods`, `/v1/sessions/{id}`, `/health`.
-- MCP stdio: `activate_current`, `list_currents`, `explain_selection`, `run_criba`, `build_model_prompt`, `record_decision`, `compare_runs`.
-- GUI PySide6: activación, resultados por pestaña y copia del prompt. La biblioteca e historial están disponibles por API/CLI; su editor visual es una ampliación pendiente.
+Descarga el ZIP portable (no requiere Python/Git/Docker/API key):
 
-## Integración MCP
+1. **Descargar** el asset `CRIBA-Blackforge-Portable-Windows-x64.zip` desde
+   [GitHub Releases](https://github.com/klssxx/Criba-Blackforge/releases).
+2. **Verificar SHA-256** (PowerShell):
 
-Configure su cliente para lanzar (ajuste la ruta si es necesario):
+   ```powershell
+   Get-FileHash -Algorithm SHA256 .\CRIBA-Blackforge-Portable-Windows-x64.zip
+   ```
 
-```json
-{"command":"powershell.exe","args":["-ExecutionPolicy","Bypass","-File","E:\\PROYECTS\\CRIBA\\scripts\\criba.ps1","mcp"]}
-```
+   SHA-256 esperado:
 
-El cliente debe invocar `activate_current` antes de su respuesta final. El campo `model_instruction` y `response_contract` expresan esta obligación, pero CRIBA no puede imponer el comportamiento de un cliente/modelo externo.
+   ```
+   c764af35b2c9d21d7f40e71e02eeec80ed8e9e0041e9725a6615db8a19e83e2e
+   ```
 
-## Seguridad
+3. **Extraer** en una carpeta (p.ej. `C:\CRIBA`).
+4. **Ejecutar** `CRIBA-Blackforge.exe` (doble clic; abre la GUI).
+5. **Demo en 60 segundos**: escribe una consulta en el cuadro inferior y pulsa
+   **▶ EJECUTAR CRIBA**; revisa el resumen, métricas y decisión a la derecha.
 
-CRIBA no ejecuta comandos provenientes de consultas, no lee credenciales, no envía consultas a red ni modifica proyectos. Los experimentos son planes para sandbox con límite de daño, rollback y stop criterion. Las sesiones SQLite guardan la consulta: protéjalas como información potencialmente sensible.
+Consulta `FIRST_RUN_ES.md` / `FIRST_RUN_EN.md` dentro del ZIP para la guía
+completa.
 
-## Paquete Windows
+## Limitaciones conocidas
 
-Con PyInstaller instalado, ejecute `./scripts/build-portable.ps1`. El resultado se genera en `dist/CRIBA-Current-Engine`. La build incluye los catálogos JSON. No se distribuye un intérprete Python independiente en este repositorio.
+- La base de datos SQLite portable se guarda en
+  `%LOCALAPPDATA%\CRIBA-Blackforge\criba.sqlite3`.
+- Capa `AGENTIC` es un future hook (no implementado by design); solo el flujo
+  `LOCAL_MVP` está activo.
+- El ejecutable no está firmado (SmartScreen/AV pueden avisar en el primer uso).
+- Adaptadores API local / MCP no activos por defecto; el flujo básico no los
+  necesita.
 
-## Verificación
+## Licencia
 
-```powershell
-$env:PYTHONPATH = (Resolve-Path .\src).Path
-& 'C:\Program Files\Blender Foundation\Blender 5.2\5.2\python\bin\python.exe' -m pytest -q --basetemp=.pytest-temp
-```
-
-Ver [`docs/FINAL_REPORT.md`](docs/FINAL_REPORT.md) para el estado verificable.
-
+Ver `THIRD_PARTY_NOTICES.md` en el build portable y el archivo LICENSE del
+repositorio.
