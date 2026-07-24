@@ -123,16 +123,19 @@ No ejecutar reset, clean, checkout destructivo ni añadir esos cambios a commits
 ## Último comando y resultado
 
 Último gate pesado:
-`<modal_python> -m modal run .autoregen/cloud/modal_runner.py::pytest_full`
+`<modal_python> -m modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge`
 
-Resultado: rc=0; 204 passed, 0 failed, 1 warning, 4.46 s; Modal app `ap-9UJAy9xk2JfPxnA1MQq4kg`. Después se comprobó que no quedaban procesos `modal.exe`, `pytest.exe` ni `mypy.exe` activos.
+Resultado: rc=0; Benchmark FASE 4 completado. Operación más lenta: catalog_cold_load_validate_freeze (41.59 ms mediana). Catalog SHA-256: `1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc`. Run: https://modal.com/apps/klssxx/main/ap-uYO53Dw9U5bhrrpUYmVDSS.
+
+Suite completa posterior al benchmark: **204 passed, 0 failed, 1 warning, 4.46 s**, rc=0.
+Run: https://modal.com/apps/klssxx/main/ap-9UJAy9xk2JfPxnA1MQq4kg. Modal app `ap-uYO53Dw9U5bhrrpUYmVDSS` y `ap-9UJAy9xk2JfPxnA1MQq4kg` no tienen procesos hijos activos al terminar.
 
 Tests pasados:
 - FASE 3 CLI focalizado: 3 passed.
 - FASE 4 catálogo focalizado: 9 passed.
+- FASE 4 benchmark: rc=0, 7 operaciones medidas.
 - FASE 4 suite completa: 204 passed.
 - mypy scoped FASE 3: 20 source files sin issues.
-- mypy focalizado catálogo y benchmark: PASS.
 
 Tests fallidos abiertos: ninguno.
 Tests no ejecutados todavía:
@@ -201,3 +204,4 @@ Criterio para declarar FASE 5 VERIFIED: docstrings públicas Google style donde 
 - `0282928 perf: cache immutable blackforge catalog index`
 - `ed5467f docs(handoff): close FASE 3 strict-typing gate and set FASE 4 next action`
 - `ca673ac test: add reproducible blackforge performance benchmark`
+- `53e669d docs(handoff): close phase 4 performance gate`
