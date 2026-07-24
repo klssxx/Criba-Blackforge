@@ -62,6 +62,12 @@ def main(argv: Sequence[str] | None = None) -> int:
     compare_parser = sub.add_parser("compare")
     compare_parser.add_argument("--session-a", required=True)
     compare_parser.add_argument("--session-b", required=True)
+    blackforge_parser = sub.add_parser("blackforge", help="Ejecuta el pipeline BLACKFORGE determinista")
+    blackforge_parser.add_argument("--query", help="Consulta que se incluirá en el packet BLACKFORGE")
+    blackforge_parser.add_argument("--seed", type=int, default=1)
+    blackforge_parser.add_argument("--session-size", type=int, default=12)
+    blackforge_parser.add_argument("--profile", default="hybrid")
+    blackforge_parser.add_argument("--session-id", default="blackforge-cli")
     serve_parser = sub.add_parser("serve")
     serve_parser.add_argument("--host", default="127.0.0.1")
     serve_parser.add_argument("--port", type=int, default=8765)
@@ -82,6 +88,26 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         if args.command == "compare":
             print(json.dumps(Storage(args.database).compare(args.session_a, args.session_b), ensure_ascii=False, indent=2))
+            return 0
+        if args.command == "blackforge":
+            from .blackforge_pipeline import run_headless
+
+            if args.query is None:
+                packet = run_headless(
+                    seed=args.seed,
+                    session_size=args.session_size,
+                    profile=args.profile,
+                    session_id=args.session_id,
+                )
+            else:
+                packet = run_headless(
+                    query=args.query,
+                    seed=args.seed,
+                    session_size=args.session_size,
+                    profile=args.profile,
+                    session_id=args.session_id,
+                )
+            print(json.dumps(packet, ensure_ascii=False, indent=2))
             return 0
         if args.command == "serve":
             from .api import serve

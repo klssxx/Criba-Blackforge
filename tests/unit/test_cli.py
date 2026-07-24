@@ -55,3 +55,25 @@ def test_activate_without_query_returns_controlled_error(tmp_path, capsys) -> No
     assert result == 2
     assert captured.out == ""
     assert "Indica --query o --file" in captured.err
+
+
+def test_blackforge_cli_runs_the_headless_pipeline(capsys) -> None:
+    query = "Ejecutar BLACKFORGE desde la interfaz de línea de comandos: áβ"
+
+    result = main([
+        "blackforge",
+        "--query",
+        query,
+        "--seed",
+        "11",
+        "--session-id",
+        "cli-regression",
+    ])
+
+    assert result == 0
+    packet = json.loads(capsys.readouterr().out)
+    assert packet["status"] == "OK"
+    assert packet["query"] == query
+    assert packet["session_id"] == "cli-regression"
+    assert packet["selection"]["selected_count"] == 12
+    assert packet["ideas"]

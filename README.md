@@ -6,7 +6,7 @@ inmutable de 723 registros, selector determinista, safety gate S0–S3, firma
 causal, salida packet 2.1).
 
 > Estado: funcional end-to-end con **GUI de escritorio PySide6 incluida** en el
-> release portable. Suite de **213 tests** en verde y `mypy --strict` rc=0 sobre
+> release portable. Suite automatizada en verde y `mypy --strict` rc=0 sobre
 > 20 archivos fuente (ver `artifacts/finalization/TEST_EVIDENCE.md`). El defecto
 > KI-001 (`SyntaxError` en `gui.py`) está **resuelto**.
 
@@ -29,8 +29,14 @@ Ver `docs/ARCHITECTURE.md` (diagrama Mermaid, contratos y flujos).
 ```bash
 # Entorno (Windows 11 x64, .venv local del proyecto)
 python -m pip install -e ".[gui,api,mcp,dev,build]"
-python -m pytest                     # suite: 213 passed
+python -m pytest
 python -m mypy src/criba             # tipado strict: 0 issues
+
+# Motor CRIBA (packet de innovación persistible)
+criba activate --query "Evaluar una alternativa reversible"
+
+# Pipeline BLACKFORGE (selector + safety + causal + convergence)
+criba blackforge --query "Analizar una hipótesis concreta" --seed 11
 ```
 
 ## Build portable (Windows)
@@ -58,18 +64,15 @@ Descarga el ZIP portable (no requiere Python/Git/Docker/API key):
    Get-FileHash -Algorithm SHA256 .\CRIBA-Blackforge-Portable-Windows-x64.zip
    ```
 
-   SHA-256 esperado:
-
-   ```
-   bf0eef4ac374027017aba7bd38045a3e1f22772aed0e23c06abcd7e711d0599b
-   ```
-
-   Compáralo siempre con el fichero `.sha256` que acompaña al ZIP.
+   Compáralo siempre con el fichero `.sha256` que acompaña al ZIP. Ese fichero
+   identifica de forma autoritativa el build portable concreto que descargaste.
 
 3. **Extraer** en una carpeta (p.ej. `C:\CRIBA`).
 4. **Ejecutar** `CRIBA-Blackforge.exe` (doble clic; abre la GUI).
 5. **Demo en 60 segundos**: escribe una consulta en el cuadro inferior y pulsa
    **▶ EJECUTAR CRIBA**; revisa el resumen, métricas y decisión a la derecha.
+6. **BLACKFORGE por CLI** (opcional): desde la carpeta extraída ejecuta
+   `CRIBA-Blackforge-CLI.exe blackforge --query "tu hipótesis" --seed 11`.
 
 Consulta `FIRST_RUN_ES.md` / `FIRST_RUN_EN.md` dentro del ZIP para la guía
 completa.
