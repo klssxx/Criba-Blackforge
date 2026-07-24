@@ -1,40 +1,71 @@
 {
-  "handoff_schema_version": "1.0.0",
-  "reason": "context_saturation",
-  "last_verified_phase": "FASE 2",
-  "current_phase": "FASE 3 — TIPADO Y CONTRATOS (baseline 3.1 capturado, sin corregir)",
-  "current_status": "partial",
-  "last_modified_files": [
-    "src/criba/blackforge_safety.py",
-    "src/criba/engine.py"
+  "handoff_schema_version": "1.1.0",
+  "reason": "fase3_typing_gate_closed",
+  "last_verified_phase": "FASE 3 — TIPADO Y CONTRATOS COMPLETADA (strict mypy rc=0, 20 archivos; suite 204 passed)",
+  "current_phase": "FASE 4 — RENDIMIENTO Y RECURSOS",
+  "current_status": "fase3_closed_ready_for_fase4",
+  "checkpoint_date": "2026-07-24",
+  "execution_environment": {
+    "mode": "cloud_only_for_heavy_work",
+    "provider": "modal",
+    "workspace": "klssxx",
+    "runner": ".autoregen/cloud/modal_runner.py",
+    "modal_python": "C:\\Users\\KLSX\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "required_environment": {
+      "PYTHONUTF8": "1",
+      "PYTHONIOENCODING": "utf-8"
+    },
+    "allowed_local_bridge": "Start Modal CLI and safe Git only; never run project pytest, mypy, coverage, Hypothesis or benchmarks locally.",
+    "commands": {
+      "suite_completa": "<modal_python> -m modal run .autoregen/cloud/modal_runner.py::pytest_full",
+      "un_archivo": "<modal_python> -m modal run .autoregen/cloud/modal_runner.py::pytest_file --path <ruta>",
+      "mypy_strict_scoped": "<modal_python> -m modal run .autoregen/cloud/modal_runner.py::mypy_scoped",
+      "coverage": "<modal_python> -m modal run .autoregen/cloud/modal_runner.py::coverage_run",
+      "benchmark": "<modal_python> -m modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge"
+    }
+  },
+  "baseline_real": {
+    "commit": "0d86764",
+    "tests_passed": 137,
+    "note": "Baseline original; no confundirlo con el resultado vigente de 204 pruebas."
+  },
+  "latest_remote_verification": {
+    "fase3_gate": {
+      "mypy_strict_src_criba": {
+        "command": "modal run .autoregen/cloud/modal_runner.py::mypy_scoped",
+        "rc": 0,
+        "result": "Success: no issues found in 20 source files",
+        "run_url": "https://modal.com/apps/klssxx/main/ap-bFrUh1HzQnT9n000T1NOHM"
+      },
+      "suite_completa": {
+        "command": "modal run .autoregen/cloud/modal_runner.py::pytest_full",
+        "passed": 204,
+        "failed": 0,
+        "duration_s": 3.30,
+        "warning": "FastAPI/Starlette deprecation warning for httpx; non-blocking",
+        "run_url": "https://modal.com/apps/klssxx/main/ap-9KyTj5LA8SgYHD7jBnAkCw"
+      }
+    },
+    "strict_mypy_pass": [
+      "src/criba/genome.py",
+      "src/criba/blackforge_causal.py",
+      "src/criba/blackforge_safety.py",
+      "src/criba (paquete completo, 20 archivos)"
+    ],
+    "root_cause_resolved": "Modal CLI had Windows charmap output failure before launching remote work; UTF-8 environment is now mandatory. FASE 3 tipado estricto cerrado sin errores pendientes."
+  },
+  "uncommitted_remaining": [
+    "Los diffs de usuario en pyproject.toml, 01_TAREA_ACTUAL.txt, 02_INICIAR_AUTOREGENERACION.cmd, HANDOFF.md, RESUME_NEXT_SESSION.txt, .autoregen/logs y verification/ NO fueron modificados por el agente; conservar antes de cualquier commit.",
+    "Archivos grandes/cache/logs sin commitear (ver .gitignore)."
   ],
-  "created_files": [
-    "tests/unit/test_engine_boundaries.py",
-    "tests/unit/test_blackforge_safety_branches.py",
-    "tests/unit/test_blackforge_selector_branches.py",
-    "tests/unit/test_blackforge_causal_branches.py",
-    "tests/unit/test_value_score_contract.py",
-    "CHANGELOG.md",
-    "verification/baseline_fase0.json",
-    "verification/coverage_fase1.json",
-    "verification/fase2_robustness_report.json",
-    "verification/mypy_baseline_fase3.json",
-    "verification/known_issues.json",
-    "verification/HANDOFF_PRE_HARDENING.md"
-  ],
-  "last_command": "python -m pytest -p no:cacheprovider -q",
-  "last_result": "189 passed, 1 warning, rc=0",
-  "tests_passed": ["full suite: 189 passed (137 baseline + 52 new)"],
-  "tests_failed": [],
-  "tests_not_run": ["FASE 4 benchmark", "FASE 5 docs", "FASE 6 exploration", "property-based (hypothesis not installed)"],
   "protected_invariants": [
-    "value_score = evidence * novelty / cost (formula intacta, ahora con contrato ValueScoreError)",
-    "recommended_status in VALID_DECISIONS; nunca ADOPTAR por numero de familias",
-    "pipeline_action in {PROTOTIPAR,DIVERGIR}; dimension separada, no de negocio",
-    "ningun golden regenerado semanticamente",
-    "gui.py / theme no modificados"
+    "value_score = evidence * novelty / cost",
+    "recommended_status remains in VALID_DECISIONS and is not inferred from family count",
+    "pipeline_action remains separate and in {PROTOTIPAR, DIVERGIR}",
+    "no semantic golden regeneration",
+    "gui.py and theme remain out of scope because of KI-001"
   ],
-  "next_exact_action": "Iniciar FASE 3.2/3.4: corregir mypy --strict en modulos prioritarios empezando por los bugs de tipos REALES (blackforge_selector failure/detail linea 228/239/243, engine cross_consistency_assessment return-value linea 234), luego type-arg de genericos. Commit atomico por modulo, re-ejecutar suite completa tras cada fix.",
-  "next_exact_command": "python -m mypy --strict src/criba/blackforge_selector.py",
-  "next_required_test": "python -m pytest -p no:cacheprovider -q tests/unit/test_blackforge_selector.py tests/unit/test_blackforge_selector_branches.py"
+  "next_exact_action": "FASE 3 cerrada (sin errores de tipado). Iniciar FASE 4: leer sección 7 de 01_TAREA_ACTUAL.txt y ejecutar benchmark reproducible del catálogo de 723 registros con `modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge`, respetando límite de RAM y sin duplicar el catálogo en memoria.",
+  "next_exact_command": "modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge",
+  "next_required_test": "Tras cambios de FASE 4, test de regresión de performance estable y, al cierre del bloque, una única suite Modal completa."
 }

@@ -1,129 +1,90 @@
 # AUTOREGENERATION_CHECKPOINT
 
-Timestamp: 2026-07-24T02:10:00Z (generacion 1, sesion 1)
-Motivo: Checkpoint limpio antes de iniciar FASE 3 (mypy --strict), una fase
-extensa. Salud de sesion YELLOW (mucho contenido grande cargado: engine.py,
-blackforge_causal.py, safety, selector y sus tests). Se cierra la subfase
-actual con su gate ejecutado una vez y se pide contexto limpio. NO hay decision
-humana bloqueante. NO se ha declarado el proyecto completado.
+Fecha: 2026-07-24
 
-Ultima fase completamente verificada: FASE 2 (VERIFIED)
-Fase actual: FASE 3 — TIPADO Y CONTRATOS (solo baseline 3.1 capturado, sin corregir)
-Estado: PARTIAL
+Motivo: checkpoint operativo tras desbloquear la ejecución remota en Modal.
 
-## FASES COMPLETADAS (VERIFIED)
+## Estado verificado
 
-### FASE 0 — RED DE SEGURIDAD Y BASELINE (VERIFIED)
-- .git estaba PRESENTE pero VACIO (repo invalido); reinicializado con `git init -b main`.
-- Baseline REAL medido esta sesion: `python -m pytest` -> 137 passed, 0 failed,
-  1 warning, rc=0 (~2.9s). Registrado en verification/baseline_fase0.json.
-- Escaneo de secretos: 0 reales. Unico hit = cadena literal "aws_secret_access_key"
-  DENTRO de 01_TAREA_ACTUAL.txt (el propio prompt enumera patrones). Sin .env, sin claves.
-- HANDOFF previo preservado en verification/HANDOFF_PRE_HARDENING.md.
-- .gitignore robusto creado (build/, dist/, caches, tmp pytest, .hermes-tmp.*).
-- Commit baseline: 0d86764 "chore: capture pre-hardening baseline with 137 passing tests".
-- Alternativa C VERIFICADA EN CODIGO (no solo en handoff previo):
-  engine.py:408-419 -> pipeline_action ∈ {PROTOTIPAR,DIVERGIR} segun len(families);
-  recommended_status="AMPLIAR PRUEBA" ∈ VALID_DECISIONS; independientes; validacion
-  de enums; value_score=evidence*novelty/cost intacto.
+- Entorno de verificación: Modal cloud, workspace `klssxx`; nunca ejecutar suites
+  ni análisis pesados en la máquina local.
+- Suite completa: **200 passed**, 1 warning no bloqueante, 3.67 s.
+  Ejecución: https://modal.com/apps/klssxx/main/ap-UjqFcoO9TXIGqdYquvIXtq
+- `mypy --strict` en nube: PASS para `src/criba/genome.py`,
+  `src/criba/blackforge_causal.py` y `src/criba/blackforge_safety.py`.
+- La causa del bloqueo no era el código: el CLI de Modal abortaba al escribir
+  un carácter Unicode en una consola Windows `charmap`, y los handoffs antiguos
+  ordenaban un falso `HUMAN_DECISION_REQUIRED` si Hermes no mostraba terminal.
 
-### FASE 1 — COBERTURA REAL (VERIFIED)
-- Cobertura de ramas global 73% -> 77%. Reporte: verification/coverage_fase1.json.
-- Modulos prioritarios: engine 91%->95%, blackforge_safety 92%->99%,
-  blackforge_selector 88%->93%, blackforge_causal 74%->84%, pipeline 97%, catalog 79%.
-- Tests nuevos por modulo (commits atomicos): 638dbad (engine boundaries),
-  81cbe4a (safety+selector branches), 034054e (causal accept/reject), b596085 (report).
-- HALLAZGO REAL corregido: S3 safety denial no exponia authorized_scope_confirmed
-  en unmet_requirements (lista local nunca retornada). Fix: fc532ea.
+## Punto de partida
 
-### FASE 2 — CASOS BORDE Y ROBUSTEZ (VERIFIED)
-- value_score extraido como funcion publica con contrato ValueScoreError:
-  rechaza cost<=0, no-finitos y no-numericos (bool incluido) en vez de devolver
-  0.0 silencioso. Formula RATIFICADA intacta. Commit fix: 6581467. 8 tests contrato.
-- Revision except-amplios: 3 restantes son bordes de adaptador legitimos
-  (_iso fallback [testeado], mcp_server JSON-RPC, api.py HTTP 500). Reporte:
-  verification/fase2_robustness_report.json. Commit: c015771.
-- CHANGELOG.md actualizado (Keep a Changelog [Unreleased]). Commit: 3bbc541.
+FASE 3 — TIPADO Y CONTRATOS: **COMPLETADA Y VERIFICADA** (ver gate abajo).
+No repitas los checks ya PASS ni la suite completa si no hay cambios de código.
+Inspecciona primero los diffs no confirmados y conserva los cambios del
+usuario. Crea commits atómicos solo de módulos de FASE 3 que hayas revisado;
+no hagas push, reset, clean ni checkout destructivo.
 
-## FASE 3 — SOLO BASELINE CAPTURADO (PARTIAL, NO corregido)
-- mypy 2.3.0 instalado como dev tool.
-- Baseline `mypy --strict` sobre 7 modulos prioritarios = 76 errores.
-  Registrado en verification/mypy_baseline_fase3.json (raw_errors + categorias).
-- Distribucion: type-arg 42 (genericos sin parametrizar), union-attr 12,
-  no-untyped-def 6, arg-type 4, index 3, no-any-return 3, no-untyped-call 3,
-  no-redef 1, return-value 1, var-annotated 1.
-- BUGS DE TIPOS REALES a corregir (no solo anotaciones):
-  blackforge_selector.py:228 `failure` redefinido (no-redef);
-  blackforge_selector.py:239/243 `detail` es object no indexable/incompatible;
-  engine.py:234 cross_consistency_assessment retorna tuple pero anotado list.
-- NADA de FASE 3 commiteado como codigo; solo el baseline como evidencia.
+Los invariantes protegidos siguen siendo:
 
-## KNOWN ISSUES
-- KI-001 (verification/known_issues.json): gui.py tiene string triple-comillas
-  sin terminar (SyntaxError linea 388), PREEXISTENTE al baseline. gui.py no
-  parsea. Fuera del alcance ratificado del core; NO tocar sin ratificacion.
+- `value_score = evidence * novelty / cost`;
+- `recommended_status` pertenece a `VALID_DECISIONS` y no se adopta por número
+  de familias;
+- `pipeline_action` es independiente y solo vale `PROTOTIPAR` o `DIVERGIR`;
+- no regenerar goldens;
+- no tocar `gui.py` ni theme (KI-001 preexistente).
 
-Archivos creados esta sesion:
-- .gitignore (reescrito)
-- tests/unit/test_engine_boundaries.py
-- tests/unit/test_blackforge_safety_branches.py
-- tests/unit/test_blackforge_selector_branches.py
-- tests/unit/test_blackforge_causal_branches.py
-- tests/unit/test_value_score_contract.py
-- CHANGELOG.md (reescrito, Keep a Changelog)
-- verification/baseline_fase0.json
-- verification/coverage_fase1.json
-- verification/fase2_robustness_report.json
-- verification/mypy_baseline_fase3.json
-- verification/known_issues.json
-- verification/HANDOFF_PRE_HARDENING.md (copia del handoff previo)
+### GATE FASE 3 — CERRADO (2026-07-24, verificación Modal klssxx)
 
-Archivos modificados (codigo):
-- src/criba/blackforge_safety.py (fix S3 unmet scope)
-- src/criba/engine.py (value_score funcion + contrato)
+- `mypy --strict` sobre `src/criba` vía `[tool.mypy]` de pyproject.toml:
+  **rc=0 — Success: no issues found in 20 source files**.
+  Comando: `modal run .autoregen/cloud/modal_runner.py::mypy_scoped`
+  Run: https://modal.com/apps/klssxx/main/ap-bFrUh1HzQnT9n000T1NOHM
+- Contratos tipados (Idea, Decision, Packet, pipeline_action, recommended_status,
+  resultado causal, safety decision) ya en fases previas; `pipeline_action`
+  separado de `recommended_status` (ratificado en la directiva).
+- Suite completa final del bloque: **204 passed, 1 warning, 3.30 s** (el
+  warning es deprecación FastAPI/Starlette por `httpx`, no bloqueante).
+  Comando: `modal run .autoregen/cloud/modal_runner.py::pytest_full`
+  Run: https://modal.com/apps/klssxx/main/ap-9KyTj5LA8SgYHD7jBnAkCw
+- No quedan módulos con errores de tipado: el objetivo "siguiente módulo con
+  errores pendientes" de la directiva ya no aplica; FASE 3 terminó.
 
-Ultimo comando: python -m pytest -p no:cacheprovider -q  ->  189 passed, 1 warning, rc=0
-Resultado: PASS
-Tests pasados: 189 (137 baseline + 52 nuevos)
-Tests fallidos: 0
-Tests no ejecutados: FASE 4 (perf), FASE 5 (docs), FASE 6 (exploracion), property-based (hypothesis no instalado)
+## Lanzador remoto obligatorio
 
-Invariantes protegidos:
-- value_score = evidence * novelty / cost (formula intacta).
-- recommended_status ∈ VALID_DECISIONS; nunca ADOPTAR por numero de familias.
-- pipeline_action ∈ {PROTOTIPAR,DIVERGIR}, dimension separada, no de negocio.
-- Ningun golden regenerado semanticamente (el churn de headless_output era solo
-  uuid/timestamp no deterministas; revertido).
-- gui.py / theme no modificados.
+`02_INICIAR_AUTOREGENERACION.cmd` ya establece UTF-8 y expone
+`MODAL_PYTHON=C:\Users\KLSX\AppData\Local\Programs\Python\Python312\python.exe`.
 
-Decisiones cerradas: Alternativa C ratificada e implementada/verificada.
-Riesgos: FASE 3 tiene bugs de tipos reales en selector que requieren cuidado
-para no cambiar comportamiento; re-verificar suite tras cada fix.
-Deuda tecnica: FASE 3 (mypy strict), FASE 4 (benchmark 723 registros),
-FASE 5 (docstrings + ARCHITECTURE + Mermaid), FASE 6 (TODO/FIXME + hypothesis),
-KI-001 gui.py.
+Cada invocación de Modal debe heredar:
 
-Proxima accion exacta: iniciar FASE 3.2/3.4 — corregir errores de mypy --strict
-en modulos prioritarios, empezando por los BUGS DE TIPOS REALES (blackforge_selector
-failure/detail, engine cross_consistency_assessment return), luego los type-arg
-de genericos. Commit atomico por modulo. Re-ejecutar la suite completa tras cada
-fix para garantizar 0 regresiones.
-Proximo comando: python -m mypy --strict src/criba/blackforge_selector.py
-Proximo test: python -m pytest -p no:cacheprovider -q tests/unit/test_blackforge_selector.py tests/unit/test_blackforge_selector_branches.py
-Criterio para declarar VERIFIED (FASE 3): mypy --strict verde en alcance propio,
-contratos tipados, JSON compatible (golden intacto), pipeline_action/recommended_status
-separados, sin equivalencias semanticas inventadas, suite completa verde.
+```powershell
+$env:PYTHONUTF8='1'
+$env:PYTHONIOENCODING='utf-8'
+& $env:MODAL_PYTHON -m modal run .autoregen\cloud\modal_runner.py::<entrypoint>
+```
 
-Clasificacion interna: HARDENING_SESSION_PARTIAL
+Si Hermes no recibe terminal pero sí `execute_code`, puede usarlo únicamente
+como puente para lanzar ese proceso Modal remoto y para git no destructivo o
+commits atómicos. No puede ejecutar pytest, mypy, coverage, benchmarks ni
+Python del proyecto en local.
 
-## HISTORIAL DE COMMITS (0d86764..HEAD)
-82cbb99 chore: record mypy strict baseline and gui.py known issue
-c015771 test: add malformed input coverage for public APIs
-3bbc541 docs: record hardening fixes in changelog
-6581467 fix: reject non-positive cost in value score
-b596085 test: record FASE 1 branch coverage report
-034054e test: cover causal acceptance and rejection paths
-81cbe4a test: cover blackforge safety and selector branch paths
-fc532ea fix: surface unconfirmed authorized scope in S3 safety denial
-638dbad test: cover engine decision boundaries and alternativa C separation
-0d86764 chore: capture pre-hardening baseline with 137 passing tests
+## Próxima acción exacta
+
+FASE 3 completa: no hay más errores de tipado. La próxima fase es **FASE 4 —
+RENDIMIENTO Y RECURSOS**, siguiendo la sección 7 de `01_TAREA_ACTUAL.txt`:
+
+1. Leer la sección 7 (FASE 4) de `01_TAREA_ACTUAL.txt`.
+2. Benchmark reproducible con el catálogo real de 723 registros, midiendo por
+   separado: carga/validación, índices, selección, safety gate, firma
+   causal y pipeline headless. Usar el entrypoint existente
+   `modal run .autoregen/cloud/modal_runner.py::benchmark_blackforge`
+   (warm-up corto, máximo 3–5 repeticiones, sin duplicar el catálogo en
+   memoria; respetar límites de RAM).
+3. Revisar complejidad (bucles anidados, búsquedas lineales repetidas,
+   serialización/copias reiteradas, firmas/índices recalculados) y aplicar
+   optimizaciones con perfil previo.
+4. Añadir prueba de regresión de performance estable (comparar complejidad /
+   reuso de índices, umbral generoso basado en mediciones).
+5. Commits atómicos Conventional Commits por cada bloque; actualizar
+   HANDOFF.md y `session_handoff.json` con comando, resultado, enlace Modal y
+   siguiente acción.
+Estado: FASE 3 CLOSED — READY FOR FASE 4.
