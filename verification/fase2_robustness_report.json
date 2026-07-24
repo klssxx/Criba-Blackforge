@@ -1,0 +1,30 @@
+{
+  "phase": "FASE 2 — CASOS BORDE Y ROBUSTEZ",
+  "generated_session": "generation-1",
+  "value_score_contract": {
+    "formula": "evidence * novelty / cost (RATIFICADA, sin cambios)",
+    "enforced": "cost > 0, entradas finitas, tipos numéricos (bool rechazado)",
+    "error_type": "ValueScoreError",
+    "tests": "tests/unit/test_value_score_contract.py (8 tests)"
+  },
+  "broad_exception_review": [
+    {
+      "location": "src/criba/blackforge_safety.py:186 (_iso)",
+      "verdict": "ACCEPTABLE",
+      "reason": "Fallback de presentación cuando el clock inyectado no devuelve un timestamp numérico; devuelve str(clock()) sin ocultar corrupción de datos. Cubierto por test_iso_fallback_when_clock_not_numeric.",
+      "action": "none"
+    },
+    {
+      "location": "src/criba/mcp_server.py:36",
+      "verdict": "ACCEPTABLE (boundary)",
+      "reason": "Borde de protocolo JSON-RPC: convierte cualquier fallo en un error -32000 estructurado. Re-lanzar rompería el protocolo. Adaptador opcional (0% cobertura, fuera del alcance prioritario).",
+      "action": "deferred"
+    },
+    {
+      "location": "src/criba/api.py:47",
+      "verdict": "REVIEW_LATER",
+      "reason": "Borde HTTP: responde 500 con mensaje seguro. No filtra secretos, pero traga el detalle sin registro. Adaptador opcional (45% cobertura).",
+      "action": "consider adding structured logging in a future generation; NOT a hardening blocker for the core engine."
+    }
+  ]
+}
