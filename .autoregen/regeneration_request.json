@@ -1,0 +1,9 @@
+{
+  "signal": "CONTEXT_REGENERATION_REQUIRED",
+  "reason": "Salud de sesion YELLOW antes de iniciar FASE 3 (mypy --strict), fase extensa. Subfase cerrada con gate ejecutado; se pide contexto limpio para continuar sin perdida de precision.",
+  "last_verified_phase": "FASE 2",
+  "next_action": "Iniciar FASE 3 (TIPADO): corregir mypy --strict empezando por bugs de tipos reales en blackforge_selector (failure/detail) y engine (cross_consistency_assessment return), luego type-arg; commit atomico por modulo; suite verde tras cada fix.",
+  "handoff": "HANDOFF.md",
+  "state": ".autoregen/session_handoff.json",
+  "resume": "RESUME_NEXT_SESSION.txt"
+}

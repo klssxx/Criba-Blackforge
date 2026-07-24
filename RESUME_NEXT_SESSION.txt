@@ -1,0 +1,63 @@
+INSTRUCCIONES DE REANUDACION — CRIBA + BLACKFORGE HARDENING
+(generacion 1 -> siguiente generacion, contexto limpio)
+
+Ruta de trabajo: E:\PROYECTS\CRIBA
+Trabaja como UNICO escritor. NO uses --continue ni --resume. NO hagas push.
+
+PASOS DE ARRANQUE (en orden):
+1. Lee E:\PROYECTS\CRIBA\01_TAREA_ACTUAL.txt (el hiper-megaprompt completo).
+2. Lee E:\PROYECTS\CRIBA\.autoregen\AUTOREGEN_GLOBAL.txt (protocolo de salud/senales).
+3. Lee E:\PROYECTS\CRIBA\HANDOFF.md (estado detallado de esta generacion).
+4. Lee E:\PROYECTS\CRIBA\.autoregen\session_handoff.json (estado estructurado).
+5. VERIFICA el estado real antes de continuar (no confies solo en el handoff):
+   - git log --oneline 0d86764..HEAD   (deben existir 9 commits sobre el baseline)
+   - git status --short                 (arbol limpio salvo el log de sesion vivo)
+   - python -m pytest -p no:cacheprovider -q   (debe dar 189 passed, rc=0)
+   IMPORTANTE en Windows: exporta TMP/TEMP a un dir bajo el proyecto para evitar
+   PermissionError:  set TMP=E:\PROYECTS\CRIBA\.tmp_pytest  (o via env en subprocess).
+   NOTA DE ENTORNO: en esta sesion la tool `terminal` NO existia; los comandos de
+   shell se ejecutaron via Python subprocess (execute_code). Adapta segun tu entorno.
+
+NO REPITAS fases ya VERIFIED: FASE 0, FASE 1 y FASE 2 estan completas y verificadas.
+
+CONTINUA DESDE next_exact_action (FASE 3 — TIPADO):
+- Baseline ya capturado: verification/mypy_baseline_fase3.json (76 errores con
+  mypy --strict, mypy 2.3.0 ya instalado).
+- Empieza por los BUGS DE TIPOS REALES (no solo anotaciones):
+    * src/criba/blackforge_selector.py:228  -> `failure` redefinido (no-redef)
+    * src/criba/blackforge_selector.py:239/243 -> `detail` es object (index/arg-type)
+    * src/criba/engine.py:234 -> cross_consistency_assessment retorna tuple,
+      anotado como list (return-value); corrige la anotacion de retorno.
+- Luego los errores type-arg (parametrizar genericos: dict[str, Any], etc.).
+- Evita Any salvo frontera externa inevitable y documentada. No añadas cientos de
+  ignores para conseguir verde. Encapsula fronteras sin tipos con exclusion minima.
+- Convierte a TypedDict/dataclass/enum solo contratos estables y RATIFICADOS,
+  conservando EXACTAMENTE la forma JSON serializada (añade tests de compatibilidad).
+- Commit atomico por modulo (refactor: ... / chore: enable strict mypy for ...).
+- RE-EJECUTA la suite completa tras CADA fix: 0 regresiones, 189+ passed.
+
+Proximo comando exacto:   python -m mypy --strict src/criba/blackforge_selector.py
+Proximo test exacto:      python -m pytest -p no:cacheprovider -q tests/unit/test_blackforge_selector.py tests/unit/test_blackforge_selector_branches.py
+
+INVARIANTES QUE NO SE TOCAN:
+- value_score = evidence * novelty / cost (ya con contrato ValueScoreError).
+- recommended_status ∈ {ADOPTAR, AMPLIAR PRUEBA, ABANDONAR, ARCHIVAR PARA RECOMBINAR};
+  nunca ADOPTAR solo por numero de familias.
+- pipeline_action ∈ {PROTOTIPAR, DIVERGIR}: dimension separada, NO de negocio.
+- No regenerar goldens sin ratificacion humana.
+- gui.py / theme: NO modificar (KI-001: gui.py tiene SyntaxError preexistente,
+  fuera del alcance ratificado del core).
+
+FASES PENDIENTES tras FASE 3:
+- FASE 4: benchmark reproducible con el catalogo real de 723 registros (mediana,
+  varias repeticiones), inmutabilidad, regresion de performance no fragil.
+- FASE 5: docstrings Google style, docs/ARCHITECTURE.md + Mermaid, HANDOFF final.
+- FASE 6: TODO/FIXME/XXX -> resolver o known_issues.json; property-based testing
+  (instalar hypothesis como dev tool si hay red); revision de empaquetado.
+
+CRITERIO DE CIERRE (PROJECT_COMPLETED) — solo cuando TODO esto se cumpla:
+FASE 0-5 completas, FASE 6 ejecutada/documentada, commits atomicos, arbol limpio,
+suite verde, cobertura registrada, mypy strict verde en codigo propio, sin goldens
+regenerados sin ratificacion, JSON compatible, pipeline_action/recommended_status
+separados, value_score intacto, benchmark registrado, docs actualizadas, HANDOFF
+y RESUME actualizados, sin decision humana bloqueante, project_completed.json valido.
