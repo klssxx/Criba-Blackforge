@@ -20,7 +20,7 @@ import json
 import os
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, List, Optional
+from typing import Any, Dict, List, Mapping, Optional
 
 from .blackforge_catalog import load as _load_catalog, get as _get
 from .blackforge_selector import select_blackforge
@@ -41,9 +41,9 @@ def run_headless(
     seed: int = 1,
     session_size: int = 12,
     profile: str = "hybrid",
-    session_context: Optional[dict] = None,
+    session_context: Optional[Mapping[str, Any]] = None,
     session_id: str = "blackforge-headless",
-) -> dict:
+) -> Dict[str, Any]:
     """Run the full headless pipeline and return a packet-2.1 dict."""
     sel = select_blackforge(seed=seed, session_size=session_size, profile=profile)
     if sel.failure is not None:
@@ -57,23 +57,26 @@ def run_headless(
             "status": "SELECTION_FAILED",
         }
 
-    ctx = session_context or {}
-    selected_items = [_get(bid) for bid in sel.selected_ids]
+    ctx: Dict[str, Any] = dict(session_context or {})
+    selected_items: List[Mapping[str, Any]] = [
+        x for x in (_get(bid) for bid in sel.selected_ids) if x is not None
+    ]
 
     # Safety gate: keep only items that are NOT DENY.
-    safe = []
-    safety_report = []
-    for item in selected_items:
-        d = evaluate_blackforge_safety(dict(item), ctx, session_id=session_id)
+    safe: List[Mapping[str, Any]] = []
+    safety_report: List[Dict[str, Any]] = []
+    for raw_item in selected_items:
+        d = evaluate_blackforge_safety(dict(raw_item), ctx, session_id=session_id)
         safety_report.append(d.to_dict())
         if d.decision != DENY:
-            safe.append(item)
+            safe.append(raw_item)
 
     # Build ideas with a causal signal + convergence measurement.
-    ideas = []
+    ideas: List[Dict[str, Any]] = []
     seen_axes: Dict[str, int] = {}
-    for idx, item in enumerate(safe, start=1):
-        axis = item.get("causal_axis_primary") or "unknown"
+    for idx, raw_item in enumerate(safe, start=1):
+        record: Mapping[str, Any] = raw_item
+        axis = record.get("causal_axis_primary") or "unknown"
         # novelty: how many distinct causal axes are represented among survivors
         # (measurement-layer datum, same spirit as CRIBA's CCA).
         seen_axes[axis] = seen_axes.get(axis, 0) + 1
@@ -81,22 +84,22 @@ def run_headless(
         # Build a CRIBA-like idea dict so _evaluate_idea stays the single source.
         idea = {
             "id": f"BF{idx:02d}",
-            "blackforge_id": item["blackforge_id"],
-            "title": item.get("title", ""),
-            "description": item.get("description", ""),
-            "causal_variables": {axis: item.get("causal_axis_primary", "unknown")},
-            "extreme": bool(item.get("requires_explicit_authorization")),
+            "blackforge_id": record["blackforge_id"],
+            "title": record.get("title", ""),
+            "description": record.get("description", ""),
+            "causal_variables": {axis: record.get("causal_axis_primary", "unknown")},
+            "extreme": bool(record.get("requires_explicit_authorization")),
             "genome": {
-                "actor": [item.get("source_family", "unknown")],
-                "mechanism": [item.get("functional_category_primary", "capability_proof")],
-                "topology": [item.get("domain_primary", "unknown")],
-                "trust_model": ["evidence_based" if item.get("evidence_level") == "testable" else "implicit"],
+                "actor": [record.get("source_family", "unknown")],
+                "mechanism": [record.get("functional_category_primary", "capability_proof")],
+                "topology": [record.get("domain_primary", "unknown")],
+                "trust_model": ["evidence_based" if record.get("evidence_level") == "testable" else "implicit"],
                 "time_model": ["staged"],
             },
             "causal_axis_primary": axis,
-            "pipeline_stage": item.get("pipeline_stage"),
-            "safety_class": item.get("safety_class"),
-            "quality_score_v2": item.get("quality_score_v2", 0),
+            "pipeline_stage": record.get("pipeline_stage"),
+            "safety_class": record.get("safety_class"),
+            "quality_score_v2": record.get("quality_score_v2", 0),
         }
         conv = _evaluate_idea(idea)  # same convergence formula as CRIBA engine
         idea["convergence"] = conv
@@ -147,14 +150,15 @@ def run_headless(
     return packet
 
 
-def _stable(packet: dict) -> dict:
+def _stable(packet: Dict[str, Any]) -> Dict[str, Any]:
     """Normalize for golden comparison: drop UUID/timestamp/paths, sort keys."""
     p = {k: v for k, v in packet.items() if k not in ("activation_id", "timestamp")}
     p = _strip_timestamps(p)
-    return json.loads(json.dumps(p, ensure_ascii=False, sort_keys=True))
+    stable: Dict[str, Any] = json.loads(json.dumps(p, ensure_ascii=False, sort_keys=True))
+    return stable
 
 
-def _strip_timestamps(obj):
+def _strip_timestamps(obj: Any) -> Any:
     """Recursively drop 'timestamp' keys so normalized output is deterministic."""
     if isinstance(obj, dict):
         return {k: _strip_timestamps(v) for k, v in obj.items() if k != "timestamp"}
@@ -163,7 +167,7 @@ def _strip_timestamps(obj):
     return obj
 
 
-def save_artifacts(packet: dict, out_dir: str = "verification") -> Dict[str, str]:
+def save_artifacts(packet: Dict[str, Any], out_dir: str = "verification") -> Dict[str, str]:
     os.makedirs(out_dir, exist_ok=True)
     raw_path = os.path.join(out_dir, "blackforge_headless_output.json")
     norm_path = os.path.join(out_dir, "blackforge_headless_output.normalized.json")
