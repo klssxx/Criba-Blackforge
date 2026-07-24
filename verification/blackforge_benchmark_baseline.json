@@ -1,0 +1,101 @@
+{
+  "schema": "criba_blackforge_benchmark",
+  "schema_version": "1.0.0",
+  "methodology": {
+    "warmup_per_operation": 1,
+    "repetitions": 3,
+    "execution": "sequential",
+    "clock": "time.perf_counter_ns",
+    "summary": "median and nearest-rank p95; no fragile timing gate"
+  },
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
+    "cpu_count_visible": 18,
+    "max_rss_kib": 96080,
+    "modal_resource_limits": {
+      "cpu": 2.0,
+      "memory_mib": 4096
+    }
+  },
+  "input": {
+    "catalog_records": 723,
+    "catalog_sha256": "1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc",
+    "catalog_bytes": 3182943,
+    "selector_seed": 1,
+    "session_size": 12
+  },
+  "operations": {
+    "catalog_cold_load_validate_freeze": {
+      "repetitions": 3,
+      "samples_ms": [
+        39.109698,
+        36.758548,
+        36.272218
+      ],
+      "median_ms": 36.758548,
+      "p95_nearest_rank_ms": 39.109698
+    },
+    "catalog_id_index_construction": {
+      "repetitions": 3,
+      "samples_ms": [
+        0.38658,
+        0.320719,
+        0.29516
+      ],
+      "median_ms": 0.320719,
+      "p95_nearest_rank_ms": 0.38658
+    },
+    "catalog_lookup_12_selected_ids": {
+      "repetitions": 3,
+      "samples_ms": [
+        0.09274,
+        0.0839,
+        0.09038
+      ],
+      "median_ms": 0.09038,
+      "p95_nearest_rank_ms": 0.09274
+    },
+    "selector": {
+      "repetitions": 3,
+      "samples_ms": [
+        0.7233,
+        0.7445,
+        0.73848
+      ],
+      "median_ms": 0.73848,
+      "p95_nearest_rank_ms": 0.7445
+    },
+    "safety_gate_12_items": {
+      "repetitions": 3,
+      "samples_ms": [
+        0.135491,
+        0.11593,
+        0.11063
+      ],
+      "median_ms": 0.11593,
+      "p95_nearest_rank_ms": 0.135491
+    },
+    "causal_signature_validation": {
+      "repetitions": 3,
+      "samples_ms": [
+        0.41395,
+        0.36266,
+        0.39748
+      ],
+      "median_ms": 0.39748,
+      "p95_nearest_rank_ms": 0.41395
+    },
+    "headless_pipeline": {
+      "repetitions": 3,
+      "samples_ms": [
+        1.26485,
+        1.23738,
+        1.31343
+      ],
+      "median_ms": 1.26485,
+      "p95_nearest_rank_ms": 1.31343
+    }
+  },
+  "observed_slowest_operation_by_median": "catalog_cold_load_validate_freeze"
+}

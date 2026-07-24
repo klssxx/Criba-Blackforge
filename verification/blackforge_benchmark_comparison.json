@@ -1,0 +1,67 @@
+{
+  "schema": "criba_blackforge_benchmark_comparison",
+  "schema_version": "1.0.0",
+  "execution_environment": "Modal cloud workspace klssxx",
+  "baseline_run_url": "https://modal.com/apps/klssxx/main/ap-OBROYaW94xukQND0GojqWv",
+  "post_change_run_url": "https://modal.com/apps/klssxx/main/ap-AcZpqJf7QGJc80X4x1Hhb7",
+  "same_catalog_sha256": true,
+  "catalog_sha256": "1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc",
+  "catalog_records": 723,
+  "repetitions_per_operation": 3,
+  "operation_medians": {
+    "catalog_cold_load_validate_freeze": {
+      "baseline_median_ms": 36.758548,
+      "post_change_median_ms": 43.470687,
+      "delta_ms": 6.712139,
+      "delta_percent": 18.26
+    },
+    "catalog_id_index_construction": {
+      "baseline_median_ms": 0.320719,
+      "post_change_median_ms": 0.397151,
+      "delta_ms": 0.076432,
+      "delta_percent": 23.831
+    },
+    "catalog_lookup_12_selected_ids": {
+      "baseline_median_ms": 0.09038,
+      "post_change_median_ms": 0.02663,
+      "delta_ms": -0.06375,
+      "delta_percent": -70.536
+    },
+    "selector": {
+      "baseline_median_ms": 0.73848,
+      "post_change_median_ms": 0.99264,
+      "delta_ms": 0.25416,
+      "delta_percent": 34.417
+    },
+    "safety_gate_12_items": {
+      "baseline_median_ms": 0.11593,
+      "post_change_median_ms": 0.17001,
+      "delta_ms": 0.05408,
+      "delta_percent": 46.649
+    },
+    "causal_signature_validation": {
+      "baseline_median_ms": 0.39748,
+      "post_change_median_ms": 0.52165,
+      "delta_ms": 0.12417,
+      "delta_percent": 31.239
+    },
+    "headless_pipeline": {
+      "baseline_median_ms": 1.26485,
+      "post_change_median_ms": 1.508289,
+      "delta_ms": 0.243439,
+      "delta_percent": 19.246
+    }
+  },
+  "max_rss_kib": {
+    "baseline": 96080,
+    "post_change": 94832,
+    "delta_kib": -1248,
+    "delta_percent": -1.299
+  },
+  "interpretation": [
+    "The cached immutable ID index reduces the measured 12-ID lookup median; the exact delta is recorded above.",
+    "Recursive freezing and duplicate-ID validation add one-time cold-load work, after which the catalog and index are reused.",
+    "Independent three-sample cloud runs are descriptive evidence, not a fragile wall-clock regression gate.",
+    "The structural regression gate is cache/index identity plus deep immutability and exact 723-record validation."
+  ]
+}
