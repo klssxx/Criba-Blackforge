@@ -1,0 +1,31 @@
+{
+  "product": "CRIBA + BLACKFORGE",
+  "version": "0.1.0",
+  "date_utc": "2026-07-24",
+  "build": "dist/CRIBA-Blackforge-Portable-Windows-x64 (dual GUI+CLI onedir)",
+  "overall_status": "PARTIAL",
+  "executables": {
+    "CRIBA-Blackforge.exe": "GUI windowed",
+    "CRIBA-Blackforge-CLI.exe": "CLI console (UTF-8)"
+  },
+  "flows": {
+    "gui_first_open": "PASS",
+    "gui_main_render_fonts": "PASS",
+    "gui_buttons_nav": "PASS",
+    "gui_db_connectivity": "PASS",
+    "cli_list_currents": "PASS",
+    "cli_activate_utf8": "PASS",
+    "cli_utf8_accents": "PASS",
+    "cli_database_flag_persistence": "PASS",
+    "qt_dlls_bundled": "PASS",
+    "blackforge_catalog_723_bundled": "PASS",
+    "gui_click_interaction": "NOT_EXECUTED_USER_DENIED"
+  },
+  "evidence": {
+    "cli_value_score": 0.5524,
+    "cli_exit_code": 0,
+    "gui_window_size": "1364x779",
+    "gui_status_bar": "Base de datos: OK"
+  },
+  "honest_note": "CLI exe fully smoke-tested end-to-end on the real binary. GUI exe launches/renders with DB; click-through NOT executed (user-denied), not fabricated."
+}

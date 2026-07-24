@@ -1,0 +1,118 @@
+=== GIT STATUS ===
+ D .autoregen/logs/session-01-20260724-001224.log
+ D .autoregen/logs/session-01-20260724-002104.log
+ D .autoregen/logs/session-01-20260724-002718.log
+ D .autoregen/logs/session-01-20260724-002946.log
+ D .autoregen/logs/session-01-20260724-004257.log
+ D .autoregen/logs/session-01-20260724-005246.log
+ D .autoregen/logs/session-01-20260724-005737.log
+ D .autoregen/logs/session-01-20260724-010954.log
+ D .autoregen/logs/session-01-20260724-011426.log
+ D .autoregen/logs/session-01-20260724-014717.log
+ D .autoregen/logs/session-01-20260724-015413.log
+ M .autoregen/regeneration_request.json
+ M .autoregen/session_handoff.json
+ M .autoregen/supervisor_state.json
+ D 00_DIAGNOSTICO_HERMES.cmd
+ D 01_TAREA_ACTUAL.txt
+ D 01_TAREA_ACTUAL_PLANTILLA.txt
+ D 02_INICIAR_AUTOREGENERACION.cmd
+ D 03_REINICIAR_ESTADO.cmd
+ D 04_AUTORIZAR_ALTERNATIVA_C.txt
+ D CHECKPOINT_2026-07-23.md
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO.zip
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/AUTOSUPERVISION_PROMPT.txt
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/CRIBA_BLACKFORGE_V2_IMPLEMENTACION_COMPLETA.zip
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/LANZAR_SUPERVISOR.cmd
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/MANIFEST_SUPERVISOR_SHA256.json
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/README_SUPERVISOR.txt
+ D CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO/Supervisor-Hermes-CRIBA.ps1
+ M HANDOFF.md
+ D HERMES_AUTOREGENERACION_SIEMPRE_ACTIVA_V2_CORREGIDO.zip
+ D README_PRIMERO.txt
+ D README_PRIMERO_V2.txt
+ D README_PRIMERO_V3.txt
+ M RESUME_NEXT_SESSION.txt
+ M docs/ARCHITECTURE.md
+ M scripts/build-portable.ps1
+ M verification/blackforge_benchmark.json
+ M verification/blackforge_headless_output.json
+?? .autoregen/logs/session-02-20260724-090147.log
+?? .autoregen/project_completed.json
+?? .hermes/
+?? CRIBA-Blackforge.spec
+?? CRIBA-Current-Engine.spec.bak
+?? artifacts/
+?? nul
+?? scripts/build-portable.ps1.bak
+
+=== BRANCH ===
+main
+
+=== LOG -15 ===
+f7ae486 (HEAD -> main, origin/main) docs: add CRIBA+BLACKFORGE architecture (FASE 5)
+d7d2bd6 docs(handoff): close FASE 4 benchmark gate and set FASE 5 ready state
+7a375c5 docs(handoff): close FASE 4 benchmark gate and prepare FASE 5 documentation
+53e669d docs(handoff): close phase 4 performance gate
+ca673ac test: add reproducible blackforge performance benchmark
+ed5467f docs(handoff): close FASE 3 strict-typing gate and set FASE 4 next action
+0282928 perf: cache immutable blackforge catalog index
+6c6bd2a chore: enable strict mypy for criba modules
+098a312 refactor: type CLI activation boundaries
+5b0fe6f refactor: harden and type loopback API boundaries
+f425519 refactor: validate and type MCP JSON-RPC boundary
+f4c4cc4 refactor: type SQLite persistence JSON boundaries
+129959e refactor: type preserved v1 audit engine contracts
+c757e6a refactor: type and validate local agentic adapter
+e6941b3 refactor: type genome similarity contracts
+
+=== REMOTE ===
+origin	https://github.com/klssxx/Criba-Blackforge.git (fetch)
+origin	https://github.com/klssxx/Criba-Blackforge.git (push)
+
+=== DIFF STAT ===
+warning: in the working copy of '.autoregen/regeneration_request.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of '.autoregen/session_handoff.json', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'HANDOFF.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'RESUME_NEXT_SESSION.txt', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'docs/ARCHITECTURE.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'scripts/build-portable.ps1', LF will be replaced by CRLF the next time Git touches it
+ .autoregen/logs/session-01-20260724-001224.log     |    9 -
+ .autoregen/logs/session-01-20260724-002104.log     | 1173 -------
+ .autoregen/logs/session-01-20260724-002718.log     |  351 --
+ .autoregen/logs/session-01-20260724-002946.log     | 2143 ------------
+ .autoregen/logs/session-01-20260724-004257.log     | 1042 ------
+ .autoregen/logs/session-01-20260724-005246.log     | 1045 ------
+ .autoregen/logs/session-01-20260724-005737.log     | 1326 -------
+ .autoregen/logs/session-01-20260724-010954.log     | 1099 ------
+ .autoregen/logs/session-01-20260724-011426.log     | 3622 --------------------
+ .autoregen/logs/session-01-20260724-014717.log     |  379 --
+ .autoregen/logs/session-01-20260724-015413.log     |  208 --
+ .autoregen/regeneration_request.json               |    8 +-
+ .autoregen/session_handoff.json                    |  128 +-
+ .autoregen/supervisor_state.json                   |   16 +-
+ 00_DIAGNOSTICO_HERMES.cmd                          |   18 -
+ 01_TAREA_ACTUAL.txt                                | 1134 ------
+ 01_TAREA_ACTUAL_PLANTILLA.txt                      |    4 -
+ 02_INICIAR_AUTOREGENERACION.cmd                    |   19 -
+ 03_REINICIAR_ESTADO.cmd                            |   13 -
+ 04_AUTORIZAR_ALTERNATIVA_C.txt                     |   64 -
+ CHECKPOINT_2026-07-23.md                           |  125 -
+ CRIBA_BLACKFORGE_SUPERVISOR_AUTOMATICO.zip         |  Bin 700275 -> 0 bytes
+ .../AUTOSUPERVISION_PROMPT.txt                     |  180 -
+ ...CRIBA_BLACKFORGE_V2_IMPLEMENTACION_COMPLETA.zip |  Bin 691822 -> 0 bytes
+ .../LANZAR_SUPERVISOR.cmd                          |   19 -
+ .../MANIFEST_SUPERVISOR_SHA256.json                |   30 -
+ .../README_SUPERVISOR.txt                          |   91 -
+ .../Supervisor-Hermes-CRIBA.ps1                    |  394 ---
+ HANDOFF.md                                         |  190 +-
+ ...UTOREGENERACION_SIEMPRE_ACTIVA_V2_CORREGIDO.zip |  Bin 9016 -> 0 bytes
+ README_PRIMERO.txt                                 |   39 -
+ README_PRIMERO_V2.txt                              |   53 -
+ README_PRIMERO_V3.txt                              |   44 -
+ RESUME_NEXT_SESSION.txt                            |   48 +-
+ docs/ARCHITECTURE.md                               |  458 ++-
+ scripts/build-portable.ps1                         |   12 +-
+ verification/blackforge_benchmark.json             |   72 +-
+ verification/blackforge_headless_output.json       |   28 +-
+ 38 files changed, 620 insertions(+), 14964 deletions(-)

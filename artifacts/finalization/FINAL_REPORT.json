@@ -1,0 +1,37 @@
+{
+  "product": "CRIBA + BLACKFORGE",
+  "version": "0.1.0",
+  "date_utc": "2026-07-24",
+  "repo": "E:/PROYECTS/CRIBA",
+  "branch": "main",
+  "final_status": "PARTIAL",
+  "gates": {
+    "BASELINE_VERIFIED": true,
+    "BLUEPRINT_VERIFIED": true,
+    "QUALITY_GATES_PASS": true,
+    "GUI_SMOKE_PASS": "PARTIAL",
+    "PORTABLE_EXECUTABLE_PASS": "PARTIAL",
+    "HASH_AND_MANIFEST_VERIFIED": true,
+    "GIT_STATE_VERIFIED": true,
+    "RELEASE": "RELEASE_READY_NOT_PUBLISHED"
+  },
+  "tests": {"compileall": 0, "pytest_passed": 213, "pytest_failed": 0, "mypy_issues": 0, "mypy_files": 20},
+  "artifact": {
+    "zip": "dist/CRIBA-Blackforge-Portable-Windows-x64.zip",
+    "size_bytes": 63897395,
+    "sha256": "bf0eef4ac374027017aba7bd38045a3e1f22772aed0e23c06abcd7e711d0599b",
+    "exe": "dist/CRIBA-Blackforge/CRIBA-Blackforge.exe",
+    "bundled": ["PySide6/Qt6", "pydantic", "data catalogs"]
+  },
+  "commits": [
+    {"sha": "2c62ad1", "type": "fix", "summary": "gui.py KI-001 + portable DB"},
+    {"sha": "3e0c86b", "type": "build", "summary": "pydantic runtime + extras"},
+    {"sha": "b74afc3", "type": "build", "summary": "package portable GUI exe"},
+    {"sha": "a86c1d5", "type": "docs", "summary": "README + guides GUI release"}
+  ],
+  "remote": {"url": "https://github.com/klssxx/Criba-Blackforge", "visibility": "PUBLIC", "pushed": false, "releases": 0},
+  "blockers_fixed": ["gui.py SyntaxError (KI-001)", "CLI-only exe -> GUI exe", "pydantic undeclared", "ephemeral DB path"],
+  "pending": ["GUI click-through smoke (user-denied)", "code signing", "git push", "AUTORIZO PUBLICAR for release"],
+  "user_deletions_respected": true,
+  "honesty_note": "FINAL_STATUS is PARTIAL, not VERIFIED, because the real .exe click-through interaction was not executed (user-denied). All other checks are backed by executed evidence."
+}
