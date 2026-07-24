@@ -1,4 +1,0 @@
-PEGA_AQUI_TU_PROMPT
-
-Borra todo este contenido y pega aquí la tarea o hiper-megaprompt que quieres
-que Hermes ejecute con autorregeneración siempre activa.
