@@ -1,6 +1,7 @@
 """Explainable keyword and signal selector. It is intentionally deterministic."""
 from __future__ import annotations
 import re
+from typing import Any
 from .catalog import currents, find_current
 
 SIGNALS = {
@@ -37,7 +38,7 @@ def _signals(query: str) -> dict[str, bool]:
     normalized = re.sub(r"[^\wáéíóúüñ]+", " ", query.casefold())
     return {name:any(token in normalized for token in tokens) for name,tokens in SIGNALS.items()}
 
-def select(query: str, requested: str = "auto", allow_secondary: bool = False) -> dict:
+def select(query: str, requested: str = "auto", allow_secondary: bool = False) -> dict[str, Any]:
     if not isinstance(query, str) or not query.strip(): raise ValueError("La consulta no puede estar vacía.")
     flags = _signals(query)
     scored=[]
