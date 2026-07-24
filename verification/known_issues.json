@@ -1,0 +1,11 @@
+{
+  "id": "KI-001",
+  "location": "src/criba/gui.py:61-388",
+  "summary": "gui.py tiene un string triple-comillas sin terminar; el archivo no parsea (SyntaxError en linea 388, detectado por compileall y por coverage 'couldnt-parse'). Es PREEXISTENTE al hardening (presente en el baseline commit 0d86764).",
+  "risk": "La GUI opcional no se puede importar ni ejecutar; cualquier smoke de GUI fallaria. No afecta al motor core (CLI/API/headless), que no importa gui.py.",
+  "severity": "medium",
+  "recommended_action": "Reparar el string triple-comillas sin terminar en gui.py. NO se toca en esta generacion: theme/gui estan fuera del alcance ratificado del core y una edicion sin ver la intencion original podria romper el layout premium. Requiere ratificacion o una generacion dedicada a GUI.",
+  "acceptance_criteria": "python -m py_compile src/criba/gui.py devuelve rc=0 y coverage deja de emitir 'couldnt-parse' para gui.py, sin alterar el diseno visual intencionado.",
+  "detected_session": "generation-1",
+  "detected_by": "python -m compileall src/criba (FASE 3 pre-check)"
+}
