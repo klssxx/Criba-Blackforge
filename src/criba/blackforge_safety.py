@@ -161,10 +161,13 @@ def evaluate_blackforge_safety(
             )
         if not auth_scope_ok:
             unmet.append("authorized_scope_confirmed")
+        # Report BOTH the missing S3 requirements and an unconfirmed authorized
+        # scope so the caller sees the precise blocker (scope was previously
+        # appended to `unmet` but never surfaced in the returned decision).
         return SafetyDecision(
             decision=DENY, policy_version=_SAFETY_POLICY_VERSION, item_id=item_id,
             reasons=["S3_HIGH_CONTROL: nunca habilitado por defecto; requiere aprobación humana + sandbox aislado + logging completo + scope autorizado."],
-            unmet_requirements=missing, allowed_scope=SCOPE_NONE,
+            unmet_requirements=missing + unmet, allowed_scope=SCOPE_NONE,
             session_id=session_id, timestamp=_iso(clock),
         )
 
