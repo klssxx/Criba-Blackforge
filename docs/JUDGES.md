@@ -36,5 +36,5 @@ entrega `v0.1.0` de CRIBA + BLACKFORGE sin depender de la afirmación del autor.
 ```powershell
 .\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean CRIBA-Blackforge.spec
 # SHA-256 del ZIP resultante:
-#   c764af35b2c9d21d7f40e71e02eeec80ed8e9e0041e9725a6615db8a19e83e2e
+#   bf0eef4ac374027017aba7bd38045a3e1f22772aed0e23c06abcd7e711d0599b
 ```

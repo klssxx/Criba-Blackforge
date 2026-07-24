@@ -61,8 +61,10 @@ Descarga el ZIP portable (no requiere Python/Git/Docker/API key):
    SHA-256 esperado:
 
    ```
-   c764af35b2c9d21d7f40e71e02eeec80ed8e9e0041e9725a6615db8a19e83e2e
+   bf0eef4ac374027017aba7bd38045a3e1f22772aed0e23c06abcd7e711d0599b
    ```
+
+   Compáralo siempre con el fichero `.sha256` que acompaña al ZIP.
 
 3. **Extraer** en una carpeta (p.ej. `C:\CRIBA`).
 4. **Ejecutar** `CRIBA-Blackforge.exe` (doble clic; abre la GUI).
