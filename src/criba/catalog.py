@@ -2,10 +2,11 @@
 from __future__ import annotations
 import json
 from pathlib import Path
+from typing import Any
 from .constants import DATA_ROOT
 
-def _load_dir(name: str) -> list[dict]:
-    result = []
+def _load_dir(name: str) -> list[dict[str, Any]]:
+    result: list[dict[str, Any]] = []
     directory = DATA_ROOT / name
     for path in sorted(directory.glob("*.json")):
         try:
@@ -18,9 +19,9 @@ def _load_dir(name: str) -> list[dict]:
         result.extend(entries)
     return result
 
-def currents() -> list[dict]: return _load_dir("currents")
-def methods() -> list[dict]: return _load_dir("methods")
-def find_current(current_id: str) -> dict:
+def currents() -> list[dict[str, Any]]: return _load_dir("currents")
+def methods() -> list[dict[str, Any]]: return _load_dir("methods")
+def find_current(current_id: str) -> dict[str, Any]:
     for item in currents():
         if item["id"] == current_id: return item
     raise ValueError(f"Corriente inexistente: {current_id}")
