@@ -8,6 +8,16 @@ version = "0.1.0"
 description = "Local, deterministic CRIBA pre-response engine"
 requires-python = ">=3.10"
 authors = [{name = "CRIBA Current Engine"}]
+dependencies = [
+  "pydantic>=2",
+]
+
+[project.optional-dependencies]
+gui = ["PySide6>=6.7"]
+api = ["fastapi>=0.115", "uvicorn>=0.30"]
+mcp = ["mcp>=1.0"]
+dev = ["pytest>=8.0", "mypy>=1.8", "httpx"]
+build = ["pyinstaller>=6.0"]
 
 [project.scripts]
 criba = "criba.cli:main"
