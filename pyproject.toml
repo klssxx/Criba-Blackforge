@@ -18,3 +18,24 @@ package-dir = {"" = "src"}
 [tool.setuptools.packages.find]
 where = ["src"]
 
+[tool.mypy]
+# FASE 3 hardening: strict typing over CRIBA + BLACKFORGE own code.
+python_version = "3.12"
+strict = true
+# gui.py carries a preexisting SyntaxError (KI-001) and is out of the ratified
+# core scope; exclude it so mypy checks the rest of the package.
+exclude = "gui\\.py$"
+
+[[tool.mypy.overrides]]
+# gui.py is excluded as an explicit target above, but cli.py imports it lazily.
+# Do not follow that single out-of-scope module (KI-001) during core checking.
+module = "criba.gui"
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+# uvicorn is an OPTIONAL runtime dependency (imported inside a try/except with a
+# stdlib fallback in api.py). It ships no type stubs; ignore the missing import
+# at that boundary only, without weakening strictness elsewhere.
+module = ["uvicorn", "uvicorn.*"]
+ignore_missing_imports = true
+
