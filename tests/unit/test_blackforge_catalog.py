@@ -131,8 +131,14 @@ def test_functional_categories_valid():
 
 
 def test_loader_is_immutable():
-    _, recs = bc.load()
-    # Records are MappingProxyType (immutable) and the tuple is frozen.
+    meta, recs = bc.load()
+    # Metadata, nested policies, records and their nested collections are frozen.
+    assert "records" not in meta
+    assert isinstance(meta["selection_policy"], MappingProxyType)
+    with pytest.raises(TypeError):
+        meta["selection_policy"]["constraints"]["minimum_source_catalogs"] = 99
+    with pytest.raises(AttributeError):
+        meta["selection_policy"]["allowed_tiers_default"].append("archive")
     assert isinstance(recs, tuple)
     assert isinstance(recs[0], MappingProxyType)
     with pytest.raises(TypeError):
@@ -141,6 +147,21 @@ def test_loader_is_immutable():
     # append; either way it is immutable).
     with pytest.raises((TypeError, AttributeError)):
         recs.append("x")
+
+
+def test_loader_reuses_catalog_and_immutable_id_index():
+    bc.reset_cache()
+    loaded = bc.load()
+    _, recs = loaded
+    index = bc._get_id_index()
+
+    assert bc.load() is loaded
+    assert bc._get_id_index() is index
+    assert isinstance(index, MappingProxyType)
+    assert len(index) == 723
+    assert bc.get(recs[-1]["blackforge_id"]) is recs[-1]
+    with pytest.raises(TypeError):
+        index["BF-MUTATED"] = recs[0]
 
 
 def test_emits_report():

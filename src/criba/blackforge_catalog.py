@@ -19,11 +19,12 @@ from __future__ import annotations
 import json
 from pathlib import Path
 from types import MappingProxyType
-from typing import Any, Dict, List, Mapping, Optional, Tuple
+from typing import Any, Mapping, Optional, Tuple
 
 # Immutable view types over the frozen BLACKFORGE catalog.
 _FrozenRecord = MappingProxyType[str, Any]
 _FrozenCatalog = Tuple[_FrozenRecord, Tuple[_FrozenRecord, ...]]
+_FrozenIndex = MappingProxyType[str, _FrozenRecord]
 
 from .constants import PACKAGE_ROOT
 
@@ -37,6 +38,7 @@ _CATALOG_PATH = (
 
 # Module-level cache (parsed exactly once per process).
 _cache: Optional[_FrozenCatalog] = None
+_id_index: Optional[_FrozenIndex] = None
 
 
 class CatalogValidationError(ValueError):
@@ -57,27 +59,59 @@ def _load_raw() -> dict[str, Any]:
     return payload
 
 
-def _freeze_record(rec: dict[str, Any]) -> _FrozenRecord:
-    """Return an immutable view of a single record (deep-frozen at top level)."""
-    return MappingProxyType({k: (tuple(v) if isinstance(v, list) else v) for k, v in rec.items()})
+def _freeze_value(value: Any) -> Any:
+    """Recursively freeze JSON containers without copying immutable scalars."""
+    if isinstance(value, dict):
+        return MappingProxyType({str(key): _freeze_value(item) for key, item in value.items()})
+    if isinstance(value, list):
+        return tuple(_freeze_value(item) for item in value)
+    return value
+
+
+def _freeze_record(rec: Mapping[str, Any]) -> _FrozenRecord:
+    """Return a recursively immutable view of a catalog record."""
+    return MappingProxyType({str(key): _freeze_value(value) for key, value in rec.items()})
+
+
+def _build_id_index(records: Tuple[_FrozenRecord, ...]) -> _FrozenIndex:
+    """Build the immutable O(1) ID index and reject duplicate/malformed IDs."""
+    index: dict[str, _FrozenRecord] = {}
+    for record in records:
+        raw_id = record.get("blackforge_id")
+        if not isinstance(raw_id, str) or not raw_id:
+            raise CatalogValidationError("Registro sin blackforge_id válido.")
+        if raw_id in index:
+            raise CatalogValidationError(f"blackforge_id duplicado: {raw_id}")
+        index[raw_id] = record
+    return MappingProxyType(index)
 
 
 def _get_catalog() -> _FrozenCatalog:
     """Load + freeze the catalog once. Returns (meta, frozen_records)."""
-    global _cache
+    global _cache, _id_index
     if _cache is not None:
         return _cache
     payload = _load_raw()
-    meta = MappingProxyType(dict(payload))
+    meta = _freeze_record({key: value for key, value in payload.items() if key != "records"})
     frozen = tuple(_freeze_record(r) for r in payload["records"])
+    _id_index = _build_id_index(frozen)
     _cache = (meta, frozen)
     return _cache
 
 
+def _get_id_index() -> _FrozenIndex:
+    """Return the immutable index, initializing the catalog exactly once."""
+    if _id_index is None:
+        _get_catalog()
+    assert _id_index is not None
+    return _id_index
+
+
 def reset_cache() -> None:
     """Test hook: drop the cached parse (does not reload from disk)."""
-    global _cache
+    global _cache, _id_index
     _cache = None
+    _id_index = None
 
 
 def load() -> _FrozenCatalog:
@@ -92,18 +126,24 @@ def records() -> Tuple[_FrozenRecord, ...]:
 
 def get(blackforge_id: str) -> Optional[_FrozenRecord]:
     """Return an immutable record view by blackforge_id, or None if absent."""
-    for r in _get_catalog()[1]:
-        if r["blackforge_id"] == blackforge_id:
-            return r
-    return None
+    return _get_id_index().get(blackforge_id)
+
+
+def _thaw(value: Any) -> Any:
+    """Recursively copy frozen JSON containers back to mutable dicts/lists."""
+    if isinstance(value, Mapping):
+        return {str(key): _thaw(item) for key, item in value.items()}
+    if isinstance(value, tuple):
+        return [_thaw(item) for item in value]
+    return value
 
 
 def to_dict() -> dict[str, Any]:
-    """Defensive deep-ish copy for callers that truly need a mutable dict."""
+    """Defensive deep copy for callers that truly need a mutable JSON shape."""
     meta, recs = _get_catalog()
     return {
-        "meta": dict(meta),
-        "records": [dict(r) for r in recs],
+        "meta": _thaw(meta),
+        "records": [_thaw(record) for record in recs],
     }
 
 
