@@ -279,6 +279,44 @@ _BASE_VALUES = {
 }
 
 
+class ValueScoreError(ValueError):
+    """Raised when value_score inputs violate the ratified contract.
+
+    The formula value_score = evidence * novelty / cost is ratified and must not
+    change. This guards its domain: cost must be strictly positive and all inputs
+    finite, so the score is never silently coerced, infinite, or NaN.
+    """
+
+
+def value_score(evidence: float, novelty: float, cost: float) -> float:
+    """Ratified convergence score: ``evidence * novelty / cost``.
+
+    Args:
+        evidence: Evidence anchoring of the idea (finite number).
+        novelty: Measurement-layer novelty (finite number).
+        cost: Effort to test the idea. MUST be strictly positive.
+
+    Returns:
+        The rounded value score (4 decimals).
+
+    Raises:
+        ValueScoreError: if ``cost <= 0`` or any input is non-finite. The error
+            is explicit — cost is never silently converted and the result is
+            never infinite or NaN.
+    """
+    import math as _math
+    for name, val in (("evidence", evidence), ("novelty", novelty), ("cost", cost)):
+        if not isinstance(val, (int, float)) or isinstance(val, bool):
+            raise ValueScoreError(f"value_score: {name} debe ser numérico, no {type(val).__name__}.")
+        if not _math.isfinite(val):
+            raise ValueScoreError(f"value_score: {name} debe ser finito; se recibió {val!r}.")
+    if cost <= 0:
+        raise ValueScoreError(
+            f"value_score: cost debe ser > 0 (fórmula evidence*novelty/cost); se recibió cost={cost!r}."
+        )
+    return round((evidence * novelty) / cost, 4)
+
+
 def _evaluate_idea(idea: dict) -> dict:
     """Convergence scoring. Input = what the OPERATOR generated (title,
     description, causal_variables, extreme). Novelty comes from the measurement
@@ -297,17 +335,21 @@ def _evaluate_idea(idea: dict) -> dict:
     extreme = bool(idea.get("extreme"))
     viability = round(0.45 if extreme else 0.8, 4)
 
-    # cost: effort to test; extreme + more moved axes = higher cost.
+    # cost: effort to test; extreme + more moved axes = higher cost. The base
+    # term 0.3 guarantees cost is always strictly positive here, so value_score's
+    # cost>0 contract holds by construction.
     cost = round(0.3 + (0.4 if extreme else 0.0) + 0.3 * (len(moved_axes) / len(_CAUSAL_AXES)), 4)
 
-    # value_score = evidence * novelty / cost  (explicit convergence criterion)
-    value_score = round((evidence * novelty) / cost, 4) if cost > 0 else 0.0
+    # value_score = evidence * novelty / cost  (explicit convergence criterion).
+    # novelty==0 (no axis moved) yields a legitimate 0.0 — that is a real score,
+    # not an error, because cost stays positive.
+    score = value_score(evidence, novelty, cost)
     return {
         "novelty": novelty,
         "evidence": evidence,
         "viability": viability,
         "cost": cost,
-        "value_score": value_score,
+        "value_score": score,
     }
 
 
