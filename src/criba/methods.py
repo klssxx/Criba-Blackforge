@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing import Any
 from .catalog import methods
 
 PREFERENCES={
@@ -8,7 +9,7 @@ PREFERENCES={
  "minimal":["diagnostico","arquitectura","verificacion","decision_riesgo"],
  "balanced":["diagnostico","inversion","arquitectura","verificacion"],
 }
-def select_methods(count: int=4, mode: str="balanced", manual: list[str]|None=None) -> list[dict]:
+def select_methods(count: int=4, mode: str="balanced", manual: list[str]|None=None) -> list[dict[str, Any]]:
     if not 1 <= count <= 8: raise ValueError("supporting_methods debe estar entre 1 y 8.")
     available=methods(); by_id={m["id"]:m for m in available}; selected=[]; families=set()
     candidates=[by_id[x] for x in manual or [] if x in by_id] if manual else []
