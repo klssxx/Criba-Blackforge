@@ -46,7 +46,7 @@ manifest = {
         "FIRST_RUN_ES.md", "FIRST_RUN_EN.md", "THIRD_PARTY_NOTICES.md",
     ],
     "blackforge_catalog": {"records": 723, "sha256": catalog_sha},
-    "tests": "213 passed (local pytest); mypy --strict rc=0 over 20 core source files (gui.py runtime-verified, excluded from strict typing)",
+    "tests": "215 passed (local pytest); mypy --strict rc=0 over 20 core source files (gui.py runtime-verified, excluded from strict typing)",
     "smoke_test": {
         "gui_exe_launches": True,
         "gui_from_path_with_spaces": True,

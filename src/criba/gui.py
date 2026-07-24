@@ -136,8 +136,11 @@ class Window(QMainWindow):
         # ---------- SIMPLE panel (default) ----------
         self.simple_panel = QFrame(); sp = QVBoxLayout(self.simple_panel); sp.setContentsMargins(0, 0, 0, 0); sp.setSpacing(12)
         sprob = QFrame(); sprob.setObjectName("card"); spc = QVBoxLayout(sprob); spc.setContentsMargins(14, 12, 14, 12)
-        spc.addWidget(QLabel("Tu consulta")); self.query = QTextEdit(); self.query.setPlaceholderText("Describe el problema o decisión que quieres validar con CRIBA…")
-        self.query.setFixedHeight(72); spc.addWidget(self.query)
+        spc.addWidget(QLabel("Tu consulta")); self.simple_query = QTextEdit(); self.simple_query.setPlaceholderText("Describe el problema o decisión que quieres validar con CRIBA…")
+        self.simple_query.setFixedHeight(72); spc.addWidget(self.simple_query)
+        # Keep the historical attribute pointing at the default, visible editor.
+        # The advanced editor is synchronized after it has been created below.
+        self.query = self.simple_query
         sp.addWidget(sprob)
         self.simple_answer = QFrame(); self.simple_answer.setObjectName("card"); self.simple_answer.hide()
         sa_lay = QVBoxLayout(self.simple_answer); sa_lay.setContentsMargins(14, 12, 14, 12); sp.addWidget(self.simple_answer)
@@ -163,8 +166,14 @@ class Window(QMainWindow):
         cfg_row = QHBoxLayout(); cfg_row.setSpacing(14)
         # problem
         prob_card = QFrame(); prob_card.setObjectName("card"); pc = QVBoxLayout(prob_card); pc.setContentsMargins(14, 12, 14, 12)
-        pc.addWidget(QLabel("Consulta / Problema")); self.query = QTextEdit(); self.query.setPlaceholderText("Pega la consulta para activar CRIBA…")
-        self.query.setMinimumHeight(120); pc.addWidget(self.query)
+        pc.addWidget(QLabel("Consulta / Problema")); self.advanced_query = QTextEdit(); self.advanced_query.setPlaceholderText("Pega la consulta para activar CRIBA…")
+        self.advanced_query.setMinimumHeight(120); pc.addWidget(self.advanced_query)
+        self.simple_query.textChanged.connect(
+            lambda: self._sync_query_fields(self.simple_query, self.advanced_query)
+        )
+        self.advanced_query.textChanged.connect(
+            lambda: self._sync_query_fields(self.advanced_query, self.simple_query)
+        )
         # current
         cur_card = QFrame(); cur_card.setObjectName("card"); cc = QVBoxLayout(cur_card); cc.setContentsMargins(14, 12, 14, 12)
         cc.addWidget(QLabel("Corriente")); self.current = QComboBox(); self.current.addItem("Selección automática (recomendada)", "auto")
@@ -257,10 +266,21 @@ class Window(QMainWindow):
         self.advanced_container.setVisible(checked)
         self.adv_btn.setText("Avanzado ▴" if checked else "Avanzado ▾")
 
+    @staticmethod
+    def _sync_query_fields(source, target):
+        """Mirror text between the simple and advanced query inputs without a signal loop."""
+        text = source.toPlainText()
+        if target.toPlainText() != text:
+            target.blockSignals(True)
+            try:
+                target.setPlainText(text)
+            finally:
+                target.blockSignals(False)
+
     # ---------- actions ----------
     def do_activate(self):
         try:
-            q = self.query.toPlainText().strip()
+            q = self.simple_query.toPlainText().strip()
             if not q:
                 QMessageBox.warning(self, "CRIBA", "Escribe una consulta antes de ejecutar.")
                 return
