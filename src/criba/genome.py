@@ -6,8 +6,8 @@ classification but never controls the schema. Invalid values are coerced to
 for human review. The ontology is NEVER auto-extended.
 """
 from __future__ import annotations
-from typing import Dict, List, Optional
-from pydantic import BaseModel, field_validator, ConfigDict
+from typing import Any, Dict, List, Optional
+from pydantic import BaseModel, field_validator, ConfigDict, ValidationInfo
 
 ONTOLOGY_VERSION = "1.0.0"
 
@@ -77,11 +77,13 @@ class Genome(BaseModel):
 
     @field_validator("actor", "mechanism", "topology", "trust_model", "time_model", mode="before")
     @classmethod
-    def _normalize(cls, v, info):
+    def _normalize(cls, v: Any, info: ValidationInfo) -> List[str]:
         field = info.field_name
+        if field is None:
+            return ["unknown"]
         allowed = _ENUMS[field]
         items = v if isinstance(v, list) else [v]
-        out = []
+        out: List[str] = []
         for item in items:
             if item is None:
                 continue
@@ -104,7 +106,7 @@ def is_known(field: str, value: str) -> bool:
 def normalize_proposal(proposal: Dict[str, object], source_idea: str = "unknown") -> tuple[Genome, List[UnclassifiedProperty]]:
     """Build a Genome from a model-proposed dict, coercing invalid enums and
     parking unknown concepts. Returns (genome, parked_properties)."""
-    data: Dict[str, list] = {f: ["unknown"] for f in _FIELDS}
+    data: Dict[str, List[str]] = {f: ["unknown"] for f in _FIELDS}
     parked: List[UnclassifiedProperty] = []
     for field in _FIELDS:
         raw = proposal.get(field)
@@ -123,7 +125,7 @@ def normalize_proposal(proposal: Dict[str, object], source_idea: str = "unknown"
         if kept:
             data[field] = kept
         parked.extend(new)
-    genome = Genome(**data)
+    genome = Genome.model_validate(data)
     genome.unclassified_properties = parked
     return genome, parked
 
