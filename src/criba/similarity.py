@@ -12,7 +12,7 @@ Rules (condition 14 — mandatory unknown handling):
   unknown field lists. Duplicate classification requires coverage >= threshold.
 """
 from __future__ import annotations
-from typing import Dict, List
+from typing import Any, Dict, List, Mapping
 
 _RAW_WEIGHTS = {
     "mechanism": 0.30,
@@ -39,12 +39,12 @@ _TH = 0.85   # >= this AND same main mechanism -> probable_duplicate
 _MID = 0.70  # between MID and _TH -> close_variant; below -> structurally_distinct
 
 
-def _effective(values) -> set:
+def _effective(values: object) -> set[str]:
     s = values if isinstance(values, list) else [values]
     return {str(x).strip().lower() for x in s if x is not None} - {"unknown"}
 
 
-def _field_similarity(field: str, a, b) -> float:
+def _field_similarity(field: str, a: object, b: object) -> float:
     ea, eb = _effective(a), _effective(b)
     if not ea and not eb:
         return 0.0  # both absent -> no match credit
@@ -54,10 +54,10 @@ def _field_similarity(field: str, a, b) -> float:
     return inter / union if union else 0.0
 
 
-def genome_distance(a: dict, b: dict) -> dict:
+def genome_distance(a: Mapping[str, object], b: Mapping[str, object]) -> dict[str, Any]:
     """Weighted distance/similarity with coverage. unknown never counts as match."""
     matches: Dict[str, float] = {}
-    diffs: Dict[str, dict] = {}
+    diffs: Dict[str, dict[str, object | None]] = {}
     unknowns: List[str] = []
     total = 0.0
     comp_weight = 0.0
@@ -87,12 +87,12 @@ def genome_distance(a: dict, b: dict) -> dict:
     }
 
 
-def classify(a: dict, b: dict) -> dict:
+def classify(a: Mapping[str, object], b: Mapping[str, object]) -> dict[str, Any]:
     res = genome_distance(a, b)
     sim = res["similarity"]
     cov = res["coverage"]
-    main_a = (a.get("mechanism") or ["unknown"])[0]
-    main_b = (b.get("mechanism") or ["unknown"])[0]
+    main_a = main_mechanism(a) or "unknown"
+    main_b = main_mechanism(b) or "unknown"
     same_main = main_a == main_b and main_a != "unknown"
     if cov < MIN_DUPLICATE_COVERAGE:
         verdict = "structurally_distinct"  # insufficient info -> never duplicate
@@ -109,6 +109,9 @@ def classify(a: dict, b: dict) -> dict:
     return res
 
 
-def main_mechanism(g: dict) -> str:
-    m = (g.get("mechanism") or ["unknown"])[0]
+def main_mechanism(g: Mapping[str, object]) -> str:
+    values = g.get("mechanism")
+    if not isinstance(values, list) or not values:
+        return ""
+    m = str(values[0])
     return m if m != "unknown" else ""
