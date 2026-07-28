@@ -27,10 +27,11 @@ Ver `docs/ARCHITECTURE.md` (diagrama Mermaid, contratos y flujos).
 ## Desarrollo
 
 ```bash
-# Entorno (Windows 11 x64, .venv local del proyecto)
-python -m pip install -e ".[gui,api,mcp,dev,build]"
-python -m pytest
-python -m mypy src/criba             # tipado strict: 0 issues
+# Entorno reproducible (Windows 11 x64, .venv local del proyecto)
+# Instala uv una vez: https://docs.astral.sh/uv/
+uv sync --all-extras --locked
+uv run pytest
+uv run mypy src/criba
 
 # Motor CRIBA (packet de innovación persistible)
 criba activate --query "Evaluar una alternativa reversible"
@@ -38,6 +39,11 @@ criba activate --query "Evaluar una alternativa reversible"
 # Pipeline BLACKFORGE (selector + safety + causal + convergence)
 criba blackforge --query "Analizar una hipótesis concreta" --seed 11
 ```
+
+`uv.lock` es la fuente de verdad para las versiones de desarrollo y build. No
+lo edites a mano: al cambiar `pyproject.toml`, ejecuta `uv lock` y revisa el
+diff. Los scripts PowerShell usan primero `CRIBA_PYTHON` si está definido y,
+si no, `.venv\Scripts\python.exe`.
 
 ## Build portable (Windows)
 
@@ -76,6 +82,18 @@ Descarga el ZIP portable (no requiere Python/Git/Docker/API key):
 
 Consulta `FIRST_RUN_ES.md` / `FIRST_RUN_EN.md` dentro del ZIP para la guía
 completa.
+
+## Entrega segura
+
+Los pull requests ejecutan tests, chequeo de tipos, auditoría de dependencias,
+análisis de workflows y un escaneo Trivy. Al publicar un GitHub Release, se
+construye una vez el ZIP portable para Windows, se calcula su SHA-256, se
+genera un SBOM CycloneDX y se atesta el ZIP antes de subirlo al release. La
+configuración de protección y rollback está en
+[`docs/RELEASE_OPERATIONS.md`](docs/RELEASE_OPERATIONS.md).
+
+Toda la automatización usa PowerShell sobre runners Windows x64
+`windows-2025`; no requiere comandos de Ubuntu ni Linux.
 
 ## Limitaciones conocidas
 

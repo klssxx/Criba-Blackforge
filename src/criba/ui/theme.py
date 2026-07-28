@@ -101,8 +101,8 @@ QPushButton#navbtn[suggested="true"] {{
 }}
 QPushButton#navbtnBlackforge {{
   background: {t.bg_card};
-  border: 1px solid {_rgba(t.accent_violet, 0.40)};
-  border-left: 3px solid {_rgba(t.accent_violet, 0.40)};
+  border: 1px solid {_rgba(bf_a, 0.40)};
+  border-left: 3px solid {_rgba(bf_a, 0.40)};
 }}
 QLabel#navText {{ font-size: {body.size_px}px; font-weight: 600; background: transparent; }}
 QLabel#navSub  {{ color: {t.text_muted}; font-size: {caption.size_px}px; background: transparent; }}
@@ -113,13 +113,13 @@ QLabel#navIcon {{ font-size: {t.icon_size('md')}px; color: {t.text_secondary}; b
 /* ===== teaser mini sidebar ===== */
 QFrame#blackforgeTeaserMini {{
   background: {t.bg_card};
-  border: 1px solid {_rgba(t.accent_violet, 0.45)};
+  border: 1px solid {_rgba(bf_a, 0.45)};
   border-radius: {t.radius('md')}px;
 }}
 QFrame#blackforgeTeaserMini:hover {{ background: {t.bg_card_hover}; }}
 QLabel#bfMiniLogo {{
   font-size: {h3.size_px}px; font-weight: 800; letter-spacing: 2px;
-  color: {t.accent_violet}; background: transparent;
+  color: {bf_a}; background: transparent;
 }}
 QLabel#bfMiniTag {{
   color: {t.text_muted}; font-size: {caption.size_px - 1}px;
@@ -288,6 +288,89 @@ QFrame#errorBanner {{
   border-radius: {t.radius('md')}px;
 }}
 QLabel#errorBannerText {{ color: {t.text_primary}; background: transparent; }}
+
+/* ===== BLACKFORGE dashboard industrial (CRIBA BLACKFORCE literal) ===== */
+QLabel#bfWordmark {{
+  font-size: {display.size_px + 6}px; font-weight: 800; letter-spacing: 1px;
+  background: transparent;
+}}
+QLabel#bfCriba {{ color: {bf_a}; }}
+QLabel#bfForce {{ color: {t.text_primary}; }}
+QLabel#bfBuilt {{ color: {bf_a}; font-size: {caption.size_px}px; letter-spacing: 3px; background: transparent; }}
+
+QFrame#bfHero {{
+  background: qradialgradient(cx:50%, cy:42%, radius:75%,
+    stop:0 {t.bg_card_hover}, stop:1 {t.bg_hero});
+  border: 1px solid {t.border_soft};
+  border-radius: {t.radius('xl')}px;
+  overflow: hidden;
+}}
+QLabel#bfHeroOverlay {{
+  background: transparent; font-size: {h2.size_px}px; font-weight: 700;
+  letter-spacing: 2px; color: {t.text_primary};
+}}
+QPushButton#bf3d {{
+  background: {_rgba(t.bg_app, 0.6)};
+  border: 1px solid {bf_a};
+  color: {bf_a}; border-radius: {t.radius('md')}px;
+  padding: 8px 16px; font-weight: 600;
+}}
+QPushButton#bf3d:hover {{ background: {_rgba(bf_a, 0.18)}; color: {bf_b}; }}
+
+QFrame#bfGaugeCard {{
+  background: {t.bg_card}; border: 1px solid {t.border_soft};
+  border-radius: {t.radius('lg')}px;
+  border-top: 2px solid {bf_a};
+}}
+QLabel#bfGaugeTitle {{ color: {t.text_secondary}; font-size: {caption.size_px}px;
+  font-weight: 600; letter-spacing: 1px; background: transparent; }}
+
+QFrame#bfSysCard {{
+  background: {t.bg_card}; border: 1px solid {t.border_soft};
+  border-radius: {t.radius('md')}px;
+}}
+QFrame#bfSysCard:hover {{ background: {t.bg_card_hover}; }}
+QLabel#bfSysIcon {{
+  color: {bf_a}; font-size: {t.icon_size('lg') - 6}px; background: transparent;
+}}
+QLabel#bfSysName {{ color: {t.text_muted}; font-size: {caption.size_px}px;
+  letter-spacing: 1px; background: transparent; }}
+QLabel#bfSysValue {{ color: {t.text_primary}; font-size: {h1.size_px}px;
+  font-weight: 700; background: transparent; }}
+QLabel#bfSysOk {{ color: {t.success}; font-size: {caption.size_px}px;
+  font-weight: 600; background: transparent; }}
+
+QFrame#bfSpecBar {{
+  background: {t.bg_card}; border: 1px solid {t.border_soft};
+  border-radius: {t.radius('md')}px;
+}}
+QLabel#bfSpecKey {{ color: {t.text_muted}; font-size: {caption.size_px}px;
+  letter-spacing: 1px; background: transparent; }}
+QLabel#bfSpecVal {{ color: {t.text_primary}; font-size: {h3.size_px}px;
+  font-weight: 700; background: transparent; }}
+
+QFrame#bfKpiCard {{
+  background: {t.bg_card}; border: 1px solid {t.border_soft};
+  border-radius: {t.radius('lg')}px;
+}}
+QLabel#bfKpiHead {{ color: {t.text_secondary}; font-size: {caption.size_px}px;
+  font-weight: 600; letter-spacing: 1px; background: transparent; }}
+QLabel#bfKpiValue {{ color: {bf_a}; font-size: {display.size_px}px;
+  font-weight: 800; background: transparent; }}
+QLabel#bfKpiUnit {{ color: {t.text_primary}; font-size: {h3.size_px}px;
+  background: transparent; }}
+QPushButton#bfDropdown {{
+  background: {t.bg_inset}; border: 1px solid {t.border_soft};
+  color: {t.text_secondary}; border-radius: {t.radius('sm')}px;
+  padding: 4px 10px; font-size: {caption.size_px}px;
+}}
+QPushButton#bfDropdown:hover {{ border-color: {bf_a}; color: {t.text_primary}; }}
+QLabel#bfGranoLbl {{ color: {t.text_secondary}; font-size: {caption.size_px}px;
+  background: transparent; }}
+QLabel#bfGranoPct {{ color: {t.text_primary}; font-size: {caption.size_px}px;
+  font-weight: 600; background: transparent; }}
+QLabel#bfAlarms {{ color: {t.success}; font-size: {h2.size_px}px;
+  font-weight: 700; background: transparent; }}
 
 /* ===== banda warning fuentes (S8) ===== */
 QFrame#staleBand {{

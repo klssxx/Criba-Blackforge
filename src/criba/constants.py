@@ -22,3 +22,18 @@ VALID_DECISIONS = {"ADOPTAR", "AMPLIAR PRUEBA", "ABANDONAR", "ARCHIVAR PARA RECO
 # pipeline (que hacer despues), no el estado de la idea. Se anade de forma
 # aditiva; recommended_status sigue restringido a VALID_DECISIONS.
 VALID_PIPELINE_ACTIONS = {"PROTOTIPAR", "DIVERGIR"}
+
+# HIPERMEGAPROMPT feature flags — all OFF by default (§16).
+# Activate incrementally; existing behaviour is preserved when flags are False.
+FEATURES: dict[str, bool] = {
+    "context_layer_v2": False,
+    "compound_personas": False,
+    "ensemble_analysis": False,
+    "six_stage_chain": False,
+    "adversarial_self_reinforcement": False,
+    "human_review_gates": False,
+    "blackforge_extended_context": False,
+    "deterministic_validation": False,
+    "structured_logging": False,
+    "quality_feedback_loop": False,
+}

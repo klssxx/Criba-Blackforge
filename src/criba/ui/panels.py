@@ -39,6 +39,7 @@ BF_FEATURES = [
     ("▦", "Simulación", "Escenarios seguros"),
     ("⛨", "Contramedidas", "Defensa activa"),
     ("⚗", "Laboratorio", "Pruebas aisladas"),
+    ("🎲", "Lotería", "Exploración aleatoria"),
 ]
 
 

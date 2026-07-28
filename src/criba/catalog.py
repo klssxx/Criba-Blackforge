@@ -21,6 +21,27 @@ def _load_dir(name: str) -> list[dict[str, Any]]:
 
 def currents() -> list[dict[str, Any]]: return _load_dir("currents")
 def methods() -> list[dict[str, Any]]: return _load_dir("methods")
+
+def methods_by_granularity(granularity: str) -> list[dict[str, Any]]:
+    """Retorna solo métodos con la granularidad especificada."""
+    return [m for m in methods() if m.get("granularity") == granularity]
+
+def frameworks() -> list[dict[str, Any]]:
+    """Retorna solo frameworks (granularity == 'framework')."""
+    return methods_by_granularity("framework")
+
+def facilitation_patterns() -> list[dict[str, Any]]:
+    """Retorna solo patrones de facilitación (granularity == 'facilitation_pattern')."""
+    return methods_by_granularity("facilitation_pattern")
+
+def group_games() -> list[dict[str, Any]]:
+    """Retorna solo juegos de grupo (granularity == 'group_game')."""
+    return methods_by_granularity("group_game")
+
+def methods_by_source(source: str) -> list[dict[str, Any]]:
+    """Retorna solo métodos de una fuente específica."""
+    return [m for m in methods() if m.get("source") == source]
+
 def find_current(current_id: str) -> dict[str, Any]:
     for item in currents():
         if item["id"] == current_id: return item

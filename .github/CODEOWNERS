@@ -1,0 +1,11 @@
+# These ownership rules take effect after branch protection / rulesets require
+# Code Owner review. @klssxx owns this single-maintainer repository.
+.github/workflows/** @klssxx
+.github/dependabot.yml @klssxx
+.github/CODEOWNERS @klssxx
+pyproject.toml @klssxx
+uv.lock @klssxx
+scripts/build-portable.ps1 @klssxx
+scripts/criba.ps1 @klssxx
+scripts/verify-mvp.ps1 @klssxx
+docs/RELEASE_OPERATIONS.md @klssxx

@@ -16,7 +16,18 @@ dependencies = [
 gui = ["PySide6>=6.7"]
 api = ["fastapi>=0.115", "uvicorn>=0.30"]
 mcp = ["mcp>=1.0"]
-dev = ["pytest>=8.0", "mypy>=1.8", "httpx"]
+dev = [
+  "pytest>=8.0",
+  "pytest-cov>=7.0",
+  "pytest-timeout>=2.4",
+  "mypy>=1.8",
+  "httpx",
+  "hypothesis>=6.0",
+  "ruff>=0.12",
+  "mutmut>=3.5",
+  "pip-audit>=2.9",
+  "cyclonedx-bom>=7.0",
+]
 build = ["pyinstaller>=6.0"]
 
 [project.scripts]
@@ -50,3 +61,18 @@ follow_imports = "skip"
 module = ["uvicorn", "uvicorn.*"]
 ignore_missing_imports = true
 
+[tool.mutmut]
+source_paths = ["src/criba/personas.py"]
+pytest_add_cli_args_test_selection = [
+  "tests/unit/test_personas.py",
+  "tests/property/test_personas_properties.py",
+  "tests/adversarial/test_personas_adversarial.py",
+]
+pytest_add_cli_args = [
+  "-p",
+  "no:cacheprovider",
+  "--timeout=60",
+  "--timeout-method=thread",
+]
+use_git_change_detection = false
+max_stack_depth = 16

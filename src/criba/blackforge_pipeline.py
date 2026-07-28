@@ -32,6 +32,28 @@ REFERENCE_QUERY = (
     "de agentes autónomos sin depender de una autoridad central permanente?"
 )
 
+# Mapeo de ejes BLACKFORGE (inglés) → CRIBA (español) para _evaluate_idea()
+_AXIS_MAP = {
+    "authority_source": "quien_decide",
+    "authorization_rule": "quien_decide",
+    "constraint_scope": "cuando",
+    "coordination_rule": "topologia",
+    "data_flow": "evidencia_requerida",
+    "decision_owner": "quien_decide",
+    "decision_trigger": "cuando",
+    "evidence_required": "evidencia_requerida",
+    "failure_default": "si_falla",
+    "feedback_source": "evidencia_requerida",
+    "human_behavior": "quien_decide",
+    "incentive_structure": "evidencia_requerida",
+    "observability": "evidencia_requerida",
+    "resource_dependency": "si_falla",
+    "rollback_authority": "si_falla",
+    "state_duration": "cuando",
+    "topology": "topologia",
+    "unknown": "evidencia_requerida",
+}
+
 PACKET_SCHEMA = "blackforge_headless_packet"
 PACKET_VERSION = "2.1.0"
 
@@ -82,12 +104,14 @@ def run_headless(
         seen_axes[axis] = seen_axes.get(axis, 0) + 1
         # Divergence surrogate: distinct axis vs the count already seen.
         # Build a CRIBA-like idea dict so _evaluate_idea stays the single source.
+        # Map BLACKFORGE English axis → CRIBA Spanish axis for scoring
+        criba_axis = _AXIS_MAP.get(axis, "evidencia_requerida")
         idea = {
             "id": f"BF{idx:02d}",
             "blackforge_id": record["blackforge_id"],
             "title": record.get("title", ""),
             "description": record.get("description", ""),
-            "causal_variables": {axis: record.get("causal_axis_primary", "unknown")},
+            "causal_variables": {criba_axis: record.get("causal_axis_primary", "unknown")},
             "extreme": bool(record.get("requires_explicit_authorization")),
             "genome": {
                 "actor": [record.get("source_family", "unknown")],
@@ -100,6 +124,12 @@ def run_headless(
             "pipeline_stage": record.get("pipeline_stage"),
             "safety_class": record.get("safety_class"),
             "quality_score_v2": record.get("quality_score_v2", 0),
+            "method1_name": record.get("title", ""),
+            "method2_name": record.get("description", "")[:50],
+            "method1_desc": record.get("description", ""),
+            "method2_desc": "",
+            "family": record.get("functional_category_primary", "unknown"),
+            "family2": record.get("source_family", "unknown"),
         }
         conv = _evaluate_idea(idea)  # same convergence formula as CRIBA engine
         idea["convergence"] = conv

@@ -10,14 +10,16 @@ from typing import Any
 
 from PySide6.QtCore import QThreadPool, QTimer, Qt
 from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QMainWindow,
-                               QScrollArea, QToolButton, QVBoxLayout, QWidget)
+                               QPushButton, QScrollArea, QStackedWidget,
+                               QToolButton, QVBoxLayout, QWidget)
 
 from ..storage import Storage
 from .panels import (build_idea_card, build_motor_card, build_ranking_card,
                      build_right_column, build_teaser_card)
 from .theme import build_qss
 from .tokens import load_tokens
-from .widgets import FooterSegment, NavButton
+from .i18n import on_change, t as _t
+from .widgets import FooterSegment, NavButton, apply_neon_breath
 from . import actions
 
 NAV_SPEC = [
@@ -27,7 +29,7 @@ NAV_SPEC = [
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
     ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
     ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
-    ("navBlackforge", "⛨", "Blackforge", "Pantalla de ciberseguridad"),
+    ("navBlackforge", "⛨", "Blackforge", "Panel de control BLACKFORCE"),
 ]
 
 
@@ -52,11 +54,11 @@ class CribaMainWindow(QMainWindow):
         self._clock.timeout.connect(self._tick_clock)
         self._clock.start()
         self._tick_clock()
+        on_change(self._on_lang_change)
         actions.enter_s1(self)
 
     # ------------------------------------------------------------------
     def _build_ui(self) -> None:
-        t = self.t
         root = QWidget()
         root.setObjectName("appRoot")
         self.setCentralWidget(root)
@@ -64,15 +66,33 @@ class CribaMainWindow(QMainWindow):
         rl.setContentsMargins(0, 0, 0, 0)
         rl.setSpacing(0)
         rl.addWidget(self._build_sidebar())
-        main = QWidget()
-        main.setObjectName("mainColumn")
-        ml = QVBoxLayout(main)
+        # QStackedWidget: page 0 = workbench CRIBA, page 1 = pantalla Blackforge.
+        # Navegar a Blackforge cambia de página (no abre otra ventana): la
+        # navegación se conserva y "Volver a CRIBA" regresa a la página 0.
+        self.stack = QStackedWidget()
+        criba_page = QWidget()
+        criba_page.setObjectName("mainColumn")
+        ml = QVBoxLayout(criba_page)
         ml.setContentsMargins(0, 0, 0, 0)
         ml.setSpacing(0)
         ml.addWidget(self._build_topbar())
         ml.addWidget(self._build_content(), 1)
         ml.addWidget(self._build_footer())
-        rl.addWidget(main, 1)
+        self.stack.addWidget(criba_page)
+        from .blackforge_screen import BlackforgeScreen
+        self.blackforge_page = BlackforgeScreen(self)
+        self.stack.addWidget(self.blackforge_page)
+        rl.addWidget(self.stack, 1)
+
+    def show_criba_page(self) -> None:
+        """Vuelve al workbench principal de CRIBA (desde Blackforge)."""
+        self.stack.setCurrentIndex(0)
+
+    def show_blackforge_page(self) -> None:
+        """Cambia a la pantalla especializada Blackforge (misma ventana)."""
+        self.stack.setCurrentIndex(1)
+        self.blackforge_page.on_enter()
+
 
     def _build_sidebar(self) -> QFrame:
         t = self.t
@@ -121,6 +141,8 @@ class CribaMainWindow(QMainWindow):
         self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))
         self.nav["navHistorial"].clicked.connect(lambda: actions.on_historial(self))
         self.nav["navBlackforge"].clicked.connect(lambda: actions.on_blackforge(self))
+        # contorno neón turquesa que respira (3s sube / 3s baja) en bucle
+        apply_neon_breath(self.nav["navBlackforge"])
         return sb
 
     def _build_topbar(self) -> QFrame:
@@ -167,6 +189,13 @@ class CribaMainWindow(QMainWindow):
         cw = QWidget()
         cw.setLayout(clock)
         lay.addWidget(cw)
+        self._lang_btn_main = QPushButton(_t("lang.btn"))
+        self._lang_btn_main.setObjectName("ghost")
+        self._lang_btn_main.setFixedWidth(46)
+        self._lang_btn_main.setCursor(Qt.CursorShape.PointingHandCursor)
+        self._lang_btn_main.setToolTip("Cambiar idioma / Switch language")
+        self._lang_btn_main.clicked.connect(self._toggle_lang)
+        lay.addWidget(self._lang_btn_main)
         notif = QToolButton()
         notif.setObjectName("notifBtn")
         notif.setText("◔")
@@ -274,6 +303,32 @@ class CribaMainWindow(QMainWindow):
             lay.setSpacing(t.spacing(8))
             lay.setContentsMargins(t.spacing(12), 4, t.spacing(12), 4)
         return foot
+
+    # ------------------------------------------------------------------
+    def _toggle_lang(self) -> None:
+        from .i18n import toggle
+        toggle()
+
+    def _on_lang_change(self) -> None:
+        from .i18n import t
+        self._lang_btn_main.setText(t("lang.btn"))
+        self.greetingTitle.setText(t("greeting.title"))
+        self.greetingSub.setText(t("greeting.sub"))
+        self.modeBadge.setText(t("mode.innovacion"))
+        for key, spec_txt, spec_sub in [
+            ("navNuevaIdea",   "nav.nueva_idea",   "nav.nueva_idea.sub"),
+            ("navGenerar",     "nav.generar",       "nav.generar.sub"),
+            ("navEvaluar",     "nav.evaluar",       "nav.evaluar.sub"),
+            ("navGuardar",     "nav.guardar",       "nav.guardar.sub"),
+            ("navActualizar",  "nav.actualizar",    "nav.actualizar.sub"),
+            ("navHistorial",   "nav.historial",     "nav.historial.sub"),
+            ("navBlackforge",  "nav.blackforge",    "nav.blackforge.sub"),
+        ]:
+            btn = self.nav.get(key)
+            if btn:
+                btn._text.setText(t(spec_txt))
+                btn._sub.setText(t(spec_sub))
+                btn._default_sub = t(spec_sub)
 
     # ------------------------------------------------------------------
     def _tick_clock(self) -> None:

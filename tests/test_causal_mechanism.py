@@ -18,7 +18,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 import pytest
 from criba import engine
 
-_CAUSAL_KEYS = ("quien_decide", "cuando", "evidencia_requerida", "si_falla")
+_CAUSAL_KEYS = (
+    "quien_decide", "cuando", "evidencia_requerida", "si_falla", "topologia",
+    "fuente_poder", "mecanismo_control", "flujo_informacion", "recurso_principal",
+    "relacion_confianza", "escala_operacion", "velocidad_respuesta",
+    "nivel_abstraccion", "orientacion_temporal", "tipo_innovacion",
+)
 
 
 def _packet():
@@ -94,6 +99,16 @@ def _base_causal():
         "evidencia_requerida": "reglas estaticas",
         "si_falla": "incidente detectado tarde",
         "topologia": "centralizada",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "escala_operacion": "una_organizacion",
+        "velocidad_respuesta": "lenta_reactiva",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "tipo_innovacion": "incremental",
     }
 
 

@@ -1,0 +1,2925 @@
+{
+  "contextualization": {
+    "assumptions": [
+      "'¿cómo' es la única manera de abordar el problema.",
+      "'generar' es la única manera de abordar el problema.",
+      "'ideas' es la única manera de abordar el problema.",
+      "'estructuralmente' es la única manera de abordar el problema.",
+      "Quien diseña conoce todos los casos límite.",
+      "Más control siempre implica más seguridad."
+    ],
+    "known_space": [
+      "El enfoque estándar para '¿cómo' es el único viable.",
+      "Se asume que la solución conocida es la mejor.",
+      "Más control siempre implica más seguridad.",
+      "El coste de error es aceptable mientras sea raro.",
+      "La centralización permite control y trazabilidad."
+    ],
+    "problem": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+    "saturated_mechanisms": [
+      {
+        "mechanism": "verification",
+        "reason": "ya se aplica en todas las capas."
+      },
+      {
+        "mechanism": "automation",
+        "reason": "empujada al límite sin margen de reversión."
+      },
+      {
+        "mechanism": "consensus",
+        "reason": "se invoca para todo, diluyendo responsabilidad."
+      }
+    ]
+  },
+  "decision": {
+    "confidence": 0.85,
+    "justification": "3 familias representadas; 100/100 de divergencia. DIVERGIR: lleva la idea a prototipo en sombra.",
+    "pipeline_action": "DIVERGIR",
+    "recommended_status": "AMPLIAR PRUEBA"
+  },
+  "experiment": {
+    "baseline": "Lo ya conocido.",
+    "damage_limit": "Solo datos sintéticos; cero cambios en proyectos reales.",
+    "falsifiable_hypothesis": "La variante basada en Ablación, retirada y reintroducción abre ideas nuevas sin romper guardrails.",
+    "rollback": "Eliminar artefactos temporales y conservar el registro de evidencia.",
+    "sandbox": "Entorno local temporal, aislado y sin credenciales ni red externa.",
+    "variant": "Combinar Lente de selección de parentesco con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['escala_operacion', 'orientacion_temporal'] del dominio general."
+  },
+  "ideas": [
+    {
+      "broken_assumption": "Más control siempre implica más seguridad.",
+      "causal_axes_changed": [
+        "escala_operacion",
+        "orientacion_temporal"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "piensa en sistémico",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "lecciones historicas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.5031,
+        "evidence": 0.384,
+        "novelty": 0.677,
+        "value_score": 0.5167,
+        "viability": 0.8
+      },
+      "description": "Combinar Lente de selección de parentesco con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['escala_operacion', 'orientacion_temporal'] del dominio general.",
+      "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: escala_operacion, orientacion_temporal.",
+      "difference_signature": "(escala_operacion:una_organizacion→piensa en sistémico|orientacion_temporal:corto_plazo→lecciones historicas)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Lente de selección de parentesco×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "historia_culturas+estrategia"
+      },
+      "expected_effect": "Al cambiar escala_operacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+      "extreme": false,
+      "family": "historia_culturas",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I11",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I11",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I11",
+      "known_space_element": "Se asume que la solución conocida es la mejor.",
+      "mechanism_causal": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "lentes_1_1700_0862+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Lente de selección de parentesco",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "historia_culturas+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Lente de selección de parentesco + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "lentes_1_1700_0862+metodologias_2000_1961",
+      "title": "Lente de selección de parentesco × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "Más control siempre implica más seguridad.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "escala_operacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "piensa en sistémico",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "conexion no obvia",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.5009,
+        "evidence": 0.384,
+        "novelty": 0.6695,
+        "value_score": 0.5133,
+        "viability": 0.8
+      },
+      "description": "Combinar Más control, menos fricción con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'escala_operacion'] del dominio general.",
+      "difference_from_known": "Frente a 'El enfoque estándar para '¿cómo' es el único viable.', cambia: flujo_informacion, escala_operacion.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|escala_operacion:una_organizacion→piensa en sistémico)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "general+estrategia"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, escala_operacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+      "extreme": false,
+      "family": "general",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I05",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I05",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I05",
+      "known_space_element": "El enfoque estándar para '¿cómo' es el único viable.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "general+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "metodos_disruptivos_0202+metodologias_2000_1961",
+      "title": "Más control, menos fricción × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "'estructuralmente' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "escala_operacion",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "piensa en sistémico",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "rompe paradigma existente",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.4972,
+        "evidence": 0.384,
+        "novelty": 0.6575,
+        "value_score": 0.5078,
+        "viability": 0.8
+      },
+      "description": "Combinar Secuencia aleatoria con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['escala_operacion', 'tipo_innovacion'] del dominio general.",
+      "difference_from_known": "Frente a 'La centralización permite control y trazabilidad.', cambia: escala_operacion, tipo_innovacion.",
+      "difference_signature": "(escala_operacion:una_organizacion→piensa en sistémico|tipo_innovacion:incremental→rompe paradigma existente)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Secuencia aleatoria×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "ruptura_marco+estrategia"
+      },
+      "expected_effect": "Al cambiar escala_operacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+      "extreme": false,
+      "family": "ruptura_marco",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I09",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I09",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I09",
+      "known_space_element": "La centralización permite control y trazabilidad.",
+      "mechanism_causal": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "ruptura_marco_0123+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Secuencia aleatoria",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "ruptura_marco+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Secuencia aleatoria + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "ruptura_marco_0123+metodologias_2000_1961",
+      "title": "Secuencia aleatoria × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "'estructuralmente' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "orientacion_temporal"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "conexion no obvia",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "lecciones historicas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.4766,
+        "evidence": 0.384,
+        "novelty": 0.5885,
+        "value_score": 0.4742,
+        "viability": 0.8
+      },
+      "description": "Combinar Más control, menos fricción con Lente de selección de parentesco sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'orientacion_temporal'] del dominio general.",
+      "difference_from_known": "Frente a 'El coste de error es aceptable mientras sea raro.', cambia: flujo_informacion, orientacion_temporal.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|orientacion_temporal:corto_plazo→lecciones historicas)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Lente de selección de parentesco",
+        "field": "mechanism",
+        "value": "general+historia_culturas"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+      "extreme": false,
+      "family": "general",
+      "family2": "historia_culturas",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I03",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I03",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I03",
+      "known_space_element": "El coste de error es aceptable mientras sea raro.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Lente de selección de parentesco",
+      "operator": "general+historia_culturas",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Lente de selección de parentesco",
+      "source_method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+      "title": "Más control, menos fricción × Lente de selección de parentesco sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "'generar' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "orientacion_temporal",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "lecciones historicas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "rompe paradigma existente",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.4729,
+        "evidence": 0.384,
+        "novelty": 0.5765,
+        "value_score": 0.4681,
+        "viability": 0.8
+      },
+      "description": "Combinar Secuencia aleatoria con Lente de selección de parentesco sobre '¿cómo':  + . Muta ejes ['orientacion_temporal', 'tipo_innovacion'] del dominio general.",
+      "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: orientacion_temporal, tipo_innovacion.",
+      "difference_signature": "(orientacion_temporal:corto_plazo→lecciones historicas|tipo_innovacion:incremental→rompe paradigma existente)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Secuencia aleatoria×Lente de selección de parentesco",
+        "field": "mechanism",
+        "value": "ruptura_marco+historia_culturas"
+      },
+      "expected_effect": "Al cambiar orientacion_temporal, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+      "extreme": false,
+      "family": "ruptura_marco",
+      "family2": "historia_culturas",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I07",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I07",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I07",
+      "known_space_element": "Más control siempre implica más seguridad.",
+      "mechanism_causal": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'lecciones historicas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'lecciones historicas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "ruptura_marco_0123+lentes_1_1700_0862",
+      "method1_desc": "",
+      "method1_name": "Secuencia aleatoria",
+      "method2_desc": "",
+      "method2_name": "Lente de selección de parentesco",
+      "operator": "ruptura_marco+historia_culturas",
+      "query_anchor": "¿cómo",
+      "rupture": "Secuencia aleatoria + Lente de selección de parentesco",
+      "source_method": "ruptura_marco_0123+lentes_1_1700_0862",
+      "title": "Secuencia aleatoria × Lente de selección de parentesco sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "'generar' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "conexion no obvia",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "rompe paradigma existente",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.4707,
+        "evidence": 0.384,
+        "novelty": 0.569,
+        "value_score": 0.4642,
+        "viability": 0.8
+      },
+      "description": "Combinar Más control, menos fricción con Secuencia aleatoria sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'tipo_innovacion'] del dominio general.",
+      "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: flujo_informacion, tipo_innovacion.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|tipo_innovacion:incremental→rompe paradigma existente)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "distinct",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Secuencia aleatoria",
+        "field": "mechanism",
+        "value": "general+ruptura_marco"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+      "extreme": false,
+      "family": "general",
+      "family2": "ruptura_marco",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I01",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I01",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I01",
+      "known_space_element": "Se asume que la solución conocida es la mejor.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+ruptura_marco_0123",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Secuencia aleatoria",
+      "operator": "general+ruptura_marco",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Secuencia aleatoria",
+      "source_method": "metodos_disruptivos_0202+ruptura_marco_0123",
+      "title": "Más control, menos fricción × Secuencia aleatoria sobre '¿cómo' (cruce)"
+    },
+    {
+      "broken_assumption": "'¿cómo' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "escala_operacion",
+        "orientacion_temporal"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "escala la solucion a nivel ecosistema",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.9031,
+        "evidence": 0.384,
+        "novelty": 0.677,
+        "value_score": 0.2879,
+        "viability": 0.45
+      },
+      "description": "Aplicar Lente de selección de parentesco de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['escala_operacion', 'orientacion_temporal']. Resultado: escala la solucion a nivel ecosistema cuando escala_operacion.",
+      "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: escala_operacion, orientacion_temporal.",
+      "difference_signature": "(escala_operacion:una_organizacion→escala la solucion a nivel ecosistema|orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Lente de selección de parentesco×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "historia_culturas+estrategia"
+      },
+      "expected_effect": "Al cambiar escala_operacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+      "extreme": true,
+      "family": "historia_culturas",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I12",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I12",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I12",
+      "known_space_element": "Más control siempre implica más seguridad.",
+      "mechanism_causal": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "lentes_1_1700_0862+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Lente de selección de parentesco",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "historia_culturas+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Lente de selección de parentesco + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "lentes_1_1700_0862+metodologias_2000_1961",
+      "title": "Lente de selección de parentesco × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+    },
+    {
+      "broken_assumption": "'¿cómo' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "escala_operacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "escala la solucion a nivel ecosistema",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "cruza dominios que parecian separados",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.9008,
+        "evidence": 0.384,
+        "novelty": 0.6695,
+        "value_score": 0.2854,
+        "viability": 0.45
+      },
+      "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['flujo_informacion', 'escala_operacion']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+      "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: flujo_informacion, escala_operacion.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|escala_operacion:una_organizacion→escala la solucion a nivel ecosistema)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "general+estrategia"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, escala_operacion se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+      "extreme": true,
+      "family": "general",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I06",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I06",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I06",
+      "known_space_element": "Se asume que la solución conocida es la mejor.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "general+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "metodos_disruptivos_0202+metodologias_2000_1961",
+      "title": "Más control, menos fricción × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+    },
+    {
+      "broken_assumption": "Quien diseña conoce todos los casos límite.",
+      "causal_axes_changed": [
+        "escala_operacion",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "escala la solucion a nivel ecosistema",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "invierte la regla fundamental del dominio",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.8972,
+        "evidence": 0.384,
+        "novelty": 0.6575,
+        "value_score": 0.2814,
+        "viability": 0.45
+      },
+      "description": "Aplicar Secuencia aleatoria de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['escala_operacion', 'tipo_innovacion']. Resultado: escala la solucion a nivel ecosistema cuando escala_operacion.",
+      "difference_from_known": "Frente a 'El enfoque estándar para '¿cómo' es el único viable.', cambia: escala_operacion, tipo_innovacion.",
+      "difference_signature": "(escala_operacion:una_organizacion→escala la solucion a nivel ecosistema|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Secuencia aleatoria×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "field": "mechanism",
+        "value": "ruptura_marco+estrategia"
+      },
+      "expected_effect": "Al cambiar escala_operacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+      "extreme": true,
+      "family": "ruptura_marco",
+      "family2": "estrategia",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I10",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I10",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I10",
+      "known_space_element": "El enfoque estándar para '¿cómo' es el único viable.",
+      "mechanism_causal": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "ruptura_marco_0123+metodologias_2000_1961",
+      "method1_desc": "",
+      "method1_name": "Secuencia aleatoria",
+      "method2_desc": "",
+      "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "operator": "ruptura_marco+estrategia",
+      "query_anchor": "¿cómo",
+      "rupture": "Secuencia aleatoria + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "source_method": "ruptura_marco_0123+metodologias_2000_1961",
+      "title": "Secuencia aleatoria × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+    },
+    {
+      "broken_assumption": "Quien diseña conoce todos los casos límite.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "orientacion_temporal"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "cruza dominios que parecian separados",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "incremental",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.8765,
+        "evidence": 0.384,
+        "novelty": 0.5885,
+        "value_score": 0.2578,
+        "viability": 0.45
+      },
+      "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Lente de selección de parentesco para alterar los ejes ['flujo_informacion', 'orientacion_temporal']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+      "difference_from_known": "Frente a 'La centralización permite control y trazabilidad.', cambia: flujo_informacion, orientacion_temporal.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Lente de selección de parentesco",
+        "field": "mechanism",
+        "value": "general+historia_culturas"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+      "extreme": true,
+      "family": "general",
+      "family2": "historia_culturas",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I04",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I04",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I04",
+      "known_space_element": "La centralización permite control y trazabilidad.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Lente de selección de parentesco",
+      "operator": "general+historia_culturas",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Lente de selección de parentesco",
+      "source_method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+      "title": "Más control, menos fricción × Lente de selección de parentesco sobre '¿cómo' (extremo)"
+    },
+    {
+      "broken_assumption": "'ideas' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "orientacion_temporal",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "lineal_arriba_abajo",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "invierte la regla fundamental del dominio",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.8729,
+        "evidence": 0.384,
+        "novelty": 0.5765,
+        "value_score": 0.2536,
+        "viability": 0.45
+      },
+      "description": "Aplicar Secuencia aleatoria de forma extrema sobre '¿cómo': . Luego cruzar con Lente de selección de parentesco para alterar los ejes ['orientacion_temporal', 'tipo_innovacion']. Resultado: busca patrones en civilizaciones pasadas cuando orientacion_temporal.",
+      "difference_from_known": "Frente a 'El coste de error es aceptable mientras sea raro.', cambia: orientacion_temporal, tipo_innovacion.",
+      "difference_signature": "(orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Secuencia aleatoria×Lente de selección de parentesco",
+        "field": "mechanism",
+        "value": "ruptura_marco+historia_culturas"
+      },
+      "expected_effect": "Al cambiar orientacion_temporal, tipo_innovacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+      "extreme": true,
+      "family": "ruptura_marco",
+      "family2": "historia_culturas",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I08",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I08",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I08",
+      "known_space_element": "El coste de error es aceptable mientras sea raro.",
+      "mechanism_causal": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'busca patrones en civilizaciones pasadas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'busca patrones en civilizaciones pasadas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "ruptura_marco_0123+lentes_1_1700_0862",
+      "method1_desc": "",
+      "method1_name": "Secuencia aleatoria",
+      "method2_desc": "",
+      "method2_name": "Lente de selección de parentesco",
+      "operator": "ruptura_marco+historia_culturas",
+      "query_anchor": "¿cómo",
+      "rupture": "Secuencia aleatoria + Lente de selección de parentesco",
+      "source_method": "ruptura_marco_0123+lentes_1_1700_0862",
+      "title": "Secuencia aleatoria × Lente de selección de parentesco sobre '¿cómo' (extremo)"
+    },
+    {
+      "broken_assumption": "'ideas' es la única manera de abordar el problema.",
+      "causal_axes_changed": [
+        "flujo_informacion",
+        "tipo_innovacion"
+      ],
+      "causal_claim": "MECHANISM_VERIFIED",
+      "causal_variables": {
+        "cuando": "despues de validar",
+        "escala_operacion": "una_organizacion",
+        "evidencia_requerida": "reglas estaticas",
+        "flujo_informacion": "cruza dominios que parecian separados",
+        "fuente_poder": "jerarquia formal",
+        "mecanismo_control": "reglas escritas",
+        "nivel_abstraccion": "implementacion_detallada",
+        "orientacion_temporal": "corto_plazo",
+        "quien_decide": "usuarios/destinatarios finales",
+        "recurso_principal": "datos_y_codigo",
+        "relacion_confianza": "confianza_ciega",
+        "si_falla": "incidente detectado tarde",
+        "tipo_innovacion": "invierte la regla fundamental del dominio",
+        "topologia": "centralizada",
+        "velocidad_respuesta": "lenta_reactiva"
+      },
+      "convergence": {
+        "cost": 0.8707,
+        "evidence": 0.384,
+        "novelty": 0.569,
+        "value_score": 0.2509,
+        "viability": 0.45
+      },
+      "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Secuencia aleatoria para alterar los ejes ['flujo_informacion', 'tipo_innovacion']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+      "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: flujo_informacion, tipo_innovacion.",
+      "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+      "divergence_real": true,
+      "domain": "general",
+      "duplicate_status": "variant",
+      "evidence": {
+        "evidence_span": "cruce Más control, menos fricción×Secuencia aleatoria",
+        "field": "mechanism",
+        "value": "general+ruptura_marco"
+      },
+      "expected_effect": "Al cambiar flujo_informacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+      "extreme": true,
+      "family": "general",
+      "family2": "ruptura_marco",
+      "genome": {
+        "actor": [
+          "unknown"
+        ],
+        "mechanism": [
+          "capability_proof"
+        ],
+        "ontology_version": "1.0.0",
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "unknown"
+        ],
+        "trust_model": [
+          "implicit"
+        ],
+        "unclassified_properties": [
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "actor",
+            "source_idea": "I02",
+            "status": "pending_review",
+            "value": "usuarios/destinatarios finales"
+          },
+          {
+            "evidence": "propuesto por el modelo",
+            "field": "topology",
+            "source_idea": "I02",
+            "status": "pending_review",
+            "value": "centralizada"
+          }
+        ]
+      },
+      "id": "I02",
+      "known_space_element": "Más control siempre implica más seguridad.",
+      "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+      "method": "metodos_disruptivos_0202+ruptura_marco_0123",
+      "method1_desc": "",
+      "method1_name": "Más control, menos fricción",
+      "method2_desc": "",
+      "method2_name": "Secuencia aleatoria",
+      "operator": "general+ruptura_marco",
+      "query_anchor": "¿cómo",
+      "rupture": "Más control, menos fricción + Secuencia aleatoria",
+      "source_method": "metodos_disruptivos_0202+ruptura_marco_0123",
+      "title": "Más control, menos fricción × Secuencia aleatoria sobre '¿cómo' (extremo)"
+    }
+  ],
+  "innovation": {
+    "assumptions": [
+      "'¿cómo' es la única manera de abordar el problema.",
+      "'generar' es la única manera de abordar el problema.",
+      "'ideas' es la única manera de abordar el problema.",
+      "'estructuralmente' es la única manera de abordar el problema.",
+      "Quien diseña conoce todos los casos límite.",
+      "Más control siempre implica más seguridad."
+    ],
+    "cosmetic_rejected": 0,
+    "duplicate_report": [
+      {
+        "idea_id": "I01",
+        "reason": "primera de su clase",
+        "similarity": 1.0,
+        "verdict": "distinct"
+      },
+      {
+        "idea_id": "I02",
+        "reason": "comparten ejes ['flujo_informacion', 'tipo_innovacion'], difieren en []",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I01"
+      },
+      {
+        "idea_id": "I03",
+        "reason": "comparten ejes ['flujo_informacion'], difieren en ['orientacion_temporal', 'tipo_innovacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I02"
+      },
+      {
+        "idea_id": "I04",
+        "reason": "comparten ejes ['flujo_informacion'], difieren en ['orientacion_temporal', 'tipo_innovacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I03"
+      },
+      {
+        "idea_id": "I05",
+        "reason": "comparten ejes ['flujo_informacion'], difieren en ['escala_operacion', 'tipo_innovacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I04"
+      },
+      {
+        "idea_id": "I06",
+        "reason": "comparten ejes ['flujo_informacion'], difieren en ['escala_operacion', 'tipo_innovacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I05"
+      },
+      {
+        "idea_id": "I07",
+        "reason": "comparten ejes ['tipo_innovacion'], difieren en ['flujo_informacion', 'orientacion_temporal']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I06"
+      },
+      {
+        "idea_id": "I08",
+        "reason": "comparten ejes ['tipo_innovacion'], difieren en ['flujo_informacion', 'orientacion_temporal']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I07"
+      },
+      {
+        "idea_id": "I09",
+        "reason": "comparten ejes ['tipo_innovacion'], difieren en ['escala_operacion', 'flujo_informacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I08"
+      },
+      {
+        "idea_id": "I10",
+        "reason": "comparten ejes ['tipo_innovacion'], difieren en ['escala_operacion', 'flujo_informacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I09"
+      },
+      {
+        "idea_id": "I11",
+        "reason": "comparten ejes ['orientacion_temporal'], difieren en ['escala_operacion', 'flujo_informacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I10"
+      },
+      {
+        "idea_id": "I12",
+        "reason": "comparten ejes ['orientacion_temporal'], difieren en ['escala_operacion', 'flujo_informacion']",
+        "similarity": 0.75,
+        "verdict": "close_variant",
+        "vs": "I11"
+      }
+    ],
+    "idea_families": [
+      "general",
+      "historia_culturas",
+      "ruptura_marco"
+    ],
+    "ideas": [
+      {
+        "broken_assumption": "Más control siempre implica más seguridad.",
+        "causal_axes_changed": [
+          "escala_operacion",
+          "orientacion_temporal"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "piensa en sistémico",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "lecciones historicas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.5031,
+          "evidence": 0.384,
+          "novelty": 0.677,
+          "value_score": 0.5167,
+          "viability": 0.8
+        },
+        "description": "Combinar Lente de selección de parentesco con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['escala_operacion', 'orientacion_temporal'] del dominio general.",
+        "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: escala_operacion, orientacion_temporal.",
+        "difference_signature": "(escala_operacion:una_organizacion→piensa en sistémico|orientacion_temporal:corto_plazo→lecciones historicas)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Lente de selección de parentesco×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "historia_culturas+estrategia"
+        },
+        "expected_effect": "Al cambiar escala_operacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+        "extreme": false,
+        "family": "historia_culturas",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I11",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I11",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I11",
+        "known_space_element": "Se asume que la solución conocida es la mejor.",
+        "mechanism_causal": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "lentes_1_1700_0862+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Lente de selección de parentesco",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "historia_culturas+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Lente de selección de parentesco + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "lentes_1_1700_0862+metodologias_2000_1961",
+        "title": "Lente de selección de parentesco × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "Más control siempre implica más seguridad.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "escala_operacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "piensa en sistémico",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "conexion no obvia",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.5009,
+          "evidence": 0.384,
+          "novelty": 0.6695,
+          "value_score": 0.5133,
+          "viability": 0.8
+        },
+        "description": "Combinar Más control, menos fricción con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'escala_operacion'] del dominio general.",
+        "difference_from_known": "Frente a 'El enfoque estándar para '¿cómo' es el único viable.', cambia: flujo_informacion, escala_operacion.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|escala_operacion:una_organizacion→piensa en sistémico)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "general+estrategia"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, escala_operacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+        "extreme": false,
+        "family": "general",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I05",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I05",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I05",
+        "known_space_element": "El enfoque estándar para '¿cómo' es el único viable.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "general+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "metodos_disruptivos_0202+metodologias_2000_1961",
+        "title": "Más control, menos fricción × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "'estructuralmente' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "escala_operacion",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "piensa en sistémico",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "rompe paradigma existente",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.4972,
+          "evidence": 0.384,
+          "novelty": 0.6575,
+          "value_score": 0.5078,
+          "viability": 0.8
+        },
+        "description": "Combinar Secuencia aleatoria con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo':  + . Muta ejes ['escala_operacion', 'tipo_innovacion'] del dominio general.",
+        "difference_from_known": "Frente a 'La centralización permite control y trazabilidad.', cambia: escala_operacion, tipo_innovacion.",
+        "difference_signature": "(escala_operacion:una_organizacion→piensa en sistémico|tipo_innovacion:incremental→rompe paradigma existente)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Secuencia aleatoria×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "ruptura_marco+estrategia"
+        },
+        "expected_effect": "Al cambiar escala_operacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+        "extreme": false,
+        "family": "ruptura_marco",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I09",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I09",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I09",
+        "known_space_element": "La centralización permite control y trazabilidad.",
+        "mechanism_causal": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'piensa en sistémico'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "ruptura_marco_0123+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Secuencia aleatoria",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "ruptura_marco+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Secuencia aleatoria + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "ruptura_marco_0123+metodologias_2000_1961",
+        "title": "Secuencia aleatoria × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "'estructuralmente' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "orientacion_temporal"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "conexion no obvia",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "lecciones historicas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.4766,
+          "evidence": 0.384,
+          "novelty": 0.5885,
+          "value_score": 0.4742,
+          "viability": 0.8
+        },
+        "description": "Combinar Más control, menos fricción con Lente de selección de parentesco sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'orientacion_temporal'] del dominio general.",
+        "difference_from_known": "Frente a 'El coste de error es aceptable mientras sea raro.', cambia: flujo_informacion, orientacion_temporal.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|orientacion_temporal:corto_plazo→lecciones historicas)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Lente de selección de parentesco",
+          "field": "mechanism",
+          "value": "general+historia_culturas"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+        "extreme": false,
+        "family": "general",
+        "family2": "historia_culturas",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I03",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I03",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I03",
+        "known_space_element": "El coste de error es aceptable mientras sea raro.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Lente de selección de parentesco",
+        "operator": "general+historia_culturas",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Lente de selección de parentesco",
+        "source_method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+        "title": "Más control, menos fricción × Lente de selección de parentesco sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "'generar' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "orientacion_temporal",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "lecciones historicas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "rompe paradigma existente",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.4729,
+          "evidence": 0.384,
+          "novelty": 0.5765,
+          "value_score": 0.4681,
+          "viability": 0.8
+        },
+        "description": "Combinar Secuencia aleatoria con Lente de selección de parentesco sobre '¿cómo':  + . Muta ejes ['orientacion_temporal', 'tipo_innovacion'] del dominio general.",
+        "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: orientacion_temporal, tipo_innovacion.",
+        "difference_signature": "(orientacion_temporal:corto_plazo→lecciones historicas|tipo_innovacion:incremental→rompe paradigma existente)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Secuencia aleatoria×Lente de selección de parentesco",
+          "field": "mechanism",
+          "value": "ruptura_marco+historia_culturas"
+        },
+        "expected_effect": "Al cambiar orientacion_temporal, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+        "extreme": false,
+        "family": "ruptura_marco",
+        "family2": "historia_culturas",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I07",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I07",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I07",
+        "known_space_element": "Más control siempre implica más seguridad.",
+        "mechanism_causal": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'lecciones historicas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'lecciones historicas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "ruptura_marco_0123+lentes_1_1700_0862",
+        "method1_desc": "",
+        "method1_name": "Secuencia aleatoria",
+        "method2_desc": "",
+        "method2_name": "Lente de selección de parentesco",
+        "operator": "ruptura_marco+historia_culturas",
+        "query_anchor": "¿cómo",
+        "rupture": "Secuencia aleatoria + Lente de selección de parentesco",
+        "source_method": "ruptura_marco_0123+lentes_1_1700_0862",
+        "title": "Secuencia aleatoria × Lente de selección de parentesco sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "'generar' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "conexion no obvia",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "rompe paradigma existente",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.4707,
+          "evidence": 0.384,
+          "novelty": 0.569,
+          "value_score": 0.4642,
+          "viability": 0.8
+        },
+        "description": "Combinar Más control, menos fricción con Secuencia aleatoria sobre '¿cómo':  + . Muta ejes ['flujo_informacion', 'tipo_innovacion'] del dominio general.",
+        "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: flujo_informacion, tipo_innovacion.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→conexion no obvia|tipo_innovacion:incremental→rompe paradigma existente)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "distinct",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Secuencia aleatoria",
+          "field": "mechanism",
+          "value": "general+ruptura_marco"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+        "extreme": false,
+        "family": "general",
+        "family2": "ruptura_marco",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I01",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I01",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I01",
+        "known_space_element": "Se asume que la solución conocida es la mejor.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'conexion no obvia'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+ruptura_marco_0123",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Secuencia aleatoria",
+        "operator": "general+ruptura_marco",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Secuencia aleatoria",
+        "source_method": "metodos_disruptivos_0202+ruptura_marco_0123",
+        "title": "Más control, menos fricción × Secuencia aleatoria sobre '¿cómo' (cruce)"
+      },
+      {
+        "broken_assumption": "'¿cómo' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "escala_operacion",
+          "orientacion_temporal"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "escala la solucion a nivel ecosistema",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.9031,
+          "evidence": 0.384,
+          "novelty": 0.677,
+          "value_score": 0.2879,
+          "viability": 0.45
+        },
+        "description": "Aplicar Lente de selección de parentesco de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['escala_operacion', 'orientacion_temporal']. Resultado: escala la solucion a nivel ecosistema cuando escala_operacion.",
+        "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: escala_operacion, orientacion_temporal.",
+        "difference_signature": "(escala_operacion:una_organizacion→escala la solucion a nivel ecosistema|orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Lente de selección de parentesco×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "historia_culturas+estrategia"
+        },
+        "expected_effect": "Al cambiar escala_operacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+        "extreme": true,
+        "family": "historia_culturas",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I12",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I12",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I12",
+        "known_space_element": "Más control siempre implica más seguridad.",
+        "mechanism_causal": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar historia_culturas se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "lentes_1_1700_0862+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Lente de selección de parentesco",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "historia_culturas+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Lente de selección de parentesco + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "lentes_1_1700_0862+metodologias_2000_1961",
+        "title": "Lente de selección de parentesco × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+      },
+      {
+        "broken_assumption": "'¿cómo' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "escala_operacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "escala la solucion a nivel ecosistema",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "cruza dominios que parecian separados",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.9008,
+          "evidence": 0.384,
+          "novelty": 0.6695,
+          "value_score": 0.2854,
+          "viability": 0.45
+        },
+        "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['flujo_informacion', 'escala_operacion']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+        "difference_from_known": "Frente a 'Se asume que la solución conocida es la mejor.', cambia: flujo_informacion, escala_operacion.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|escala_operacion:una_organizacion→escala la solucion a nivel ecosistema)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "general+estrategia"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, escala_operacion se produce una alternativa al enfoque estándar de general: Invertir la premisa central del problema",
+        "extreme": true,
+        "family": "general",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I06",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I06",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I06",
+        "known_space_element": "Se asume que la solución conocida es la mejor.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con estrategia, se añade 'escala_operacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "general+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "metodos_disruptivos_0202+metodologias_2000_1961",
+        "title": "Más control, menos fricción × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+      },
+      {
+        "broken_assumption": "Quien diseña conoce todos los casos límite.",
+        "causal_axes_changed": [
+          "escala_operacion",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "escala la solucion a nivel ecosistema",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "invierte la regla fundamental del dominio",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.8972,
+          "evidence": 0.384,
+          "novelty": 0.6575,
+          "value_score": 0.2814,
+          "viability": 0.45
+        },
+        "description": "Aplicar Secuencia aleatoria de forma extrema sobre '¿cómo': . Luego cruzar con Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico para alterar los ejes ['escala_operacion', 'tipo_innovacion']. Resultado: escala la solucion a nivel ecosistema cuando escala_operacion.",
+        "difference_from_known": "Frente a 'El enfoque estándar para '¿cómo' es el único viable.', cambia: escala_operacion, tipo_innovacion.",
+        "difference_signature": "(escala_operacion:una_organizacion→escala la solucion a nivel ecosistema|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Secuencia aleatoria×Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+          "field": "mechanism",
+          "value": "ruptura_marco+estrategia"
+        },
+        "expected_effect": "Al cambiar escala_operacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+        "extreme": true,
+        "family": "ruptura_marco",
+        "family2": "estrategia",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I10",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I10",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I10",
+        "known_space_element": "El enfoque estándar para '¿cómo' es el único viable.",
+        "mechanism_causal": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'escala_operacion': 'una_organizacion' → 'escala la solucion a nivel ecosistema'. Al cruzar con estrategia, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "ruptura_marco_0123+metodologias_2000_1961",
+        "method1_desc": "",
+        "method1_name": "Secuencia aleatoria",
+        "method2_desc": "",
+        "method2_name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "operator": "ruptura_marco+estrategia",
+        "query_anchor": "¿cómo",
+        "rupture": "Secuencia aleatoria + Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+        "source_method": "ruptura_marco_0123+metodologias_2000_1961",
+        "title": "Secuencia aleatoria × Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico sobre '¿cómo' (extremo)"
+      },
+      {
+        "broken_assumption": "Quien diseña conoce todos los casos límite.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "orientacion_temporal"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "cruza dominios que parecian separados",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "incremental",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.8765,
+          "evidence": 0.384,
+          "novelty": 0.5885,
+          "value_score": 0.2578,
+          "viability": 0.45
+        },
+        "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Lente de selección de parentesco para alterar los ejes ['flujo_informacion', 'orientacion_temporal']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+        "difference_from_known": "Frente a 'La centralización permite control y trazabilidad.', cambia: flujo_informacion, orientacion_temporal.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Lente de selección de parentesco",
+          "field": "mechanism",
+          "value": "general+historia_culturas"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, orientacion_temporal se produce una alternativa al enfoque estándar de general: Usar restricciones como ventaja competitiva",
+        "extreme": true,
+        "family": "general",
+        "family2": "historia_culturas",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I04",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I04",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I04",
+        "known_space_element": "La centralización permite control y trazabilidad.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con historia_culturas, se añade 'orientacion_temporal'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Lente de selección de parentesco",
+        "operator": "general+historia_culturas",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Lente de selección de parentesco",
+        "source_method": "metodos_disruptivos_0202+lentes_1_1700_0862",
+        "title": "Más control, menos fricción × Lente de selección de parentesco sobre '¿cómo' (extremo)"
+      },
+      {
+        "broken_assumption": "'ideas' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "orientacion_temporal",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "lineal_arriba_abajo",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "busca patrones en civilizaciones pasadas",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "invierte la regla fundamental del dominio",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.8729,
+          "evidence": 0.384,
+          "novelty": 0.5765,
+          "value_score": 0.2536,
+          "viability": 0.45
+        },
+        "description": "Aplicar Secuencia aleatoria de forma extrema sobre '¿cómo': . Luego cruzar con Lente de selección de parentesco para alterar los ejes ['orientacion_temporal', 'tipo_innovacion']. Resultado: busca patrones en civilizaciones pasadas cuando orientacion_temporal.",
+        "difference_from_known": "Frente a 'El coste de error es aceptable mientras sea raro.', cambia: orientacion_temporal, tipo_innovacion.",
+        "difference_signature": "(orientacion_temporal:corto_plazo→busca patrones en civilizaciones pasadas|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Secuencia aleatoria×Lente de selección de parentesco",
+          "field": "mechanism",
+          "value": "ruptura_marco+historia_culturas"
+        },
+        "expected_effect": "Al cambiar orientacion_temporal, tipo_innovacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+        "extreme": true,
+        "family": "ruptura_marco",
+        "family2": "historia_culturas",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I08",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I08",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I08",
+        "known_space_element": "El coste de error es aceptable mientras sea raro.",
+        "mechanism_causal": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'busca patrones en civilizaciones pasadas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar ruptura_marco se modifica 'orientacion_temporal': 'corto_plazo' → 'busca patrones en civilizaciones pasadas'. Al cruzar con historia_culturas, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "ruptura_marco_0123+lentes_1_1700_0862",
+        "method1_desc": "",
+        "method1_name": "Secuencia aleatoria",
+        "method2_desc": "",
+        "method2_name": "Lente de selección de parentesco",
+        "operator": "ruptura_marco+historia_culturas",
+        "query_anchor": "¿cómo",
+        "rupture": "Secuencia aleatoria + Lente de selección de parentesco",
+        "source_method": "ruptura_marco_0123+lentes_1_1700_0862",
+        "title": "Secuencia aleatoria × Lente de selección de parentesco sobre '¿cómo' (extremo)"
+      },
+      {
+        "broken_assumption": "'ideas' es la única manera de abordar el problema.",
+        "causal_axes_changed": [
+          "flujo_informacion",
+          "tipo_innovacion"
+        ],
+        "causal_claim": "MECHANISM_VERIFIED",
+        "causal_variables": {
+          "cuando": "despues de validar",
+          "escala_operacion": "una_organizacion",
+          "evidencia_requerida": "reglas estaticas",
+          "flujo_informacion": "cruza dominios que parecian separados",
+          "fuente_poder": "jerarquia formal",
+          "mecanismo_control": "reglas escritas",
+          "nivel_abstraccion": "implementacion_detallada",
+          "orientacion_temporal": "corto_plazo",
+          "quien_decide": "usuarios/destinatarios finales",
+          "recurso_principal": "datos_y_codigo",
+          "relacion_confianza": "confianza_ciega",
+          "si_falla": "incidente detectado tarde",
+          "tipo_innovacion": "invierte la regla fundamental del dominio",
+          "topologia": "centralizada",
+          "velocidad_respuesta": "lenta_reactiva"
+        },
+        "convergence": {
+          "cost": 0.8707,
+          "evidence": 0.384,
+          "novelty": 0.569,
+          "value_score": 0.2509,
+          "viability": 0.45
+        },
+        "description": "Aplicar Más control, menos fricción de forma extrema sobre '¿cómo': . Luego cruzar con Secuencia aleatoria para alterar los ejes ['flujo_informacion', 'tipo_innovacion']. Resultado: cruza dominios que parecian separados cuando flujo_informacion.",
+        "difference_from_known": "Frente a 'Más control siempre implica más seguridad.', cambia: flujo_informacion, tipo_innovacion.",
+        "difference_signature": "(flujo_informacion:lineal_arriba_abajo→cruza dominios que parecian separados|tipo_innovacion:incremental→invierte la regla fundamental del dominio)",
+        "divergence_real": true,
+        "domain": "general",
+        "duplicate_status": "variant",
+        "evidence": {
+          "evidence_span": "cruce Más control, menos fricción×Secuencia aleatoria",
+          "field": "mechanism",
+          "value": "general+ruptura_marco"
+        },
+        "expected_effect": "Al cambiar flujo_informacion, tipo_innovacion se produce una alternativa al enfoque estándar de general: Diseñar para el escenario que nadie considera",
+        "extreme": true,
+        "family": "general",
+        "family2": "ruptura_marco",
+        "genome": {
+          "actor": [
+            "unknown"
+          ],
+          "mechanism": [
+            "capability_proof"
+          ],
+          "ontology_version": "1.0.0",
+          "time_model": [
+            "staged"
+          ],
+          "topology": [
+            "unknown"
+          ],
+          "trust_model": [
+            "implicit"
+          ],
+          "unclassified_properties": [
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "actor",
+              "source_idea": "I02",
+              "status": "pending_review",
+              "value": "usuarios/destinatarios finales"
+            },
+            {
+              "evidence": "propuesto por el modelo",
+              "field": "topology",
+              "source_idea": "I02",
+              "status": "pending_review",
+              "value": "centralizada"
+            }
+          ]
+        },
+        "id": "I02",
+        "known_space_element": "Más control siempre implica más seguridad.",
+        "mechanism_causal": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "mechanism_explanation": "Al aplicar general se modifica 'flujo_informacion': 'lineal_arriba_abajo' → 'cruza dominios que parecian separados'. Al cruzar con ruptura_marco, se añade 'tipo_innovacion'. Esto crea una configuración causal que no existía en el espacio conocido.",
+        "method": "metodos_disruptivos_0202+ruptura_marco_0123",
+        "method1_desc": "",
+        "method1_name": "Más control, menos fricción",
+        "method2_desc": "",
+        "method2_name": "Secuencia aleatoria",
+        "operator": "general+ruptura_marco",
+        "query_anchor": "¿cómo",
+        "rupture": "Más control, menos fricción + Secuencia aleatoria",
+        "source_method": "metodos_disruptivos_0202+ruptura_marco_0123",
+        "title": "Más control, menos fricción × Secuencia aleatoria sobre '¿cómo' (extremo)"
+      }
+    ],
+    "known_space": [
+      "El enfoque estándar para '¿cómo' es el único viable.",
+      "Se asume que la solución conocida es la mejor.",
+      "Más control siempre implica más seguridad.",
+      "El coste de error es aceptable mientras sea raro.",
+      "La centralización permite control y trazabilidad."
+    ],
+    "mean_value_score": 0.3801,
+    "real_divergent_count": 12,
+    "ruptures": [
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''¿cómo' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''¿cómo' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''¿cómo' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''generar' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''generar' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''generar' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''ideas' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''ideas' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''ideas' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''estructuralmente' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''estructuralmente' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''estructuralmente' es la única manera de abordar el problema.' por uno de otro dominio."
+      }
+    ],
+    "saturated_mechanisms": [
+      {
+        "mechanism": "verification",
+        "reason": "ya se aplica en todas las capas."
+      },
+      {
+        "mechanism": "automation",
+        "reason": "empujada al límite sin margen de reversión."
+      },
+      {
+        "mechanism": "consensus",
+        "reason": "se invoca para todo, diluyendo responsabilidad."
+      }
+    ],
+    "top_ideas": [
+      "I11",
+      "I05",
+      "I09"
+    ],
+    "unclassified_properties": [
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I01",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I01",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I02",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I02",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I03",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I03",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I04",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I04",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I05",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I05",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I06",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I06",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I07",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I07",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I08",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I08",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I09",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I09",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I10",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I10",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I11",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I11",
+        "status": "pending_review",
+        "value": "centralizada"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "actor",
+        "source_idea": "I12",
+        "status": "pending_review",
+        "value": "usuarios/destinatarios finales"
+      },
+      {
+        "evidence": "propuesto por el modelo",
+        "field": "topology",
+        "source_idea": "I12",
+        "status": "pending_review",
+        "value": "centralizada"
+      }
+    ]
+  },
+  "intent": "INNOVAR",
+  "metrics": {
+    "conf_causal_root": "INFERRED_NOT_PROVEN",
+    "conf_code_executes": 1.0,
+    "controlled_risk": 42,
+    "divergence": 100,
+    "feasibility": 60,
+    "mean_value_score": 0.3801,
+    "potential_novelty": 100,
+    "reversibility": 74,
+    "uncertainty": 56
+  },
+  "model_instruction": "Antes de responder al usuario, aplica obligatoriamente el paquete CRIBA adjunto.\n\nCorriente activada: Ablación, retirada y reintroducción.\n\nTu tarea es INNOVAR: usa el paquete para generar ideas nuevas, divergentes y accionables. Separa: 1. ideas generadas, 2. combinaciones inesperadas, 3. experimentos rápidos, 4. riesgos y cómo acotarlos.\n\nNo reveles cadena de pensamiento privada. Expón corriente activada, ideas, propuestas, riesgos, incertidumbre y respuesta final. Cuando falte información, no inventes datos.",
+  "original_query": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
+  "packet_type": "MANDATORY_MODEL_PACKET",
+  "response_contract": {
+    "must_generate_new_ideas": true,
+    "must_name_current": true,
+    "must_not_reveal_private_chain_of_thought": true,
+    "must_state_uncertainty": true,
+    "must_use_packet": true
+  },
+  "rupture": {
+    "broken_assumptions": [
+      "A01",
+      "A02",
+      "A03",
+      "A04"
+    ],
+    "counterexample": "Contraejemplo: una situación donde '¿cómo' falla estrepitosamente.",
+    "eliminations": [
+      "Quitar el componente implícito en ''¿cómo' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en ''generar' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en ''ideas' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando.",
+      "Quitar el componente implícito en ''estructuralmente' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+    ],
+    "inversions": [
+      "En lugar de asumir ''¿cómo' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir ''generar' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir ''ideas' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él.",
+      "En lugar de asumir ''estructuralmente' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+    ],
+    "operations": [
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''¿cómo' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''¿cómo' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A01",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''¿cómo' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''generar' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''generar' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A02",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''generar' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''ideas' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''ideas' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A03",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''ideas' es la única manera de abordar el problema.' por uno de otro dominio."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M200-01",
+        "operation": "invert",
+        "query_anchor": "¿cómo",
+        "result": "En lugar de asumir ''estructuralmente' es la única manera de abordar el problema.', exigir lo contrario y diseñar para él."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M100-01",
+        "operation": "eliminate",
+        "query_anchor": "¿cómo",
+        "result": "Quitar el componente implícito en ''estructuralmente' es la única manera de abordar el problema.' y ver si el sistema sigue funcionando."
+      },
+      {
+        "assumption_id": "A04",
+        "domain": "general",
+        "method_id": "M800-01",
+        "operation": "substitute",
+        "query_anchor": "¿cómo",
+        "result": "Sustituir el mecanismo implícito en ''estructuralmente' es la única manera de abordar el problema.' por uno de otro dominio."
+      }
+    ]
+  },
+  "schema": "mandatory_model_packet",
+  "schema_version": "2.0.0",
+  "security": {
+    "no_command_execution": true,
+    "no_credentials_access": true,
+    "no_network_by_default": true,
+    "safety_level": "strict"
+  },
+  "selected_current": {
+    "id": "ablacion_reintroduccion",
+    "name": "Ablación, retirada y reintroducción",
+    "score": 60,
+    "selection_reasons": [
+      "La consulta presenta componentes o complejidad que pueden retirarse."
+    ]
+  },
+  "supporting_methods": [
+    {
+      "axis": "generation",
+      "family": "general",
+      "id": "metodos_disruptivos_0202",
+      "name": "Más control, menos fricción",
+      "reason": "",
+      "sector": ""
+    },
+    {
+      "axis": "ruptura",
+      "family": "ruptura_marco",
+      "id": "ruptura_marco_0123",
+      "name": "Secuencia aleatoria",
+      "reason": "",
+      "sector": ""
+    },
+    {
+      "axis": "perspective",
+      "family": "historia_culturas",
+      "id": "lentes_1_1700_0862",
+      "name": "Lente de selección de parentesco",
+      "reason": "",
+      "sector": ""
+    },
+    {
+      "axis": "methodology",
+      "family": "estrategia",
+      "id": "metodologias_2000_1961",
+      "name": "Distributionally Robust Optimization aplicado a matemáticas aplicadas para diagnóstico",
+      "reason": "",
+      "sector": "matematicas"
+    }
+  ],
+  "versions": {
+    "currents": "1.0.0",
+    "genome": "1.0.0",
+    "selector": "1.0.0"
+  }
+}

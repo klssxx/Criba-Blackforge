@@ -11,7 +11,7 @@ def test_selector_is_explainable_and_bounded():
 def test_method_families_are_unique():
     items=select_methods(4,"strict"); assert len({x["family"] for x in items})==4
 def test_packet_and_prompt_contract():
-    packet=activate(QUERY); assert packet["packet_type"]=="MANDATORY_MODEL_PACKET"; assert len(packet["supporting_methods"])==4; assert packet["decision"]["recommended_status"]=="AMPLIAR PRUEBA"; assert "cadena de pensamiento privada" in build_prompt(packet)
+    packet=activate(QUERY); assert packet["packet_type"]=="MANDATORY_MODEL_PACKET"; assert len(packet["supporting_methods"])==12; assert packet["decision"]["recommended_status"]=="AMPLIAR PRUEBA"; assert "cadena de pensamiento privada" in build_prompt(packet)
 def test_rejects_empty_and_oversized():
     import pytest
     with pytest.raises(ValueError): activate("")

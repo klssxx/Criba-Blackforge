@@ -5,7 +5,18 @@ $ErrorActionPreference = "Stop"
 $ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Push-Location $ROOT
 
-$PY = "C:\Users\KLSX\AppData\Local\Programs\Python\Python312\python.exe"
+if ($env:CRIBA_PYTHON) {
+    $PY = $env:CRIBA_PYTHON
+    if (-not (Test-Path -LiteralPath $PY -PathType Leaf)) {
+        throw "CRIBA_PYTHON does not point to an executable: $PY"
+    }
+}
+else {
+    $PY = Join-Path $ROOT '.venv\Scripts\python.exe'
+    if (-not (Test-Path -LiteralPath $PY -PathType Leaf)) {
+        throw 'Project .venv interpreter not found. Run "uv sync --all-extras --locked" or set CRIBA_PYTHON to Python 3.10+.'
+    }
+}
 
 Write-Host "=== CRIBA MVP GATE ===" -ForegroundColor Cyan
 

@@ -14,7 +14,7 @@ from criba import engine
 
 QUERY = ("¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones "
          "de agentes autónomos sin depender de una autoridad central permanente?")
-GOLDEN = os.path.join(os.path.dirname(__file__), "..", "verification", "mvp_output_sample.normalized.json")
+GOLDEN = os.path.join(os.path.dirname(__file__), "golden_mvp_output.json")
 
 
 def _stable(packet: dict) -> dict:

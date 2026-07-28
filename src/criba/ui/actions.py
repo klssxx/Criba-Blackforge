@@ -135,6 +135,22 @@ def on_nueva_idea(win: Any) -> None:
     win.nav["navNuevaIdea"].setChecked(False)
     if not problem:
         return
+    _apply_new_problem(win, problem)
+
+
+def on_nueva_idea_no_dialog(win: Any, problem: str) -> None:
+    """Non-interactive variant: apply a problem without a modal dialog.
+
+    Used by automated GUI regression tests (offscreen). Mirrors the real
+    on_nueva_idea path exactly, minus the QDialog.
+    """
+    win.nav["navNuevaIdea"].setChecked(False)
+    if not problem:
+        return
+    _apply_new_problem(win, problem)
+
+
+def _apply_new_problem(win: Any, problem: str) -> None:
     win.problem = problem
     win.packet = None
     r = win.refs
@@ -365,8 +381,17 @@ def on_historial(win: Any) -> None:
     finally:
         win.nav["navHistorial"].setChecked(False)
     if loaded:
-        win.packet = loaded["packet"]
-        win.problem = loaded["packet"].get("original_query", "")
+        packet = loaded["packet"]
+        # Blackforge sessions use a different packet shape (ideas at top level,
+        # selected_current.id == 'blackforge'); route them to the BF screen
+        # instead of the CRIBA evaluator, which expects innovation.ideas.
+        sc = packet.get("selected_current", {})
+        if isinstance(sc, dict) and sc.get("id") == "blackforge":
+            win.blackforge_page.load_from_history(packet)
+            win.show_blackforge_page()
+            return
+        win.packet = packet
+        win.problem = packet.get("original_query", "")
         r = win.refs
         _session_badge(win, True)
         r["stages"]["stageProblema"].set_state("done")
@@ -481,12 +506,11 @@ def _restore_buttons_after_op(win: Any) -> None:
 
 
 # ---------------------------------------------------------------------------
-# S10 — BLACKFORGE (teaser; el modo completo es pantalla aparte)
+# S10 — BLACKFORGE (pantalla especializada integrada en la misma ventana)
 # ---------------------------------------------------------------------------
 def on_blackforge(win: Any) -> None:
     win.nav["navBlackforge"].setChecked(False)
-    from .dialogs import show_blackforge_info
-    show_blackforge_info(win)
+    win.show_blackforge_page()
 
 
 # ---------------------------------------------------------------------------

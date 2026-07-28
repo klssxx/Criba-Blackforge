@@ -40,6 +40,11 @@ class Tokens:
     @property
     def bg_inset(self) -> str: return str(self.raw["color"]["bg"]["inset"])
     @property
+    def bg_hero(self) -> str:
+        # blackforge usa su propio theme_blackforge.json; el criba.json no lo
+        # tiene, así que con fallback seguro al bg_app.
+        return str(self.raw["color"]["bg"].get("hero", self.raw["color"]["bg"]["app"]))
+    @property
     def border_soft(self) -> str: return str(self.raw["color"]["border"]["soft"])
     @property
     def border_active(self) -> str: return str(self.raw["color"]["border"]["active"])
@@ -55,6 +60,14 @@ class Tokens:
     def accent_cyan(self) -> str: return str(self.raw["color"]["accent"]["cyan"])
     @property
     def accent_violet(self) -> str: return str(self.raw["color"]["accent"]["violet"])
+    @property
+    def accent_orange(self) -> str:
+        # blackforge usa naranja (theme_blackforge.json); el criba.json no lo
+        # tiene siempre. Fallback al primer color del gradiente blackforge.
+        try:
+            return str(self.raw["gradient"]["blackforge"][0])
+        except (KeyError, TypeError):
+            return str(self.raw["color"]["accent"].get("orange", "#FF7A1A"))
     @property
     def success(self) -> str: return str(self.raw["color"]["success"])
     @property

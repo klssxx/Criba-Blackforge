@@ -37,7 +37,7 @@
   "gradient": {
     "brand": ["#22D3EE", "#8B5CF6"],
     "cta": ["#3B82F6", "#8B5CF6"],
-    "blackforge": ["#8B5CF6", "#EC4899"]
+    "blackforge": ["#FF7A1A", "#FFB15C"]
   },
   "radius": {
     "sm": 6,

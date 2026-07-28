@@ -1,0 +1,56 @@
+{
+  "schema_version": "2.0",
+  "description": "Ontología de categorías, granularidades y tipos de relación para la librería de métodos CRIBA BLACKFORGE",
+  "categories": [
+    "investigacion",
+    "mejora",
+    "innovacion",
+    "puntos_de_vista",
+    "tecnicas_de_salto",
+    "facilitacion",
+    "diseno",
+    "negocio",
+    "seguridad",
+    "gobernanza",
+    "estrategia",
+    "proceso",
+    "diagnostico",
+    "resolucion",
+    "sostenibilidad"
+  ],
+  "granularities": [
+    "micro_technique",
+    "lens",
+    "framework",
+    "facilitation_pattern",
+    "group_game",
+    "method"
+  ],
+  "origins": [
+    "internal",
+    "external"
+  ],
+  "relationship_types": [
+    "equivalente",
+    "inspirado_en",
+    "contradictorio_a",
+    "implementa",
+    "agrupa",
+    "complementa"
+  ],
+  "required_fields": ["id", "name", "family", "selection_reason", "template", "source"],
+  "optional_fields": [
+    "source_number",
+    "category",
+    "granularity",
+    "categories",
+    "tags",
+    "origin",
+    "external_refs",
+    "related_internal_ids",
+    "normalized_mechanism",
+    "relationship_type",
+    "suit",
+    "game_category"
+  ]
+}

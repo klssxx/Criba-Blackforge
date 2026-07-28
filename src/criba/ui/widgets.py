@@ -6,7 +6,7 @@ la excepción permitida al QSS global (STYLE_GUIDE §6).
 """
 from __future__ import annotations
 
-from PySide6.QtCore import (Property, QEasingCurve, QPropertyAnimation,
+from PySide6.QtCore import (Property, QEasingCurve, QObject, QPropertyAnimation,
                             QRectF, QSize, Qt, QTimer, Signal)
 from PySide6.QtGui import (QColor, QConicalGradient, QFont, QFontMetrics,
                            QPainter, QPen)
@@ -254,13 +254,16 @@ class MetricWidget(QWidget):
 class ValueScoreGauge(QWidget):
     """Gauge circular 270° con degradado grad.brand. Glow nivel 2 (único)."""
 
-    def __init__(self, parent: QWidget | None = None) -> None:
+    def __init__(self, parent: QWidget | None = None,
+                 diameter: int | None = None) -> None:
         super().__init__(parent)
         self._t = load_tokens()
-        d = self._t.layout("gauge_diameter")
+        d = diameter if diameter is not None else self._t.layout("gauge_diameter")
+        self._diam = d
         self.setFixedSize(d + 20, d + 44)
         self._score = 0.0
         self._percentile = "Pendiente"
+        self._inner_label = "VALUE_SCORE"
         self.setGraphicsEffect(make_glow(2, self._t))
         self._anim = QPropertyAnimation(self, b"score", self)
         self._anim.setDuration(300)
@@ -294,7 +297,7 @@ class ValueScoreGauge(QWidget):
         t = self._t
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
-        d = t.layout("gauge_diameter")
+        d = self._diam
         stroke = 10
         rect = QRectF(10 + stroke / 2, 8 + stroke / 2, d - stroke, d - stroke)
         start_deg, span_deg = 225, -270  # 270° arc, gap at bottom
@@ -302,8 +305,8 @@ class ValueScoreGauge(QWidget):
         p.setPen(QPen(_qcolor(t.bg_inset), stroke, Qt.PenStyle.SolidLine,
                       Qt.PenCapStyle.RoundCap))
         p.drawArc(rect, start_deg * 16, span_deg * 16)
-        # progreso con degradado brand
-        a, b = t.gradient("brand")
+        # progreso con degradado naranja (BLACKFORGE)
+        a, b = t.gradient("blackforge")
         grad = QConicalGradient(rect.center(), start_deg)
         grad.setColorAt(0.0, _qcolor(a))
         grad.setColorAt(0.75, _qcolor(b))
@@ -322,7 +325,7 @@ class ValueScoreGauge(QWidget):
         p.setPen(_qcolor(t.text_muted))
         label_rect = QRectF(rect.x(), rect.y() + rect.height() * 0.66,
                             rect.width(), 16)
-        p.drawText(label_rect, Qt.AlignmentFlag.AlignHCenter, "VALUE_SCORE")
+        p.drawText(label_rect, Qt.AlignmentFlag.AlignHCenter, self._inner_label)
         # percentil bajo el gauge
         p.setPen(_qcolor(t.accent_violet))
         foot = QRectF(0, 8 + d + 4, self.width(), 24)
@@ -607,3 +610,158 @@ def set_chip(chip: QLabel, text: str, kind: str) -> None:
     chip.setText(text)
     chip.setProperty("kind", kind)
     _repolish(chip)
+
+
+# ---------------------------------------------------------------------------
+# 2.15 LineChartWidget (BLACKFORGE — producción en tiempo real)
+# ---------------------------------------------------------------------------
+def _rgba_local(hex_color: str, alpha: float) -> str:
+    h = hex_color.lstrip("#")
+    r, g, b = int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)
+    return f"rgba({r},{g},{b},{int(alpha * 255)})"
+
+
+class LineChartWidget(QWidget):
+    """Gráfica de línea + área con degradado. Lee tokens (grad. blackforge)."""
+
+    def __init__(self, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self._t = load_tokens()
+        self._series: list[float] = []
+        self._ymin = 0.0
+        self._ymax = 1.0
+        self.setMinimumHeight(120)
+
+    def set_series(self, values: list[float],
+                   ymin: float | None = None, ymax: float | None = None) -> None:
+        self._series = list(values)
+        self._ymin = ymin if ymin is not None else (min(values) if values else 0.0)
+        self._ymax = ymax if ymax is not None else (max(values) if values else 1.0)
+        self.update()
+
+    def paintEvent(self, event) -> None:  # noqa: N802
+        t = self._t
+        p = QPainter(self)
+        p.setRenderHint(QPainter.RenderHint.Antialiasing)
+        r = self.rect()
+        if not self._series or r.width() < 10:
+            p.setPen(_qcolor(t.text_muted))
+            p.drawText(r, Qt.AlignmentFlag.AlignCenter, "Sin datos")
+            p.end()
+            return
+        pad_l, pad_r, pad_t, pad_b = 8, 8, 12, 16
+        w = r.width() - pad_l - pad_r
+        h = r.height() - pad_t - pad_b
+        x0, y0 = r.x() + pad_l, r.y() + pad_t
+        # rejilla horizontal
+        p.setPen(QPen(_qcolor(t.border_soft), 1))
+        for i in range(4):
+            gy = y0 + int(h * i / 3)
+            p.drawLine(x0, gy, x0 + w, gy)
+        a, b = t.gradient("blackforge")
+        n = len(self._series)
+        span = (self._ymax - self._ymin) or 1.0
+        pts = []
+        for i, v in enumerate(self._series):
+            x = x0 + (w * i / max(1, n - 1))
+            yy = y0 + h - int(h * (v - self._ymin) / span)
+            pts.append((x, yy))
+        # área
+        from PySide6.QtGui import QLinearGradient, QPainterPath
+        path = QPainterPath()
+        path.moveTo(pts[0][0], pts[0][1])
+        for x, yy in pts[1:]:
+            path.lineTo(x, yy)
+        path.lineTo(pts[-1][0], y0 + h)
+        path.lineTo(pts[0][0], y0 + h)
+        path.closeSubpath()
+        grad = QLinearGradient(0, y0, 0, y0 + h)
+        grad.setColorAt(0.0, _qcolor(_rgba_local(a, 0.35)))
+        grad.setColorAt(1.0, _qcolor(_rgba_local(a, 0.02)))
+        p.fillPath(path, grad)
+        # línea
+        pen = QPen(_qcolor(a), 2)
+        pen.setCapStyle(Qt.PenCapStyle.RoundCap)
+        pen.setJoinStyle(Qt.PenJoinStyle.RoundJoin)
+        p.setPen(pen)
+        ppath = QPainterPath()
+        ppath.moveTo(pts[0][0], pts[0][1])
+        for x, yy in pts[1:]:
+            ppath.lineTo(x, yy)
+        p.drawPath(ppath)
+        # punto final
+        p.setBrush(_qcolor(b))
+        p.setPen(Qt.PenStyle.NoPen)
+        p.drawEllipse(int(pts[-1][0]) - 3, int(pts[-1][1]) - 3, 6, 6)
+        p.end()
+
+
+# ---------------------------------------------------------------------------
+# Neon breathing border (BLACKFORGE nav) — solo el contorno respira en turquesa
+# ---------------------------------------------------------------------------
+class _NeonBreath(QObject):
+    """Anima el blur de un QGraphicsDropShadowEffect turquesa en bucle 6s.
+
+    El brillo nunca llega a 0: oscila entre `min_blur` (siempre visible) y
+    `max_blur`. Es tolerante a que el widget/sefecto se destruyan (cierre de
+    ventana): detiene la animación y no escribe sobre un C++ object borrado.
+    """
+
+    def __init__(self, widget: QWidget, color: str = "#22E0D6",
+                 min_blur: int = 8, max_blur: int = 22,
+                 period_ms: int = 6000) -> None:
+        super().__init__(widget)
+        self._alive = True
+        self._eff = QGraphicsDropShadowEffect(widget)
+        self._eff.setOffset(0, 0)
+        self._eff.setColor(_qcolor(color))
+        self._eff.setBlurRadius(min_blur)
+        self._widget = widget
+        widget.setGraphicsEffect(self._eff)
+        widget.destroyed.connect(self._on_destroyed)
+        self._min = min_blur
+        self._max = max_blur
+        self._blur = min_blur
+        self._anim = QPropertyAnimation(self, b"blur", self)
+        self._anim.setDuration(period_ms // 2)  # 3s sube, 3s baja
+        self._anim.setStartValue(min_blur)
+        self._anim.setEndValue(max_blur)
+        self._anim.setLoopCount(-1)  # infinito
+        self._anim.setDirection(QPropertyAnimation.Direction.Forward)
+        self._anim.finished.connect(self._reverse)  # ping-pong
+        self._anim.start()
+
+    def _on_destroyed(self, _obj=None) -> None:
+        self._alive = False
+        try:
+            self._anim.stop()
+        except RuntimeError:
+            pass
+
+    def _reverse(self) -> None:
+        if not self._alive:
+            return
+        if self._anim.direction() == QPropertyAnimation.Direction.Forward:
+            self._anim.setDirection(QPropertyAnimation.Direction.Backward)
+        else:
+            self._anim.setDirection(QPropertyAnimation.Direction.Forward)
+        self._anim.start()
+
+    def get_blur(self) -> int:
+        return self._blur
+
+    def set_blur(self, v: int) -> None:
+        if not self._alive:
+            return
+        try:
+            self._blur = int(v)
+            self._eff.setBlurRadius(self._blur)
+        except RuntimeError:
+            self._alive = False
+
+    blur = Property(int, get_blur, set_blur)
+
+
+def apply_neon_breath(widget: QWidget, **kwargs) -> None:
+    """Aplica respiración neón turquesa SOLO al contorno del widget."""
+    _NeonBreath(widget, **kwargs)

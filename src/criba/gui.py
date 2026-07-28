@@ -133,6 +133,23 @@ class Window(QMainWindow):
         hdr.addWidget(self.mode); hdr.addWidget(self.adv_btn); hdr.addWidget(self.run_btn)
         cl.addLayout(hdr)
 
+        # ---------- LOTTERY MODES ----------
+        lottery_row = QHBoxLayout(); lottery_row.setSpacing(10)
+        lottery_label = QLabel("Modos de innovación:"); lottery_label.setStyleSheet(f"color:{TEXT_DIM};font-weight:600")
+        lottery_row.addWidget(lottery_label)
+        self.lottery_associative = QPushButton("🔗 Lotería Asociativa"); self.lottery_associative.setObjectName("ghost")
+        self.lottery_associative.setToolTip("Selección aleatoria buscando asociaciones temáticas.\nExplora conexiones inesperadas entre métodos.")
+        self.lottery_associative.clicked.connect(self.do_lottery_associative)
+        self.lottery_pure = QPushButton("🎲 Lotería Pura"); self.lottery_pure.setObjectName("ghost")
+        self.lottery_pure.setToolTip("Selección 100% aleatoria.\nLa mayoría serán basura, pero algo único podría surgir.")
+        self.lottery_pure.clicked.connect(self.do_lottery_pure)
+        self.lottery_alternating = QPushButton("🔄 Lotería Alternada"); self.lottery_alternating.setObjectName("ghost")
+        self.lottery_alternating.setToolTip("Alterna entre asociativa y pura.\nMáxima diversidad de exploración.")
+        self.lottery_alternating.clicked.connect(self.do_lottery_alternating)
+        lottery_row.addWidget(self.lottery_associative); lottery_row.addWidget(self.lottery_pure); lottery_row.addWidget(self.lottery_alternating)
+        lottery_row.addStretch()
+        cl.addLayout(lottery_row)
+
         # ---------- SIMPLE panel (default) ----------
         self.simple_panel = QFrame(); sp = QVBoxLayout(self.simple_panel); sp.setContentsMargins(0, 0, 0, 0); sp.setSpacing(12)
         sprob = QFrame(); sprob.setObjectName("card"); spc = QVBoxLayout(sprob); spc.setContentsMargins(14, 12, 14, 12)
@@ -384,6 +401,86 @@ class Window(QMainWindow):
         box = QMessageBox(self); box.setWindowTitle("Paquete completo (JSON)"); box.layout().addWidget(dlg)
         box.exec()
 
+    def do_lottery_associative(self):
+        """Ejecuta lotería asociativa."""
+        q = self.simple_query.toPlainText().strip()
+        if not q:
+            QMessageBox.warning(self, "CRIBA", "Escribe una consulta para la lotería asociativa.")
+            return
+        try:
+            from .lottery import run_lottery
+            import os
+            methods_file = None
+            candidates = [
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
+            ]
+            for c in candidates:
+                if os.path.exists(c):
+                    methods_file = c
+                    break
+            if methods_file is None:
+                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
+                return
+            summary = run_lottery(methods_file, rounds=5, batch_size=10, mode="associative", query=q)
+            QMessageBox.information(self, "Lotería Asociativa",
+                f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
+                f"{summary['extraordinary_ideas']} extraordinarias.\n"
+                f"{summary['good_ideas']} buenas.")
+        except Exception as exc:
+            QMessageBox.warning(self, "CRIBA", f"Error: {exc}")
+
+    def do_lottery_pure(self):
+        """Ejecuta lotería pura."""
+        try:
+            from .lottery import run_lottery
+            import os
+            methods_file = None
+            candidates = [
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
+            ]
+            for c in candidates:
+                if os.path.exists(c):
+                    methods_file = c
+                    break
+            if methods_file is None:
+                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
+                return
+            summary = run_lottery(methods_file, rounds=5, batch_size=10, mode="pure")
+            QMessageBox.information(self, "Lotería Pura",
+                f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
+                f"{summary['extraordinary_ideas']} extraordinarias.\n"
+                f"{summary['good_ideas']} buenas.")
+        except Exception as exc:
+            QMessageBox.warning(self, "CRIBA", f"Error: {exc}")
+
+    def do_lottery_alternating(self):
+        """Ejecuta lotería alternada."""
+        q = self.simple_query.toPlainText().strip()
+        try:
+            from .lottery import run_lottery
+            import os
+            methods_file = None
+            candidates = [
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
+                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
+            ]
+            for c in candidates:
+                if os.path.exists(c):
+                    methods_file = c
+                    break
+            if methods_file is None:
+                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
+                return
+            summary = run_lottery(methods_file, rounds=10, batch_size=10, mode="alternating", query=q or None)
+            QMessageBox.information(self, "Lotería Alternada",
+                f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
+                f"{summary['extraordinary_ideas']} extraordinarias.\n"
+                f"{summary['good_ideas']} buenas.")
+        except Exception as exc:
+            QMessageBox.warning(self, "CRIBA", f"Error: {exc}")
+
     def show_history(self):
         sessions = self.store.list_sessions(20)
         if not sessions:
@@ -408,13 +505,15 @@ def run(database=None):
 
 
 def run_legacy(database=None):
-    """Pantalla anterior (CRIBA Current Engine). Conservada como fallback."""
-    if QApplication is None:
-        print("PySide6 no está instalado. Instala requirements-optional.txt para usar 'criba gui'.", file=sys.stderr)
-        return 2
-    app = QApplication.instance() or QApplication(sys.argv)
-    window = Window(database); window.show()
-    return app.exec()
+    """Ruta obsoleta. La interfaz canónica es CribaMainWindow (criba gui).
+
+    Se desactiva explícitamente: no debe abrirse ninguna UI antigua. Usa
+    ``python -m criba gui`` (gui.run) que lanza CribaMainWindow.
+    """
+    raise RuntimeError(
+        "Interfaz 'CRIBA Current Engine' obsoleta. Usa 'criba gui' "
+        "(CribaMainWindow) como ruta canónica."
+    )
 
 
 if __name__ == "__main__":
