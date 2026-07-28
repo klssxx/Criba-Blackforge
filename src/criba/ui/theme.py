@@ -150,6 +150,9 @@ QFrame#card {{
   border: 1px solid {t.border_soft};
   border-radius: {t.radius('lg')}px;
 }}
+QFrame#card:hover {{
+  border-color: {_rgba(t.border_active, 0.45)};
+}}
 QFrame#cardAccent {{
   background: {t.bg_card};
   border: 1px solid {t.border_soft};
@@ -328,8 +331,16 @@ QLabel#bfGaugeTitle {{ color: {t.text_secondary}; font-size: {caption.size_px}px
 QFrame#bfSysCard {{
   background: {t.bg_card}; border: 1px solid {t.border_soft};
   border-radius: {t.radius('md')}px;
+  border-left: 2px solid transparent;
 }}
-QFrame#bfSysCard:hover {{ background: {t.bg_card_hover}; }}
+QFrame#bfSysCard:hover {{
+  background: {t.bg_card_hover};
+  border-left: 2px solid {_rgba(bf_a, 0.65)};
+}}
+QFrame#bfSysCard[accent="blackforge"] {{
+  border-left: 3px solid {bf_a};
+  background: {_rgba(bf_a, 0.07)};
+}}
 QLabel#bfSysIcon {{
   color: {bf_a}; font-size: {t.icon_size('lg') - 6}px; background: transparent;
 }}
@@ -352,6 +363,11 @@ QLabel#bfSpecVal {{ color: {t.text_primary}; font-size: {h3.size_px}px;
 QFrame#bfKpiCard {{
   background: {t.bg_card}; border: 1px solid {t.border_soft};
   border-radius: {t.radius('lg')}px;
+  border-top: 2px solid {_rgba(bf_a, 0.25)};
+}}
+QFrame#bfKpiCard:hover {{
+  border-top: 2px solid {bf_a};
+  background: {_rgba(bf_a, 0.05)};
 }}
 QLabel#bfKpiHead {{ color: {t.text_secondary}; font-size: {caption.size_px}px;
   font-weight: 600; letter-spacing: 1px; background: transparent; }}
