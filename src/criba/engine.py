@@ -19,7 +19,7 @@ from datetime import datetime, timezone
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 from .catalog import find_current
-from .constants import MAX_QUERY_CHARS, VALID_MODES, CURRENT_CATALOG_VERSION, SELECTOR_VERSION, VALID_DECISIONS, VALID_PIPELINE_ACTIONS
+from .constants import MAX_QUERY_CHARS, VALID_MODES, CURRENT_CATALOG_VERSION, SELECTOR_VERSION, VALID_DECISIONS, VALID_PIPELINE_ACTIONS, FEATURES
 from .methods import select_methods
 from .selector import select
 from .genome import normalize_proposal, ONTOLOGY_VERSION, UnclassifiedProperty
@@ -52,64 +52,311 @@ def _novelty_verbs(query: str) -> bool:
 
 
 def cartograph_and_break(query: str, context: dict[str, Any], selection: dict[str, Any]) -> dict[str, Any]:
-    """Phase 1+2 (Cartografiar + Romper). Local, deterministic.
+    """Phase 1+2 (Cartografiar + Romper). Query-driven.
 
-    Returns {known_space, assumptions, saturated_mechanisms, ruptures}.
+    Returns {known_space, assumptions, saturated_mechanisms, ruptures, domain,
+             actors, assets, constraints, threats, opportunities}.
     """
-    lowered = query.casefold()
-    known = [
-        "El enfoque estándar delega la decisión a un operador humano.",
-        "La solución dominante añade más reglas de validación.",
-        "Se asume que más automatización siempre reduce el error.",
-        "El diseño convencional centraliza la autoridad.",
-        "Se parte de que el usuario conocerá el procedimiento.",
-    ]
-    if "aprob" in lowered or "agent" in lowered:
-        known.append("El flujo típico exige aprobación previa de un supervisor.")
-    if "fraude" in lowered:
-        known.append("La defensa habitual son reglas estáticas de detección de fraude.")
-    assumptions = [
-        "El primer enfoque es el único posible.",
+    q = query.casefold()
+
+    # --- Domain detection ---
+    domain = "general"
+    if any(w in q for w in ("api", " software", "sistema", "codigo", "algoritmo", "red")):
+        domain = "tecnologia"
+    elif any(w in q for w in ("seguridad", "ataque", "vulnerabilidad", "amenaza", "proteger", "defensa")):
+        domain = "seguridad"
+    elif any(w in q for w in ("negocio", "mercado", "cliente", "empresa", "ventas", "churn")):
+        domain = "negocio"
+    elif any(w in q for w in ("ia", "inteligencia artificial", "machine learning", "modelo")):
+        domain = "ia"
+    elif any(w in q for w in ("gobernanza", "dao", "organizacion", "equipo", "coordinar")):
+        domain = "gobernanza"
+    elif any(w in q for w in ("etica", "sesgo", "justo", "equidad", "niños")):
+        domain = "etica"
+    elif any(w in q for w in ("salud", "medico", "hospital", "paciente")):
+        domain = "salud"
+    elif any(w in q for w in ("educacion", "aprendizaje", "estudiante", "escuela")):
+        domain = "educacion"
+    elif any(w in q for w in ("transporte", "movilidad", "vehiculo", "logistica")):
+        domain = "transporte"
+    elif any(w in q for w in ("energia", "consumo", "edificio", "sostenible")):
+        domain = "energia"
+    elif any(w in q for w in ("alimento", "supermercado", "desperdicio", "cadena")):
+        domain = "alimentos"
+    elif any(w in q for w in ("trabajo", "descanso", "turno", "jornada")):
+        domain = "recursos_humanos"
+
+    # --- Query-specific elements extraction ---
+    # Extract key nouns/concepts from query
+    query_tokens = [w for w in q.split() if len(w) > 3]
+    key_concepts = [w for w in query_tokens if w not in (
+        "como", "podemos", "para", "que", "sin", "una", "del", "las", "los",
+        "por", "con", "este", "esta", "todo", "mas", "sobre", "entre", "hacia",
+    )]
+
+    # --- Actors detection ---
+    actors = []
+    if any(w in q for w in ("usuario", "cliente", "persona", "gente", "equipo")):
+        actors.append("usuarios/destinatarios finales")
+    if any(w in q for w in ("empresa", "organizacion", "equipo")):
+        actors.append("organizacion/implementadores")
+    if any(w in q for w in ("atacante", "adversario", "amenaza")):
+        actors.append("adversario/amenaza externa")
+    if any(w in q for w in ("regulador", "normativa", "ley")):
+        actors.append("regulador/autoridad")
+    if not actors:
+        actors = ["stakeholders no identificados"]
+
+    # --- Assets detection ---
+    assets = []
+    if any(w in q for w in ("api", "datos", "informacion", "sistema")):
+        assets.append("datos/informacion del sistema")
+    if any(w in q for w in ("recurso", "energia", "tiempo", "dinero")):
+        assets.append("recursos economicos/temporales")
+    if any(w in q for w in ("confianza", "reputacion", "imagen")):
+        assets.append("confianza/reputacion")
+    if not assets:
+        assets = ["valor central del problema"]
+
+    # --- Known space (query-specific) ---
+    known = []
+    # Generic patterns adapted to domain
+    if domain == "seguridad":
+        known.extend([
+            f"La defensa típica contra '{key_concepts[0] if key_concepts else 'amenazas'}' usa reglas estáticas.",
+            "Se asume que el atacante sigue patrones conocidos.",
+            "Más capas de defensa siempre reducen el riesgo.",
+            "El perimeter security es suficiente si está bien configurado.",
+        ])
+    elif domain == "negocio":
+        known.extend([
+            f"La solución dominante para '{key_concepts[0] if key_concepts else 'el problema'}' es incremental.",
+            "Se asume que más features = más valor para el cliente.",
+            "El modelo de negocio actual es el único viable.",
+            "Los competidores siguen la misma estrategia porque funciona.",
+        ])
+    elif domain == "tecnologia":
+        known.extend([
+            f"La arquitectura actual de '{key_concepts[0] if key_concepts else 'el sistema'}' es la correcta.",
+            "Se asume que más automatización siempre reduce el error.",
+            "La escalabilidad se logra añadiendo más recursos.",
+            "El diseño convencional centraliza el control.",
+        ])
+    elif domain == "ia":
+        known.extend([
+            f"El modelo actual de '{key_concepts[0] if key_concepts else 'IA'}' captura la realidad.",
+            "Se asume que más datos = mejor rendimiento.",
+            "La explicabilidad es compatible con la complejidad.",
+            "El sesgo se corrige con más datos de entrenamiento.",
+        ])
+    elif domain == "gobernanza":
+        known.extend([
+            f"La gobernanza de '{key_concepts[0] if key_concepts else 'el sistema'}' requiere jerarquía.",
+            "Se asume que la descentralización implica caos.",
+            "Las decisiones requieren consenso previo.",
+            "La autoridad debe ser permanente para ser efectiva.",
+        ])
+    elif domain == "educacion":
+        known.extend([
+            f"El aprendizaje de '{key_concepts[0] if key_concepts else 'contenidos'}' requiere instrucción directa.",
+            "Se asume que todos aprenden de la misma manera.",
+            "La evaluación debe ser uniforme y estandarizada.",
+            "El ritmo lo marca el profesor, no el estudiante.",
+        ])
+    elif domain == "salud":
+        known.extend([
+            f"El tratamiento de '{key_concepts[0] if key_concepts else 'condiciones'}' sigue protocolos establecidos.",
+            "Se asume que la adherencia depende de la voluntad del paciente.",
+            "La tecnología sanitaria es conservadora por necesidad.",
+            "Los datos sensibles requieren centralización para seguridad.",
+        ])
+    elif domain == "transporte":
+        known.extend([
+            f"El transporte de '{key_concepts[0] if key_concepts else 'personas/materiales'}' depende de infraestructura fija.",
+            "Se asume que más carreteras = menos congestión.",
+            "Los vehículos privados son la forma dominante de moverse.",
+            "La logística optimiza rutas, no el modelo completo.",
+        ])
+    elif domain == "energia":
+        known.extend([
+            f"El consumo de '{key_concepts[0] if key_concepts else 'energia'}' en edificios es inevitable.",
+            "Se asume que la eficiencia requiere inversión alta.",
+            "Los sistemas antiguos no pueden actualizarse sin reconstruir.",
+            "El ahorro individual no impacta el consumo global.",
+        ])
+    elif domain == "alimentos":
+        known.extend([
+            f"El desperdicio de '{key_concepts[0] if key_concepts else 'alimentos'}' es un costo aceptable.",
+            "Se asume que la cadena de suministro es óptima.",
+            "Los consumidores compran lo que necesitan.",
+            "La caducidad es una medida confiable de calidad.",
+        ])
+    elif domain == "recursos_humanos":
+        known.extend([
+            f"El descanso de '{key_concepts[0] if key_concepts else 'trabajadores'}' depende de la voluntad individual.",
+            "Se asume que turnos largos = más productividad.",
+            "El ritmo circadiano se adapta con el tiempo.",
+            "La fatiga se gestiona con pausas ocasionales.",
+        ])
+    else:
+        known.extend([
+            f"El enfoque estándar para '{key_concepts[0] if key_concepts else 'este problema'}' es el único viable.",
+            "Se asume que la solución conocida es la mejor.",
+            "Más control siempre implica más seguridad.",
+            "El coste de error es aceptable mientras sea raro.",
+        ])
+
+    # Add query-specific known space
+    if "central" in q or "jerarqui" in q:
+        known.append("La centralización permite control y trazabilidad.")
+    if "automatic" in q or "automatiz" in q:
+        known.append("La automatización elimina el error humano.")
+    if "rapido" in q or "veloc" in q:
+        known.append("La velocidad requiere simplificación de procesos.")
+
+    # --- Assumptions (query-specific) ---
+    assumptions = []
+    for concept in key_concepts[:4]:
+        assumptions.append(f"'{concept}' es la única manera de abordar el problema.")
+    assumptions.extend([
         "Quien diseña conoce todos los casos límite.",
         "Más control siempre implica más seguridad.",
         "El coste de error es aceptable mientras sea raro.",
-    ]
-    saturated = [
-        {"mechanism": "verification", "reason": "ya se aplica en todas las capas."},
-        {"mechanism": "automation", "reason": "empujada al límite sin margen de reversión."},
-        {"mechanism": "consensus", "reason": "se invoca para todo, diluyendo responsabilidad."},
-    ]
-    # Ruptures: at least 4 operations, >=3 families, >=1 invert, >=1 elimination.
+    ])
+    assumptions = assumptions[:6]  # Max 6
+
+    # --- Saturated mechanisms (domain-specific) ---
+    saturated = []
+    if domain == "seguridad":
+        saturated = [
+            {"mechanism": "firewall_rules", "reason": "reglas estáticas que el atacante aprende a evadir"},
+            {"mechanism": "encryption", "reason": "cifrado que protege datos pero no decisiones"},
+            {"mechanism": "access_control", "reason": "permisos que asumen identidad confiable"},
+        ]
+    elif domain == "negocio":
+        saturated = [
+            {"mechanism": "feature_addition", "reason": "añadir features sin validar valor real"},
+            {"mechanism": "price_competition", "reason": "competir por precio destruye márgenes"},
+            {"mechanism": "customer_surveys", "reason": "encuestas que predicen comportamiento pasado"},
+        ]
+    elif domain == "tecnologia":
+        saturated = [
+            {"mechanism": "horizontal_scaling", "reason": "añadir servidores sin optimizar código"},
+            {"mechanism": "microservices", "reason": "dividir en servicios que crean complejidad"},
+            {"mechanism": "caching", "reason": "caché que oculta problemas de diseño"},
+        ]
+    else:
+        saturated = [
+            {"mechanism": "verification", "reason": "ya se aplica en todas las capas."},
+            {"mechanism": "automation", "reason": "empujada al límite sin margen de reversión."},
+            {"mechanism": "consensus", "reason": "se invoca para todo, diluyendo responsabilidad."},
+        ]
+
+    # --- Ruptures (query-anchored) ---
     ruptures = []
     for i, a in enumerate(assumptions[:4], start=1):
-        ruptures.append({"assumption_id": f"A{i:02d}", "operation": "invert",
-                         "result": f"En lugar de asumir '{a}', exigir lo contrario y diseñar para él.",
-                         "method_id": "M200-01"})
-        ruptures.append({"assumption_id": f"A{i:02d}", "operation": "eliminate",
-                         "result": f"Quitar el componente implícito en '{a}' y ver si el sistema sigue funcionando.",
-                         "method_id": "M100-01"})
+        # Invert
+        ruptures.append({
+            "assumption_id": f"A{i:02d}",
+            "operation": "invert",
+            "result": f"En lugar de asumir '{a}', exigir lo contrario y diseñar para él.",
+            "method_id": "M200-01",
+            "query_anchor": key_concepts[0] if key_concepts else "problema",
+            "domain": domain,
+        })
+        # Eliminate
+        ruptures.append({
+            "assumption_id": f"A{i:02d}",
+            "operation": "eliminate",
+            "result": f"Quitar el componente implícito en '{a}' y ver si el sistema sigue funcionando.",
+            "method_id": "M100-01",
+            "query_anchor": key_concepts[0] if key_concepts else "problema",
+            "domain": domain,
+        })
+        # Substitute (new)
+        ruptures.append({
+            "assumption_id": f"A{i:02d}",
+            "operation": "substitute",
+            "result": f"Sustituir el mecanismo implícito en '{a}' por uno de otro dominio.",
+            "method_id": "M800-01",
+            "query_anchor": key_concepts[0] if key_concepts else "problema",
+            "domain": domain,
+        })
+
+    # --- Opportunities (query-specific) ---
+    opportunities = []
+    if domain == "seguridad":
+        opportunities = [
+            "Usar la amenaza como motor de diseño (antifragilidad)",
+            "Invertir la responsabilidad: que el sistema pruebe su propia seguridad",
+            "Diseñar para el fallo, no para la perfección",
+        ]
+    elif domain == "negocio":
+        opportunities = [
+            "Crear mercados donde no existen competidores",
+            "Convertir costos en fuentes de ingreso",
+            "Diseñar experiencias que el cliente no esperaba",
+        ]
+    elif domain == "tecnologia":
+        opportunities = [
+            "Usar constrains como motor de innovación",
+            "Invertir la arquitectura: datos que deciden, código que obedece",
+            "Diseñar para la destrucción creativa del propio sistema",
+        ]
+    else:
+        opportunities = [
+            "Invertir la premisa central del problema",
+            "Usar restricciones como ventaja competitiva",
+            "Diseñar para el escenario que nadie considera",
+        ]
+
+    # --- Constraints ---
+    constraints = []
+    if "rapido" in q or "tiempo" in q:
+        constraints.append("velocidad: la solución debe ser rápida de implementar")
+    if "barato" in q or "coste" in q or "economic" in q:
+        constraints.append("coste: la solución debe ser económica")
+    if "seguro" in q or "proteger" in q:
+        constraints.append("seguridad: la solución no debe crear nuevas vulnerabilidades")
+    if "simple" in q or "facil" in q:
+        constraints.append("simplicidad: la solución debe ser comprensible")
+    if not constraints:
+        constraints.append("viabilidad: la solución debe ser implementable")
+
     return {
         "known_space": known[:12],
         "assumptions": assumptions,
         "saturated_mechanisms": saturated,
         "ruptures": ruptures,
-        "counterexample": "Contraejemplo: una entrada válida según las reglas actuales produce un resultado que viola el objetivo declarado.",
+        "domain": domain,
+        "actors": actors,
+        "assets": assets,
+        "constraints": constraints,
+        "opportunities": opportunities,
+        "key_concepts": key_concepts[:5],
+        "counterexample": f"Contraejemplo: una situación donde '{key_concepts[0] if key_concepts else 'el enfoque actual'}' falla estrepitosamente.",
         "wants_novelty": _novelty_verbs(query),
     }
 
 
 # ===========================================================================
 # Two-layer ideation model (correct category separation):
-#  - OPERATORS (16) = generation layer (TRIZ-style verbs). They perturb the
-#    base idea. They are NOT axes of divergence.
-#  - CAUSAL VARIABLES (5) = verification layer (Zwicky-box parameters). They
-#    are the ONLY criterion that measures whether divergence was real.
+#  - OPERATORS (39 families) = generation layer. They perturb the base idea.
+#  - CAUSAL VARIABLES (15 axes) = verification layer (Zwicky-box parameters).
+#    They are the ONLY criterion that measures whether divergence was real.
 #  - CCA = cross-consistency assessment: an operator that moved no causal axis
 #    produced cosmetic wording, not a new idea -> flagged divergence_real=False.
 # ===========================================================================
 
-# The 5 causal axes (Zwicky box columns). These define the configuration space.
-_CAUSAL_AXES = ("quien_decide", "cuando", "evidencia_requerida", "si_falla", "topologia")
+# The 15 causal axes (expanded Zwicky box). 3x más espacio que antes.
+_CAUSAL_AXES = (
+    # Original 5
+    "quien_decide", "cuando", "evidencia_requerida", "si_falla", "topologia",
+    # New 10
+    "fuente_poder", "mecanismo_control", "flujo_informacion", "recurso_principal",
+    "relacion_confianza", "escala_operacion", "velocidad_respuesta",
+    "nivel_abstraccion", "orientacion_temporal", "tipo_innovacion",
+)
 
 # Base causal configuration of the problem (from cartograph). Operators mutate it.
 _BASE_CAUSAL = {
@@ -118,28 +365,79 @@ _BASE_CAUSAL = {
     "evidencia_requerida": "reglas estaticas",
     "si_falla": "incidente detectado tarde",
     "topologia": "centralizada",
+    "fuente_poder": "jerarquia formal",
+    "mecanismo_control": "reglas escritas",
+    "flujo_informacion": "lineal_arriba_abajo",
+    "recurso_principal": "datos_y_codigo",
+    "relacion_confianza": "confianza_ciega",
+    "escala_operacion": "una_organizacion",
+    "velocidad_respuesta": "lenta_reactiva",
+    "nivel_abstraccion": "implementacion_detallada",
+    "orientacion_temporal": "corto_plazo",
+    "tipo_innovacion": "incremental",
 }
 
-# Each operator declares (axis, normal_value, extreme_value). The extreme is
-# OPERATOR-SPECIFIC (not generic per axis) so two operators over the same axis
-# still produce distinct causal vectors -> real divergence, never cosmetic.
+# Each family declares (axis, normal_value, extreme_value). The extreme is
+# FAMILY-SPECIFIC so two families over the same axis still produce distinct
+# causal vectors -> real divergence, never cosmetic.
+# 39 families mapped to 15 axes with distinct values.
 _OPERATOR_EFFECT = {
-    "diagnostico":        ("evidencia_requerida", "supuesto hecho explicito", "se asume lo contrario del supuesto y se prueba"),
-    "inversion":          ("quien_decide", "el objetivo opuesto", "quien decide es el que antes no podia"),
-    "sustraccion":        ("si_falla", "colapsa funcion oculta al quitar dependencia", "el fallo se vuelve visible y obligatorio"),
-    "restricciones":      ("cuando", "durante la ideacion con regla absurda", "nunca: se prohibe la opcion obvia"),
-    "actores_roles":      ("quien_decide", "un actor distinto con la ultima palabra", "un actor externo sin historial decide"),
-    "incentivos":         ("evidencia_requerida", "comportamiento recompensado", "se premia el error para revelar limites"),
-    "morfologia":         ("topologia", "reensamblada por dimensiones", "topologia efimera que se recrea por operacion"),
-    "recombinacion":      ("topologia", "dos mecanismos cruzados en malla", "tres mecanismos en anillo cerrado"),
-    "analogias":          ("evidencia_requerida", "mapeo causal de otro dominio", "analogia de un dominio opuesto y no relacionado"),
-    "arquitectura":       ("quien_decide", "una parte disidente del todo", "cada parte tiene veto y desacuerdo audible"),
-    "gobernanza":         ("evidencia_requerida", "trazabilidad de cada cambio", "cada cambio es reversible y auditable por terceros"),
-    "diseno_adversarial": ("si_falla", "flanco explotado por atacante simulado", "el atacante participa en disenar la defensa"),
-    "escenarios":         ("cuando", "en el caso limite llevado al extremo", "en el peor caso ya ocurrido y reversible"),
-    "prototipado":        ("cuando", "antes de comprometer, en sombra", "en produccion con red de seguridad minima"),
-    "verificacion":       ("evidencia_requerida", "relacion reproducible no predicha", "la relacion se busca donde intuicion dice imposible"),
-    "decision_riesgo":    ("si_falla", "dano contenido, no catastrofico", "el dano es el dato de entrenamiento"),
+    # --- Diagnóstico (evidencia) ---
+    "diagnostico":            ("evidencia_requerida", "supuesto hecho explicito", "se asume lo contrario del supuesto y se prueba"),
+    # --- Inversión (quien_decide) ---
+    "inversion":              ("quien_decide", "el objetivo opuesto", "quien decide es el que antes no podia"),
+    # --- Sustracción (si_falla) ---
+    "sustraccion":            ("si_falla", "colapsa funcion oculta al quitar dependencia", "el fallo se vuelve visible y obligatorio"),
+    # --- Restricciones (cuando) ---
+    "restricciones":          ("cuando", "durante la ideacion con regla absurda", "nunca: se prohibe la opcion obvia"),
+    # --- Actores/roles (quien_decide) ---
+    "actores_roles":          ("quien_decide", "un actor distinto con la ultima palabra", "un actor externo sin historial decide"),
+    # --- Incentivos (evidencia) ---
+    "incentivos":             ("evidencia_requerida", "comportamiento recompensado", "se premia el error para revelar limites"),
+    # --- Morfología (topología) ---
+    "morfologia":             ("topologia", "reensamblada por dimensiones", "topologia efimera que se recrea por operacion"),
+    # --- Recombinación (topología) ---
+    "recombinacion":          ("topologia", "dos mecanismos cruzados en malla", "tres mecanismos en anillo cerrado"),
+    # --- Analogías (evidencia) ---
+    "analogias":              ("evidencia_requerida", "mapeo causal de otro dominio", "analogia de un dominio opuesto y no relacionado"),
+    # --- Arquitectura (quien_decide) ---
+    "arquitectura":           ("quien_decide", "una parte disidente del todo", "cada parte tiene veto y desacuerdo audible"),
+    # --- Gobernanza (control) ---
+    "gobernanza":             ("mecanismo_control", "trazabilidad de cada cambio", "cada cambio es reversible y auditable por terceros"),
+    # --- Diseño adversarial (si_falla) ---
+    "diseno_adversarial":     ("si_falla", "flanco explotado por atacante simulado", "el atacante participa en disenar la defensa"),
+    # --- Escenarios (cuando) ---
+    "escenarios":             ("cuando", "en el caso limite llevado al extremo", "en el peor caso ya ocurrido y reversible"),
+    # --- Prototipado (cuando) ---
+    "prototipado":            ("cuando", "antes de comprometer, en sombra", "en produccion con red de seguridad minima"),
+    # --- Verificación (evidencia) ---
+    "verificacion":           ("evidencia_requerida", "relacion reproducible no predicha", "la relacion se busca donde intuicion dice imposible"),
+    # --- Decisión/riesgo (si_falla) ---
+    "decision_riesgo":        ("si_falla", "dano contenido, no catastrofico", "el dano es el dato de entrenamiento"),
+    # --- Nuevas familias expandidas ---
+    "ruptura_marco":          ("tipo_innovacion", "rompe paradigma existente", "invierte la regla fundamental del dominio"),
+    "salto_espacio":          ("nivel_abstraccion", "salta a meta-nivel", "resuelve desde un plano completamente distinto"),
+    "general":                ("flujo_informacion", "conexion no obvia", "cruza dominios que parecian separados"),
+    "lente_avanzado":         ("orientacion_temporal", "perspectiva temporal distinta", "mira el problema desde el futuro o el pasado"),
+    "perspectiva":            ("relacion_confianza", "cuestiona la fuente", "asume que la premisa inicial es falsa"),
+    "diseno_investigacion":   ("recurso_principal", "datos empiricos del usuario", "reemplaza supuestos con observacion directa"),
+    "seguridad":              ("fuente_poder", "amenaza como motor", "usa la existencia de amenazas para diseñar soluciones"),
+    "estrategia":             ("escala_operacion", "piensa en sistémico", "escala la solucion a nivel ecosistema"),
+    "innovacion":             ("velocidad_respuesta", "experimento rapido", "valida en horas, no en meses"),
+    "etica":                  ("mecanismo_control", "valor como restriccion", "el valor ético es una variable de diseño, no un postum"),
+    "facilitacion":           ("flujo_informacion", "participacion masiva", "todos deciden, no solo expertos"),
+    "ciencia_realidad":       ("evidencia_requerida", "method empirico", "exige reproduccion y falsabilidad"),
+    "filosofia":              ("nivel_abstraccion", "primeros principios", "descompone hasta verdades atomicas"),
+    "psicologia":             ("relacion_confianza", "inconsciente como variable", "factores emocionales y cognitivos explicitados"),
+    "creacion_diseno":        ("recurso_principal", "materialidad como prototipo", "hace tangible lo abstracto"),
+    "historia_culturas":      ("orientacion_temporal", "lecciones historicas", "busca patrones en civilizaciones pasadas"),
+    "investigacion":          ("evidencia_requerida", "metodo cientifico", "hipotesis -> experimento -> conclusion"),
+    "juegos_innovacion":      ("escala_operacion", "juego como laboratorio", "simula en miniature antes de escalar"),
+    "diseno":                 ("tipo_innovacion", "diseno centrado en humano", "la experiencia del usuario define la solucion"),
+    "mejora":                 ("velocidad_respuesta", "ciclo continuo", "medir -> ajustar -> medir sin parar"),
+    "proceso":                ("flujo_informacion", "flujo visualizado", "hace visible lo que era invisible"),
+    "negocio":                ("fuente_poder", "valor economico como palanca", "usa incentivos economicos para cambiar comportamiento"),
+    "sostenibilidad":         ("escala_operacion", "ciclo cerrado", "diseña para que el residuo sea recurso"),
 }
 
 _VALID_MECH = {"elimination", "inversion", "isolation", "verification", "delegation", "prediction",
@@ -157,23 +455,69 @@ def _apply_family(family: str, base: dict[str, str], extreme: bool) -> dict[str,
     return cv
 
 
+def _build_dynamic_base(query: str) -> dict[str, str]:
+    """Build a query-adaptive base causal vector. Analyzes the query to set
+    initial conditions that reflect the problem domain."""
+    base = dict(_BASE_CAUSAL)
+    q = query.casefold()
+
+    # Domain-specific adaptations
+    if any(w in q for w in ("api", "software", "sistema", "codigo", "algoritmo")):
+        base["recurso_principal"] = "codigo_y_arquitectura"
+        base["nivel_abstraccion"] = "nivel_sistemas"
+    if any(w in q for w in ("seguridad", "ataque", "vulnerabilidad", "amenaza")):
+        base["fuente_poder"] = "amenaza_como_motor"
+        base["relacion_confianza"] = "desconfianza_verificable"
+    if any(w in q for w in ("negocio", "mercado", "cliente", "empresa")):
+        base["fuente_poder"] = "valor_economico"
+        base["escala_operacion"] = "ecosistema_mercado"
+    if any(w in q for w in ("ia", "inteligencia artificial", "machine learning", "algoritmo")):
+        base["recurso_principal"] = "datos_y_modelos"
+        base["nivel_abstraccion"] = "nivel_algoritmico"
+    if any(w in q for w in ("gobernanza", "dao", "organizacion", "equipo")):
+        base["mecanismo_control"] = "acuerdos_emergentes"
+        base["flujo_informacion"] = "distribuido"
+    if any(w in q for w in ("etica", "sesgo", "justo", "equidad")):
+        base["mecanismo_control"] = "valor_etico"
+        base["relacion_confianza"] = "confianza_condicional"
+    if any(w in q for w in ("rapido", "velocidad", "tiempo real", "latencia")):
+        base["velocidad_respuesta"] = "inmediata"
+    if any(w in q for w in ("escala", "masivo", "millones")):
+        base["escala_operacion"] = "global_masivo"
+    if any(w in q for w in ("creativ", "innovacion", "disruptiv", "nuevo")):
+        base["tipo_innovacion"] = "disruptiva"
+    if any(w in q for w in ("futuro", "tendencia", "proyeccion")):
+        base["orientacion_temporal"] = "largo_plazo"
+
+    return base
+
+
 def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, Any], methods: list[Any], query: str) -> list[Any]:
-    """Phase 3 (Divergir). Local, deterministic, two-layer:
+    """Phase 3 (Divergir). Query-driven, deterministic, two-layer:
     OPERATORS generate candidates via PAIRWISE recombination (combinatorial
-    divergence over the 5 causal axes). CAUSAL VARIABLES measure real divergence.
+    divergence over 15 causal axes). CAUSAL VARIABLES measure real divergence.
     CCA flags cosmetic (no-axis-moved) candidates.
 
-    Each pair of operators crosses DISTINCT causal axes, so two ideas sharing the
-    same mechanism (family) still get DIFFERENT causal vectors -> real divergence,
-    and the 4th verification (same mechanism / distinct family => distinct causal
-    vars) holds by construction.
+    Each idea is anchored to specific query elements, a concrete rupture,
+    a concrete operator, and a concrete method.
     """
     from itertools import combinations
     ideas = []
-    base = dict(_BASE_CAUSAL)
-    if carto.get("actor"):
-        base["quien_decide"] = carto["actor"]
-    base["topologia"] = "decentralizada" if "descentral" in query.casefold() else "centralizada"
+    base = _build_dynamic_base(query)
+
+    # Extract context from cartograph
+    domain = carto.get("domain", "general")
+    key_concepts = carto.get("key_concepts", [])
+    actors = carto.get("actors", [])
+    # Support legacy singular "actor" field
+    if not actors and carto.get("actor"):
+        actors = [carto["actor"]]
+    # Propagate actor to base causal vector
+    if actors:
+        base["quien_decide"] = actors[0]
+    assets = carto.get("assets", [])
+    opportunities = carto.get("opportunities", [])
+    assumptions = carto.get("assumptions", [])
 
     seq = 0
     pairs = list(combinations(methods, 2)) or [(methods[0], methods[0])]
@@ -181,16 +525,58 @@ def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, 
         for extreme in (False, True):
             seq += 1
             cv = _apply_family(ma["family"], dict(base), extreme)
-            cv = _apply_family(mb["family"], cv, extreme)  # cross two distinct axes
+            cv = _apply_family(mb["family"], cv, extreme)
             moved = [k for k in _CAUSAL_AXES if cv[k] != base[k]]
             divergence_real = len(moved) >= 1
-            # genome mechanism = lead operator family if it is a valid enum, else
-            # capability_proof (general-purpose). The full cross is traced in
-            # source_method / evidence.value so duplicate detection + the 4th
-            # verification can still distinguish distinct crosses.
+
             fam_a, fam_b = ma["family"], mb["family"]
             lead = fam_a if fam_a in _VALID_MECH else "capability_proof"
             mech_pair = f"{fam_a}+{fam_b}"
+
+            # --- Query-anchored description ---
+            anchor = key_concepts[0] if key_concepts else "el problema"
+            actor = actors[0] if actors else "el sistema"
+            asset = assets[0] if assets else "el recurso"
+
+            if extreme:
+                description = (
+                    f"Aplicar {ma['name']} de forma extrema sobre '{anchor}': "
+                    f"{ma.get('selection_reason', '')}. "
+                    f"Luego cruzar con {mb['name']} para alterar los ejes {moved}. "
+                    f"Resultado: {cv.get(moved[0], 'cambio')} cuando {moved[0]}."
+                )
+            else:
+                description = (
+                    f"Combinar {ma['name']} con {mb['name']} sobre '{anchor}': "
+                    f"{ma.get('selection_reason', '')} + {mb.get('selection_reason', '')}. "
+                    f"Muta ejes {moved} del dominio {domain}."
+                )
+
+            # --- Traceability fields ---
+            query_anchor = anchor
+            broken_assumption = assumptions[seq % len(assumptions)] if assumptions else "supuesto genérico"
+            known_element = carto.get("known_space", ["enfoque estándar"])[seq % max(1, len(carto.get("known_space", [1])))]
+            opportunity = opportunities[seq % len(opportunities)] if opportunities else "oportunidad no explorada"
+
+            # --- Mechanism explanation ---
+            ax_changed = moved[0] if moved else "ninguno"
+            mechanism = (
+                f"Al aplicar {fam_a} se modifica '{ax_changed}': "
+                f"'{base.get(ax_changed, '?')}' → '{cv.get(ax_changed, '?')}'. "
+                f"Al cruzar con {fam_b}, se añade '{moved[1] if len(moved) > 1 else ax_changed}'. "
+                f"Esto crea una configuración causal que no existía en el espacio conocido."
+            )
+
+            # --- Expected effect ---
+            expected_effect = (
+                f"Al cambiar {', '.join(moved)} se produce una alternativa "
+                f"al enfoque estándar de {domain}: {opportunity}"
+            )
+
+            # --- Difference signature ---
+            diff_values = [f"{k}:{base[k]}→{cv[k]}" for k in moved]
+            difference_signature = f"({'|'.join(diff_values)})"
+
             genome = {
                 "actor": [base["quien_decide"]],
                 "mechanism": [lead],
@@ -200,21 +586,39 @@ def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, 
             }
             from .genome import normalize_proposal
             g, _ = normalize_proposal(dict(genome), source_idea=f"I{seq:02d}")
+
             idea = {
                 "id": f"I{seq:02d}",
-                "title": f"{ma['name']} × {mb['name']} ({'extremo' if extreme else 'cruce'})",
-                "description": f"Idea {seq}: cruce de operadores {fam_a}+{fam_b}. Mueve ejes {moved}.",
-                "mechanism_causal": f"cruce {fam_a}+{fam_b}: altera {moved}",
+                "title": f"{ma['name']} × {mb['name']} sobre '{anchor}' ({'extremo' if extreme else 'cruce'})",
+                "description": description,
+                "mechanism_causal": mechanism,
                 "causal_variables": cv,
-                "difference_from_known": f"Frente a base ({base}), cambia: {', '.join(moved) or 'nada'}.",
+                "difference_from_known": f"Frente a '{known_element}', cambia: {', '.join(moved) or 'nada'}.",
                 "genome": g.model_dump(),
                 "evidence": {"field": "mechanism", "value": mech_pair, "evidence_span": f"cruce {ma['name']}×{mb['name']}"},
                 "family": fam_a,
+                "family2": fam_b,
                 "divergence_real": divergence_real,
-                "extreme": extreme,  # operator-produced mode (input for convergence layer)
-                "causal_claim": "MECHANISM_VERIFIED",  # the code maps family->axis->value in _OPERATOR_EFFECT
+                "extreme": extreme,
+                "causal_claim": "MECHANISM_VERIFIED",
                 "duplicate_status": "candidate",
                 "source_method": f"{ma['id']}+{mb['id']}",
+                "method1_name": ma['name'],
+                "method2_name": mb['name'],
+                "method1_desc": ma.get('selection_reason', ''),
+                "method2_desc": mb.get('selection_reason', ''),
+                # --- Traceability ---
+                "query_anchor": query_anchor,
+                "domain": domain,
+                "known_space_element": known_element,
+                "broken_assumption": broken_assumption,
+                "rupture": f"{ma['name']} + {mb['name']}",
+                "method": f"{ma['id']}+{mb['id']}",
+                "operator": f"{fam_a}+{fam_b}",
+                "causal_axes_changed": moved,
+                "mechanism_explanation": mechanism,
+                "expected_effect": expected_effect,
+                "difference_signature": difference_signature,
             }
             ideas.append(idea)
     return ideas
@@ -238,23 +642,39 @@ def cross_consistency_assessment(ideas: list[Any]) -> Tuple[list[Any], int]:
 # Duplicate detection (condition 6/7) — uses criba.similarity
 # ---------------------------------------------------------------------------
 def _detect_duplicates(ideas: list[Any]) -> list[dict[str, Any]]:
+    """Detect duplicates using changed_axes comparison.
+    Two ideas are duplicates only if they change the SAME axes with SIMILAR values."""
     report: list[dict[str, Any]] = []
     seen: list[Any] = []
     for idea in ideas:
-        g = idea["genome"]
+        cv = idea.get("causal_variables", {})
+        axes_changed = set(idea.get("causal_axes_changed", []))
         matched = None
         for prev in seen:
-            r = genome_classify(g, prev["genome"])
-            if r["verdict"] == "probable_duplicate":
-                matched = r; break
-            if r["verdict"] == "close_variant" and matched is None:
-                matched = r
+            prev_cv = prev.get("causal_variables", {})
+            prev_axes = set(prev.get("causal_axes_changed", []))
+            # Same axes changed?
+            if axes_changed == prev_axes:
+                # Same axes changed -> check if values are similar
+                same_values = sum(1 for k in axes_changed if cv.get(k) == prev_cv.get(k))
+                if same_values >= len(axes_changed) - 1:  # at most 1 value differs
+                    matched = {"verdict": "probable_duplicate", "similarity": 0.95,
+                               "reason": f"mismos ejes {axes_changed} con valores casi idénticos"}
+                    break
+            # Overlapping axes (share at least 1 axis)
+            overlap = axes_changed & prev_axes
+            if len(overlap) >= 1 and matched is None:
+                # Check if the non-overlapping axes are also similar
+                diff_axes = axes_changed.symmetric_difference(prev_axes)
+                if len(diff_axes) <= 2:
+                    matched = {"verdict": "close_variant", "similarity": 0.75,
+                               "reason": f"comparten ejes {sorted(overlap)}, difieren en {sorted(diff_axes)}"}
         if matched:
             idea["duplicate_status"] = "duplicate" if matched["verdict"] == "probable_duplicate" else "variant"
             report.append({
                 "idea_id": idea["id"], "verdict": matched["verdict"],
                 "similarity": matched["similarity"], "reason": matched["reason"],
-                "vs": matched.get("vs") or (prev["id"] if "vs" not in matched else None),
+                "vs": prev["id"] if matched else None,
             })
         else:
             idea["duplicate_status"] = "distinct"
@@ -276,6 +696,16 @@ _BASE_VALUES = {
     "evidencia_requerida": "reglas estaticas",
     "si_falla": "incidente detectado tarde",
     "topologia": "centralizada",
+    "fuente_poder": "jerarquia formal",
+    "mecanismo_control": "reglas escritas",
+    "flujo_informacion": "lineal_arriba_abajo",
+    "recurso_principal": "datos_y_codigo",
+    "relacion_confianza": "confianza_ciega",
+    "escala_operacion": "una_organizacion",
+    "velocidad_respuesta": "lenta_reactiva",
+    "nivel_abstraccion": "implementacion_detallada",
+    "orientacion_temporal": "corto_plazo",
+    "tipo_innovacion": "incremental",
 }
 
 
@@ -318,32 +748,63 @@ def value_score(evidence: float, novelty: float, cost: float) -> float:
 
 
 def _evaluate_idea(idea: dict[str, Any]) -> dict[str, Any]:
-    """Convergence scoring. Input = what the OPERATOR generated (title,
-    description, causal_variables, extreme). Novelty comes from the measurement
-    layer (count of axes the operator perturbed vs base)."""
+    """Convergence scoring with CONTENT-based diversity.
+
+    Scoring now depends on:
+    1. Causal variables (original)
+    2. Method names (new) - longer names = more specific = higher novelty
+    3. Method descriptions (new) - more detail = higher evidence
+    4. Combination uniqueness (new) - different families = higher novelty
+    """
+    import hashlib
+
     cv = idea.get("causal_variables", {})
-    # novelty: measurement-layer datum (how many distinct axes moved vs base)
+    method1_name = idea.get("method1_name", "")
+    method2_name = idea.get("method2_name", "")
+    method1_desc = idea.get("method1_desc", "")
+    method2_desc = idea.get("method2_desc", "")
+    fam_a = idea.get("family", "")
+    fam_b = idea.get("family2", "")
+
+    # NOVELTY: basada en contenido de métodos + ejes movidos
     moved_axes = [k for k in _CAUSAL_AXES if cv.get(k) != _BASE_VALUES.get(k)]
-    novelty = round(len(moved_axes) / len(_CAUSAL_AXES), 4)  # 0..1 gradient
 
-    # evidence: how anchored the operator's proposition is. An operator that
-    # names a concrete mechanism/axis value (not the generic base) scores higher.
+    # Si no hay ejes movidos, novelty es 0 (regla original)
+    if len(moved_axes) == 0:
+        novelty = 0.0
+    else:
+        # Factor 1: ejes movidos (original)
+        axes_novelty = len(moved_axes) / len(_CAUSAL_AXES)
+
+        # Factor 2: diversidad de nombres (nombres más largos = más específicos)
+        name_diversity = (len(method1_name) + len(method2_name)) / 200  # normalizado
+
+        # Factor 3: si las familias son diferentes
+        family_diversity = 0.2 if fam_a != fam_b else 0.0
+
+        novelty = round(min(1.0, axes_novelty * 0.5 + name_diversity * 0.3 + family_diversity + 0.2), 4)
+
+    # EVIDENCE: basada en descripciones + ejes concretos
     concrete = sum(1 for k in _CAUSAL_AXES if cv.get(k) and cv.get(k) != _BASE_VALUES.get(k))
-    evidence = round(0.3 + 0.7 * (concrete / len(_CAUSAL_AXES)), 4)
 
-    # viability: extreme perturbations are harder to test safely/reversibly.
+    # Factor 1: ejes concretos (original)
+    axes_evidence = concrete / len(_CAUSAL_AXES)
+
+    # Factor 2: longitud de descripciones (más detalle = más evidencia)
+    desc_evidence = min(1.0, (len(method1_desc) + len(method2_desc)) / 400)
+
+    evidence = round(0.3 + 0.7 * (axes_evidence * 0.6 + desc_evidence * 0.4), 4)
+
+    # VIABILITY
     extreme = bool(idea.get("extreme"))
     viability = round(0.45 if extreme else 0.8, 4)
 
-    # cost: effort to test; extreme + more moved axes = higher cost. The base
-    # term 0.3 guarantees cost is always strictly positive here, so value_score's
-    # cost>0 contract holds by construction.
-    cost = round(0.3 + (0.4 if extreme else 0.0) + 0.3 * (len(moved_axes) / len(_CAUSAL_AXES)), 4)
+    # COST
+    cost = round(0.3 + (0.4 if extreme else 0.0) + 0.3 * novelty, 4)
 
-    # value_score = evidence * novelty / cost  (explicit convergence criterion).
-    # novelty==0 (no axis moved) yields a legitimate 0.0 — that is a real score,
-    # not an error, because cost stays positive.
+    # SCORE
     score = value_score(evidence, novelty, cost)
+
     return {
         "novelty": novelty,
         "evidence": evidence,
@@ -354,9 +815,116 @@ def _evaluate_idea(idea: dict[str, Any]) -> dict[str, Any]:
 
 
 # ---------------------------------------------------------------------------
+# Morphological frame (debate ejes adicionales — aditivo, retrocompatible)
+# ---------------------------------------------------------------------------
+# 9 ejes morfológicos del debate: meta-atributos del problema/contexto.
+_MORPHO_AXES: dict[str, list[str]] = {
+    "actor": ["usuario", "desarrollador", "agente IA", "sistema/dato",
+              "auditor", "adversario", "tercero afectado", "actor no humano",
+              "agente local", "multi-agente", "humano+IA", "hardware"],
+    "entrada": ["prompt", "código", "logs", "evidencia", "evento",
+                "contradicción", "fallo real", "señal externa",
+                "voz", "sensores", "Kanban", "clima"],
+    "restriccion": ["coste cero", "offline", "hardware limitado", "tiempo extremo",
+                    "datos mínimos", "confianza cero", "solo reversible",
+                    "sin autoridad central", "8 GB RAM", "sin GPU", "solo terminal"],
+    "salida": ["idea", "arquitectura", "mecanismo", "test", "experimento",
+               "política/gate", "contraejemplo", "prototipo",
+               "código", "automatización", "invento físico", "prompt reutilizable"],
+    "dominio_externo": ["biología", "física", "ecología", "industria", "derecho",
+                        "economía", "música/arte", "ajedrez/juegos",
+                        "ciclismo", "electrónica DIY", "TRIZ", "biomimética"],
+    "escala": ["componente", "aplicación", "proyecto", "equipo",
+               "organización", "ecosistema"],
+    "tiempo": ["instantáneo", "una sesión", "una iteración",
+               "ciclo de vida", "años", "generaciones"],
+    "grado_ruptura": ["conservador", "moderado", "fuerte", "absurdo-productivo"],
+    "orientacion": ["prevención", "detección", "resistencia", "recuperación", "evolución"],
+}
+
+_MORPHO_DEFAULTS: dict[str, str] = {
+    "actor": "desarrollador", "entrada": "prompt", "restriccion": "hardware limitado",
+    "salida": "idea", "dominio_externo": "biología", "escala": "proyecto",
+    "tiempo": "una sesión", "grado_ruptura": "moderado", "orientacion": "detección",
+}
+
+_MORPHO_SIGNALS: list[tuple[tuple[str, ...], str, str]] = [
+    (("usuario", "user", "cliente", "end user"),                "actor", "usuario"),
+    (("agente", "agent", "ia", "llm", "bot"),                   "actor", "agente IA"),
+    (("adversario", "atacante", "hacker", "threat"),            "actor", "adversario"),
+    (("auditor", "revisor", "inspector"),                       "actor", "auditor"),
+    (("multi", "team", "equipo", "colectivo"),                  "actor", "multi-agente"),
+    (("código", "code", "script", "fichero"),                   "entrada", "código"),
+    (("log", "logs", "traza", "trace"),                         "entrada", "logs"),
+    (("evento", "event", "trigger", "alarma"),                  "entrada", "evento"),
+    (("voz", "audio", "speech"),                                "entrada", "voz"),
+    (("sensor", "iot", "hardware"),                             "entrada", "sensores"),
+    (("fallo", "error", "bug", "crash"),                        "entrada", "fallo real"),
+    (("gratis", "gratuito", "free", "sin costo", "coste cero"), "restriccion", "coste cero"),
+    (("offline", "sin red", "sin internet", "local"),           "restriccion", "offline"),
+    (("rápido", "urgente", "inmediato", "tiempo extremo"),      "restriccion", "tiempo extremo"),
+    (("pocos datos", "escasos", "mínimos datos"),               "restriccion", "datos mínimos"),
+    (("sin gpu", "cpu only", "bajo recurso"),                   "restriccion", "sin GPU"),
+    (("idea", "concepto", "propuesta"),                         "salida", "idea"),
+    (("arquitectura", "diseño", "blueprint"),                   "salida", "arquitectura"),
+    (("test", "prueba", "experimento", "hipótesis"),            "salida", "test"),
+    (("prototipo", "mvp", "demo"),                              "salida", "prototipo"),
+    (("biolog", "celula", "adn", "evolución"),                  "dominio_externo", "biología"),
+    (("física", "mecánica", "termodinámica"),                   "dominio_externo", "física"),
+    (("ecolog", "ecosistema", "sostenib"),                      "dominio_externo", "ecología"),
+    (("juego", "chess", "ajedrez", "game"),                     "dominio_externo", "ajedrez/juegos"),
+    (("triz", "inventive", "altshuller"),                       "dominio_externo", "TRIZ"),
+    (("biomimética", "biomimicry", "nature"),                   "dominio_externo", "biomimética"),
+    (("componente", "función", "módulo pequeño"),               "escala", "componente"),
+    (("aplicación", "app", "servicio"),                         "escala", "aplicación"),
+    (("equipo", "team", "squad"),                               "escala", "equipo"),
+    (("organización", "empresa", "corporación"),                "escala", "organización"),
+    (("ecosistema", "industria", "sector", "mercado"),          "escala", "ecosistema"),
+    (("instantáneo", "tiempo real", "real-time"),               "tiempo", "instantáneo"),
+    (("sesión", "session", "conversación"),                     "tiempo", "una sesión"),
+    (("ciclo", "sprint", "iteración"),                          "tiempo", "una iteración"),
+    (("año", "largo plazo", "long term"),                       "tiempo", "años"),
+    (("incremental", "mejora", "optimiza", "refactor"),         "grado_ruptura", "conservador"),
+    (("ruptura", "disrupt", "radical", "nuevo paradigma"),      "grado_ruptura", "fuerte"),
+    (("absurdo", "imposible", "utópico"),                       "grado_ruptura", "absurdo-productivo"),
+    (("prevención", "prevent", "evitar"),                       "orientacion", "prevención"),
+    (("detectar", "monitor", "detect"),                         "orientacion", "detección"),
+    (("resilient", "tolerancia", "resistencia"),                "orientacion", "resistencia"),
+    (("recuperar", "recover", "restaurar"),                     "orientacion", "recuperación"),
+    (("evolución", "aprendizaje", "adapt"),                     "orientacion", "evolución"),
+    (("seguridad", "security", "protect", "defensa"),           "orientacion", "prevención"),
+    (("hack", "pentest", "ataque", "exploit"),                  "orientacion", "detección"),
+]
+
+
+def build_morpho_frame(query: str, context: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Infiere los valores morfológicos más probables para la query dada.
+
+    Retrocompatible: campo nuevo ``morphological_frame`` en el packet.
+    Nunca altera campos existentes.
+    """
+    text = query.lower() + " " + (json.dumps(context or {}).lower())
+    frame: dict[str, str] = dict(_MORPHO_DEFAULTS)
+    evidence: dict[str, list[str]] = {ax: [] for ax in _MORPHO_AXES}
+    for keywords, axis, value in _MORPHO_SIGNALS:
+        for kw in keywords:
+            if kw in text:
+                if not evidence[axis]:
+                    frame[axis] = value
+                evidence[axis].append(kw)
+                break
+    return {
+        "schema": "morphological_frame_v1",
+        "inferred": frame,
+        "evidence": {ax: evs[:3] for ax, evs in evidence.items() if evs},
+        "coverage": f"{sum(1 for v in evidence.values() if v)}/{len(_MORPHO_AXES)} ejes con evidencia",
+    }
+
+
+# ---------------------------------------------------------------------------
 # Orchestration (condition 2/3/10/11)
 # ---------------------------------------------------------------------------
-def activate(query: str, current: str = "auto", mode: str = "balanced", supporting_methods: int = 4,
+def activate(query: str, current: str = "auto", mode: str = "balanced", supporting_methods: int = 12,
              context: dict[str, Any] | None = None, safety_level: str = "strict", manual_methods: list[str] | None = None,
              cartograph_fn: Optional[CartographFn] = None, diverge_fn: Optional[DivergeFn] = None) -> dict[str, Any]:
     if not isinstance(query, str) or not query.strip():
@@ -369,9 +937,19 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
         raise ValueError("safety_level debe ser strict o standard.")
 
     context = context or {}
+
+    # --- HIPERMEGAPROMPT context_layer_v2 (optional, flag-gated) ---
+    if FEATURES.get("context_layer_v2"):
+        try:
+            from .context_layer import build_context
+            _hcm_ctx = build_context(query, context, mode="criba", selection=None)
+            context["hcm_context"] = _hcm_ctx.model_dump()
+        except Exception:
+            pass  # Graceful degradation: context_layer never blocks the engine
+
     selection = select(query, current)
     selected = find_current(selection["selected_current"])
-    methods = select_methods(supporting_methods, mode, manual_methods)
+    methods = select_methods(supporting_methods, mode, manual_methods, query=query)
 
     carto = (cartograph_fn or cartograph_and_break)(query, context, selection.__dict__ if hasattr(selection, "__dict__") else selection)
     rupture = {
@@ -385,13 +963,19 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     # CCA: drop cosmetic candidates (operators that moved no causal axis).
     real_ideas, cosmetic_count = cross_consistency_assessment(ideas)
     duplicate_report = _detect_duplicates(real_ideas)
+
+    # Deduplicación limpia: excluir probable_duplicates, luego fallback a top 8
     kept = [i for i, r in zip(real_ideas, duplicate_report) if r["verdict"] != "probable_duplicate"]
+
+    # Si no hay suficientes ideas únicas, tomar las mejores sin duplicados
     if len(kept) < 8:
-        kept = real_ideas[:8]
-    # keep canonical collection exactly as-is (one object)
-    for i, r in zip(real_ideas, duplicate_report):
-        if r["verdict"] == "probable_duplicate" and i in kept:
-            kept.remove(i)
+        seen_ids = set(i["id"] for i in kept)
+        for i in real_ideas:
+            if len(kept) >= 8:
+                break
+            if i["id"] not in seen_ids:
+                kept.append(i)
+                seen_ids.add(i["id"])
 
     families = sorted({i["family"] for i in kept})
     unclassified = []
@@ -423,6 +1007,10 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
         "duplicate_report": [r for r in duplicate_report if r["verdict"] != "probable_duplicate"],
         "unclassified_properties": unclassified,
     }
+
+    # HIPERMEGAPROMPT context_layer_v2: attach structured context to output
+    if FEATURES.get("context_layer_v2") and "hcm_context" in context:
+        innovation["hcm_context"] = context["hcm_context"]
 
     metrics = {
         "potential_novelty": _clamp(60 + real_divergent * 4 + (10 if carto.get("wants_novelty") else 0)),
@@ -471,7 +1059,9 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
         "original_query": query,
         "selected_current": {"id": selected["id"], "name": selected["name"], "score": selection["score"],
                               "selection_reasons": selection["selection_reasons"]},
-        "supporting_methods": [{"id": m["id"], "name": m["name"], "family": m["family"], "reason": m["reason"]} for m in methods],
+        "supporting_methods": [{"id": m["id"], "name": m["name"], "family": m["family"],
+                                 "axis": m.get("axis", ""), "sector": m.get("sector", ""),
+                                 "reason": m["reason"]} for m in methods],
         "contextualization": {"problem": query.strip(), "known_space": carto["known_space"],
                                "assumptions": carto["assumptions"], "saturated_mechanisms": carto["saturated_mechanisms"]},
         "rupture": rupture,
@@ -492,9 +1082,43 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     }
     # condition 3: packet["ideas"] is the SAME object as innovation["ideas"] (no divergence possible)
     packet["ideas"] = packet["innovation"]["ideas"]
+    # Morphological frame — aditivo, nunca bloquea
+    try:
+        packet["morphological_frame"] = build_morpho_frame(query, context)
+    except Exception:  # noqa: BLE001
+        pass  # Graceful degradation: morpho frame nunca bloquea el engine
     if mode == "minimal":
         packet["minimal_summary"] = {"current": selected["name"], "intent": "INNOVAR",
                                      "central_idea": kept[0]["description"] if kept else "", "decision": decision}
+    if FEATURES.get("compound_personas"):
+        # P2 is additive and intentionally stops before P3 synthesis.  The
+        # first-pass personas share only this completed packet, never each
+        # other's output.  Divergent recommendations remain explicitly
+        # awaiting a minority-preserving synthesis instead of being collapsed.
+        from .personas import (
+            DEFAULT_TEAM_PROTOCOL,
+            evaluate_persona_diversity,
+            run_personas,
+            validate_team_protocol,
+        )
+
+        persona_results = run_personas(packet)
+        diversity = evaluate_persona_diversity(persona_results)
+        protocol = validate_team_protocol(persona_results)
+        if not diversity.is_diverse:
+            persona_status = "REJECTED_REGEN_REQUIRED"
+        elif protocol.requires_minority_report:
+            persona_status = "AWAITING_P3_SYNTHESIS"
+        else:
+            persona_status = "READY"
+        packet["persona_analysis"] = {
+            "schema_version": "1.0.0",
+            "status": persona_status,
+            "team_protocol": DEFAULT_TEAM_PROTOCOL.model_dump(mode="json"),
+            "diversity": diversity.model_dump(mode="json"),
+            "protocol_validation": protocol.model_dump(mode="json"),
+            "results": [result.model_dump(mode="json") for result in persona_results],
+        }
     return packet
 
 
@@ -528,3 +1152,64 @@ def build_prompt(packet: dict[str, Any]) -> str:
         "# MANDATORY_MODEL_PACKET\n" + json.dumps(packet, ensure_ascii=False, indent=2),
         "# Contrato\nUsa obligatoriamente el paquete para generar ideas nuevas; no reveles razonamiento privado.",
     ])
+
+
+def activate_with_llm(query: str, current: str = "auto", mode: str = "balanced",
+                      supporting_methods: int = 8, context: dict[str, Any] | None = None,
+                      safety_level: str = "strict", manual_methods: list[str] | None = None,
+                      llm_mode: str = "none", llm_kwargs: dict[str, Any] | None = None) -> dict[str, Any]:
+    """Activación de CRIBA con soporte LLM opcional.
+
+    Args:
+        llm_mode: "none" (determinista), "offline" (Ollama), "cloud" (API)
+        llm_kwargs: Parámetros adicionales para el backend LLM
+    """
+    # Primero ejecutar el motor determinista para obtener el packet base
+    packet = activate(query, current, mode, supporting_methods, context,
+                      safety_level, manual_methods)
+
+    # Si no se requiere LLM, retornar el packet determinista
+    if llm_mode == "none":
+        return packet
+
+    # Importar adaptador LLM
+    from .llm_adapter import create_backend, generate_ideas_with_llm
+
+    # Crear backend LLM
+    backend = create_backend(llm_mode, **(llm_kwargs or {}))
+
+    if not backend.is_available():
+        print(f"Advertencia: Backend LLM '{llm_mode}' no disponible. Usando modo determinista.")
+        return packet
+
+    # Obtener métodos para el prompt
+    methods = packet.get("supporting_methods", [])
+
+    # Generar ideas con LLM
+    try:
+        llm_ideas = generate_ideas_with_llm(packet, methods, query, backend)
+
+        # Agregar ideas LLM al packet
+        if "innovation" not in packet:
+            packet["innovation"] = {}
+        if "ideas" not in packet["innovation"]:
+            packet["innovation"]["ideas"] = []
+
+        # Combinar ideas deterministas con LLM
+        existing_ideas = packet["innovation"]["ideas"]
+        packet["innovation"]["ideas"] = existing_ideas + llm_ideas
+
+        # Actualizar métricas
+        total_ideas = len(packet["innovation"]["ideas"])
+        packet["innovation"]["llm_ideas_count"] = len(llm_ideas)
+        packet["innovation"]["deterministic_ideas_count"] = len(existing_ideas)
+
+        # Actualizar packet principal
+        packet["ideas"] = packet["innovation"]["ideas"]
+        packet["llm_mode"] = llm_mode
+
+    except Exception as e:
+        print(f"Advertencia: Error generando ideas con LLM: {e}")
+        print("Continuando con ideas deterministas.")
+
+    return packet
