@@ -4,8 +4,7 @@ import json
 import os
 import random
 from itertools import combinations
-from typing import Any, Dict, List, Set, Tuple
-from pathlib import Path
+from typing import Any
 
 
 class LotteryEngine:
@@ -13,20 +12,27 @@ class LotteryEngine:
 
     def __init__(self, methods_file: str, seed: int = 42):
         self.methods = self._load_methods(methods_file)
-        self.used_combos: Set[Tuple[str, str]] = set()
-        self.used_methods: Set[str] = set()
-        self.all_ideas: List[Dict[str, Any]] = []
-        self.round_history: List[Dict[str, Any]] = []
+        self.used_combos: set[tuple[str, str]] = set()
+        self.used_methods: set[str] = set()
+        self.all_ideas: list[dict[str, Any]] = []
+        self.round_history: list[dict[str, Any]] = []
         self.rng = random.Random(seed)
         self.round_number = 0
 
-    def _load_methods(self, filepath: str) -> List[Dict[str, Any]]:
+    def _load_methods(self, filepath: str) -> list[dict[str, Any]]:
         """Carga métodos desde JSON."""
         with open(filepath, 'r', encoding='utf-8') as f:
-            return json.load(f)
+            payload: Any = json.load(f)
+        if not isinstance(payload, list) or not all(
+            isinstance(item, dict) for item in payload
+        ):
+            raise ValueError("El archivo de métodos debe contener una lista JSON.")
+        return [dict(item) for item in payload]
 
     @classmethod
-    def from_methods(cls, methods: List[Dict[str, Any]], seed: int = 42) -> "LotteryEngine":
+    def from_methods(
+        cls, methods: list[dict[str, Any]], seed: int = 42
+    ) -> "LotteryEngine":
         """Construye el motor desde una lista de métodos ya cargada en memoria.
 
         Evita leer un archivo (el catálogo de BLACKFORGE es una lista de dicts
@@ -43,18 +49,23 @@ class LotteryEngine:
         eng.round_number = 0
         return eng
 
-    def get_available_methods(self) -> List[Dict[str, Any]]:
+    def get_available_methods(self) -> list[dict[str, Any]]:
         """Retorna métodos no usados aún."""
         return [m for m in self.methods if m['name'] not in self.used_methods]
 
-    def select_random_batch(self, size: int = 20) -> List[Dict[str, Any]]:
+    def select_random_batch(self, size: int = 20) -> list[dict[str, Any]]:
         """Selecciona un lote ALEATORIO de métodos (lotería pura)."""
         available = self.get_available_methods()
         if len(available) < size:
             return available
         return self.rng.sample(available, size)
 
-    def select_associative_batch(self, size: int = 20, theme: str = None, query: str = None) -> List[Dict[str, Any]]:
+    def select_associative_batch(
+        self,
+        size: int = 20,
+        theme: str | None = None,
+        query: str | None = None,
+    ) -> list[dict[str, Any]]:
         """Selecciona métodos buscando ASOCIACIONES temáticas (lotería asociativa)."""
         available = self.get_available_methods()
         if len(available) < size:
@@ -75,8 +86,8 @@ class LotteryEngine:
 
         # Si no hay suficientes relacionados, mezclar
         families = list(set(m['family'] for m in available))
-        selected = []
-        selected_families = set()
+        selected: list[dict[str, Any]] = []
+        selected_families: set[str] = set()
 
         # Tomar 1 de cada familia primero (diversidad)
         for fam in families:
@@ -96,9 +107,11 @@ class LotteryEngine:
 
         return selected[:size]
 
-    def generate_ideas_from_batch(self, batch: List[Dict[str, Any]], mode: str = "associative") -> List[Dict[str, Any]]:
+    def generate_ideas_from_batch(
+        self, batch: list[dict[str, Any]], mode: str = "associative"
+    ) -> list[dict[str, Any]]:
         """Genera ideas de un lote de métodos."""
-        ideas = []
+        ideas: list[dict[str, Any]] = []
         pairs = list(combinations(batch, 2))
 
         for m1, m2 in pairs:
@@ -117,9 +130,11 @@ class LotteryEngine:
 
         return ideas
 
-    def _create_idea(self, m1: Dict, m2: Dict, mode: str) -> Dict[str, Any]:
+    def _create_idea(
+        self, m1: dict[str, Any], m2: dict[str, Any], mode: str
+    ) -> dict[str, Any]:
         """Crea una idea a partir de dos métodos usando el motor real de CRIBA."""
-        from .engine import _evaluate_idea, _CAUSAL_AXES, _BASE_VALUES
+        from .engine import _BASE_VALUES, _evaluate_idea
 
         # Generar título descriptivo
         if mode == "associative":
@@ -211,7 +226,12 @@ class LotteryEngine:
             'convergence': conv,
         }
 
-    def run_round(self, mode: str = "alternating", batch_size: int = 20, query: str = None) -> Dict[str, Any]:
+    def run_round(
+        self,
+        mode: str = "alternating",
+        batch_size: int = 20,
+        query: str | None = None,
+    ) -> dict[str, Any]:
         """Ejecuta una ronda de lotería."""
         self.round_number += 1
 
@@ -245,7 +265,13 @@ class LotteryEngine:
         self.round_history.append(stats)
         return stats
 
-    def run_tournament(self, total_rounds: int = 10, batch_size: int = 20, mode: str = "alternating", query: str = None) -> Dict[str, Any]:
+    def run_tournament(
+        self,
+        total_rounds: int = 10,
+        batch_size: int = 20,
+        mode: str = "alternating",
+        query: str | None = None,
+    ) -> dict[str, Any]:
         """Ejecuta un torneo completo de lotería."""
         print("=" * 60)
         print("🎰 DOBLE LOTERÍA DE CRIBA 🎰")
@@ -264,7 +290,7 @@ class LotteryEngine:
 
         return self._get_summary()
 
-    def _print_round_stats(self, stats: Dict[str, Any]):
+    def _print_round_stats(self, stats: dict[str, Any]) -> None:
         """Imprime estadísticas de una ronda."""
         mode_emoji = "🔗" if stats['mode'] == "associative" else "🎲"
         print(f"Ronda {stats['round']:3d} {mode_emoji} {stats['mode']:12s} | "
@@ -273,14 +299,14 @@ class LotteryEngine:
               f"👍 {stats['good']:3d} | "
               f"🗑️  {stats['trash']:3d}")
 
-    def _get_summary(self) -> Dict[str, Any]:
+    def _get_summary(self) -> dict[str, Any]:
         """Retorna resumen del torneo."""
         total_ideas = len(self.all_ideas)
         extraordinary = sum(1 for i in self.all_ideas if i['quality'] == 'EXTRAORDINARIA')
         good = sum(1 for i in self.all_ideas if i['quality'] == 'BUENA')
         trash = sum(1 for i in self.all_ideas if i['quality'] == 'BASURA')
 
-        summary = {
+        summary: dict[str, Any] = {
             'total_rounds': self.round_number,
             'total_methods_used': len(self.used_methods),
             'total_methods_available': len(self.methods),
@@ -301,37 +327,37 @@ class LotteryEngine:
         print(f"Rondas ejecutadas: {summary['total_rounds']}")
         print(f"Métodos usados: {summary['total_methods_used']}/{summary['total_methods_available']} ({summary['coverage_percent']}%)")
         print(f"Combinaciones probadas: {summary['total_combinations_tested']:,}")
-        print(f"")
-        print(f"IDEAS GENERADAS:")
+        print("")
+        print("IDEAS GENERADAS:")
         print(f"  ⭐ Extraordinarias: {summary['extraordinary_ideas']} ({summary['extraordinary_percent']}%)")
         print(f"  👍 Buenas: {summary['good_ideas']}")
         print(f"  🗑️  Basura: {summary['trash_ideas']}")
         print(f"  📊 Total: {summary['total_ideas']}")
-        print(f"")
-        print(f"TOP 10 IDEAS:")
+        print("")
+        print("TOP 10 IDEAS:")
         for i, idea in enumerate(summary['top_ideas'][:10], 1):
             print(f"  {i}. [{idea['quality']}] {idea['title'][:50]}")
             print(f"     Score: {idea['score']} | Modo: {idea['mode']}")
 
         return summary
 
-    def get_top_ideas(self, n: int = 50) -> List[Dict[str, Any]]:
+    def get_top_ideas(self, n: int = 50) -> list[dict[str, Any]]:
         """Retorna las mejores N ideas."""
         return sorted(self.all_ideas, key=lambda x: x['score'], reverse=True)[:n]
 
-    def get_ideas_by_quality(self, quality: str) -> List[Dict[str, Any]]:
+    def get_ideas_by_quality(self, quality: str) -> list[dict[str, Any]]:
         """Retorna ideas por calidad."""
         return [i for i in self.all_ideas if i['quality'] == quality]
 
-    def get_family_coverage(self) -> Dict[str, int]:
+    def get_family_coverage(self) -> dict[str, int]:
         """Retorna cobertura de familias."""
-        coverage = {}
+        coverage: dict[str, int] = {}
         for idea in self.all_ideas:
             for fam in [idea['family1'], idea['family2']]:
                 coverage[fam] = coverage.get(fam, 0) + 1
         return dict(sorted(coverage.items(), key=lambda x: -x[1]))
 
-    def save_results(self, output_dir: str):
+    def save_results(self, output_dir: str) -> None:
         """Guarda resultados del torneo."""
         os.makedirs(output_dir, exist_ok=True)
 
@@ -359,7 +385,8 @@ class LotteryEngine:
 
 
 def run_lottery(methods_file: str, rounds: int = 20, batch_size: int = 20,
-                mode: str = "alternating", seed: int = 42, query: str = None) -> Dict[str, Any]:
+                mode: str = "alternating", seed: int = 42,
+                query: str | None = None) -> dict[str, Any]:
     """Función principal para ejecutar la lotería."""
     engine = LotteryEngine(methods_file, seed)
     summary = engine.run_tournament(rounds, batch_size, mode, query=query)

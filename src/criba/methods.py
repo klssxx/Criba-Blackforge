@@ -15,7 +15,6 @@ Estrategia de selección (Interesantedebate.txt):
 from __future__ import annotations
 import hashlib
 import random
-import re
 from typing import Any
 
 from .catalog import methods
@@ -151,11 +150,13 @@ def select_methods(
     for ax in axes_ordered:
         if len(selected) >= count:
             break
-        m = pick_from_axis(ax)
-        if m:
-            selected.append({**m, "reason": m.get("selection_reason", "")})
-            selected_ids.add(m["id"])
-            used_families.add(m.get("family", ""))
+        picked = pick_from_axis(ax)
+        if picked:
+            selected.append(
+                {**picked, "reason": picked.get("selection_reason", "")}
+            )
+            selected_ids.add(picked["id"])
+            used_families.add(picked.get("family", ""))
 
     # Segundo pase: rellenar con diversidad máxima (familia no repetida)
     if len(selected) < count:

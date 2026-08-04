@@ -43,15 +43,21 @@ where = ["src"]
 # FASE 3 hardening: strict typing over CRIBA + BLACKFORGE own code.
 python_version = "3.12"
 strict = true
-# gui.py is runtime-verified (offscreen smoke + UI contract), not strictly typed:
-# it is untyped PySide6 view code. Exclude it so mypy strict checks the engine
-# core; the GUI is validated by execution, not by the type checker.
-exclude = "gui\\.py$"
+# Qt view modules are runtime-verified by the real GUI and UI-contract tests.
+# PySide's dynamic signal/event APIs do not form a useful strict-mypy boundary;
+# keep strict checking on the engine and integration code instead.
+exclude = "(gui\\.py$|[\\\\/]ui[\\\\/])"
 
 [[tool.mypy.overrides]]
 # gui.py is excluded as an explicit target above, but cli.py imports it lazily.
 # Do not follow that single view module during core checking.
 module = "criba.gui"
+follow_imports = "skip"
+
+[[tool.mypy.overrides]]
+# Keep excluded Qt view modules out when a strictly typed core module imports
+# their public boundary lazily.
+module = ["criba.ui", "criba.ui.*"]
 follow_imports = "skip"
 
 [[tool.mypy.overrides]]

@@ -11,8 +11,7 @@ Modos soportados:
 from __future__ import annotations
 
 import json
-from typing import Any, Mapping, Optional, Protocol
-from pathlib import Path
+from typing import Any, Protocol
 
 import httpx
 
@@ -61,7 +60,7 @@ class OllamaBackend:
 
         r = self.client.post(f"{self.url}/api/generate", json=payload)
         r.raise_for_status()
-        return r.json().get("response", "")
+        return str(r.json().get("response", ""))
 
 
 class CloudBackend:
@@ -79,7 +78,7 @@ class CloudBackend:
 
     def is_available(self) -> bool:
         try:
-            r = self.client.get(f"{self.url}/models")
+            r = self.client.get(f"{self.base_url}/models")
             return r.status_code == 200
         except Exception:
             return False
@@ -99,7 +98,7 @@ class CloudBackend:
 
         r = self.client.post(f"{self.base_url}/chat/completions", json=payload)
         r.raise_for_status()
-        return r.json()["choices"][0]["message"]["content"]
+        return str(r.json()["choices"][0]["message"]["content"])
 
 
 class NoneBackend:
@@ -112,7 +111,7 @@ class NoneBackend:
         return "[Modo sin modelo: usar engine.activate() para generar ideas mecánicas]"
 
 
-def create_backend(mode: str = "none", **kwargs) -> LLMBackend:
+def create_backend(mode: str = "none", **kwargs: Any) -> LLMBackend:
     """Crea un backend LLM según el modo especificado.
 
     Args:
