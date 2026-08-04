@@ -61,13 +61,18 @@ class Tokens:
     @property
     def accent_violet(self) -> str: return str(self.raw["color"]["accent"]["violet"])
     @property
+    def accent_magenta(self) -> str: return str(self.raw["color"]["accent"].get("magenta", self.accent_violet))
+    @property
     def accent_orange(self) -> str:
         # blackforge usa naranja (theme_blackforge.json); el criba.json no lo
         # tiene siempre. Fallback al primer color del gradiente blackforge.
         try:
-            return str(self.raw["gradient"]["blackforge"][0])
+            return str(self.raw["color"]["accent"].get("orange", self.raw["gradient"]["blackforge"][0]))
         except (KeyError, TypeError):
-            return str(self.raw["color"]["accent"].get("orange", "#FF7A1A"))
+            return "#FF6A00"
+    @property
+    def accent_amber(self) -> str:
+        return str(self.raw["color"]["accent"].get("amber", self.accent_orange))
     @property
     def success(self) -> str: return str(self.raw["color"]["success"])
     @property
@@ -112,5 +117,11 @@ class Tokens:
 
 @lru_cache(maxsize=1)
 def load_tokens(path: Path | None = None) -> Tokens:
-    data = json.loads((path or THEME_PATH).read_text(encoding="utf-8"))
+    actual_path = path or THEME_PATH
+    data = json.loads(actual_path.read_text(encoding="utf-8"))
     return Tokens(raw=data)
+
+
+def reload_tokens() -> None:
+    """Force reload tokens from disk (clears lru_cache)."""
+    load_tokens.cache_clear()

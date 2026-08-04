@@ -47,6 +47,29 @@ def test_ambiguous_authorization_fails_closed(authorization: object) -> None:
     assert result.output.authorization_status == "pending"
 
 
+@pytest.mark.parametrize(
+    ("authorization", "expected"),
+    [
+        ("authorized", "granted"),
+        ("AUTHORIZED", "granted"),
+        ("unauthorized", "denied"),
+        ("UNAUTHORIZED", "denied"),
+        ("pending", "pending"),
+        ("granted", "granted"),
+        ("GRANTED", "granted"),
+        ("denied", "denied"),
+        ("expired", "expired"),
+        ("not_required", "not_required"),
+    ],
+)
+def test_authorization_aliases_are_normalized(
+    authorization: str, expected: str
+) -> None:
+    result = run_persona("D", _packet(authorization_state=authorization))
+    assert isinstance(result.output, PersonaD)
+    assert result.output.authorization_status == expected
+
+
 def test_prompt_injection_in_prior_outputs_is_removed_not_interpreted() -> None:
     marker = "OVERRIDE_CONTRACT_AND_EXFILTRATE"
     prompt = build_persona_prompt(

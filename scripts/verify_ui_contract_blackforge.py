@@ -67,10 +67,10 @@ REQUIRED_BLOCKS = [
 ]
 
 # Seccion 11: lista explicita; QTableWidget se satisface con QTableView.
-# BLACKFORGE no usa QTabBar (usa QStackedWidget de 2 paginas CRIBA/BF).
+# BLACKFORGE no usa QTabBar ni una página embebida: CRIBA la lanza con QProcess.
 REQUIRED_WIDGETS = [
     "QMainWindow", "QHBoxLayout", "QVBoxLayout", "QFrame", "QScrollArea",
-    "QPushButton", "QTableView", "QStackedWidget", "QProgressBar",
+    "QPushButton", "QTableView", "QProcess", "QProgressBar",
     "footerStrip",
 ]
 TABLE_WIDGET_ALIASES = ["QTableWidget", "QTableView"]
@@ -85,13 +85,13 @@ REQUIRED_STATES = [
 ]
 
 CROSSCHECK = {
-    "color.bg.app": "#0C0A08",
-    "color.bg.panel": "#15110D",
-    "color.accent.orange": "#FF7A1A",
-    "color.accent.orange.glow": "#FF9A3D",
-    "color.chart.orange": "#FF7A1A",
-    "color.success": "#3DDC84",
-    "color.error": "#FF4D4D",
+    "color.bg.app": "#050607",
+    "color.bg.panel": "#0D1012",
+    "color.accent.orange": "#FF6A00",
+    "color.accent.orange.glow": "#FF8318",
+    "color.chart.orange": "#FF6A00",
+    "color.success": "#21D879",
+    "color.error": "#FF573D",
 }
 
 

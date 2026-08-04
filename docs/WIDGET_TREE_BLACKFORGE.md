@@ -1,6 +1,6 @@
 # WIDGET_TREE_BLACKFORGE.md
-Árbol de widgets PySide6 de la pantalla principal BLACKFORGE
-Versión: 1.0.0 · Fecha: 2026-07-24 · Estado: CONTRATO (no implementado aún)
+Árbol de widgets PySide6 de la aplicación BLACKFORGE
+Versión: 1.1.0 · Fecha: 2026-07-28 · Estado: IMPLEMENTADO
 
 Objetivo: que dos sesiones distintas implementen la misma pantalla con mínima
 desviación. Los objectName son NORMATIVOS (el QSS global depende de ellos).
@@ -10,8 +10,12 @@ Hermano de WIDGET_TREE_CRIBA.md: misma estructura de árbol y convenciones.
 1. ÁRBOL COMPLETO
 ======================================================================
 
-QMainWindow "BlackforgeMainWindow"  (min 1360x768, título "BLACKFORGE — Fuerza técnica")
-└── QWidget central  #appRoot        [QHBoxLayout, margins 0, spacing 0]
+Límite de aplicación: CRIBA usa QProcess para ejecutar `BLACKFORGE.exe` o,
+en desarrollo, `python -m criba.blackforge_gui`. No existe QStackedWidget
+compartido entre ambas aplicaciones.
+
+QMainWindow "BlackforgeWindow"  (target 1386x778, título "BLACKFORGE — Innovación en ciberseguridad")
+└── QWidget central  #blackforgeRoot [QHBoxLayout, margins 0, spacing 0]
     ├── QFrame #sidebar              (ancho fijo 240) [QVBoxLayout, margins 16, spacing 8]
     │   ├── QWidget #brandBlock      [QVBoxLayout]
     │   │   ├── QLabel #brandCriba       ("CRIBA", caption muted)

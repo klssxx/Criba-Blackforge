@@ -166,12 +166,12 @@ Tras mitigar: transición a S9 (sin alertas) o S6 (revisión) según corresponda
 S11. VUELTA A CRIBA (cierre de modo Blackforge)
 ======================================================================
 Cambia:
-- navVolverCriba: state=done → flash success + check 1.2 s.
-- QStackedWidget raíz hace switch a la pantalla CRIBA (INNOVACIÓN).
-- modeBadge (en topbar CRIBA) → "MODO: INNOVACIÓN" con acento grad.cta (cian/violeta).
-- BLACKFORGE queda en pausa; su sesión/sandbox se conserva para volver.
-- Footer de CRIBA recupera sus segmentos (fsModelo CRIBA-1.8 PRO, etc.).
-Botones: en CRIBA, navBlackforge queda disponible para retornar a BLACKFORGE.
+- El control accesible "Volver a CRIBA" cierra la ventana/proceso BLACKFORGE.
+- `QProcess.finished` restaura y activa la ventana CRIBA.
+- Si BLACKFORGE falla o termina de otra forma, CRIBA también se restaura.
+- No se construye una shell ni se interpolan datos de sesión en argumentos.
+- La persistencia compartida permite volver a abrir una sesión posteriormente.
+Botones: en CRIBA, navBlackforge queda disponible para ejecutar BLACKFORGE otra vez.
 
 ======================================================================
 MATRIZ RESUMEN (botón × estado)
@@ -191,4 +191,4 @@ OFF† = disabled hasta autorización.
 OFF‡ = disabled hasta sandbox disponible.
 RUN  = state=running (bloqueado, con progreso).
 DONE = navVolverCriba flash success al cambiar de modo.
-"ON" en S11 = la pantalla ya es CRIBA; navBlackforge vuelve a BLACKFORGE.
+"ON" en S11 = BLACKFORGE terminó y CRIBA vuelve a estar visible.

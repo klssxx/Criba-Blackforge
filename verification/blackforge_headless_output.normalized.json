@@ -11,138 +11,23 @@
   "cosmetic_rejected": 0,
   "ideas": [
     {
-      "blackforge_id": "BF-CYB-M800-0561",
-      "causal_axis_primary": "authorization_rule",
-      "causal_signature_present": true,
-      "causal_variables": {
-        "authorization_rule": "authorization_rule"
-      },
-      "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
-        "viability": 0.8
-      },
-      "description": "Verificar cada acceso sin confiar por ubicación o identidad previa.",
-      "extreme": false,
-      "genome": {
-        "actor": [
-          "Ciberseguridad"
-        ],
-        "mechanism": [
-          "trust_identity_access"
-        ],
-        "time_model": [
-          "staged"
-        ],
-        "topology": [
-          "cybersecurity"
-        ],
-        "trust_model": [
-          "implicit"
-        ]
-      },
-      "id": "BF01",
-      "pipeline_stage": "DIVERGIR",
-      "quality_score_v2": 64,
-      "safety_class": "S1_DEFENSIVE",
-      "title": "Zero Trust"
-    },
-    {
-      "blackforge_id": "BF-CYB-M800-0566",
-      "causal_axis_primary": "failure_default",
-      "causal_signature_present": true,
-      "causal_variables": {
-        "failure_default": "failure_default"
-      },
-      "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
-        "viability": 0.8
-      },
-      "description": "Ejecutar cambios en entornos desechables.",
-      "extreme": false,
-      "genome": {
-        "actor": [
-          "Ciberseguridad"
-        ],
-        "mechanism": [
-          "failure_resilience"
-        ],
-        "time_model": [
-          "staged"
-        ],
-        "topology": [
-          "cybersecurity"
-        ],
-        "trust_model": [
-          "implicit"
-        ]
-      },
-      "id": "BF02",
-      "pipeline_stage": "DIVERGIR",
-      "quality_score_v2": 58,
-      "safety_class": "S1_DEFENSIVE",
-      "title": "Aislamiento por ejecución"
-    },
-    {
-      "blackforge_id": "BF-CYB-L600-1511",
-      "causal_axis_primary": "authority_source",
-      "causal_signature_present": true,
-      "causal_variables": {
-        "authority_source": "authority_source"
-      },
-      "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
-        "viability": 0.8
-      },
-      "description": "vincular cambios a identidades criptográficas verificables.",
-      "extreme": false,
-      "genome": {
-        "actor": [
-          "Lentes 1501-1550"
-        ],
-        "mechanism": [
-          "supply_chain_build"
-        ],
-        "time_model": [
-          "staged"
-        ],
-        "topology": [
-          "cybersecurity"
-        ],
-        "trust_model": [
-          "implicit"
-        ]
-      },
-      "id": "BF03",
-      "pipeline_stage": "CARTOGRAFIAR",
-      "quality_score_v2": 61,
-      "safety_class": "S1_DEFENSIVE",
-      "title": "Lente de firma de commits"
-    },
-    {
       "blackforge_id": "BF-CYB-L600-1507",
       "causal_axis_primary": "resource_dependency",
       "causal_signature_present": true,
       "causal_variables": {
-        "resource_dependency": "resource_dependency"
+        "si_falla": "resource_dependency"
       },
       "convergence": {
         "cost": 0.6,
-        "evidence": 0.3,
+        "evidence": 0.3791,
         "novelty": 1.0,
-        "value_score": 0.5,
+        "value_score": 0.6318,
         "viability": 0.8
       },
       "description": "buscar componentes indirectos que entran sin ser elegidos explícitamente.",
       "extreme": false,
+      "family": "supply_chain_build",
+      "family2": "Lentes 1501-1550",
       "genome": {
         "actor": [
           "Lentes 1501-1550"
@@ -161,111 +46,39 @@
         ]
       },
       "id": "BF04",
+      "method1_desc": "buscar componentes indirectos que entran sin ser elegidos explícitamente.",
+      "method1_name": "Lente de dependencia transitiva",
+      "method2_desc": "",
+      "method2_name": "buscar componentes indirectos que entran sin ser e",
       "pipeline_stage": "DESCOMPONER",
       "quality_score_v2": 67,
       "safety_class": "S0_CONCEPTUAL",
       "title": "Lente de dependencia transitiva"
     },
     {
-      "blackforge_id": "BF-CYB-M800-0554",
-      "causal_axis_primary": "decision_owner",
+      "blackforge_id": "BF-CYB-M800-0561",
+      "causal_axis_primary": "authorization_rule",
       "causal_signature_present": true,
       "causal_variables": {
-        "decision_owner": "decision_owner"
+        "quien_decide": "authorization_rule"
       },
       "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
+        "cost": 0.597,
+        "evidence": 0.3749,
+        "novelty": 0.99,
+        "value_score": 0.6217,
         "viability": 0.8
       },
-      "description": "Someter decisiones a principios superiores verificables.",
+      "description": "Verificar cada acceso sin confiar por ubicación o identidad previa.",
       "extreme": false,
+      "family": "trust_identity_access",
+      "family2": "Ciberseguridad",
       "genome": {
         "actor": [
-          "IA y automatización"
+          "Ciberseguridad"
         ],
         "mechanism": [
-          "agents_ai_devtools"
-        ],
-        "time_model": [
-          "staged"
-        ],
-        "topology": [
-          "developer_tools"
-        ],
-        "trust_model": [
-          "implicit"
-        ]
-      },
-      "id": "BF05",
-      "pipeline_stage": "DIVERGIR",
-      "quality_score_v2": 60,
-      "safety_class": "S1_DEFENSIVE",
-      "title": "Agente constitucional"
-    },
-    {
-      "blackforge_id": "BF-CYB-M800-0545",
-      "causal_axis_primary": "evidence_required",
-      "causal_signature_present": true,
-      "causal_variables": {
-        "evidence_required": "evidence_required"
-      },
-      "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
-        "viability": 0.8
-      },
-      "description": "Hacer que modelos independientes revisen resultados.",
-      "extreme": false,
-      "genome": {
-        "actor": [
-          "IA y automatización"
-        ],
-        "mechanism": [
-          "agents_ai_devtools"
-        ],
-        "time_model": [
-          "staged"
-        ],
-        "topology": [
-          "developer_tools"
-        ],
-        "trust_model": [
-          "implicit"
-        ]
-      },
-      "id": "BF06",
-      "pipeline_stage": "EVALUAR",
-      "quality_score_v2": 60,
-      "safety_class": "S1_DEFENSIVE",
-      "title": "Verificación cruzada"
-    },
-    {
-      "blackforge_id": "BF-CYB-R1000-0461",
-      "causal_axis_primary": "failure_default",
-      "causal_signature_present": true,
-      "causal_variables": {
-        "failure_default": "failure_default"
-      },
-      "convergence": {
-        "cost": 0.6,
-        "evidence": 0.3,
-        "novelty": 1.0,
-        "value_score": 0.5,
-        "viability": 0.8
-      },
-      "description": "prueba propagación limitada.",
-      "extreme": false,
-      "genome": {
-        "actor": [
-          "Fallo y resiliencia"
-        ],
-        "mechanism": [
-          "failure_resilience"
+          "trust_identity_access"
         ],
         "time_model": [
           "staged"
@@ -274,31 +87,37 @@
           "cybersecurity"
         ],
         "trust_model": [
-          "evidence_based"
+          "implicit"
         ]
       },
-      "id": "BF07",
-      "pipeline_stage": "ROMPER",
-      "quality_score_v2": 58,
+      "id": "BF01",
+      "method1_desc": "Verificar cada acceso sin confiar por ubicación o identidad previa.",
+      "method1_name": "Zero Trust",
+      "method2_desc": "",
+      "method2_name": "Verificar cada acceso sin confiar por ubicación o ",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 64,
       "safety_class": "S1_DEFENSIVE",
-      "title": "Fallo contagioso controlado"
+      "title": "Zero Trust"
     },
     {
       "blackforge_id": "BF-CYB-M800-0312",
       "causal_axis_primary": "failure_default",
       "causal_signature_present": true,
       "causal_variables": {
-        "failure_default": "failure_default"
+        "si_falla": "failure_default"
       },
       "convergence": {
         "cost": 0.6,
-        "evidence": 0.3,
+        "evidence": 0.3707,
         "novelty": 1.0,
-        "value_score": 0.5,
+        "value_score": 0.6178,
         "viability": 0.8
       },
       "description": "Aislar información inconsistente sin detener todo el sistema.",
       "extreme": false,
+      "family": "failure_resilience",
+      "family2": "Fracaso y resiliencia",
       "genome": {
         "actor": [
           "Fracaso y resiliencia"
@@ -317,33 +136,84 @@
         ]
       },
       "id": "BF08",
+      "method1_desc": "Aislar información inconsistente sin detener todo el sistema.",
+      "method1_name": "Tolerancia al dato corrupto",
+      "method2_desc": "",
+      "method2_name": "Aislar información inconsistente sin detener todo ",
       "pipeline_stage": "DIVERGIR",
       "quality_score_v2": 50,
       "safety_class": "S1_DEFENSIVE",
       "title": "Tolerancia al dato corrupto"
     },
     {
-      "blackforge_id": "BF-CYB-R1000-0314",
-      "causal_axis_primary": "resource_dependency",
+      "blackforge_id": "BF-CYB-L600-1511",
+      "causal_axis_primary": "authority_source",
       "causal_signature_present": true,
       "causal_variables": {
-        "resource_dependency": "resource_dependency"
+        "quien_decide": "authority_source"
       },
       "convergence": {
         "cost": 0.6,
-        "evidence": 0.3,
+        "evidence": 0.3693,
         "novelty": 1.0,
-        "value_score": 0.5,
+        "value_score": 0.6155,
         "viability": 0.8
       },
-      "description": "revela cadenas ocultas.",
+      "description": "vincular cambios a identidades criptográficas verificables.",
       "extreme": false,
+      "family": "supply_chain_build",
+      "family2": "Lentes 1501-1550",
       "genome": {
         "actor": [
-          "Descomposición"
+          "Lentes 1501-1550"
         ],
         "mechanism": [
           "supply_chain_build"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF03",
+      "method1_desc": "vincular cambios a identidades criptográficas verificables.",
+      "method1_name": "Lente de firma de commits",
+      "method2_desc": "",
+      "method2_name": "vincular cambios a identidades criptográficas veri",
+      "pipeline_stage": "CARTOGRAFIAR",
+      "quality_score_v2": 61,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Lente de firma de commits"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0554",
+      "causal_axis_primary": "decision_owner",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "quien_decide": "decision_owner"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3672,
+        "novelty": 1.0,
+        "value_score": 0.612,
+        "viability": 0.8
+      },
+      "description": "Someter decisiones a principios superiores verificables.",
+      "extreme": false,
+      "family": "agents_ai_devtools",
+      "family2": "IA y automatización",
+      "genome": {
+        "actor": [
+          "IA y automatización"
+        ],
+        "mechanism": [
+          "agents_ai_devtools"
         ],
         "time_model": [
           "staged"
@@ -355,28 +225,124 @@
           "implicit"
         ]
       },
-      "id": "BF09",
-      "pipeline_stage": "DESCOMPONER",
-      "quality_score_v2": 54,
+      "id": "BF05",
+      "method1_desc": "Someter decisiones a principios superiores verificables.",
+      "method1_name": "Agente constitucional",
+      "method2_desc": "",
+      "method2_name": "Someter decisiones a principios superiores verific",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 60,
       "safety_class": "S1_DEFENSIVE",
-      "title": "Descomposición por dependencia"
+      "title": "Agente constitucional"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0545",
+      "causal_axis_primary": "evidence_required",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "evidencia_requerida": "evidence_required"
+      },
+      "convergence": {
+        "cost": 0.6,
+        "evidence": 0.3644,
+        "novelty": 1.0,
+        "value_score": 0.6073,
+        "viability": 0.8
+      },
+      "description": "Hacer que modelos independientes revisen resultados.",
+      "extreme": false,
+      "family": "agents_ai_devtools",
+      "family2": "IA y automatización",
+      "genome": {
+        "actor": [
+          "IA y automatización"
+        ],
+        "mechanism": [
+          "agents_ai_devtools"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF06",
+      "method1_desc": "Hacer que modelos independientes revisen resultados.",
+      "method1_name": "Verificación cruzada",
+      "method2_desc": "",
+      "method2_name": "Hacer que modelos independientes revisen resultado",
+      "pipeline_stage": "EVALUAR",
+      "quality_score_v2": 60,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Verificación cruzada"
+    },
+    {
+      "blackforge_id": "BF-CYB-M800-0566",
+      "causal_axis_primary": "failure_default",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "si_falla": "failure_default"
+      },
+      "convergence": {
+        "cost": 0.5997,
+        "evidence": 0.3567,
+        "novelty": 0.999,
+        "value_score": 0.5942,
+        "viability": 0.8
+      },
+      "description": "Ejecutar cambios en entornos desechables.",
+      "extreme": false,
+      "family": "failure_resilience",
+      "family2": "Ciberseguridad",
+      "genome": {
+        "actor": [
+          "Ciberseguridad"
+        ],
+        "mechanism": [
+          "failure_resilience"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF02",
+      "method1_desc": "Ejecutar cambios en entornos desechables.",
+      "method1_name": "Aislamiento por ejecución",
+      "method2_desc": "",
+      "method2_name": "Ejecutar cambios en entornos desechables.",
+      "pipeline_stage": "DIVERGIR",
+      "quality_score_v2": 58,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Aislamiento por ejecución"
     },
     {
       "blackforge_id": "BF-CYB-S800-0702",
       "causal_axis_primary": "incentive_structure",
       "causal_signature_present": true,
       "causal_variables": {
-        "incentive_structure": "incentive_structure"
+        "evidencia_requerida": "incentive_structure"
       },
       "convergence": {
         "cost": 0.6,
-        "evidence": 0.3,
+        "evidence": 0.3553,
         "novelty": 1.0,
-        "value_score": 0.5,
+        "value_score": 0.5922,
         "viability": 0.8
       },
       "description": "intenta invalidar su propia recompensa.",
       "extreme": false,
+      "family": "agents_ai_devtools",
+      "family2": "Agentes, razonamiento y aprendizaje",
       "genome": {
         "actor": [
           "Agentes, razonamiento y aprendizaje"
@@ -395,6 +361,10 @@
         ]
       },
       "id": "BF10",
+      "method1_desc": "intenta invalidar su propia recompensa.",
+      "method1_name": "Agente con objetivo adversarial",
+      "method2_desc": "",
+      "method2_name": "intenta invalidar su propia recompensa.",
       "pipeline_stage": "ATACAR",
       "quality_score_v2": 60,
       "safety_class": "S1_DEFENSIVE",
@@ -405,17 +375,19 @@
       "causal_axis_primary": "evidence_required",
       "causal_signature_present": true,
       "causal_variables": {
-        "evidence_required": "evidence_required"
+        "evidencia_requerida": "evidence_required"
       },
       "convergence": {
         "cost": 0.6,
-        "evidence": 0.3,
+        "evidence": 0.3553,
         "novelty": 1.0,
-        "value_score": 0.5,
+        "value_score": 0.5922,
         "viability": 0.8
       },
       "description": "sustituye actores con permisos iguales.",
       "extreme": false,
+      "family": "trust_identity_access",
+      "family2": "Experimentos, pruebas y verificación",
       "genome": {
         "actor": [
           "Experimentos, pruebas y verificación"
@@ -434,18 +406,112 @@
         ]
       },
       "id": "BF11",
+      "method1_desc": "sustituye actores con permisos iguales.",
+      "method1_name": "Prueba de invariancia de identidad",
+      "method2_desc": "",
+      "method2_name": "sustituye actores con permisos iguales.",
       "pipeline_stage": "MATERIALIZAR",
       "quality_score_v2": 58,
       "safety_class": "S1_DEFENSIVE",
       "title": "Prueba de invariancia de identidad"
+    },
+    {
+      "blackforge_id": "BF-CYB-R1000-0461",
+      "causal_axis_primary": "failure_default",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "si_falla": "failure_default"
+      },
+      "convergence": {
+        "cost": 0.5948,
+        "evidence": 0.3476,
+        "novelty": 0.9825,
+        "value_score": 0.5742,
+        "viability": 0.8
+      },
+      "description": "prueba propagación limitada.",
+      "extreme": false,
+      "family": "failure_resilience",
+      "family2": "Fallo y resiliencia",
+      "genome": {
+        "actor": [
+          "Fallo y resiliencia"
+        ],
+        "mechanism": [
+          "failure_resilience"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "cybersecurity"
+        ],
+        "trust_model": [
+          "evidence_based"
+        ]
+      },
+      "id": "BF07",
+      "method1_desc": "prueba propagación limitada.",
+      "method1_name": "Fallo contagioso controlado",
+      "method2_desc": "",
+      "method2_name": "prueba propagación limitada.",
+      "pipeline_stage": "ROMPER",
+      "quality_score_v2": 58,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Fallo contagioso controlado"
+    },
+    {
+      "blackforge_id": "BF-CYB-R1000-0314",
+      "causal_axis_primary": "resource_dependency",
+      "causal_signature_present": true,
+      "causal_variables": {
+        "si_falla": "resource_dependency"
+      },
+      "convergence": {
+        "cost": 0.5938,
+        "evidence": 0.3441,
+        "novelty": 0.9795,
+        "value_score": 0.5676,
+        "viability": 0.8
+      },
+      "description": "revela cadenas ocultas.",
+      "extreme": false,
+      "family": "supply_chain_build",
+      "family2": "Descomposición",
+      "genome": {
+        "actor": [
+          "Descomposición"
+        ],
+        "mechanism": [
+          "supply_chain_build"
+        ],
+        "time_model": [
+          "staged"
+        ],
+        "topology": [
+          "developer_tools"
+        ],
+        "trust_model": [
+          "implicit"
+        ]
+      },
+      "id": "BF09",
+      "method1_desc": "revela cadenas ocultas.",
+      "method1_name": "Descomposición por dependencia",
+      "method2_desc": "",
+      "method2_name": "revela cadenas ocultas.",
+      "pipeline_stage": "DESCOMPONER",
+      "quality_score_v2": 54,
+      "safety_class": "S1_DEFENSIVE",
+      "title": "Descomposición por dependencia"
     }
   ],
-  "mean_value_score": 0.5,
+  "mean_value_score": 0.6024,
   "metrics": {
     "controlled_risk": 48,
     "divergence": 100,
     "feasibility": 60,
-    "mean_value_score": 0.5,
+    "mean_value_score": 0.6024,
     "potential_novelty": 100,
     "reversibility": 74,
     "uncertainty": 56
@@ -671,8 +737,8 @@
   "session_id": "blackforge-headless",
   "status": "OK",
   "top_ideas": [
+    "BF04",
     "BF01",
-    "BF02",
-    "BF03"
+    "BF08"
   ]
 }

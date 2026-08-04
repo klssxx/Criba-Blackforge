@@ -387,8 +387,7 @@ def on_historial(win: Any) -> None:
         # instead of the CRIBA evaluator, which expects innovation.ideas.
         sc = packet.get("selected_current", {})
         if isinstance(sc, dict) and sc.get("id") == "blackforge":
-            win.blackforge_page.load_from_history(packet)
-            win.show_blackforge_page()
+            win.show_blackforge_page(history_packet=packet)
             return
         win.packet = packet
         win.problem = packet.get("original_query", "")
@@ -506,7 +505,7 @@ def _restore_buttons_after_op(win: Any) -> None:
 
 
 # ---------------------------------------------------------------------------
-# S10 — BLACKFORGE (pantalla especializada integrada en la misma ventana)
+# S10 — BLACKFORGE (aplicación especializada independiente)
 # ---------------------------------------------------------------------------
 def on_blackforge(win: Any) -> None:
     win.nav["navBlackforge"].setChecked(False)

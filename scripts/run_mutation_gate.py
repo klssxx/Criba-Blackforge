@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 import re
 import subprocess
-import sys
 from typing import Any
 
 
@@ -38,7 +37,12 @@ def parse_mutmut_summary(output: str) -> dict[str, int]:
 
 def run_shard(target: str, minimum_score: float) -> tuple[int, dict[str, Any]]:
     """Execute a clean mutation shard and return an evidence report."""
-    command = [sys.executable, "-m", "mutmut", "run", target, "--max-children", "2"]
+    # Invoke the console entry point so ``mutmut.__main__`` is imported under
+    # its canonical module name. ``python -m mutmut`` executes it first as
+    # ``__main__``; the generated trampoline then imports ``mutmut.__main__``
+    # again inside the test worker and mutmut 3.x attempts to initialise the
+    # multiprocessing context twice (GH-466).
+    command = ["mutmut", "run", target, "--max-children", "2"]
     completed = subprocess.run(
         command,
         cwd=Path.cwd(),

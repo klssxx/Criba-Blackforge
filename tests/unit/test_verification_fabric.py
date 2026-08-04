@@ -9,6 +9,7 @@ import pytest
 
 from scripts.verification_fabric import (
     FABRIC_SCHEMA_VERSION,
+    FROZEN_TOOLCHAIN,
     GateResult,
     GateSpec,
     automatic_verdict,
@@ -18,6 +19,15 @@ from scripts.verification_fabric import (
     p2_gate_specs,
     verify_manifest,
 )
+
+
+def test_modal_image_pin_matches_declared_mutmut_toolchain() -> None:
+    repo_root = Path(__file__).resolve().parents[2]
+    modal_runner = (repo_root / ".autoregen/cloud/modal_runner.py").read_text(
+        encoding="utf-8"
+    )
+    expected_pin = f'"mutmut=={FROZEN_TOOLCHAIN["mutmut"]}"'
+    assert expected_pin in modal_runner
 
 
 def _result(spec: GateSpec, **changes: object) -> GateResult:
@@ -52,6 +62,18 @@ def test_p2_profile_covers_requested_verification_categories() -> None:
     } <= categories
     assert len(specs) == len({spec.gate_id for spec in specs})
     assert all(spec.command_timeout_seconds <= 86_400 for spec in specs)
+    mutation_targets = {
+        spec.command[spec.command.index("--target") + 1]
+        for spec in specs
+        if spec.category == "mutation"
+    }
+    assert mutation_targets == {
+        "criba.personas.x__parse_persona_output__mutmut_*",
+        "criba.personas.x_run_persona__mutmut_*",
+        "criba.personas.x_evaluate_persona_diversity__mutmut_*",
+        "criba.personas.x_validate_team_protocol__mutmut_*",
+        "criba.personas.x__authorization_status__mutmut_*",
+    }
 
 
 def test_required_failure_produces_fail() -> None:
@@ -126,6 +148,33 @@ def test_manifest_self_hash_and_log_hash_detect_tampering(tmp_path: Path) -> Non
     tampered = json.loads(json.dumps(manifest))
     tampered["results"][0]["stdout"] = "forged"
     assert verify_manifest(tampered) == (False, "manifest_sha256 mismatch")
+
+
+def test_source_snapshot_excludes_backups_and_generated_verification_runs(
+    tmp_path: Path,
+) -> None:
+    source = tmp_path / "src" / "criba"
+    source.mkdir(parents=True)
+    (source / "engine.py").write_text("ACTIVE = True\n", encoding="utf-8")
+    (source / "engine.py.bak").write_text("stale backup\n", encoding="utf-8")
+
+    verification = tmp_path / "verification"
+    (verification / "compose_run").mkdir(parents=True)
+    (verification / "lottery_results").mkdir(parents=True)
+    (verification / "canonical.json").write_text("{}\n", encoding="utf-8")
+    (verification / "compose_run" / "scratch.json").write_text(
+        "{}\n", encoding="utf-8"
+    )
+    (verification / "lottery_results" / "generated.json").write_text(
+        "{}\n", encoding="utf-8"
+    )
+
+    snapshot = build_source_snapshot(tmp_path, ("src", "verification"))
+
+    assert [entry["path"] for entry in snapshot["files"]] == [
+        "src/criba/engine.py",
+        "verification/canonical.json",
+    ]
 
 
 def test_gate_rejects_timeout_beyond_modal_limit() -> None:

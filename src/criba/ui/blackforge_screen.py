@@ -221,7 +221,10 @@ class BlackforgeScreen(QWidget):
     def __init__(self, main_window: Any) -> None:
         super().__init__()
         self.win = main_window
-        self.t: Tokens = main_window.t
+        # Tokens ya recargados por main_window, pero obtener instancia fresca
+        from .tokens import load_tokens, reload_tokens
+        reload_tokens()
+        self.t: Tokens = load_tokens()
         self.setObjectName("mainColumn")
         self._hero_pixmap = QPixmap()
         self._metrics = _catalog_metrics()
@@ -331,6 +334,8 @@ class BlackforgeScreen(QWidget):
         self.backBtn.setObjectName("ghost")
         self.backBtn.setCursor(Qt.CursorShape.PointingHandCursor)
         self.backBtn.clicked.connect(self._go_back)
+        # respiración neón cyan (regreso a CRIBA desde BLACKFORGE)
+        apply_neon_breath(self.backBtn, color="#00DDF2", min_blur=6, max_blur=18, period_ms=6000)
         lay.addWidget(self.backBtn)
         return tb
 
@@ -457,7 +462,7 @@ class BlackforgeScreen(QWidget):
         self._run_btn.setObjectName("primary")
         self._run_btn.setCursor(Qt.CursorShape.PointingHandCursor)
         apply_neon_breath(self._run_btn,
-                          color="#FF7A1A", min_blur=6, max_blur=18, period_ms=4000)
+                          color="#FF6A00", min_blur=6, max_blur=18, period_ms=4000)
         self._run_btn.clicked.connect(self._on_execute)
         lay.addWidget(self._run_btn)
         return card

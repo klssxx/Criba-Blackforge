@@ -1,0 +1,173 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Every PR job is intentionally read-only. There is no pull_request_target,
+# credential, deployment, or write-capable token in this workflow.
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  quality:
+    name: quality (Python ${{ matrix.python-version }})
+    runs-on: windows-2025
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.11']
+    steps:
+      # v5.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      # v6.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: ${{ matrix.python-version }}
+      # v7.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9
+        with:
+          version: '0.11.28'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install locked dependencies
+        shell: pwsh
+        run: uv sync --all-extras --locked
+      - name: Run tests
+        shell: pwsh
+        run: uv run pytest -q
+      - name: Type-check supported source
+        if: matrix.python-version == '3.11'
+        shell: pwsh
+        run: uv run mypy src/criba
+
+  workflow-lint:
+    name: workflow lint
+    runs-on: windows-2025
+    timeout-minutes: 10
+    steps:
+      # v5.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Download and verify actionlint for Windows
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $archive = Join-Path $env:RUNNER_TEMP 'actionlint_1.7.12_windows_amd64.zip'
+          $toolDir = Join-Path $env:RUNNER_TEMP 'actionlint-1.7.12'
+          Invoke-WebRequest -Uri 'https://github.com/rhysd/actionlint/releases/download/v1.7.12/actionlint_1.7.12_windows_amd64.zip' -OutFile $archive
+          $expected = '6e7241b51e6817ea6a047693d8e6fed13b31819c9a0dd6c5a726e1592d22f6e9'
+          $actual = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $expected) { throw "actionlint checksum mismatch: $actual" }
+          Expand-Archive -LiteralPath $archive -DestinationPath $toolDir -Force
+          "ACTIONLINT_EXE=$(Join-Path $toolDir 'actionlint.exe')" | Add-Content -LiteralPath $env:GITHUB_ENV
+      - name: Lint GitHub Actions workflows
+        shell: pwsh
+        run: |
+          & $env:ACTIONLINT_EXE
+          exit $LASTEXITCODE
+
+  dependency-audit:
+    name: dependency audit
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      # v5.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      # v6.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1
+        with:
+          python-version: '3.11'
+      # v7.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: astral-sh/setup-uv@94527f2e458b27549849d47d273a16bec83a01e9
+        with:
+          version: '0.11.28'
+          enable-cache: true
+          cache-dependency-glob: uv.lock
+      - name: Install locked dependencies
+        shell: pwsh
+        run: uv sync --all-extras --locked
+      - name: Export public dependencies with hashes
+        shell: pwsh
+        run: uv export --all-extras --locked --no-emit-project --format requirements-txt --output-file requirements-audit.txt
+      - name: Fail on known vulnerable public dependencies
+        # The exported file deliberately excludes the local editable package
+        # and contains the hashes from uv.lock.
+        shell: pwsh
+        run: uv run pip-audit --requirement requirements-audit.txt --strict --require-hashes --progress-spinner off
+
+  repository-scan:
+    name: repository scan
+    runs-on: windows-2025
+    timeout-minutes: 15
+    steps:
+      # v5.0.0, tag verified with git ls-remote on 2026-07-26.
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+        with:
+          fetch-depth: 1
+          persist-credentials: false
+      - name: Download and verify Trivy for Windows
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $archive = Join-Path $env:RUNNER_TEMP 'trivy_0.72.0_windows-64bit.zip'
+          $toolDir = Join-Path $env:RUNNER_TEMP 'trivy-0.72.0'
+          Invoke-WebRequest -Uri 'https://github.com/aquasecurity/trivy/releases/download/v0.72.0/trivy_0.72.0_windows-64bit.zip' -OutFile $archive
+          $expected = 'ed3cf122060f61818fe1f735fd97557954e16e10bc8b058af9852271cf2e91b3'
+          $actual = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant()
+          if ($actual -ne $expected) { throw "Trivy checksum mismatch: $actual" }
+          Expand-Archive -LiteralPath $archive -DestinationPath $toolDir -Force
+          "TRIVY_EXE=$(Join-Path $toolDir 'trivy.exe')" | Add-Content -LiteralPath $env:GITHUB_ENV
+      - name: Fail on HIGH or CRITICAL source findings
+        shell: pwsh
+        run: |
+          & $env:TRIVY_EXE fs `
+            --scanners vuln,secret,misconfig `
+            --severity HIGH,CRITICAL `
+            --ignore-unfixed `
+            --exit-code 1 `
+            --skip-dirs .git `
+            --skip-dirs .venv `
+            --skip-dirs build `
+            --skip-dirs dist `
+            .
+          exit $LASTEXITCODE
+
+  ci-result:
+    name: ci-result
+    needs: [quality, workflow-lint, dependency-audit, repository-scan]
+    if: ${{ !cancelled() }}
+    runs-on: windows-2025
+    timeout-minutes: 5
+    env:
+      QUALITY_RESULT: ${{ needs.quality.result }}
+      WORKFLOW_LINT_RESULT: ${{ needs.workflow-lint.result }}
+      DEPENDENCY_AUDIT_RESULT: ${{ needs.dependency-audit.result }}
+      REPOSITORY_SCAN_RESULT: ${{ needs.repository-scan.result }}
+    steps:
+      - name: Enforce every required check
+        shell: pwsh
+        run: |
+          $checks = @('QUALITY_RESULT', 'WORKFLOW_LINT_RESULT', 'DEPENDENCY_AUDIT_RESULT', 'REPOSITORY_SCAN_RESULT')
+          foreach ($check in $checks) {
+            $value = [Environment]::GetEnvironmentVariable($check)
+            if ($value -ne 'success') {
+              Write-Error "$check did not pass: $value"
+              exit 1
+            }
+          }

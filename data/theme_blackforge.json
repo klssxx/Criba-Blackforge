@@ -5,41 +5,43 @@
   "relationship": "Mismo nivel de calidad visual y sistemas de tokens que CRIBA; distinta firma cromatica (naranja en vez de cian/violeta) y distinto tono emocional (especializacion dura, tecnica, controlada, exclusiva). No rompe CRIBA.",
   "color": {
     "bg": {
-      "app": "#0C0A08",
-      "panel": "#15110D",
-      "card": "#1D1712",
-      "card_hover": "#271F17",
+      "app": "#050607",
+      "panel": "#0D1012",
+      "card": "#121619",
+      "card_hover": "#181D20",
       "hero": "#0A0806",
-      "inset": "#120E0A"
+      "inset": "#0B0D0F"
     },
     "border": {
-      "soft": "#3A2E22",
-      "active": "#FF7A1A"
+      "soft": "#30363B",
+      "active": "#FF6A00"
     },
     "text": {
-      "primary": "#FBF3EA",
-      "secondary": "#C9B8A6",
-      "muted": "#8A7866"
+      "primary": "#F5F4F1",
+      "secondary": "#AEB4B8",
+      "muted": "#7A8085"
     },
     "accent": {
-      "orange": "#FF7A1A",
-      "orange_dim": "#C2410C",
-      "orange_glow": "#FF9A3D"
+      "orange": "#FF6A00",
+      "orange_dim": "#C65300",
+      "orange_glow": "#FF8318",
+      "orange_bright": "#FF8318",
+      "amber": "#FFA126"
     },
-    "success": "#3DDC84",
-    "warning": "#F5A623",
-    "error": "#FF4D4D",
+    "success": "#21D879",
+    "warning": "#FFAA1C",
+    "error": "#FF573D",
     "chart": {
-      "orange": "#FF7A1A",
+      "orange": "#FF6A00",
       "neutral": "#5C4B39",
-      "green": "#3DDC84",
-      "red": "#FF4D4D"
+      "green": "#21D879",
+      "red": "#FF573D"
     }
   },
   "gradient": {
-    "brand": ["#FF7A1A", "#FFB15C"],
-    "cta": ["#FF7A1A", "#FF5A1A"],
-    "herald": ["#FF9A3D", "#FFE0B0"]
+    "brand": ["#FF6A00", "#FFA126"],
+    "cta": ["#FF6A00", "#FF5A1A"],
+    "herald": ["#FF8318", "#FFD5A0"]
   },
   "radius": {
     "sm": 6,
@@ -61,12 +63,12 @@
     "md": "0 4px 16px rgba(0,0,0,0.65)",
     "glow_1": {
       "blur": 14,
-      "color": "rgba(255,122,26,0.32)",
+      "color": "rgba(255,106,0,0.32)",
       "note": "elemento activo/hover destacado; via QGraphicsDropShadowEffect"
     },
     "glow_2": {
       "blur": 26,
-      "color": "rgba(255,154,61,0.40)",
+      "color": "rgba(255,131,24,0.40)",
       "note": "SOLO el gauge central 'FORGE_INTEGRITY' / hero activo"
     }
   },

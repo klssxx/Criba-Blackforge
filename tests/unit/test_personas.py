@@ -49,14 +49,15 @@ def _packet() -> dict[str, object]:
 
 
 class _JsonBackend:
-    def __init__(self, response: dict[str, object]) -> None:
+    def __init__(self, response: dict[str, object], persona_id: str = "A") -> None:
         self._response = response
+        self._persona_id = persona_id
 
     def is_available(self) -> bool:
         return True
 
     def generate(self, prompt: str, system_prompt: str = "") -> str:
-        assert "PERSONA A" in prompt
+        assert f"PERSONA {self._persona_id}" in prompt
         assert "solo JSON" in system_prompt
         return json.dumps(self._response)
 
@@ -146,13 +147,19 @@ class TestPromptAndExecution:
         assert result.confidence == "inferred"
         assert isinstance(result.output, PersonaA)
 
-    def test_valid_backend_response_is_parsed_against_the_right_contract(self) -> None:
-        fallback = run_persona("A", _packet()).output
-        backend = _JsonBackend(fallback.model_dump())
-        result = run_persona("A", _packet(), backend=backend)
+    @pytest.mark.parametrize(
+        ("persona_id", "expected_type"),
+        [("A", PersonaA), ("B", PersonaB), ("C", PersonaC), ("D", PersonaD)],
+    )
+    def test_valid_backend_response_is_parsed_against_the_right_contract(
+        self, persona_id, expected_type
+    ) -> None:
+        fallback = run_persona(persona_id, _packet()).output
+        backend = _JsonBackend(fallback.model_dump(), persona_id)
+        result = run_persona(persona_id, _packet(), backend=backend)
         assert result.source == "llm"
         assert result.confidence == "unverified"
-        assert isinstance(result.output, PersonaA)
+        assert isinstance(result.output, expected_type)
 
     def test_invalid_backend_response_falls_back_without_claiming_evidence(self) -> None:
         result = run_persona("C", _packet(), backend=_InvalidBackend())
@@ -202,6 +209,26 @@ class TestPromptAndExecution:
 
 
 class TestDifferentiationAndMinorityReport:
+    @staticmethod
+    def _with_recommendations(recommendations: list[str]) -> list[PersonaResult]:
+        results = run_personas(_packet())
+        return [
+            result.model_copy(
+                update={
+                    "output": result.output.model_copy(
+                        update={
+                            (
+                                "strongest_direction"
+                                if isinstance(result.output, PersonaB)
+                                else "recommendation"
+                            ): recommendation
+                        }
+                    )
+                }
+            )
+            for result, recommendation in zip(results, recommendations, strict=True)
+        ]
+
     def test_distinct_personas_pass_diversity_check(self) -> None:
         report = evaluate_persona_diversity(run_personas(_packet()))
         assert isinstance(report, PersonaDiversityReport)
@@ -233,6 +260,7 @@ class TestDifferentiationAndMinorityReport:
         missing = validate_team_protocol(results)
         assert not missing.is_valid
         assert missing.requires_minority_report
+        assert missing.reason == "minority_report_required_for_disagreement"
 
         report = MinorityReport(
             dissenting_persona_ids=["D"],
@@ -243,3 +271,18 @@ class TestDifferentiationAndMinorityReport:
         accepted = validate_team_protocol(results, minority_report=report)
         assert accepted.is_valid
         assert accepted.requires_minority_report
+        assert accepted.reason == "minority_report_present"
+
+    def test_empty_recommendation_does_not_create_false_disagreement(self) -> None:
+        results = self._with_recommendations(["", "consensus", "consensus", "consensus"])
+        validation = validate_team_protocol(results)
+        assert validation.is_valid
+        assert not validation.requires_minority_report
+        assert validation.reason == "no_recommendation_disagreement"
+
+    def test_exactly_two_recommendations_require_a_minority_report(self) -> None:
+        results = self._with_recommendations(["majority", "majority", "minority", "majority"])
+        validation = validate_team_protocol(results)
+        assert not validation.is_valid
+        assert validation.requires_minority_report
+        assert validation.reason == "minority_report_required_for_disagreement"

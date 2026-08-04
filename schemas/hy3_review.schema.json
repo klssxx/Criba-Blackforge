@@ -1,0 +1,170 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://local.criba/schemas/hy3_review.schema.json",
+  "title": "CRIBA Hy3 Semantic Review",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "phase",
+    "model",
+    "review_mode",
+    "source_hash",
+    "verdict",
+    "findings",
+    "persona_separation",
+    "minority_preservation",
+    "scope_compliance",
+    "recommended_next_action"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "phase": {
+      "const": "P2"
+    },
+    "model": {
+      "type": "string",
+      "minLength": 1
+    },
+    "review_mode": {
+      "enum": [
+        "hermes_hy3",
+        "modal_direct_hy3"
+      ]
+    },
+    "source_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "verdict": {
+      "enum": [
+        "VERIFIED",
+        "PARTIAL",
+        "BLOCKED",
+        "FAILED"
+      ]
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "severity",
+          "title",
+          "evidence",
+          "affected_paths",
+          "regression_test"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "severity": {
+            "enum": [
+              "BLOCKER",
+              "HIGH",
+              "MEDIUM",
+              "LOW"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidence": {
+            "type": "string",
+            "minLength": 1
+          },
+          "affected_paths": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "regression_test": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposed_minimal_fix": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "persona_separation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_structurally_distinct",
+        "evidence",
+        "collapse_risks"
+      ],
+      "properties": {
+        "is_structurally_distinct": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "collapse_risks": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "minority_preservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "is_unambiguous",
+        "evidence"
+      ],
+      "properties": {
+        "is_unambiguous": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "scope_compliance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "p3_to_p10_untouched",
+        "evidence"
+      ],
+      "properties": {
+        "p3_to_p10_untouched": {
+          "type": "boolean"
+        },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "recommended_next_action": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

@@ -2739,6 +2739,30 @@
     "uncertainty": 56
   },
   "model_instruction": "Antes de responder al usuario, aplica obligatoriamente el paquete CRIBA adjunto.\n\nCorriente activada: Ablación, retirada y reintroducción.\n\nTu tarea es INNOVAR: usa el paquete para generar ideas nuevas, divergentes y accionables. Separa: 1. ideas generadas, 2. combinaciones inesperadas, 3. experimentos rápidos, 4. riesgos y cómo acotarlos.\n\nNo reveles cadena de pensamiento privada. Expón corriente activada, ideas, propuestas, riesgos, incertidumbre y respuesta final. Cuando falte información, no inventes datos.",
+  "morphological_frame": {
+    "coverage": "2/9 ejes con evidencia",
+    "evidence": {
+      "actor": [
+        "agente"
+      ],
+      "salida": [
+        "idea",
+        "demo"
+      ]
+    },
+    "inferred": {
+      "actor": "agente IA",
+      "dominio_externo": "biología",
+      "entrada": "prompt",
+      "escala": "proyecto",
+      "grado_ruptura": "moderado",
+      "orientacion": "detección",
+      "restriccion": "hardware limitado",
+      "salida": "idea",
+      "tiempo": "una sesión"
+    },
+    "schema": "morphological_frame_v1"
+  },
   "original_query": "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones de agentes autónomos sin depender de una autoridad central permanente?",
   "packet_type": "MANDATORY_MODEL_PACKET",
   "response_contract": {

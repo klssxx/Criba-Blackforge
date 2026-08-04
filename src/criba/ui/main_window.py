@@ -6,11 +6,12 @@ Datos reales del engine (activate/Storage); sin datos fake permanentes.
 from __future__ import annotations
 
 from datetime import datetime
+from pathlib import Path
 from typing import Any
 
-from PySide6.QtCore import QThreadPool, QTimer, Qt
+from PySide6.QtCore import QProcess, QThreadPool, QTimer, Qt
 from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QMainWindow,
-                               QPushButton, QScrollArea, QStackedWidget,
+                               QMessageBox, QPushButton, QScrollArea,
                                QToolButton, QVBoxLayout, QWidget)
 
 from ..storage import Storage
@@ -36,6 +37,9 @@ NAV_SPEC = [
 class CribaMainWindow(QMainWindow):
     def __init__(self, database: Any = None) -> None:
         super().__init__()
+        # Force fresh token load (clears lru_cache for theme updates)
+        from .tokens import reload_tokens
+        reload_tokens()
         self.t = load_tokens()
         self.store = Storage(database)
         self.packet: dict[str, Any] | None = None
@@ -44,6 +48,7 @@ class CribaMainWindow(QMainWindow):
         self.sources_updated_at: datetime | None = None
         self.pool = QThreadPool.globalInstance()
         self.refs: dict[str, Any] = {}
+        self._blackforge_process: QProcess | None = None
         self.setWindowTitle("CRIBA — Innovación sin límites")
         self.setMinimumSize(1360, 768)
         self.resize(1680, 1050)
@@ -65,11 +70,9 @@ class CribaMainWindow(QMainWindow):
         rl = QHBoxLayout(root)
         rl.setContentsMargins(0, 0, 0, 0)
         rl.setSpacing(0)
-        rl.addWidget(self._build_sidebar())
-        # QStackedWidget: page 0 = workbench CRIBA, page 1 = pantalla Blackforge.
-        # Navegar a Blackforge cambia de página (no abre otra ventana): la
-        # navegación se conserva y "Volver a CRIBA" regresa a la página 0.
-        self.stack = QStackedWidget()
+        self.sidebar = self._build_sidebar()
+        self.sidebar.setVisible(True)  # Visible por defecto en CRIBA
+        rl.addWidget(self.sidebar)
         criba_page = QWidget()
         criba_page.setObjectName("mainColumn")
         ml = QVBoxLayout(criba_page)
@@ -78,20 +81,77 @@ class CribaMainWindow(QMainWindow):
         ml.addWidget(self._build_topbar())
         ml.addWidget(self._build_content(), 1)
         ml.addWidget(self._build_footer())
-        self.stack.addWidget(criba_page)
-        from .blackforge_screen import BlackforgeScreen
-        self.blackforge_page = BlackforgeScreen(self)
-        self.stack.addWidget(self.blackforge_page)
-        rl.addWidget(self.stack, 1)
+        rl.addWidget(criba_page, 1)
 
     def show_criba_page(self) -> None:
-        """Vuelve al workbench principal de CRIBA (desde Blackforge)."""
-        self.stack.setCurrentIndex(0)
+        """Restore CRIBA after the standalone BLACKFORGE app exits."""
+        self.show()
+        self.raise_()
+        self.activateWindow()
 
-    def show_blackforge_page(self) -> None:
-        """Cambia a la pantalla especializada Blackforge (misma ventana)."""
-        self.stack.setCurrentIndex(1)
-        self.blackforge_page.on_enter()
+    def show_blackforge_page(
+        self, history_packet: dict[str, Any] | None = None
+    ) -> None:
+        """Launch BLACKFORGE as a separate, shell-free child process.
+
+        ``history_packet`` is accepted for compatibility with the history
+        action.  Session data remains in the shared CRIBA store; no untrusted
+        packet content is interpolated into process arguments.
+        """
+        del history_packet
+        if (
+            self._blackforge_process is not None
+            and self._blackforge_process.state()
+            != QProcess.ProcessState.NotRunning
+        ):
+            self.hide()
+            return
+
+        from .app_bridge import (
+            BlackforgeLaunchError,
+            resolve_blackforge_launch,
+        )
+
+        try:
+            launch = resolve_blackforge_launch()
+        except BlackforgeLaunchError as exc:
+            QMessageBox.warning(self, "CRIBA · BLACKFORGE", str(exc))
+            return
+
+        process = QProcess(self)
+        process.setProgram(launch.program)
+        process.setArguments(list(launch.arguments))
+        if launch.arguments:
+            process.setWorkingDirectory(str(Path(__file__).resolve().parents[3]))
+        else:
+            process.setWorkingDirectory(str(Path(launch.program).resolve().parent))
+        process.started.connect(self.hide)
+        process.finished.connect(self._on_blackforge_finished)
+        process.errorOccurred.connect(self._on_blackforge_error)
+        self._blackforge_process = process
+        process.start()
+
+    def _on_blackforge_finished(
+        self, exit_code: int, exit_status: QProcess.ExitStatus
+    ) -> None:
+        del exit_code, exit_status
+        process = self._blackforge_process
+        self._blackforge_process = None
+        if process is not None:
+            process.deleteLater()
+        self.show_criba_page()
+
+    def _on_blackforge_error(self, error: QProcess.ProcessError) -> None:
+        if error == QProcess.ProcessError.FailedToStart:
+            process = self._blackforge_process
+            detail = process.errorString() if process is not None else str(error)
+            self._blackforge_process = None
+            QMessageBox.warning(
+                self,
+                "CRIBA · BLACKFORGE",
+                f"No se pudo iniciar BLACKFORGE:\n{detail}",
+            )
+            self.show_criba_page()
 
 
     def _build_sidebar(self) -> QFrame:

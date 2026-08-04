@@ -30,7 +30,7 @@ FROZEN_TOOLCHAIN: Final[dict[str, str]] = {
     "httpx": "0.28.1",
     "hypothesis": "6.161.1",
     "ruff": "0.12.12",
-    "mutmut": "3.5.0",
+    "mutmut": "3.6.0",
 }
 
 
@@ -155,11 +155,17 @@ def p2_gate_specs() -> list[GateSpec]:
         "--timeout-method=thread",
     )
     mutation_targets = (
-        ("mutation_persona_c", "criba.personas.PersonaC*"),
-        ("mutation_run_persona", "criba.personas.run_persona*"),
-        ("mutation_diversity", "criba.personas.evaluate_persona_diversity*"),
-        ("mutation_protocol", "criba.personas.validate_team_protocol*"),
-        ("mutation_authorization", "criba.personas._authorization_status*"),
+        ("mutation_persona_c", "criba.personas.x__parse_persona_output__mutmut_*"),
+        ("mutation_run_persona", "criba.personas.x_run_persona__mutmut_*"),
+        (
+            "mutation_diversity",
+            "criba.personas.x_evaluate_persona_diversity__mutmut_*",
+        ),
+        ("mutation_protocol", "criba.personas.x_validate_team_protocol__mutmut_*"),
+        (
+            "mutation_authorization",
+            "criba.personas.x__authorization_status__mutmut_*",
+        ),
     )
     specs = [
         GateSpec(
@@ -475,5 +481,9 @@ def _ignored_snapshot_path(path: Path) -> bool:
         "artifacts",
         "dist",
         "build",
+        "compose_run",
+        "lottery_results",
     }
-    return any(part in ignored_parts for part in path.parts)
+    return path.suffix.casefold() == ".bak" or any(
+        part in ignored_parts for part in path.parts
+    )

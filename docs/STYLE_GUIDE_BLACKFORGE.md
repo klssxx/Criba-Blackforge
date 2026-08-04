@@ -13,8 +13,8 @@ Hermano de STYLE_GUIDE_CRIBA.md: mismos sistemas, firma cromatica naranja.
 Fondos
 | Token                | Valor    | Uso |
 |----------------------|----------|-----|
-| color.bg.app         | #0C0A08  | fondo global de la ventana (negro carbón cálido) |
-| color.bg.panel       | #15110D  | sidebar, top bar, footer strip |
+| color.bg.app         | #050607  | fondo global de la ventana (negro carbón cálido) |
+| color.bg.panel       | #0D1012  | sidebar, top bar, footer strip |
 | color.bg.card        | #1D1712  | cards estándar |
 | color.bg.card.hover  | #271F17  | hover de cards, filas y botones de nav |
 | color.bg.hero        | #0A0806  | base del hero / pozo de la imagen |
@@ -22,7 +22,7 @@ Fondos
 
 Bordes
 | color.border.soft    | #3A2E22  | borde por defecto de cards y divisores |
-| color.border.active  | #FF7A1A  | borde de elemento activo/foco (naranja) |
+| color.border.active  | #FF6A00  | borde de elemento activo/foco (naranja) |
 
 Texto
 | color.text.primary   | #FBF3EA  | títulos, valores, texto principal (blanco cálido) |
@@ -30,25 +30,25 @@ Texto
 | color.text.muted     | #8A7866  | captions, etiquetas, metadatos |
 
 Acentos (firma cromática BF)
-| color.accent.orange      | #FF7A1A  | elemento activo, enlaces, highlights, marca |
+| color.accent.orange      | #FF6A00  | elemento activo, enlaces, highlights, marca |
 | color.accent.orange.dim  | #C2410C  | variantes, bordes destacados al 40% |
-| color.accent.orange.glow | #FF9A3D  | glow naranja, bordes de glow |
+| color.accent.orange.glow | #FF8318  | glow naranja, bordes de glow |
 
 Semánticos
-| color.success | #3DDC84  | sesión activa, sandbox OK, guardado |
+| color.success | #21D879  | sesión activa, sandbox OK, guardado |
 | color.warning | #F5A623  | revisión requerida, degradación |
-| color.error   | #FF4D4D  | fallos, riesgo alto, autorización faltante |
+| color.error   | #FF573D  | fallos, riesgo alto, autorización faltante |
 
 Charts (orden fijo; no improvisar colores en gráficos)
-| color.chart.orange | #FF7A1A | naranja — superficie de ataque, vectores |
+| color.chart.orange | #FF6A00 | naranja — superficie de ataque, vectores |
 | color.chart.neutral| #5C4B39 | gris carbón — residual, "Otros" |
-| color.chart.green | #3DDC84 | verde — contramedidas OK, estados sanos |
-| color.chart.red   | #FF4D4D | rojo — riesgo alto, alertas |
+| color.chart.green | #21D879 | verde — contramedidas OK, estados sanos |
+| color.chart.red   | #FF573D | rojo — riesgo alto, alertas |
 
 Degradados canónicos (solo estos 3):
-- grad.brand:  naranja #FF7A1A → ámbar #FFB15C (logo BF, gauge hero, activos)
-- grad.cta:    naranja #FF7A1A → rojo #FF5A1A (botones primarios)
-- grad.herald: naranja #FF9A3D → hueso #FFE0B0 (overlays del hero)
+- grad.brand:  naranja #FF6A00 → ámbar #FFA126 (logo BF, gauge hero, activos)
+- grad.cta:    naranja #FF6A00 → rojo #FF5A1A (botones primarios)
+- grad.herald: naranja #FF8318 → hueso #FFD5A0 (overlays del hero)
 
 ======================================================================
 2. RADIOS, ESPACIADO, SOMBRAS, ICONOS

@@ -20,7 +20,9 @@ Ver `docs/ARCHITECTURE.md` (diagrama Mermaid, contratos y flujos).
 - **Pipeline BLACKFORGE** (`src/criba/blackforge_pipeline.py`): `run_headless()`
   sobre catálogo inmutable → selector + safety + firma causal + convergencia →
   packet 2.1.
-- **GUI** (`src/criba/gui.py`): app PySide6/Qt6, tema oscuro premium.
+- **GUI CRIBA** (`src/criba/gui.py`) y **GUI BLACKFORGE**
+  (`src/criba/blackforge_gui.py`): aplicaciones PySide6/Qt6 independientes.
+  CRIBA inicia BLACKFORGE sin shell y vuelve a mostrarse cuando esta termina.
 - **Entrypoints**: GUI (`criba.gui:run`), CLI (`criba.cli:main`), API loopback
   (`api.py`), MCP stdio (`mcp_server.py`).
 
@@ -56,7 +58,11 @@ El build usa PyInstaller `onedir` (windowed, con Qt/PySide6 empaquetado) desde
 .\.venv\Scripts\python.exe -m PyInstaller --noconfirm --clean CRIBA-Blackforge.spec
 ```
 
-Salida: `dist\CRIBA-Blackforge\CRIBA-Blackforge.exe`.
+Salidas principales:
+
+- `dist\CRIBA-Blackforge\CRIBA.exe`
+- `dist\CRIBA-Blackforge\BLACKFORGE.exe`
+- `dist\CRIBA-Blackforge\CRIBA-CLI.exe`
 
 ## Download the Windows portable build
 
@@ -74,11 +80,12 @@ Descarga el ZIP portable (no requiere Python/Git/Docker/API key):
    identifica de forma autoritativa el build portable concreto que descargaste.
 
 3. **Extraer** en una carpeta (p.ej. `C:\CRIBA`).
-4. **Ejecutar** `CRIBA-Blackforge.exe` (doble clic; abre la GUI).
+4. **Ejecutar** `CRIBA.exe` (doble clic; abre CRIBA).
 5. **Demo en 60 segundos**: escribe una consulta en el cuadro inferior y pulsa
    **▶ EJECUTAR CRIBA**; revisa el resumen, métricas y decisión a la derecha.
-6. **BLACKFORGE por CLI** (opcional): desde la carpeta extraída ejecuta
-   `CRIBA-Blackforge-CLI.exe blackforge --query "tu hipótesis" --seed 11`.
+6. **BLACKFORGE**: ábrela desde CRIBA; se ejecuta como `BLACKFORGE.exe`.
+   Por CLI (opcional), ejecuta
+   `CRIBA-CLI.exe blackforge --query "tu hipótesis" --seed 11`.
 
 Consulta `FIRST_RUN_ES.md` / `FIRST_RUN_EN.md` dentro del ZIP para la guía
 completa.

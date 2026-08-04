@@ -1,6 +1,6 @@
 # UI_CONTRACT_BLACKFORGE.md
-Contrato visual y estructural de BLACKFORGE — Módulo especializado de ciberseguridad / hacking / innovación técnica
-Versión: 1.0.0 · Fecha: 2026-07-24 · Estado: CONTRATO (no implementado aún)
+Contrato visual y estructural de BLACKFORGE — aplicación especializada de ciberseguridad / hacking / innovación técnica
+Versión: 1.1.0 · Fecha: 2026-07-28 · Estado: IMPLEMENTADO
 
 Este documento es NORMATIVO. Cualquier implementación futura de la pantalla
 principal de BLACKFORGE debe cumplirlo sin desviación relevante. Complementos:
@@ -16,13 +16,14 @@ negro carbón + naranja intenso. Mantiene misma calidad visual, distinto tono.
 1. VISIÓN DE DISEÑO
 ======================================================================
 
-BLACKFORGE es el submodo más poderoso y especializado de CRIBA. Debe percibirse
+BLACKFORGE es una aplicación independiente que CRIBA ejecuta como herramienta
+especializada. Debe percibirse
 como:
 * una "forja" de ideas técnicas;
 * un laboratorio de seguridad;
 * una capa de análisis serio;
 * un módulo premium y exclusivo;
-* "entrar en un submodo avanzado" de CRIBA.
+* entrar en una aplicación avanzada con identidad propia.
 
 Lenguaje visual obligatorio:
 - dark industrial-premium: fondo negro carbón con tinte cálido (no azul);
@@ -255,12 +256,17 @@ Reglas 1360x768 (degradación controlada, en este orden):
 12. RELACIÓN CON EL ESTADO ACTUAL DEL REPO
 ======================================================================
 
-- gui.py actual (CRIBA Current Engine) queda intacto. BLACKFORGE es un
-  QStackedWidget hermano; navBlackforge hace switch y modeBadge → naranja.
+- CRIBA y BLACKFORGE son aplicaciones distintas. CRIBA lanza BLACKFORGE
+  mediante QProcess con programa y argumentos separados, nunca mediante shell.
+- Al arrancar BLACKFORGE, CRIBA se oculta pero permanece vivo. El control
+  "Volver a CRIBA" cierra BLACKFORGE; la señal de fin restaura CRIBA. Un fallo
+  del proceso hijo también restaura CRIBA.
+- En desarrollo se ejecuta `python -m criba.blackforge_gui`. En el portable,
+  `CRIBA.exe` solo admite como destino el ejecutable hermano `BLACKFORGE.exe`
+  dentro del mismo directorio.
 - La nota "MODO BLACKFORGE NO ACTIVO" de STATE_MATRIX_CRIBA.md queda
   SUPERSEDIDA por este contrato: cuando exista la pantalla, navBlackforge
-  navega a este layout (8 zonas) y modeBadge = "MODO: BLACKFORGE" con
-  acento grad.brand.
+  lanza este layout en su propia ventana y proceso.
 - Datos reales del engine (si los hay) alimentan cada bloque; los valores de
   ejemplo de este documento (0.87, 16/16, "Bajo") son ilustrativos y NUNCA
   deben quedar hardcodeados en la implementación.
