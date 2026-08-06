@@ -1,10 +1,10 @@
 {
   "handoff_schema_version": "1.1.0",
-  "reason": "fase4_verified_ready_for_fase5",
-  "last_verified_phase": "FASE 4 — RENDIMIENTO Y RECURSOS COMPLETADA",
-  "current_phase": "FASE 5 — DOCUMENTACIÓN TÉCNICA",
-  "current_status": "ready_for_fase5_documentacion",
-  "checkpoint_date": "2026-07-24",
+  "reason": "advanced_lottery_catalog_branch_verified_before_repository_consolidation",
+  "last_verified_phase": "Integración de modos de lotería, catálogo runtime y portabilidad verificada en Modal",
+  "current_phase": "Checkpoint, PR y consolidación de copias locales",
+  "current_status": "ready_for_checkpoint_commit_and_pr",
+  "checkpoint_date": "2026-08-06",
   "execution_environment": {
     "mode": "cloud_only_for_heavy_work",
     "provider": "modal",
@@ -20,7 +20,7 @@
   "baseline_real": {
     "commit": "0d86764",
     "tests_passed": 137,
-    "note": "Baseline original; no confundirlo con el resultado vigente de 204 pruebas."
+    "note": "Baseline histórico; el resultado vigente con extras GUI es 436 pruebas superadas."
   },
   "latest_remote_verification": {
     "fase3_gate": {
@@ -58,14 +58,58 @@
       "rc": 0
     }
   },
+  "latest_verification_2026_08_06": {
+    "branch": "fix/lottery-modes-catalog-portability",
+    "base_commit": "5b6f727ec98fb6926a770d64c44083c3a764adef",
+    "remote_checkpoint": "origin/fix/lottery-modes-catalog-portability",
+    "modal_full": {
+      "command": "modal run scripts/modal_verify.py",
+      "passed": 436,
+      "failed": 0,
+      "mypy": "Success: no issues found in 29 source files",
+      "ruff_critical": "All checks passed (E9,F63,F7,F82)",
+      "runtime_catalog_records": 7201,
+      "runtime_catalog_sources": 19,
+      "run_url": "https://modal.com/apps/klssxx/main/ap-C0Sf0NLHxof1JG1CQfGYBE",
+      "rc": 0
+    },
+    "modal_coverage": {
+      "passed": 421,
+      "skipped_without_qt_extras": 3,
+      "total_percent_including_qt_views": 44,
+      "run_url": "https://modal.com/apps/klssxx/main/ap-FIpsoylLrzZubbVG9UnlBe",
+      "rc": 0
+    },
+    "blackforge_benchmark": {
+      "repetitions": 3,
+      "catalog_records": 723,
+      "catalog_sha256": "1ec32ab6902c16fce5a5f3c4716a87d7059a1e264cd2bc20a1294125a2c86b47",
+      "catalog_cold_load_median_ms": 52.958432,
+      "headless_pipeline_median_ms": 1.272923,
+      "run_url": "https://modal.com/apps/klssxx/main/ap-2tRdqe6oY9VrxESO5zmJ0Z",
+      "rc": 0
+    }
+  },
   "protected_invariants": [
     "value_score = evidence * novelty / cost",
     "recommended_status remains in VALID_DECISIONS and is not inferred from family count",
     "pipeline_action remains separate and in {PROTOTIPAR, DIVERGIR}",
     "no semantic golden regeneration",
-    "gui.py and theme remain out of scope because of KI-001"
+    "gui.py and theme remain out of strict mypy; GUI tests run with PySide6 offscreen",
+    "runtime method IDs remain unique across all approved sources",
+    "tests must write generated BLACKFORGE artifacts to temporary directories"
   ],
-  "next_exact_action": "FASE 4 completada. Iniciar FASE 5: inspeccionar README.md, CHANGELOG.md, docs/ARCHITECTURE.md si existen, e inventory de docstrings públicas en engine.py, blackforge_*.py. Validar cada reclamo documental contra código. NO tocar gui.py/theme ni repetir FASE 3/4 gates sin cambios relevantes.",
-  "next_exact_command": "git status --short",
-  "next_required_test": "Después del primer bloque de docstring, ejecutar mypy_scoped y pytest focalizado en Modal; para cierre de FASE 5, una única suite Modal completa."
+  "repository_consolidation": {
+    "canonical_target": "E:\\PROYECTS\\CRIBA",
+    "rule": "No borrar ninguna copia hasta que commits y cambios útiles estén en GitHub main.",
+    "dyad_import_root_cause": "Import failed with EPERM while scanning .pytest-temp and left partial destination directories.",
+    "discarded_as_noncanonical": [
+      "generated blackforge_headless_output.json UUID/timestamp drift",
+      "hard-coded E:\\PROYECTS\\CRIBA capture_ui_real.py regression",
+      "stale lockfile and handoff variants superseded by verified branch"
+    ]
+  },
+  "next_exact_action": "Commit and push the verified runner/test/handoff fixes, open and merge the feature PR after GitHub CI, then replace duplicate local repositories with one canonical E:\\PROYECTS\\CRIBA checkout.",
+  "next_exact_command": "git diff --check && git status --short",
+  "next_required_test": "GitHub CI on the final commit; rebuild and smoke-test the Windows portable after main is consolidated."
 }

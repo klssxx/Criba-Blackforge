@@ -1,4 +1,35 @@
-# AUTOREGENERATION_CHECKPOINT
+# CRIBA + BLACKFORGE — CHECKPOINT ACTUAL
+
+## Actualización 2026-08-06
+
+La fuente de trabajo vigente es la rama `fix/lottery-modes-catalog-portability`,
+basada en `main` (`d870f9b`) y con dos checkpoints publicados hasta `5b6f727`.
+Integra los modos optimizado/asociativo/puro, portabilidad de rutas, catálogo
+runtime ampliado y pruebas específicas de CLI/GUI/lotería.
+
+Verificación Modal vigente:
+
+- `modal run scripts/modal_verify.py`: 436 passed, mypy 0 issues en 29 módulos,
+  Ruff crítico PASS y catálogo runtime PASS con 7.201 IDs únicos de 19 fuentes.
+- `modal run .autoregen/cloud/modal_runner.py::coverage_run`: 421 passed,
+  3 skipped sin extras Qt y 44% total incluyendo vistas Qt fuera de instrumentación.
+- Benchmark BLACKFORGE: 723 registros; carga fría mediana 52,958 ms y pipeline
+  headless mediano 1,273 ms (3 repeticiones, Modal).
+
+Pendiente operativo: commit/push de las correcciones finales, PR con CI verde,
+consolidar un único checkout canónico en `E:\PROYECTS\CRIBA` y eliminar copias
+redundantes solo cuando GitHub contenga todo el trabajo útil.
+
+La causa de las carpetas Dyad incompletas fue un import fallido con `EPERM` al
+examinar `.pytest-temp`; Dyad dejó el destino parcial sin rollback. No fue un
+borrado de Git ni afectó al remoto.
+
+Todo el contenido posterior de este documento es historial del checkpoint de
+julio y no debe usarse como próxima acción vigente.
+
+---
+
+# AUTOREGENERATION_CHECKPOINT (HISTÓRICO)
 
 Timestamp: 2026-07-25T00:30:00+02:00
 Motivo: Reconciliación de handoff STALE + verificación final (FASE 5 y FASE 6 cerradas; pendiente solo PUBLICACIÓN con autorización)

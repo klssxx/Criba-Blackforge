@@ -1,9 +1,8 @@
 """FASE 6 — PIPELINE HEADLESS BLACKFORGE (gate reproducible).
 
 Runs the deterministic headless pipeline (src/criba/blackforge_pipeline.py) and
-validates HIPER_MEGAPROMPT FASE 6 contracts. Emits:
-- verification/blackforge_headless_output.json
-- verification/blackforge_headless_output.normalized.json
+validates HIPER_MEGAPROMPT FASE 6 contracts. Artifact persistence is exercised
+in pytest's temporary directory so a test run never rewrites tracked evidence.
 
 Contracts:
 - same seed -> same normalized result (deterministic);
@@ -19,6 +18,7 @@ from __future__ import annotations
 import json
 import os
 import sys
+from pathlib import Path
 
 import pytest
 
@@ -27,8 +27,6 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 from criba import blackforge_pipeline as bp  # noqa: E402
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
-RAW = os.path.join(ROOT, "verification", "blackforge_headless_output.json")
-NORM = os.path.join(ROOT, "verification", "blackforge_headless_output.normalized.json")
 
 
 def test_deterministic_same_seed():
@@ -75,10 +73,12 @@ def test_frozen_problem_model_referenced():
     assert p["selection"]["allowed_tiers"]
 
 
-def test_emits_artifacts_and_normalized_matches_rerun():
+def test_emits_artifacts_and_normalized_matches_rerun(tmp_path: Path):
     p = bp.run_headless(seed=1)
-    paths = bp.save_artifacts(p, out_dir=os.path.join(ROOT, "verification"))
+    paths = bp.save_artifacts(p, out_dir=str(tmp_path))
     assert os.path.exists(paths["raw"]) and os.path.exists(paths["normalized"])
+    assert os.path.basename(paths["raw"]) == "blackforge_headless_output.json"
+    assert os.path.basename(paths["normalized"]) == "blackforge_headless_output.normalized.json"
     # A second run with the same seed must reproduce the normalized artifact.
     p2 = bp.run_headless(seed=1)
     with open(paths["normalized"], encoding="utf-8") as f:

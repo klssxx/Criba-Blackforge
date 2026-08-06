@@ -49,10 +49,16 @@ _INCLUDE = [
     "scripts",
     "imports",
     "data",
+    "docs",
     "verification",
     "pyproject.toml",
     "uv.lock",
     "CRIBA-Blackforge.spec",
+    "README.md",
+    "FIRST_RUN_ES.md",
+    "FIRST_RUN_EN.md",
+    "THIRD_PARTY_NOTICES.md",
+    "LICENSE",
 ]
 
 _PINNED_PACKAGES = (

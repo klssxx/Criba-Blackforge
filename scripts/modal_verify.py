@@ -65,6 +65,20 @@ def verify() -> dict[str, Any]:
         _run(["uv", "sync", "--all-extras", "--locked"]),
         _run(["uv", "run", "pytest", "-q"]),
         _run(["uv", "run", "mypy", "src/criba"]),
+        _run(
+            [
+                "uv",
+                "run",
+                "ruff",
+                "check",
+                "--select",
+                "E9,F63,F7,F82",
+                "src/criba",
+                "tests",
+                "scripts",
+                ".autoregen/cloud/modal_runner.py",
+            ]
+        ),
         _run(["uv", "run", "python", "scripts/verify_library.py"]),
     ]
     return {
