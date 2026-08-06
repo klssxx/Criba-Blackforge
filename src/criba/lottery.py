@@ -1,14 +1,31 @@
-"""Sistema de Doble Lotería para CRIBA: Asociativa + Pura, alternando para máxima diversión."""
+"""Motores de selección optimizada y lotería para CRIBA/BLACKFORGE."""
 from __future__ import annotations
 import json
 import os
 import random
 from itertools import combinations
+from pathlib import Path
 from typing import Any
+
+from .constants import DATA_ROOT
+
+
+VALID_LOTTERY_MODES = {"optimized", "associative", "pure", "alternating"}
+
+
+def default_methods_file() -> Path:
+    """Return the catalog bundled with source checkouts and portable builds."""
+    return DATA_ROOT / "methods" / "library_combined.json"
+
+
+def default_output_dir() -> Path:
+    """Return a writable, machine-independent directory for lottery results."""
+    base = Path(os.environ.get("LOCALAPPDATA") or Path.home())
+    return base / "CRIBA-Blackforge" / "lottery_results"
 
 
 class LotteryEngine:
-    """Motor de doble lotería que explota TODOS los métodos sin repetir combinaciones."""
+    """Select and combine methods without repeating them between rounds."""
 
     def __init__(self, methods_file: str, seed: int = 42):
         self.methods = self._load_methods(methods_file)
@@ -16,8 +33,41 @@ class LotteryEngine:
         self.used_methods: set[str] = set()
         self.all_ideas: list[dict[str, Any]] = []
         self.round_history: list[dict[str, Any]] = []
+        self.last_round_ideas: list[dict[str, Any]] = []
         self.rng = random.Random(seed)
         self.round_number = 0
+
+    @staticmethod
+    def _normalize_method(item: dict[str, Any]) -> dict[str, Any]:
+        """Normalize CRIBA and BLACKFORGE records to the lottery contract."""
+        normalized = dict(item)
+        method_id = str(
+            normalized.get("id")
+            or normalized.get("blackforge_id")
+            or normalized.get("name")
+            or normalized.get("title")
+            or ""
+        ).strip()
+        title = str(normalized.get("title") or normalized.get("name") or method_id).strip()
+        if not method_id or not title:
+            raise ValueError("Cada método debe tener id/nombre y título.")
+        normalized["id"] = method_id
+        normalized["name"] = str(normalized.get("name") or method_id).strip()
+        normalized["title"] = title
+        normalized["description"] = str(
+            normalized.get("description")
+            or normalized.get("template")
+            or normalized.get("selection_reason")
+            or ""
+        ).strip()
+        normalized["family"] = str(
+            normalized.get("family")
+            or normalized.get("functional_category_primary")
+            or normalized.get("source_family")
+            or normalized.get("source")
+            or "general"
+        ).strip()
+        return normalized
 
     def _load_methods(self, filepath: str) -> list[dict[str, Any]]:
         """Carga métodos desde JSON."""
@@ -27,7 +77,10 @@ class LotteryEngine:
             isinstance(item, dict) for item in payload
         ):
             raise ValueError("El archivo de métodos debe contener una lista JSON.")
-        return [dict(item) for item in payload]
+        methods = [self._normalize_method(item) for item in payload]
+        if not methods:
+            raise ValueError("El catálogo de métodos no puede estar vacío.")
+        return methods
 
     @classmethod
     def from_methods(
@@ -40,21 +93,55 @@ class LotteryEngine:
         BLACKFORGE en lugar de parchear atributos con ``__new__``.
         """
         eng = cls.__new__(cls)
-        eng.methods = methods
+        eng.methods = [cls._normalize_method(item) for item in methods]
+        if not eng.methods:
+            raise ValueError("El catálogo de métodos no puede estar vacío.")
         eng.used_combos = set()
         eng.used_methods = set()
         eng.all_ideas = []
         eng.round_history = []
+        eng.last_round_ideas = []
         eng.rng = random.Random(seed)
         eng.round_number = 0
         return eng
 
     def get_available_methods(self) -> list[dict[str, Any]]:
         """Retorna métodos no usados aún."""
-        return [m for m in self.methods if m['name'] not in self.used_methods]
+        return [m for m in self.methods if m['id'] not in self.used_methods]
+
+    def select_optimized_batch(self, size: int = 20) -> list[dict[str, Any]]:
+        """Select the strongest available records while preserving family diversity."""
+        if size < 1:
+            raise ValueError("El tamaño del lote debe ser positivo.")
+        available = self.get_available_methods()
+
+        def rank(method: dict[str, Any]) -> tuple[float, str]:
+            raw_score = method.get("quality_score_v2", method.get("quality_score", 0))
+            try:
+                score = float(raw_score or 0)
+            except (TypeError, ValueError):
+                score = 0.0
+            return (-score, str(method["id"]))
+
+        ranked = sorted(available, key=rank)
+        selected: list[dict[str, Any]] = []
+        families: set[str] = set()
+        for method in ranked:
+            family = str(method["family"])
+            if family in families:
+                continue
+            selected.append(method)
+            families.add(family)
+            if len(selected) >= size:
+                return selected
+        selected_ids = {method["id"] for method in selected}
+        selected.extend(method for method in ranked if method["id"] not in selected_ids)
+        return selected[:size]
 
     def select_random_batch(self, size: int = 20) -> list[dict[str, Any]]:
         """Selecciona un lote ALEATORIO de métodos (lotería pura)."""
+        if size < 1:
+            raise ValueError("El tamaño del lote debe ser positivo.")
         available = self.get_available_methods()
         if len(available) < size:
             return available
@@ -67,6 +154,8 @@ class LotteryEngine:
         query: str | None = None,
     ) -> list[dict[str, Any]]:
         """Selecciona métodos buscando ASOCIACIONES temáticas (lotería asociativa)."""
+        if size < 1:
+            raise ValueError("El tamaño del lote debe ser positivo.")
         available = self.get_available_methods()
         if len(available) < size:
             return available
@@ -85,7 +174,7 @@ class LotteryEngine:
             return related + extra
 
         # Si no hay suficientes relacionados, mezclar
-        families = list(set(m['family'] for m in available))
+        families = sorted({str(m['family']) for m in available})
         selected: list[dict[str, Any]] = []
         selected_families: set[str] = set()
 
@@ -115,7 +204,7 @@ class LotteryEngine:
         pairs = list(combinations(batch, 2))
 
         for m1, m2 in pairs:
-            combo_key = tuple(sorted([m1['title'], m2['title']]))
+            combo_key = tuple(sorted([str(m1['id']), str(m2['id'])]))
 
             # No repetir combinaciones
             if combo_key in self.used_combos:
@@ -233,10 +322,17 @@ class LotteryEngine:
         query: str | None = None,
     ) -> dict[str, Any]:
         """Ejecuta una ronda de lotería."""
+        if mode not in VALID_LOTTERY_MODES:
+            raise ValueError(f"Modo de lotería inválido: {mode}")
+        if batch_size < 2:
+            raise ValueError("El lote debe contener al menos dos métodos.")
         self.round_number += 1
 
         # Seleccionar lote según modo
-        if mode == "associative" or (mode == "alternating" and self.round_number % 2 == 1):
+        if mode == "optimized":
+            batch = self.select_optimized_batch(batch_size)
+            selected_mode = "optimized"
+        elif mode == "associative" or (mode == "alternating" and self.round_number % 2 == 1):
             batch = self.select_associative_batch(batch_size, query=query)
             selected_mode = "associative"
         else:
@@ -245,10 +341,11 @@ class LotteryEngine:
 
         # Marcar métodos como usados
         for m in batch:
-            self.used_methods.add(m['name'])
+            self.used_methods.add(m['id'])
 
         # Generar ideas
         ideas = self.generate_ideas_from_batch(batch, selected_mode)
+        self.last_round_ideas = ideas
 
         # Estadísticas de la ronda
         stats = {
@@ -259,7 +356,8 @@ class LotteryEngine:
             'extraordinary': sum(1 for i in ideas if i['quality'] == 'EXTRAORDINARIA'),
             'good': sum(1 for i in ideas if i['quality'] == 'BUENA'),
             'trash': sum(1 for i in ideas if i['quality'] == 'BASURA'),
-            'families': list(set(m['family'] for m in batch))
+            'families': sorted({str(m['family']) for m in batch}),
+            'method_ids': [str(m['id']) for m in batch],
         }
 
         self.round_history.append(stats)
@@ -273,6 +371,8 @@ class LotteryEngine:
         query: str | None = None,
     ) -> dict[str, Any]:
         """Ejecuta un torneo completo de lotería."""
+        if total_rounds < 1:
+            raise ValueError("El torneo debe tener al menos una ronda.")
         print("=" * 60)
         print("🎰 DOBLE LOTERÍA DE CRIBA 🎰")
         print("=" * 60)
@@ -292,7 +392,11 @@ class LotteryEngine:
 
     def _print_round_stats(self, stats: dict[str, Any]) -> None:
         """Imprime estadísticas de una ronda."""
-        mode_emoji = "🔗" if stats['mode'] == "associative" else "🎲"
+        mode_emoji = {
+            "optimized": "⚙️",
+            "associative": "🔗",
+            "pure": "🎲",
+        }[stats['mode']]
         print(f"Ronda {stats['round']:3d} {mode_emoji} {stats['mode']:12s} | "
               f"Ideas: {stats['ideas_generated']:4d} | "
               f"⭐ {stats['extraordinary']:2d} | "
@@ -357,44 +461,46 @@ class LotteryEngine:
                 coverage[fam] = coverage.get(fam, 0) + 1
         return dict(sorted(coverage.items(), key=lambda x: -x[1]))
 
-    def save_results(self, output_dir: str) -> None:
+    def save_results(self, output_dir: str | Path) -> None:
         """Guarda resultados del torneo."""
-        os.makedirs(output_dir, exist_ok=True)
+        destination = Path(output_dir)
+        destination.mkdir(parents=True, exist_ok=True)
 
         # Guardar todas las ideas
-        with open(os.path.join(output_dir, 'all_ideas.json'), 'w', encoding='utf-8') as f:
+        with (destination / 'all_ideas.json').open('w', encoding='utf-8') as f:
             json.dump(self.all_ideas, f, ensure_ascii=False, indent=2)
 
         # Guardar top ideas
-        with open(os.path.join(output_dir, 'top_ideas.json'), 'w', encoding='utf-8') as f:
+        with (destination / 'top_ideas.json').open('w', encoding='utf-8') as f:
             json.dump(self.get_top_ideas(50), f, ensure_ascii=False, indent=2)
 
         # Guardar extraordinarias
-        with open(os.path.join(output_dir, 'extraordinary_ideas.json'), 'w', encoding='utf-8') as f:
+        with (destination / 'extraordinary_ideas.json').open('w', encoding='utf-8') as f:
             json.dump(self.get_ideas_by_quality('EXTRAORDINARIA'), f, ensure_ascii=False, indent=2)
 
         # Guardar historial
-        with open(os.path.join(output_dir, 'round_history.json'), 'w', encoding='utf-8') as f:
+        with (destination / 'round_history.json').open('w', encoding='utf-8') as f:
             json.dump(self.round_history, f, ensure_ascii=False, indent=2)
 
         # Guardar cobertura
-        with open(os.path.join(output_dir, 'family_coverage.json'), 'w', encoding='utf-8') as f:
+        with (destination / 'family_coverage.json').open('w', encoding='utf-8') as f:
             json.dump(self.get_family_coverage(), f, ensure_ascii=False, indent=2)
 
-        print(f"Resultados guardados en: {output_dir}/")
+        print(f"Resultados guardados en: {destination}")
 
 
 def run_lottery(methods_file: str, rounds: int = 20, batch_size: int = 20,
                 mode: str = "alternating", seed: int = 42,
-                query: str | None = None) -> dict[str, Any]:
+                query: str | None = None,
+                output_dir: str | Path | None = None) -> dict[str, Any]:
     """Función principal para ejecutar la lotería."""
     engine = LotteryEngine(methods_file, seed)
     summary = engine.run_tournament(rounds, batch_size, mode, query=query)
-    engine.save_results("E:/PROYECTS/CRIBA/verification/lottery_results")
+    destination = Path(output_dir) if output_dir is not None else default_output_dir()
+    engine.save_results(destination)
+    summary["output_dir"] = str(destination)
     return summary
 
 
 if __name__ == "__main__":
-    # Ejecutar lotería
-    methods_file = "E:/PROYECTS/CRIBA/verification/compose_run/all_methods.json"
-    run_lottery(methods_file, rounds=20, batch_size=20, mode="alternating")
+    run_lottery(str(default_methods_file()), rounds=20, batch_size=20, mode="alternating")
