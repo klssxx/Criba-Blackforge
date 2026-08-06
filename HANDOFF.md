@@ -2,8 +2,9 @@
 
 ## Actualización 2026-08-06
 
-La fuente de trabajo vigente es la rama `fix/lottery-modes-catalog-portability`,
-basada en `main` (`d870f9b`) y con el checkpoint publicado `28dd82a`.
+La fuente de trabajo vigente es `main` en `e6729b7`, que fusiona la PR #3
+(`fix/lottery-modes-catalog-portability`). La rama de integración queda
+publicada en `aa5ec13` para trazabilidad.
 Integra los modos optimizado/asociativo/puro, portabilidad de rutas, catálogo
 runtime ampliado y pruebas específicas de CLI/GUI/lotería.
 
@@ -15,16 +16,37 @@ Verificación Modal vigente:
   3 skipped sin extras Qt y 44% total incluyendo vistas Qt fuera de instrumentación.
 - Benchmark BLACKFORGE: 723 registros; carga fría mediana 52,958 ms y pipeline
   headless mediano 1,273 ms (3 repeticiones, Modal).
+- CI de la PR #3: las comprobaciones de Python 3.10/3.11, workflow lint,
+  auditoría de dependencias, escaneo del repositorio y `ci-result` finalizaron
+  correctamente: https://github.com/klssxx/Criba-Blackforge/actions/runs/31074122856.
 
-Pendiente operativo: abrir la PR de `28dd82a`, esperar CI verde y fusionarla en
-`main`; después, reconstruir y hacer smoke-test del portable Windows, consolidar
-un único checkout canónico en `E:\PROYECTS\CRIBA` y eliminar copias redundantes
-solo cuando GitHub contenga todo el trabajo útil.
+Portable Windows reconstruido y probado desde el checkout canónico (`main`
+`e6729b7`):
+
+- `uv sync --all-extras --locked` y `scripts/build-portable.ps1` completaron
+  con PyInstaller 6.21.0 y generaron `CRIBA.exe`, `BLACKFORGE.exe` y
+  `CRIBA-CLI.exe`.
+- La CLI se ejecutó desde `%TEMP%`: `--help` y BLACKFORGE con seed 11 dieron
+  salida 0, 12 seleccionados, estado `OK`, ideas y ejes causales válidos.
+- `CRIBA.exe` y `BLACKFORGE.exe` arrancaron y se cerraron limpiamente, ambos
+  con salida 0.
+
+Estado de consolidación: `E:\PROYECTS\CRIBA` es el checkout canónico, limpio y
+alineado con `origin/main`. El estado local anterior se preservó de forma
+recuperable en `stash@{0}: pre-consolidation-local-state-2026-08-06`. Dos clones
+temporales ya verificados como redundantes permanecen en `%TEMP%` porque el
+entorno actual bloqueó su eliminación recursiva antes de ejecutarla; ambos son
+ancestros de `main` y pueden retirarse con autorización de limpieza:
+
+- `C:\Users\KLSX\AppData\Local\Temp\Criba-Blackforge-clean-audit-1785985003132`
+- `C:\Users\KLSX\AppData\Local\Temp\Criba-Blackforge-final-audit-20260806-035912055`
 
 La causa de las carpetas Dyad incompletas fue un import fallido con `EPERM` al
 examinar `.pytest-temp`; Dyad dejó el destino parcial sin rollback. No fue un
 borrado de Git ni afectó al remoto.
 
+No quedan cambios de producto pendientes. La única acción operativa opcional es
+retirar esas dos copias temporales, sin tocar el checkout canónico ni su stash.
 Todo el contenido posterior de este documento es historial del checkpoint de
 julio y no debe usarse como próxima acción vigente.
 
