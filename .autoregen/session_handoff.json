@@ -2,8 +2,8 @@
   "handoff_schema_version": "1.1.0",
   "reason": "advanced_lottery_catalog_branch_verified_before_repository_consolidation",
   "last_verified_phase": "Integración de modos de lotería, catálogo runtime y portabilidad verificada en Modal",
-  "current_phase": "Checkpoint, PR y consolidación de copias locales",
-  "current_status": "ready_for_checkpoint_commit_and_pr",
+  "current_phase": "PR y CI de integración; consolidación de copias locales posterior",
+  "current_status": "ready_for_pr_and_github_ci",
   "checkpoint_date": "2026-08-06",
   "execution_environment": {
     "mode": "cloud_only_for_heavy_work",
@@ -61,7 +61,8 @@
   "latest_verification_2026_08_06": {
     "branch": "fix/lottery-modes-catalog-portability",
     "base_commit": "5b6f727ec98fb6926a770d64c44083c3a764adef",
-    "remote_checkpoint": "origin/fix/lottery-modes-catalog-portability",
+    "checkpoint_commit": "28dd82a1c502236b5db2a07a46346ae5a5c985f0",
+    "remote_checkpoint": "origin/fix/lottery-modes-catalog-portability@28dd82a",
     "modal_full": {
       "command": "modal run scripts/modal_verify.py",
       "passed": 436,
@@ -109,7 +110,7 @@
       "stale lockfile and handoff variants superseded by verified branch"
     ]
   },
-  "next_exact_action": "Commit and push the verified runner/test/handoff fixes, open and merge the feature PR after GitHub CI, then replace duplicate local repositories with one canonical E:\\PROYECTS\\CRIBA checkout.",
-  "next_exact_command": "git diff --check && git status --short",
-  "next_required_test": "GitHub CI on the final commit; rebuild and smoke-test the Windows portable after main is consolidated."
+  "next_exact_action": "Open a PR for checkpoint 28dd82a, wait for GitHub CI to pass, merge the feature branch into main, then replace duplicate local repositories with one canonical E:\\PROYECTS\\CRIBA checkout.",
+  "next_exact_command": "gh pr create --base main --head fix/lottery-modes-catalog-portability",
+  "next_required_test": "GitHub CI on the PR head; rebuild and smoke-test the Windows portable after main is consolidated."
 }

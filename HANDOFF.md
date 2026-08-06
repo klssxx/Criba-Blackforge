@@ -3,7 +3,7 @@
 ## Actualización 2026-08-06
 
 La fuente de trabajo vigente es la rama `fix/lottery-modes-catalog-portability`,
-basada en `main` (`d870f9b`) y con dos checkpoints publicados hasta `5b6f727`.
+basada en `main` (`d870f9b`) y con el checkpoint publicado `28dd82a`.
 Integra los modos optimizado/asociativo/puro, portabilidad de rutas, catálogo
 runtime ampliado y pruebas específicas de CLI/GUI/lotería.
 
@@ -16,9 +16,10 @@ Verificación Modal vigente:
 - Benchmark BLACKFORGE: 723 registros; carga fría mediana 52,958 ms y pipeline
   headless mediano 1,273 ms (3 repeticiones, Modal).
 
-Pendiente operativo: commit/push de las correcciones finales, PR con CI verde,
-consolidar un único checkout canónico en `E:\PROYECTS\CRIBA` y eliminar copias
-redundantes solo cuando GitHub contenga todo el trabajo útil.
+Pendiente operativo: abrir la PR de `28dd82a`, esperar CI verde y fusionarla en
+`main`; después, reconstruir y hacer smoke-test del portable Windows, consolidar
+un único checkout canónico en `E:\PROYECTS\CRIBA` y eliminar copias redundantes
+solo cuando GitHub contenga todo el trabajo útil.
 
 La causa de las carpetas Dyad incompletas fue un import fallido con `EPERM` al
 examinar `.pytest-temp`; Dyad dejó el destino parcial sin rollback. No fue un
