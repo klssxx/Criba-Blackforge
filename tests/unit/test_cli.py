@@ -77,3 +77,30 @@ def test_blackforge_cli_runs_the_headless_pipeline(capsys) -> None:
     assert packet["session_id"] == "cli-regression"
     assert packet["selection"]["selected_count"] == 12
     assert packet["ideas"]
+
+
+def test_lottery_cli_uses_packaged_catalog_and_explicit_output_dir(
+    tmp_path, capsys
+) -> None:
+    output_dir = tmp_path / "lottery results"
+
+    result = main([
+        "lottery",
+        "--mode",
+        "optimized",
+        "--rounds",
+        "1",
+        "--batch-size",
+        "2",
+        "--seed",
+        "19",
+        "--output-dir",
+        str(output_dir),
+    ])
+
+    assert result == 0
+    assert "Modo: optimized" in capsys.readouterr().out
+    history = json.loads(
+        (output_dir / "round_history.json").read_text(encoding="utf-8")
+    )
+    assert history[0]["mode"] == "optimized"

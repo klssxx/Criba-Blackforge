@@ -229,6 +229,7 @@ class BlackforgeScreen(QWidget):
         self._hero_pixmap = QPixmap()
         self._metrics = _catalog_metrics()
         self._mode = "optimizado"
+        self._lottery_engine: Any = None
         self._busy = False
         self._run_btn: QPushButton | None = None
         self._spin_timer = QTimer(self)
@@ -636,22 +637,20 @@ class BlackforgeScreen(QWidget):
         from .i18n import lang as cur_lang
         try:
             recs = list(bf_records())
-            methods = [{
-                "name": r.get("blackforge_id", "") or r.get("id", ""),
-                "title": r.get("title", ""),
-                "description": r.get("description", ""),
-                "family": r.get("functional_category_primary") or r.get("source_family", ""),
-            } for r in recs]
-            if not methods:
-                return
-            eng = LotteryEngine.from_methods(methods, seed=random.randint(0, 9999))
-            if self._mode == "pura":
-                batch = eng.select_random_batch(size=12)
-                mode_arg = "pure"
-            else:
-                batch = eng.select_associative_batch(size=12)
-                mode_arg = "associative"
-            ideas = eng.generate_ideas_from_batch(batch, mode_arg)
+            if self._lottery_engine is None:
+                methods = [dict(record) for record in recs]
+                if not methods:
+                    return
+                self._lottery_engine = LotteryEngine.from_methods(
+                    methods, seed=random.SystemRandom().randint(0, 2**31 - 1)
+                )
+            engine_mode = {
+                "optimizado": "optimized",
+                "asociativa": "associative",
+                "pura": "pure",
+            }[self._mode]
+            self._lottery_engine.run_round(engine_mode, batch_size=12)
+            ideas = self._lottery_engine.last_round_ideas
             if not ideas:
                 return
             rows = []

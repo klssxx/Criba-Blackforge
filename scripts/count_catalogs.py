@@ -1,17 +1,21 @@
 #!/usr/bin/env python3
-"""Cuenta todos los catálogos de métodos."""
-import json
-from pathlib import Path
+"""Count the approved runtime method catalog by source and granularity."""
 
-methods_dir = Path("E:/PROYECTS/CRIBA/data/methods")
-total_new = 0
-for f in sorted(methods_dir.glob("source_*.json")):
-    d = json.load(open(f, "r", encoding="utf-8"))
-    total_new += len(d)
-    print(f"  {f.name}: {len(d)} items")
+from __future__ import annotations
 
-existing = json.load(open(methods_dir / "library_combined.json", "r", encoding="utf-8"))
-print(f"\n---")
-print(f"New sources total: {total_new}")
-print(f"Existing library: {len(existing)}")
-print(f"Grand total: {total_new + len(existing)}")
+from collections import Counter
+
+from criba.catalog import methods
+
+catalog = methods()
+print(f"Runtime total: {len(catalog)}")
+print("\nBy source:")
+for source, count in Counter(
+    str(item.get("source", "unspecified")) for item in catalog
+).most_common():
+    print(f"  {source}: {count}")
+print("\nBy granularity:")
+for granularity, count in sorted(
+    Counter(str(item.get("granularity", "micro_technique")) for item in catalog).items()
+):
+    print(f"  {granularity}: {count}")

@@ -1,0 +1,782 @@
+[
+  {
+    "id": "escape_master_1001",
+    "name": "Inversión estructural",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "formula qué tendría que ser cierto para que el sistema fallara de una forma hoy considerada absurda y razona hacia atrás.",
+    "source": "escape_1030_master",
+    "source_number": 1001,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1001",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "inversionestructural",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1002",
+    "name": "SCAMPER aplicado a primitivas",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "sustituye, combina, adapta, modifica, reutiliza, elimina o reordena permisos, pruebas, consenso y otros primitivos, no solo ideas completas.",
+    "source": "escape_1030_master",
+    "source_number": 1002,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1002",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "scamperaplicadoaprimitivas",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1003",
+    "name": "Análisis morfológico con columna ajena",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "añade una dimensión deliberadamente externa al dominio para forzar combinaciones que el vocabulario habitual no produciría.",
+    "source": "escape_1030_master",
+    "source_number": 1003,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1003",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "analisismorfologicoconcolumnaajena",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1004",
+    "name": "Incógnitas desconocidas por comportamiento",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "genera entornos adversariales que intenten contradecir las invariantes asumidas en vez de limitarse a enumerar amenazas conocidas.",
+    "source": "escape_1030_master",
+    "source_number": 1004,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1004",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "incognitasdesconocidasporcomportamiento",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1005",
+    "name": "Contraejemplo sistemático",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "para cada garantía, construye el escenario mínimo que la rompería y usa el resultado para descubrir una clase nueva de fallo.",
+    "source": "escape_1030_master",
+    "source_number": 1005,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1005",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "contraejemplosistematico",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1006",
+    "name": "Cartografía de densidad conceptual",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "mapea dónde se concentran las ideas existentes y explora primero las regiones casi vacías.",
+    "source": "escape_1030_master",
+    "source_number": 1006,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1006",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "cartografiadedensidadconceptual",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1007",
+    "name": "Frontera de imposibilidad provisional",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "trata cada límite aceptado como hipótesis temporal y diseña una prueba concreta para atravesarlo.",
+    "source": "escape_1030_master",
+    "source_number": 1007,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1007",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "fronteradeimposibilidadprovisional",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1008",
+    "name": "Exploración por regiones vacías",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "define combinaciones de dimensiones nunca ocupadas y genera exclusivamente dentro de ellas.",
+    "source": "escape_1030_master",
+    "source_number": 1008,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1008",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "exploracionporregionesvacias",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1009",
+    "name": "Triangulación de espacios incompatibles",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "cruza tres dominios cuyas reglas no puedan reconciliarse de forma directa.",
+    "source": "escape_1030_master",
+    "source_number": 1009,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1009",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "triangulaciondeespaciosincompatibles",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1010",
+    "name": "Compresión del espacio conocido",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "reduce las soluciones existentes a unos pocos mecanismos causales para revelar qué dimensiones faltan.",
+    "source": "escape_1030_master",
+    "source_number": 1010,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1010",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "compresiondelespacioconocido",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1011",
+    "name": "Expansión por dimensión nueva",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "añade un eje que no figure en el modelo actual y reconstruye todas las alternativas con él.",
+    "source": "escape_1030_master",
+    "source_number": 1011,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1011",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "expansionpordimensionnueva",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1012",
+    "name": "Rotación de coordenadas del problema",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "reexpresa actores, recursos, tiempo y objetivos como ejes distintos para cambiar qué soluciones aparecen cercanas.",
+    "source": "escape_1030_master",
+    "source_number": 1012,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1012",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "rotaciondecoordenadasdelproblema",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1013",
+    "name": "Proyección fuera de base",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "describe el problema sin usar ninguna de sus categorías habituales y reconstruye después el significado.",
+    "source": "escape_1030_master",
+    "source_number": 1013,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1013",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "proyeccionfueradebase",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1014",
+    "name": "Muestreo de antisoluciones",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "genera mecanismos que no resuelven el objetivo pero crean capacidades inesperadas reutilizables.",
+    "source": "escape_1030_master",
+    "source_number": 1014,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1014",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "muestreodeantisoluciones",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1015",
+    "name": "Gradiente de extrañeza",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "avanza en pasos donde cada propuesta debe ser causalmente más distante que la anterior.",
+    "source": "escape_1030_master",
+    "source_number": 1015,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1015",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "gradientedeextraneza",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1016",
+    "name": "Presupuesto de familiaridad",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "limita cuántos componentes conocidos puede conservar una propuesta antes de ser descartada.",
+    "source": "escape_1030_master",
+    "source_number": 1016,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1016",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "presupuestodefamiliaridad",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1017",
+    "name": "Prueba de independencia conceptual",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "elimina nombres y metáforas para comprobar si una idea posee un mecanismo realmente distinto.",
+    "source": "escape_1030_master",
+    "source_number": 1017,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1017",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "pruebadeindependenciaconceptual",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1018",
+    "name": "Separación de novedad verbal y causal",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "evalúa por separado cuánto cambia el lenguaje y cuánto cambia la cadena de causa y efecto.",
+    "source": "escape_1030_master",
+    "source_number": 1018,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1018",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "separaciondenovedadverbalycausal",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1019",
+    "name": "Distancia de mecanismo",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "compara propuestas por operaciones, dependencias e invariantes, no por similitud de palabras.",
+    "source": "escape_1030_master",
+    "source_number": 1019,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1019",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "distanciademecanismo",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1020",
+    "name": "Genealogía oculta de ideas",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "rastrea influencias indirectas para detectar propuestas aparentemente nuevas que derivan de la misma raíz.",
+    "source": "escape_1030_master",
+    "source_number": 1020,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1020",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "genealogiaocultadeideas",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1021",
+    "name": "Saturación de familia",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "bloquea temporalmente una familia cuando ya concentra demasiadas variantes.",
+    "source": "escape_1030_master",
+    "source_number": 1021,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1021",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "saturaciondefamilia",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1022",
+    "name": "Reserva de espacio desconocido",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "mantiene una parte del esfuerzo sin objetivo de utilidad inmediata para proteger la exploración radical.",
+    "source": "escape_1030_master",
+    "source_number": 1022,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1022",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "reservadeespaciodesconocido",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1023",
+    "name": "Mapa de preguntas no formulables",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "identifica cuestiones que el vocabulario actual no puede expresar y crea conceptos para poder plantearlas.",
+    "source": "escape_1030_master",
+    "source_number": 1023,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1023",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "mapadepreguntasnoformulables",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1024",
+    "name": "Generación por lagunas de evidencia",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "parte de aquello que no puede observarse, medirse o demostrarse y diseña mecanismos alrededor de esa ausencia.",
+    "source": "escape_1030_master",
+    "source_number": 1024,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1024",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "generacionporlagunasdeevidencia",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1025",
+    "name": "Contradicción entre disciplinas",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "selecciona reglas incompatibles de dos campos y convierte el conflicto en requisito de diseño.",
+    "source": "escape_1030_master",
+    "source_number": 1025,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1025",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "contradiccionentredisciplinas",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1026",
+    "name": "Ruptura de la unidad de análisis",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "cambia qué se considera objeto, actor, evento o sistema antes de buscar soluciones.",
+    "source": "escape_1030_master",
+    "source_number": 1026,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1026",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "rupturadelaunidaddeanalisis",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1027",
+    "name": "Cambio de coordenadas de valor",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "sustituye utilidad, seguridad o eficiencia por una magnitud ajena y observa qué arquitecturas sobreviven.",
+    "source": "escape_1030_master",
+    "source_number": 1027,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1027",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "cambiodecoordenadasdevalor",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1028",
+    "name": "Inversión del criterio de utilidad",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "prioriza temporalmente propuestas inútiles para el objetivo directo pero fértiles para descubrir mecanismos.",
+    "source": "escape_1030_master",
+    "source_number": 1028,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1028",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "inversiondelcriteriodeutilidad",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1029",
+    "name": "Prototipo de imposibilidad",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "construye una versión mínima de una idea considerada inviable para localizar el impedimento real.",
+    "source": "escape_1030_master",
+    "source_number": 1029,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1029",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "prototipodeimposibilidad",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  },
+  {
+    "id": "escape_master_1030",
+    "name": "Auditoría de retorno al espacio conocido",
+    "family": "salto_espacio",
+    "selection_reason": "Mecanismo exclusivo del MASTER de 1.030 técnicas, ausente del catálogo ampliado por comparación normalizada de nombre.",
+    "template": "comprueba en cada iteración si la propuesta radical ha sido domesticada hasta convertirse en una variante convencional.",
+    "source": "escape_1030_master",
+    "source_number": 1030,
+    "source_ref": "1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt#1030",
+    "granularity": "micro_technique",
+    "origin": "internal",
+    "axis": "escape",
+    "categories": [
+      "innovacion",
+      "tecnicas_de_salto"
+    ],
+    "tags": [
+      "exploracion",
+      "espacio_desconocido"
+    ],
+    "normalized_mechanism": "auditoriaderetornoalespacioconocido",
+    "relationship_type": "complementa",
+    "external_refs": [],
+    "related_internal_ids": [],
+    "sector": ""
+  }
+]

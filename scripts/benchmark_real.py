@@ -9,7 +9,8 @@ import hashlib
 from collections import Counter
 from pathlib import Path
 
-sys.path.insert(0, "E:/PROYECTS/CRIBA/src")
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
 from criba import engine
 
@@ -224,7 +225,7 @@ def run_benchmark():
     print(f"Determinista: {summary['deterministic']}")
 
     # Guardar resultados
-    output = Path("E:/PROYECTS/CRIBA/verification/benchmark_real_results.json")
+    output = ROOT / "verification" / "benchmark_real_results.json"
     with open(output, "w", encoding="utf-8") as f:
         json.dump({"summary": summary, "results": all_results}, f, ensure_ascii=False, indent=2)
     print(f"\nResultados guardados en: {output}")

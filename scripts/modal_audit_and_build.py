@@ -23,8 +23,8 @@ from typing import Any
 
 import modal
 
-REPO_ROOT = pathlib.Path("E:/PROYECTS/CRIBA")
-EE_ROOT = pathlib.Path("C:/Users/KLSX/Downloads/ee")
+REPO_ROOT = pathlib.Path(__file__).resolve().parents[1]
+EE_ROOT = pathlib.Path(os.environ.get("CRIBA_EE_ROOT", REPO_ROOT.parent / "ee"))
 REMOTE_ROOT = "/criba"
 REMOTE_EE = "/ee"
 
@@ -493,7 +493,7 @@ def main() -> None:
     print("Lanzando auditoría Modal CRIBA/BLACKFORGE...")
     result = full_audit.remote()
 
-    out = Path("E:/PROYECTS/CRIBA/artifacts/modal_audit_result.json")
+    out = REPO_ROOT / "artifacts" / "modal_audit_result.json"
     out.parent.mkdir(exist_ok=True)
     out.write_text(json.dumps(result, indent=2, ensure_ascii=False), encoding="utf-8")
     print(f"Guardado: {out}")

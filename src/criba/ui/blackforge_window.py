@@ -616,6 +616,7 @@ class BlackforgeWindow(QMainWindow):
         self.tokens: Tokens = load_tokens(DATA_ROOT / "theme_blackforge.json")
         self.snapshot = _catalog_snapshot()
         self.mode = "optimized"
+        self._lottery_engine: Any = None
         self._busy = False
         self._spin_index = 0
         self._spin_timer = QTimer(self)
@@ -1036,26 +1037,13 @@ class BlackforgeWindow(QMainWindow):
             from ..lottery import LotteryEngine
 
             records = list(bf_records())
-            methods = [
-                {
-                    "name": row.get("blackforge_id", "") or row.get("id", ""),
-                    "title": row.get("title", ""),
-                    "description": row.get("description", ""),
-                    "family": row.get("functional_category_primary")
-                    or row.get("source_family", ""),
-                }
-                for row in records
-            ]
-            engine = LotteryEngine.from_methods(
-                methods, seed=random.SystemRandom().randint(0, 2**31 - 1)
-            )
-            if self.mode == "pure":
-                batch = engine.select_random_batch(size=12)
-                mode = "pure"
-            else:
-                batch = engine.select_associative_batch(size=12)
-                mode = "associative"
-            ideas = engine.generate_ideas_from_batch(batch, mode)
+            if self._lottery_engine is None:
+                methods = [dict(row) for row in records]
+                self._lottery_engine = LotteryEngine.from_methods(
+                    methods, seed=random.SystemRandom().randint(0, 2**31 - 1)
+                )
+            self._lottery_engine.run_round(self.mode, batch_size=12)
+            ideas = self._lottery_engine.last_round_ideas
             rows: list[tuple[str, ...]] = []
             for index, idea in enumerate(ideas[:5], start=1):
                 formatted = format_idea(idea, "es", index - 1)

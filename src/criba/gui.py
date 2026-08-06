@@ -4,14 +4,14 @@ Premium three-column layout (navigation sidebar + central workbench + summary
 panel) and a status footer, matching the CRIBA Current Engine reference design.
 """
 from __future__ import annotations
-import json, sys
+import json, os, sys
 from datetime import datetime
 from .catalog import currents, methods
 from .engine import activate, build_prompt
 from .storage import Storage
 
 try:
-    from PySide6.QtCore import Qt
+    from PySide6.QtCore import QTimer, Qt
     from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
         QHBoxLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QMainWindow,
         QMessageBox, QPushButton, QScrollArea, QSizePolicy, QSpinBox, QStackedWidget,
@@ -409,20 +409,7 @@ class Window(QMainWindow):
             return
         try:
             from .lottery import run_lottery
-            import os
-            methods_file = None
-            candidates = [
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
-            ]
-            for c in candidates:
-                if os.path.exists(c):
-                    methods_file = c
-                    break
-            if methods_file is None:
-                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
-                return
-            summary = run_lottery(methods_file, rounds=5, batch_size=10, mode="associative", query=q)
+            summary = run_lottery(rounds=5, batch_size=10, mode="associative", query=q)
             QMessageBox.information(self, "Lotería Asociativa",
                 f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
                 f"{summary['extraordinary_ideas']} extraordinarias.\n"
@@ -434,20 +421,7 @@ class Window(QMainWindow):
         """Ejecuta lotería pura."""
         try:
             from .lottery import run_lottery
-            import os
-            methods_file = None
-            candidates = [
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
-            ]
-            for c in candidates:
-                if os.path.exists(c):
-                    methods_file = c
-                    break
-            if methods_file is None:
-                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
-                return
-            summary = run_lottery(methods_file, rounds=5, batch_size=10, mode="pure")
+            summary = run_lottery(rounds=5, batch_size=10, mode="pure")
             QMessageBox.information(self, "Lotería Pura",
                 f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
                 f"{summary['extraordinary_ideas']} extraordinarias.\n"
@@ -460,20 +434,7 @@ class Window(QMainWindow):
         q = self.simple_query.toPlainText().strip()
         try:
             from .lottery import run_lottery
-            import os
-            methods_file = None
-            candidates = [
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "compose_run", "all_methods.json"),
-                os.path.join(os.path.dirname(__file__), "..", "..", "verification", "all_methods.json"),
-            ]
-            for c in candidates:
-                if os.path.exists(c):
-                    methods_file = c
-                    break
-            if methods_file is None:
-                QMessageBox.warning(self, "CRIBA", "No se encontró el archivo de métodos.")
-                return
-            summary = run_lottery(methods_file, rounds=10, batch_size=10, mode="alternating", query=q or None)
+            summary = run_lottery(rounds=10, batch_size=10, mode="alternating", query=q or None)
             QMessageBox.information(self, "Lotería Alternada",
                 f"Completada.\n{summary['total_ideas']} ideas generadas.\n"
                 f"{summary['extraordinary_ideas']} extraordinarias.\n"
@@ -501,6 +462,9 @@ def run(database=None):
     from .ui.main_window import CribaMainWindow
     app = QApplication.instance() or QApplication(sys.argv)
     window = CribaMainWindow(database); window.show()
+    smoke_exit_ms = os.environ.get("CRIBA_SMOKE_EXIT_MS")
+    if smoke_exit_ms:
+        QTimer.singleShot(max(0, int(smoke_exit_ms)), window.close)
     return app.exec()
 
 

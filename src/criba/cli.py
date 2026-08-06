@@ -103,11 +103,16 @@ def main(argv: Sequence[str] | None = None) -> int:
     lottery_parser.add_argument("--query", help="Consulta para modo asociativo")
     lottery_parser.add_argument("--rounds", type=int, default=20, help="Número de rondas")
     lottery_parser.add_argument("--batch-size", type=int, default=20, help="Métodos por ronda")
-    lottery_parser.add_argument("--mode", choices=["alternating", "associative", "pure"],
+    lottery_parser.add_argument("--mode", choices=["optimized", "alternating", "associative", "pure"],
                                default="alternating", help="Modo de lotería")
     lottery_parser.add_argument("--seed", type=int, default=42, help="Semilla aleatoria")
     lottery_parser.add_argument("--methods-file", default=None,
                                help="Ruta al archivo de métodos JSON")
+    lottery_parser.add_argument(
+        "--output-dir",
+        default=None,
+        help="Directorio de resultados (por defecto, datos locales del usuario)",
+    )
 
     serve_parser = sub.add_parser("serve")
     serve_parser.add_argument("--host", default="127.0.0.1")
@@ -162,33 +167,20 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
         if args.command == "lottery":
             from .lottery import run_lottery
-            import os
 
-            # Buscar archivo de métodos
             methods_file = args.methods_file
-            if methods_file is None:
-                # Buscar en ubicaciones estándar
-                candidates = [
-                    Path(__file__).parent.parent.parent / "verification" / "compose_run" / "all_methods.json",
-                    Path(__file__).parent.parent.parent / "verification" / "all_methods.json",
-                ]
-                for c in candidates:
-                    if c.exists():
-                        methods_file = str(c)
-                        break
-
-            if methods_file is None or not os.path.exists(methods_file):
-                print("Error: No se encontró el archivo de métodos.", file=sys.stderr)
-                print("Usa --methods-file para especificar la ruta.", file=sys.stderr)
+            if methods_file is not None and not Path(methods_file).is_file():
+                print(f"Error: No se encontró el archivo de métodos: {methods_file}", file=sys.stderr)
                 return 1
 
-            summary = run_lottery(
+            run_lottery(
                 methods_file=methods_file,
                 rounds=args.rounds,
                 batch_size=args.batch_size,
                 mode=args.mode,
                 seed=args.seed,
-                query=args.query
+                query=args.query,
+                output_dir=args.output_dir,
             )
             return 0
 
