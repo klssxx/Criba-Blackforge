@@ -1,9 +1,9 @@
 {
   "handoff_schema_version": "1.1.0",
-  "reason": "advanced_lottery_catalog_branch_verified_before_repository_consolidation",
-  "last_verified_phase": "Integración de modos de lotería, catálogo runtime y portabilidad verificada en Modal",
-  "current_phase": "PR y CI de integración; consolidación de copias locales posterior",
-  "current_status": "ready_for_pr_and_github_ci",
+  "reason": "lottery_catalog_main_integration_and_portable_smoke_verified",
+  "last_verified_phase": "Integración de modos de lotería y catálogo runtime fusionada en main; portable Windows reconstruido y smoke-tested",
+  "current_phase": "Consolidación local posterior a la integración",
+  "current_status": "main_verified_with_optional_temp_cleanup_pending",
   "checkpoint_date": "2026-08-06",
   "execution_environment": {
     "mode": "cloud_only_for_heavy_work",
@@ -61,8 +61,10 @@
   "latest_verification_2026_08_06": {
     "branch": "fix/lottery-modes-catalog-portability",
     "base_commit": "5b6f727ec98fb6926a770d64c44083c3a764adef",
-    "checkpoint_commit": "28dd82a1c502236b5db2a07a46346ae5a5c985f0",
-    "remote_checkpoint": "origin/fix/lottery-modes-catalog-portability@28dd82a",
+    "verification_commit": "28dd82a1c502236b5db2a07a46346ae5a5c985f0",
+    "published_handoff_commit": "aa5ec13392e440613ca14bf8708af46d0a44d6cd",
+    "main_integration_commit": "e6729b7ec8f0345ea2d0a37e6f086fb2263302a6",
+    "remote_checkpoint": "origin/main@e6729b7",
     "modal_full": {
       "command": "modal run scripts/modal_verify.py",
       "passed": 436,
@@ -89,6 +91,33 @@
       "headless_pipeline_median_ms": 1.272923,
       "run_url": "https://modal.com/apps/klssxx/main/ap-2tRdqe6oY9VrxESO5zmJ0Z",
       "rc": 0
+    },
+    "github_pr_ci": {
+      "pr_number": 3,
+      "merge_commit": "e6729b7ec8f0345ea2d0a37e6f086fb2263302a6",
+      "run_url": "https://github.com/klssxx/Criba-Blackforge/actions/runs/31074122856",
+      "checks": [
+        "quality (Python 3.10)",
+        "quality (Python 3.11)",
+        "workflow lint",
+        "dependency audit",
+        "repository scan",
+        "ci-result"
+      ],
+      "result": "SUCCESS"
+    },
+    "portable_smoke": {
+      "commit": "e6729b7ec8f0345ea2d0a37e6f086fb2263302a6",
+      "build_command": "uv sync --all-extras --locked; .\\scripts\\build-portable.ps1",
+      "artifacts": ["CRIBA.exe", "BLACKFORGE.exe", "CRIBA-CLI.exe"],
+      "cli_help_rc": 0,
+      "blackforge_rc": 0,
+      "blackforge_status": "OK",
+      "blackforge_selected_count": 12,
+      "gui_startup_and_clean_close": {
+        "CRIBA.exe": 0,
+        "BLACKFORGE.exe": 0
+      }
     }
   },
   "protected_invariants": [
@@ -102,15 +131,32 @@
   ],
   "repository_consolidation": {
     "canonical_target": "E:\\PROYECTS\\CRIBA",
+    "canonical_commit": "e6729b7ec8f0345ea2d0a37e6f086fb2263302a6",
+    "canonical_status": "clean main aligned with origin/main",
+    "preserved_local_stash": "stash@{0}: pre-consolidation-local-state-2026-08-06",
     "rule": "No borrar ninguna copia hasta que commits y cambios útiles estén en GitHub main.",
     "dyad_import_root_cause": "Import failed with EPERM while scanning .pytest-temp and left partial destination directories.",
     "discarded_as_noncanonical": [
       "generated blackforge_headless_output.json UUID/timestamp drift",
       "hard-coded E:\\PROYECTS\\CRIBA capture_ui_real.py regression",
       "stale lockfile and handoff variants superseded by verified branch"
-    ]
+    ],
+    "redundant_temp_repositories": [
+      {
+        "path": "C:\\Users\\KLSX\\AppData\\Local\\Temp\\Criba-Blackforge-clean-audit-1785985003132",
+        "head": "aa5ec13392e440613ca14bf8708af46d0a44d6cd",
+        "contained_in_main": true
+      },
+      {
+        "path": "C:\\Users\\KLSX\\AppData\\Local\\Temp\\Criba-Blackforge-final-audit-20260806-035912055",
+        "head": "5b6f727ec98fb6926a770d64c44083c3a764adef",
+        "contained_in_main": true,
+        "only_uncommitted_difference": "generated UUID/timestamp drift in verification/blackforge_headless_output.json"
+      }
+    ],
+    "cleanup_status": "not executed: the current execution environment blocked recursive deletion before it ran"
   },
-  "next_exact_action": "Open a PR for checkpoint 28dd82a, wait for GitHub CI to pass, merge the feature branch into main, then replace duplicate local repositories with one canonical E:\\PROYECTS\\CRIBA checkout.",
-  "next_exact_command": "gh pr create --base main --head fix/lottery-modes-catalog-portability",
-  "next_required_test": "GitHub CI on the PR head; rebuild and smoke-test the Windows portable after main is consolidated."
+  "next_exact_action": "If cleanup authority is available, remove only the two verified redundant temporary repositories; do not touch E:\\PROYECTS\\CRIBA or stash@{0}.",
+  "next_exact_command": "git -C E:\\PROYECTS\\CRIBA status --short --branch",
+  "next_required_test": "No additional product test is required unless code changes; rerun GitHub CI for this handoff-only update."
 }
