@@ -8,7 +8,7 @@ import json
 from pathlib import Path
 from typing import List, Dict, Any
 
-METHODS_DIR = Path(r"E:\PROYECTS\CRIBA\data\methods")
+METHODS_DIR = Path(__file__).resolve().parents[1] / "data" / "methods"
 
 
 def load_json(filepath: Path) -> List[Dict[str, Any]]:

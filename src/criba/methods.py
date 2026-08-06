@@ -1,11 +1,14 @@
-"""Métodos de selección para CRIBA — catálogo expandido 6870 entradas.
+"""Métodos de selección para CRIBA — catálogo runtime compuesto.
 
 Ejes morfológicos del catálogo completo:
   perspective  — 1700 lentes/puntos de vista
   generation   — 900 métodos de ideas disruptivas
   ruptura      — 1100 técnicas de ruptura de marco
   escape       — 1100 técnicas de salto fuera del espacio conocido
-  methodology  — 2070 técnicas y metodologías externas
+  methodology  — técnicas, metodologías y marcos meta-nivel
+
+El catálogo runtime suma la base unificada, las fuentes meta aprobadas, la
+extensión trazable del MASTER y los métodos fundacionales preservados.
 
 Estrategia de selección (Interesantedebate.txt):
   Cada activación recibe UNA entrada por eje (25% peso igual por eje base).

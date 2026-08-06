@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
 """Traza el pipeline completo de CRIBA con funciones y líneas exactas."""
 import sys
-sys.path.insert(0, "E:/PROYECTS/CRIBA/src")
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT / "src"))
 
 from criba import engine, catalog, methods, selector
 
@@ -31,7 +34,7 @@ print(f"    Current name: {selected['name']}\n")
 print("[4] SELECCIÓN DE MÉTODOS (engine.py:410)")
 print("    -> methods.select_methods(count, mode, manual, query)")
 print("    -> methods.py:79 (select_methods function)")
-print("    -> catalog.py:23 (methods() loads library_combined.json)")
+print("    -> catalog.methods() composes all approved runtime sources")
 selected_methods = methods.select_methods(8, "balanced", query=QUERY)
 print(f"    Methods selected: {len(selected_methods)}")
 for m in selected_methods[:3]:

@@ -1,29 +1,30 @@
 #!/usr/bin/env python3
-"""Verifica el estado final de la librería combinada."""
-import json
+"""Validate the composed runtime method catalog."""
 
-d = json.load(open("E:/PROYECTS/CRIBA/data/methods/library_combined.json", "r", encoding="utf-8"))
+from __future__ import annotations
 
-print(f"Total items: {len(d)}")
-print(f"All have id: {all('id' in i for i in d)}")
-print(f"All have name: {all('name' in i for i in d)}")
-print(f"All have source: {all('source' in i for i in d)}")
-print(f"All have normalized_mechanism: {all('normalized_mechanism' in i for i in d)}")
-print(f"Items with related_internal_ids: {sum(1 for i in d if i.get('related_internal_ids'))}")
-print(f"Items with relationship_type: {sum(1 for i in d if i.get('relationship_type'))}")
+from collections import Counter
 
-# Granularities
-grans = {}
-for i in d:
-    g = i.get("granularity", "micro_technique")
-    grans[g] = grans.get(g, 0) + 1
-print(f"Granularities: {grans}")
+from criba.catalog import methods
 
-# Sources
-sources = {}
-for i in d:
-    s = i.get("source", "NONE")
-    sources[s] = sources.get(s, 0) + 1
-print(f"Sources ({len(sources)}):")
-for s, c in sorted(sources.items(), key=lambda x: -x[1]):
-    print(f"  {s}: {c}")
+catalog = methods()
+ids = [str(item["id"]) for item in catalog]
+checks = {
+    "expected_runtime_count": len(catalog) == 7_201,
+    "all_have_id": all(item.get("id") for item in catalog),
+    "all_have_name": all(item.get("name") for item in catalog),
+    "ids_are_unique": len(ids) == len(set(ids)),
+    "master_extension_count": sum(
+        item.get("source") == "escape_1030_master" for item in catalog
+    )
+    == 30,
+    "foundational_count": sum(
+        item.get("source") == "foundational_methods" for item in catalog
+    )
+    == 66,
+}
+for name, passed in checks.items():
+    print(f"{name}: {'PASS' if passed else 'FAIL'}")
+print(f"Runtime total: {len(catalog)}")
+print(f"Sources: {len(Counter(str(item.get('source')) for item in catalog))}")
+raise SystemExit(0 if all(checks.values()) else 1)

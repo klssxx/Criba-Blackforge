@@ -4,7 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-ROOT = Path(r"E:\PROYECTS\CRIBA")
+ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "dist" / "CRIBA-Blackforge-Portable-Windows-x64"
 
 commit = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()

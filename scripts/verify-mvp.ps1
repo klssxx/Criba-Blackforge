@@ -1,8 +1,8 @@
 # verify-mvp.ps1 — GATE reproducible (conditions 13-17 + causal verification)
 # Run BEFORE: opening the GUI, rebuilding the portable, or declaring MVP done.
-# Must execute from the project root E:\PROYECTS\CRIBA
+# May be executed from any directory.
 $ErrorActionPreference = "Stop"
-$ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$ROOT = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 Push-Location $ROOT
 
 if ($env:CRIBA_PYTHON) {

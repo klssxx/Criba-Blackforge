@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-METHODS_DIR = Path("E:/PROYECTS/CRIBA/data/methods")
+METHODS_DIR = Path(__file__).resolve().parents[1] / "data" / "methods"
 ONTOLOGY_PATH = METHODS_DIR / "ontology.json"
 
 # Defaults para campos nuevos en ítems existentes

@@ -225,7 +225,7 @@ Razón: P7/P8 son la base de auditoría de todas las demás. Sin gates ni logs, 
 ## Comandos de verificación por fase
 
 ```
-cd E:/PROYECTS/CRIBA
+Set-Location C:/ruta/al/clon/Criba-Blackforge
 .venv/Scripts/python -m pytest tests/unit -q        # P1, P2, P3, P6, P7
 .venv/Scripts/python -m pytest tests -q              # regresión completa
 .venv/Scripts/python -m pytest tests/test_mvp_golden_output.py -q   # P1 golden

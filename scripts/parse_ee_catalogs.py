@@ -15,11 +15,13 @@ Salida: data/methods/library_ee_expanded.json
 
 import re
 import json
+import os
 from pathlib import Path
 from typing import List, Dict, Any
 
-EE_DIR = Path(r"C:\Users\KLSX\Downloads\ee")
-OUTPUT_DIR = Path(r"E:\PROYECTS\CRIBA\data\methods")
+REPO_ROOT = Path(__file__).resolve().parents[1]
+EE_DIR = Path(os.environ.get("CRIBA_EE_ROOT", REPO_ROOT.parent / "ee"))
+OUTPUT_DIR = REPO_ROOT / "data" / "methods" / "archive"
 
 
 def parse_800_metodos(filepath: Path) -> List[Dict[str, Any]]:

@@ -1,176 +1,80 @@
-# Integración de Catálogos de Metodologías CRIBA BLACKFORGE
+# Integración de catálogos de métodos
 
-## Resumen
+## Estado runtime
 
-Librería unificada de **4002 métodos** de innovación, seguridad y hacking ético, organizados en **17 fuentes** y **5 granularidades**.
+CRIBA compone en tiempo de ejecución **7.201 métodos con ID único** desde
+fuentes JSON versionadas. `src/criba/catalog.py` es el punto de composición y
+rechaza cualquier colisión de ID antes de entregar el catálogo al motor.
 
-## Estadísticas Finales
+| Capa | Entradas | Ubicación |
+|---|---:|---|
+| Catálogo unificado base | 6.870 | `data/methods/library_combined.json` |
+| Fuentes meta aprobadas | 235 | `data/methods/sources/source_*.json` |
+| Extensión exclusiva del MASTER | 30 | `data/methods/sources/source_escape_master_unique.json` |
+| Métodos fundacionales | 66 | `data/methods/archive/library_expanded.json` |
+| **Total runtime** | **7.201** | `criba.catalog.methods()` |
 
-| Métrica | Valor |
-|---------|-------|
-| Total de métodos | 4002 |
-| Fuentes | 17 |
-| Granularidades | 5 (micro_technique, framework, method, facilitation_pattern, group_game) |
-| Frameworks | 111 |
-| Métodos de diseño (IDEO) | 51 |
-| Patrones de facilitación | 25 |
-| Juegos de grupo | 19 |
+La ubicación histórica de los 66 métodos se conserva, pero el cargador los
+incluye explícitamente y añade en memoria `source=foundational_methods`,
+`granularity=method` y `origin=internal` cuando faltan esos campos. No se carga
+ningún otro archivo de `archive/`.
 
-## Fuentes
+## Composición por granularidad
 
-### Fuentes originales (ee/)
-| Fuente | Ítems | Descripción |
-|--------|-------|-------------|
-| 1000_tecnicas_ruptura_de_marco | 1000 | Técnicas de ruptura de marco mental |
-| 800_tecnicas_salto_espacio_conocido | 801 | Estrategias de salto fuera del espacio conocido |
-| 800_metodos_ideas_disruptivas | 800 | Métodos para ideación disruptiva |
-| 1700_puntos_de_vista | 550 | Lentes y perspectivas múltiples |
-| lentes_1101-1700 | 550 | Lentes avanzados de decisión |
-| original | 66 | Métodos base de CRIBA |
+| Granularidad | Cantidad |
+|---|---:|
+| `micro_technique` | 5.394 |
+| `method` | 1.178 |
+| `framework` | 585 |
+| `facilitation_pattern` | 25 |
+| `group_game` | 19 |
 
-### Fuentes nuevas (frameworks meta-nivel)
-| Fuente | Ítems | Granularidad | Descripción |
-|--------|-------|--------------|-------------|
-| innovation_frameworks | 35 | framework | Design Thinking, JTBD, Blue Ocean, FMEA, etc. |
-| security_frameworks | 15 | framework | MITRE ATT&CK, OWASP, STRIDE, Kill Chain, etc. |
-| pentest_methodologies | 12 | framework | PTES, OSSTMM, OWASP Testing, etc. |
-| red_team_playbooks | 11 | framework | Red Team Ops, Purple Team, Atomic Red Team, etc. |
-| incident_response | 11 | framework | NIST IR, SANS, Forensics, etc. |
-| decision_frameworks | 14 | framework | RICE, Weighted Scoring, Delphi, Six Hats, etc. |
-| research_taxonomies | 20 | framework | Experimental, Grounded Theory, Ethnography, etc. |
-| ideo_method_cards | 51 | method | 51 métodos de design research (Ask/Look/Learn/Try) |
-| liberating_structures | 25 | facilitation_pattern | 1-2-4-All, 9 Whys, Fishbowl, etc. |
-| brainstorming_techniques | 22 | method | Brainwriting, SCAMPER, Synectics, Crazy 8s, etc. |
-| gamestorming | 19 | group_game | Anti-Problem, Dot Voting, Mind Map, etc. |
+Las 301 entradas meta/fundacionales sin eje canónico se mantienen como
+`unspecified`; el selector las asigna por familia al eje funcional apropiado.
+Los cinco ejes base suman 6.900 entradas: 1.700 perspectivas, 900 técnicas de
+generación, 1.100 de ruptura, 1.130 de escape y 2.070 metodologías.
 
-## Granularidades
+## Extensión MASTER trazable
 
-| Granularidad | Cantidad | Uso |
-|--------------|----------|-----|
-| micro_technique | 3767 | Técnicas atómicas para selección automática |
-| framework | 111 | Marcos de referencia para orquestación |
-| method | 80 | Métodos de investigación de diseño |
-| facilitation_pattern | 25 | Patrones para sesiones grupales |
-| group_game | 19 | Juegos de taller e innovación |
+El MASTER de 1.030 técnicas y el ampliado de escape se comparan por nombre
+normalizado Unicode. El resultado son exactamente las entradas 1001–1030,
+ausentes del ampliado. Cada registro conserva `source_number` y `source_ref`.
+La entrada 1 del MASTER no se volvió a añadir porque ya tiene equivalente en la
+base ampliada.
 
-## Schema Enriquecido
+Para regenerar la fuente desde los documentos originales:
 
-Cada ítem tiene estos campos:
-
-```json
-{
-  "id": "str (único global)",
-  "name": "str",
-  "family": "str (normalizada)",
-  "selection_reason": "str",
-  "template": "str",
-  "source": "str (fuente original)",
-  "granularity": "micro_technique|framework|method|facilitation_pattern|group_game",
-  "categories": ["investigacion", "innovacion", "seguridad", ...],
-  "tags": ["adversarial", "divergencia", ...],
-  "origin": "internal|external",
-  "normalized_mechanism": "str (para comparación semántica)",
-  "related_internal_ids": ["ID1", "ID2", ...],
-  "relationship_type": "equivalente|inspirado_en|complementa|..."
-}
+```powershell
+uv run python scripts/import_escape_master.py `
+  --master C:\ruta\1030_tecnicas_salto_fuera_espacio_conocido_MASTER.txt `
+  --expanded C:\ruta\1100_tecnicas_salto_espacio_conocido_AMPLIADO_VALIDADO.txt `
+  --output data\methods\sources\source_escape_master_unique.json
 ```
 
-## Uso en el Motor
+El importador aborta si el resultado deja de ser 30, evitando cambios
+silenciosos por una fuente distinta o un parser regresivo.
+
+## Uso
 
 ```python
-from criba.catalog import (
-    methods,                    # Todos los métodos (4002)
-    frameworks,                 # Solo frameworks (111)
-    facilitation_patterns,      # Solo patrones de facilitación (25)
-    group_games,                # Solo juegos de grupo (19)
-    methods_by_source,          # Filtrar por fuente
-    methods_by_granularity,     # Filtrar por granularidad
-)
+from criba.catalog import methods, frameworks, methods_by_source
 
-# Selección con granularidad
-from criba.methods import select_methods
-selected = select_methods(
-    count=8,
-    mode="balanced",
-    query="cómo proteger APIs",
-    granularity_filter=["micro_technique", "framework"]
-)
+all_methods = methods()  # 7.201
+meta_frameworks = frameworks()
+master_extension = methods_by_source("escape_1030_master")
 ```
 
-## Equivalencias Detectadas
-
-121 ítems tienen relaciones de equivalencia mapeadas:
-- TRIZ clásico ↔ técnicas de ruptura de marco
-- SCAMPER ↔ métodos de inversión y sustracción
-- Anti-Problem (Gamestorming) ↔ "Invertir el objetivo"
-- 1-2-4-All (LS) ↔ métodos de divergencia
-- FMEA ↔ técnicas de diseño adversarial
-
-## Estructura de Archivos
-
-```
-data/
-  methods/
-    library_combined.json          # Librería unificada (4002 ítems)
-    sources/                       # Fuentes individuales (para referencia)
-      source_innovation_frameworks.json
-      source_ideo_method_cards.json
-      source_liberating_structures.json
-      source_brainstorming_techniques.json
-      source_gamestorming.json
-      source_security_frameworks.json
-      source_pentest_methodologies.json
-      source_red_team_playbooks.json
-      source_incident_response.json
-      source_decision_frameworks.json
-      source_research_taxonomies.json
-    archive/                       # Archivos originales preservados
-  schemas/
-    ontology.json                  # Ontología de categorías y granularidades
-```
-
-## Scripts
-
-| Script | Descripción |
-|--------|-------------|
-| `scripts/parse_ee_catalogs_v2.py` | Parsea archivos de texto de ee/ a JSON |
-| `scripts/merge_libraries_v3.py` | Merge inteligente con schema enriquecido |
-| `scripts/regenerate_golden.py` | Regenera golden master tras cambios |
-| `scripts/count_catalogs.py` | Cuenta ítems por fuente |
-| `scripts/verify_library.py` | Verifica integridad de la librería |
+La lotería usa este catálogo compuesto cuando no se proporciona
+`--methods-file`. Un JSON personalizado sigue siendo válido mediante esa
+opción.
 
 ## Verificación
 
-```bash
-# Tests completos
-python -m pytest tests/ -v
-
-# Conteo total
-python -c "from src.criba.catalog import methods; print(len(methods()))"
-# → 4002
-
-# Solo frameworks
-python -c "from src.criba.catalog import frameworks; print(len(frameworks()))"
-# → 111
-
-# Solo patrones de facilitación
-python -c "from src.criba.catalog import facilitation_patterns; print(len(facilitation_patterns()))"
-# → 25
-
-# Solo juegos de grupo
-python -c "from src.criba.catalog import group_games; print(len(group_games()))"
-# → 19
-
-# Golden master
-python scripts/regenerate_golden.py
+```powershell
+uv run python scripts/count_catalogs.py
+uv run python scripts/verify_library.py
+uv run pytest -q tests/unit/test_catalog_runtime.py
 ```
 
-## Seguridad y Ética
-
-Todos los métodos de seguridad están diseñados para:
-- Pentesting autorizado y defensivo
-- Análisis de vulnerabilidades en entornos controlados
-- Mejora de postura de seguridad
-- NO para ataques no autorizados
-
-Los Safety Gates de BLACKFORGE (S0-S3) siguen operando sobre el pipeline.
+Los documentos de investigación, el PDF y la imagen de referencia de `ee` no
+forman parte del catálogo ejecutable y no se publican automáticamente.
