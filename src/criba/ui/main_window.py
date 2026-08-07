@@ -30,6 +30,7 @@ NAV_SPEC = [
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
     ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
     ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
+    ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
     ("navBlackforge", "⛨", "Blackforge", "Panel de control BLACKFORCE"),
 ]
 
@@ -95,8 +96,8 @@ class CribaMainWindow(QMainWindow):
         """Launch BLACKFORGE as a separate, shell-free child process.
 
         ``history_packet`` is accepted for compatibility with the history
-        action.  Session data remains in the shared CRIBA store; no untrusted
-        packet content is interpolated into process arguments.
+        action.  The active problem is passed as one bounded argv value; no
+        shell is invoked or command line is interpolated.
         """
         del history_packet
         if (
@@ -120,7 +121,11 @@ class CribaMainWindow(QMainWindow):
 
         process = QProcess(self)
         process.setProgram(launch.program)
-        process.setArguments(list(launch.arguments))
+        arguments = list(launch.arguments)
+        if self.problem:
+            # QProcess receives an argv list directly: no shell interpolation.
+            arguments.extend(("--query", self.problem[:20_000]))
+        process.setArguments(arguments)
         if launch.arguments:
             process.setWorkingDirectory(str(Path(__file__).resolve().parents[3]))
         else:
@@ -200,6 +205,7 @@ class CribaMainWindow(QMainWindow):
         self.nav["navGuardar"].clicked.connect(lambda: actions.on_guardar(self))
         self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))
         self.nav["navHistorial"].clicked.connect(lambda: actions.on_historial(self))
+        self.nav["navModelos"].clicked.connect(lambda: actions.on_modelos(self))
         self.nav["navBlackforge"].clicked.connect(lambda: actions.on_blackforge(self))
         # contorno neón turquesa que respira (3s sube / 3s baja) en bucle
         apply_neon_breath(self.nav["navBlackforge"])

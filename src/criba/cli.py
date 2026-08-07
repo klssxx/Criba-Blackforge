@@ -8,6 +8,8 @@ from typing import Sequence
 
 from .catalog import currents
 from .engine import activate, activate_with_llm, build_prompt
+from .model_config import ModelSettings, load_model_settings
+from .model_runtime import enhance_criba_packet, enhance_ideas_with_model
 from .storage import Storage
 
 
@@ -34,7 +36,14 @@ def _run(args: argparse.Namespace, prompt: bool = False) -> int:
 
     llm_mode = getattr(args, "llm", "none")
 
-    if llm_mode != "none":
+    use_configured_model = bool(getattr(args, "use_configured_model", False))
+    if use_configured_model and llm_mode != "none":
+        raise ValueError("Elige --use-configured-model o --llm, no ambos.")
+
+    if use_configured_model:
+        packet = activate(query, args.current, args.mode, args.supporting_methods)
+        packet = enhance_criba_packet(packet, _configured_model_settings(args))
+    elif llm_mode != "none":
         packet = activate_with_llm(query, args.current, args.mode, args.supporting_methods,
                                    llm_mode=llm_mode, llm_kwargs=llm_kwargs)
     else:
@@ -46,6 +55,7 @@ def _run(args: argparse.Namespace, prompt: bool = False) -> int:
         "mode": args.mode,
         "supporting_methods": args.supporting_methods,
         "llm_mode": llm_mode,
+        "use_configured_model": use_configured_model,
     })
     output = build_prompt(packet) if prompt else json.dumps(packet, ensure_ascii=False, indent=2)
     if getattr(args, "output", None):
@@ -53,6 +63,18 @@ def _run(args: argparse.Namespace, prompt: bool = False) -> int:
     else:
         print(output)
     return 0
+
+
+def _configured_model_settings(args: argparse.Namespace) -> ModelSettings:
+    """Load GUI-shared profiles and apply a transient CLI reasoning override."""
+
+    settings = load_model_settings()
+    settings.enabled = True
+    profile = settings.active_profile()
+    reasoning = getattr(args, "reasoning", None)
+    if profile is not None and reasoning:
+        profile.reasoning = reasoning
+    return settings
 
 
 def main(argv: Sequence[str] | None = None) -> int:
@@ -80,6 +102,17 @@ def main(argv: Sequence[str] | None = None) -> int:
         command_parser.add_argument("--llm-model", default=None, help="Nombre del modelo LLM")
         command_parser.add_argument("--llm-url", default=None, help="URL del servidor LLM (Ollama: http://localhost:11434)")
         command_parser.add_argument("--llm-api-key", default=None, help="API key para modo cloud")
+        command_parser.add_argument(
+            "--use-configured-model",
+            action="store_true",
+            help="Usa el perfil GGUF/Ollama guardado en la pestaña Modelos IA",
+        )
+        command_parser.add_argument(
+            "--reasoning",
+            choices=["fast", "balanced", "deep"],
+            default=None,
+            help="Sobrescribe temporalmente el reasoning del perfil configurado",
+        )
         return command_parser
 
     activation("activate").add_argument("--json", action="store_true")
@@ -98,6 +131,14 @@ def main(argv: Sequence[str] | None = None) -> int:
     blackforge_parser.add_argument("--session-size", type=int, default=12)
     blackforge_parser.add_argument("--profile", default="hybrid")
     blackforge_parser.add_argument("--session-id", default="blackforge-cli")
+    blackforge_parser.add_argument(
+        "--use-configured-model",
+        action="store_true",
+        help="Redacta las ideas con el perfil GGUF/Ollama compartido con la GUI",
+    )
+    blackforge_parser.add_argument(
+        "--reasoning", choices=["fast", "balanced", "deep"], default=None
+    )
     # Lottery command
     lottery_parser = sub.add_parser("lottery", help="Ejecuta la Doble Lotería: Asociativa + Pura")
     lottery_parser.add_argument("--query", help="Consulta para modo asociativo")
@@ -153,6 +194,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                     profile=args.profile,
                     session_id=args.session_id,
                 )
+            if args.use_configured_model:
+                raw_ideas = packet.get("ideas", [])
+                if isinstance(raw_ideas, list):
+                    enhanced, semantic = enhance_ideas_with_model(
+                        str(packet.get("query") or args.query or ""),
+                        [idea for idea in raw_ideas if isinstance(idea, dict)],
+                        product="BLACKFORGE",
+                        settings=_configured_model_settings(args),
+                    )
+                    packet["ideas"] = enhanced
+                    packet["semantic_generation"] = semantic
             print(json.dumps(packet, ensure_ascii=False, indent=2))
             return 0
         if args.command == "serve":

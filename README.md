@@ -63,6 +63,25 @@ Al pulsar **Blackforge** dentro de CRIBA, la aplicación abre el ejecutable
 hermano `BLACKFORGE.exe`. CRIBA se oculta mientras trabajas allí y vuelve al
 cerrar BLACKFORGE. Todo forma parte del mismo ZIP y del mismo repositorio.
 
+## Modelos locales GGUF (opcional)
+
+CRIBA y BLACKFORGE pueden usar un modelo local para convertir las combinaciones
+deterministas en títulos, explicaciones y experimentos escritos con lenguaje
+natural. El motor CRIBA sigue decidiendo métodos, seguridad y puntuaciones; el
+modelo solo redacta y su salida se valida antes de mostrarla.
+
+1. Instala `llama.cpp` (necesitas `llama-server.exe`) o usa Ollama.
+2. Abre **Modelos IA** en CRIBA, o **Modelos** en BLACKFORGE.
+3. Pulsa **Añadir**, selecciona el `.gguf`, el runtime y el nivel de reasoning.
+4. Prueba la conexión, activa el perfil y guarda.
+5. En CRIBA, define una **Nueva idea** y pulsa **Generar**. En BLACKFORGE,
+   escribe el reto y pulsa **Ejecutar generación**.
+
+El modelo no se incluye dentro del ZIP para no convertir el portable en una
+descarga de varios gigabytes. La configuración se comparte entre ambos
+ejecutables y se guarda en `%LOCALAPPDATA%\CRIBA-Blackforge\models.json`, sin
+claves API. Consulta [la guía de modelos locales](docs/LOCAL_MODELS.md).
+
 ## Primera prueba en 60 segundos
 
 1. Abre `CRIBA.exe`.
@@ -93,6 +112,10 @@ uv run criba activate --query "Evaluar una alternativa reversible"
 
 # Pipeline BLACKFORGE reproducible con semilla
 uv run criba blackforge --query "Analizar una hipótesis concreta" --seed 11
+
+# Mismo perfil local configurado en la GUI
+uv run criba activate --query "Reducir fraude" --use-configured-model --reasoning balanced
+uv run criba blackforge --query "Reducir fraude" --seed 11 --use-configured-model --reasoning deep
 ```
 
 `uv.lock` es la fuente de verdad para las versiones. Los scripts PowerShell
@@ -114,6 +137,7 @@ dist\CRIBA-Blackforge\
 ├── CRIBA-CLI.exe
 ├── FIRST_RUN_ES.md
 ├── FIRST_RUN_EN.md
+├── LOCAL_MODELS.md
 ├── THIRD_PARTY_NOTICES.md
 ├── LICENSE
 └── _internal\

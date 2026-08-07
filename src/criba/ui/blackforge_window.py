@@ -4,6 +4,7 @@ The visual contract is documented in ``docs/UI_CONTRACT_BLACKFORGE.md``: a
 dedicated charcoal/orange application, not a page embedded inside CRIBA.
 Engine/catalog behaviour remains local and deterministic.
 """
+
 from __future__ import annotations
 
 import random
@@ -15,6 +16,7 @@ from PySide6.QtCore import (
     QPointF,
     QRectF,
     Qt,
+    QThreadPool,
     QTimer,
 )
 from PySide6.QtGui import (
@@ -33,6 +35,7 @@ from PySide6.QtWidgets import (
     QHBoxLayout,
     QHeaderView,
     QLabel,
+    QLineEdit,
     QMainWindow,
     QMessageBox,
     QPushButton,
@@ -47,6 +50,8 @@ from PySide6.QtWidgets import (
 
 from ..blackforge_catalog import records as bf_records
 from ..constants import DATA_ROOT
+from ..model_config import load_model_settings
+from ..model_runtime import enhance_ideas_with_model
 from .interpreter import format_idea
 from .tokens import Tokens, load_tokens
 
@@ -54,11 +59,7 @@ from .tokens import Tokens, load_tokens
 def _catalog_snapshot() -> dict[str, Any]:
     records = list(bf_records())
     families = {
-        str(
-            row.get("functional_category_primary")
-            or row.get("source_family")
-            or "—"
-        )
+        str(row.get("functional_category_primary") or row.get("source_family") or "—")
         for row in records
     }
     top = sorted(
@@ -519,9 +520,7 @@ class HeroCanvas(QWidget):
         top_fade.setColorAt(1.0, QColor(5, 7, 8, 0))
         painter.fillRect(bounds, top_fade)
 
-        bottom_fade = QLinearGradient(
-            0, bounds.height() * 0.65, 0, bounds.height()
-        )
+        bottom_fade = QLinearGradient(0, bounds.height() * 0.65, 0, bounds.height())
         bottom_fade.setColorAt(0.0, QColor(5, 7, 8, 0))
         bottom_fade.setColorAt(1.0, QColor(5, 7, 8, 190))
         painter.fillRect(bounds, bottom_fade)
@@ -610,13 +609,15 @@ class BlackforgeWindow(QMainWindow):
         ("history", "Historial"),
     )
 
-    def __init__(self, database: Any = None) -> None:
+    def __init__(self, database: Any = None, query: str = "") -> None:
         super().__init__()
         self.database = database
         self.tokens: Tokens = load_tokens(DATA_ROOT / "theme_blackforge.json")
         self.snapshot = _catalog_snapshot()
         self.mode = "optimized"
+        self.initial_query = query.strip()
         self._lottery_engine: Any = None
+        self.pool = QThreadPool.globalInstance()
         self._busy = False
         self._spin_index = 0
         self._spin_timer = QTimer(self)
@@ -676,9 +677,7 @@ class BlackforgeWindow(QMainWindow):
         right_scroll.setObjectName("bfRightScroll")
         right_scroll.setWidgetResizable(True)
         right_scroll.setFrameShape(QFrame.Shape.NoFrame)
-        right_scroll.setHorizontalScrollBarPolicy(
-            Qt.ScrollBarPolicy.ScrollBarAlwaysOff
-        )
+        right_scroll.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         right_scroll.setFixedWidth(388)
         self.right_column = self._build_right_column()
         right_scroll.setWidget(self.right_column)
@@ -815,6 +814,13 @@ class BlackforgeWindow(QMainWindow):
             header.setSectionResizeMode(column, QHeaderView.ResizeMode.Fixed)
             self.ideas_table.setColumnWidth(column, 78)
         layout.addWidget(self.ideas_table, 1)
+        self.idea_detail_label = QLabel(
+            "Ejecuta una generación para ver la propuesta explicada en lenguaje natural."
+        )
+        self.idea_detail_label.setObjectName("bfIdeaDetail")
+        self.idea_detail_label.setWordWrap(True)
+        self.idea_detail_label.setMaximumHeight(58)
+        layout.addWidget(self.idea_detail_label)
         return card
 
     def _build_right_column(self) -> QWidget:
@@ -833,11 +839,26 @@ class BlackforgeWindow(QMainWindow):
     def _build_modes_panel(self) -> QFrame:
         panel = QFrame()
         panel.setObjectName("bfCard")
-        panel.setMinimumHeight(273)
+        panel.setMinimumHeight(330)
         layout = QVBoxLayout(panel)
         layout.setContentsMargins(14, 16, 14, 12)
         layout.setSpacing(11)
         layout.addWidget(_section_header("generation", "MODOS DE GENERACIÓN"))
+
+        query_label = QLabel("RETO / CONTEXTO")
+        query_label.setObjectName("bfQueryLabel")
+        layout.addWidget(query_label)
+        self.query_input = QLineEdit()
+        self.query_input.setObjectName("bfQueryInput")
+        self.query_input.setPlaceholderText(
+            "Ej.: reducir fraude sin perjudicar a clientes legítimos"
+        )
+        self.query_input.setText(
+            self.initial_query
+            or "Diseñar una mejora de ciberseguridad concreta, reversible y medible"
+        )
+        self.query_input.setMaxLength(20_000)
+        layout.addWidget(self.query_input)
 
         row = QHBoxLayout()
         row.setSpacing(7)
@@ -889,49 +910,18 @@ class BlackforgeWindow(QMainWindow):
         layout.setSpacing(8)
         layout.addWidget(_section_header("models", "INTEGRACIÓN DE MODELOS"))
 
-        row = QHBoxLayout()
-        row.setSpacing(8)
-        for icon, title, body in (
-            ("server", "Modelo local", "Procesamiento privado\ny seguro en entorno local."),
-            ("cloud", "Modelo nube", "Capacidad elástica\ny actualizaciones continuas."),
-        ):
-            card = QFrame()
-            card.setObjectName("bfInnerCard")
-            card.setMinimumHeight(98)
-            card.setMinimumWidth(0)
-            card.setSizePolicy(
-                QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Preferred
-            )
-            card_layout = QVBoxLayout(card)
-            card_layout.setContentsMargins(10, 8, 10, 8)
-            card_layout.setSpacing(3)
-            top = QHBoxLayout()
-            top.addWidget(LineIcon(icon, 27))
-            texts = QVBoxLayout()
-            texts.setSpacing(0)
-            name = QLabel(title)
-            name.setObjectName("bfInnerTitle")
-            name.setMinimumWidth(0)
-            available = QLabel("●  Disponible")
-            available.setObjectName("bfAvailable")
-            available.setMinimumWidth(0)
-            texts.addWidget(name)
-            texts.addWidget(available)
-            top.addLayout(texts, 1)
-            card_layout.addLayout(top)
-            description = QLabel(body)
-            description.setObjectName("bfInnerDescription")
-            description.setWordWrap(True)
-            description.setMinimumWidth(0)
-            description.setAlignment(Qt.AlignmentFlag.AlignCenter)
-            card_layout.addWidget(description)
-            row.addWidget(card, 1)
-        layout.addLayout(row)
-        foot = QLabel(
-            "El juez/verificador evalúa e interpreta las combinaciones generadas."
-        )
-        foot.setObjectName("bfFootnote")
-        layout.addWidget(foot)
+        self.model_name_label = QLabel()
+        self.model_name_label.setObjectName("bfInnerTitle")
+        self.model_status_label = QLabel()
+        self.model_status_label.setObjectName("bfAvailable")
+        self.model_status_label.setWordWrap(True)
+        layout.addWidget(self.model_name_label)
+        layout.addWidget(self.model_status_label)
+        configure = QPushButton("◇  CONFIGURAR / AÑADIR GGUF")
+        configure.setObjectName("bfModelConfigButton")
+        configure.clicked.connect(self._open_models)
+        layout.addWidget(configure)
+        self._refresh_model_panel()
         return panel
 
     def _build_verification_panel(self) -> QFrame:
@@ -954,9 +944,7 @@ class BlackforgeWindow(QMainWindow):
             tile = QFrame()
             tile.setObjectName("bfVerifyTile")
             tile.setMinimumWidth(0)
-            tile.setSizePolicy(
-                QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding
-            )
+            tile.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Expanding)
             tile_layout = QVBoxLayout(tile)
             tile_layout.setContentsMargins(5, 7, 5, 6)
             tile_layout.setSpacing(4)
@@ -1005,6 +993,8 @@ class BlackforgeWindow(QMainWindow):
             self._select_mode("pure")
         elif key == "generation":
             self._select_mode(self.mode)
+        elif key == "models":
+            self._open_models()
         elif key == "history":
             QMessageBox.information(
                 self,
@@ -1030,26 +1020,64 @@ class BlackforgeWindow(QMainWindow):
         if self._busy:
             return
         self._set_busy(True)
-        QTimer.singleShot(40, self._run_generation)
+        from .actions import Worker, _start_worker
+
+        query = self.query_input.text().strip()
+        worker = Worker(lambda: self._build_generation_result(query))
+        worker.signals.done.connect(self._apply_generation_result)
+        worker.signals.fail.connect(self._on_generation_error)
+        _start_worker(self, worker)
 
     def _run_generation(self) -> None:
-        try:
-            from ..lottery import LotteryEngine
+        """Synchronous compatibility path used by focused engine/UI tests."""
 
-            records = list(bf_records())
-            if self._lottery_engine is None:
-                methods = [dict(row) for row in records]
-                self._lottery_engine = LotteryEngine.from_methods(
-                    methods, seed=random.SystemRandom().randint(0, 2**31 - 1)
-                )
-            self._lottery_engine.run_round(self.mode, batch_size=12)
-            ideas = self._lottery_engine.last_round_ideas
+        try:
+            self._apply_generation_result(self._build_generation_result())
+        except Exception as exc:  # noqa: BLE001
+            self._on_generation_error(str(exc))
+
+    def _build_generation_result(self, query: str | None = None) -> dict[str, Any]:
+        """Run lottery plus optional language synthesis away from the GUI thread."""
+
+        from ..lottery import LotteryEngine
+
+        records = list(bf_records())
+        if self._lottery_engine is None:
+            methods = [dict(row) for row in records]
+            self._lottery_engine = LotteryEngine.from_methods(
+                methods, seed=random.SystemRandom().randint(0, 2**31 - 1)
+            )
+        self._lottery_engine.run_round(self.mode, batch_size=12)
+        deterministic = self._lottery_engine.last_round_ideas
+        active_query = (
+            self.query_input.text().strip() if query is None else query.strip()
+        )
+        enhanced, semantic = enhance_ideas_with_model(
+            active_query,
+            deterministic,
+            product="BLACKFORGE",
+        )
+        return {"ideas": enhanced, "semantic": semantic, "query": active_query}
+
+    def _apply_generation_result(self, result: Any) -> None:
+        """Render a completed result on the Qt GUI thread."""
+
+        try:
+            if not isinstance(result, dict):
+                raise ValueError("Resultado de generación no válido.")
+            ideas = result.get("ideas", [])
             rows: list[tuple[str, ...]] = []
             for index, idea in enumerate(ideas[:5], start=1):
                 formatted = format_idea(idea, "es", index - 1)
                 convergence = idea.get("convergence") or {}
                 viability = float(convergence.get("viability", 0.8) or 0.8)
-                risk = "Alto" if viability < 0.5 else "Medio" if viability < 0.7 else "Bajo"
+                risk = (
+                    "Alto"
+                    if viability < 0.5
+                    else "Medio"
+                    if viability < 0.7
+                    else "Bajo"
+                )
                 rows.append(
                     (
                         str(index),
@@ -1060,18 +1088,72 @@ class BlackforgeWindow(QMainWindow):
                         str(formatted["quality"]),
                     )
                 )
+            self.ideas_model.set_rows(rows)
             if rows:
-                self.ideas_model.set_rows(rows)
-            self.status_subtitle.setText("Generación estructurada y verificada")
+                lead = ideas[0]
+                detail = str(lead.get("description") or "").strip()
+                experiment = str(lead.get("semantic_experiment") or "").strip()
+                if experiment:
+                    detail = f"{detail} · Prueba: {experiment}"
+                self.idea_detail_label.setText(detail or str(lead.get("title") or ""))
+            semantic = result.get("semantic", {})
+            if semantic.get("status") in {"ok", "partial"}:
+                enhanced_count = int(semantic.get("enhanced_count", 0))
+                candidate_count = int(semantic.get("candidate_count", len(ideas)))
+                suffix = " · parcial" if semantic.get("status") == "partial" else ""
+                self.status_subtitle.setText(
+                    f"{enhanced_count}/{candidate_count} ideas redactadas por "
+                    f"{semantic.get('model', 'modelo local')}{suffix}"
+                )
+            elif semantic.get("status") == "fallback":
+                self.status_subtitle.setText(
+                    "Fallback determinista · revisa Modelos IA"
+                )
+                self.idea_detail_label.setText(
+                    f"Modelo local no disponible: {semantic.get('error', 'error desconocido')}"
+                )
+            else:
+                self.status_subtitle.setText(
+                    "Generación determinista · modelo desactivado"
+                )
         except Exception as exc:  # noqa: BLE001
-            QMessageBox.warning(
-                self,
-                "BLACKFORGE",
-                f"No se pudo completar la generación:\n{exc}",
-            )
-            self.status_subtitle.setText("Motor disponible · generación no completada")
+            self._on_generation_error(str(exc))
         finally:
             self._set_busy(False)
+
+    def _on_generation_error(self, message: str) -> None:
+        self._set_busy(False)
+        first_line = message.splitlines()[0]
+        QMessageBox.warning(
+            self,
+            "BLACKFORGE",
+            f"No se pudo completar la generación:\n{first_line}",
+        )
+        self.status_subtitle.setText("Motor disponible · generación no completada")
+
+    def _open_models(self) -> None:
+        from .model_settings_dialog import open_model_settings
+
+        open_model_settings(self)
+        self._refresh_model_panel()
+        self.nav_buttons["models"].setChecked(False)
+        self.nav_buttons["home"].setChecked(True)
+
+    def _refresh_model_panel(self) -> None:
+        settings = load_model_settings()
+        profile = settings.active_profile()
+        self.model_name_label.setText(
+            profile.name
+            if settings.enabled and profile is not None
+            else "Motor determinista"
+        )
+        if settings.enabled and profile is not None:
+            backend = "llama.cpp / GGUF" if profile.backend == "llama_cpp" else "Ollama"
+            self.model_status_label.setText(
+                f"● Activo · {backend} · reasoning {profile.reasoning}"
+            )
+        else:
+            self.model_status_label.setText("○ Modelo de lenguaje desactivado")
 
     def _set_busy(self, busy: bool) -> None:
         self._busy = busy
@@ -1117,9 +1199,7 @@ class BlackforgeWindow(QMainWindow):
             "NOV",
             "DIC",
         )
-        self.date_label.setText(
-            f"{now.day:02d} {months[now.month - 1]} {now.year}"
-        )
+        self.date_label.setText(f"{now.day:02d} {months[now.month - 1]} {now.year}")
         self.time_label.setText(now.strftime("%H:%M:%S"))
 
     def keyPressEvent(self, event) -> None:  # noqa: N802
@@ -1335,6 +1415,42 @@ QPushButton#bfExecuteButton:hover {{
 QPushButton#bfExecuteButton:disabled {{
     color: #CAB5A6;
     background: #6D3109;
+}}
+QLabel#bfQueryLabel {{
+    color: #AEB0AE;
+    font-size: 10px;
+    font-weight: 650;
+}}
+QLineEdit#bfQueryInput {{
+    background: #090C0E;
+    border: 1px solid #343A3E;
+    border-radius: 7px;
+    color: #F0EFEC;
+    padding: 7px 9px;
+    min-height: 25px;
+}}
+QLineEdit#bfQueryInput:focus {{
+    border-color: {orange};
+}}
+QPushButton#bfModelConfigButton {{
+    background: #17120D;
+    border: 1px solid {orange};
+    border-radius: 6px;
+    color: {orange};
+    padding: 7px;
+    font-size: 10px;
+    font-weight: 650;
+}}
+QPushButton#bfModelConfigButton:hover {{
+    background: #28180B;
+    color: {orange_bright};
+}}
+QLabel#bfIdeaDetail {{
+    color: #C7C8C5;
+    background: #0A0D0F;
+    border-left: 2px solid {orange};
+    padding: 6px 8px;
+    font-size: 10px;
 }}
 QFrame#bfInnerCard, QFrame#bfVerifyTile {{
     background: #0D1113;

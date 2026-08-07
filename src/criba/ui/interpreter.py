@@ -107,13 +107,18 @@ def format_idea(idea: dict[str, Any], lang: str = "es", idx: int = 0) -> dict[st
     else:
         title = raw_title[:80]
 
-    # Frase-resumen usando plantilla cíclica
-    tpl = templates[idx % len(templates)]
-    sentence = tpl.format(
-        m1=m1_raw[:50] or "Método A",
-        m2=m2_raw[:50] or "Método B",
-        domain=domain,
-    )
+    # A validated language layer already understands the user's problem; do
+    # not overwrite its semantic description with the old mechanical template.
+    semantic_description = str(idea.get("description") or "").strip()
+    if idea.get("semantic_source") == "local_model" and semantic_description:
+        sentence = semantic_description
+    else:
+        tpl = templates[idx % len(templates)]
+        sentence = tpl.format(
+            m1=m1_raw[:50] or "Método A",
+            m2=m2_raw[:50] or "Método B",
+            domain=domain,
+        )
 
     conv = idea.get("convergence") or {}
     novelty_raw = float(conv.get("novelty") or idea.get("score") or 0)

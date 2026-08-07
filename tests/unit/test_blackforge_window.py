@@ -17,6 +17,11 @@ def qt_app():
     yield app
 
 
+@pytest.fixture(autouse=True)
+def isolated_model_config(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("CRIBA_MODEL_CONFIG", str(tmp_path / "models.json"))
+
+
 def test_blackforge_is_a_standalone_target_dashboard(qt_app) -> None:
     window = BlackforgeWindow()
     window.resize(1386, 778)

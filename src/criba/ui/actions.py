@@ -3,6 +3,7 @@
 Todas las mutaciones (generar/evaluar/actualizar) corren en QThreadPool;
 la GUI nunca se congela (WIDGET_TREE §3).
 """
+
 from __future__ import annotations
 
 import traceback
@@ -17,8 +18,7 @@ from ..engine import activate
 from .ranking import RankingModel
 from .widgets import set_chip
 
-MUTATORS = ("navNuevaIdea", "navGenerar", "navEvaluar", "navGuardar",
-            "navActualizar")
+MUTATORS = ("navNuevaIdea", "navGenerar", "navEvaluar", "navGuardar", "navActualizar")
 
 
 class _Signals(QObject):
@@ -65,6 +65,7 @@ def _start_worker(win: Any, worker: "Worker") -> None:
 
 def _activity(win: Any, kind: str, text: str) -> None:
     from .panels import add_activity
+
     add_activity(win.t, win.refs, _now_ts(), kind, text)
 
 
@@ -93,6 +94,8 @@ def _session_badge(win: Any, active: bool) -> None:
 # S1 — SIN SESIÓN
 # ---------------------------------------------------------------------------
 def enter_s1(win: Any) -> None:
+    from ..model_config import active_model_label
+
     _session_badge(win, False)
     win.greetingSub.setText("Crea una nueva idea para empezar")
     r = win.refs
@@ -113,16 +116,26 @@ def enter_s1(win: Any) -> None:
     r["scoreHistogram"].set_bins([])
     r["catDonut"].set_segments([])
     r["catDonut"].set_center("0", "ideas totales")
-    win.footerSegs["fsModelo"].set_value(f"CRIBA {ENGINE_VERSION}")
+    win.footerSegs["fsModelo"].set_value(
+        f"CRIBA {ENGINE_VERSION} · {active_model_label()}"
+    )
     win.footerSegs["fsSesion"].set_value("—")
     win.footerSegs["fsIdeas"].set_value("0")
     win.footerSegs["fsConvergencia"].set_value("—")
     win.footerSegs["fsUltima"].set_value("—")
     refresh_sources_freshness(win)
-    _set_buttons(win, {"navNuevaIdea": True, "navGenerar": False,
-                       "navEvaluar": False, "navGuardar": False,
-                       "navActualizar": True, "navHistorial": True,
-                       "navBlackforge": True})
+    _set_buttons(
+        win,
+        {
+            "navNuevaIdea": True,
+            "navGenerar": False,
+            "navEvaluar": False,
+            "navGuardar": False,
+            "navActualizar": True,
+            "navHistorial": True,
+            "navBlackforge": True,
+        },
+    )
     _suggest(win, "navNuevaIdea")
 
 
@@ -131,6 +144,7 @@ def enter_s1(win: Any) -> None:
 # ---------------------------------------------------------------------------
 def on_nueva_idea(win: Any) -> None:
     from .dialogs import ask_problem
+
     problem = ask_problem(win)
     win.nav["navNuevaIdea"].setChecked(False)
     if not problem:
@@ -164,7 +178,9 @@ def _apply_new_problem(win: Any, problem: str) -> None:
     for conn in r["connectors"][1:]:
         conn.set_lit(False)
     r["ideaTitle"].setText(problem if len(problem) <= 120 else problem[:117] + "…")
-    r["ideaSummary"].setText("Problema base capturado. Genera ideas con los 16 operadores.")
+    r["ideaSummary"].setText(
+        "Problema base capturado. Genera ideas con los 16 operadores."
+    )
     set_chip(r["ideaEstadoChip"], "Sin evaluar", "exploracion")
     r["scoreGauge"].show()
     r["scoreGauge"].set_score(0.0, animate=False)
@@ -174,16 +190,32 @@ def _apply_new_problem(win: Any, problem: str) -> None:
     r["mConvergencia"].set_value("—")
     r["mBestScore"].set_value("—")
     _activity(win, "cyan", f"Problema base definido: {problem[:60]}")
-    _set_buttons(win, {"navNuevaIdea": True, "navGenerar": True,
-                       "navEvaluar": False, "navGuardar": False,
-                       "navActualizar": True, "navHistorial": True,
-                       "navBlackforge": True})
+    _set_buttons(
+        win,
+        {
+            "navNuevaIdea": True,
+            "navGenerar": True,
+            "navEvaluar": False,
+            "navGuardar": False,
+            "navActualizar": True,
+            "navHistorial": True,
+            "navBlackforge": True,
+        },
+    )
     _suggest(win, "navGenerar")
 
 
 # ---------------------------------------------------------------------------
 # S3 — GENERANDO  (activate() genera Y evalúa; la fase visual se divide)
 # ---------------------------------------------------------------------------
+def _generate_criba_packet(problem: str) -> dict[str, Any]:
+    """Run deterministic CRIBA and its optional semantic language layer."""
+
+    from ..model_runtime import enhance_criba_packet
+
+    return enhance_criba_packet(activate(problem))
+
+
 def on_generar(win: Any) -> None:
     win.nav["navGenerar"].setChecked(False)
     if not win.problem:
@@ -195,10 +227,11 @@ def on_generar(win: Any) -> None:
     win.nav["navGenerar"].set_state("running", "Ejecutando operadores...")
     r["stages"]["stageGenerar"].set_state("active", spinning=True)
     _activity(win, "blue", "Generación iniciada (16 operadores)")
-    worker = Worker(lambda: activate(win.problem))
+    worker = Worker(lambda: _generate_criba_packet(win.problem))
     worker.signals.done.connect(lambda packet: _on_generated(win, packet))
-    worker.signals.fail.connect(lambda msg: on_operation_error(win, "navGenerar",
-                                                               "stageGenerar", msg))
+    worker.signals.fail.connect(
+        lambda msg: on_operation_error(win, "navGenerar", "stageGenerar", msg)
+    )
     _start_worker(win, worker)
 
 
@@ -212,12 +245,44 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
     r["stages"]["stageEvaluar"].set_state("active")
     r["mOperadores"].set_value("16/16")
     r["mIdeas"].set_value(str(len(ideas)))
-    _activity(win, "blue", f"{len(ideas)} ideas generadas "
-                           f"({packet['innovation']['real_divergent_count']} divergencia real)")
-    _set_buttons(win, {"navNuevaIdea": True, "navGenerar": True,
-                       "navEvaluar": True, "navGuardar": False,
-                       "navActualizar": True, "navHistorial": True,
-                       "navBlackforge": True})
+    _activity(
+        win,
+        "blue",
+        f"{len(ideas)} ideas generadas "
+        f"({packet['innovation']['real_divergent_count']} divergencia real)",
+    )
+    semantic = packet.get("semantic_generation", {})
+    if semantic.get("status") in {"ok", "partial"}:
+        enhanced_count = int(semantic.get("enhanced_count", 0))
+        candidate_count = int(semantic.get("candidate_count", len(ideas)))
+        suffix = " · respuesta parcial" if semantic.get("status") == "partial" else ""
+        _activity(
+            win,
+            "orange" if semantic.get("status") == "partial" else "cyan",
+            f"{enhanced_count}/{candidate_count} ideas prioritarias redactadas por "
+            f"{semantic.get('model', 'modelo local')} "
+            f"({semantic.get('reasoning', 'balanced')}){suffix}",
+        )
+        win.footerSegs["fsModelo"].set_value(
+            str(semantic.get("model") or "Modelo local")
+        )
+    elif semantic.get("status") == "fallback":
+        _activity(
+            win, "orange", f"Modelo no disponible: {semantic.get('error', 'fallback')}"
+        )
+        win.footerSegs["fsModelo"].set_value("Determinista · fallback LLM")
+    _set_buttons(
+        win,
+        {
+            "navNuevaIdea": True,
+            "navGenerar": True,
+            "navEvaluar": True,
+            "navGuardar": False,
+            "navActualizar": True,
+            "navHistorial": True,
+            "navBlackforge": True,
+        },
+    )
     _suggest(win, "navEvaluar")
 
 
@@ -237,8 +302,9 @@ def on_evaluar(win: Any) -> None:
     packet = win.packet
     worker = Worker(lambda: _build_ranking_rows(packet))
     worker.signals.done.connect(lambda rows: _on_evaluated(win, rows))
-    worker.signals.fail.connect(lambda msg: on_operation_error(win, "navEvaluar",
-                                                               "stageEvaluar", msg))
+    worker.signals.fail.connect(
+        lambda msg: on_operation_error(win, "navEvaluar", "stageEvaluar", msg)
+    )
     _start_worker(win, worker)
 
 
@@ -246,15 +312,19 @@ def _build_ranking_rows(packet: dict[str, Any]) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for i, idea in enumerate(packet["innovation"]["ideas"], start=1):
         conv = idea.get("convergence", {})
-        rows.append({
-            "rank": i,
-            "id": idea.get("id", ""),
-            "titulo": idea.get("title") or idea.get("description", ""),
-            "descripcion": idea.get("description", ""),
-            "value_score": float(conv.get("value_score", 0.0)),
-            "convergencia": float(conv.get("novelty", 0.0)),
-            "estado": "candidata" if i <= 3 else ("eval" if i <= 6 else "exploracion"),
-        })
+        rows.append(
+            {
+                "rank": i,
+                "id": idea.get("id", ""),
+                "titulo": idea.get("title") or idea.get("description", ""),
+                "descripcion": idea.get("description", ""),
+                "value_score": float(conv.get("value_score", 0.0)),
+                "convergencia": float(conv.get("novelty", 0.0)),
+                "estado": "candidata"
+                if i <= 3
+                else ("eval" if i <= 6 else "exploracion"),
+            }
+        )
     return rows
 
 
@@ -284,18 +354,29 @@ def _on_evaluated(win: Any, rows: list[dict[str, Any]]) -> None:
     conv_global = packet["metrics"].get("divergence", 0)
     r["mConvergencia"].set_value(f"{conv_global}%")
     _update_charts(win, rows)
-    win.footerSegs["fsSesion"].set_value(
-        f"CRB-{packet['activation_id'][:8].upper()}")
+    win.footerSegs["fsSesion"].set_value(f"CRB-{packet['activation_id'][:8].upper()}")
     win.footerSegs["fsIdeas"].set_value(str(len(rows)))
     win.footerSegs["fsConvergencia"].set_value(f"{conv_global}%")
     win.footerSegs["fsUltima"].set_value(datetime.now().strftime("%d/%m %H:%M"))
-    _activity(win, "blue",
-              f"Idea evaluada: {rows[0]['titulo'][:60]} (score {rows[0]['value_score']:.2f})"
-              if rows else "Evaluación sin ideas")
-    _set_buttons(win, {"navNuevaIdea": True, "navGenerar": True,
-                       "navEvaluar": True, "navGuardar": True,
-                       "navActualizar": True, "navHistorial": True,
-                       "navBlackforge": True})
+    _activity(
+        win,
+        "blue",
+        f"Idea evaluada: {rows[0]['titulo'][:60]} (score {rows[0]['value_score']:.2f})"
+        if rows
+        else "Evaluación sin ideas",
+    )
+    _set_buttons(
+        win,
+        {
+            "navNuevaIdea": True,
+            "navGenerar": True,
+            "navEvaluar": True,
+            "navGuardar": True,
+            "navActualizar": True,
+            "navHistorial": True,
+            "navBlackforge": True,
+        },
+    )
     _suggest(win, "navGuardar")
 
 
@@ -311,14 +392,17 @@ def _update_charts(win: Any, rows: list[dict[str, Any]]) -> None:
     bins = []
     for i in range(nbins):
         edge = lo + span * (i + 0.5) / nbins
-        count = sum(1 for s in scores
-                    if lo + span * i / nbins <= s <= lo + span * (i + 1) / nbins)
+        count = sum(
+            1
+            for s in scores
+            if lo + span * i / nbins <= s <= lo + span * (i + 1) / nbins
+        )
         bins.append((edge, count))
     r["scoreHistogram"].set_bins(bins)
     # donut por familia de operador (datos reales del packet)
     from collections import Counter
-    fams = Counter(i.get("family", "otros")
-                   for i in win.packet["innovation"]["ideas"])
+
+    fams = Counter(i.get("family", "otros") for i in win.packet["innovation"]["ideas"])
     top = fams.most_common(4)
     rest = sum(fams.values()) - sum(c for _, c in top)
     segs = []
@@ -327,16 +411,19 @@ def _update_charts(win: Any, rows: list[dict[str, Any]]) -> None:
         if item.widget():
             item.widget().deleteLater()
     from .widgets import LegendRow
+
     total = sum(fams.values()) or 1
     for idx, (name, count) in enumerate(top, start=1):
         color = QColor(t.chart(idx))
         segs.append((name, float(count), color))
         r["donutLegend"].addWidget(
-            LegendRow(t.chart(idx), name, f"{round(100 * count / total)}%"))
+            LegendRow(t.chart(idx), name, f"{round(100 * count / total)}%")
+        )
     if rest > 0:
         segs.append(("Otros", float(rest), QColor(t.chart(5))))
         r["donutLegend"].addWidget(
-            LegendRow(t.chart(5), "Otros", f"{round(100 * rest / total)}%"))
+            LegendRow(t.chart(5), "Otros", f"{round(100 * rest / total)}%")
+        )
     r["catDonut"].set_segments(segs)
     r["catDonut"].set_center(str(len(rows)), "ideas totales")
 
@@ -351,8 +438,11 @@ def on_guardar(win: Any) -> None:
         return
     r = win.refs
     try:
-        ident = win.store.save(win.packet["original_query"], win.packet,
-                               {"gui": True, "screen": "innovacion"})
+        ident = win.store.save(
+            win.packet["original_query"],
+            win.packet,
+            {"gui": True, "screen": "innovacion"},
+        )
     except Exception as exc:  # noqa: BLE001
         on_operation_error(win, "navGuardar", "stageGuardar", str(exc))
         return
@@ -376,6 +466,7 @@ def on_guardar(win: Any) -> None:
 def on_historial(win: Any) -> None:
     win.nav["navHistorial"].setChecked(True)
     from .dialogs import show_history
+
     try:
         loaded = show_history(win)
     finally:
@@ -419,19 +510,25 @@ def on_actualizar(win: Any) -> None:
         # Fuentes deterministas: derivadas del catálogo local (sin red por
         # defecto — security.no_network_by_default del contrato del engine).
         from ..catalog import currents, methods
+
         cs, ms = currents(), methods()
         fam = {}
-        names = ["Tecnología emergente", "Tendencias de negocio",
-                 "Investigación científica", "Diseño & experiencia",
-                 "Comunidad & open source"]
+        names = [
+            "Tecnología emergente",
+            "Tendencias de negocio",
+            "Investigación científica",
+            "Diseño & experiencia",
+            "Comunidad & open source",
+        ]
         for i, name in enumerate(names):
             fam[name] = min(100, 40 + (len(ms) * (i + 3)) % 55 + len(cs))
         return fam
 
     worker = Worker(_job)
     worker.signals.done.connect(lambda fam: _on_sources_updated(win, fam))
-    worker.signals.fail.connect(lambda msg: on_operation_error(win, "navActualizar",
-                                                               None, msg))
+    worker.signals.fail.connect(
+        lambda msg: on_operation_error(win, "navActualizar", None, msg)
+    )
     _start_worker(win, worker)
 
 
@@ -479,8 +576,7 @@ def show_error(win: Any, op: str, msg: str) -> None:
     win.errorBanner.show()
 
 
-def on_operation_error(win: Any, nav_key: str, stage_key: str | None,
-                       msg: str) -> None:
+def on_operation_error(win: Any, nav_key: str, stage_key: str | None, msg: str) -> None:
     first = msg.splitlines()[0][:60]
     win.nav[nav_key].set_state("error", f"Error: {first}")
     if stage_key:
@@ -493,15 +589,18 @@ def on_operation_error(win: Any, nav_key: str, stage_key: str | None,
 def _restore_buttons_after_op(win: Any) -> None:
     has_problem = bool(win.problem)
     has_packet = win.packet is not None
-    _set_buttons(win, {
-        "navNuevaIdea": True,
-        "navGenerar": has_problem,
-        "navEvaluar": has_packet,
-        "navGuardar": has_packet,
-        "navActualizar": True,
-        "navHistorial": True,
-        "navBlackforge": True,
-    })
+    _set_buttons(
+        win,
+        {
+            "navNuevaIdea": True,
+            "navGenerar": has_problem,
+            "navEvaluar": has_packet,
+            "navGuardar": has_packet,
+            "navActualizar": True,
+            "navHistorial": True,
+            "navBlackforge": True,
+        },
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -510,6 +609,20 @@ def _restore_buttons_after_op(win: Any) -> None:
 def on_blackforge(win: Any) -> None:
     win.nav["navBlackforge"].setChecked(False)
     win.show_blackforge_page()
+
+
+def on_modelos(win: Any) -> None:
+    """Open the shared local-model profile manager."""
+
+    from ..model_config import active_model_label
+    from .model_settings_dialog import open_model_settings
+
+    win.nav["navModelos"].setChecked(False)
+    if open_model_settings(win):
+        win.footerSegs["fsModelo"].set_value(
+            f"CRIBA {ENGINE_VERSION} · {active_model_label()}"
+        )
+        _activity(win, "cyan", f"Modelo activo: {active_model_label()}")
 
 
 # ---------------------------------------------------------------------------
