@@ -2,19 +2,16 @@
 from __future__ import annotations
 
 import pytest
+
 from criba.constraints import (
+    ConstraintSet,
     KnowledgeStatus,
     NoveltyStatus,
-    FindingConfidence,
-    ConstraintSet,
-    ConstraintViolation,
-    ConstraintValidation,
+    build_constraints,
     classify_knowledge,
     classify_novelty,
-    build_constraints,
     validate_idea_against_constraints,
 )
-
 
 # ---------------------------------------------------------------------------
 # KnowledgeStatus

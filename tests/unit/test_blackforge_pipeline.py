@@ -20,11 +20,9 @@ import os
 import sys
 from pathlib import Path
 
-import pytest
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba import blackforge_pipeline as bp  # noqa: E402
+from criba import blackforge_pipeline as bp
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 

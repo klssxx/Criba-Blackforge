@@ -19,13 +19,14 @@ from __future__ import annotations
 import json
 import os
 import uuid
+from collections.abc import Mapping
 from datetime import datetime, timezone
-from typing import Any, Dict, List, Mapping, Optional
+from typing import Any
 
-from .blackforge_catalog import load as _load_catalog, get as _get
+from .blackforge_catalog import get as _get
+from .blackforge_safety import DENY, evaluate_blackforge_safety
 from .blackforge_selector import select_blackforge
-from .blackforge_safety import evaluate_blackforge_safety, DENY
-from .engine import _evaluate_idea, _clamp
+from .engine import _clamp, _evaluate_idea
 
 REFERENCE_QUERY = (
     "¿Cómo podemos generar ideas estructuralmente nuevas para controlar las acciones "
@@ -63,9 +64,9 @@ def run_headless(
     seed: int = 1,
     session_size: int = 12,
     profile: str = "hybrid",
-    session_context: Optional[Mapping[str, Any]] = None,
+    session_context: Mapping[str, Any] | None = None,
     session_id: str = "blackforge-headless",
-) -> Dict[str, Any]:
+) -> dict[str, Any]:
     """Run the full headless pipeline and return a packet-2.1 dict."""
     sel = select_blackforge(seed=seed, session_size=session_size, profile=profile)
     if sel.failure is not None:
@@ -79,14 +80,14 @@ def run_headless(
             "status": "SELECTION_FAILED",
         }
 
-    ctx: Dict[str, Any] = dict(session_context or {})
-    selected_items: List[Mapping[str, Any]] = [
+    ctx: dict[str, Any] = dict(session_context or {})
+    selected_items: list[Mapping[str, Any]] = [
         x for x in (_get(bid) for bid in sel.selected_ids) if x is not None
     ]
 
     # Safety gate: keep only items that are NOT DENY.
-    safe: List[Mapping[str, Any]] = []
-    safety_report: List[Dict[str, Any]] = []
+    safe: list[Mapping[str, Any]] = []
+    safety_report: list[dict[str, Any]] = []
     for raw_item in selected_items:
         d = evaluate_blackforge_safety(dict(raw_item), ctx, session_id=session_id)
         safety_report.append(d.to_dict())
@@ -94,8 +95,8 @@ def run_headless(
             safe.append(raw_item)
 
     # Build ideas with a causal signal + convergence measurement.
-    ideas: List[Dict[str, Any]] = []
-    seen_axes: Dict[str, int] = {}
+    ideas: list[dict[str, Any]] = []
+    seen_axes: dict[str, int] = {}
     for idx, raw_item in enumerate(safe, start=1):
         record: Mapping[str, Any] = raw_item
         axis = record.get("causal_axis_primary") or "unknown"
@@ -180,11 +181,11 @@ def run_headless(
     return packet
 
 
-def _stable(packet: Dict[str, Any]) -> Dict[str, Any]:
+def _stable(packet: dict[str, Any]) -> dict[str, Any]:
     """Normalize for golden comparison: drop UUID/timestamp/paths, sort keys."""
     p = {k: v for k, v in packet.items() if k not in ("activation_id", "timestamp")}
     p = _strip_timestamps(p)
-    stable: Dict[str, Any] = json.loads(json.dumps(p, ensure_ascii=False, sort_keys=True))
+    stable: dict[str, Any] = json.loads(json.dumps(p, ensure_ascii=False, sort_keys=True))
     return stable
 
 
@@ -197,7 +198,7 @@ def _strip_timestamps(obj: Any) -> Any:
     return obj
 
 
-def save_artifacts(packet: Dict[str, Any], out_dir: str = "verification") -> Dict[str, str]:
+def save_artifacts(packet: dict[str, Any], out_dir: str = "verification") -> dict[str, str]:
     os.makedirs(out_dir, exist_ok=True)
     raw_path = os.path.join(out_dir, "blackforge_headless_output.json")
     norm_path = os.path.join(out_dir, "blackforge_headless_output.normalized.json")

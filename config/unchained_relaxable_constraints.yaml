@@ -1,0 +1,14 @@
+# SUPRA UNCHAINED MODE - Relaxable Constraints Catalog
+# El modelo solo tiene permitido relajar las reglas listadas aquí explícitamente.
+
+relaxable_assumptions:
+  - id: "ASSUMP-001"
+    description: "Perimeter-centric inspection and firewall boundaries"
+  - id: "ASSUMP-002"
+    description: "Static network topology and deterministic IP/port addressing"
+  - id: "ASSUMP-003"
+    description: "Reactive patch management and signature-based detection"
+  - id: "ASSUMP-004"
+    description: "Centralized trust authority and synchronous identity verification"
+  - id: "ASSUMP-005"
+    description: "Binary allow/deny access models at session establishment"

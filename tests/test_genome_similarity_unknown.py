@@ -4,11 +4,15 @@ Covers every case in the gate. similarity() returns similarity + coverage and
 NEVER classifies duplicate when coverage < MIN_DUPLICATE_COVERAGE.
 """
 from __future__ import annotations
-import sys, os
+
+import os
+import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 import pytest
-from criba.similarity import genome_distance, classify, MIN_DUPLICATE_COVERAGE
+
+from criba.similarity import MIN_DUPLICATE_COVERAGE, classify, genome_distance
 
 
 def G(**kw):

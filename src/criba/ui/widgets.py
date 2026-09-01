@@ -6,13 +6,27 @@ la excepción permitida al QSS global (STYLE_GUIDE §6).
 """
 from __future__ import annotations
 
-from PySide6.QtCore import (Property, QEasingCurve, QObject, QPropertyAnimation,
-                            QRectF, QSize, Qt, QTimer, Signal)
-from PySide6.QtGui import (QColor, QConicalGradient, QFont, QFontMetrics,
-                           QPainter, QPen)
-from PySide6.QtWidgets import (QFrame, QGraphicsDropShadowEffect, QHBoxLayout,
-                               QLabel, QProgressBar, QPushButton, QSizePolicy,
-                               QVBoxLayout, QWidget)
+from PySide6.QtCore import (
+    Property,
+    QEasingCurve,
+    QObject,
+    QPropertyAnimation,
+    QRectF,
+    Qt,
+    QTimer,
+)
+from PySide6.QtGui import QColor, QConicalGradient, QFont, QPainter, QPen
+from PySide6.QtWidgets import (
+    QFrame,
+    QGraphicsDropShadowEffect,
+    QHBoxLayout,
+    QLabel,
+    QProgressBar,
+    QPushButton,
+    QSizePolicy,
+    QVBoxLayout,
+    QWidget,
+)
 
 from .tokens import Tokens, load_tokens
 
@@ -216,7 +230,7 @@ class PipelineConnector(QWidget):
         self._lit = lit
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802 (Qt API)
+    def paintEvent(self, event) -> None:
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
         color = _qcolor(self._t.accent_cyan if self._lit else self._t.border_soft)
@@ -293,7 +307,7 @@ class ValueScoreGauge(QWidget):
         self._percentile = text
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802
+    def paintEvent(self, event) -> None:
         t = self._t
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
@@ -350,7 +364,7 @@ class HistogramWidget(QWidget):
         self._bins = list(bins)
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802
+    def paintEvent(self, event) -> None:
         t = self._t
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
@@ -448,7 +462,7 @@ class DonutChartWidget(QWidget):
         self._center = (big, small)
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802
+    def paintEvent(self, event) -> None:
         t = self._t
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)
@@ -639,7 +653,7 @@ class LineChartWidget(QWidget):
         self._ymax = ymax if ymax is not None else (max(values) if values else 1.0)
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802
+    def paintEvent(self, event) -> None:
         t = self._t
         p = QPainter(self)
         p.setRenderHint(QPainter.RenderHint.Antialiasing)

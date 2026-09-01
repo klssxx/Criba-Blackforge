@@ -13,8 +13,7 @@ from datetime import datetime, timezone
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, Field, field_validator, model_validator
-
+from pydantic import BaseModel, Field, model_validator
 
 # ---------------------------------------------------------------------------
 # Enums
@@ -89,7 +88,7 @@ class InnovationContext(BaseModel):
     )
 
     @model_validator(mode="after")
-    def _auto_normalize(self) -> "InnovationContext":
+    def _auto_normalize(self) -> InnovationContext:
         """Auto-fill normalized_query from original_query if empty."""
         if not self.normalized_query and self.original_query:
             self.normalized_query = self.original_query.strip().lower()

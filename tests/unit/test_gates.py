@@ -5,8 +5,6 @@ executed-test evidence, even if all 12 structural gates pass.
 """
 from __future__ import annotations
 
-import pytest
-
 from criba.gates import (
     G01_schema_valid,
     G04_authorization_valid,
@@ -20,8 +18,7 @@ from criba.gates import (
     Verdict,
     evaluate_gates,
 )
-from criba.output_format import CribaOutput, validate_output_limits
-
+from criba.output_format import CribaOutput
 
 # ---------------------------------------------------------------------------
 # Fixtures: a minimal valid CRIBA context/packet/output

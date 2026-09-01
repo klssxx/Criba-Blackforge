@@ -3,14 +3,17 @@
 Run: pytest tests/unit/test_innovation_mvp.py
 """
 from __future__ import annotations
-import json, os, sys
-import pytest
+
+import json
+import os
+import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from criba import engine
-from criba.genome import Genome, normalize_proposal, classify as gclassify, UnclassifiedProperty
-from criba.similarity import genome_distance, classify, main_mechanism, WEIGHTS
+from criba.genome import Genome, normalize_proposal
+from criba.genome import classify as gclassify
+from criba.similarity import WEIGHTS, classify, genome_distance
 
 
 # ---------- condition 1: schema_version is a string ----------

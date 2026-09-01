@@ -15,7 +15,6 @@ from typing import Any, Protocol
 
 import httpx
 
-
 # Configuración por defecto
 DEFAULT_OLLAMA_URL = "http://localhost:11434"
 DEFAULT_OLLAMA_MODEL = "llama3.2"

@@ -18,16 +18,28 @@ from __future__ import annotations
 
 import random
 from datetime import datetime
-from pathlib import Path
 from typing import Any
 
-from PySide6.QtCore import (QAbstractTableModel, QEasingCurve,
-                            QPropertyAnimation, Qt, QTimer)
+from PySide6.QtCore import (
+    QAbstractTableModel,
+    QEasingCurve,
+    QPropertyAnimation,
+    Qt,
+    QTimer,
+)
 from PySide6.QtGui import QColor, QPainter, QPixmap
 from PySide6.QtWidgets import (
-    QDialog, QFrame, QGraphicsOpacityEffect, QGridLayout, QHBoxLayout,
-    QLabel, QPushButton, QScrollArea, QSizePolicy, QTableView,
-    QVBoxLayout, QWidget,
+    QDialog,
+    QFrame,
+    QGraphicsOpacityEffect,
+    QGridLayout,
+    QHBoxLayout,
+    QLabel,
+    QPushButton,
+    QScrollArea,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
 )
 
 from ..blackforge_catalog import records as bf_records
@@ -35,8 +47,13 @@ from ..constants import DATA_ROOT
 from .i18n import on_change, t
 from .interpreter import format_idea
 from .tokens import Tokens
-from .widgets import (DonutChartWidget, LegendRow, SourceBarWidget,
-                      apply_neon_breath, make_chip, make_glow)
+from .widgets import (
+    DonutChartWidget,
+    LegendRow,
+    SourceBarWidget,
+    apply_neon_breath,
+    make_chip,
+)
 
 
 # --- métricas reales del catálogo (se calculan una vez) -------------------
@@ -120,19 +137,19 @@ class _BFIdeasModel(QAbstractTableModel):
     def refresh_headers(self) -> None:
         self.headerDataChanged.emit(Qt.Orientation.Horizontal, 0, 5)
 
-    def rowCount(self, parent=None) -> int:   # noqa: N802
+    def rowCount(self, parent=None) -> int:
         return len(self._rows)
 
-    def columnCount(self, parent=None) -> int:  # noqa: N802
+    def columnCount(self, parent=None) -> int:
         return len(self._HEADER_KEYS)
 
-    def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):  # noqa: N802
+    def headerData(self, section, orientation, role=Qt.ItemDataRole.DisplayRole):
         if orientation == Qt.Orientation.Horizontal and role == Qt.ItemDataRole.DisplayRole:
             k = self._HEADER_KEYS[section]
             return t(k) if k != "#" else "#"
         return None
 
-    def data(self, index, role=Qt.ItemDataRole.DisplayRole):  # noqa: N802
+    def data(self, index, role=Qt.ItemDataRole.DisplayRole):
         if not index.isValid():
             return None
         row = self._rows[index.row()]
@@ -192,7 +209,7 @@ class _HeroGlow(QWidget):
         self._active = -1
         self.update()
 
-    def paintEvent(self, event) -> None:  # noqa: N802
+    def paintEvent(self, event) -> None:
         if self._active < 0:
             return
         p = QPainter(self)

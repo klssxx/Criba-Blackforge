@@ -2,9 +2,10 @@
 
 import json
 import sqlite3
+from collections.abc import Mapping
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
-from typing import Any, Mapping, cast
+from typing import Any, cast
 from urllib.parse import urlparse
 
 from .catalog import currents, methods

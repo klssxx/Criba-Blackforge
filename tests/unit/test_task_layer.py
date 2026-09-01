@@ -1,19 +1,16 @@
 """Tests for task_layer.py — HIPERMEGAPROMPT §3."""
 from __future__ import annotations
 
-import pytest
 from criba.task_layer import (
-    CribaTaskType,
-    BlackforgeTaskType,
-    CRIBA_SEQUENCE,
-    BLACKFORGE_SEQUENCE,
     BLACKFORGE_EXTENSION,
+    BLACKFORGE_SEQUENCE,
+    CRIBA_SEQUENCE,
+    BlackforgeTaskType,
+    CribaTaskType,
     TaskDefinition,
-    SequenceValidation,
-    validate_sequence,
     define_task,
+    validate_sequence,
 )
-
 
 # ---------------------------------------------------------------------------
 # Enums

@@ -1,6 +1,7 @@
 """i18n mínimo — ES (default) / EN. Sin dependencias externas."""
 from __future__ import annotations
-from typing import Callable
+
+from collections.abc import Callable
 
 _STRINGS: dict[str, dict[str, str]] = {
     "es": {
@@ -165,7 +166,7 @@ def lang() -> str:
 def set_lang(code: str) -> None:
     global _current
     _current = code if code in _STRINGS else "es"
-    for cb in list(_listeners):
+    for cb in _listeners:
         try:
             cb()
         except Exception:

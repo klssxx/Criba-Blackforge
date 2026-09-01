@@ -6,18 +6,15 @@ nunca reparación silenciosa) y los casos borde de normalización escalar.
 """
 from __future__ import annotations
 
-import math
-
 import pytest
 
 from criba.blackforge_causal import (
-    CausalWeightProfile,
     GENERAL_PROFILE,
+    CausalWeightProfile,
     ProposalValidationError,
     analyze_causal_pair,
-    build_causal_signature,
-    normalize_scalar,
     normalize_id,
+    normalize_scalar,
     sensitivity_analysis,
     validate_against_frozen_model,
 )

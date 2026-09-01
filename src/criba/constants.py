@@ -1,6 +1,6 @@
-from pathlib import Path
 import os
 import sys
+from pathlib import Path
 
 PACKAGE_ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
 DATA_ROOT = PACKAGE_ROOT / "data"
@@ -28,12 +28,12 @@ VALID_PIPELINE_ACTIONS = {"PROTOTIPAR", "DIVERGIR"}
 FEATURES: dict[str, bool] = {
     "context_layer_v2": False,
     "compound_personas": False,
-    "ensemble_analysis": False,
-    "six_stage_chain": False,
-    "adversarial_self_reinforcement": False,
-    "human_review_gates": False,
-    "blackforge_extended_context": False,
-    "deterministic_validation": False,
-    "structured_logging": False,
-    "quality_feedback_loop": False,
+    "ensemble_analysis": True,
+    "six_stage_chain": True,
+    "adversarial_self_reinforcement": True,
+    "human_review_gates": True,
+    "blackforge_extended_context": True,
+    "deterministic_validation": True,
+    "structured_logging": True,
+    "quality_feedback_loop": True,
 }

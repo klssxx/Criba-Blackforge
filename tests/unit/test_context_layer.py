@@ -1,18 +1,16 @@
 """Tests for context_layer.py — HIPERMEGAPROMPT §2."""
 from __future__ import annotations
 
-import pytest
 from criba.context_layer import (
-    InnovationContext,
     BlackforgeContext,
-    OperatingMode,
     ContextIntegrityStatus,
-    detect_domain,
+    InnovationContext,
+    OperatingMode,
     build_context,
+    detect_domain,
     extend_for_blackforge,
     validate_context_integrity,
 )
-
 
 # ---------------------------------------------------------------------------
 # detect_domain

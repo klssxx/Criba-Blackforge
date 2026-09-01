@@ -1,9 +1,12 @@
 """File-backed catalogs. JSON only by design: portable and dependency free."""
 from __future__ import annotations
+
 import json
 from pathlib import Path
 from typing import Any
+
 from .constants import DATA_ROOT
+
 
 def _load_file(path: Path) -> list[dict[str, Any]]:
     try:

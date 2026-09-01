@@ -1,7 +1,9 @@
 """Explainable keyword and signal selector. It is intentionally deterministic."""
 from __future__ import annotations
+
 import re
 from typing import Any
+
 from .catalog import currents, find_current
 
 SIGNALS = {

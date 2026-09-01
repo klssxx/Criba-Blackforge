@@ -12,7 +12,9 @@ Rules (condition 14 — mandatory unknown handling):
   unknown field lists. Duplicate classification requires coverage >= threshold.
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Mapping
+
+from collections.abc import Mapping
+from typing import Any
 
 _RAW_WEIGHTS = {
     "mechanism": 0.30,
@@ -31,7 +33,7 @@ _MULTIVALUE_FIELDS = _COMPARABLE_FIELDS
 
 _COMP_RAW = {k: _RAW_WEIGHTS[k] for k in _COMPARABLE_FIELDS}
 _COMP_TOTAL = sum(_COMP_RAW.values())
-WEIGHTS: Dict[str, float] = {k: v / _COMP_TOTAL for k, v in _COMP_RAW.items()}
+WEIGHTS: dict[str, float] = {k: v / _COMP_TOTAL for k, v in _COMP_RAW.items()}
 
 MIN_DUPLICATE_COVERAGE = 0.60
 
@@ -56,9 +58,9 @@ def _field_similarity(field: str, a: object, b: object) -> float:
 
 def genome_distance(a: Mapping[str, object], b: Mapping[str, object]) -> dict[str, Any]:
     """Weighted distance/similarity with coverage. unknown never counts as match."""
-    matches: Dict[str, float] = {}
-    diffs: Dict[str, dict[str, object | None]] = {}
-    unknowns: List[str] = []
+    matches: dict[str, float] = {}
+    diffs: dict[str, dict[str, object | None]] = {}
+    unknowns: list[str] = []
     total = 0.0
     comp_weight = 0.0
     for field, w in WEIGHTS.items():

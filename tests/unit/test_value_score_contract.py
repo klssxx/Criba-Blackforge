@@ -10,7 +10,7 @@ import math
 
 import pytest
 
-from criba.engine import value_score, ValueScoreError
+from criba.engine import ValueScoreError, value_score
 
 
 def test_value_score_formula_matches_definition():

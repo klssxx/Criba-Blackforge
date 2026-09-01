@@ -28,7 +28,7 @@ import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba import blackforge_catalog as bc  # noqa: E402
+from criba import blackforge_catalog as bc
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 REPORT = os.path.join(ROOT, "verification", "blackforge_catalog_report.json")

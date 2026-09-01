@@ -20,9 +20,10 @@ Design rules (from HIPER_MEGAPROMPT FASE 2):
 from __future__ import annotations
 
 import random
-from collections import Counter, defaultdict
+from collections import Counter
+from collections.abc import Mapping
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Mapping, Optional
+from typing import Any
 
 from .blackforge_catalog import load as _load_catalog
 
@@ -32,9 +33,9 @@ class SelectionFailure:
     """Structured, honest failure: names the impossible quota, doesn't fake it."""
     reason: str
     failed_quota: str
-    detail: Dict[str, Any] = field(default_factory=dict)
+    detail: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {"status": "FAILED", "failed_quota": self.failed_quota,
                 "reason": self.reason, "detail": self.detail}
 
@@ -43,18 +44,18 @@ class SelectionFailure:
 class SelectionReport:
     seed: int
     session_size: int
-    allowed_tiers: List[str]
-    selected_ids: List[str]
-    compliance: Dict[str, Any]
+    allowed_tiers: list[str]
+    selected_ids: list[str]
+    compliance: dict[str, Any]
     profile_used: str
     s3_count: int
     s3_allowed: bool
-    failure: Optional[SelectionFailure] = None
+    failure: SelectionFailure | None = None
 
     def status_ok(self) -> bool:
         return self.failure is None
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "status": "OK" if self.failure is None else "FAILED",
             "seed": self.seed,
@@ -93,7 +94,7 @@ def select_blackforge(
     explicit_high_control_approval: bool = False,
     authorized_scope_confirmed: bool = False,
     sandbox_available: bool = False,
-    allowed_tiers: Optional[List[str]] = None,
+    allowed_tiers: list[str] | None = None,
 ) -> SelectionReport:
     """Deterministic, quota-respecting selection over the BLACKFORGE catalog.
 
@@ -159,7 +160,7 @@ def select_blackforge(
     ordered = sorted(candidates, key=_key)
 
     # Greedy quota-respecting fill (stable, deterministic).
-    selected: List[Mapping[str, Any]] = []
+    selected: list[Mapping[str, Any]] = []
     per_primary_cat: Counter[str] = Counter()
     per_source_family: Counter[str] = Counter()
     per_causal_unknown = 0
@@ -238,7 +239,7 @@ def select_blackforge(
         "s3_cap": {"cap": s3_cap, "actual": s3_count, "ok": s3_count <= s3_cap},
     }
 
-    failure: Optional[SelectionFailure] = None
+    failure: SelectionFailure | None = None
     # Identify the first impossible quota to report it precisely.
     if not compliance["session_size_met"]:
         failure = SelectionFailure(

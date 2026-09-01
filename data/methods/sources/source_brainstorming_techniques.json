@@ -186,7 +186,7 @@
     "categories": ["innovacion", "facilitacion", "diseno"],
     "tags": ["crazy_8s", "rapido", "presion_temporal", "visual"],
     "origin": "external",
-    "external_refs": ["google_ventures_sprint"],
+    "external_refs": [],
     "related_internal_ids": ["brain_classic_brainstorming", "brain_brainwriting"],
     "normalized_mechanism": "generar_ideas_rapido_presion_temporal",
     "relationship_type": "implementa"

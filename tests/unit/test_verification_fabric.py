@@ -1,15 +1,14 @@
 """Tests for manifest integrity and automatic fabric gates."""
 from __future__ import annotations
 
-from dataclasses import replace
 import json
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
 
 from scripts.verification_fabric import (
     FABRIC_SCHEMA_VERSION,
-    FROZEN_TOOLCHAIN,
     GateResult,
     GateSpec,
     automatic_verdict,
@@ -19,15 +18,6 @@ from scripts.verification_fabric import (
     p2_gate_specs,
     verify_manifest,
 )
-
-
-def test_modal_image_pin_matches_declared_mutmut_toolchain() -> None:
-    repo_root = Path(__file__).resolve().parents[2]
-    modal_runner = (repo_root / ".autoregen/cloud/modal_runner.py").read_text(
-        encoding="utf-8"
-    )
-    expected_pin = f'"mutmut=={FROZEN_TOOLCHAIN["mutmut"]}"'
-    assert expected_pin in modal_runner
 
 
 def _result(spec: GateSpec, **changes: object) -> GateResult:

@@ -7,11 +7,11 @@ keep their IDs, get an INCOMPLETE genome, and a migration warning is recorded.
 This module owns ONLY migration (separation of concerns, condition 5).
 """
 from __future__ import annotations
+
 import copy
 from typing import Any
 
-from .genome import Genome, ONTOLOGY_VERSION
-from .similarity import MIN_DUPLICATE_COVERAGE
+from .genome import ONTOLOGY_VERSION, Genome
 
 SCHEMA_VERSION = "2.0.0"
 

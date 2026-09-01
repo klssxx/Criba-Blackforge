@@ -16,12 +16,10 @@ from __future__ import annotations
 import os
 import sys
 
-import pytest
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba import engine  # noqa: E402
-from criba.constants import VALID_DECISIONS  # noqa: E402
+from criba import engine
+from criba.constants import VALID_DECISIONS
 
 
 def test_criba_engine_does_not_import_blackforge_on_load():

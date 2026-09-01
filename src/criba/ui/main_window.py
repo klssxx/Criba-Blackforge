@@ -9,19 +9,34 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from PySide6.QtCore import QProcess, QThreadPool, QTimer, Qt
-from PySide6.QtWidgets import (QFrame, QHBoxLayout, QLabel, QMainWindow,
-                               QMessageBox, QPushButton, QScrollArea,
-                               QToolButton, QVBoxLayout, QWidget)
+from PySide6.QtCore import QProcess, Qt, QThreadPool, QTimer
+from PySide6.QtWidgets import (
+    QFrame,
+    QHBoxLayout,
+    QLabel,
+    QMainWindow,
+    QMessageBox,
+    QPushButton,
+    QScrollArea,
+    QToolButton,
+    QVBoxLayout,
+    QWidget,
+)
 
 from ..storage import Storage
-from .panels import (build_idea_card, build_motor_card, build_ranking_card,
-                     build_right_column, build_teaser_card)
+from . import actions
+from .i18n import on_change
+from .i18n import t as _t
+from .panels import (
+    build_idea_card,
+    build_motor_card,
+    build_ranking_card,
+    build_right_column,
+    build_teaser_card,
+)
 from .theme import build_qss
 from .tokens import load_tokens
-from .i18n import on_change, t as _t
 from .widgets import FooterSegment, NavButton, apply_neon_breath
-from . import actions
 
 NAV_SPEC = [
     ("navNuevaIdea", "◉", "Nueva idea", "Inicia el flujo, pide el problema base"),
@@ -30,6 +45,8 @@ NAV_SPEC = [
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
     ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
     ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
+    ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
+    ("navHibrido", "⚡", "Híbrido", "Pipeline completo: ensemble → cadena → adversarial"),
     ("navBlackforge", "⛨", "Blackforge", "Panel de control BLACKFORCE"),
 ]
 
@@ -95,8 +112,8 @@ class CribaMainWindow(QMainWindow):
         """Launch BLACKFORGE as a separate, shell-free child process.
 
         ``history_packet`` is accepted for compatibility with the history
-        action.  Session data remains in the shared CRIBA store; no untrusted
-        packet content is interpolated into process arguments.
+        action.  The active problem is passed as one bounded argv value; no
+        shell is invoked or command line is interpolated.
         """
         del history_packet
         if (
@@ -120,7 +137,11 @@ class CribaMainWindow(QMainWindow):
 
         process = QProcess(self)
         process.setProgram(launch.program)
-        process.setArguments(list(launch.arguments))
+        arguments = list(launch.arguments)
+        if self.problem:
+            # QProcess receives an argv list directly: no shell interpolation.
+            arguments.extend(("--query", self.problem[:20_000]))
+        process.setArguments(arguments)
         if launch.arguments:
             process.setWorkingDirectory(str(Path(__file__).resolve().parents[3]))
         else:
@@ -193,6 +214,7 @@ class CribaMainWindow(QMainWindow):
         tl.addWidget(bft)
         teaser.mousePressEvent = lambda e: actions.on_blackforge(self)  # type: ignore[method-assign]
         lay.addWidget(teaser)
+
         # conexiones nav
         self.nav["navNuevaIdea"].clicked.connect(lambda: actions.on_nueva_idea(self))
         self.nav["navGenerar"].clicked.connect(lambda: actions.on_generar(self))
@@ -200,7 +222,9 @@ class CribaMainWindow(QMainWindow):
         self.nav["navGuardar"].clicked.connect(lambda: actions.on_guardar(self))
         self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))
         self.nav["navHistorial"].clicked.connect(lambda: actions.on_historial(self))
+        self.nav["navModelos"].clicked.connect(lambda: actions.on_modelos(self))
         self.nav["navBlackforge"].clicked.connect(lambda: actions.on_blackforge(self))
+        self.nav["navHibrido"].clicked.connect(lambda: actions.on_hibrido(self))
         # contorno neón turquesa que respira (3s sube / 3s baja) en bucle
         apply_neon_breath(self.nav["navBlackforge"])
         return sb

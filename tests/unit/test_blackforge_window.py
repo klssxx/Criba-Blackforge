@@ -7,14 +7,19 @@ os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 pytest.importorskip("PySide6")
 from PySide6.QtWidgets import QApplication
 
-from criba.ui.blackforge_window import BlackforgeWindow
 from criba.ui.blackforge_screen import BlackforgeScreen
+from criba.ui.blackforge_window import BlackforgeWindow
 
 
 @pytest.fixture(scope="module")
 def qt_app():
     app = QApplication.instance() or QApplication([])
     yield app
+
+
+@pytest.fixture(autouse=True)
+def isolated_model_config(tmp_path, monkeypatch) -> None:
+    monkeypatch.setenv("CRIBA_MODEL_CONFIG", str(tmp_path / "models.json"))
 
 
 def test_blackforge_is_a_standalone_target_dashboard(qt_app) -> None:
@@ -33,6 +38,7 @@ def test_blackforge_is_a_standalone_target_dashboard(qt_app) -> None:
         "generation",
         "associative",
         "pure",
+        "workbench",
         "models",
         "verify",
         "history",

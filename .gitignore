@@ -16,6 +16,11 @@ env/
 !.env.example
 !.env.sample
 !.env.template
+*key*.json
+*credential*.json
+*service-account*.json
+.hermes/supra_state/
+.hermes/state/
 
 # Caches
 .pytest_cache/

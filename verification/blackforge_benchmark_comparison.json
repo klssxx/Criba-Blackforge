@@ -61,7 +61,7 @@
   "interpretation": [
     "The cached immutable ID index reduces the measured 12-ID lookup median; the exact delta is recorded above.",
     "Recursive freezing and duplicate-ID validation add one-time cold-load work, after which the catalog and index are reused.",
-    "Independent three-sample cloud runs are descriptive evidence, not a fragile wall-clock regression gate.",
+    "Independent three-sample environment runs are descriptive evidence, not a fragile wall-clock regression gate.",
     "The structural regression gate is cache/index identity plus deep immutability and exact 723-record validation."
   ]
 }

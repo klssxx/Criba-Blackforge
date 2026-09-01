@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import copy
 
-from hypothesis import given, settings, strategies as st
+from hypothesis import given, settings
+from hypothesis import strategies as st
 
 from criba.personas import (
     PERSONA_IDS,
@@ -13,7 +14,6 @@ from criba.personas import (
     evaluate_persona_diversity,
     run_personas,
 )
-
 
 _safe_text = st.text(
     alphabet=st.characters(blacklist_categories=("Cs",)),

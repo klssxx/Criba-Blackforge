@@ -1,4 +1,3 @@
-import json
 from criba.engine import activate, build_prompt
 from criba.methods import select_methods
 from criba.selector import select

@@ -4,18 +4,40 @@ Premium three-column layout (navigation sidebar + central workbench + summary
 panel) and a status footer, matching the CRIBA Current Engine reference design.
 """
 from __future__ import annotations
-import json, os, sys
+
+import json
+import os
+import sys
 from datetime import datetime
+
 from .catalog import currents, methods
 from .engine import activate, build_prompt
 from .storage import Storage
 
 try:
-    from PySide6.QtCore import QTimer, Qt
-    from PySide6.QtWidgets import (QApplication, QComboBox, QFrame, QGridLayout,
-        QHBoxLayout, QLabel, QLineEdit, QListWidget, QListWidgetItem, QMainWindow,
-        QMessageBox, QPushButton, QScrollArea, QSizePolicy, QSpinBox, QStackedWidget,
-        QTextEdit, QVBoxLayout, QWidget, QProgressBar)
+    from PySide6.QtCore import Qt, QTimer
+    from PySide6.QtWidgets import (
+        QApplication,
+        QComboBox,
+        QFrame,
+        QGridLayout,
+        QHBoxLayout,
+        QLabel,
+        QLineEdit,
+        QListWidget,
+        QListWidgetItem,
+        QMainWindow,
+        QMessageBox,
+        QProgressBar,
+        QPushButton,
+        QScrollArea,
+        QSizePolicy,
+        QSpinBox,
+        QStackedWidget,
+        QTextEdit,
+        QVBoxLayout,
+        QWidget,
+    )
 except ImportError:
     QApplication = None  # gui.run() will report the missing dependency
 
@@ -60,8 +82,15 @@ QToolTip{{background:#0d1830;color:#e6edf8;border:1px solid {BORDER};border-radi
 """
 
 
-def _metric_bar(name: str, value: int) -> "QFrame":
-    from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QProgressBar, QSizePolicy, QVBoxLayout
+def _metric_bar(name: str, value: int) -> QFrame:
+    from PySide6.QtWidgets import (
+        QFrame,
+        QHBoxLayout,
+        QLabel,
+        QProgressBar,
+        QSizePolicy,
+        QVBoxLayout,
+    )
     f = QFrame(); f.setObjectName("card")
     fl = QVBoxLayout(f); fl.setContentsMargins(12, 10, 12, 10); fl.setSpacing(6)
     top = QHBoxLayout()

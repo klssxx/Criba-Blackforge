@@ -10,15 +10,22 @@ from __future__ import annotations
 
 import hashlib
 import json
+from collections.abc import Mapping
 from enum import Enum
-from typing import Any, Final, Literal, Mapping, Protocol, TypeAlias
+from typing import Any, Final, Literal, Protocol, TypeAlias
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator, model_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    ValidationError,
+    field_validator,
+    model_validator,
+)
 
 from .constraints import FindingConfidence
 from .engine import build_prompt as build_engine_prompt
 from .llm_adapter import NoneBackend, build_llm_prompt
-
 
 PERSONAS_SCHEMA_VERSION: Final[str] = "1.0.0"
 PersonaId: TypeAlias = Literal["A", "B", "C", "D"]

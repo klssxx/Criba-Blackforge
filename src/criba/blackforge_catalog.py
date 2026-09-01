@@ -17,13 +17,13 @@ verification/blackforge_catalog_report.json) so a human can decide.
 from __future__ import annotations
 
 import json
-from pathlib import Path
+from collections.abc import Mapping
 from types import MappingProxyType
-from typing import Any, Mapping, Optional, Tuple
+from typing import Any
 
 # Immutable view types over the frozen BLACKFORGE catalog.
 _FrozenRecord = MappingProxyType[str, Any]
-_FrozenCatalog = Tuple[_FrozenRecord, Tuple[_FrozenRecord, ...]]
+_FrozenCatalog = tuple[_FrozenRecord, tuple[_FrozenRecord, ...]]
 _FrozenIndex = MappingProxyType[str, _FrozenRecord]
 
 from .constants import PACKAGE_ROOT
@@ -37,8 +37,8 @@ _CATALOG_PATH = (
 )
 
 # Module-level cache (parsed exactly once per process).
-_cache: Optional[_FrozenCatalog] = None
-_id_index: Optional[_FrozenIndex] = None
+_cache: _FrozenCatalog | None = None
+_id_index: _FrozenIndex | None = None
 
 
 class CatalogValidationError(ValueError):
@@ -73,7 +73,7 @@ def _freeze_record(rec: Mapping[str, Any]) -> _FrozenRecord:
     return MappingProxyType({str(key): _freeze_value(value) for key, value in rec.items()})
 
 
-def _build_id_index(records: Tuple[_FrozenRecord, ...]) -> _FrozenIndex:
+def _build_id_index(records: tuple[_FrozenRecord, ...]) -> _FrozenIndex:
     """Build the immutable O(1) ID index and reject duplicate/malformed IDs."""
     index: dict[str, _FrozenRecord] = {}
     for record in records:
@@ -119,12 +119,12 @@ def load() -> _FrozenCatalog:
     return _get_catalog()
 
 
-def records() -> Tuple[_FrozenRecord, ...]:
+def records() -> tuple[_FrozenRecord, ...]:
     """Frozen tuple of immutable records (read-only)."""
     return _get_catalog()[1]
 
 
-def get(blackforge_id: str) -> Optional[_FrozenRecord]:
+def get(blackforge_id: str) -> _FrozenRecord | None:
     """Return an immutable record view by blackforge_id, or None if absent."""
     return _get_id_index().get(blackforge_id)
 

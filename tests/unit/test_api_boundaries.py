@@ -6,7 +6,6 @@ from fastapi.testclient import TestClient
 
 from criba.api import create_app, serve
 
-
 QUERY = "Evaluar un cambio reversible y verificable"
 
 

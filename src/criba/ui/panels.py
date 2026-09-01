@@ -8,18 +8,44 @@ from __future__ import annotations
 from typing import Any
 
 from PySide6.QtCore import Qt
-from PySide6.QtWidgets import (QFrame, QHBoxLayout, QHeaderView, QLabel,
-                               QPushButton, QSizePolicy, QTabBar, QTableView,
-                               QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (
+    QFrame,
+    QHBoxLayout,
+    QHeaderView,
+    QLabel,
+    QPushButton,
+    QTabBar,
+    QTableView,
+    QVBoxLayout,
+    QWidget,
+)
 
-from .ranking import (COL_CONV, COL_IDEA, COL_IMPACT, COL_RANK, COL_SCORE,
-                      COL_STATE, ChipDelegate, RankDelegate, RankingFilterProxy,
-                      RankingModel, ScoreBarDelegate)
+from .ranking import (
+    COL_CONV,
+    COL_IDEA,
+    COL_IMPACT,
+    COL_RANK,
+    COL_SCORE,
+    COL_STATE,
+    ChipDelegate,
+    RankDelegate,
+    RankingFilterProxy,
+    RankingModel,
+    ScoreBarDelegate,
+)
 from .tokens import Tokens
-from .widgets import (ActivityItemWidget, DonutChartWidget, FeatureWidget,
-                      HistogramWidget, MetricWidget, PipelineConnector,
-                      PipelineStageWidget, SourceBarWidget, ValueScoreGauge,
-                      make_chip)
+from .widgets import (
+    ActivityItemWidget,
+    DonutChartWidget,
+    FeatureWidget,
+    HistogramWidget,
+    MetricWidget,
+    PipelineConnector,
+    PipelineStageWidget,
+    SourceBarWidget,
+    ValueScoreGauge,
+    make_chip,
+)
 
 PIPELINE_STAGES = [
     ("stageProblema", "◎", "Problema base", "Define el reto central a resolver"),

@@ -5,11 +5,15 @@ the legacy engine), migrates to v2 without error, preserves legacy fields, adds
 schema_version 2.0.0 and the innovation block (empty or safely migrated).
 """
 from __future__ import annotations
-import sys, os, json
+
+import json
+import os
+import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba.migration import migrate_v1_to_v2
 from criba import engine
+from criba.migration import migrate_v1_to_v2
 
 FIXTURE = os.path.join(os.path.dirname(__file__), "fixtures", "mandatory_model_packet_v1.json")
 

@@ -17,8 +17,8 @@ import pytest
 os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
 pytest.importorskip("PySide6")
 
-from PySide6.QtWidgets import QApplication
 from PySide6.QtTest import QTest
+from PySide6.QtWidgets import QApplication
 
 from criba.storage import Storage
 from criba.ui import actions
@@ -59,7 +59,10 @@ def _drive_flow(win: CribaMainWindow, query: str, qapp: QApplication) -> str:
     return ident
 
 
-def test_query_drives_full_flow_and_persists(tmp_path, qapp: QApplication) -> None:
+def test_query_drives_full_flow_and_persists(
+    tmp_path, monkeypatch, qapp: QApplication
+) -> None:
+    monkeypatch.setenv("CRIBA_MODEL_CONFIG", str(tmp_path / "models.json"))
     query = "Validar CRIBA con texto Unicode: áβ — proteger API"
     win = CribaMainWindow(tmp_path / "criba.sqlite3")
     try:
@@ -71,7 +74,10 @@ def test_query_drives_full_flow_and_persists(tmp_path, qapp: QApplication) -> No
         qapp.processEvents()
 
 
-def test_persisted_session_survives_reopen(tmp_path, qapp: QApplication) -> None:
+def test_persisted_session_survives_reopen(
+    tmp_path, monkeypatch, qapp: QApplication
+) -> None:
+    monkeypatch.setenv("CRIBA_MODEL_CONFIG", str(tmp_path / "models.json"))
     query = "Validar BLACKFORGE con Unicode: ñ — red team"
     db = tmp_path / "criba2.sqlite3"
     # First session: generate, evaluate, save.

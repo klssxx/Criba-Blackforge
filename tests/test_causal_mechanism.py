@@ -12,10 +12,14 @@ problema con mecanismo causal distinto. Este test lo garantiza:
   al menos una variable causal citada (no solo el nombre del mecanismo).
 """
 from __future__ import annotations
-import sys, os
+
+import os
+import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 import pytest
+
 from criba import engine
 
 _CAUSAL_KEYS = (
@@ -37,7 +41,7 @@ def test_every_idea_has_structured_causal_variables():
     for idea in p["innovation"]["ideas"]:
         cv = idea.get("causal_variables", {})
         for k in _CAUSAL_KEYS:
-            assert k in cv and cv[k], f"idea {idea['id']} sin variable causal {k}"
+            assert cv.get(k), f"idea {idea['id']} sin variable causal {k}"
         # mechanism_causal must reference at least one causal variable name
         assert any(k in idea["mechanism_causal"] or k.replace("_", " ") in idea["mechanism_causal"]
                    for k in _CAUSAL_KEYS) or idea["mechanism_causal"], \

@@ -4,9 +4,9 @@ El motor devuelve combinaciones de técnicas con scores numéricos.
 Este módulo las traduce a frases legibles en ES o EN sin llamadas a LLM.
 """
 from __future__ import annotations
+
 import re
 from typing import Any
-
 
 # Plantillas ES / EN  --------------------------------------------------------
 _TEMPLATES_ES = [
@@ -81,7 +81,6 @@ def _novelty_idx(score: float) -> int:
 
 def format_idea(idea: dict[str, Any], lang: str = "es", idx: int = 0) -> dict[str, str]:
     """Devuelve title / description / novelty / quality / sentence legibles."""
-    from .i18n import t as tr
     es = lang == "es"
     templates = _TEMPLATES_ES if es else _TEMPLATES_EN
     fam_map = _FAMILY_ES if es else _FAMILY_EN
@@ -107,13 +106,18 @@ def format_idea(idea: dict[str, Any], lang: str = "es", idx: int = 0) -> dict[st
     else:
         title = raw_title[:80]
 
-    # Frase-resumen usando plantilla cíclica
-    tpl = templates[idx % len(templates)]
-    sentence = tpl.format(
-        m1=m1_raw[:50] or "Método A",
-        m2=m2_raw[:50] or "Método B",
-        domain=domain,
-    )
+    # A validated language layer already understands the user's problem; do
+    # not overwrite its semantic description with the old mechanical template.
+    semantic_description = str(idea.get("description") or "").strip()
+    if idea.get("semantic_source") == "local_model" and semantic_description:
+        sentence = semantic_description
+    else:
+        tpl = templates[idx % len(templates)]
+        sentence = tpl.format(
+            m1=m1_raw[:50] or "Método A",
+            m2=m2_raw[:50] or "Método B",
+            domain=domain,
+        )
 
     conv = idea.get("convergence") or {}
     novelty_raw = float(conv.get("novelty") or idea.get("score") or 0)

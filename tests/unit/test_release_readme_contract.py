@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 ROOT = Path(__file__).resolve().parents[2]
 PORTABLE_DOCS = (
     "FIRST_RUN_ES.md",
@@ -20,14 +19,9 @@ def test_portable_build_includes_user_facing_documents() -> None:
         assert f"'{filename}'" in build_script
 
 
-def test_readme_has_direct_download_and_real_screenshots() -> None:
+def test_readme_describes_the_separated_local_runtime() -> None:
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert (
-        "releases/latest/download/"
-        "CRIBA-Blackforge-Portable-Windows-x64.zip"
-    ) in readme
-
-    for filename in ("criba-overview.png", "blackforge-overview.png"):
-        image = ROOT / "docs" / "assets" / filename
-        assert image.read_bytes().startswith(b"\x89PNG\r\n\x1a\n")
-        assert image.stat().st_size > 50_000
+    assert "Motor local y determinista" in readme
+    assert "scripts\\launch_workbench.bat" in readme
+    assert "SUPRA_AGENTIC" not in readme
+    assert "api/v1" not in readme

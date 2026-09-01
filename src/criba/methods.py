@@ -16,6 +16,7 @@ Estrategia de selección (Interesantedebate.txt):
   El resto de slots se cubren con familias diversas no repetidas.
 """
 from __future__ import annotations
+
 import hashlib
 import random
 from typing import Any

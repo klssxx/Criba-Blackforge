@@ -15,25 +15,25 @@ Contracts:
 """
 from __future__ import annotations
 
+import copy
 import json
 import os
 import sys
-import copy
 
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba.blackforge_causal import (  # noqa: E402
+from criba.blackforge_causal import (
     CYBERSECURITY_PROFILE,
     GENERAL_PROFILE,
     CausalWeightProfile,
     ProposalValidationError,
     analyze_causal_pair,
     build_causal_signature,
+    frozen_model_fingerprint,
     sensitivity_analysis,
     validate_against_frozen_model,
-    frozen_model_fingerprint,
 )
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")

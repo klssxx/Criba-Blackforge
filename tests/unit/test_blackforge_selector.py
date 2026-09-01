@@ -20,11 +20,9 @@ import json
 import os
 import sys
 
-import pytest
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba import blackforge_selector as bs  # noqa: E402
+from criba import blackforge_selector as bs
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 REPORT = os.path.join(ROOT, "verification", "blackforge_selector_report.json")
@@ -69,6 +67,7 @@ def test_maxima_per_category_family_unknown_axis():
     assert c["max_unknown_causal_axis"]["ok"]
     # Enforce concretely on the selected set.
     from collections import Counter
+
     from criba.blackforge_catalog import get
     pc = Counter(); fam = Counter(); unk = 0
     for bid in rep.selected_ids:

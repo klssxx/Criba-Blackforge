@@ -1,38 +1,28 @@
 """Tests for output_format.py — HIPERMEGAPROMPT §5."""
 from __future__ import annotations
 
-import pytest
 from criba.output_format import (
+    MAX_FULLY_DEVELOPED_IDEAS,
     MAX_PRIMARY_RECOMMENDATIONS,
     MAX_SECONDARY_ALTERNATIVES,
-    MAX_FULLY_DEVELOPED_IDEAS,
+    AuthorizationRecord,
+    BlackforgeOutput,
+    BlackforgeRankingRow,
+    CribaOutput,
+    DecisionRecord,
     ExecutiveSummary,
+    FindingRow,
+    IdeaOutput,
     InterpretedContext,
     KnownSpace,
     OperatorRow,
-    IdeaOutput,
     RankingRow,
-    WinningProposal,
-    CribaOutput,
     SecuritySummary,
-    AuthorizationRecord,
     ThreatModel,
-    OffensiveHypothesis,
-    DefensiveMechanism,
-    AdversarialReview,
-    EvidenceRecord,
-    FindingRow,
-    BlackforgeRankingRow,
-    BlackforgeWinner,
-    ValidationPlanRecord,
-    DecisionRecord,
-    BlackforgeOutput,
-    format_criba_output,
     format_blackforge_output,
+    format_criba_output,
     validate_output_limits,
-    OutputValidation,
 )
-
 
 # ---------------------------------------------------------------------------
 # Limits

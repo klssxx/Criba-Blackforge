@@ -20,12 +20,10 @@ import json
 import os
 import sys
 
-import pytest
-
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
-from criba import blackforge_safety as sf  # noqa: E402
-from criba.blackforge_catalog import get  # noqa: E402
+from criba import blackforge_safety as sf
+from criba.blackforge_catalog import get
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 REPORT = os.path.join(ROOT, "verification", "blackforge_safety_report.json")

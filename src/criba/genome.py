@@ -6,8 +6,10 @@ classification but never controls the schema. Invalid values are coerced to
 for human review. The ontology is NEVER auto-extended.
 """
 from __future__ import annotations
-from typing import Any, Dict, List, Optional
-from pydantic import BaseModel, field_validator, ConfigDict, ValidationInfo
+
+from typing import Any
+
+from pydantic import BaseModel, ConfigDict, ValidationInfo, field_validator
 
 ONTOLOGY_VERSION = "1.0.0"
 
@@ -34,7 +36,7 @@ TIME_MODEL = [
     "delayed", "ephemeral_per_operation", "unknown",
 ]
 
-_ENUMS: Dict[str, List[str]] = {
+_ENUMS: dict[str, list[str]] = {
     "actor": ACTOR,
     "mechanism": MECHANISM,
     "topology": TOPOLOGY,
@@ -68,22 +70,22 @@ class Genome(BaseModel):
     """Closed genome. Every proposed value is normalized against the ontology."""
     model_config = ConfigDict(extra="forbid")
     ontology_version: str = ONTOLOGY_VERSION
-    actor: List[str] = ["unknown"]
-    mechanism: List[str] = ["unknown"]
-    topology: List[str] = ["unknown"]
-    trust_model: List[str] = ["unknown"]
-    time_model: List[str] = ["unknown"]
-    unclassified_properties: List[UnclassifiedProperty] = []
+    actor: list[str] = ["unknown"]
+    mechanism: list[str] = ["unknown"]
+    topology: list[str] = ["unknown"]
+    trust_model: list[str] = ["unknown"]
+    time_model: list[str] = ["unknown"]
+    unclassified_properties: list[UnclassifiedProperty] = []
 
     @field_validator("actor", "mechanism", "topology", "trust_model", "time_model", mode="before")
     @classmethod
-    def _normalize(cls, v: Any, info: ValidationInfo) -> List[str]:
+    def _normalize(cls, v: Any, info: ValidationInfo) -> list[str]:
         field = info.field_name
         if field is None:
             return ["unknown"]
         allowed = _ENUMS[field]
         items = v if isinstance(v, list) else [v]
-        out: List[str] = []
+        out: list[str] = []
         for item in items:
             if item is None:
                 continue
@@ -103,11 +105,11 @@ def is_known(field: str, value: str) -> bool:
     return str(value).strip().lower() in _ENUMS.get(field, [])
 
 
-def normalize_proposal(proposal: Dict[str, object], source_idea: str = "unknown") -> tuple[Genome, List[UnclassifiedProperty]]:
+def normalize_proposal(proposal: dict[str, object], source_idea: str = "unknown") -> tuple[Genome, list[UnclassifiedProperty]]:
     """Build a Genome from a model-proposed dict, coercing invalid enums and
     parking unknown concepts. Returns (genome, parked_properties)."""
-    data: Dict[str, List[str]] = {f: ["unknown"] for f in _FIELDS}
-    parked: List[UnclassifiedProperty] = []
+    data: dict[str, list[str]] = {f: ["unknown"] for f in _FIELDS}
+    parked: list[UnclassifiedProperty] = []
     for field in _FIELDS:
         raw = proposal.get(field)
         if raw is None:
@@ -130,10 +132,10 @@ def normalize_proposal(proposal: Dict[str, object], source_idea: str = "unknown"
     return genome, parked
 
 
-def validate_evidence(genome: Genome, evidences: List[GenomeEvidence], source_idea: str = "unknown") -> List[str]:
+def validate_evidence(genome: Genome, evidences: list[GenomeEvidence], source_idea: str = "unknown") -> list[str]:
     """Accept a model-proposed evidence list; coerce invalid fields, return warnings
     and park new concepts in unclassified_properties (with full structure)."""
-    warnings: List[str] = []
+    warnings: list[str] = []
     for ev in evidences:
         if ev.field not in _ENUMS:
             warnings.append(f"campo fuera de ontología: {ev.field}")

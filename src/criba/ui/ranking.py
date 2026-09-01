@@ -3,8 +3,13 @@ from __future__ import annotations
 
 from typing import Any
 
-from PySide6.QtCore import (QAbstractTableModel, QModelIndex,
-                            QSortFilterProxyModel, QRectF, Qt)
+from PySide6.QtCore import (
+    QAbstractTableModel,
+    QModelIndex,
+    QRectF,
+    QSortFilterProxyModel,
+    Qt,
+)
 from PySide6.QtGui import QColor, QFont, QPainter, QPen
 from PySide6.QtWidgets import QStyledItemDelegate, QStyleOptionViewItem
 
@@ -55,18 +60,18 @@ class RankingModel(QAbstractTableModel):
             idx = self.index(row, COL_STATE)
             self.dataChanged.emit(idx, idx)
 
-    def rowCount(self, parent: QModelIndex = QModelIndex()) -> int:  # noqa: N802
+    def rowCount(self, parent: QModelIndex = QModelIndex()) -> int:
         return 0 if parent.isValid() else len(self._rows)
 
-    def columnCount(self, parent: QModelIndex = QModelIndex()) -> int:  # noqa: N802
+    def columnCount(self, parent: QModelIndex = QModelIndex()) -> int:
         return 0 if parent.isValid() else len(COLUMNS)
 
-    def headerData(self, section: int, orientation, role=Qt.ItemDataRole.DisplayRole):  # noqa: N802
+    def headerData(self, section: int, orientation, role=Qt.ItemDataRole.DisplayRole):
         if role == Qt.ItemDataRole.DisplayRole and orientation == Qt.Orientation.Horizontal:
             return COLUMNS[section]
         return None
 
-    def data(self, index: QModelIndex, role=Qt.ItemDataRole.DisplayRole):  # noqa: C901
+    def data(self, index: QModelIndex, role=Qt.ItemDataRole.DisplayRole):
         if not index.isValid():
             return None
         r = self._rows[index.row()]
@@ -108,7 +113,7 @@ class RankingFilterProxy(QSortFilterProxyModel):
         self._mode = mode
         self.invalidateRowsFilter()
 
-    def filterAcceptsRow(self, source_row: int, parent: QModelIndex) -> bool:  # noqa: N802
+    def filterAcceptsRow(self, source_row: int, parent: QModelIndex) -> bool:
         if not self._mode:
             return True
         if self._mode == "top":

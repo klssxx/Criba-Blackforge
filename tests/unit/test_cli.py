@@ -3,9 +3,9 @@ from __future__ import annotations
 
 import json
 
+from criba import cli
 from criba.cli import main
 from criba.storage import Storage
-
 
 QUERY = "Evaluar un flujo reversible de aprobación con trazabilidad Unicode: áβ"
 
@@ -77,6 +77,66 @@ def test_blackforge_cli_runs_the_headless_pipeline(capsys) -> None:
     assert packet["session_id"] == "cli-regression"
     assert packet["selection"]["selected_count"] == 12
     assert packet["ideas"]
+
+
+def test_blackforge_cli_uses_shared_profile_and_reasoning_override(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    monkeypatch.setenv("CRIBA_MODEL_CONFIG", str(tmp_path / "models.json"))
+    seen: dict[str, object] = {}
+
+    def enhance(query, ideas, *, product, settings):
+        seen.update(
+            query=query,
+            product=product,
+            reasoning=settings.active_profile().reasoning,
+        )
+        enhanced = [dict(idea) for idea in ideas]
+        enhanced[0]["title"] = "Propuesta redactada por el modelo local"
+        return enhanced, {"status": "ok", "enhanced_count": 1}
+
+    monkeypatch.setattr(cli, "enhance_ideas_with_model", enhance)
+    result = main(
+        [
+            "blackforge",
+            "--query",
+            "Reducir fraude",
+            "--seed",
+            "11",
+            "--use-configured-model",
+            "--reasoning",
+            "deep",
+        ]
+    )
+
+    packet = json.loads(capsys.readouterr().out)
+    assert result == 0
+    assert seen == {
+        "query": "Reducir fraude",
+        "product": "BLACKFORGE",
+        "reasoning": "deep",
+    }
+    assert packet["ideas"][0]["title"] == "Propuesta redactada por el modelo local"
+    assert packet["semantic_generation"]["status"] == "ok"
+
+
+def test_cli_rejects_legacy_and_shared_model_flags_together(tmp_path, capsys) -> None:
+    result = main(
+        [
+            "--database",
+            str(tmp_path / "conflict.sqlite3"),
+            "activate",
+            "--query",
+            "Reducir fraude",
+            "--use-configured-model",
+            "--llm",
+            "offline",
+        ]
+    )
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "Elige --use-configured-model o --llm" in captured.err
 
 
 def test_lottery_cli_uses_packaged_catalog_and_explicit_output_dir(

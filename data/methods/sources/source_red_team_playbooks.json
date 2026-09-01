@@ -170,7 +170,7 @@
     "categories": ["seguridad", "proceso", "continuo"],
     "tags": ["assume_breach", "deteccion", "respuesta", "mttd", "mttr"],
     "origin": "external",
-    "external_refs": ["google_beyond_prod"],
+    "external_refs": [],
     "related_internal_ids": ["rt_purple_team", "sec_zero_trust"],
     "normalized_mechanism": "testear_deteccion_respuesta_asumiendo_brecha",
     "relationship_type": "implementa"

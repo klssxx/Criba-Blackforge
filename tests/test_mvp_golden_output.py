@@ -7,7 +7,11 @@ idea-view equality, valid genomes, duplicate report, determinism, stable output.
 The golden master is NOT auto-updated on failure.
 """
 from __future__ import annotations
-import sys, os, json
+
+import json
+import os
+import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from criba import engine

@@ -9,7 +9,6 @@ import pytest
 from criba.mcp_server import call, run_stdio
 from criba.storage import Storage
 
-
 QUERY = "Evaluar de forma reversible un flujo de aprobación"
 
 

@@ -12,7 +12,7 @@
     "python": "3.12.10",
     "platform": "Linux-4.19.0-gvisor-x86_64-with-glibc2.36",
     "cpu_count_visible": 18,
-    "max_rss_kib": 94832,
+    "max_rss_kib": 97708,
     "modal_resource_limits": {
       "cpu": 2.0,
       "memory_mib": 4096
@@ -20,8 +20,8 @@
   },
   "input": {
     "catalog_records": 723,
-    "catalog_sha256": "1c698d540fbb22d6aa7e2f65bb8e59847109de1d093cfab4de8e817b4eab51cc",
-    "catalog_bytes": 3182943,
+    "catalog_sha256": "1ec32ab6902c16fce5a5f3c4716a87d7059a1e264cd2bc20a1294125a2c86b47",
+    "catalog_bytes": 3253238,
     "selector_seed": 1,
     "session_size": 12
   },
@@ -29,72 +29,72 @@
     "catalog_cold_load_validate_freeze": {
       "repetitions": 3,
       "samples_ms": [
-        47.244057,
-        43.470687,
-        43.189008
+        50.545884,
+        49.773577,
+        49.517615
       ],
-      "median_ms": 43.470687,
-      "p95_nearest_rank_ms": 47.244057
+      "median_ms": 49.773577,
+      "p95_nearest_rank_ms": 50.545884
     },
     "catalog_id_index_construction": {
       "repetitions": 3,
       "samples_ms": [
-        0.374571,
-        0.397151,
-        0.599909
+        0.153767,
+        0.122865,
+        0.146377
       ],
-      "median_ms": 0.397151,
-      "p95_nearest_rank_ms": 0.599909
+      "median_ms": 0.146377,
+      "p95_nearest_rank_ms": 0.153767
     },
     "catalog_lookup_12_selected_ids": {
       "repetitions": 3,
       "samples_ms": [
-        0.026429,
-        0.03102,
-        0.02663
+        0.00929,
+        0.00925,
+        0.00852
       ],
-      "median_ms": 0.02663,
-      "p95_nearest_rank_ms": 0.03102
+      "median_ms": 0.00925,
+      "p95_nearest_rank_ms": 0.00929
     },
     "selector": {
       "repetitions": 3,
       "samples_ms": [
-        0.99264,
-        0.96099,
-        0.998129
+        0.530175,
+        0.577477,
+        0.485933
       ],
-      "median_ms": 0.99264,
-      "p95_nearest_rank_ms": 0.998129
+      "median_ms": 0.530175,
+      "p95_nearest_rank_ms": 0.577477
     },
     "safety_gate_12_items": {
       "repetitions": 3,
       "samples_ms": [
-        0.17435,
-        0.1486,
-        0.17001
+        0.091944,
+        0.090545,
+        0.100615
       ],
-      "median_ms": 0.17001,
-      "p95_nearest_rank_ms": 0.17435
+      "median_ms": 0.091944,
+      "p95_nearest_rank_ms": 0.100615
     },
     "causal_signature_validation": {
       "repetitions": 3,
       "samples_ms": [
-        0.52165,
-        0.56705,
-        0.480189
+        0.298134,
+        0.296684,
+        0.287394
       ],
-      "median_ms": 0.52165,
-      "p95_nearest_rank_ms": 0.56705
+      "median_ms": 0.296684,
+      "p95_nearest_rank_ms": 0.298134
     },
     "headless_pipeline": {
       "repetitions": 3,
       "samples_ms": [
-        1.53043,
-        1.508289,
-        1.46816
+        1.422127,
+        1.321313,
+        1.440269
       ],
-      "median_ms": 1.508289,
-      "p95_nearest_rank_ms": 1.53043
+      "median_ms": 1.422127,
+      "p95_nearest_rank_ms": 1.440269
     }
   },
   "observed_slowest_operation_by_median": "catalog_cold_load_validate_freeze"

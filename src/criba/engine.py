@@ -14,16 +14,26 @@ The two HY3 call points are isolated as injectable functions so a cloud adapter
 can replace the local implementation later without touching the rest.
 """
 from __future__ import annotations
-import json, uuid
+
+import json
+import uuid
+from collections.abc import Callable
 from datetime import datetime, timezone
-from typing import Any, Callable, Dict, List, Optional, Tuple
+from typing import Any
 
 from .catalog import find_current
-from .constants import MAX_QUERY_CHARS, VALID_MODES, CURRENT_CATALOG_VERSION, SELECTOR_VERSION, VALID_DECISIONS, VALID_PIPELINE_ACTIONS, FEATURES
+from .constants import (
+    CURRENT_CATALOG_VERSION,
+    FEATURES,
+    MAX_QUERY_CHARS,
+    SELECTOR_VERSION,
+    VALID_DECISIONS,
+    VALID_MODES,
+    VALID_PIPELINE_ACTIONS,
+)
+from .genome import ONTOLOGY_VERSION, normalize_proposal
 from .methods import select_methods
 from .selector import select
-from .genome import normalize_proposal, ONTOLOGY_VERSION, UnclassifiedProperty
-from .similarity import classify as genome_classify
 
 SCHEMA = "mandatory_model_packet"
 SCHEMA_VERSION = "2.0.0"
@@ -584,7 +594,6 @@ def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, 
                 "trust_model": ["evidence_based" if ("evidencia" in cv["evidencia_requerida"]) else "implicit"],
                 "time_model": ["ephemeral_per_operation" if "ephemeral" in cv["topologia"] else "staged"],
             }
-            from .genome import normalize_proposal
             g, _ = normalize_proposal(dict(genome), source_idea=f"I{seq:02d}")
 
             idea = {
@@ -624,7 +633,7 @@ def diverge(carto: dict[str, Any], rupture: dict[str, Any], selected: dict[str, 
     return ideas
 
 
-def cross_consistency_assessment(ideas: list[Any]) -> Tuple[list[Any], int]:
+def cross_consistency_assessment(ideas: list[Any]) -> tuple[list[Any], int]:
     """CCA filter: mark cosmetic candidates (no causal axis moved) and drop them
     from the divergent set so they never count as real innovation."""
     real = []
@@ -756,7 +765,6 @@ def _evaluate_idea(idea: dict[str, Any]) -> dict[str, Any]:
     3. Method descriptions (new) - more detail = higher evidence
     4. Combination uniqueness (new) - different families = higher novelty
     """
-    import hashlib
 
     cv = idea.get("causal_variables", {})
     method1_name = idea.get("method1_name", "")
@@ -926,7 +934,7 @@ def build_morpho_frame(query: str, context: dict[str, Any] | None = None) -> dic
 # ---------------------------------------------------------------------------
 def activate(query: str, current: str = "auto", mode: str = "balanced", supporting_methods: int = 12,
              context: dict[str, Any] | None = None, safety_level: str = "strict", manual_methods: list[str] | None = None,
-             cartograph_fn: Optional[CartographFn] = None, diverge_fn: Optional[DivergeFn] = None) -> dict[str, Any]:
+             cartograph_fn: CartographFn | None = None, diverge_fn: DivergeFn | None = None) -> dict[str, Any]:
     if not isinstance(query, str) or not query.strip():
         raise ValueError("La consulta no puede estar vacía.")
     if len(query) > MAX_QUERY_CHARS:

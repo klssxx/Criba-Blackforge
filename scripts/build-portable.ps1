@@ -12,17 +12,19 @@ $spec = Join-Path $root 'CRIBA-Blackforge.spec'
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 $portable = Join-Path $root 'dist\CRIBA-Blackforge'
 $portableDocs = @(
-    'FIRST_RUN_ES.md',
-    'FIRST_RUN_EN.md',
-    'THIRD_PARTY_NOTICES.md',
-    'LICENSE'
+    @{ Source = 'FIRST_RUN_ES.md'; Destination = 'FIRST_RUN_ES.md' },
+    @{ Source = 'FIRST_RUN_EN.md'; Destination = 'FIRST_RUN_EN.md' },
+    @{ Source = 'docs\LOCAL_MODELS.md'; Destination = 'LOCAL_MODELS.md' },
+    @{ Source = 'THIRD_PARTY_NOTICES.md'; Destination = 'THIRD_PARTY_NOTICES.md' },
+    @{ Source = 'LICENSE'; Destination = 'LICENSE' }
 )
 foreach ($document in $portableDocs) {
-    Copy-Item -LiteralPath (Join-Path $root $document) `
-        -Destination (Join-Path $portable $document) -Force
+    Copy-Item -LiteralPath (Join-Path $root $document.Source) `
+        -Destination (Join-Path $portable $document.Destination) -Force
 }
 Write-Host "Portable build complete:"
 Write-Host "  dist\CRIBA-Blackforge\CRIBA.exe"
 Write-Host "  dist\CRIBA-Blackforge\BLACKFORGE.exe"
 Write-Host "  dist\CRIBA-Blackforge\CRIBA-CLI.exe"
-Write-Host "  FIRST_RUN_ES.md / FIRST_RUN_EN.md / THIRD_PARTY_NOTICES.md / LICENSE"
+Write-Host "  FIRST_RUN_ES.md / FIRST_RUN_EN.md / LOCAL_MODELS.md"
+Write-Host "  THIRD_PARTY_NOTICES.md / LICENSE"

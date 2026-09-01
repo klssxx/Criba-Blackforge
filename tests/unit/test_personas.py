@@ -10,8 +10,8 @@ from criba import constants
 from criba.constraints import FindingConfidence
 from criba.engine import activate
 from criba.personas import (
-    PERSONAS_SCHEMA_VERSION,
     DEFAULT_TEAM_PROTOCOL,
+    PERSONAS_SCHEMA_VERSION,
     CompositePersonaDimensions,
     MinorityReport,
     PersonaA,

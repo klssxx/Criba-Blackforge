@@ -22,8 +22,9 @@ resolve to DENY, regardless of tier or approvals.
 from __future__ import annotations
 
 import time
-from dataclasses import dataclass, field
-from typing import Any, Callable, Dict, List, Mapping, Optional
+from collections.abc import Callable, Mapping
+from dataclasses import dataclass
+from typing import Any
 
 from .blackforge_catalog import load as _load_catalog
 
@@ -48,13 +49,13 @@ class SafetyDecision:
     decision: str
     policy_version: str
     item_id: str
-    reasons: List[str]
-    unmet_requirements: List[str]
+    reasons: list[str]
+    unmet_requirements: list[str]
     allowed_scope: str
     session_id: str
     timestamp: str
 
-    def to_dict(self) -> Dict[str, Any]:
+    def to_dict(self) -> dict[str, Any]:
         return {
             "decision": self.decision,
             "policy_version": self.policy_version,
@@ -69,7 +70,7 @@ class SafetyDecision:
 
 def evaluate_blackforge_safety(
     item: Mapping[str, Any],
-    session_context: Optional[Mapping[str, Any]] = None,
+    session_context: Mapping[str, Any] | None = None,
     clock: Callable[[], float] = time.time,
     session_id: str = "default-session",
 ) -> SafetyDecision:
@@ -79,11 +80,11 @@ def evaluate_blackforge_safety(
       explicit_authorization, sandbox, rollback, logging, stop_condition,
       isolated_sandbox, human_approval, authorized_scope_confirmed.
     """
-    ctx: Dict[str, Any] = dict(session_context or {})
+    ctx: dict[str, Any] = dict(session_context or {})
     item_id = item.get("blackforge_id") or item.get("canonical_item_id") or "?"
     safety_class = item.get("safety_class")
-    reasons: List[str] = []
-    unmet: List[str] = []
+    reasons: list[str] = []
+    unmet: list[str] = []
 
     # 1) Hard prohibitions -> DENY unconditionally.
     meta, _ = _load_catalog()

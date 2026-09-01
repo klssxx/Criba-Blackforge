@@ -18,7 +18,8 @@ rewriting the engine. Today only ``LocalAgenticLayer`` exists (a stub).
 """
 from __future__ import annotations
 
-from typing import Any, Mapping, Protocol, cast
+from collections.abc import Mapping
+from typing import Any, Protocol, cast
 
 JsonDict = dict[str, Any]
 

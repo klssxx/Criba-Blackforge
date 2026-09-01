@@ -4,8 +4,9 @@ from __future__ import annotations
 import json
 import sqlite3
 import sys
+from collections.abc import Mapping
 from pathlib import Path
-from typing import Any, Mapping
+from typing import Any
 
 from .catalog import currents
 from .engine import activate, build_prompt

@@ -9,17 +9,17 @@ Ejercita el generador y las capas reales (no réplicas de la implementación):
 """
 import pytest
 
+from criba.constants import VALID_DECISIONS, VALID_PIPELINE_ACTIONS
 from criba.engine import (
-    activate,
-    diverge,
-    cross_consistency_assessment,
+    _BASE_CAUSAL,
+    _CAUSAL_AXES,
     _apply_family,
     _evaluate_idea,
-    _CAUSAL_AXES,
-    _BASE_CAUSAL,
+    activate,
+    cross_consistency_assessment,
+    diverge,
 )
 from criba.methods import select_methods
-from criba.constants import VALID_DECISIONS, VALID_PIPELINE_ACTIONS
 
 QUERY = (
     "¿Cómo podríamos diseñar un sistema de aprobación para agentes de "

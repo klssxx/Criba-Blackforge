@@ -1,5 +1,7 @@
 """Motores de selección optimizada y lotería para CRIBA/BLACKFORGE."""
 from __future__ import annotations
+
+import hashlib
 import json
 import os
 import random
@@ -11,7 +13,7 @@ from pathlib import Path
 from typing import Any
 
 from .constants import DATA_ROOT
-
+from .storage import Storage
 
 VALID_LOTTERY_MODES = {"optimized", "associative", "pure", "alternating"}
 
@@ -37,7 +39,7 @@ def default_output_dir() -> Path:
 class LotteryEngine:
     """Select and combine methods without repeating them between rounds."""
 
-    def __init__(self, methods_file: str, seed: int = 42):
+    def __init__(self, methods_file: str, seed: int = 42, storage: Storage | None = None):
         self.methods = self._load_methods(methods_file)
         self.used_combos: set[tuple[str, str]] = set()
         self.used_methods: set[str] = set()
@@ -46,6 +48,21 @@ class LotteryEngine:
         self.last_round_ideas: list[dict[str, Any]] = []
         self.rng = random.Random(seed)
         self.round_number = 0
+        self.storage = storage
+        if self.storage is not None:
+            self.sync_storage(self.storage)
+
+    @property
+    def catalog_fingerprint(self) -> str:
+        """Compute a deterministic SHA-256 fingerprint of all active catalog IDs."""
+        ids_sorted = sorted(str(m["id"]) for m in self.methods)
+        return hashlib.sha256(",".join(ids_sorted).encode("utf-8")).hexdigest()
+
+    def sync_storage(self, storage: Storage | None = None) -> None:
+        """Load historically used combinations from SQLite store into memory."""
+        self.storage = storage or Storage()
+        loaded = self.storage.load_used_lottery_combinations(self.catalog_fingerprint)
+        self.used_combos.update(loaded)
 
     @staticmethod
     def _normalize_method(item: dict[str, Any]) -> dict[str, Any]:
@@ -108,8 +125,8 @@ class LotteryEngine:
 
     @classmethod
     def from_methods(
-        cls, methods: list[dict[str, Any]], seed: int = 42
-    ) -> "LotteryEngine":
+        cls, methods: list[dict[str, Any]], seed: int = 42, storage: Storage | None = None
+    ) -> LotteryEngine:
         """Construye el motor desde una lista de métodos ya cargada en memoria.
 
         Evita leer un archivo (el catálogo de BLACKFORGE es una lista de dicts
@@ -125,6 +142,9 @@ class LotteryEngine:
         eng.last_round_ideas = []
         eng.rng = random.Random(seed)
         eng.round_number = 0
+        eng.storage = storage
+        if eng.storage is not None:
+            eng.sync_storage(eng.storage)
         return eng
 
     def get_available_methods(self) -> list[dict[str, Any]]:
@@ -261,9 +281,10 @@ class LotteryEngine:
     def generate_ideas_from_batch(
         self, batch: list[dict[str, Any]], mode: str = "associative"
     ) -> list[dict[str, Any]]:
-        """Genera ideas de un lote de métodos."""
+        """Genera ideas de un lote de métodos y persiste los pares usados en SQLite."""
         ideas: list[dict[str, Any]] = []
         pairs = list(combinations(batch, 2))
+        new_combos: list[tuple[str, str]] = []
 
         for m1, m2 in pairs:
             left_id, right_id = sorted((str(m1['id']), str(m2['id'])))
@@ -274,11 +295,20 @@ class LotteryEngine:
                 continue
 
             self.used_combos.add(combo_key)
+            new_combos.append(combo_key)
 
             # Generar idea
             idea = self._create_idea(m1, m2, mode)
             ideas.append(idea)
             self.all_ideas.append(idea)
+
+        if hasattr(self, "storage") and self.storage is not None and new_combos:
+            self.storage.save_lottery_combinations(
+                self.catalog_fingerprint,
+                new_combos,
+                run_id=f"run-{self.round_number}",
+                mode=mode,
+            )
 
         return ideas
 
@@ -441,13 +471,13 @@ class LotteryEngine:
         print("=" * 60)
         print("DOBLE LOTERIA DE CRIBA")
         print("=" * 60)
-        print("")
+        print()
         print("Modo: " + ("Asociativa + Pura (alternando)" if mode == "alternating" else mode))
         print("Métodos por ronda: " + str(batch_size))
         print("Total rondas: " + str(total_rounds))
         if query:
             print(_console_safe("Query: " + query[:50] + "..."))
-        print("")
+        print()
 
         for _ in range(total_rounds):
             stats = self.run_round(mode, batch_size, query=query)
@@ -489,20 +519,20 @@ class LotteryEngine:
             'top_ideas': sorted(self.all_ideas, key=lambda x: x['score'], reverse=True)[:10]
         }
 
-        print("")
+        print()
         print("=" * 60)
         print("RESUMEN DEL TORNEO")
         print("=" * 60)
         print(f"Rondas ejecutadas: {summary['total_rounds']}")
         print(f"Métodos usados: {summary['total_methods_used']}/{summary['total_methods_available']} ({summary['coverage_percent']}%)")
         print(f"Combinaciones probadas: {summary['total_combinations_tested']:,}")
-        print("")
+        print()
         print("IDEAS GENERADAS:")
         print(f"  Extraordinarias: {summary['extraordinary_ideas']} ({summary['extraordinary_percent']}%)")
         print(f"  Buenas: {summary['good_ideas']}")
         print(f"  Basura: {summary['trash_ideas']}")
         print(f"  Total: {summary['total_ideas']}")
-        print("")
+        print()
         print("TOP 10 IDEAS:")
         for i, idea in enumerate(summary['top_ideas'][:10], 1):
             print(_console_safe(f"  {i}. [{idea['quality']}] {idea['title'][:50]}"))

@@ -18,18 +18,16 @@ Reuses (no reimplementation):
 """
 from __future__ import annotations
 
+from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from enum import Enum
-from typing import Any, Mapping, Sequence
-
-from pydantic import BaseModel, Field
+from typing import Any
 
 from .blackforge_causal import canonical_hash
 from .blackforge_safety import (
     DENY,
     evaluate_blackforge_safety,
 )
-
 
 # ---------------------------------------------------------------------------
 # Verdict
