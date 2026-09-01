@@ -482,7 +482,8 @@ class ChainRunner:
         outputs: dict[int, BaseModel] = {}
         human_reviews = human_reviews or {}
         for stage in range(1, self.STAGE_COUNT + 1):
-            output, memory = self.run_stage(stage, memory, packet, previous_output=outputs.get(stage - 1, {}))
+            prev_out: BaseModel | Mapping[str, Any] | None = outputs.get(stage - 1)
+            output, memory = self.run_stage(stage, memory, packet, previous_output=prev_out if isinstance(prev_out, dict) else dict(prev_out) if prev_out is not None else {})
             outputs[stage] = output
             review = human_reviews.get(stage)
             if review and review.decision == "reject":

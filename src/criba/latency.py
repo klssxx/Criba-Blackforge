@@ -212,7 +212,7 @@ class LatencyScheduler:
         for i in range(0, len(operators), chunk_size):
             chunk = operators[i:i + chunk_size]
             family = families[i // chunk_size % len(families)]
-            batches.append(BatchPlan(family=family, operators=chunk))
+            batches.append(BatchPlan(family=family, operators=list(chunk)))
         return batches
 
     def should_early_exit(self, diversity: float, quality: float) -> bool:

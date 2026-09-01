@@ -293,13 +293,15 @@ def _find_partial_agreements(results: Sequence[PersonaResult]) -> list[PartialAg
         ca = personaa.output
         if hasattr(cc, "confirmed_facts") and hasattr(ca, "structural_problem"):
             if cc.confirmed_facts and ca.structural_problem:
-                partials.append(
-                    PartialAgreement(
-                        shared_diagnosis=ca.structural_problem.strip().casefold(),
-                        divergent_responses=[
-                            f"Persona C: {cc.confirmed_facts[0].strip().casefold()}",
-                            f"Persona A: {ca.proposed_change.strip().casefold()}" if ca.proposed_change else "",
-                        ],
+                proposed = getattr(ca, "proposed_change", None) or ""
+                if proposed:
+                    partials.append(
+                        PartialAgreement(
+                            shared_diagnosis=ca.structural_problem.strip().casefold(),
+                            divergent_responses=[
+                                f"Persona C: {cc.confirmed_facts[0].strip().casefold()}",
+                                f"Persona A: {proposed.strip().casefold()}" if proposed else "",
+                            ],
                         decision_needed="Validar si el mecanismo propuesto ataca la causa compartida",
                     )
                 )

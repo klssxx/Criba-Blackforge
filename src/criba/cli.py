@@ -258,7 +258,6 @@ def main(argv: Sequence[str] | None = None) -> int:
 
             result = run(args.database)
             return result if isinstance(result, int) else 0
-            return app.exec()
 
         if args.command in {"blackforge-gui", "blackforge_gui"}:
             from PySide6.QtWidgets import QApplication
