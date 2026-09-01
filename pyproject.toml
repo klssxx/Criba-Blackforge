@@ -40,7 +40,9 @@ package-dir = {"" = "src"}
 where = ["src"]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
+# "." makes the repo root importable so tests can import scripts.* both under
+# `python -m pytest` (CWD on sys.path) and plain `pytest`/`uv run pytest` (CI).
+pythonpath = ["src", "."]
 
 [tool.mypy]
 # FASE 3 hardening: strict typing over CRIBA + BLACKFORGE own code.
