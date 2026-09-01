@@ -5,6 +5,7 @@ import json
 import sys
 from collections.abc import Sequence
 from pathlib import Path
+from typing import Any
 
 from .catalog import currents
 from .engine import activate, activate_with_llm, build_prompt
@@ -40,14 +41,21 @@ def _run(args: argparse.Namespace, prompt: bool = False) -> int:
     if use_configured_model and llm_mode != "none":
         raise ValueError("Elige --use-configured-model o --llm, no ambos.")
 
+    # Contexto para interprete-serendipia (P2): api_key + seed
+    ctx: dict[str, Any] = {}
+    if getattr(args, "llm_api_key", None):
+        ctx["zai_api_key"] = args.llm_api_key
+    if getattr(args, "seed", None) is not None:
+        ctx["seed"] = args.seed
+
     if use_configured_model:
-        packet = activate(query, args.current, args.mode, args.supporting_methods)
+        packet = activate(query, args.current, args.mode, args.supporting_methods, context=ctx)
         packet = enhance_criba_packet(packet, _configured_model_settings(args))
     elif llm_mode != "none":
         packet = activate_with_llm(query, args.current, args.mode, args.supporting_methods,
-                                   llm_mode=llm_mode, llm_kwargs=llm_kwargs)
+                                   llm_mode=llm_mode, llm_kwargs=llm_kwargs, context=ctx)
     else:
-        packet = activate(query, args.current, args.mode, args.supporting_methods)
+        packet = activate(query, args.current, args.mode, args.supporting_methods, context=ctx)
 
     store = Storage(args.database)
     store.save(query, packet, {

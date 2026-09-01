@@ -22,6 +22,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from .catalog import find_current
+from .interprete.juez import JuezInterprete
 from .constants import (
     CURRENT_CATALOG_VERSION,
     FEATURES,
@@ -996,10 +997,43 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     for i in kept:
         i["convergence"] = _evaluate_idea(i)
     ranked = sorted(kept, key=lambda x: x["convergence"]["value_score"], reverse=True)
-    # keep canonical collection ordered by value (best first)
     kept[:] = ranked
     top_ideas = [i["id"] for i in kept[:3]]
     mean_value = round(sum(i["convergence"]["value_score"] for i in kept) / max(1, len(kept)), 4)
+
+    # --- Interprete-serendipia (capa P2): interpretación epistemológica ---
+    # Flag-gate (FEATURES["interprete_serendipia"]): NO afecta el packet base
+    # en modo clásico; solo añade el bloque innovation.interprete.
+    interprete_block: dict[str, Any] = {"applied": False}
+    if FEATURES.get("interprete_serendipia"):
+        try:
+            api_key = context.get("zai_api_key") if isinstance(context, dict) else None
+            from criba.constants import DEFAULT_DB
+            from criba.storage import Storage
+            juez = JuezInterprete(api_key=api_key, storage=Storage(context.get("database", DEFAULT_DB)) if isinstance(context, dict) and "database" in context else None)
+            interp_result = juez.interpretar_lote(
+                query=query, ideas=kept, activation_id=str(uuid.uuid4()),
+                run_id=f"interprete-{uuid.uuid4().hex[:8]}", seed=context.get("seed") if isinstance(context, dict) else None,
+            )
+            interprete_block = {
+                "applied": True,
+                "modelo": interp_result["modelo"],
+                "fallback_usado": interp_result["fallback_usado"],
+                "interpretados": [
+                    {"idea_id": r["id"],
+                     "labels": r.get("interprete_labels", []),
+                     "score": r.get("interprete_score", 0.0),
+                     "veredicto": r.get("interprete_verdict", "PENDIENTE"),
+                     "dh": r.get("prefilter", {}).get("dh"),
+                     "registro": r.get("_registro", {}).get("status"),
+                    }
+                    for r in interp_result["interpretados"]
+                ],
+                "prefiltrado_stats": interp_result["prefiltrado"]["stats"],
+                "top_interprete": interp_result["interpretados"][0] if interp_result["interpretados"] else None,
+            }
+        except Exception:
+            interprete_block = {"applied": True, "error": "interprete_no_disponible"}
 
     innovation: dict[str, Any] = {
         "known_space": carto["known_space"],
@@ -1019,6 +1053,9 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     # HIPERMEGAPROMPT context_layer_v2: attach structured context to output
     if FEATURES.get("context_layer_v2") and "hcm_context" in context:
         innovation["hcm_context"] = context["hcm_context"]
+
+    # Adjunto el bloque interprete-serendipia al innovation block (capa P2).
+    innovation["interprete"] = interprete_block
 
     metrics = {
         "potential_novelty": _clamp(60 + real_divergent * 4 + (10 if carto.get("wants_novelty") else 0)),

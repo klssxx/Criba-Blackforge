@@ -36,4 +36,5 @@ FEATURES: dict[str, bool] = {
     "deterministic_validation": True,
     "structured_logging": True,
     "quality_feedback_loop": True,
+    "interprete_serendipia": False,
 }

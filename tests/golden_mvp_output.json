@@ -2429,6 +2429,9 @@
         "title": "Más control, menos fricción × Secuencia aleatoria sobre '¿cómo' (extremo)"
       }
     ],
+    "interprete": {
+      "applied": false
+    },
     "known_space": [
       "El enfoque estándar para '¿cómo' es el único viable.",
       "Se asume que la solución conocida es la mejor.",
