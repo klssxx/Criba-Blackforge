@@ -1004,36 +1004,10 @@ def activate(query: str, current: str = "auto", mode: str = "balanced", supporti
     # --- Interprete-serendipia (capa P2): interpretación epistemológica ---
     # Flag-gate (FEATURES["interprete_serendipia"]): NO afecta el packet base
     # en modo clásico; solo añade el bloque innovation.interprete.
-    interprete_block: dict[str, Any] = {"applied": False}
-    if FEATURES.get("interprete_serendipia"):
-        try:
-            api_key = context.get("zai_api_key") if isinstance(context, dict) else None
-            from criba.constants import DEFAULT_DB
-            from criba.storage import Storage
-            juez = JuezInterprete(api_key=api_key, storage=Storage(context.get("database", DEFAULT_DB)) if isinstance(context, dict) and "database" in context else None)
-            interp_result = juez.interpretar_lote(
-                query=query, ideas=kept, activation_id=str(uuid.uuid4()),
-                run_id=f"interprete-{uuid.uuid4().hex[:8]}", seed=context.get("seed") if isinstance(context, dict) else None,
-            )
-            interprete_block = {
-                "applied": True,
-                "modelo": interp_result["modelo"],
-                "fallback_usado": interp_result["fallback_usado"],
-                "interpretados": [
-                    {"idea_id": r["id"],
-                     "labels": r.get("interprete_labels", []),
-                     "score": r.get("interprete_score", 0.0),
-                     "veredicto": r.get("interprete_verdict", "PENDIENTE"),
-                     "dh": r.get("prefilter", {}).get("dh"),
-                     "registro": r.get("_registro", {}).get("status"),
-                    }
-                    for r in interp_result["interpretados"]
-                ],
-                "prefiltrado_stats": interp_result["prefiltrado"]["stats"],
-                "top_interprete": interp_result["interpretados"][0] if interp_result["interpretados"] else None,
-            }
-        except Exception:
-            interprete_block = {"applied": True, "error": "interprete_no_disponible"}
+    # Cableado (y IDs deterministas PR-0) desglosado en criba.interprete.pipeline.
+    from criba.interprete.pipeline import build_interprete_block
+
+    interprete_block = build_interprete_block(query=query, ideas=kept, context=context)
 
     innovation: dict[str, Any] = {
         "known_space": carto["known_space"],
