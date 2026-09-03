@@ -1,0 +1,52 @@
+{
+  "task_id": "P06-T02",
+  "title": "Graph builder",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/entities/extractor.py",
+    "src/criba/intelligence/entities/resolver.py",
+    "src/criba/intelligence/entities/__init__.py",
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/graph/builder.py",
+    "tests/intelligence/test_graph_builder.py"
+  ],
+  "files_modified": ["src/criba/intelligence/graph/__init__.py"],
+  "commits": ["6de1f6e77ad7e92a80466fe49b14359f9adccaa3"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_builder.py::test_build_document_persists_document_entities_and_edges -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_builder.py::test_build_documents_reuses_entities_and_accumulates_sources -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "13 targeted graph/builder/boundary tests passed",
+    "755 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 3 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "GraphBuilder reuses the existing deterministic EntityResolver and gazetteer extractor instead of creating a second ontology.",
+    "Each EvidenceDocument becomes a deterministic document node; extracted entities connect to it with DERIVED_FROM edges.",
+    "The builder keeps one resolver instance so repeated documents reuse entities and accumulate source document ids."
+  ],
+  "risks": [
+    "Entity extraction remains limited to the current deterministic gazetteer until the planned ontology work.",
+    "Document graph nodes use the stable document:<doc_id> identifier namespace; callers must avoid conflicting entity ids."
+  ],
+  "follow_up": [
+    "P06-T03 graph traversal",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T05:44:24+02:00"
+}
