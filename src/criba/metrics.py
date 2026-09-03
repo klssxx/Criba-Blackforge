@@ -6,11 +6,12 @@ drift detection, and promotion gates.
 """
 from __future__ import annotations
 
+import math
 from collections.abc import Mapping
 from enum import Enum
 from typing import Any
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 # ---------------------------------------------------------------------------
 # Metric categories (§13.2–§13.7)
@@ -96,6 +97,7 @@ class ProcessMetrics(BaseModel):
     context_length: int = 0
     summarization_loss: float = 0.0
     schema_failures: int = 0
+    traceability_failures: int = 0
 
 
 class ResultMetrics(BaseModel):
@@ -133,6 +135,13 @@ class ExplicitFeedback(BaseModel):
     missing_context: str = ""
     actual_outcome: str = ""
 
+    @field_validator("score")
+    @classmethod
+    def _score_in_range(cls, value: float | None) -> float | None:
+        if value is not None and not 0.0 <= value <= 1.0:
+            raise ValueError("score debe estar entre 0 y 1")
+        return value
+
 
 class ImplicitFeedback(BaseModel):
     """§13.9 — Implicit feedback (used with caution)."""
@@ -159,6 +168,18 @@ class PromotionStatus(str, Enum):
     NEEDS_MORE_DATA = "needs_more_data"
 
 
+QUALITY_FORMULA_VERSION = "quality-score-v1"
+QUALITY_WEIGHTS: dict[str, float] = {
+    "relevance": 0.20,
+    "mechanism": 0.15,
+    "evidence": 0.20,
+    "diversity": 0.15,
+    "feasibility": 0.10,
+    "risk": 0.10,
+    "traceability": 0.10,
+}
+
+
 # ---------------------------------------------------------------------------
 # MetricsCollector
 # ---------------------------------------------------------------------------
@@ -176,8 +197,96 @@ class MetricsCollector:
         self.explicit_feedback: list[ExplicitFeedback] = []
         self.implicit_feedback: list[ImplicitFeedback] = []
 
+    def record_explicit_feedback(self, feedback: ExplicitFeedback) -> None:
+        """§13.8 — Store user feedback as an immutable typed record."""
+        self.explicit_feedback.append(feedback)
+
+    def record_implicit_feedback(self, feedback: ImplicitFeedback) -> None:
+        """§13.9 — Store behavior signals without treating clicks as quality."""
+        self.implicit_feedback.append(feedback)
+
+    def feedback_signal(self) -> float:
+        """Return only explicit feedback as a quality signal.
+
+        Implicit interaction data remains available for analysis but cannot
+        silently improve the quality score (§13.9).
+        """
+        values: list[float] = []
+        for feedback in self.explicit_feedback:
+            if feedback.score is not None:
+                values.append(feedback.score)
+            elif feedback.useful is not None:
+                values.append(1.0 if feedback.useful else 0.0)
+        return math.fsum(values) / len(values) if values else 0.0
+
+    def ingest_gate_report(self, report: Any) -> None:
+        """§13.10 — Import executed gate evidence into process metrics."""
+        raw = report.to_dict() if hasattr(report, "to_dict") else dict(report)
+        results = raw.get("results") or []
+        schema_failures = sum(
+            1 for item in results
+            if not item.get("passed", False)
+            and item.get("gate_id") in {"G01_schema_valid", "G12_output_contract_valid"}
+        )
+        traceability_failures = sum(
+            1 for item in results
+            if not item.get("passed", False)
+            and item.get("gate_id") == "G10_trace_complete"
+        )
+        current = self.process_metrics or ProcessMetrics()
+        self.process_metrics = current.model_copy(update={
+            "schema_failures": current.schema_failures + schema_failures,
+            "traceability_failures": current.traceability_failures + traceability_failures,
+        })
+
+    def ingest_log_summary(self, summary: Mapping[str, Any]) -> None:
+        """§13.10 — Import retry and cold-reconstruction evidence."""
+        current = self.process_metrics or ProcessMetrics()
+        integrity = summary.get("integrity", summary)
+        integrity_failures = 0 if integrity.get("chain_intact", True) else 1
+        self.process_metrics = current.model_copy(update={
+            "retries": current.retries + int(summary.get("retries", 0)),
+            "cancellations": current.cancellations + int(summary.get("cancellations", 0)),
+            "traceability_failures": current.traceability_failures + integrity_failures,
+        })
+
+    def quality_breakdown(self) -> dict[str, Any]:
+        """§13.15 — Visible weighted quality formula; missing inputs are explicit."""
+        components: dict[str, float] = {}
+        if self.generation_metrics:
+            components["relevance"] = self.generation_metrics.relevance
+            components["mechanism"] = self.generation_metrics.mechanism_specificity
+            components["diversity"] = math.fsum((
+                self.generation_metrics.semantic_diversity,
+                self.generation_metrics.structural_diversity,
+            )) / 2.0
+        if self.input_metrics:
+            components["evidence"] = self.input_metrics.evidence_quality
+        elif self.blackforge_metrics:
+            components["evidence"] = self.blackforge_metrics.evidence_quality
+        if self.blackforge_metrics:
+            components["risk"] = self.blackforge_metrics.safe_validation_quality
+        if self.process_metrics:
+            components["traceability"] = 1.0 if (
+                self.process_metrics.schema_failures == 0
+                and self.process_metrics.traceability_failures == 0
+            ) else 0.0
+        weights = {key: QUALITY_WEIGHTS[key] for key in components}
+        weight_total = math.fsum(weights.values())
+        score = (
+            math.fsum(components[key] * weights[key] for key in components) / weight_total
+            if weight_total else 0.0
+        )
+        return {
+            "formula_version": QUALITY_FORMULA_VERSION,
+            "components": components,
+            "weights": weights,
+            "score": score,
+            "missing_components": [key for key in QUALITY_WEIGHTS if key not in components],
+        }
+
     def compute_composite(self) -> float:
-        """§13.15 — Single composite quality score."""
+        """§13.15 — Backward-compatible composite score with stable summation."""
         scores: list[float] = []
         if self.generation_metrics:
             scores.append(self.generation_metrics.semantic_diversity)
@@ -188,7 +297,7 @@ class MetricsCollector:
             scores.append(self.process_metrics.cache_hit_rate)
         if self.result_metrics:
             scores.append(self.result_metrics.human_acceptance)
-        return sum(scores) / len(scores) if scores else 0.0
+        return math.fsum(scores) / len(scores) if scores else 0.0
 
     def detect_drift(self, baseline: Mapping[str, float]) -> list[str]:
         """§13.12 — Detect quality drift against baseline."""
@@ -233,6 +342,10 @@ class MetricsCollector:
         if self.process_metrics and self.process_metrics.schema_failures > 0:
             reasons.append("schema_failures_present")
 
+        # Explicit user feedback is a promotion signal; clicks are not.
+        if self.explicit_feedback and self.feedback_signal() < 0.5:
+            reasons.append("negative_explicit_feedback")
+
         # Hard blockers reject immediately.
         if reasons:
             return PromotionStatus.REJECTED, reasons
@@ -260,6 +373,8 @@ class MetricsCollector:
         """Produce a compact summary."""
         return {
             "composite": self.compute_composite(),
+            "quality_breakdown": self.quality_breakdown(),
+            "feedback_signal": self.feedback_signal(),
             "has_input": self.input_metrics is not None,
             "has_generation": self.generation_metrics is not None,
             "has_evaluation": self.evaluation_metrics is not None,
