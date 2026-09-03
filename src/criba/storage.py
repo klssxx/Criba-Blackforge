@@ -45,6 +45,14 @@ class Storage:
                   id INTEGER PRIMARY KEY AUTOINCREMENT, chain_id TEXT NOT NULL, stage INTEGER NOT NULL,
                   field_name TEXT NOT NULL, field_value TEXT NOT NULL,
                   FOREIGN KEY(chain_id) REFERENCES chain_sessions(chain_id))''')
+                con.execute('''CREATE TABLE IF NOT EXISTS chain_outputs (
+                  id INTEGER PRIMARY KEY AUTOINCREMENT, chain_id TEXT NOT NULL, stage INTEGER NOT NULL,
+                  output_json TEXT NOT NULL,
+                  FOREIGN KEY(chain_id) REFERENCES chain_sessions(chain_id))''')
+                con.execute('''CREATE TABLE IF NOT EXISTS chain_reviews (
+                  review_id TEXT PRIMARY KEY, chain_id TEXT NOT NULL, stage INTEGER NOT NULL,
+                  decision TEXT NOT NULL, review_json TEXT NOT NULL,
+                  FOREIGN KEY(chain_id) REFERENCES chain_sessions(chain_id))''')
                 con.execute('''CREATE TABLE IF NOT EXISTS lottery_used_combinations (
                   catalog_fingerprint TEXT NOT NULL,
                   combo_key TEXT NOT NULL,
@@ -130,10 +138,79 @@ class Storage:
                         field_value = json.dumps(value, ensure_ascii=False)
                     else:
                         field_value = str(value)
+                    already_saved = con.execute(
+                        "SELECT 1 FROM chain_memory WHERE chain_id=? AND stage=? "
+                        "AND field_name=? AND field_value=? LIMIT 1",
+                        (chain_id, stage, field_name, field_value),
+                    ).fetchone()
+                    if already_saved:
+                        continue
                     con.execute(
                         "INSERT INTO chain_memory(chain_id, stage, field_name, field_value) VALUES(?,?,?,?)",
                         (chain_id, stage, field_name, field_value),
                     )
+        finally:
+            con.close()
+
+    def save_chain_output(self, chain_id: str, stage: int, output: Mapping[str, Any]) -> None:
+        """Persist a typed stage output for cold reconstruction."""
+        con = self.connect()
+        try:
+            with con:
+                con.execute(
+                    "INSERT INTO chain_outputs(chain_id, stage, output_json) VALUES(?,?,?)",
+                    (chain_id, stage, json.dumps(dict(output), ensure_ascii=False)),
+                )
+        finally:
+            con.close()
+
+    def load_chain_outputs(self, chain_id: str) -> list[dict[str, Any]]:
+        """Load stage outputs in execution order."""
+        con = self.connect()
+        try:
+            rows = con.execute(
+                "SELECT id, chain_id, stage, output_json FROM chain_outputs "
+                "WHERE chain_id=? ORDER BY stage, id",
+                (chain_id,),
+            ).fetchall()
+            return [
+                {"id": row["id"], "chain_id": row["chain_id"], "stage": row["stage"],
+                 "output": json.loads(row["output_json"])}
+                for row in rows
+            ]
+        finally:
+            con.close()
+
+    def save_chain_review(self, review_id: str, chain_id: str, stage: int,
+                          decision: str, review: Mapping[str, Any]) -> None:
+        """Persist one human decision record idempotently by review_id."""
+        con = self.connect()
+        try:
+            with con:
+                con.execute(
+                    "INSERT OR IGNORE INTO chain_reviews "
+                    "(review_id, chain_id, stage, decision, review_json) VALUES(?,?,?,?,?)",
+                    (review_id, chain_id, stage, decision,
+                     json.dumps(dict(review), ensure_ascii=False)),
+                )
+        finally:
+            con.close()
+
+    def load_chain_reviews(self, chain_id: str) -> list[dict[str, Any]]:
+        """Load persisted human decisions in stage order."""
+        con = self.connect()
+        try:
+            rows = con.execute(
+                "SELECT review_id, chain_id, stage, decision, review_json FROM chain_reviews "
+                "WHERE chain_id=? ORDER BY stage, review_id",
+                (chain_id,),
+            ).fetchall()
+            return [
+                {"review_id": row["review_id"], "chain_id": row["chain_id"],
+                 "stage": row["stage"], "decision": row["decision"],
+                 "review": json.loads(row["review_json"])}
+                for row in rows
+            ]
         finally:
             con.close()
 

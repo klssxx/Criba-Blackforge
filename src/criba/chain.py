@@ -196,6 +196,7 @@ class ChainMemory(BaseModel):
 
     chain_id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     current_stage: int = 1
+    status: StageStatus = StageStatus.PENDING
     original_objective: str = ""
     current_problem_definition: str = ""
     confirmed_facts: list[str] = Field(default_factory=list)
@@ -469,6 +470,7 @@ class ChainRunner:
                 "running",
             )
             self._storage.save_chain_memory(memory.chain_id, stage, memory.model_dump())
+            self._storage.save_chain_output(memory.chain_id, stage, output.model_dump(mode="json"))
         return output, memory
 
     def run_chain(
@@ -476,18 +478,82 @@ class ChainRunner:
         packet: Mapping[str, Any],
         *,
         human_reviews: Mapping[int, HumanDecisionRecord] | None = None,
+        require_human_review: bool = False,
     ) -> tuple[dict[int, BaseModel], ChainMemory]:
-        """Ejecuta la cadena completa de 6 fases."""
+        """Ejecuta seis fases, con HITL estricto opcional."""
         memory = ChainMemory(original_objective=packet.get("original_query", ""))
         outputs: dict[int, BaseModel] = {}
         human_reviews = human_reviews or {}
         for stage in range(1, self.STAGE_COUNT + 1):
+            memory.status = StageStatus.PENDING
+            self._validate_transition(memory.status, StageStatus.RUNNING)
+            memory.status = StageStatus.RUNNING
             prev_out: BaseModel | Mapping[str, Any] | None = outputs.get(stage - 1)
-            output, memory = self.run_stage(stage, memory, packet, previous_output=prev_out if isinstance(prev_out, dict) else dict(prev_out) if prev_out is not None else {})
+            output, memory = self.run_stage(
+                stage,
+                memory,
+                packet,
+                previous_output=(
+                    prev_out.model_dump() if isinstance(prev_out, BaseModel)
+                    else dict(prev_out or {})
+                ),
+            )
             outputs[stage] = output
+            self._validate_transition(StageStatus.RUNNING, StageStatus.AWAITING_HUMAN_REVIEW)
+            memory.status = StageStatus.AWAITING_HUMAN_REVIEW
             review = human_reviews.get(stage)
-            if review and review.decision == "reject":
+
+            if self._persist and self._storage is not None:
+                self._storage.save_chain_session(
+                    memory.chain_id,
+                    memory.original_objective,
+                    stage,
+                    memory.status.value,
+                )
+
+            if review is None:
+                if require_human_review:
+                    break
+                # Backward-compatible automatic mode: this is completion,
+                # never a fabricated human approval.
+                memory.status = StageStatus.COMPLETED
+                continue
+
+            if review.chain_id and review.chain_id != memory.chain_id:
+                raise ValueError("La review pertenece a otra cadena")
+            if review.stage not in (0, stage):
+                raise ValueError(f"La review no corresponde a la fase {stage}")
+            if self._persist and self._storage is not None:
+                self._storage.save_chain_review(
+                    review.review_id,
+                    memory.chain_id,
+                    stage,
+                    review.decision,
+                    review.model_dump(mode="json"),
+                )
+
+            if review.decision in ("approve_stage", "approved"):
+                self._validate_transition(StageStatus.AWAITING_HUMAN_REVIEW, StageStatus.APPROVED)
+                self._validate_transition(StageStatus.APPROVED, StageStatus.COMPLETED)
+                memory.status = StageStatus.COMPLETED
+            elif review.decision in ("reject", "reject_finding", "terminate_chain"):
+                self._validate_transition(StageStatus.AWAITING_HUMAN_REVIEW, StageStatus.REJECTED)
+                memory.status = StageStatus.REJECTED
                 break
+            elif review.decision in ("request_revision", "edit_context", "return_to_previous_stage"):
+                self._validate_transition(StageStatus.AWAITING_HUMAN_REVIEW, StageStatus.REVISION_REQUIRED)
+                memory.status = StageStatus.REVISION_REQUIRED
+                break
+            else:
+                raise ValueError(f"Decisión humana inválida: {review.decision!r}")
+
+            if self._persist and self._storage is not None:
+                self._storage.save_chain_session(
+                    memory.chain_id,
+                    memory.original_objective,
+                    stage,
+                    memory.status.value,
+                )
         return outputs, memory
 
     def request_rehydration(
@@ -507,8 +573,29 @@ class ChainRunner:
             reason=reason,
         )
 
+    def rehydrate(self, request: RehydrationRequest) -> dict[str, Any]:
+        """Load only the requested stage/finding from persisted memory."""
+        if self._storage is None:
+            raise ValueError("Storage no configurado")
+        rows = self._storage.load_chain_memory(request.chain_id)
+        selected: dict[str, Any] = {}
+        for row in rows:
+            if row["stage"] != request.source_stage:
+                continue
+            field_name = str(row["field_name"])
+            if request.finding_id and request.finding_id not in {field_name, str(row["field_value"])}:
+                continue
+            selected.setdefault(field_name, row["field_value"])
+        return {
+            "chain_id": request.chain_id,
+            "source_stage": request.source_stage,
+            "finding_id": request.finding_id,
+            "required_detail": request.required_detail,
+            "detail": selected,
+        }
+
     def cold_reconstruct(self, chain_id: str) -> dict[str, Any]:
-        """Reconstrucción fría de una cadena desde persistencia."""
+        """Reconstrucción fría completa desde memoria, outputs y reviews."""
         if self._storage is None:
             raise ValueError("Storage no configurado")
         session = self._storage.load_chain_session(chain_id)
@@ -516,5 +603,7 @@ class ChainRunner:
         return {
             "session": session,
             "memory_history": memory_rows,
+            "outputs": self._storage.load_chain_outputs(chain_id),
+            "reviews": self._storage.load_chain_reviews(chain_id),
             "total_records": len(memory_rows),
         }
