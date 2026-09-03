@@ -9,24 +9,24 @@
     "tag": "pre-iie-baseline"
   },
   "current": {
-    "phase": "P06",
-    "task": "P06-T09",
-    "subtask": "Graph semantics audit",
+    "phase": "P07",
+    "task": "P07-T01",
+    "subtask": "Time-series observations",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T06:20:07+02:00"
+    "last_updated": "2026-09-03T06:56:06+02:00"
   },
   "last_good_state": {
-    "commit": "d2dc31ecc227f16ec561ba0a0a483cd8b1cdab3e",
+    "commit": "2114144ee6b95ecfd34da01ba5c8a951d0303549",
     "phase": "P06",
-    "task": "P06-T08",
+    "task": "P06-T09",
     "tests": [
-      "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_graph_bridges.py tests/intelligence/test_graph_link_prediction.py tests/intelligence/test_graph_fixtures.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider: 27 passed",
-      "python -m pytest -q -p no:cacheprovider: 769 passed",
+      "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_graph_bridges.py tests/intelligence/test_graph_link_prediction.py tests/intelligence/test_graph_fixtures.py tests/intelligence/test_graph_semantics.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider: 32 passed",
+      "python -m pytest -q -p no:cacheprovider: 774 passed",
       "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py: success"
     ]
   },
-  "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05"],
+  "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05", "P06"],
   "completed_tasks": [
     "P00-T01", "P00-T02", "P00-T03", "P00-T04", "P00-GATE",
     "P01-T01", "P01-T02", "P01-T03", "P01-T04", "P01-T05", "P01-T06",
@@ -34,11 +34,11 @@
     "P03-T01", "P03-T02", "P03-T03", "P03-T04", "P03-T05", "P03-T06",
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
-    "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08"
+    "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08", "P06-T09"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P06-T09", "BF-P00-T06"],
+  "pending_tasks": ["P07-T01", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -58,7 +58,8 @@
     "D-P06-5: P06-T05 implementa Community detection como componentes conexas débiles deterministas; la dirección de edges se ignora, pero el filtro de subgrafo se respeta.",
     "D-P06-6: P06-T06 interpreta bridge node analysis como puntos de articulación del grafo débil y usa Tarjan iterativo con adyacencia deduplicada.",
     "D-P06-7: P06-T07 expone predicción de enlaces por common-neighbor Jaccard, excluye links existentes y mantiene la interfaz sin embeddings ni dependencias externas.",
-    "D-P06-8: P06-T08 mantiene fixtures sintéticos reutilizables bajo tests/intelligence; la topología valida store, communities y bridges sin introducir datos de producción."
+    "D-P06-8: T08 mantiene fixtures sintéticos reutilizables bajo tests/intelligence; la topología valida store, communities y bridges sin introducir datos de producción.",
+    "D-P06-9: T09 acumula source_doc_ids en upserts repetidos y excluye self-loops de las métricas débiles para preservar semántica de procedencia y link prediction."
   ],
   "open_questions": [],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -81,31 +82,31 @@
   "tests": {
     "last_targeted": {
       "P05": "65 passed; mypy success (2026-09-03)",
-      "P06": "27 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/boundary tests passed; mypy success (2026-09-03)",
+      "P06": "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "769 passed in P06-T08 at d2dc31e (2026-09-03)",
+      "criba": "774 passed in P06-T09 at 2114144 (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P06-T09: run graph semantics audit without changing legacy storage.",
-  "resume_instructions": "P06-T08 is verified at d2dc31e with 769 full tests passing. Resume at P06-T09 graph semantics audit. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P07-T01: implement time-series observations.",
+  "resume_instructions": "P06 is closed at 2114144 with 32 targeted graph tests and 774 full CRIBA tests passing. Resume at P07-T01 time-series observations. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "d2dc31ecc227f16ec561ba0a0a483cd8b1cdab3e",
+      "commit": "2114144ee6b95ecfd34da01ba5c8a951d0303549",
       "tags_at_head": [],
       "dirty_files": [],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "d2dc31ecc227f16ec561ba0a0a483cd8b1cdab3e",
-      "last_good_tests": ["P06 graph/builder/traversal/centrality/community/bridge/link-prediction/fixture: 27 passed; full CRIBA: 769 passed; mypy success"]
+      "last_good_commit": "2114144ee6b95ecfd34da01ba5c8a951d0303549",
+      "last_good_tests": ["P06 graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics: 32 passed; full CRIBA: 774 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -149,5 +150,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T06:20:07+02:00"
+  "last_updated": "2026-09-03T06:56:06+02:00"
 }
