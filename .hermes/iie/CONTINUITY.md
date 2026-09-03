@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 08:45:00+02:00 — P08-T03 VERIFIED; P08-T04 NOT_STARTED
+**Última actualización:** 2026-09-03 08:55:00+02:00 — P08-T04 VERIFIED; P08-T05 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -32,7 +32,7 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05, P06 and P07 are closed. P07-T01 through P07-T10 are verified. P08-T01 (research-gap extraction) is **NOT_STARTED**. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
+P05, P06 and P07 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T04 are verified. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -44,7 +44,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-P07-T10 code verified (checkpoint commit pending): signal semantics audit, with 52 targeted signal/storage/contract tests and full CRIBA regression at 808 passed.
+P08-T04 code verified in `1ca816e`: deterministic failure mining, with 5 focused tests, 16 focused P08 gap tests, and full CRIBA regression at 824 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -80,6 +80,11 @@ P07-T10 code verified (checkpoint commit pending): signal semantics audit, with 
 - `python -m pytest -q -p no:cacheprovider` → 797 passed, 1 dependency deprecation warning.
 - `python -m pytest tests/intelligence/test_signal_semantics.py tests/intelligence/test_signal_synthetic.py tests/intelligence/test_signal_observations.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_scurve.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 52 passed.
 - `python -m pytest -q -p no:cacheprovider` → 808 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_failures.py -q -p no:cacheprovider` → 5 passed.
+- `python -m pytest tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py -q -p no:cacheprovider` → 16 passed.
+- `mypy --no-incremental src/criba/intelligence/gaps` → success.
+- `python -m compileall -q src/criba/intelligence/gaps` → success.
+- `python -m pytest -q -p no:cacheprovider` → 824 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
@@ -92,7 +97,7 @@ None. All IIE feature flags remain `false`.
 The Neon steering directive is recorded as a cross-cutting architecture addendum, not as a signal-layer dependency. Before any provider implementation: audit the existing persistence/configuration boundary; keep PostgreSQL as the standard contract; isolate Neon-specific code under infrastructure/adapters; never write to Neon `production`; do not expose connection strings; and stop only billable, admin, destructive, production-write or authentication-gated actions for explicit user approval. Local PostgreSQL portability remains mandatory.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P08-T01: research-gap extraction. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P08-T05: technology resurrection. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra medium, per blueprint. Required verification: implement deterministic research-gap extraction over stored evidence/claims, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
+GPT-5.6 Terra high, per blueprint. Required verification: implement deterministic technology-resurrection candidate extraction over stored evidence, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.

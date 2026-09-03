@@ -10,20 +10,20 @@
   },
   "current": {
     "phase": "P08",
-    "task": "P08-T04",
-    "subtask": "failure mining",
+    "task": "P08-T05",
+    "subtask": "technology resurrection",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T08:33:46+02:00"
+    "last_updated": "2026-09-03T08:55:00+02:00"
   },
   "last_good_state": {
-    "commit": "c855fc97f0b5a3334812e880902b42880e7502d6",
-    "phase": "P07",
-    "task": "P07-T10",
+    "commit": "1ca816e90e5f2feb51f441b04984b9b3a523f244",
+    "phase": "P08",
+    "task": "P08-T04",
     "tests": [
-      "python -m pytest tests/intelligence/test_signal_semantics.py tests/intelligence/test_signal_synthetic.py tests/intelligence/test_signal_observations.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_scurve.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider: 52 passed",
-      "python -m pytest -q -p no:cacheprovider: 808 passed",
-      "mypy --no-incremental src/criba/intelligence/signals/scurve.py src/criba/intelligence/signals/lead_lag.py src/criba/intelligence/signals/weak_signals.py src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py: success"
+    "python -m pytest tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py -q -p no:cacheprovider: 16 passed",
+    "python -m pytest -q -p no:cacheprovider: 824 passed",
+    "mypy --no-incremental src/criba/intelligence/gaps: success"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05", "P06", "P07"],
@@ -35,11 +35,11 @@
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
     "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08", "P06-T09",
-    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06", "P07-T07", "P07-T08", "P07-T09", "P07-T10"
+    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06", "P07-T07", "P07-T08", "P07-T09", "P07-T10", "P08-T01", "P08-T02", "P08-T03", "P08-T04"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P08-T04", "BF-P00-T06"],
+  "pending_tasks": ["P08-T05", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -71,7 +71,8 @@
     "D-NEON-1: Neon se incorpora sólo como adapter/provider PostgreSQL opcional; domain/application permanecen provider-neutral, production queda protegida y cualquier operación billable, admin, destructive o production-write requiere autorización explícita.",
     "D-P07-8: T08 aproxima una curva logística explicable con capacidad superior al máximo observado, ajuste logit lineal y límites de precisión que no alcanzan artificialmente la asíntota.",
     "D-P07-9: T09 fija una fixture sintética compartida (rampa monótona, rampa retardada un periodo, control plano y pico único) que ejercita todos los componentes de señal sin datos de producción.",
-    "D-P07-10: T10 audita determinismo, independencia de orden, aislamiento entre tópicos, antisimetría lead/lag y procedencia de agregación; sin defectos semánticos que requieran cambios de implementación."
+    "D-P07-10: T10 audita determinismo, independencia de orden, aislamiento entre tópicos, antisimetría lead/lag y procedencia de agregación; sin defectos semánticos que requieran cambios de implementación.",
+    "D-P08-4: T070 failure mining usa extracción determinista por frases con procedencia documental, modo de fallo explícito cuando existe y exclusión de fallos ya mitigados."
   ],
   "open_questions": ["NEON-ARCH-AUDIT: audit existing persistence/CLI/configuration and choose the provider-neutral PostgreSQL adapter boundary before any Neon integration or dependency install."],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -96,31 +97,31 @@
       "P05": "65 passed; mypy success (2026-09-03)",
       "P06": "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed; mypy success (2026-09-03)",
       "P07": "11 semantics audit + 11 synthetic tests passed; 52 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
-      "P08": "4 targeted research-gap tests passed; mypy success (2026-09-03)",
+      "P08": "16 targeted gap tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "812 passed in P08-T01 (2026-09-03)",
+      "criba": "824 passed in P08-T04 (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P08-T04: implement failure mining.",
-  "resume_instructions": "P08-T03 is verified with 3 focused tests and 819 full CRIBA tests passing. Resume at P08-T04 failure mining. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P08-T05: implement technology resurrection.",
+  "resume_instructions": "P08-T04 is verified at 1ca816e with 5 focused failure-mining tests and 824 full CRIBA tests passing. Resume at P08-T05 technology resurrection. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "c855fc97f0b5a3334812e880902b42880e7502d6",
+      "commit": "1ca816e90e5f2feb51f441b04984b9b3a523f244",
       "tags_at_head": [],
       "dirty_files": [" M docs/FINAL_REPORT.md", "?? .pre-commit-config.yaml", "?? docs/TOOLCHAIN.md", "?? docs/architecture/", "?? scripts/verify-dev-environment.ps1", "?? scripts/verify-dev-environment.sh"],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "c855fc97f0b5a3334812e880902b42880e7502d6",
-      "last_good_tests": ["P07 signal observations/dynamics/bursts/changepoints/anomaly/weak-signals/lead-lag/scurve: 30 targeted passed; full CRIBA: 786 passed; mypy success"]
+      "last_good_commit": "1ca816e90e5f2feb51f441b04984b9b3a523f244",
+      "last_good_tests": ["P08 failure mining: 5 focused passed; full CRIBA: 824 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -164,5 +165,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T08:36:00+02:00"
+  "last_updated": "2026-09-03T08:55:00+02:00"
 }

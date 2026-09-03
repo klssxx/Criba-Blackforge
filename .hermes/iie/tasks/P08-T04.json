@@ -1,0 +1,58 @@
+{
+  "task_id": "P08-T04",
+  "title": "Failure mining",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3897-3900; technique registry T070",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/claims.py",
+    "src/criba/intelligence/gaps/research.py",
+    "src/criba/intelligence/gaps/limitations.py",
+    "src/criba/intelligence/gaps/contradictions.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/failures.py",
+    "tests/intelligence/test_failures.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_failures.py -q -p no:cacheprovider (5 passed)",
+    "python -m pytest tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py -q -p no:cacheprovider (16 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps (success in 5 files)",
+    "python -m compileall -q src/criba/intelligence/gaps (success)",
+    "python -m pytest -q -p no:cacheprovider (824 passed, 1 existing warning)",
+    "git diff --check (success)",
+    "python -m ruff check src/criba/intelligence/gaps tests/intelligence/test_failures.py (not available: No module named ruff)"
+  ],
+  "tests_passed": [
+    "5 focused failure-mining tests",
+    "16 focused P08 gap tests",
+    "mypy success in 5 files",
+    "compileall success",
+    "824 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Failure mining is deterministic, sentence-level and stdlib-only; it extracts explicit failure cues, preserves document provenance and deduplicates repeated statements.",
+    "FailureCase.failure_mode captures condition, handling target or explicit failure-mode text when available; no mode is invented for unstructured failures.",
+    "Resolved language such as prevents, tolerates or handles failures is excluded to avoid promoting mitigated failure cases."
+  ],
+  "remaining_risks": [
+    "Rule-based English cue coverage is limited; nuanced negation and domain-specific failure terminology are outside this task.",
+    "The repository environment has no importable ruff module; pytest, mypy, compileall and diff checks were run successfully."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert 1ca816e90e5f2feb51f441b04984b9b3a523f244",
+  "limitations": [
+    "No network, external dependencies, database writes or production artifacts were used.",
+    "The unrelated pre-existing docs/FINAL_REPORT.md, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/ and scripts/verify-dev-environment.* remain untouched and uncommitted."
+  ],
+  "commits": ["1ca816e90e5f2feb51f441b04984b9b3a523f244"],
+  "completed_at": "2026-09-03T08:55:00+02:00"
+}
