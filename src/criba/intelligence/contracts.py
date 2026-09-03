@@ -18,7 +18,7 @@ __all__ = [
     "ProvenanceRecord", "Claim", "ClaimAssessment", "EntityNode", "EntityAlias",
     "RelationEdge", "TopicObservation", "Signal", "WeakSignal", "Gap",
     "Contradiction", "Limitation", "FailureCase", "ResurrectionCandidate",
-    "WhiteSpaceCandidate", "PatentExpirationOpportunity", "Hypothesis", "InventionCandidate", "SourceDescriptor",
+    "WhiteSpaceCandidate", "PatentExpirationOpportunity", "DormantPaperCandidate", "Hypothesis", "InventionCandidate", "SourceDescriptor",
     "SourceCapability", "QueryPlan", "QueryVariant", "SourceQuery", "SourceQueryResult",
     "PriorArtQuery", "PriorArtMatch", "PriorArtAssessment", "NoveltyAssessment",
     "EvidenceAssessment", "ConfidenceAssessment", "FeasibilityAssessment",
@@ -372,6 +372,38 @@ class PatentExpirationOpportunity:
             "claim_scope": self.claim_scope,
             "expiration_status": self.expiration_status,
             "opportunity_statement": self.opportunity_statement,
+            "evidence_doc_ids": list(self.evidence_doc_ids),
+            "confidence": self.confidence,
+        }
+
+
+@dataclass
+class DormantPaperCandidate:
+    """Evidence contract for a paper with sustained low attention."""
+
+    paper_id: str = ""
+    title: str = ""
+    published: str = ""
+    dormant_since: str = ""
+    citation_count: int | None = None
+    recent_citations: int | None = None
+    recent_attention: int | None = None
+    last_cited: str = ""
+    dormancy_reason: str = ""
+    evidence_doc_ids: tuple[str, ...] = ()
+    confidence: float = 0.0              # 0..1 evidence confidence
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "paper_id": self.paper_id,
+            "title": self.title,
+            "published": self.published,
+            "dormant_since": self.dormant_since,
+            "citation_count": self.citation_count,
+            "recent_citations": self.recent_citations,
+            "recent_attention": self.recent_attention,
+            "last_cited": self.last_cited,
+            "dormancy_reason": self.dormancy_reason,
             "evidence_doc_ids": list(self.evidence_doc_ids),
             "confidence": self.confidence,
         }

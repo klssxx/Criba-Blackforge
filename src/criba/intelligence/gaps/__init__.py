@@ -1,6 +1,15 @@
 """IIE gaps sector."""
 
 from .contradictions import ContradictionAnalyzer, analyze_contradictions
+from .dormant import (
+    DormantPaperAnalyzer,
+    DormantPaperDetector,
+    DormantPaperExtractor,
+    detect_dormant_papers,
+    analyze_dormant_papers,
+    extract_dormant_papers,
+    find_dormant_papers,
+)
 from .failures import FailureCaseExtractor, FailureMiner, extract_failures, mine_failures
 from .limitations import LimitationExtractor, extract_limitations
 from .patent_expiration import (
@@ -34,6 +43,9 @@ from .white_space import (
 
 __all__ = [
     "ContradictionAnalyzer",
+    "DormantPaperAnalyzer",
+    "DormantPaperDetector",
+    "DormantPaperExtractor",
     "FailureCaseExtractor",
     "FailureMiner",
     "LimitationExtractor",
@@ -48,6 +60,10 @@ __all__ = [
     "ResurrectionExtractor",
     "TechnologyResurrectionExtractor",
     "TechnologyResurrection",
+    "detect_dormant_papers",
+    "analyze_dormant_papers",
+    "extract_dormant_papers",
+    "find_dormant_papers",
     "extract_failures",
     "mine_failures",
     "extract_limitations",
