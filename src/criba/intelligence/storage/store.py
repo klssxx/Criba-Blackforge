@@ -17,6 +17,12 @@ from typing import Any
 
 DB_VERSION = 1
 
+_CLAIM_COLUMNS = (
+    "claim_id", "run_id", "text", "epistemic_state", "evidence_doc_ids",
+    "fragment_ids", "technique_ids", "created_by",
+)
+_CLAIM_JSON_COLUMNS = ("evidence_doc_ids", "fragment_ids", "technique_ids")
+
 _SCHEMA = """
 CREATE TABLE IF NOT EXISTS intel_runs (
     run_id TEXT PRIMARY KEY,
@@ -215,12 +221,12 @@ class IntelligenceStore:
 
     # -- schema / migrations (P02-T02) --------------------------------------
     def migrate(self) -> int:
-        current = self._conn.execute("PRAGMA user_version").fetchone()[0]
+        current = int(self._conn.execute("PRAGMA user_version").fetchone()[0])
         if current < 1:
             self._conn.executescript(_SCHEMA)
             self._conn.execute(f"PRAGMA user_version={DB_VERSION}")
             self._conn.commit()
-        return self._conn.execute("PRAGMA user_version").fetchone()[0]
+        return int(self._conn.execute("PRAGMA user_version").fetchone()[0])
 
     def close(self) -> None:
         self._conn.close()
@@ -323,8 +329,59 @@ class IntelligenceStore:
         self._conn.commit()
 
     def save_claim(self, claim: dict[str, Any]) -> None:
-        self._upsert_simple("intel_claims", "claim_id", claim,
-                            ("evidence_doc_ids", "fragment_ids", "technique_ids"))
+        """Persist one claim without allowing contract extras into SQL."""
+        if "claim_id" not in claim:
+            raise KeyError("claim_id")
+        record = {key: claim[key] for key in _CLAIM_COLUMNS if key in claim}
+        record.setdefault("run_id", "")
+        record.setdefault("text", "")
+        record.setdefault("epistemic_state", "INFERENCE")
+        record.setdefault("evidence_doc_ids", [])
+        record.setdefault("fragment_ids", [])
+        record.setdefault("technique_ids", [])
+        record.setdefault("created_by", "rule")
+        state = record["epistemic_state"]
+        record["epistemic_state"] = getattr(state, "value", state)
+        self._upsert_simple("intel_claims", "claim_id", record, _CLAIM_JSON_COLUMNS)
+
+    def get_claim(self, claim_id: str) -> dict[str, Any] | None:
+        """Return one claim with JSON columns decoded to Python lists."""
+        row = self._conn.execute(
+            "SELECT * FROM intel_claims WHERE claim_id=?", (claim_id,)
+        ).fetchone()
+        if not row:
+            return None
+        claim = dict(row)
+        for column in _CLAIM_JSON_COLUMNS:
+            claim[column] = _unjs(claim[column], [])
+        return claim
+
+    def list_claims(
+        self,
+        run_id: str | None = None,
+        epistemic_state: str | Any | None = None,
+        limit: int = 50,
+    ) -> list[dict[str, Any]]:
+        """List newest claims, optionally filtered by run and epistemic state."""
+        clauses: list[str] = []
+        params: list[Any] = []
+        if run_id is not None:
+            clauses.append("run_id=?")
+            params.append(run_id)
+        if epistemic_state is not None:
+            clauses.append("epistemic_state=?")
+            params.append(getattr(epistemic_state, "value", epistemic_state))
+        where = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+        params.append(max(0, int(limit)))
+        rows = self._conn.execute(
+            f"SELECT * FROM intel_claims{where} ORDER BY rowid DESC LIMIT ?", params
+        ).fetchall()
+        return [
+            {**dict(row), **{
+                column: _unjs(row[column], []) for column in _CLAIM_JSON_COLUMNS
+            }}
+            for row in rows
+        ]
 
     def save_signal(self, signal: dict[str, Any]) -> None:
         self._upsert_simple("intel_signals", "signal_id", signal,
@@ -394,9 +451,13 @@ class IntelligenceStore:
             "INSERT INTO intel_technique_runs (run_id, technique_id, status) VALUES (?,?, 'RUNNING')",
             (run_id, technique_id))
         self._conn.commit()
+        if cur.lastrowid is None:
+            raise RuntimeError("SQLite did not return a technique run id")
         return cur.lastrowid
 
-    def finish_technique(self, technique_run_id: int, status: str, detail: dict | None = None) -> None:
+    def finish_technique(
+        self, technique_run_id: int, status: str, detail: dict[str, Any] | None = None
+    ) -> None:
         self._conn.execute(
             "UPDATE intel_technique_runs SET status=?, finished_at=datetime('now'), detail=? "
             "WHERE technique_run_id=?", (status, _js(detail or {}), technique_run_id))
