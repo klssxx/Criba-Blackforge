@@ -1,0 +1,43 @@
+{
+  "task_id": "P09-T03",
+  "title": "Rare combinations",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/registry.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/rare_combinations.py",
+    ".hermes/iie/tasks/P09-T03.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/invention",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "14 passed: invention taxonomy/operator plus contract tests",
+    "189 passed: intelligence suite",
+    "compileall: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T053 counts only explicitly supplied metadata.concepts pairs, avoiding prose-derived or fabricated concepts.",
+    "Rarity is documented as local document frequency and every output remains an HYPOTHESIS."
+  ],
+  "risks": [
+    "A corpus-local rare pair does not establish global novelty, feasibility, or patentability."
+  ],
+  "follow_up": ["P09-T04: cross-domain analogies."],
+  "completed_at": "2026-09-03T21:32:00+02:00"
+}

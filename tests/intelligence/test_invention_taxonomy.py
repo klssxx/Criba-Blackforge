@@ -4,12 +4,14 @@ from __future__ import annotations
 import pytest
 
 from criba.intelligence.contracts import InventionCandidate
+from criba.intelligence.contracts import EvidenceDocument
 from criba.intelligence.invention import (
     OPERATORS_BY_KEY,
     OperatorContext,
     OperatorRegistry,
     get_operator,
     operator_definitions,
+    detect_rare_combinations,
 )
 
 
@@ -55,3 +57,24 @@ def test_registry_rejects_duplicate_registration_and_untraceable_output():
         registry.register("triz", lambda _: [])
     with pytest.raises(ValueError, match="traceability"):
         registry.execute("triz", OperatorContext(problem="reduce heat"))
+
+
+def test_rare_combinations_are_deterministic_and_explicitly_corpus_local():
+    documents = [
+        EvidenceDocument(doc_id="d2", metadata={"concepts": ["optics", "cooling"]}),
+        EvidenceDocument(doc_id="d1", metadata={"concepts": ["optics", "cooling"]}),
+        EvidenceDocument(doc_id="d3", metadata={"concepts": ["cooling", "biology"]}),
+    ]
+    candidates = detect_rare_combinations(documents)
+    assert [candidate.title for candidate in candidates] == ["Explore biology + cooling"]
+    assert candidates[0].operators == ("T053",)
+    assert "not a global novelty" in candidates[0].description
+
+
+def test_rare_combinations_validate_limits_and_ignore_unsupported_metadata():
+    doc = EvidenceDocument(doc_id="d1", metadata={"concepts": "not a sequence"})
+    assert detect_rare_combinations([doc]) == []
+    with pytest.raises(ValueError, match="frequency"):
+        detect_rare_combinations([], max_frequency=0)
+    with pytest.raises(ValueError, match="limit"):
+        detect_rare_combinations([], limit=-1)
