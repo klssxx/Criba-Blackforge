@@ -1,6 +1,6 @@
 {
   "task_id": "P03-T03",
-  "title": "Adapters OpenAlex/arXiv/GitHub/EPO",
+  "title": "OpenAlex adapter",
   "status": "VERIFIED",
   "model": "GLM-5.3",
   "reasoning": "high",
@@ -15,7 +15,7 @@
     "10 passed + live OpenAlex"
   ],
   "tests_failed": [],
-  "decisions": [],
+  "decisions": ["Ledger title reconciled to the master blueprint; OpenAlex normalization is implemented in the consolidated P03 adapter commit 3cea520."],
   "risks": [],
   "follow_up": [],
   "completed_at": "2026-09-03"
