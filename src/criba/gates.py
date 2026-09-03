@@ -125,6 +125,76 @@ VALID_TRANSITIONS: dict[str, tuple[str, ...]] = {
 }
 
 
+@dataclass(frozen=True)
+class ShadowComparison:
+    """Comparison of an old and candidate run before promotion (§10.10)."""
+
+    baseline_hash: str
+    candidate_hash: str
+    differences: tuple[str, ...] = ()
+
+    @property
+    def equivalent(self) -> bool:
+        return not self.differences
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "baseline_hash": self.baseline_hash,
+            "candidate_hash": self.candidate_hash,
+            "differences": list(self.differences),
+            "equivalent": self.equivalent,
+        }
+
+
+def compare_shadow_results(
+    baseline: Mapping[str, Any],
+    candidate: Mapping[str, Any],
+    *,
+    ignored_fields: Sequence[str] = ("activation_id", "timestamp"),
+) -> ShadowComparison:
+    """Compare two completed runs without changing either mapping."""
+    def normalize(value: Any) -> Any:
+        if isinstance(value, Mapping):
+            return {
+                str(key): normalize(item)
+                for key, item in value.items()
+                if key not in ignored_fields
+            }
+        if isinstance(value, list):
+            return [normalize(item) for item in value]
+        return value
+
+    left = normalize(baseline)
+    right = normalize(candidate)
+    differences: list[str] = []
+
+    def diff_paths(left_value: Any, right_value: Any, path: str = "") -> None:
+        if isinstance(left_value, Mapping) and isinstance(right_value, Mapping):
+            for key in sorted(set(left_value) | set(right_value)):
+                child = f"{path}.{key}" if path else str(key)
+                if key not in left_value or key not in right_value:
+                    differences.append(child)
+                else:
+                    diff_paths(left_value[key], right_value[key], child)
+            return
+        if isinstance(left_value, list) and isinstance(right_value, list):
+            if len(left_value) != len(right_value):
+                differences.append(path)
+                return
+            for index, (left_item, right_item) in enumerate(zip(left_value, right_value)):
+                diff_paths(left_item, right_item, f"{path}[{index}]")
+            return
+        if left_value != right_value:
+            differences.append(path)
+
+    diff_paths(left, right)
+    return ShadowComparison(
+        baseline_hash=canonical_hash(left),
+        candidate_hash=canonical_hash(right),
+        differences=tuple(differences),
+    )
+
+
 # ---------------------------------------------------------------------------
 # Individual gates (pure, deterministic)
 # ---------------------------------------------------------------------------

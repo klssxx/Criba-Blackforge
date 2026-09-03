@@ -15,7 +15,9 @@ from criba.gates import (
     G12_output_contract_valid,
     RetryClassification,
     RetryPolicy,
+    ShadowComparison,
     Verdict,
+    compare_shadow_results,
     evaluate_gates,
 )
 from criba.output_format import CribaOutput
@@ -93,6 +95,26 @@ def test_G11_no_review_fails():
 
 def test_G12_output_limits_valid():
     assert G12_output_contract_valid(CribaOutput()).passed is True
+
+
+def test_shadow_comparison_ignores_only_declared_volatile_fields():
+    baseline = {"activation_id": "a", "timestamp": "t1", "result": {"score": 0.8}}
+    candidate = {"activation_id": "b", "timestamp": "t2", "result": {"score": 0.8}}
+    comparison = compare_shadow_results(baseline, candidate)
+    assert isinstance(comparison, ShadowComparison)
+    assert comparison.equivalent is True
+    assert comparison.baseline_hash == comparison.candidate_hash
+    assert baseline["activation_id"] == "a"
+
+
+def test_shadow_comparison_reports_semantic_difference():
+    comparison = compare_shadow_results(
+        {"result": {"score": 0.8}},
+        {"result": {"score": 0.7}},
+    )
+    assert comparison.equivalent is False
+    assert "result.score" in comparison.differences
+    assert comparison.baseline_hash != comparison.candidate_hash
 
 
 # ---------------------------------------------------------------------------
