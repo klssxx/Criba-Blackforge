@@ -1,0 +1,49 @@
+{
+  "task_id": "P06-T04",
+  "title": "Graph centrality",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "files_read": [
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/traversal.py",
+    "src/criba/intelligence/graph/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/graph/centrality.py",
+    "tests/intelligence/test_graph_centrality.py"
+  ],
+  "files_modified": ["src/criba/intelligence/graph/store.py", "src/criba/intelligence/graph/__init__.py"],
+  "commits": ["f57038e7a614ef119e3374531b55e771b7eea9c1"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_centrality.py::test_degree_centrality_is_normalized_and_deterministic -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_centrality.py::test_degree_centrality_limits_neighbors_to_requested_subgraph -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "18 targeted graph/builder/traversal/centrality/boundary tests passed",
+    "760 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 5 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Centrality is unweighted degree centrality over unique neighbors, normalized by N-1.",
+    "Centrality uses the complete ordered node list by default and supports an induced requested subset.",
+    "NetworkX remains unnecessary for the deterministic metric required by P06-T04."
+  ],
+  "risks": [
+    "The metric is undirected degree centrality even though traversal and shortest_path are directed; this is explicit and should not be silently reused as in-degree/out-degree centrality.",
+    "Unknown ids in a requested subset receive a score of zero when isolated from known ids."
+  ],
+  "follow_up": [
+    "P06-T05 signal derivation",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T05:57:10+02:00"
+}
