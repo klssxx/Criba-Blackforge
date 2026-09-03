@@ -1,0 +1,56 @@
+{
+  "task_id": "P07-T02",
+  "title": "Velocity + acceleration",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3835: velocity + acceleration",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T02 block)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_observations.py",
+    ".hermes/iie/tasks/P07-T01.json"
+  ],
+  "files_created": [],
+  "files_modified": [
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_observations.py"
+  ],
+  "commits": ["594aa56507fb0638b6d1fc5a4b2c9b94a22405c7"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_observations.py::test_topic_dynamics_aligns_velocity_and_acceleration_to_periods -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_observations.py::test_topic_dynamics_accepts_raw_observations_and_short_series -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "2 focused RED-GREEN velocity/acceleration tests passed",
+    "23 targeted signal/storage/contract tests passed",
+    "779 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 3 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Velocity is the discrete frequency difference between consecutive ordered observation buckets, aligned with a zero value at the first point.",
+    "Acceleration is the discrete change in velocity, aligned with zero values for the first two points because two intervals are required.",
+    "TopicDynamics accepts either an existing ObservationSeries or raw TopicObservation iterables and returns empty metrics for unknown topics.",
+    "The calculation assumes equally spaced canonical periods; it performs no network calls, calendar inference or paid computation."
+  ],
+  "risks": [
+    "Irregular calendar gaps are not normalized; later semantics work must define whether rates should be divided by elapsed time.",
+    "Metrics operate on frequency only; source diversity and metadata are preserved by observations but are not yet included in dynamics."
+  ],
+  "follow_up": [
+    "P07-T03 burst detection",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T07:35:20+02:00"
+}

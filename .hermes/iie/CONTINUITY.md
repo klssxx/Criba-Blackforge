@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 07:27:54+02:00 — P07-T01 VERIFIED; P07-T02 NOT_STARTED
+**Última actualización:** 2026-09-03 07:35:20+02:00 — P07-T02 VERIFIED; P07-T03 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -20,10 +20,11 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P06-T08 committed in `d2dc31e`: reusable synthetic graph fixtures with 27 graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/boundary tests; full regression is `769 passed`; mypy is clean.
 - P06-T09 committed in `2114144`: graph semantics audit and provenance hardening; repeated `source_doc_ids` accumulate and self-loops are excluded from weak metrics; final targeted graph regression is `32 passed`, full regression is `774 passed`; mypy and compileall are clean.
 - P07-T01 committed in `b24efbd`: deterministic topic/period observation series plus isolated SQLite persistence; 21 targeted signal/storage/contract tests passed and full regression is `777 passed`; mypy and compileall are clean.
+- P07-T02 committed in `594aa56`: discrete topic velocity and acceleration aligned to observation periods; 23 targeted signal/storage/contract tests passed and full regression is `779 passed`; mypy and compileall are clean.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05 and P06 are closed. P06-T01 through P06-T09 and P07-T01 are verified. P07-T02 (velocity + acceleration) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
+P05 and P06 are closed. P06-T01 through P06-T09 and P07-T01 through P07-T02 are verified. P07-T03 (burst detection) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -35,7 +36,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-`b24efbd` — P07-T01 deterministic time-series observations, with 21 targeted signal/storage/contract tests and full CRIBA regression at 777 passed.
+`594aa56` — P07-T02 discrete topic velocity and acceleration, with 23 targeted signal/storage/contract tests and full CRIBA regression at 779 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -53,6 +54,9 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 - `python -m pytest tests/intelligence/test_signal_observations.py -q -p no:cacheprovider` → 3 passed.
 - `python -m pytest tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 21 passed.
 - `python -m pytest -q -p no:cacheprovider` → 777 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_signal_observations.py -q -p no:cacheprovider` → 5 passed.
+- `python -m pytest tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 23 passed.
+- `python -m pytest -q -p no:cacheprovider` → 779 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
@@ -62,7 +66,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 None. All IIE feature flags remain `false`.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P07-T02: velocity + acceleration. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P07-T03: burst detection. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra high, per blueprint. Required verification: implement velocity + acceleration over the observation series, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
+GPT-5.6 Terra high, per blueprint. Required verification: implement burst detection over the observation dynamics, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
