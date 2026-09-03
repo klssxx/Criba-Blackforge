@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from criba.intelligence import contracts as C
-from criba.intelligence.signals import ObservationSeries
+from criba.intelligence.signals import ObservationSeries, TopicDynamics
 from criba.intelligence.storage import IntelligenceStore
 
 
@@ -59,3 +59,31 @@ def test_store_filters_topics_and_bounds_result_count(tmp_path):
         assert store.list_observations(limit=-1) == []
     finally:
         store.close()
+
+
+def test_topic_dynamics_aligns_velocity_and_acceleration_to_periods():
+    series = ObservationSeries(
+        [
+            C.TopicObservation(topic="cooling", period="2026-01", frequency=2),
+            C.TopicObservation(topic="cooling", period="2026-02", frequency=4),
+            C.TopicObservation(topic="cooling", period="2026-03", frequency=7),
+        ]
+    )
+
+    dynamics = TopicDynamics(series)
+
+    assert dynamics.velocity("cooling") == [0.0, 2.0, 3.0]
+    assert dynamics.acceleration("cooling") == [0.0, 0.0, 1.0]
+
+
+def test_topic_dynamics_accepts_raw_observations_and_short_series():
+    dynamics = TopicDynamics(
+        [
+            C.TopicObservation(topic="cooling", period="2026-02", frequency=4),
+            C.TopicObservation(topic="cooling", period="2026-01", frequency=2),
+        ]
+    )
+
+    assert dynamics.velocity("cooling") == [0.0, 2.0]
+    assert dynamics.acceleration("cooling") == [0.0, 0.0]
+    assert TopicDynamics([]).velocity("missing") == []
