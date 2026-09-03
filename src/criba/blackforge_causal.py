@@ -449,8 +449,8 @@ def analyze_causal_pair(left: Mapping[str, Any], right: Mapping[str, Any], model
     }
 
     critical_differences = sorted(axis for axis in profile.critical_axes if a_axes.get(axis, set()) != b_axes.get(axis, set()) and (a_axes.get(axis) or b_axes.get(axis)))
-    comparable_weight = sum(profile.weights[name] for name, value in features.items() if value["comparable"])
-    weighted_sum = sum(profile.weights[name] * value["similarity"] for name, value in features.items() if value["comparable"])
+    comparable_weight = math.fsum(profile.weights[name] for name, value in features.items() if value["comparable"])
+    weighted_sum = math.fsum(profile.weights[name] * value["similarity"] for name, value in features.items() if value["comparable"])
     similarity = weighted_sum / comparable_weight if comparable_weight else 0.0
     coverage = comparable_weight
 

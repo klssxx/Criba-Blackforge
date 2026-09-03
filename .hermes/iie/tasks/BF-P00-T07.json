@@ -1,0 +1,62 @@
+{
+  "task_id": "BF-P00-T07",
+  "title": "Estabilizar agregación causal y hacer exigible el golden",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "isolated_worktree": {
+    "path": "E:/PROYECTS/_BFT07_WT",
+    "branch": "bf-p00-t07-causal-golden",
+    "base_commit": "4a6b6e02af49960272dfaa9702ed6c5de197ff65"
+  },
+  "files_read": [
+    "src/criba/blackforge_causal.py",
+    "tests/unit/test_blackforge_causal.py",
+    "verification/blackforge_causal_report.json",
+    "verification/blackforge_headless_output.json",
+    "verification/blackforge_headless_output.normalized.json"
+  ],
+  "files_modified": [
+    "src/criba/blackforge_causal.py",
+    "tests/unit/test_blackforge_causal.py"
+  ],
+  "commits": [],
+  "root_cause": {
+    "symptom": "Regeneración del causal_report producía coverage=0.9 mientras el golden versionado contiene 0.8999999999999999 (diff exacto reproducido: 2 hunks, a_vs_b y a_vs_a).",
+    "cause": "sum() con orden de inserción de dict es sensible a asociatividad IEEE-754; el golden fue generado con una agregación orden-independiente.",
+    "fix": "math.fsum() (suma exacta compensada, orden-independiente) en comparable_weight y weighted_sum (blackforge_causal.py:452-453). El golden NO fue modificado: el generador corregido reproduce el blob tracked 5bff8e0921fd2eec50a66db0f042a9cf8a6e2682 byte a byte."
+  },
+  "regressions_added": [
+    "test_fsum_coverage_repr_matches_tracked_golden: exige repr(coverage) == repr(0.8999999999999999); falla si sum() vuelve a introducir 0.9. Sin tolerancias.",
+    "test_emitted_report_is_byte_identical_to_tracked_golden: regenera el reporte y lo compara byte a byte contra el blob TRACKED (git cat-file HEAD:path), no contra el working tree, para que una regeneración previa no pueda auto-validarse."
+  ],
+  "volatile_fields_headless_raw": {
+    "documented": ["activation_id (uuid4)", "timestamp", "safety_report[*].timestamp (12 entradas)"],
+    "total_diverging_fields": 14,
+    "normalized": "Contenido JSON idéntico; byte-idéntico al blob tracked tras normalización CRLF->LF de finales de línea (blob tracked = LF, 21161 bytes; regenerado en Windows modo texto = CRLF, 21904 bytes; 743 CR = 743 LF). save_artifacts escribe finales de línea de plataforma; NO se modificó blackforge_pipeline.py por estar fuera de las rutas permitidas de esta tarea."
+  },
+  "tests_run": [
+    "python -m pytest tests/unit/test_blackforge_causal.py -q -p no:cacheprovider",
+    "python -m pytest tests/unit/test_blackforge_catalog.py tests/unit/test_blackforge_selector.py tests/unit/test_blackforge_safety.py tests/unit/test_blackforge_causal.py tests/unit/test_blackforge_pipeline.py -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/blackforge_causal.py",
+    "git diff --check",
+    "comparación git hash-object vs rev-parse HEAD:path de los 9 goldens tras regeneración"
+  ],
+  "tests_passed": [
+    "13 passed: causal suite (11 preexistentes + 2 regresiones nuevas)",
+    "47 passed: los cinco tests BF emisores",
+    "compileall: success",
+    "git diff --check: clean",
+    "9/9 goldens byte-idénticos a sus blobs tracked tras regenerar"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Se corrige el generador (fsum), nunca el golden, cumpliendo la condición de partida.",
+    "La regresión byte a byte compara contra el blob Git tracked, no contra archivos del working tree que los propios tests puedan haber reescrito.",
+    "El hallazgo CRLF del headless normalized se documenta como limitación del pipeline (modo texto), no se normaliza silenciosamente ni se corrige fuera de alcance."
+  ],
+  "risks": [
+    "save_artifacts sigue escribiendo finales de línea de plataforma; un consumidor que compare bytes crudos sin normalización de finales de línea verá diferencias en Windows. Corrección pertenece a una tarea con acceso a blackforge_pipeline.py."
+  ],
+  "completed_at": "2026-09-03T23:30:00+02:00"
+}
