@@ -10,8 +10,8 @@
     "supra_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70"
   },
   "current": {
-    "phase": "P03",
-    "task": "P03-T01",
+    "phase": "P04",
+    "task": "P04-T01",
     "subtask": "",
     "status": "PENDING",
     "started_at": "2026-09-03T00:00:00",
@@ -19,16 +19,18 @@
   },
   "last_good_state": {
     "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-    "phase": "P02",
-    "task": "P02-GATE",
+    "phase": "P03",
+    "task": "P03-GATE",
     "tests": [
-      "CRIBA full: 713 passed"
+      "intelligence: 42 passed",
+      "live: OpenAlex OK"
     ]
   },
   "completed_phases": [
     "P00",
     "P01",
-    "P02"
+    "P02",
+    "P03"
   ],
   "completed_tasks": [
     "P00-T01",
@@ -44,7 +46,13 @@
     "P02-T02",
     "P02-T03",
     "P02-T04",
-    "P02-T05"
+    "P02-T05",
+    "P03-T01",
+    "P03-T02",
+    "P03-T03",
+    "P03-T04",
+    "P03-T05",
+    "P03-T06"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
@@ -93,8 +101,8 @@
     "watermark": "GREEN",
     "note": "ZCode stats no consultables desde aqui; estimar por turns"
   },
-  "next_action": "P03-T01 source protocol (IntelligenceSource ABC §33)",
-  "resume_instructions": "Leer CONTINUITY.md. P00+P01+P02 completos. Continuar P03-T01 sin re-auditar.",
+  "next_action": "P04-T01 lexical retrieval scoring",
+  "resume_instructions": "Leer CONTINUITY.md. P00-P03 completos. Continuar P04-T01.",
   "techniques": {
     "_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml; ver ADDENDUM seccion 127"
   }
