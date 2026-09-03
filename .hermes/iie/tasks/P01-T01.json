@@ -1,0 +1,24 @@
+{
+  "task_id": "P01-T01",
+  "title": "Architecture boundaries (ADR-001)",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "max",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/"
+  ],
+  "tests_passed": [
+    "21 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Dominios D01-D15, jerarquia L0-L4, 7 reglas duras, testable por AST. Rol MAX."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

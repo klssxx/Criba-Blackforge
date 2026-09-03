@@ -1,0 +1,11 @@
+T120|Independent search scouts|SUPRA|prior_art+supra intelligence_client|P10+P14|PRIOR_ART|high|FREE_NETWORK|1
+T121|Search diversity (query lattice)|IIE|prior_art.query_lattice|P10|PRIOR_ART|high|LOCAL_COMPUTE|0
+T122|Query mutation|IIE|retrieval.query_mutation|P04+P10|QUERY_PLANNER+PRIOR_ART|high|CHEAP_LOCAL|0
+T123|Negative search|IIE|prior_art|P10|PRIOR_ART|high|FREE_NETWORK|1
+T124|Reverse innovation search|CR|problems+invention|P08+P09|GAP+INVENTION|high|LOCAL_COMPUTE|0
+T125|Pain-point graph|IIE|problems+graph|P06+P08|GRAPH+GAP|high|LOCAL_COMPUTE|0
+T126|Unmet needs/reviews/workarounds/workflow friction|IIE|problems|P08|GAP|high|FREE_NETWORK|1
+T127|Human bottlenecks + API/hardware/dataset/model/OSS unlocks|IIE|problems.unlocks|P08|GAP+OPPORTUNITY|high|FREE_NETWORK|1
+T128|Patent expiration/abandoned IP/dormant research/sleeping beauty|IIE|gaps.patent_expiration+gaps.dormant+gaps.sleeping_beauty+gaps.resurrection|P08|GAP|high|FREE_NETWORK|1
+T129|Second/N-th order/counterfactual/future-back/bottleneck mapping|CR|invention.nth_order+invention.counterfactual+invention.future_back+invention.bottlenecks|P09|INVENTION|high|LOCAL_COMPUTE|0
+T130|S-curves/substitution curves/innovation genealogy|IIE|signals.scurve+graph|P06+P07|SIGNALS+RADAR+GRAPH|high|LOCAL_COMPUTE|0

@@ -1,0 +1,40 @@
+T040|Citation graph analysis|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T041|Co-citation analysis|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T042|Bibliographic coupling|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T043|Co-authorship networks|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T044|Inventor networks|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T045|Company migration detection|IIE|graph+signals|P06+P07|GRAPH+SIGNALS|high|LOCAL_COMPUTE|0
+T046|Topic modeling|IIE|signals.topics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T047|Emerging topic detection|IIE|signals.dynamics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T048|Topic velocity|IIE|signals.dynamics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T049|Topic acceleration|IIE|signals.dynamics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T050|Topic birth|IIE|signals.topics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T051|Topic splitting|IIE|signals.topics|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T052|Topic convergence|IIE|signals.convergence|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T053|Rare-combination detection|CR|invention.rare_combinations|P09|INVENTION|high|LOCAL_COMPUTE|0
+T054|Technological recombination|CR|invention.recombination|P09|INVENTION|high|LOCAL_COMPUTE|0
+T055|Cross-domain analogy|CR|invention.cross_domain|P09|INVENTION|high|LOCAL_COMPUTE|0
+T056|Biomimicry|CR|invention.biomimicry|P09|INVENTION|high|LOCAL_COMPUTE|0
+T057|TRIZ|CR|invention.triz|P09|INVENTION|lowhigh|CHEAP_LOCAL|0
+T058|TRIZ contradiction mining|CR|invention.triz+gaps.contradictions|P08+P09|INVENTION+GAP|high|CHEAP_LOCAL|0
+T059|Morphological analysis|CR|invention.morphology|P09|INVENTION|high|LOCAL_COMPUTE|0
+T060|SCAMPER|CR|invention.scamper|P09|INVENTION|lowhigh|CHEAP_LOCAL|0
+T061|Attribute substitution|CR|invention.recombination|P09|INVENTION|high|CHEAP_LOCAL|0
+T062|Functional decomposition|CR|invention.functions|P09|INVENTION|high|CHEAP_LOCAL|0
+T063|Function-to-mechanism search|CSI|invention.functions+retrieval|P09|INVENTION+DISCOVERY|high|FREE_NETWORK|1
+T064|First-principles decomposition|CR|invention.first_principles|P09|INVENTION|high|CHEAP_LOCAL|0
+T065|Constraint inversion|CR|invention.inversion|P09|INVENTION|high|CHEAP_LOCAL|0
+T066|Assumption mining|CR|gaps+invention|P08+P09|GAP+INVENTION|high|CHEAP_LOCAL|0
+T067|Contradiction mining|IIE|gaps.contradictions|P08|GAP|high|LOCAL_COMPUTE|0
+T068|Research-gap extraction|IIE|gaps.research|P08|GAP|high|LOCAL_COMPUTE|0
+T069|Limitation mining|IIE|gaps.limitations|P08|GAP|high|LOCAL_COMPUTE|0
+T070|Failure mining|IIE|gaps.failures|P08|GAP|high|LOCAL_COMPUTE|0
+T071|Technology resurrection|IIE|gaps.resurrection|P08|GAP|high|FREE_NETWORK|1
+T072|Capability unlock detection|IIE|problems.unlocks+gaps|P08|GAP+OPPORTUNITY|high|FREE_NETWORK|1
+T073|Cost-curve mining|IIE|signals|P07|SIGNALS+RADAR|high|FREE_NETWORK|1
+T074|Performance-threshold detection|IIE|signals|P07|SIGNALS|high|FREE_NETWORK|1
+T075|Miniaturization detection|IIE|signals|P07|SIGNALS|high|FREE_NETWORK|1
+T076|Energy-efficiency unlock|IIE|signals+problems.unlocks|P07+P08|SIGNALS+GAP|high|FREE_NETWORK|1
+T077|Latency unlock|IIE|signals+problems.unlocks|P07+P08|SIGNALS+GAP|high|FREE_NETWORK|1
+T078|Material substitution|CR|invention.recombination|P09|INVENTION|high|CHEAP_LOCAL|0
+T079|Technology convergence score|IIE|signals.convergence|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0

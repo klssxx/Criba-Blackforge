@@ -10,31 +10,49 @@
     "supra_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70"
   },
   "current": {
-    "phase": "P00",
-    "task": "P00-GATE",
+    "phase": "P02",
+    "task": "P02-T01",
     "subtask": "",
-    "status": "RUNNING",
+    "status": "PENDING",
     "started_at": "2026-09-03T00:00:00",
-    "last_updated": "2026-09-03T00:00:00"
+    "last_updated": "2026-09-03"
   },
   "last_good_state": {
     "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-    "phase": "P00",
-    "task": "P00-T03",
-    "tests": ["CRIBA: 681 passed", "SUPRA: 21 passed"]
+    "phase": "P01",
+    "task": "P01-GATE",
+    "tests": [
+      "CRIBA full: 702 passed"
+    ]
   },
-  "completed_phases": [],
-  "completed_tasks": ["P00-T01", "P00-T02", "P00-T03"],
-  "in_progress_tasks": ["P00-T04"],
+  "completed_phases": [
+    "P00",
+    "P01"
+  ],
+  "completed_tasks": [
+    "P00-T01",
+    "P00-T02",
+    "P00-T03",
+    "P01-T01",
+    "P01-T02",
+    "P01-T03",
+    "P01-T04",
+    "P01-T05",
+    "P01-T06"
+  ],
+  "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P01-T01", "P01-T02", "P01-T03", "P01-T04", "P01-T05", "P01-T06"],
+  "pending_tasks": [
+    "P02-T01"
+  ],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
     "D-P00-1: IIE arranca desde cero (regla AR): no existe .hermes/iie/ previo ni implementacion IIE reconocible",
     "D-P00-2: .hermes/iie/ se commitea en branch feat/iie-master para resume robusto desde Git",
     "D-P00-3: inventario: CRIBA=68 py/20787 LOC en 44 paquetes; SUPRA=13 py/2089 LOC; zero codigo intelligence existente -> riesgo duplicacion bajo en sources/, medio en invention/scoring (ver P00 checkpoint riesgos)",
-    "D-P00-4: SUPRA uv.lock untracked se deja como esta (no es tarea de este blueprint)"
+    "D-P00-4: SUPRA uv.lock untracked se deja como esta (no es tarea de este blueprint)",
+    "D-P01-1: registry YAML generado por gen_registry.py desde reg_parts/*.txt (fuente editable); YAML = canonico commiteado"
   ],
   "open_questions": [],
   "known_debt": [
@@ -65,9 +83,12 @@
     }
   },
   "model_usage": {},
-  "credit_state": {"watermark": "GREEN", "note": "ZCode stats no consultables desde aqui; estimar por turns"},
-  "next_action": "P01-T01 architecture boundaries (MAX role)",
-  "resume_instructions": "Leer CONTINUITY.md. P00 completo y gate aplicado (tag pre-iie-baseline, branch feat/iie-master). Continuar en P01-T01 sin re-auditar (regla Y).",
+  "credit_state": {
+    "watermark": "GREEN",
+    "note": "ZCode stats no consultables desde aqui; estimar por turns"
+  },
+  "next_action": "P02-T01 IntelligenceStore (intelligence.sqlite3, 20 tablas, FTS5)",
+  "resume_instructions": "Leer CONTINUITY.md. P00+P01 completos y verificados. Continuar P02-T01 sin re-auditar.",
   "techniques": {
     "_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml; ver ADDENDUM seccion 127"
   }

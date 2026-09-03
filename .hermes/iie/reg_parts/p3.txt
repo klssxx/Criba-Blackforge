@@ -1,0 +1,40 @@
+T080|Global novelty search|IIE|scoring.novelty+prior_art|P10+P11|PRIOR_ART+OPPORTUNITY|high|FREE_NETWORK|1
+T081|Local novelty|CR|scoring.novelty|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T082|Global novelty|IIE|scoring.novelty|P11|OPPORTUNITY|high|FREE_NETWORK|1
+T083|Temporal novelty|IIE|scoring.novelty|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T084|Semantic distance|IIE|scoring.novelty+retrieval.semantic|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T085|Density estimation|IIE|scoring.novelty|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T086|White-space analysis|IIE|gaps.white_space|P08|GAP|high|LOCAL_COMPUTE|0
+T087|Patent landscape white spaces|IIE|gaps.white_space|P08|GAP|high|FREE_NETWORK|1
+T088|Research landscape white spaces|IIE|gaps.white_space|P08|GAP|high|LOCAL_COMPUTE|0
+T089|Market white spaces|IIE|gaps.white_space|P08|GAP|high|FREE_NETWORK|1
+T090|Knowledge graph|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T091|Link prediction|IIE|graph.link_prediction|P06|GRAPH|high|LOCAL_COMPUTE|0
+T092|Missing-link discovery|IIE|graph.link_prediction|P06|GRAPH+INVENTION|high|LOCAL_COMPUTE|0
+T093|Graph embeddings|IIE|graph.embeddings|P06|GRAPH|high|LOCAL_COMPUTE|0
+T094|Community detection|IIE|graph.communities|P06|GRAPH|high|LOCAL_COMPUTE|0
+T095|Bridge-node detection|IIE|graph.bridges|P06|GRAPH|high|LOCAL_COMPUTE|0
+T096|Burst detection|IIE|signals.bursts|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T097|Change-point detection|IIE|signals.changepoints|P07|SIGNALS|high|LOCAL_COMPUTE|0
+T098|Anomaly detection|IIE|signals.anomaly|P07|SIGNALS|high|LOCAL_COMPUTE|0
+T099|Weak-signal detection|IIE|signals.weak_signals|P07|SIGNALS+RADAR|high|LOCAL_COMPUTE|0
+T100|Multi-source confirmation|IIE|scoring.evidence|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T101|Cross-source lead/lag|IIE|signals.lead_lag|P07|SIGNALS|high|LOCAL_COMPUTE|0
+T102|TRL estimation|CR|scoring.trl|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T103|Evidence scoring|IIE|scoring.evidence|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T104|Confidence scoring|CR|scoring.confidence|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T105|Hype detection|IIE|scoring.hype|P11|OPPORTUNITY|high|FREE_NETWORK|1
+T106|Underhype detection|IIE|scoring.hype|P11|OPPORTUNITY|high|FREE_NETWORK|1
+T107|Opportunity scoring|CR|scoring.opportunity|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T108|Saturation score|CR|scoring.competition|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T109|Competitive density|CR|scoring.competition|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T110|Patent blocking|IIE|scoring.patents|P11|OPPORTUNITY|high|FREE_NETWORK|1
+T111|Feasibility estimation|CR|scoring.feasibility|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T112|Prototypeability|CR|scoring.prototypeability|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T113|Time-to-market|CR|scoring.opportunity|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T114|Cost-to-test|CR|scoring.prototypeability|P11|OPPORTUNITY|high|LOCAL_COMPUTE|0
+T115|Falsifiability|CSI|scoring.evidence+SUPRA sandbox|P11+P14|OPPORTUNITY+VERIFY|high|LOCAL_COMPUTE|0
+T116|Adjacent Possible|CR|invention.adjacent_possible|P09|INVENTION|high|LOCAL_COMPUTE|0
+T117|Combinatorial invention engine|CR|invention.recombination|P09|INVENTION|high|LOCAL_COMPUTE|0
+T118|Generate-Search-Reject-Mutate|IIE|prior_art.orchestrator|P10|PRIOR_ART|high|FREE_NETWORK|1
+T119|Adversarial novelty checking (skeptic)|IIE|prior_art.skeptic|P10|PRIOR_ART|high|LOCAL_COMPUTE|0

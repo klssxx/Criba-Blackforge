@@ -1,0 +1,39 @@
+T001|Patent keyword/title/abstract/claim search|IIE|sources.patents+retrieval|P03+P04|DISCOVERY+PRIOR_ART|high|FREE_NETWORK|1
+T002|Patent metadata filters (inventor/assignee/date/geo)|IIE|sources.patents|P03|DISCOVERY|high|FREE_NETWORK|1
+T003|CPC/IPC hierarchical classification search|IIE|sources.patents+entities.ontology|P03+P04|QUERY_PLANNER+PRIOR_ART|high|FREE_NETWORK|1
+T004|Patent families/equivalents/legal state|IIE|sources.patents|P03|DISCOVERY|high|FREE_NETWORK|1
+T005|Patent citations + non-patent literature expansion|IIE|retrieval.citations+graph|P04+P06+P10|PRIOR_ART+GRAPH|high|FREE_NETWORK|1
+T006|Patent similarity/clustering|IIE|retrieval+graph.communities|P04+P06|DISCOVERY+GRAPH|high|LOCAL_COMPUTE|0
+T007|Patent temporal evolution/entrants/bursts|IIE|signals|P07|RADAR|high|LOCAL_COMPUTE|0
+T008|Rare CPC combinations|CR|invention.rare_combinations|P09|INVENTION|high|LOCAL_COMPUTE|0
+T009|Semantic claim analysis|IIE|prior_art+retrieval.semantic|P10|PRIOR_ART|high|LOCAL_COMPUTE|0
+T010|Scientific literature/papers/preprints/theses|IIE|sources.science|P03|DISCOVERY|high|FREE_NETWORK|1
+T011|Scientific metadata graph|IIE|graph|P06|GRAPH|high|LOCAL_COMPUTE|0
+T012|Funding/grant/project intelligence|IIE|sources.funding|P03|DISCOVERY+RADAR|lowhigh|FREE_NETWORK|1
+T013|Clinical/experimental registry monitoring|IIE|sources.trials|P03|DISCOVERY|high|FREE_NETWORK|1
+T014|GitHub innovation radar|IIE|sources.github|P03|DISCOVERY+RADAR|high|FREE_NETWORK|1
+T015|Repository velocity|IIE|signals|P07|RADAR|high|FREE_NETWORK|1
+T016|AI model/dataset/Space intelligence|IIE|sources.huggingface|P03|DISCOVERY|lowhigh|FREE_NETWORK|1
+T017|Product/startup radar|IIE|sources.products|P03|DISCOVERY+RADAR|high|FREE_NETWORK|1
+T018|Search trend intelligence|IIE|sources.trends+signals|P03+P07|RADAR|high|FREE_NETWORK|1
+T019|Trend acceleration|IIE|signals.dynamics|P07|RADAR|high|LOCAL_COMPUTE|0
+T020|Social weak signals|IIE|sources.communities+signals.weak_signals|P03+P07|RADAR+SIGNALS|high|FREE_NETWORK|1
+T021|Problem mining|IIE|problems.pain_points|P08+P09|GAP+INVENTION|high|LOCAL_COMPUTE|0
+T022|Job-posting intelligence|IIE|sources.jobs|P03|RADAR|lowhigh|FREE_NETWORK|1
+T023|Supply-chain intelligence|IIE|sources.supply_chain|P03|RADAR+OPPORTUNITY|high|FREE_NETWORK|1
+T024|Regulatory intelligence|IIE|sources.regulation|P03|VERIFY+OPPORTUNITY|high|FREE_NETWORK|1
+T025|Standards mining|IIE|sources.standards|P03|VERIFY|high|FREE_NETWORK|1
+T026|Procurement mining|IIE|sources.procurement|P03|OPPORTUNITY|lowhigh|FREE_NETWORK|1
+T027|News intelligence|IIE|sources.news|P03|RADAR|lowhigh|FREE_NETWORK|1
+T028|Vertical crawling|IIE|sources.web|P03|DISCOVERY|high|FREE_NETWORK|1
+T029|Page-diff monitoring|IIE|monitoring.diffs|P16|WATCH|high|FREE_NETWORK|1
+T030|Release-note mining|IIE|sources.releases+monitoring|P03+P16|WATCH+RADAR|lowhigh|FREE_NETWORK|1
+T031|Semantic search|IIE|retrieval.semantic|P04|DISCOVERY|high|LOCAL_COMPUTE|0
+T032|Hybrid search|IIE|retrieval.hybrid|P04|DISCOVERY|high|LOCAL_COMPUTE|0
+T033|Query expansion|IIE|retrieval.expansion|P04|QUERY_PLANNER|high|CHEAP_LOCAL|0
+T034|Ontology expansion|IIE|entities.ontology+retrieval.expansion|P04|QUERY_PLANNER|high|CHEAP_LOCAL|0
+T035|Multilingual search|IIE|retrieval.multilingual|P04|QUERY_PLANNER+DISCOVERY|high|FREE_NETWORK|1
+T036|Query decomposition|IIE|retrieval.decomposition|P04|QUERY_PLANNER|high|CHEAP_LOCAL|0
+T037|Recursive search|IIE|retrieval.recursive|P04|RETRIEVE_EXPAND|high|FREE_NETWORK|1
+T038|Backward citation chasing|IIE|retrieval.citations|P04|PRIOR_ART|high|FREE_NETWORK|1
+T039|Forward citation chasing|IIE|retrieval.citations|P04|PRIOR_ART|high|FREE_NETWORK|1
