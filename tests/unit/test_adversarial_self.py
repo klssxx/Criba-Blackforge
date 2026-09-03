@@ -204,6 +204,9 @@ class TestRun:
         assert isinstance(thesis, ThesisPass)
         assert isinstance(adversarial, AdversarialPass)
         assert isinstance(resolution, ThesisResolution)
+        assert adversarial.blackforge_extension is not None
+        assert adversarial.blackforge_extension.likely_bypasses
+        assert adversarial.blackforge_extension.residual_risk
 
 
 class TestBlackforgeExtension:

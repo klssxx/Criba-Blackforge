@@ -41,6 +41,24 @@ class ThesisPass(BaseModel):
 # Pass 2: Adversarial (§8.4)
 # ---------------------------------------------------------------------------
 
+class BlackforgeAdversarialExtension(BaseModel):
+    """§8.5 — Blackforge-specific adversarial checks."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    alternate_attack_paths: list[str] = Field(default_factory=list)
+    likely_bypasses: list[str] = Field(default_factory=list)
+    trust_failures: list[str] = Field(default_factory=list)
+    control_evasion: list[str] = Field(default_factory=list)
+    telemetry_gaps: list[str] = Field(default_factory=list)
+    containment_failures: list[str] = Field(default_factory=list)
+    recovery_failures: list[str] = Field(default_factory=list)
+    privacy_risks: list[str] = Field(default_factory=list)
+    misuse_potential: list[str] = Field(default_factory=list)
+    authorization_conflicts: list[str] = Field(default_factory=list)
+    residual_risk: str = ""
+
+
 class AdversarialPass(BaseModel):
     """§8.4 — Output of the adversarial prosecutor."""
 
@@ -61,24 +79,7 @@ class AdversarialPass(BaseModel):
     kill_criteria: list[str] = Field(default_factory=list)
     survivable_parts: list[str] = Field(default_factory=list)
     verdict: str = ""
-
-
-class BlackforgeAdversarialExtension(BaseModel):
-    """§8.5 — Blackforge-specific adversarial checks."""
-
-    model_config = ConfigDict(extra="forbid", frozen=True)
-
-    alternate_attack_paths: list[str] = Field(default_factory=list)
-    likely_bypasses: list[str] = Field(default_factory=list)
-    trust_failures: list[str] = Field(default_factory=list)
-    control_evasion: list[str] = Field(default_factory=list)
-    telemetry_gaps: list[str] = Field(default_factory=list)
-    containment_failures: list[str] = Field(default_factory=list)
-    recovery_failures: list[str] = Field(default_factory=list)
-    privacy_risks: list[str] = Field(default_factory=list)
-    misuse_potential: list[str] = Field(default_factory=list)
-    authorization_conflicts: list[str] = Field(default_factory=list)
-    residual_risk: str = ""
+    blackforge_extension: BlackforgeAdversarialExtension | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -164,6 +165,21 @@ class AdversarialSelfReinforcement:
         is_blackforge: bool = False,
     ) -> AdversarialPass:
         """§8.4 — Second pass: independent adversary attacks the thesis."""
+        blackforge_extension = None
+        if is_blackforge:
+            blackforge_extension = BlackforgeAdversarialExtension(
+                alternate_attack_paths=["Ruta alternativa no validada dentro del alcance autorizado"],
+                likely_bypasses=["El control puede eludirse si falla la separación de confianza"],
+                trust_failures=["La frontera de confianza no está demostrada por evidencia"],
+                control_evasion=["La cobertura del control requiere una prueba falsable"],
+                telemetry_gaps=["No hay telemetría suficiente para afirmar detección completa"],
+                containment_failures=["El aislamiento y la reversión deben probarse antes de ejecutar"],
+                recovery_failures=["La recuperación no se considera demostrada sin restauración verificada"],
+                privacy_risks=["La validación puede exponer datos si no se minimiza el alcance"],
+                misuse_potential=["Una capacidad dual-use requiere límites de uso explícitos"],
+                authorization_conflicts=["La autorización debe cubrir exactamente el activo y la acción"],
+                residual_risk="Riesgo residual no eliminado; requiere evidencia de bypass, detección y recuperación.",
+            )
         adversarial = AdversarialPass(
             thesis_under_attack=thesis.thesis,
             strongest_hidden_assumptions=thesis.assumptions[:3] if thesis.assumptions else [
@@ -209,6 +225,7 @@ class AdversarialSelfReinforcement:
                 "La dirección general es válida",
             ],
             verdict="requires_experiment",
+            blackforge_extension=blackforge_extension,
         )
         return adversarial
 
