@@ -1,39 +1,39 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización**: 2026-09-03 (tras P00 GATE)
+**Ultima actualizacion**: 2026-09-03 (tras P02 GATE)
 
 ## WHAT IS THE PROJECT?
-Master Innovation Intelligence Blueprint v1.0-ZAI: extender CRIBA (innovation engine, NO reemplazo) con un Innovation Intelligence Engine (IIE) aditivo bajo `src/criba/intelligence/`, integrar BLACKFORGE (safety) y SUPRA (orquestación) vía fronteras contractuales. 130 técnicas T001-T130 con owner canónico único.
+Master Innovation Intelligence Blueprint v1.0-ZAI: extender CRIBA (NO reemplazo) con Innovation Intelligence Engine aditivo bajo src/criba/intelligence/. 130 tecnicas T001-T130 con owner canonico. Addendums: SECTORIZATION + T001-T130.
 
 ## WHAT IS ALREADY DONE? (VERIFIED)
-- P00-T01 Inventario: CRIBA=68 py/20787 LOC/44 paquetes; SUPRA=13 py/2089 LOC. Zero código intelligence preexistente.
-- P00-T02 Contratos legacy mapeados: gates G01-G12 (`gates.py`), `HybridOrchestrator` (`hybrid.py`), `cartograph_and_break`/`diverge`/`value_score`/`activate` (`engine.py`), `Storage` (`storage.py`), `evaluate_blackforge_safety` (`blackforge_safety.py`), `ProjectStateManager` (SUPRA `state.py`), providers boundary (SUPRA `providers/base.py`).
-- P00-T03 Baseline tests: **CRIBA 681 passed** / **SUPRA 21 passed** (= oráculo de regresión).
-- P00 GATE: tag `pre-iie-baseline`, branch `feat/iie-master`, STATE/journals/checkpoint commiteados.
+- P00: baseline congelado (tag pre-iie-baseline, branch feat/iie-master; CRIBA 681 + SUPRA 21 tests)
+- P01: ADR-001 boundaries, skeleton 13 sectores, 43 contratos + 9 enums, technique_registry.yaml (130 exactas) + TechniqueRegistry, boundaries test AST. 21 tests.
+- P02: IntelligenceStore (intelligence.sqlite3 separada, 18 tablas + FTS5, migraciones v1, cache TTL, technique_runs). 12 tests.
+- Full suite: 713 passed, cero regresion legacy.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P01 CONTRACTS (T01 architecture boundaries → T06 audit).
+P03 SOURCES (empezando por T01 source protocol).
 
 ## WHAT FAILED?
-Nada.
+Nada critico. 3 bugs menores P02 corregidos en ciclo (ver checkpoint P02).
 
 ## WHAT IS BLOCKED?
-Nada. (Deuda preexistente fuera de alcance: uuid4 engine.py:1015.)
+Nada.
 
 ## WHAT MUST NOT BE TOUCHED?
-- `engine.py` completo (solo hooks aditivos), `hybrid.py` (hooks opcionales solo), `gates.py`, `blackforge_safety.py` (JAMÁS debilitar), golden `tests/golden_mvp_output.json` (no actualizar para ocultar regresiones), `criba.sqlite3` (IIE usa `intelligence.sqlite3` separada), SUPRA `providers/` internals.
+engine.py, hybrid.py, gates.py, blackforge_safety.py, golden tests, criba.sqlite3, SUPRA providers/.
 
 ## LAST VERIFIED COMMIT?
-`05d69c3` (main, CRIBA) / `6dca3d9` (main, SUPRA). Tag: `pre-iie-baseline`.
+(commit P02 en feat/iie-master). Baseline tag: pre-iie-baseline = 05d69c3.
 
 ## WHAT TESTS CURRENTLY PASS?
-CRIBA 681, SUPRA 21 (full suite, 2026-09-03).
+CRIBA 713 (681 legacy + 32 IIE). SUPRA 21.
 
 ## FEATURE FLAGS ENABLED?
-Ninguno (los 13 flags IIE = false por diseño hasta su fase).
+Ninguno (13 flags IIE = false).
 
 ## NEXT EXACT TASK?
-P01-T01: architecture boundaries (documento de fronteras por dominio D01-D15 + dependencias permitidas + test anti-ciclos).
+P03-T01: IntelligenceSource protocol (capabilities/search/fetch/health; estados AVAILABLE/DEGRADED/UNCONFIGURED/RATE_LIMITED/UNAVAILABLE/DISABLED; free-first con cache; sin red en tests).
 
 ## MODEL/REASONING FOR IT?
-GLM-5.3 max (rol arquitecto) para el diseño de fronteras; implementación T02-T05 con high/low.
+GLM-5.3 high (protocol + OpenAlex/GitHub/arXiv adapters); low para fixtures.

@@ -10,8 +10,8 @@
     "supra_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70"
   },
   "current": {
-    "phase": "P02",
-    "task": "P02-T01",
+    "phase": "P03",
+    "task": "P03-T01",
     "subtask": "",
     "status": "PENDING",
     "started_at": "2026-09-03T00:00:00",
@@ -19,15 +19,16 @@
   },
   "last_good_state": {
     "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-    "phase": "P01",
-    "task": "P01-GATE",
+    "phase": "P02",
+    "task": "P02-GATE",
     "tests": [
-      "CRIBA full: 702 passed"
+      "CRIBA full: 713 passed"
     ]
   },
   "completed_phases": [
     "P00",
-    "P01"
+    "P01",
+    "P02"
   ],
   "completed_tasks": [
     "P00-T01",
@@ -38,7 +39,12 @@
     "P01-T03",
     "P01-T04",
     "P01-T05",
-    "P01-T06"
+    "P01-T06",
+    "P02-T01",
+    "P02-T02",
+    "P02-T03",
+    "P02-T04",
+    "P02-T05"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
@@ -87,8 +93,8 @@
     "watermark": "GREEN",
     "note": "ZCode stats no consultables desde aqui; estimar por turns"
   },
-  "next_action": "P02-T01 IntelligenceStore (intelligence.sqlite3, 20 tablas, FTS5)",
-  "resume_instructions": "Leer CONTINUITY.md. P00+P01 completos y verificados. Continuar P02-T01 sin re-auditar.",
+  "next_action": "P03-T01 source protocol (IntelligenceSource ABC §33)",
+  "resume_instructions": "Leer CONTINUITY.md. P00+P01+P02 completos. Continuar P03-T01 sin re-auditar.",
   "techniques": {
     "_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml; ver ADDENDUM seccion 127"
   }
