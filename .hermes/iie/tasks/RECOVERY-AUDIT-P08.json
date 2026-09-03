@@ -1,0 +1,44 @@
+{
+  "task_id": "RECOVERY-AUDIT-P08",
+  "title": "Restore missing P08 phase checkpoint",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    ".hermes/iie/tasks/P08-T01.json through P08-T10.json",
+    "src/criba/intelligence/gaps/__init__.py",
+    "tests/intelligence/test_gaps.py",
+    "tests/intelligence/test_contradictions.py",
+    "tests/intelligence/test_gap_audit.py"
+  ],
+  "files_created": [
+    ".hermes/iie/checkpoints/P08.md",
+    ".hermes/iie/tasks/RECOVERY-AUDIT-P08.json"
+  ],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_gaps.py tests/intelligence/test_contradictions.py tests/intelligence/test_gap_audit.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/gaps",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "14 passed: focused P08 gap/contradiction audit",
+    "182 passed: intelligence suite",
+    "compileall: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The missing phase checkpoint is restored from existing P08 task evidence without upgrading historical claims or changing engine behavior.",
+    "Current evidence is distinguished from historical full-suite claims recorded in P08-T10."
+  ],
+  "risks": [
+    "The phase is verified only for deterministic local fixtures; no live-source recall or freshness measurement is claimed."
+  ],
+  "follow_up": [
+    "P09 remains the first unjournaled blueprint phase."
+  ],
+  "completed_at": "2026-09-03T21:18:00+02:00"
+}
