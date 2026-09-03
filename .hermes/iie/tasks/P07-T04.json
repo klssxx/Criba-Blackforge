@@ -1,0 +1,59 @@
+{
+  "task_id": "P07-T04",
+  "title": "Change-point framework",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3845: change-point framework",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T04 block)",
+    "data/intelligence/technique_registry.yaml (T097 Change-point detection)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/bursts.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_bursts.py",
+    "tests/intelligence/test_signal_observations.py",
+    ".hermes/iie/tasks/P07-T03.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/changepoints.py",
+    "tests/intelligence/test_signal_changepoints.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["62f0c16747f1917603597918069722c4297e42ca"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_changepoints.py::test_change_point_detector_reports_level_shift_at_candidate_period -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN change-point test passed",
+    "25 targeted signal/storage/contract tests passed",
+    "781 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 5 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Change points use adjacent fixed-size frequency windows; the candidate period is the first period of the after-window.",
+    "Both upward and downward level shifts are reported when absolute mean delta reaches the configured minimum.",
+    "Each ChangePointEvent preserves before/after means, signed delta, direction and normalized strength for explainability.",
+    "The framework is deterministic, local and dependency-free; adaptive statistical models are deferred."
+  ],
+  "risks": [
+    "Overlapping windows can produce more than one event around a prolonged transition; consolidation is deferred until signal semantics are specified.",
+    "The detector operates on frequency levels and assumes canonical, equally spaced observation periods."
+  ],
+  "follow_up": [
+    "P07-T05 anomaly detection",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T07:52:10+02:00"
+}
