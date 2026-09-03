@@ -318,6 +318,44 @@ class IntelligenceStore:
             out.append(d)
         return out
 
+    # -- topic observations (P07-T01) ---------------------------------------
+    def save_observation(self, observation: dict[str, Any]) -> None:
+        """Append one topic observation to the isolated time-series table."""
+        self._conn.execute(
+            "INSERT INTO intel_topic_observations "
+            "(topic, period, frequency, source_diversity, metadata) VALUES (?,?,?,?,?)",
+            (
+                observation["topic"],
+                observation["period"],
+                int(observation.get("frequency", 0)),
+                int(observation.get("source_diversity", 0)),
+                _js(observation.get("metadata") or {}),
+            ),
+        )
+        self._conn.commit()
+
+    def list_observations(
+        self, topic: str | None = None, limit: int = 100
+    ) -> list[dict[str, Any]]:
+        """List observations in deterministic topic/period order."""
+        clauses: list[str] = []
+        params: list[Any] = []
+        if topic is not None:
+            clauses.append("topic=?")
+            params.append(topic)
+        where = f" WHERE {' AND '.join(clauses)}" if clauses else ""
+        params.append(max(0, int(limit)))
+        rows = self._conn.execute(
+            "SELECT obs_id, topic, period, frequency, source_diversity, metadata "
+            f"FROM intel_topic_observations{where} "
+            "ORDER BY topic ASC, period ASC, obs_id ASC LIMIT ?",
+            params,
+        ).fetchall()
+        return [
+            {**dict(row), "metadata": _unjs(row["metadata"], {})}
+            for row in rows
+        ]
+
     # -- claims / signals / gaps / hypotheses -------------------------------
     def _upsert_simple(self, table: str, key: str, obj: dict[str, Any],
                        json_cols: tuple[str, ...]) -> None:
