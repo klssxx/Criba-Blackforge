@@ -21,7 +21,7 @@ _RESOLVED_CUE = re.compile(
     re.IGNORECASE,
 )
 _NEGATED_RESOLVED_CUE = re.compile(
-    r"\b(?:no|never)\s+(?:(?!and\b)[\w-]+\s+){0,3}"
+    r"\b(?:no|never)\s+(?:(?!(?:and|but|yet|however)\b)[\w-]+\s+){0,3}"
     r"(?:addresses?|addressed|overcomes?|overcome|resolves?|resolved|"
     r"mitigates?|removes?)\b|"
     r"\b(?:does|did|do)\s+not\s+(?:address|overcome|resolve|mitigate|remove)\w*\b",

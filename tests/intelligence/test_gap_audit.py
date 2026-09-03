@@ -53,8 +53,9 @@ def test_resolved_white_space_is_still_excluded() -> None:
 
 
 def test_resolution_mention_is_not_misread_as_negated_when_conjoined() -> None:
-    text = "The study reports no prior work and addresses the research gap."
-    assert extract_research_gaps([_document(text)]) == []
+    for conjunction in ("and", "but", "yet", "however"):
+        text = f"The study reports no prior work {conjunction} addresses the research gap."
+        assert extract_research_gaps([_document(text)]) == []
 
 
 def test_unknown_metadata_space_type_falls_back_to_a_supported_type() -> None:
