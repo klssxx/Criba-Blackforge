@@ -150,6 +150,7 @@ def test_G04_blackforge_with_authorization_passes():
         "normalized_query": "pentest autorizado de api interna",
         "central_problem": "posible idor en endpoint /account",
         "authorized_environment": True,
+        "authorization_state": "granted",
         "authorization_scope": "lab-interno-api",
         "stop_conditions": ["detener si se degrada producción"],
     }
@@ -185,11 +186,12 @@ def test_metamorphic_remove_authorization_blocks():
     """Metamorphic test (§10.8): removing authorization must block offensive action."""
     base = {
         "context_id": "ctx_bf003", "mode": "blackforge",
-        "authorized_environment": True, "authorization_scope": "lab",
+        "authorized_environment": True, "authorization_state": "granted", "authorization_scope": "lab",
         "stop_conditions": ["stop"],
     }
     assert G04_authorization_valid(base).passed is True
     no_auth = dict(base, authorized_environment=False, authorization_scope="")
+    no_auth.pop("authorization_state")
     assert G04_authorization_valid(no_auth).passed is False
 
 
