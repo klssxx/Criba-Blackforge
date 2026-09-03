@@ -5,6 +5,7 @@ from .changepoints import ChangePointDetector, ChangePointEvent
 from .dynamics import ObservationSeries, TopicDynamics
 from .anomaly import AnomalyDetector, AnomalyEvent
 from .weak_signals import WeakSignalAggregator
+from .lead_lag import LeadLagAnalyzer, LeadLagResult
 
 __all__ = [
     "AnomalyDetector",
@@ -16,4 +17,6 @@ __all__ = [
     "ObservationSeries",
     "TopicDynamics",
     "WeakSignalAggregator",
+    "LeadLagAnalyzer",
+    "LeadLagResult",
 ]
