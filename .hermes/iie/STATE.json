@@ -14,10 +14,10 @@
     "subtask": "gap-engine audit",
     "status": "VERIFIED",
     "started_at": "",
-    "last_updated": "2026-09-03T09:46:00+02:00"
+    "last_updated": "2026-09-03T10:11:40+02:00"
   },
   "last_good_state": {
-    "commit": "0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8",
+    "commit": "e863b582e701b5ffa33bfe1200c49e3f300d301c",
     "phase": "P08",
     "task": "P08-T10",
     "tests": [
@@ -26,7 +26,8 @@
       "python -m pytest -q -p no:cacheprovider: 851 passed",
       "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py: success",
       "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py: success",
-      "git diff --cached --check: success"
+      "git diff --cached --check: success",
+      "independent focused review: passed=true; no security concerns or logic errors"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"],
@@ -81,7 +82,8 @@
     "D-P08-7: patent expiration opportunity queda como contrato y extractor de señales explícitas; fechas, mantenimiento, jurisdicción y claim scope requieren verificación legal y nunca se convierten en freedom to operate automático.",
     "D-P08-8: dormant paper detection requiere evidencia explícita de edad y baja atención; no basta con que un artículo sea antiguo, y el cálculo temporal usa as_of explícito para mantener determinismo.",
     "D-P08-9: sleeping beauty se separa de dormancy: requiere ventana inicial observada y salto posterior de citas por umbral absoluto y razón; texto explícito sin métricas queda como menor confianza.",
-    "D-P08-10: el audit de gap-engine corrigió tres falsos positivos/negativos objetivos: resolución negada, cue genérico 'few' y tipo de white-space no soportado; además hizo order-independent la colisión de años de citas."
+    "D-P08-10: el audit de gap-engine corrigió tres falsos positivos/negativos objetivos: resolución negada, cue genérico 'few' y tipo de white-space no soportado; además hizo order-independent la colisión de años de citas.",
+    "D-P08-10-R: la revisión independiente detectó y se corrigió antes del checkpoint la confusión de negación con but/yet/however; la cobertura ampliada fue considerada adecuada."
   ],
   "open_questions": ["NEON-ARCH-AUDIT: audit existing persistence/CLI/configuration and choose the provider-neutral PostgreSQL adapter boundary before any Neon integration or dependency install."],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -106,31 +108,31 @@
       "P05": "65 passed; mypy success (2026-09-03)",
       "P06": "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed; mypy success (2026-09-03)",
       "P07": "11 semantics audit + 11 synthetic tests passed; 52 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
-      "P08": "49 targeted gap/contract tests passed; 169 intelligence tests and full CRIBA 851 passed; mypy success (2026-09-03)",
+      "P08": "49 targeted gap/contract tests passed; 169 intelligence tests and full CRIBA 851 passed; mypy success; independent review passed (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "851 passed in P08-T10 (2026-09-03)",
+      "criba": "851 passed in P08-T10 corrective checkpoint (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
   "next_action": "BF-P00-T06 remains deferred: validate BLACKFORGE goldens only in an isolated copy; do not start BF-P01 or overwrite live goldens.",
-  "resume_instructions": "P08-T10 is verified at 0ecc058 with 6 focused audit regressions, 169 intelligence tests and 851 full CRIBA tests passing. P08 is closed. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "resume_instructions": "P08-T10 is verified at e863b58 with 6 focused audit regressions (including and/but/yet/however), 169 intelligence tests and 851 full CRIBA tests passing; the corrective diff received an independent pass. P08 is closed. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8",
+      "commit": "e863b582e701b5ffa33bfe1200c49e3f300d301c",
       "tags_at_head": [],
       "dirty_files": [" M docs/FINAL_REPORT.md", "?? .pre-commit-config.yaml", "?? docs/TOOLCHAIN.md", "?? docs/architecture/", "?? scripts/verify-dev-environment.ps1", "?? scripts/verify-dev-environment.sh"],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8",
-      "last_good_tests": ["P08 gap-engine audit: 6 focused passed; intelligence: 169 passed; full CRIBA: 851 passed; mypy success"]
+      "last_good_commit": "e863b582e701b5ffa33bfe1200c49e3f300d301c",
+      "last_good_tests": ["P08 gap-engine audit: 6 focused passed; intelligence: 169 passed; full CRIBA: 851 passed; mypy success; independent review passed"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -174,5 +176,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T09:46:00+02:00"
+  "last_updated": "2026-09-03T10:11:40+02:00"
 }

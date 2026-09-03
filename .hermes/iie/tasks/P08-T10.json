@@ -33,29 +33,34 @@
   "changes": [
     "Preserved negated statements such as 'No study addresses the research gap' as gap evidence while retaining true resolved-gap exclusions.",
     "Scoped white-space cues so generic 'few issues' is not promoted; honored numeric metadata flags and normalized unsupported metadata space types to research/market/patent classification.",
-    "Made duplicate citation-year handling order-independent by retaining the maximum observed count for a year."
+    "Made duplicate citation-year handling order-independent by retaining the maximum observed count for a year.",
+    "Expanded the conjoined-resolution guard to and/but/yet/however after independent review found that but/yet could still be misread as continuing a negation."
   ],
   "tests_run": [
     "python -m pytest tests/intelligence/test_gap_audit.py -q -p no:cacheprovider: 6 passed",
     "python -m pytest tests/intelligence/test_gap_audit.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_white_space.py -q -p no:cacheprovider: 19 passed",
     "python -m pytest tests/intelligence -q -p no:cacheprovider: 169 passed",
     "python -m pytest -q -p no:cacheprovider: 851 passed, 1 dependency deprecation warning",
+    "direct tempfile-backed conjunction probe: and/but/yet/however resolved cases excluded; direct negated case retained; TEMPFILE_REMOVED=True",
     "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py: success",
     "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py: success",
     "staged added-line security scan for secrets/shell/eval/pickle/SQL formatting: no findings",
-    "git diff --cached --check: success"
+    "independent reviewer: passed=true; no security concerns; no logic errors; regression coverage adequate",
+    "git diff --check: success"
   ],
   "tests_failed": [],
   "decisions": [
     "Audit remained local and read-only with respect to external systems; no network, credentials, dependency installation, or destructive operation was used.",
-    "Existing unrelated docs/FINAL_REPORT.md and untracked project files were not staged or modified by this task."
+    "Existing unrelated docs/FINAL_REPORT.md and untracked project files were not staged or modified by this task.",
+    "The independent review finding was fixed in e863b582e701b5ffa33bfe1200c49e3f300d301c before the final checkpoint."
   ],
   "risks": [
     "The gap extractors remain deterministic cue-based heuristics; semantic recall beyond their explicit patterns is not claimed.",
-    "ruff is declared optional in pyproject.toml but is not installed in this environment, so no ruff run is claimed."
+    "ruff is declared optional in pyproject.toml but is not installed in this environment, so no ruff run is claimed.",
+    "The independent reviewer did not re-run the full suite; full-suite evidence was executed locally after the corrective patch."
   ],
-  "rollback": "git revert 0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8",
-  "commits": ["0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8"],
+  "rollback": "git revert e863b582e701b5ffa33bfe1200c49e3f300d301c && git revert 0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8",
+  "commits": ["0ecc058cc3d36017e9df4301394e7a8a0eb7e4b8", "e863b582e701b5ffa33bfe1200c49e3f300d301c"],
   "cost": "COST=0; local execution only",
   "next_task": "BF-P00-T06 remains deferred; validate tracked BLACKFORGE goldens only in an isolated copy before any BF-P01 work."
 }

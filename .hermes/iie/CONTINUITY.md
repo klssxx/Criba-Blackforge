@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 09:46:00+02:00 — P08-T10 VERIFIED; BF-P00-T06 DEFERRED
+**Última actualización:** 2026-09-03 10:11:40+02:00 — P08-T10 VERIFIED; BF-P00-T06 DEFERRED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -36,13 +36,14 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P08-T08 committed in `86fa59c`: dormant-paper candidate contract and deterministic age/low-attention detector, with 4 focused tests; full regression is `840 passed`; mypy and compileall are clean.
 - P08-T09 committed in `77e55b1`: sleeping-beauty candidate contract and delayed-attention detector, with 4 focused tests; full regression is `844 passed`; mypy and compileall are clean.
 - P08-T10 committed in `0ecc058`: gap-engine audit fixed negated-resolution handling, generic white-space cues, metadata type normalization and duplicate citation-year ordering; 6 audit regressions, 169 intelligence tests and full regression at `851 passed`; mypy, compileall and staged security scan are clean.
+- P08-T10 corrective commit `e863b58`: independent review caught the remaining `but`/`yet`/`however` conjoined-resolution ambiguity; the guard and regression coverage were expanded to `and`/`but`/`yet`/`however`; focused and full suites remained green.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05, P06, P07 and P08 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T10 are verified. No in-scope code is currently uncommitted; unrelated docs/FINAL_REPORT.md and untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
+P05, P06, P07 and P08 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T10 are verified. No in-scope code is currently uncommitted; unrelated docs/FINAL_REPORT.md and untracked files are preserved and excluded from commits; the corrective checkpoint is recorded in `STATE.json`.
 
 ## WHAT FAILED?
-No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
+No runtime failure. The first delegated review exhausted its iteration budget with an invalid response; its concrete regex finding was reproduced, corrected in `e863b58`, and then accepted by a fresh independent review. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
 
 ## WHAT IS BLOCKED?
 Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in an isolated copy; do not overwrite them in the live worktree.
@@ -51,7 +52,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-P08-T10 code verified in `0ecc058`: gap-engine audit fixes, with 6 focused audit tests, 169 intelligence tests, and full CRIBA regression at 851 passed.
+P08-T10 code verified in `e863b58`: gap-engine audit fixes plus the independently reviewed conjoined-resolution guard, with 6 focused audit tests, 169 intelligence tests, and full CRIBA regression at 851 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -125,6 +126,8 @@ P08-T10 code verified in `0ecc058`: gap-engine audit fixes, with 6 focused audit
 - `python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
 - staged added-line security scan → no hardcoded secrets, shell execution, eval/exec, pickle or SQL-format findings.
 - `python -m pytest -q -p no:cacheprovider` → 851 passed, 1 dependency deprecation warning.
+- direct tempfile-backed conjunction probe → direct negation retained; `and`/`but`/`yet`/`however` conjoined resolutions excluded; `TEMPFILE_REMOVED=True`.
+- independent focused review → `passed=true`, no security concerns, no logic errors; test coverage adequate. Reviewer did not re-run the full suite; local full-suite evidence above was rerun after the corrective patch.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
