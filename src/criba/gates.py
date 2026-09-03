@@ -167,9 +167,19 @@ def G04_authorization_valid(context: Mapping[str, Any],
     mode = str(context.get("mode", "criba")).lower()
     if mode != "blackforge":
         return GateResult("G04_authorization_valid", True, "No es Blackforge; autorización N/A.")
+    # An explicitly supplied state is authoritative and fail-closed.
+    authorization_state = context.get("authorization_state")
+    if authorization_state is not None and authorization_state not in {
+        "granted", "authorized",
+    }:
+        return GateResult(
+            "G04_authorization_valid", False,
+            f"Estado de autorización no habilitante: {authorization_state!r}",
+        )
+    state_granted = authorization_state in {"granted", "authorized"}
     # Reuse the existing safety evaluator rather than reimplementing it.
     session_ctx = {
-        "explicit_authorization": bool(context.get("authorized_environment")),
+        "explicit_authorization": bool(context.get("authorized_environment")) or state_granted,
         "authorized_scope_confirmed": bool(context.get("authorization_scope")),
         "sandbox": True,
         "isolated_sandbox": True,

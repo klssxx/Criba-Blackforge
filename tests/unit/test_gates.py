@@ -157,6 +157,30 @@ def test_G04_blackforge_with_authorization_passes():
     assert res.passed is True
 
 
+def test_G04_explicit_denied_state_fails_closed():
+    ctx = {
+        "context_id": "ctx_bf002-denied", "mode": "blackforge",
+        "authorization_state": "denied",
+        "authorized_environment": True,
+        "authorization_scope": "lab-interno-api",
+        "stop_conditions": ["stop"],
+    }
+    res = G04_authorization_valid(ctx)
+    assert res.passed is False
+
+
+def test_G04_granted_state_still_requires_scope():
+    ctx = {
+        "context_id": "ctx_bf002-granted", "mode": "blackforge",
+        "authorization_state": "granted",
+        "authorized_environment": False,
+        "authorization_scope": "",
+        "stop_conditions": [],
+    }
+    res = G04_authorization_valid(ctx)
+    assert res.passed is False
+
+
 def test_metamorphic_remove_authorization_blocks():
     """Metamorphic test (§10.8): removing authorization must block offensive action."""
     base = {
