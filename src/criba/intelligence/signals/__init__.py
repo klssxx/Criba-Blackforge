@@ -4,6 +4,7 @@ from .bursts import BurstDetector, BurstEvent
 from .changepoints import ChangePointDetector, ChangePointEvent
 from .dynamics import ObservationSeries, TopicDynamics
 from .anomaly import AnomalyDetector, AnomalyEvent
+from .weak_signals import WeakSignalAggregator
 
 __all__ = [
     "AnomalyDetector",
@@ -14,4 +15,5 @@ __all__ = [
     "ChangePointEvent",
     "ObservationSeries",
     "TopicDynamics",
+    "WeakSignalAggregator",
 ]
