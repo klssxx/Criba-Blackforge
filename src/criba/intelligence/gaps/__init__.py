@@ -31,6 +31,15 @@ from .resurrection import (
     find_resurrection_candidates,
     extract_resurrection,
 )
+from .sleeping_beauty import (
+    SleepingBeautyAnalyzer,
+    SleepingBeautyDetector,
+    SleepingBeautyExtractor,
+    detect_sleeping_beauties,
+    analyze_sleeping_beauties,
+    extract_sleeping_beauties,
+    find_sleeping_beauties,
+)
 from .white_space import (
     WhiteSpaceAnalyzer,
     WhiteSpaceExtractor,
@@ -53,6 +62,9 @@ __all__ = [
     "PatentExpirationAnalyzer",
     "PatentExpirationOpportunityExtractor",
     "PatentExpirationEngine",
+    "SleepingBeautyAnalyzer",
+    "SleepingBeautyDetector",
+    "SleepingBeautyExtractor",
     "WhiteSpaceAnalyzer",
     "WhiteSpaceExtractor",
     "WhiteSpaceEngine",
@@ -64,6 +76,10 @@ __all__ = [
     "analyze_dormant_papers",
     "extract_dormant_papers",
     "find_dormant_papers",
+    "detect_sleeping_beauties",
+    "analyze_sleeping_beauties",
+    "extract_sleeping_beauties",
+    "find_sleeping_beauties",
     "extract_failures",
     "mine_failures",
     "extract_limitations",

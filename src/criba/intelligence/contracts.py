@@ -18,7 +18,7 @@ __all__ = [
     "ProvenanceRecord", "Claim", "ClaimAssessment", "EntityNode", "EntityAlias",
     "RelationEdge", "TopicObservation", "Signal", "WeakSignal", "Gap",
     "Contradiction", "Limitation", "FailureCase", "ResurrectionCandidate",
-    "WhiteSpaceCandidate", "PatentExpirationOpportunity", "DormantPaperCandidate", "Hypothesis", "InventionCandidate", "SourceDescriptor",
+    "WhiteSpaceCandidate", "PatentExpirationOpportunity", "DormantPaperCandidate", "SleepingBeautyCandidate", "Hypothesis", "InventionCandidate", "SourceDescriptor",
     "SourceCapability", "QueryPlan", "QueryVariant", "SourceQuery", "SourceQueryResult",
     "PriorArtQuery", "PriorArtMatch", "PriorArtAssessment", "NoveltyAssessment",
     "EvidenceAssessment", "ConfidenceAssessment", "FeasibilityAssessment",
@@ -404,6 +404,38 @@ class DormantPaperCandidate:
             "recent_attention": self.recent_attention,
             "last_cited": self.last_cited,
             "dormancy_reason": self.dormancy_reason,
+            "evidence_doc_ids": list(self.evidence_doc_ids),
+            "confidence": self.confidence,
+        }
+
+
+@dataclass
+class SleepingBeautyCandidate:
+    """Evidence contract for delayed recognition of a paper."""
+
+    paper_id: str = ""
+    title: str = ""
+    published: str = ""
+    awakening_year: int | None = None
+    beauty_period_years: int = 0
+    early_citations: int | None = None
+    peak_citations: int | None = None
+    later_citations: int | None = None
+    awakening_evidence: str = ""
+    evidence_doc_ids: tuple[str, ...] = ()
+    confidence: float = 0.0              # 0..1 evidence confidence
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "paper_id": self.paper_id,
+            "title": self.title,
+            "published": self.published,
+            "awakening_year": self.awakening_year,
+            "beauty_period_years": self.beauty_period_years,
+            "early_citations": self.early_citations,
+            "peak_citations": self.peak_citations,
+            "later_citations": self.later_citations,
+            "awakening_evidence": self.awakening_evidence,
             "evidence_doc_ids": list(self.evidence_doc_ids),
             "confidence": self.confidence,
         }
