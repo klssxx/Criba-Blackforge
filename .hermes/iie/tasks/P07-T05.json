@@ -1,0 +1,60 @@
+{
+  "task_id": "P07-T05",
+  "title": "Anomaly detection",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3850: anomaly detection",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T05 block)",
+    "data/intelligence/technique_registry.yaml (T098 Anomaly detection)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/changepoints.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_changepoints.py",
+    "tests/intelligence/test_signal_bursts.py",
+    "tests/intelligence/test_signal_observations.py",
+    ".hermes/iie/tasks/P07-T04.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/anomaly.py",
+    "tests/intelligence/test_signal_anomaly.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["ca89e8c60694ab51493c90c871eea4f6af8c2ad4"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_anomaly.py::test_anomaly_detector_reports_robust_frequency_outlier -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN anomaly detection test passed",
+    "26 targeted signal/storage/contract tests passed",
+    "782 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 6 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Anomaly detection uses a per-topic robust median/MAD baseline rather than a mean/std baseline so one extreme value does not distort its own reference.",
+    "A zero MAD falls back to one absolute frequency unit, allowing outliers in otherwise constant count series to remain detectable.",
+    "Each AnomalyEvent preserves the period, frequency, baseline median, robust score, direction and normalized strength.",
+    "The detector is deterministic, local and dependency-free; adaptive or seasonal baselines are deferred."
+  ],
+  "risks": [
+    "The fallback scale of one is a deliberate count-unit heuristic for constant series and may need domain calibration later.",
+    "Seasonality and calendar-aware baselines are not inferred by this task."
+  ],
+  "follow_up": [
+    "P07-T06 weak-signal aggregation",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T07:57:04+02:00"
+}
