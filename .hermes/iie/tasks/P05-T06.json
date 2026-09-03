@@ -1,0 +1,18 @@
+{
+  "task_id": "P05-T06",
+  "title": "Aliases and normalization",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": ["src/criba/intelligence/contracts.py"],
+  "files_created": [],
+  "files_modified": ["src/criba/intelligence/entities/resolver.py"],
+  "commits": ["6de29de"],
+  "tests_run": ["python -m pytest tests/intelligence/test_provenance.py -q -p no:cacheprovider"],
+  "tests_passed": ["8 passed"],
+  "tests_failed": [],
+  "decisions": ["Alias lookup uses normalized labels and preserves original labels on EntityNode."],
+  "risks": [],
+  "follow_up": ["P06 ontology aliases"],
+  "completed_at": "2026-09-03"
+}

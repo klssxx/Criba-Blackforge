@@ -3,81 +3,54 @@
   "project": "CRIBA-BLACKFORGE-SUPRA-IIE",
   "master_blueprint_version": "1.0 + ADDENDUM-SECTORIZATION + ADDENDUM-T001-T130",
   "baseline": {
-    "repo": "E:/PROYECTS/CRIBA (+ E:/PROYECTS/SUPRA)",
-    "branch": "main",
+    "repo": "E:/PROYECTS/CRIBA",
+    "branch": "feat/iie-master",
     "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-    "tag": "pre-iie-baseline",
-    "supra_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70"
+    "tag": "pre-iie-baseline"
   },
   "current": {
     "phase": "P05",
-    "task": "P05-T01",
-    "subtask": "",
-    "status": "PENDING",
-    "started_at": "2026-09-03T00:00:00",
-    "last_updated": "2026-09-03"
+    "task": "P05-T03",
+    "subtask": "Claim store",
+    "status": "NOT_STARTED",
+    "started_at": "2026-09-03T05:05:15+02:00",
+    "last_updated": "2026-09-03T05:05:15+02:00"
   },
   "last_good_state": {
-    "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-    "phase": "P04",
-    "task": "P04-GATE",
+    "commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+    "phase": "P05",
+    "task": "P05-T07",
     "tests": [
-      "full: 733 passed"
+      "pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider: 9 passed",
+      "mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities: success"
     ]
   },
-  "completed_phases": [
-    "P00",
-    "P01",
-    "P02",
-    "P03",
-    "P04"
-  ],
+  "completed_phases": ["P00", "P01", "P02", "P03", "P04"],
   "completed_tasks": [
-    "P00-T01",
-    "P00-T02",
-    "P00-T03",
-    "P01-T01",
-    "P01-T02",
-    "P01-T03",
-    "P01-T04",
-    "P01-T05",
-    "P01-T06",
-    "P02-T01",
-    "P02-T02",
-    "P02-T03",
-    "P02-T04",
-    "P02-T05",
-    "P03-T01",
-    "P03-T02",
-    "P03-T03",
-    "P03-T04",
-    "P03-T05",
-    "P03-T06",
-    "P04-T01",
-    "P04-T02",
-    "P04-T03",
-    "P04-T04",
-    "P04-T05",
-    "P04-T06"
+    "P00-T01", "P00-T02", "P00-T03", "P00-T04", "P00-GATE",
+    "P01-T01", "P01-T02", "P01-T03", "P01-T04", "P01-T05", "P01-T06",
+    "P02-T01", "P02-T02", "P02-T03", "P02-T04", "P02-T05",
+    "P03-T01", "P03-T02", "P03-T03", "P03-T04", "P03-T05", "P03-T06",
+    "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
+    "P05-T01", "P05-T02", "P05-T04", "P05-T05", "P05-T06", "P05-T07"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": [
-    "P02-T01"
-  ],
+  "pending_tasks": ["P05-T03", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
     "D-P00-1: IIE arranca desde cero (regla AR): no existe .hermes/iie/ previo ni implementacion IIE reconocible",
     "D-P00-2: .hermes/iie/ se commitea en branch feat/iie-master para resume robusto desde Git",
-    "D-P00-3: inventario: CRIBA=68 py/20787 LOC en 44 paquetes; SUPRA=13 py/2089 LOC; zero codigo intelligence existente -> riesgo duplicacion bajo en sources/, medio en invention/scoring (ver P00 checkpoint riesgos)",
+    "D-P00-3: inventario: CRIBA=68 py/20787 LOC en 44 paquetes; SUPRA=13 py/2089 LOC; zero codigo intelligence existente -> riesgo duplicacion bajo en sources/, medio en invention/scoring",
     "D-P00-4: SUPRA uv.lock untracked se deja como esta (no es tarea de este blueprint)",
-    "D-P01-1: registry YAML generado por gen_registry.py desde reg_parts/*.txt (fuente editable); YAML = canonico commiteado"
+    "D-P01-1: registry YAML generado por gen_registry.py desde reg_parts/*.txt (fuente editable); YAML = canonico commiteado",
+    "D-P05-1: FACT sin evidencia resoluble se degrada determinísticamente a INFERENCE; no se usa LLM como evidencia.",
+    "D-P05-2: entidades P05 usan gazetteer y resolución determinista; la ontología extensible queda para P06.",
+    "STATE_RECONCILIATION-2026-09-03: Git y pruebas demuestran P05-T01/T02/T04/T05/T06/T07 en commits 6de29de y cd95d80; STATE previo era obsoleto y P02-T01 figuraba erróneamente como pendiente."
   ],
   "open_questions": [],
-  "known_debt": [
-    "uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"
-  ],
+  "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
   "regressions": [],
   "feature_flags": {
     "intelligence_engine": false,
@@ -95,21 +68,74 @@
     "intelligence_ui": false
   },
   "tests": {
-    "last_targeted": {},
+    "last_targeted": {
+      "P05": "9 passed in 0.57s; mypy success (2026-09-03)",
+      "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
+    },
     "last_module": {},
     "last_full": {
-      "criba": "681 passed in 26.64s (2026-09-03)",
+      "criba": "733 passed in P04 at 709f16b (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
-  "credit_state": {
-    "watermark": "GREEN",
-    "note": "ZCode stats no consultables desde aqui; estimar por turns"
+  "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
+  "next_action": "P05-T03: implement Claim store against the isolated IntelligenceStore, after inspecting its existing schema and APIs.",
+  "resume_instructions": "Verify cd95d80, run the P05 targeted suite, then resume P05-T03. Do not start BF-P01; BF-P00-T06 still needs golden validation in an isolated copy.",
+  "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
+  "repos": {
+    "CRIBA": {
+      "path": "E:/PROYECTS/CRIBA",
+      "branch": "feat/iie-master",
+      "commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+      "tags_at_head": [],
+      "dirty_files": [],
+      "is_repo": true,
+      "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
+      "last_good_commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+      "last_good_tests": ["P05 targeted: 9 passed; mypy success"]
+    },
+    "SUPRA": {
+      "path": "E:/PROYECTS/SUPRA",
+      "branch": "main",
+      "commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
+      "tags_at_head": [],
+      "dirty_files": ["?? uv.lock"],
+      "is_repo": true,
+      "baseline_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
+      "last_good_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
+      "last_good_tests": ["21 passed (2026-09-03)"]
+    },
+    "BLACKFORGE": {
+      "repo_path": "E:/PROYECTS/CRIBA",
+      "shared_repo": "CRIBA",
+      "sector_paths": ["src/criba/blackforge_"],
+      "branch": "feat/iie-master",
+      "commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+      "dirty_files": [],
+      "is_repo": false,
+      "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
+      "last_good_commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+      "last_good_tests": ["BF-P00 targeted: 138 passed, 4 deselected"]
+    }
   },
-  "next_action": "P05-T01 epistemic semantics grounded_claim_ratio",
-  "resume_instructions": "Leer CONTINUITY.md. P00-P04 completos. Continuar P05-T01.",
-  "techniques": {
-    "_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml; ver ADDENDUM seccion 127"
-  }
+  "blackforge": {
+    "phase": "BF-P00",
+    "task": "BF-P00-T06",
+    "last_good_commit": "cd95d809ba59f72657eca50269bbd281b32d2726",
+    "legacy_baseline_verified": false,
+    "catalog_records": 723,
+    "safety_verified": true,
+    "causal_verified": true,
+    "t001_t130_profile": {},
+    "bf_capabilities": {},
+    "current_pipeline": "legacy headless",
+    "blocked": [],
+    "next_action": "Validate existing tracked BLACKFORGE golden artifacts in an isolated copy; do not overwrite them in the live worktree.",
+    "recommended_model": "GPT-5.6 Terra",
+    "recommended_reasoning": "high"
+  },
+  "locks": [],
+  "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
+  "last_updated": "2026-09-03T05:05:15+02:00"
 }

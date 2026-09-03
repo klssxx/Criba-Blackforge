@@ -1,0 +1,18 @@
+{
+  "task_id": "P05-T07",
+  "title": "Provenance invariant tests",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": ["tests/intelligence/test_provenance.py"],
+  "files_created": ["tests/intelligence/test_provenance.py"],
+  "files_modified": [],
+  "commits": ["6de29de"],
+  "tests_run": ["python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider", "mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities"],
+  "tests_passed": ["9 passed", "mypy success"],
+  "tests_failed": [],
+  "decisions": ["Tests cover FACT downgrade, grounded ratio, stable content hash, rule extraction, aliasing, type-aware resolution and gazetteer extraction."],
+  "risks": ["P05-T03 persistence is not covered because it is not implemented."],
+  "follow_up": ["P05-T03 Claim store"],
+  "completed_at": "2026-09-03"
+}
