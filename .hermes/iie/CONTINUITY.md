@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 08:55:00+02:00 — P08-T04 VERIFIED; P08-T05 NOT_STARTED
+**Última actualización:** 2026-09-03 09:01:44+02:00 — P08-T05 VERIFIED; P08-T06 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -29,10 +29,12 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P07-T08 committed in `a4da1e6`: deterministic logistic S-curve approximation with logit linear fit and strict in-asymptote extrapolation; 30 targeted signal/storage/contract tests passed and full regression is `786 passed`; mypy and compileall are clean.
 - P07-T09 committed in `4db46bc`: reusable synthetic time-series fixtures (monotonic ramp, lagged ramp, flat control, single-period spike) exercising every signal component; 41 targeted signal/storage/contract tests passed and full regression is `797 passed`; mypy is clean.
 - P07-T10 (signal semantics audit): determinism, input-order independence, cross-topic isolation, lead/lag antisymmetry, aggregation provenance and AST import purity verified; 52 targeted signal/storage/contract tests passed and full regression is `808 passed`; mypy and compileall are clean. No semantic defect required implementation changes.
+- P08-T01 through P08-T04 are verified: research gaps, limitations, contradictions and failure mining; full CRIBA regression reached `824 passed` before T071.
+- P08-T05 committed in `74ea223`: evidence-backed technology resurrection with the complete blueprint contract, structured-metadata and text extraction paths, and 4 focused tests; full regression is `828 passed`; mypy and compileall are clean.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05, P06 and P07 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T04 are verified. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
+P05, P06 and P07 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T05 are verified. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -44,7 +46,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-P08-T04 code verified in `1ca816e`: deterministic failure mining, with 5 focused tests, 16 focused P08 gap tests, and full CRIBA regression at 824 passed.
+P08-T05 code verified in `74ea223`: evidence-backed technology resurrection, with 4 focused tests, 22 focused gap/contract tests, and full CRIBA regression at 828 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -85,6 +87,11 @@ P08-T04 code verified in `1ca816e`: deterministic failure mining, with 5 focused
 - `mypy --no-incremental src/criba/intelligence/gaps` → success.
 - `python -m compileall -q src/criba/intelligence/gaps` → success.
 - `python -m pytest -q -p no:cacheprovider` → 824 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_resurrection.py -q -p no:cacheprovider` → 4 passed.
+- `python -m pytest tests/intelligence/test_resurrection.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 22 passed.
+- `mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
+- `python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
+- `python -m pytest -q -p no:cacheprovider` → 828 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
@@ -97,7 +104,7 @@ None. All IIE feature flags remain `false`.
 The Neon steering directive is recorded as a cross-cutting architecture addendum, not as a signal-layer dependency. Before any provider implementation: audit the existing persistence/configuration boundary; keep PostgreSQL as the standard contract; isolate Neon-specific code under infrastructure/adapters; never write to Neon `production`; do not expose connection strings; and stop only billable, admin, destructive, production-write or authentication-gated actions for explicit user approval. Local PostgreSQL portability remains mandatory.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P08-T05: technology resurrection. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P08-T06: white-space engine. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra high, per blueprint. Required verification: implement deterministic technology-resurrection candidate extraction over stored evidence, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
+GPT-5.6 Terra high, per blueprint. Required verification: implement deterministic white-space candidate extraction with explicit type/provenance fields, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.

@@ -1,0 +1,59 @@
+{
+  "task_id": "P08-T05",
+  "title": "Technology resurrection",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3902-3905 and 2763-2775; technique registry T071",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/research.py",
+    "src/criba/intelligence/gaps/limitations.py",
+    "src/criba/intelligence/gaps/contradictions.py",
+    "src/criba/intelligence/gaps/failures.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/resurrection.py",
+    "tests/intelligence/test_resurrection.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_resurrection.py -q -p no:cacheprovider (4 passed)",
+    "python -m pytest tests/intelligence/test_resurrection.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider (22 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success in 7 files)",
+    "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success)",
+    "python -m pytest -q -p no:cacheprovider (828 passed, 1 existing warning)",
+    "git diff --check (success)"
+  ],
+  "tests_passed": [
+    "4 focused technology-resurrection tests",
+    "22 focused gap/contract tests",
+    "mypy success in 7 source files",
+    "compileall success",
+    "828 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The ResurrectionCandidate contract now carries the seven blueprint fields: historical idea, historical failure reason, blocking constraint, current evidence, constraint change, new feasibility and bounded confidence.",
+    "Extraction accepts explicit metadata fields or deterministic text evidence; a text candidate requires historical failure, an identified cause, current evidence and an explicit feasibility signal.",
+    "Candidates without current evidence, or text explicitly saying there is no evidence of a constraint change, are rejected. No disappeared constraint is asserted without evidence.",
+    "The implementation remains provider-neutral and performs no network calls; the FREE_NETWORK registry classification does not authorize external access during this local task."
+  ],
+  "remaining_risks": [
+    "Text extraction is English and cue-based; structured metadata is the reliable path for domain-specific terminology.",
+    "resurrection_confidence is a deterministic evidence-coverage heuristic, not a calibrated probability."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert 74ea223fb0c35b08cef5c3746c87162680fdb7d7",
+  "limitations": [
+    "No network, external dependencies, database writes or production artifacts were used.",
+    "The unrelated pre-existing docs/FINAL_REPORT.md, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/ and scripts/verify-dev-environment.* remain untouched and uncommitted."
+  ],
+  "commits": ["74ea223fb0c35b08cef5c3746c87162680fdb7d7"],
+  "completed_at": "2026-09-03T09:01:44+02:00"
+}
