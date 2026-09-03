@@ -1,0 +1,27 @@
+{
+  "task_id": "P08-T02",
+  "title": "Limitation extraction",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3887-3890",
+  "files_read": ["src/criba/intelligence/contracts.py", "src/criba/intelligence/gaps/research.py"],
+  "files_created": ["src/criba/intelligence/gaps/limitations.py", "tests/intelligence/test_limitations.py"],
+  "files_modified": ["src/criba/intelligence/gaps/__init__.py"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_limitations.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/gaps",
+    "python -m compileall -q src/criba/intelligence/gaps",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": ["4 focused tests", "mypy success in 3 files", "compileall success", "816 full tests; 1 existing warning", "git diff --check success"],
+  "tests_failed": [],
+  "decisions": ["Deterministic sentence-level cue extraction with document provenance, deduplication, case-insensitive scope filtering and exclusion of resolved limitation language."],
+  "remaining_risks": ["Rule-based English cue coverage is limited; sentence segmentation is lightweight."],
+  "cost": "COST=0",
+  "rollback": "git revert <P08-T02 commit>",
+  "limitations": ["No network, external dependencies, database writes or production artifacts."],
+  "commits": [],
+  "completed_at": "2026-09-03T08:40:00+02:00"
+}

@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 08:33:46+02:00 — P07 cerrado; P08-T01 NOT_STARTED
+**Última actualización:** 2026-09-03 08:36:00+02:00 — P08-T01 VERIFIED; P08-T02 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
