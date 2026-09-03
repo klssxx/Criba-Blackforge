@@ -6,6 +6,7 @@ from .dynamics import ObservationSeries, TopicDynamics
 from .anomaly import AnomalyDetector, AnomalyEvent
 from .weak_signals import WeakSignalAggregator
 from .lead_lag import LeadLagAnalyzer, LeadLagResult
+from .scurve import SCurveApproximator, SCurveFit
 
 __all__ = [
     "AnomalyDetector",
@@ -19,4 +20,6 @@ __all__ = [
     "WeakSignalAggregator",
     "LeadLagAnalyzer",
     "LeadLagResult",
+    "SCurveApproximator",
+    "SCurveFit",
 ]
