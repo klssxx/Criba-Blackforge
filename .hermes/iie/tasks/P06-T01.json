@@ -1,0 +1,48 @@
+{
+  "task_id": "P06-T01",
+  "title": "SQLite knowledge graph store",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/storage/store.py",
+    "src/criba/intelligence/storage/__init__.py",
+    "src/criba/intelligence/graph/__init__.py",
+    "tests/intelligence/test_boundaries.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/graph/store.py",
+    "tests/intelligence/test_graph_store.py"
+  ],
+  "files_modified": ["src/criba/intelligence/graph/__init__.py"],
+  "commits": ["f8dba0a980fd3bd7aee5a3d8398119e1f50553aa"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/__init__.py",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "11 targeted graph/boundary tests passed",
+    "753 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 2 source files",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The graph store reuses the isolated IntelligenceStore schema instead of introducing a duplicate graph database.",
+    "Node updates use SQLite ON CONFLICT DO UPDATE so existing relations are preserved.",
+    "Edges are idempotent by (src, dst, relation); shortest_path traverses directed edges while neighbors reports both endpoints.",
+    "NetworkX and Neo4j remain outside the critical path."
+  ],
+  "risks": [
+    "The graph store composes the existing IntelligenceStore connection through its internal connection attribute; a future storage facade could make that boundary public.",
+    "Graph persistence uses the existing schema version 1 and does not merge source_doc_ids on edge updates."
+  ],
+  "follow_up": [
+    "P06-T02 graph builder",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T05:36:37+02:00"
+}

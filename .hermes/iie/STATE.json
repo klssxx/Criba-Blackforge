@@ -10,20 +10,20 @@
   },
   "current": {
     "phase": "P06",
-    "task": "P06-T01",
-    "subtask": "Graph store",
+    "task": "P06-T02",
+    "subtask": "Graph builder",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T05:19:55+02:00"
+    "last_updated": "2026-09-03T05:36:37+02:00"
   },
   "last_good_state": {
-    "commit": "89b065739f764cade8a038e62f60873d9bec36e2",
-    "phase": "P05",
-    "task": "P05-T03",
+    "commit": "f8dba0a980fd3bd7aee5a3d8398119e1f50553aa",
+    "phase": "P06",
+    "task": "P06-T01",
     "tests": [
-      "python -m pytest tests/intelligence -q -p no:cacheprovider: 65 passed",
-      "python -m pytest -q -p no:cacheprovider: 746 passed",
-      "mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities: success"
+      "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider: 11 passed",
+      "python -m pytest -q -p no:cacheprovider: 753 passed",
+      "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/__init__.py: success"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05"],
@@ -33,11 +33,12 @@
     "P02-T01", "P02-T02", "P02-T03", "P02-T04", "P02-T05",
     "P03-T01", "P03-T02", "P03-T03", "P03-T04", "P03-T05", "P03-T06",
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
-    "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07"
+    "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
+    "P06-T01"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P06-T01", "BF-P00-T06"],
+  "pending_tasks": ["P06-T02", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -49,7 +50,8 @@
     "D-P05-1: FACT sin evidencia resoluble se degrada determinísticamente a INFERENCE; no se usa LLM como evidencia.",
     "D-P05-2: entidades P05 usan gazetteer y resolución determinista; la ontología extensible queda para P06.",
     "STATE_RECONCILIATION-2026-09-03: Git y pruebas demuestran P05-T01/T02/T04/T05/T06/T07 en commits 6de29de y cd95d80; STATE previo era obsoleto y P02-T01 figuraba erróneamente como pendiente.",
-    "D-P05-3: ClaimStore usa whitelist de columnas, lectura tipada de listas JSON y filtros opcionales por run_id/epistemic_state; el contrato Claim público no cambia."
+    "D-P05-3: ClaimStore usa whitelist de columnas, lectura tipada de listas JSON y filtros opcionales por run_id/epistemic_state; el contrato Claim público no cambia.",
+    "D-P06-1: SQLiteKnowledgeGraphStore reutiliza las tablas IIE aisladas, actualiza nodos con ON CONFLICT para preservar edges y mantiene shortest_path dirigido e idempotencia de relaciones."
   ],
   "open_questions": [],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -72,30 +74,31 @@
   "tests": {
     "last_targeted": {
       "P05": "65 passed; mypy success (2026-09-03)",
+      "P06": "11 targeted graph/boundary tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "746 passed in P05 at 89b0657 (2026-09-03)",
+      "criba": "753 passed in P06-T01 at f8dba0a (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P06-T01: implement the SQLite-backed graph store without changing legacy storage.",
-  "resume_instructions": "P05-T03 is verified at 89b0657 with 746 full tests passing. Resume at P06-T01. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P06-T02: implement the graph builder without changing legacy storage.",
+  "resume_instructions": "P06-T01 is verified at f8dba0a with 753 full tests passing. Resume at P06-T02. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "89b065739f764cade8a038e62f60873d9bec36e2",
+      "commit": "f8dba0a980fd3bd7aee5a3d8398119e1f50553aa",
       "tags_at_head": [],
       "dirty_files": [],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "89b065739f764cade8a038e62f60873d9bec36e2",
-      "last_good_tests": ["P05 intelligence: 65 passed; full CRIBA: 746 passed; mypy success"]
+      "last_good_commit": "f8dba0a980fd3bd7aee5a3d8398119e1f50553aa",
+      "last_good_tests": ["P06 graph: 11 passed; full CRIBA: 753 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -139,5 +142,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T05:19:55+02:00"
+  "last_updated": "2026-09-03T05:36:37+02:00"
 }
