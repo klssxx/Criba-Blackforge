@@ -77,3 +77,8 @@ def test_principle_dataclass_rejects_invalid_numbers():
         TrizPrinciple(number=0, name="bad", description="out of range")
     with pytest.raises(ValueError):
         TrizPrinciple(number=41, name="bad", description="out of range")
+
+
+def test_principle_dataclass_rejects_untraceable_technique_id():
+    with pytest.raises(ValueError, match="technique_id"):
+        TrizPrinciple(number=1, name="Segmentation", description="valid", technique_id="T999")

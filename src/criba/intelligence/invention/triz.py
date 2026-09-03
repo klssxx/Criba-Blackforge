@@ -42,6 +42,8 @@ class TrizPrinciple:
             raise ValueError("principle name must not be empty")
         if not self.description.strip():
             raise ValueError("principle description must not be empty")
+        if self.technique_id != TRIZ_TECHNIQUE_ID:
+            raise ValueError(f"technique_id must be {TRIZ_TECHNIQUE_ID}")
 
 
 _PRINCIPLES: tuple[TrizPrinciple, ...] = (

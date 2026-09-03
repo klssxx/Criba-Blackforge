@@ -23,6 +23,8 @@
   "commits": [],
   "tests_run": [
     "python -m pytest tests/intelligence/test_triz.py -q -p no:cacheprovider",
+    "post-integration: python -m pytest tests/intelligence/test_triz.py tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "post-integration: python -m pytest tests/intelligence -q -p no:cacheprovider",
     "python -m pytest tests/intelligence -q -p no:cacheprovider",
     "python -m compileall -q src/criba/intelligence/invention/triz.py",
     "git diff --check"
@@ -30,6 +32,8 @@
   "tests_passed": [
     "16 passed: TRIZ registry contracts",
     "207 passed: intelligence suite (191 pre-existing + 16 new)",
+    "35 passed: post-integration TRIZ, invention, and contract tests",
+    "210 passed: post-integration intelligence suite",
     "compileall: success",
     "git diff --check: clean"
   ],
@@ -47,6 +51,7 @@
   "decisions": [
     "triz.py declares module-level TRIZ_TECHNIQUE_ID='T057' matching taxonomy.py operator 'triz'; __init__.py and registry.py were NOT touched per task constraints.",
     "Dataclass is frozen with __post_init__ validation (range 1..40, non-empty fields) so malformed entries cannot be constructed silently.",
+    "Post-integration hardening rejects any constructed TrizPrinciple whose technique_id is not T057, preserving the every-result traceability contract.",
     "CONTRADICTION_MATRIX_AVAILABLE=False is exposed for consumers instead of any partial or invented matrix."
   ],
   "risks": [
