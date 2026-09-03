@@ -1,10 +1,13 @@
 {
   "task_id": "P04-T05",
-  "title": "Recursive search",
+  "title": "Query mutation",
   "status": "VERIFIED",
   "model": "GLM-5.3",
   "reasoning": "high",
-  "files_read": [],
+  "files_read": [
+    "src/criba/intelligence/retrieval/expansion.py",
+    "tests/intelligence/test_retrieval.py"
+  ],
   "files_created": [],
   "files_modified": [],
   "commits": [],
@@ -15,8 +18,14 @@
     "10 passed"
   ],
   "tests_failed": [],
-  "decisions": [],
-  "risks": [],
-  "follow_up": [],
+  "decisions": [
+    "The ledger title was reconciled to the original P04 blueprint ID; mutation remains deterministic and is tagged T122."
+  ],
+  "risks": [
+    "Mutation uses a curated local synonym table and does not infer unsupported alternatives."
+  ],
+  "follow_up": [
+    "P04-T10 records the retrieval quality audit and evidence."
+  ],
   "completed_at": "2026-09-03"
 }

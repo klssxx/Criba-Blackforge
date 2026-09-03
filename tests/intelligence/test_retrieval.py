@@ -81,6 +81,13 @@ def test_dedupe_jaccard_collapses_near_duplicates():
     assert len(out) == 2  # d1/d2 near-dup -> one kept
 
 
+def test_dedupe_is_input_order_independent_for_tied_titles():
+    a = _doc("Same title", "photonic cooling", did="a")
+    b = _doc("Same title", "photonic cooling", did="b")
+    assert [d.doc_id for d in Deduper().dedupe([a, b])] == ["a"]
+    assert [d.doc_id for d in Deduper().dedupe([b, a])] == ["a"]
+
+
 def test_rrf_fuses_two_source_lists():
     a = [_doc("Paper A", "x", sid="openalex"), _doc("Paper B", "y", sid="openalex")]
     b = [_doc("Paper B", "y", sid="github", did="gh_1"), _doc("Paper C", "z", sid="github", did="gh_2")]
@@ -97,6 +104,14 @@ def test_rrf_cross_source_same_paper_ranks_high():
     fused = reciprocal_rank_fusion([a, b])
     assert len(fused) == 2  # two doc_ids but both rank 1 -> top scores equal
     assert fused[0].score == fused[1].score
+
+
+def test_rrf_rejects_mismatched_weights_and_orders_ties_by_document_id():
+    docs = [_doc("A", "x", did="b")]
+    other = [_doc("B", "y", did="a")]
+    with pytest.raises(ValueError, match="weights"):
+        reciprocal_rank_fusion([docs], weights=[1.0, 0.5])
+    assert [item.doc.doc_id for item in reciprocal_rank_fusion([docs, other])] == ["a", "b"]
 
 
 def test_rerank_caps_source_dominance():
@@ -125,6 +140,19 @@ def test_recursive_search_expands_and_stops(store):
     assert rep.stop_reason in ("max_queries", "max_depth", "no_new_documents", "no_results")
     assert len(rep.documents) >= 2
     assert all(rep.queries_used)
+
+
+def test_recursive_search_executes_initial_query_at_single_query_budget():
+    calls = []
+
+    def searcher(query, limit):
+        calls.append(query)
+        return [_doc("Only result", "cooling", did="one")]
+
+    report = RecursiveSearcher(searcher, max_depth=2, max_queries=1).run("cooling")
+    assert calls == ["cooling"]
+    assert report.queries_used == ["cooling"]
+    assert report.stop_reason == "max_queries"
 
 
 def test_citations_traversal():

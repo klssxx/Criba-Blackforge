@@ -52,7 +52,6 @@ class RecursiveSearcher:
         seen_ids: set[str] = set()
         all_docs: list[EvidenceDocument] = []
         queries = [query]
-        rep.queries_used.append(query)
         known_terms: Counter = Counter(tokenize(query))
 
         for depth in range(self.max_depth):
@@ -63,8 +62,7 @@ class RecursiveSearcher:
                     break
                 docs = self.searcher(q, limit_per_query)
                 round_docs.extend(docs)
-                if q not in rep.queries_used:
-                    rep.queries_used.append(q)
+                rep.queries_used.append(q)
             if not round_docs:
                 rep.stop_reason = "no_results"
                 break

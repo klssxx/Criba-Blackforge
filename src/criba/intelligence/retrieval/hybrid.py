@@ -35,7 +35,7 @@ class Deduper:
     def dedupe(self, docs: list[EvidenceDocument]) -> list[EvidenceDocument]:
         kept: list[EvidenceDocument] = []
         kept_tokens: list[set[str]] = []
-        for d in sorted(docs, key=lambda x: x.title or ""):
+        for d in sorted(docs, key=lambda x: ((x.title or ""), x.doc_id)):
             toks = set(tokenize((d.title or "") + " " + (d.abstract or "")[:300]))
             dup = False
             for kt in kept_tokens:
@@ -56,6 +56,8 @@ def reciprocal_rank_fusion(result_lists: list[list[EvidenceDocument]],
     """RRF: robust to score-scale differences across sources (T032 fusion)."""
     if weights is None:
         weights = [1.0] * len(result_lists)
+    elif len(weights) != len(result_lists):
+        raise ValueError("weights must match result_lists")
     agg: dict[str, FusedResult] = {}
     for w, lst in zip(weights, result_lists):
         for rank, doc in enumerate(lst, start=1):
@@ -66,7 +68,7 @@ def reciprocal_rank_fusion(result_lists: list[list[EvidenceDocument]],
             else:
                 agg[doc.doc_id] = FusedResult(doc=doc, score=contribution,
                                               ranks=[(doc.source_id, rank)])
-    return sorted(agg.values(), key=lambda f: f.score, reverse=True)
+    return sorted(agg.values(), key=lambda f: (-f.score, f.doc.doc_id))
 
 
 def rerank_diversity(fused: list[FusedResult], per_source_cap: int = 5) -> list[FusedResult]:
