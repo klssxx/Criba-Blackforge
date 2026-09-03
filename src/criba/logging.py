@@ -74,8 +74,13 @@ def _redact(payload: Any) -> Any:
 
 
 def _compute_event_hash(event: Mapping[str, Any], previous_hash: str) -> str:
-    """SHA-256 of canonical event + previous hash (§11.5)."""
-    canonical = canonical_json(event) + previous_hash
+    """SHA-256 of canonical event + previous hash (§11.5).
+
+    ``idempotency_key`` is persistence metadata, deliberately excluded so
+    adding the nullable column does not invalidate pre-1.1 streams.
+    """
+    hash_event = {key: value for key, value in event.items() if key != "idempotency_key"}
+    canonical = canonical_json(hash_event) + previous_hash
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
@@ -120,6 +125,7 @@ class LogEmitter:
                   session_id TEXT NOT NULL,
                   sequence_number INTEGER NOT NULL,
                   event_id TEXT NOT NULL UNIQUE,
+                  idempotency_key TEXT,
                   event_type TEXT NOT NULL,
                   category TEXT NOT NULL,
                   timestamp_utc TEXT NOT NULL,
@@ -141,29 +147,80 @@ class LogEmitter:
                   FOREIGN KEY(session_id) REFERENCES log_streams(session_id)
                 )"""
             )
+            columns = {
+                row["name"]
+                for row in con.execute("PRAGMA table_info(log_events)").fetchall()
+            }
+            if "idempotency_key" not in columns:
+                con.execute("ALTER TABLE log_events ADD COLUMN idempotency_key TEXT")
+            con.execute(
+                "CREATE INDEX IF NOT EXISTS idx_log_events_idempotency "
+                "ON log_events(session_id, idempotency_key)"
+            )
             existing = con.execute(
-                "SELECT 1 FROM log_streams WHERE session_id = ?", (self.session_id,)
+                "SELECT event_count, head_hash FROM log_streams WHERE session_id = ?", (self.session_id,)
             ).fetchone()
             if not existing:
                 con.execute(
                     "INSERT INTO log_streams VALUES (?, ?, ?, 0, '')",
                     (self.session_id, _now_iso(), self.profile.value),
                 )
+            else:
+                last = con.execute(
+                    "SELECT sequence_number, event_hash FROM log_events "
+                    "WHERE session_id = ? ORDER BY sequence_number DESC LIMIT 1",
+                    (self.session_id,),
+                ).fetchone()
+                actual_count = int(last["sequence_number"]) if last else 0
+                actual_head = str(last["event_hash"]) if last else ""
+                if int(existing["event_count"]) != actual_count or str(existing["head_hash"]) != actual_head:
+                    raise ValueError(
+                        f"Log stream metadata corrupta para {self.session_id}: "
+                        f"metadata=({existing['event_count']}, {existing['head_hash']!r}) "
+                        f"actual=({actual_count}, {actual_head!r})"
+                    )
+                self._sequence = actual_count
+                self._last_hash = actual_head
+
+    @staticmethod
+    def _row_to_event(row: Any) -> dict[str, Any]:
+        event = {str(key): row[key] for key in row.keys()}
+        event["payload"] = json.loads(event["payload"])
+        event["evidence_refs"] = json.loads(event["evidence_refs"])
+        return event
+
+    def _existing_idempotent(self, idempotency_key: str) -> dict[str, Any] | None:
+        with self._storage.connect() as con:
+            row = con.execute(
+                "SELECT session_id, sequence_number, event_id, idempotency_key, event_type, "
+                "category, timestamp_utc, correlation_id, causation_id, chain_id, stage_id, "
+                "context_id, task_id, persona_id, user_id_pseudonymous, authorization_id, "
+                "severity, payload, evidence_refs, previous_event_hash, event_hash, schema_version "
+                "FROM log_events WHERE session_id = ? AND idempotency_key = ? "
+                "ORDER BY sequence_number LIMIT 1",
+                (self.session_id, idempotency_key),
+            ).fetchone()
+        if row is None:
+            return None
+        event = LogEmitter._row_to_event(row)
+        event.pop("session_id", None)
+        return event
 
     def _persist(self, event: dict[str, Any], event_hash: str) -> dict[str, Any]:
         with self._storage.connect() as con:
             con.execute(
                 """INSERT INTO log_events (
-                  session_id, sequence_number, event_id, event_type, category,
+                  session_id, sequence_number, event_id, idempotency_key, event_type, category,
                   timestamp_utc, correlation_id, causation_id, chain_id, stage_id,
                   context_id, task_id, persona_id, user_id_pseudonymous,
                   authorization_id, severity, payload, evidence_refs,
                   previous_event_hash, event_hash, schema_version
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
                 (
                     self.session_id,
                     event["sequence_number"],
                     event["event_id"],
+                    event.get("idempotency_key"),
                     event["event_type"],
                     event["category"],
                     event["timestamp_utc"],
@@ -208,8 +265,13 @@ class LogEmitter:
         authorization_id: str | None = None,
         severity: str = "info",
         evidence_refs: Sequence[str] | None = None,
+        idempotency_key: str | None = None,
     ) -> dict[str, Any]:
-        """Append one event to the stream and return the stored record."""
+        """Append one event, replaying an existing idempotent event when present."""
+        if idempotency_key:
+            existing = self._existing_idempotent(idempotency_key)
+            if existing is not None:
+                return existing
         self._sequence += 1
         payload_clean = dict(payload or {})
         if self._redact:
@@ -217,6 +279,7 @@ class LogEmitter:
 
         event: dict[str, Any] = {
             "event_id": str(uuid.uuid4()),
+            "idempotency_key": idempotency_key,
             "event_type": event_type,
             "category": category.value,
             "schema_version": SCHEMA_VERSION,
@@ -263,7 +326,7 @@ class LogReconstructor:
         """Return events in sequence order with payloads parsed."""
         with self._storage.connect() as con:
             rows = con.execute(
-                """SELECT session_id, sequence_number, event_id, event_type,
+                """SELECT session_id, sequence_number, event_id, idempotency_key, event_type,
                   category, timestamp_utc, correlation_id, causation_id,
                   chain_id, stage_id, context_id, task_id, persona_id,
                   user_id_pseudonymous, authorization_id, severity, payload,
@@ -272,13 +335,7 @@ class LogReconstructor:
                 ORDER BY sequence_number ASC""",
                 (session_id,),
             ).fetchall()
-        events = []
-        for row in rows:
-            d = {k: row[k] for k in row.keys()}
-            d["payload"] = json.loads(d["payload"])
-            d["evidence_refs"] = json.loads(d["evidence_refs"])
-            events.append(d)
-        return events
+        return [LogEmitter._row_to_event(row) for row in rows]
 
     def verify_chain(self, session_id: str) -> dict[str, Any]:
         """Verify hash integrity of the whole stream (§11.5)."""
