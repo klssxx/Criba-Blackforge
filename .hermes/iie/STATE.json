@@ -10,8 +10,8 @@
   },
   "current": {
     "phase": "P08",
-    "task": "P08-T02",
-    "subtask": "limitation extraction",
+    "task": "P08-T03",
+    "subtask": "contradiction analysis",
     "status": "NOT_STARTED",
     "started_at": "",
     "last_updated": "2026-09-03T08:33:46+02:00"
@@ -39,7 +39,7 @@
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P08-T02", "BF-P00-T06"],
+  "pending_tasks": ["P08-T03", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -107,8 +107,8 @@
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P08-T02: implement limitation extraction.",
-  "resume_instructions": "P08-T01 is verified at c855fc9 with 4 focused tests and 812 full CRIBA tests passing. Resume at P08-T02 limitation extraction. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P08-T03: implement contradiction analysis.",
+  "resume_instructions": "P08-T02 is verified at e9b2574 with 4 focused tests and 816 full CRIBA tests passing. Resume at P08-T03 contradiction analysis. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {

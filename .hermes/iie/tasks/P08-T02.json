@@ -22,6 +22,6 @@
   "cost": "COST=0",
   "rollback": "git revert <P08-T02 commit>",
   "limitations": ["No network, external dependencies, database writes or production artifacts."],
-  "commits": [],
+  "commits": ["e9b257417d2c7d9c6b37b4ffe9486a4a7bbe1d3b"],
   "completed_at": "2026-09-03T08:40:00+02:00"
 }
