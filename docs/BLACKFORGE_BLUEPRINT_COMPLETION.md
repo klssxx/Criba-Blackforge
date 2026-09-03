@@ -3,7 +3,7 @@
 Estado: VERIFIED en worktree aislado
 Rama: `blackforge-blueprint-complete`
 Base de auditoría: `4a6b6e02af49960272dfaa9702ed6c5de197ff65`
-Tip de implementación antes de este journal: `9bf3030db2296a76a5c5e91cbb9e6e04e490fbcf`
+Tip funcional verificado: `172f29d47e7ac9d03575fad4231cdb34222816ff`
 
 ## Cobertura por fase
 
