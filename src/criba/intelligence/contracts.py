@@ -399,13 +399,31 @@ class FailureCase(Gap):
 
 @dataclass
 class ResurrectionCandidate(Gap):
+    """Evidence-backed candidate for reviving a previously blocked idea."""
     kind: str = "resurrection"
     dormant_since: str = ""
     unlock_enabler: str = ""
+    historical_idea: str = ""
+    historical_failure_reason: str = ""
+    blocking_constraint: str = ""
+    current_evidence: str = ""
+    constraint_change: str = ""
+    new_feasibility: str = ""
+    resurrection_confidence: float = 0.0
 
     def to_dict(self) -> dict[str, Any]:
         d = super().to_dict()
-        d.update({"dormant_since": self.dormant_since, "unlock_enabler": self.unlock_enabler})
+        d.update({
+            "dormant_since": self.dormant_since,
+            "unlock_enabler": self.unlock_enabler,
+            "historical_idea": self.historical_idea,
+            "historical_failure_reason": self.historical_failure_reason,
+            "blocking_constraint": self.blocking_constraint,
+            "current_evidence": self.current_evidence,
+            "constraint_change": self.constraint_change,
+            "new_feasibility": self.new_feasibility,
+            "resurrection_confidence": self.resurrection_confidence,
+        })
         return d
 
 
