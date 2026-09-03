@@ -11,7 +11,7 @@
   "current": {
     "phase": "P06",
     "task": "P06-T05",
-    "subtask": "Signals",
+    "subtask": "Community detection",
     "status": "NOT_STARTED",
     "started_at": "",
     "last_updated": "2026-09-03T05:57:10+02:00"
@@ -88,8 +88,8 @@
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P06-T05: implement signal derivation without changing legacy storage.",
-  "resume_instructions": "P06-T04 is verified at f57038e with 760 full tests passing. Resume at P06-T05. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P06-T05: implement community detection without changing legacy storage.",
+  "resume_instructions": "P06-T04 is verified at f57038e with 760 full tests passing. Resume at P06-T05 community detection. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {

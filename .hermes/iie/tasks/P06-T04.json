@@ -42,7 +42,7 @@
     "Unknown ids in a requested subset receive a score of zero when isolated from known ids."
   ],
   "follow_up": [
-    "P06-T05 signal derivation",
+    "P06-T05 community detection",
     "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
   ],
   "completed_at": "2026-09-03T05:57:10+02:00"

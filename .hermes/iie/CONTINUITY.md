@@ -17,7 +17,7 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05 is closed. P06-T01 through P06-T04 are verified. P06-T05 (signals) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
+P05 is closed. P06-T01 through P06-T04 are verified. P06-T05 (community detection) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -47,7 +47,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 None. All IIE feature flags remain `false`.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P06-T05: implement signal derivation without changing legacy CRIBA storage. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P06-T05: implement community detection without changing legacy CRIBA storage. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra, high reasoning, per blueprint. Required verification: signal-derivation tests, strict mypy for touched modules, `git diff --check`, full regression, then commit.
+GPT-5.6 Terra, high reasoning, per blueprint. Required verification: community-detection tests, strict mypy for touched modules, `git diff --check`, full regression, then commit.
