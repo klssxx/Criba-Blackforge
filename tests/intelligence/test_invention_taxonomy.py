@@ -12,6 +12,7 @@ from criba.intelligence.invention import (
     get_operator,
     operator_definitions,
     detect_rare_combinations,
+    detect_cross_domain_analogies,
 )
 
 
@@ -78,3 +79,20 @@ def test_rare_combinations_validate_limits_and_ignore_unsupported_metadata():
         detect_rare_combinations([], max_frequency=0)
     with pytest.raises(ValueError, match="limit"):
         detect_rare_combinations([], limit=-1)
+
+
+def test_cross_domain_analogies_require_explicit_shared_concepts_and_domains():
+    documents = [
+        EvidenceDocument(doc_id="heat", metadata={"domain": "thermal", "concepts": ["phase change"]}),
+        EvidenceDocument(doc_id="storage", metadata={"domain": "battery", "concepts": ["phase change"]}),
+        EvidenceDocument(doc_id="ignored", metadata={"concepts": ["phase change"]}),
+    ]
+    candidates = detect_cross_domain_analogies(documents)
+    assert [candidate.title for candidate in candidates] == ["Transfer phase change: battery → thermal"]
+    assert candidates[0].operators == ("T055",)
+    assert "not evidence" in candidates[0].description
+
+
+def test_cross_domain_analogies_validate_limit():
+    with pytest.raises(ValueError, match="limit"):
+        detect_cross_domain_analogies([], limit=-1)

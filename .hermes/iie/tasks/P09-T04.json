@@ -1,0 +1,38 @@
+{
+  "task_id": "P09-T04",
+  "title": "Cross-domain analogies",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/rare_combinations.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/cross_domain.py",
+    ".hermes/iie/tasks/P09-T04.json"
+  ],
+  "files_modified": ["src/criba/intelligence/invention/__init__.py", "tests/intelligence/test_invention_taxonomy.py"],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/invention",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "16 passed: invention taxonomy/operator plus contract tests",
+    "191 passed: intelligence suite",
+    "compileall: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T055 uses only explicit metadata.domain and metadata.concepts; missing domain data does not produce an analogy.",
+    "Outputs are transfer hypotheses and expressly do not assert mechanism feasibility."
+  ],
+  "risks": ["Shared vocabulary alone can be superficial; feasibility and evidence review remain downstream work."],
+  "follow_up": ["P09-T05: TRIZ registry/operator mappings."],
+  "completed_at": "2026-09-03T21:38:00+02:00"
+}
