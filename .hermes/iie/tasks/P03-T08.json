@@ -1,0 +1,36 @@
+{
+  "task_id": "P03-T08",
+  "title": "Source mocks and fixtures",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "tests/intelligence/test_sources.py",
+    "src/criba/intelligence/sources/transport.py"
+  ],
+  "files_created": [
+    ".hermes/iie/tasks/P03-T08.json"
+  ],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sources.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider"
+  ],
+  "tests_passed": [
+    "18 passed: source protocol, transport retries/budget/rate limit, cache-first behavior, error handling, and six adapter payload fixtures",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "All source fixtures are local JSON/XML strings with an injected Transport sender; CI does not contact third-party APIs.",
+    "Crossref, ClinicalTrials.gov, and NSF Awards fixtures were added by P03-T02/P03-T07 and complete the mock coverage expected by this task."
+  ],
+  "risks": [
+    "Fixtures protect normalized contracts but cannot detect upstream API schema drift without a separately authorized live compatibility check."
+  ],
+  "follow_up": [
+    "P03-T09: transport rate-limit, timeout, and retry audit.",
+    "P03-T10: source architecture audit."
+  ],
+  "completed_at": "2026-09-03T20:58:51+02:00"
+}
