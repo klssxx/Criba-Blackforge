@@ -18,7 +18,7 @@ __all__ = [
     "ProvenanceRecord", "Claim", "ClaimAssessment", "EntityNode", "EntityAlias",
     "RelationEdge", "TopicObservation", "Signal", "WeakSignal", "Gap",
     "Contradiction", "Limitation", "FailureCase", "ResurrectionCandidate",
-    "WhiteSpaceCandidate", "Hypothesis", "InventionCandidate", "SourceDescriptor",
+    "WhiteSpaceCandidate", "PatentExpirationOpportunity", "Hypothesis", "InventionCandidate", "SourceDescriptor",
     "SourceCapability", "QueryPlan", "QueryVariant", "SourceQuery", "SourceQueryResult",
     "PriorArtQuery", "PriorArtMatch", "PriorArtAssessment", "NoveltyAssessment",
     "EvidenceAssessment", "ConfidenceAssessment", "FeasibilityAssessment",
@@ -341,6 +341,40 @@ class WeakSignal(Signal):
         d = super().to_dict()
         d.update({"lead_lag_hint": self.lead_lag_hint, "confidence": self.confidence})
         return d
+
+
+@dataclass
+class PatentExpirationOpportunity:
+    """Evidence contract for a possible patent-expiration opportunity.
+
+    This object records a stated expiration signal; it is not a freedom-to-
+    operate opinion and must not be treated as one without legal verification.
+    """
+
+    opportunity_id: str = field(default_factory=lambda: _new_id("pat"))
+    patent_id: str = ""
+    title: str = ""
+    expiration_date: str = ""
+    jurisdiction: str = ""
+    claim_scope: str = ""
+    expiration_status: str = "UNKNOWN"  # EXPIRED|EXPIRING|LAPSED|UNKNOWN
+    opportunity_statement: str = ""
+    evidence_doc_ids: tuple[str, ...] = ()
+    confidence: float = 0.0              # 0..1 evidence confidence
+
+    def to_dict(self) -> dict[str, Any]:
+        return {
+            "opportunity_id": self.opportunity_id,
+            "patent_id": self.patent_id,
+            "title": self.title,
+            "expiration_date": self.expiration_date,
+            "jurisdiction": self.jurisdiction,
+            "claim_scope": self.claim_scope,
+            "expiration_status": self.expiration_status,
+            "opportunity_statement": self.opportunity_statement,
+            "evidence_doc_ids": list(self.evidence_doc_ids),
+            "confidence": self.confidence,
+        }
 
 
 # ---------------------------------------------------------------------------
