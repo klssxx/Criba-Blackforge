@@ -7,6 +7,7 @@ budget is tracked, cache keys are computed, metrics are recorded.
 """
 from __future__ import annotations
 
+import math
 import time
 from collections.abc import Sequence
 from enum import Enum
@@ -38,17 +39,21 @@ class GenerationBudget(BaseModel):
     ideas_generated: int = 0
 
     def spend(self, tokens: int = 0, latency_ms: float = 0.0) -> None:
-        """Record spend; raises if budget is exceeded."""
-        self.tokens_spent += tokens
-        self.latency_ms_spent += latency_ms
-        if self.tokens_spent > self.maximum_tokens:
+        """Record spend atomically; over-budget attempts leave state unchanged."""
+        if tokens < 0 or latency_ms < 0:
+            raise ValueError("El gasto no puede ser negativo")
+        next_tokens = self.tokens_spent + tokens
+        next_latency = self.latency_ms_spent + latency_ms
+        if next_tokens > self.maximum_tokens:
             raise BudgetExceededError(
-                f"Token budget exceeded: {self.tokens_spent}/{self.maximum_tokens}"
+                f"Token budget exceeded: {next_tokens}/{self.maximum_tokens}"
             )
-        if self.latency_ms_spent > self.maximum_latency_ms:
+        if next_latency > self.maximum_latency_ms:
             raise BudgetExceededError(
-                f"Latency budget exceeded: {self.latency_ms_spent:.0f}ms/{self.maximum_latency_ms}ms"
+                f"Latency budget exceeded: {next_latency:.0f}ms/{self.maximum_latency_ms}ms"
             )
+        self.tokens_spent = next_tokens
+        self.latency_ms_spent = next_latency
 
     def early_exit(self, diversity: float, quality: float) -> bool:
         """§9.9 — Exit early if diversity/quality targets are met."""
@@ -179,6 +184,8 @@ class LatencyScheduler:
         self._cache_hits = 0
         self._cache_misses = 0
         self._start_time = time.monotonic()
+        self._last_spend_time = self._start_time
+        self._latency_samples_ms: list[float] = []
 
     def _elapsed_ms(self) -> float:
         return (time.monotonic() - self._start_time) * 1000
@@ -219,18 +226,36 @@ class LatencyScheduler:
         """§9.9 — Check early exit conditions."""
         return self.budget.early_exit(diversity, quality)
 
+    def record_latency(self, latency_ms: float) -> None:
+        """Record one completed batch latency for percentile metrics."""
+        if latency_ms < 0:
+            raise ValueError("La latencia no puede ser negativa")
+        self._latency_samples_ms.append(float(latency_ms))
+
+    @staticmethod
+    def _percentile(samples: list[float], percentile: float) -> float:
+        if not samples:
+            return 0.0
+        ordered = sorted(samples)
+        index = min(len(ordered) - 1, max(0, math.ceil(len(ordered) * percentile) - 1))
+        return ordered[index]
+
     def record_spend(self, tokens: int = 0) -> None:
-        """§9.15 — Record spend and raise if budget exceeded."""
-        elapsed = self._elapsed_ms()
-        self.budget.spend(tokens=tokens, latency_ms=elapsed)
+        """§9.15 — Record only the elapsed interval since the prior spend."""
+        now = time.monotonic()
+        interval_ms = max(0.0, (now - self._last_spend_time) * 1000)
+        self.budget.spend(tokens=tokens, latency_ms=interval_ms)
+        self._latency_samples_ms.append(interval_ms)
+        self._last_spend_time = now
 
     def finalize_metrics(self) -> LatencyMetrics:
-        """§9.14 — Compute final latency metrics."""
+        """§9.14 — Compute observed percentile latency metrics."""
         elapsed = self._elapsed_ms()
+        samples = self._latency_samples_ms or [elapsed]
         return LatencyMetrics(
-            p50_ms=elapsed,
-            p95_ms=elapsed,
-            p99_ms=elapsed,
+            p50_ms=self._percentile(samples, 0.50),
+            p95_ms=self._percentile(samples, 0.95),
+            p99_ms=self._percentile(samples, 0.99),
             time_to_decision_ms=elapsed,
             cache_hit_rate=self.cache_hit_rate,
             total_tokens=self.budget.tokens_spent,
