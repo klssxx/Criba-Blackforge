@@ -1,0 +1,59 @@
+{
+  "task_id": "P08-T07",
+  "title": "Patent expiration opportunity contract",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3912-3915; technique registry T128 module boundary",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py",
+    "src/criba/intelligence/gaps/white_space.py",
+    "src/criba/intelligence/gaps/resurrection.py",
+    "data/intelligence/technique_registry.yaml"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/patent_expiration.py",
+    "tests/intelligence/test_patent_expiration.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_patent_expiration.py -q -p no:cacheprovider (4 passed)",
+    "python -m pytest tests/intelligence/test_patent_expiration.py tests/intelligence/test_contracts.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py -q -p no:cacheprovider (19 passed)",
+    "python -m pytest tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider (35 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success in 9 files)",
+    "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success)",
+    "python -m pytest -q -p no:cacheprovider (836 passed, 1 existing warning)",
+    "git diff --check (success)"
+  ],
+  "tests_passed": [
+    "4 focused patent-expiration tests",
+    "35 focused gap/contract tests",
+    "mypy success in 9 source files",
+    "compileall success",
+    "836 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "PatentExpirationOpportunity is a standalone JSON-safe contract because expiration evidence is not itself a Gap or a freedom-to-operate opinion.",
+    "The analyzer accepts structured metadata and explicit text containing a patent identifier plus a stated expiration date; it preserves the supplied date and jurisdiction instead of deriving legal status from the current date.",
+    "Generated opportunity statements explicitly require legal-status, maintenance and claim-scope verification; the module never asserts freedom to operate.",
+    "Missing or invalid expiration evidence is rejected; the module remains local and does not query patent registries or write production data."
+  ],
+  "remaining_risks": [
+    "Date parsing accepts year, year-month and ISO year-month-day strings but does not validate jurisdiction-specific patent term rules.",
+    "Text extraction supports common publication prefixes and English expiration cues only; registry-specific identifiers require structured metadata."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert a8b84bafc113268392b43c848c3c659b3890daa7",
+  "limitations": [
+    "No network, credentials, external dependencies, registry lookup or production write was used.",
+    "The unrelated docs/FINAL_REPORT.md, .agents/, .codex/, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/, scripts/verify-dev-environment.* and skills-lock.json remain untouched and uncommitted."
+  ],
+  "commits": ["a8b84bafc113268392b43c848c3c659b3890daa7"],
+  "completed_at": "2026-09-03T09:20:39+02:00"
+}
