@@ -22,7 +22,7 @@
     "tests/intelligence/test_signal_synthetic.py"
   ],
   "files_modified": [],
-  "commits": [],
+  "commits": ["4db46bc3b09487909db4b4c066857c208c2ba8b9"],
   "tests_run": [
     "python -m pytest tests/intelligence/test_signal_synthetic.py -q -p no:cacheprovider (3 initial expectation failures fixed: store row shape obs_id, change-point window alignment, S-curve r_squared threshold)",
     "python -m pytest tests/intelligence/test_signal_synthetic.py tests/intelligence/test_signal_observations.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_scurve.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",

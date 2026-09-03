@@ -17,7 +17,7 @@
     "last_updated": "2026-09-03T08:29:25+02:00"
   },
   "last_good_state": {
-    "commit": "PENDING_P07_T09_COMMIT",
+    "commit": "4db46bc3b09487909db4b4c066857c208c2ba8b9",
     "phase": "P07",
     "task": "P07-T09",
     "tests": [
