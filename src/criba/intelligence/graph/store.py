@@ -25,6 +25,8 @@ class KnowledgeGraphStore(Protocol):
 
     def subgraph(self, entity_ids: Iterable[str]) -> dict[str, list[dict[str, Any]]]: ...
 
+    def node_ids(self) -> list[str]: ...
+
     def stats(self) -> dict[str, int]: ...
 
     def close(self) -> None: ...
@@ -213,6 +215,14 @@ class SQLiteKnowledgeGraphStore:
             ).fetchall()
         ]
         return {"nodes": node_rows, "edges": edges}
+
+    def node_ids(self) -> list[str]:
+        return [
+            row["entity_id"]
+            for row in self._conn.execute(
+                "SELECT entity_id FROM intel_entities ORDER BY entity_id"
+            ).fetchall()
+        ]
 
     def stats(self) -> dict[str, int]:
         nodes = self._conn.execute("SELECT COUNT(*) FROM intel_entities").fetchone()[0]
