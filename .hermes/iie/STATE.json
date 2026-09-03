@@ -10,20 +10,20 @@
   },
   "current": {
     "phase": "P06",
-    "task": "P06-T03",
-    "subtask": "Traversal",
+    "task": "P06-T04",
+    "subtask": "Centrality",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T05:44:24+02:00"
+    "last_updated": "2026-09-03T05:51:34+02:00"
   },
   "last_good_state": {
-    "commit": "6de1f6e77ad7e92a80466fe49b14359f9adccaa3",
+    "commit": "6d8eb3f6a5e270ee7d20d1d911508a820035a18d",
     "phase": "P06",
-    "task": "P06-T02",
+    "task": "P06-T03",
     "tests": [
-      "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider: 13 passed",
-      "python -m pytest -q -p no:cacheprovider: 755 passed",
-      "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/__init__.py: success"
+      "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider: 16 passed",
+      "python -m pytest -q -p no:cacheprovider: 758 passed",
+      "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/__init__.py: success"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05"],
@@ -34,11 +34,11 @@
     "P03-T01", "P03-T02", "P03-T03", "P03-T04", "P03-T05", "P03-T06",
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
-    "P06-T01", "P06-T02"
+    "P06-T01", "P06-T02", "P06-T03"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P06-T03", "BF-P00-T06"],
+  "pending_tasks": ["P06-T04", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -52,7 +52,8 @@
     "STATE_RECONCILIATION-2026-09-03: Git y pruebas demuestran P05-T01/T02/T04/T05/T06/T07 en commits 6de29de y cd95d80; STATE previo era obsoleto y P02-T01 figuraba erróneamente como pendiente.",
     "D-P05-3: ClaimStore usa whitelist de columnas, lectura tipada de listas JSON y filtros opcionales por run_id/epistemic_state; el contrato Claim público no cambia.",
     "D-P06-1: SQLiteKnowledgeGraphStore reutiliza las tablas IIE aisladas, actualiza nodos con ON CONFLICT para preservar edges y mantiene shortest_path dirigido e idempotencia de relaciones.",
-    "D-P06-2: GraphBuilder reutiliza EntityResolver/extract_entities; cada documento obtiene un nodo estable y las entidades se conectan mediante DERIVED_FROM, acumulando source_doc_ids."
+    "D-P06-2: GraphBuilder reutiliza EntityResolver/extract_entities; cada documento obtiene un nodo estable y las entidades se conectan mediante DERIVED_FROM, acumulando source_doc_ids.",
+    "D-P06-3: GraphTraversal ofrece BFS dirigido y acotado, y delega shortest_path al store canónico para no duplicar la lógica de caminos."
   ],
   "open_questions": [],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -75,31 +76,31 @@
   "tests": {
     "last_targeted": {
       "P05": "65 passed; mypy success (2026-09-03)",
-      "P06": "13 targeted graph/builder/boundary tests passed; mypy success (2026-09-03)",
+      "P06": "16 targeted graph/builder/traversal/boundary tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "755 passed in P06-T02 at 6de1f6e (2026-09-03)",
+      "criba": "758 passed in P06-T03 at 6d8eb3f (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P06-T03: implement graph traversal without changing legacy storage.",
-  "resume_instructions": "P06-T02 is verified at 6de1f6e with 755 full tests passing. Resume at P06-T03. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P06-T04: implement graph centrality without changing legacy storage.",
+  "resume_instructions": "P06-T03 is verified at 6d8eb3f with 758 full tests passing. Resume at P06-T04. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "6de1f6e77ad7e92a80466fe49b14359f9adccaa3",
+      "commit": "6d8eb3f6a5e270ee7d20d1d911508a820035a18d",
       "tags_at_head": [],
       "dirty_files": [],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "6de1f6e77ad7e92a80466fe49b14359f9adccaa3",
-      "last_good_tests": ["P06 graph/builder: 13 passed; full CRIBA: 755 passed; mypy success"]
+      "last_good_commit": "6d8eb3f6a5e270ee7d20d1d911508a820035a18d",
+      "last_good_tests": ["P06 graph/builder/traversal: 16 passed; full CRIBA: 758 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -143,5 +144,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T05:44:24+02:00"
+  "last_updated": "2026-09-03T05:51:34+02:00"
 }

@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 05:44:24+02:00 — P06-T02 VERIFIED
+**Última actualización:** 2026-09-03 05:51:34+02:00 — P06-T03 VERIFIED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -12,10 +12,11 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P05 targeted verification: `65 passed`; full CRIBA regression: `746 passed`; strict mypy over storage/claims/provenance/entities: success.
 - P06-T01 committed in `f8dba0a`: SQLite knowledge graph store with 11 graph/boundary tests; full regression is `753 passed`; mypy is clean.
 - P06-T02 committed in `6de1f6e`: deterministic document graph builder with 13 graph/builder/boundary tests; full regression is `755 passed`; mypy is clean.
+- P06-T03 committed in `6d8eb3f`: bounded directed graph traversal with 16 graph/builder/traversal/boundary tests; full regression is `758 passed`; mypy is clean.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05 is closed. P06-T01 and P06-T02 are verified. P06-T03 (graph traversal) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
+P05 is closed. P06-T01 through P06-T03 are verified. P06-T04 (centrality) is **NOT_STARTED**. No code is currently uncommitted; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -27,23 +28,24 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-`6de1f6e` — P06-T02 deterministic document provenance graph builder, with graph/builder/boundary tests and full CRIBA regression green.
+`6d8eb3f` — P06-T03 bounded directed graph traversal, with graph/builder/traversal/boundary tests and full CRIBA regression green.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
 - `python -m pytest tests/intelligence -q -p no:cacheprovider` → 65 passed.
 - `python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider` → 13 passed.
-- `python -m pytest -q -p no:cacheprovider` → 753 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider` → 16 passed.
+- `python -m pytest -q -p no:cacheprovider` → 758 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
-- `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/__init__.py` → success.
+- `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/__init__.py` → success.
 - `python -m pytest tests/unit/test_blackforge*.py -q -p no:cacheprovider -k 'not emits_report'` → 138 passed, 4 deselected.
 
 ## WHAT FEATURE FLAGS ARE ENABLED?
 None. All IIE feature flags remain `false`.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P06-T03: implement graph traversal without changing legacy CRIBA storage. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P06-T04: implement graph centrality without changing legacy CRIBA storage. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra, high reasoning, per blueprint. Required verification: graph-builder tests, strict mypy for touched modules, `git diff --check`, full regression, then commit.
+GPT-5.6 Terra, high reasoning, per blueprint. Required verification: centrality tests, strict mypy for touched modules, `git diff --check`, full regression, then commit.
