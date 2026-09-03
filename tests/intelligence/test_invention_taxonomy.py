@@ -13,6 +13,7 @@ from criba.intelligence.invention import (
     operator_definitions,
     detect_rare_combinations,
     detect_cross_domain_analogies,
+    generate_scamper_hypotheses,
 )
 
 
@@ -96,3 +97,21 @@ def test_cross_domain_analogies_require_explicit_shared_concepts_and_domains():
 def test_cross_domain_analogies_validate_limit():
     with pytest.raises(ValueError, match="limit"):
         detect_cross_domain_analogies([], limit=-1)
+
+
+def test_scamper_generates_all_seven_question_types_without_claiming_solution():
+    candidates = generate_scamper_hypotheses("reduce heat", ["heat sink"])
+    assert len(candidates) == 7
+    assert [candidate.title.split(":")[0] for candidate in candidates] == [
+        "Substitute", "Combine", "Adapt", "Modify", "Put to another use", "Eliminate", "Reverse",
+    ]
+    assert all(candidate.operators == ("T060",) for candidate in candidates)
+    assert all("not evidence" in candidate.description for candidate in candidates)
+
+
+def test_scamper_validates_problem_limit_and_deduplicates_components():
+    with pytest.raises(ValueError, match="problem"):
+        generate_scamper_hypotheses(" ", ["heat sink"])
+    with pytest.raises(ValueError, match="limit"):
+        generate_scamper_hypotheses("reduce heat", ["heat sink"], limit=-1)
+    assert len(generate_scamper_hypotheses("reduce heat", ["heat sink", " heat sink "])) == 7
