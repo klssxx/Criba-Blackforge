@@ -1,0 +1,49 @@
+{
+  "task_id": "P03-T07",
+  "title": "ClinicalTrials and funding adapter skeletons",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_sources.py"
+  ],
+  "files_created": [
+    ".hermes/iie/tasks/P03-T07.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/__init__.py",
+    "tests/intelligence/test_sources.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sources.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/sources"
+  ],
+  "tests_passed": [
+    "18 passed: sources plus boundaries",
+    "174 passed: intelligence suite",
+    "compileall: success",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "ClinicalTrials.gov v2 and NSF Award Search are public, unauthenticated GET APIs used only through the injected Transport.",
+    "Both adapters expose the standard source health state inherited from IntelligenceSource and are covered by mock-only tests.",
+    "No external request, credential, dependency, or paid source was used by this task."
+  ],
+  "risks": [
+    "These are conservative normalization skeletons; field availability and schema evolution remain isolated to the adapters.",
+    "NSF Award Search covers NSF funding only, not a global funding corpus."
+  ],
+  "follow_up": [
+    "P03-T08: extend source fixtures only if new adapter edge cases require them.",
+    "P03-T09: reconcile and audit transport retries, timeouts, and rate limiting.",
+    "P03-T10: source architecture audit."
+  ],
+  "completed_at": "2026-09-03T20:58:11+02:00"
+}

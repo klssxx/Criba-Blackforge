@@ -14,9 +14,11 @@ import pytest
 from criba.intelligence.contracts import EvidenceDocument
 from criba.intelligence.sources import (
     ArxivSource,
+    ClinicalTrialsSource,
     CrossrefSource,
     EpoOpsSource,
     GitHubSource,
+    NsfAwardsSource,
     OpenAlexSource,
 )
 from criba.intelligence.sources.protocol import IntelligenceSource, SourceContext
@@ -71,6 +73,35 @@ CROSSREF_JSON = json.dumps({
             "author": [{"given": "Ada", "family": "Lovelace"}],
             "container-title": ["Journal of Determinism"],
             "is-referenced-by-count": 7,
+        }]
+    }
+})
+
+CLINICAL_TRIALS_JSON = json.dumps({
+    "studies": [{
+        "protocolSection": {
+            "identificationModule": {"nctId": "NCT01234567", "briefTitle": "Cooling intervention trial"},
+            "statusModule": {"overallStatus": "RECRUITING", "startDateStruct": {"date": "2026-01-15"}},
+            "descriptionModule": {"briefSummary": "<b>Cooling</b> intervention for participants."},
+            "sponsorCollaboratorsModule": {"leadSponsor": {"name": "Example Hospital"}},
+            "conditionsModule": {"conditions": ["Heat stress"]},
+            "designModule": {"phases": ["PHASE2"]},
+        }
+    }]
+})
+
+NSF_AWARDS_JSON = json.dumps({
+    "response": {
+        "award": [{
+            "id": "1234567",
+            "title": "Efficient cooling research",
+            "date": "01/15/2026",
+            "abstractText": "<i>Funding</i> for thermal management.",
+            "awardeeName": "Example University",
+            "fundProgramName": "Energy Systems",
+            "startDate": "02/01/2026",
+            "expDate": "01/31/2029",
+            "fundsObligatedAmt": "500000",
         }]
     }
 })
@@ -141,6 +172,30 @@ def test_crossref_rejects_non_list_items_payload():
     s = CrossrefSource(ctx(lambda *a, **k: Response(200, '{"message": {"items": {}}}')))
     r = s.search("passive cooling")
     assert not r.ok and r.error == "bad payload: message.items is not a list"
+
+
+def test_clinical_trials_normalizes_study_and_reports_available_health():
+    s = ClinicalTrialsSource(ctx(lambda *a, **k: Response(200, CLINICAL_TRIALS_JSON)))
+    assert s.health() == "AVAILABLE"
+    r = s.search("cooling")
+    assert r.ok and len(r.documents) == 1
+    d = r.documents[0]
+    assert d.kind == "trial" and d.metadata["nct_id"] == "NCT01234567"
+    assert d.metadata["lead_sponsor"] == "Example Hospital"
+    assert d.metadata["phases"] == ["PHASE2"]
+    assert d.abstract == "Cooling intervention for participants."
+
+
+def test_nsf_awards_normalizes_grant_and_reports_available_health():
+    s = NsfAwardsSource(ctx(lambda *a, **k: Response(200, NSF_AWARDS_JSON)))
+    assert s.health() == "AVAILABLE"
+    r = s.search("cooling")
+    assert r.ok and len(r.documents) == 1
+    d = r.documents[0]
+    assert d.kind == "grant" and d.metadata["award_id"] == "1234567"
+    assert d.metadata["program"] == "Energy Systems"
+    assert d.metadata["amount"] == "500000"
+    assert d.abstract == "Funding for thermal management."
 
 
 def test_arxiv_parses_atom_xml():

@@ -1,11 +1,27 @@
 """IIE source registry (P03): discovery of available sources (§114)."""
 from __future__ import annotations
 
-from .adapters import ArxivSource, CrossrefSource, EpoOpsSource, GitHubSource, OpenAlexSource
+from .adapters import (
+    ArxivSource,
+    ClinicalTrialsSource,
+    CrossrefSource,
+    EpoOpsSource,
+    GitHubSource,
+    NsfAwardsSource,
+    OpenAlexSource,
+)
 from .protocol import IntelligenceSource, SourceContext
 from .transport import Transport, TransportBudget
 
-_ALL = [OpenAlexSource, CrossrefSource, ArxivSource, GitHubSource, EpoOpsSource]
+_ALL = [
+    OpenAlexSource,
+    CrossrefSource,
+    ArxivSource,
+    GitHubSource,
+    EpoOpsSource,
+    ClinicalTrialsSource,
+    NsfAwardsSource,
+]
 
 
 def build_sources(context: SourceContext) -> list[IntelligenceSource]:
