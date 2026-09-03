@@ -3,7 +3,14 @@ from __future__ import annotations
 
 import pytest
 
-from criba.intelligence.invention import OPERATORS_BY_KEY, get_operator, operator_definitions
+from criba.intelligence.contracts import InventionCandidate
+from criba.intelligence.invention import (
+    OPERATORS_BY_KEY,
+    OperatorContext,
+    OperatorRegistry,
+    get_operator,
+    operator_definitions,
+)
 
 
 def test_taxonomy_is_complete_for_blueprint_invention_techniques():
@@ -23,3 +30,28 @@ def test_taxonomy_lookup_is_stable_and_does_not_make_up_unknown_operators():
 def test_taxonomy_mapping_cannot_be_mutated_by_consumers():
     with pytest.raises(TypeError):
         OPERATORS_BY_KEY["invented"] = get_operator("triz")
+
+
+def test_registry_executes_only_declared_and_traceable_operators():
+    registry = OperatorRegistry()
+    context = OperatorContext(problem="reduce heat")
+    with pytest.raises(LookupError, match="no registered"):
+        registry.execute("triz", context)
+    with pytest.raises(KeyError, match="unknown"):
+        registry.register("invented", lambda _: [])
+
+    registry.register(
+        "triz",
+        lambda _: [InventionCandidate(title="Heat transfer alternative", operators=("T057",))],
+    )
+    assert registry.registered_keys() == ("triz",)
+    assert registry.execute("triz", context)[0].operators == ("T057",)
+
+
+def test_registry_rejects_duplicate_registration_and_untraceable_output():
+    registry = OperatorRegistry()
+    registry.register("triz", lambda _: [InventionCandidate(title="Missing trace")])
+    with pytest.raises(ValueError, match="already registered"):
+        registry.register("triz", lambda _: [])
+    with pytest.raises(ValueError, match="traceability"):
+        registry.execute("triz", OperatorContext(problem="reduce heat"))
