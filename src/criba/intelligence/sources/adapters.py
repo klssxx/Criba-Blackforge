@@ -61,6 +61,105 @@ class OpenAlexSource(IntelligenceSource):
         return res
 
 
+class CrossrefSource(IntelligenceSource):
+    """P03-T02 scholarly metadata. Free Crossref Works API, no key required."""
+    SOURCE_ID = "crossref"
+    NAME = "Crossref"
+    KIND = "science"
+    BASE_URL = "https://api.crossref.org/works"
+    RATE_LIMIT_S = 0.2
+
+    def _search(self, query: str, limit: int = 10, **params: Any) -> SourceQueryResult:
+        res = SourceQueryResult(source_id=self.SOURCE_ID, query_text=query, ok=False)
+        resp = self.context.transport.get(
+            self.BASE_URL,
+            params={"query.bibliographic": query, "rows": min(limit, 50)},
+        )
+        res.request_count += 1
+        if resp.status != 200:
+            res.error = f"HTTP {resp.status}"
+            return res
+        try:
+            items = resp.json().get("message", {}).get("items", [])
+        except Exception as exc:
+            res.error = f"bad json: {exc}"
+            return res
+        if not isinstance(items, list):
+            res.error = "bad payload: message.items is not a list"
+            return res
+        for item in items[:limit]:
+            if not isinstance(item, dict):
+                continue
+            title_values = item.get("title") or []
+            title = title_values[0] if isinstance(title_values, list) and title_values else ""
+            doi = str(item.get("DOI") or "")
+            url = str(item.get("URL") or (f"https://doi.org/{doi}" if doi else ""))
+            published = _crossref_date(item)
+            abstract = _strip_tags(str(item.get("abstract") or ""))
+            author_names = _crossref_authors(item.get("author"))
+            container_values = item.get("container-title") or []
+            container = (
+                str(container_values[0])
+                if isinstance(container_values, list) and container_values
+                else ""
+            )
+            doc = EvidenceDocument(
+                doc_id=_new_doc_id("cr"),
+                source_id=self.SOURCE_ID,
+                title=str(title)[:500],
+                kind="paper",
+                published=published,
+                url=url,
+                abstract=abstract[:2000],
+                provenance=ProvenanceRecord(source_id=self.SOURCE_ID, url=url, method="api"),
+                metadata={
+                    "doi": doi,
+                    "crossref_type": item.get("type"),
+                    "container_title": container,
+                    "authors": author_names,
+                    "citation_count": item.get("is-referenced-by-count"),
+                },
+            )
+            if abstract:
+                doc.fragments.append(EvidenceFragment(text=abstract[:500], locator="abstract"))
+            res.documents.append(doc)
+        res.ok = True
+        return res
+
+
+def _crossref_date(item: dict[str, Any]) -> str:
+    for field in ("published-print", "published-online", "issued", "created"):
+        value = item.get(field)
+        if not isinstance(value, dict):
+            continue
+        parts = value.get("date-parts")
+        if not isinstance(parts, list) or not parts or not isinstance(parts[0], list):
+            continue
+        date = [str(part) for part in parts[0][:3] if isinstance(part, int)]
+        if date:
+            return "-".join([date[0], *[part.zfill(2) for part in date[1:]]])
+    return ""
+
+
+def _crossref_authors(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    authors: list[str] = []
+    for author in value[:20]:
+        if not isinstance(author, dict):
+            continue
+        name = " ".join(
+            part.strip() for part in (str(author.get("given") or ""), str(author.get("family") or "")) if part.strip()
+        )
+        if name:
+            authors.append(name)
+    return authors
+
+
+def _strip_tags(value: str) -> str:
+    return re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", value)).strip()
+
+
 def _inverted_index_to_text(inv: dict) -> str:
     if not inv:
         return ""

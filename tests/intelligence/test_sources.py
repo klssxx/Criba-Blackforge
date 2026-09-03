@@ -12,7 +12,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 import pytest
 
 from criba.intelligence.contracts import EvidenceDocument
-from criba.intelligence.sources import ArxivSource, EpoOpsSource, GitHubSource, OpenAlexSource
+from criba.intelligence.sources import (
+    ArxivSource,
+    CrossrefSource,
+    EpoOpsSource,
+    GitHubSource,
+    OpenAlexSource,
+)
 from criba.intelligence.sources.protocol import IntelligenceSource, SourceContext
 from criba.intelligence.sources.transport import Response, Transport, TransportBudget, BudgetExceeded
 
@@ -51,6 +57,22 @@ GITHUB_JSON = json.dumps({
         "stargazers_count": 123, "language": "Python", "topics": ["cooling", "hpc"],
         "pushed_at": "2026-08-30T00:00:00Z", "url": "https://api.github.com/repos/org/cool-sim",
     }]
+})
+
+CROSSREF_JSON = json.dumps({
+    "message": {
+        "items": [{
+            "DOI": "10.1234/example",
+            "title": ["Deterministic metadata for cooling"],
+            "URL": "https://doi.org/10.1234/example",
+            "type": "journal-article",
+            "published-online": {"date-parts": [[2026, 2, 3]]},
+            "abstract": "<jats:p>Passive <b>cooling</b> metadata.</jats:p>",
+            "author": [{"given": "Ada", "family": "Lovelace"}],
+            "container-title": ["Journal of Determinism"],
+            "is-referenced-by-count": 7,
+        }]
+    }
 })
 
 
@@ -101,6 +123,24 @@ def test_openalex_normalizes_documents():
     assert d.title.startswith("Photonic cooling")
     assert d.kind == "paper" and d.published == "2026"
     assert "photonic" in d.abstract
+
+
+def test_crossref_normalizes_documents_and_strips_markup():
+    s = CrossrefSource(ctx(lambda *a, **k: Response(200, CROSSREF_JSON)))
+    r = s.search("passive cooling")
+    assert r.ok and len(r.documents) == 1
+    d = r.documents[0]
+    assert d.kind == "paper" and d.published == "2026-02-03"
+    assert d.metadata["doi"] == "10.1234/example"
+    assert d.metadata["authors"] == ["Ada Lovelace"]
+    assert d.metadata["citation_count"] == 7
+    assert d.abstract == "Passive cooling metadata."
+
+
+def test_crossref_rejects_non_list_items_payload():
+    s = CrossrefSource(ctx(lambda *a, **k: Response(200, '{"message": {"items": {}}}')))
+    r = s.search("passive cooling")
+    assert not r.ok and r.error == "bad payload: message.items is not a list"
 
 
 def test_arxiv_parses_atom_xml():
