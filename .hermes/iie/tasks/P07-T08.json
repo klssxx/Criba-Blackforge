@@ -1,0 +1,61 @@
+{
+  "task_id": "P07-T08",
+  "title": "S-curve approximation",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3865-3868: S-curve approximation",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T08 block)",
+    "data/intelligence/technique_registry.yaml (T130 S-curves/substitution curves/innovation genealogy)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/lead_lag.py",
+    "src/criba/intelligence/signals/__init__.py",
+    ".hermes/iie/STATE.json",
+    ".hermes/iie/CONTINUITY.md"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/scurve.py",
+    "tests/intelligence/test_signal_scurve.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["a4da1e63feb279a70f79c1f92e304be0af4e1d47"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_scurve.py::test_scurve_fit_models_increasing_series_and_extrapolates_saturation -q -p no:cacheprovider (initial numerical-boundary failure, then fixed)",
+    "python -m pytest tests/intelligence/test_signal_scurve.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_scurve.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/scurve.py src/criba/intelligence/signals/lead_lag.py src/criba/intelligence/signals/weak_signals.py src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "2 focused S-curve tests passed",
+    "30 targeted signal/storage/contract tests passed",
+    "786 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 9 touched source files",
+    "compileall success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "S-curve is an explainable logistic approximation fitted with a standard-library logit linear regression over zero-based period indexes.",
+    "The carrying capacity is conservatively above the observed maximum by an explicit configurable margin; lower bound is the observed minimum.",
+    "Insufficient, constant, declining or non-monotonic series return no fit instead of manufacturing a growth curve.",
+    "Prediction clamps exponent calculation for numerical safety and uses nextafter to remain strictly inside the asymptote when floating-point rounding would equal the capacity.",
+    "No external numerical dependency or provider integration was introduced."
+  ],
+  "risks": [
+    "The approximation assumes equally spaced periods and monotonic growth; irregular dates and substitution curves require later modeling.",
+    "A capacity based on the observed range is a heuristic, not a domain-calibrated forecast."
+  ],
+  "follow_up": [
+    "P07-T09 synthetic time-series tests",
+    "P07-T10 signal semantics audit",
+    "NEON-ARCH-AUDIT before any PostgreSQL/Neon adapter implementation",
+    "BF-P00-T06 golden validation in an isolated copy"
+  ],
+  "completed_at": "2026-09-03T08:18:37+02:00"
+}
