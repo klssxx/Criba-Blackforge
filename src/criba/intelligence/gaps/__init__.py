@@ -13,6 +13,15 @@ from .resurrection import (
     find_resurrection_candidates,
     extract_resurrection,
 )
+from .white_space import (
+    WhiteSpaceAnalyzer,
+    WhiteSpaceExtractor,
+    WhiteSpaceEngine,
+    analyze_white_spaces,
+    analyze_white_space,
+    extract_white_spaces,
+    find_white_spaces,
+)
 
 __all__ = [
     "ContradictionAnalyzer",
@@ -31,5 +40,12 @@ __all__ = [
     "ResurrectionExtractor",
     "TechnologyResurrectionExtractor",
     "TechnologyResurrection",
+    "WhiteSpaceAnalyzer",
+    "WhiteSpaceExtractor",
+    "WhiteSpaceEngine",
+    "analyze_white_spaces",
+    "analyze_white_space",
+    "extract_white_spaces",
+    "find_white_spaces",
     "analyze_contradictions",
 ]
