@@ -10,20 +10,20 @@
   },
   "current": {
     "phase": "P07",
-    "task": "P07-T06",
-    "subtask": "weak-signal aggregation",
+    "task": "P07-T07",
+    "subtask": "lead/lag framework",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T07:57:04+02:00"
+    "last_updated": "2026-09-03T08:02:36+02:00"
   },
   "last_good_state": {
-    "commit": "ca89e8c60694ab51493c90c871eea4f6af8c2ad4",
+    "commit": "740016897608ed1ccbc07e2e5d381517b120cc5e",
     "phase": "P07",
-    "task": "P07-T05",
+    "task": "P07-T06",
     "tests": [
-      "python -m pytest tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider: 26 passed",
-      "python -m pytest -q -p no:cacheprovider: 782 passed",
-      "mypy --no-incremental src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py: success"
+      "python -m pytest tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider: 27 passed",
+      "python -m pytest -q -p no:cacheprovider: 783 passed",
+      "mypy --no-incremental src/criba/intelligence/signals/weak_signals.py src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py: success"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05", "P06"],
@@ -35,11 +35,11 @@
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
     "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08", "P06-T09",
-    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05"
+    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P07-T06", "BF-P00-T06"],
+  "pending_tasks": ["P07-T07", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -65,7 +65,8 @@
     "D-P07-2: T02 calcula velocidad como primera diferencia de frecuencia y aceleración como diferencia de velocidades, alineadas con ceros iniciales para buckets equiespaciados.",
     "D-P07-3: T03 detecta bursts como saltos ascendentes de frecuencia por encima de un umbral explícito y devuelve eventos explicables con período, velocidad y strength normalizado.",
     "D-P07-4: T04 usa ventanas contiguas de frecuencia para detectar cambios de nivel ascendentes o descendentes y conserva medias, delta firmado, dirección y strength normalizado.",
-    "D-P07-5: T05 detecta outliers por tópico con mediana y MAD robustos; series constantes usan escala de una unidad para no ocultar anomalías extremas."
+    "D-P07-5: T05 detecta outliers por tópico con mediana y MAD robustos; series constantes usan escala de una unidad para no ocultar anomalías extremas.",
+    "D-P07-6: T06 agrupa weak signals por semántica, deduplica signal IDs y combina strength/confidence con soporte acotado preservando procedencia e IDs de técnicas."
   ],
   "open_questions": [],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -89,31 +90,31 @@
     "last_targeted": {
       "P05": "65 passed; mypy success (2026-09-03)",
       "P06": "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed; mypy success (2026-09-03)",
-      "P07": "3 signal observation tests passed; 26 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
+      "P07": "3 signal observation tests passed; 27 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "782 passed in P07-T05 at ca89e8c (2026-09-03)",
+      "criba": "783 passed in P07-T06 at 7400168 (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P07-T06: implement weak-signal aggregation.",
-  "resume_instructions": "P06 is closed at 2114144. P07-T01 is verified at b24efbd, P07-T02 at 594aa56, P07-T03 at 1a7063a, P07-T04 at 62f0c16 and P07-T05 at ca89e8c with 26 targeted signal/storage/contract tests and 782 full CRIBA tests passing. Resume at P07-T06 weak-signal aggregation. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P07-T07: implement lead/lag framework.",
+  "resume_instructions": "P06 is closed at 2114144. P07-T01 is verified at b24efbd, P07-T02 at 594aa56, P07-T03 at 1a7063a, P07-T04 at 62f0c16, P07-T05 at ca89e8c and P07-T06 at 7400168 with 27 targeted signal/storage/contract tests and 783 full CRIBA tests passing. Resume at P07-T07 lead/lag framework. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "ca89e8c60694ab51493c90c871eea4f6af8c2ad4",
+      "commit": "740016897608ed1ccbc07e2e5d381517b120cc5e",
       "tags_at_head": [],
       "dirty_files": [" M docs/FINAL_REPORT.md", "?? .pre-commit-config.yaml", "?? docs/TOOLCHAIN.md", "?? docs/architecture/", "?? scripts/verify-dev-environment.ps1", "?? scripts/verify-dev-environment.sh"],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "ca89e8c60694ab51493c90c871eea4f6af8c2ad4",
-      "last_good_tests": ["P07 signal observations/dynamics/bursts/changepoints/anomaly: 26 targeted passed; full CRIBA: 782 passed; mypy success"]
+      "last_good_commit": "740016897608ed1ccbc07e2e5d381517b120cc5e",
+      "last_good_tests": ["P07 signal observations/dynamics/bursts/changepoints/anomaly/weak-signals: 27 targeted passed; full CRIBA: 783 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -157,5 +158,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T07:57:04+02:00"
+  "last_updated": "2026-09-03T08:02:36+02:00"
 }

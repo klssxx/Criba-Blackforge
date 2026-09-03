@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 07:57:04+02:00 — P07-T05 VERIFIED; P07-T06 NOT_STARTED
+**Última actualización:** 2026-09-03 08:02:36+02:00 — P07-T06 VERIFIED; P07-T07 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -24,10 +24,11 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P07-T03 committed in `1a7063a`: deterministic threshold-based burst detection with period-addressable events; 24 targeted signal/storage/contract tests passed and full regression is `780 passed`; mypy and compileall are clean.
 - P07-T04 committed in `62f0c16`: deterministic two-window change-point framework with signed direction and normalized strength; 25 targeted signal/storage/contract tests passed and full regression is `781 passed`; mypy and compileall are clean.
 - P07-T05 committed in `ca89e8c`: robust per-topic median/MAD anomaly detection with normalized direction and score; 26 targeted signal/storage/contract tests passed and full regression is `782 passed`; mypy and compileall are clean.
+- P07-T06 committed in `7400168`: deterministic weak-signal aggregation with ID deduplication, bounded support combination and provenance union; 27 targeted signal/storage/contract tests passed and full regression is `783 passed`; mypy and compileall are clean.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05 and P06 are closed. P06-T01 through P06-T09 and P07-T01 through P07-T05 are verified. P07-T06 (weak-signal aggregation) is **NOT_STARTED**. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
+P05 and P06 are closed. P06-T01 through P06-T09 and P07-T01 through P07-T06 are verified. P07-T07 (lead/lag framework) is **NOT_STARTED**. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -39,7 +40,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-`ca89e8c` — P07-T05 robust anomaly detection, with 26 targeted signal/storage/contract tests and full CRIBA regression at 782 passed.
+`7400168` — P07-T06 deterministic weak-signal aggregation, with 27 targeted signal/storage/contract tests and full CRIBA regression at 783 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -66,6 +67,8 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 - `python -m pytest -q -p no:cacheprovider` → 781 passed, 1 dependency deprecation warning.
 - `python -m pytest tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 26 passed.
 - `python -m pytest -q -p no:cacheprovider` → 782 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 27 passed.
+- `python -m pytest -q -p no:cacheprovider` → 783 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
@@ -75,7 +78,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 None. All IIE feature flags remain `false`.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P07-T06: weak-signal aggregation. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P07-T07: lead/lag framework. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra high, per blueprint. Required verification: implement weak-signal aggregation over the observation events, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
+GPT-5.6 Terra high, per blueprint. Required verification: implement the lead/lag framework over the observation series, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
