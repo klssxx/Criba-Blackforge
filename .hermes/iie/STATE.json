@@ -1,0 +1,74 @@
+{
+  "schema_version": "2.0",
+  "project": "CRIBA-BLACKFORGE-SUPRA-IIE",
+  "master_blueprint_version": "1.0 + ADDENDUM-SECTORIZATION + ADDENDUM-T001-T130",
+  "baseline": {
+    "repo": "E:/PROYECTS/CRIBA (+ E:/PROYECTS/SUPRA)",
+    "branch": "main",
+    "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
+    "tag": "pre-iie-baseline",
+    "supra_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70"
+  },
+  "current": {
+    "phase": "P00",
+    "task": "P00-GATE",
+    "subtask": "",
+    "status": "RUNNING",
+    "started_at": "2026-09-03T00:00:00",
+    "last_updated": "2026-09-03T00:00:00"
+  },
+  "last_good_state": {
+    "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
+    "phase": "P00",
+    "task": "P00-T03",
+    "tests": ["CRIBA: 681 passed", "SUPRA: 21 passed"]
+  },
+  "completed_phases": [],
+  "completed_tasks": ["P00-T01", "P00-T02", "P00-T03"],
+  "in_progress_tasks": ["P00-T04"],
+  "blocked_tasks": [],
+  "pending_tasks": ["P01-T01", "P01-T02", "P01-T03", "P01-T04", "P01-T05", "P01-T06"],
+  "skipped_tasks": [],
+  "failed_tasks": [],
+  "decisions": [
+    "D-P00-1: IIE arranca desde cero (regla AR): no existe .hermes/iie/ previo ni implementacion IIE reconocible",
+    "D-P00-2: .hermes/iie/ se commitea en branch feat/iie-master para resume robusto desde Git",
+    "D-P00-3: inventario: CRIBA=68 py/20787 LOC en 44 paquetes; SUPRA=13 py/2089 LOC; zero codigo intelligence existente -> riesgo duplicacion bajo en sources/, medio en invention/scoring (ver P00 checkpoint riesgos)",
+    "D-P00-4: SUPRA uv.lock untracked se deja como esta (no es tarea de este blueprint)"
+  ],
+  "open_questions": [],
+  "known_debt": [
+    "uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"
+  ],
+  "regressions": [],
+  "feature_flags": {
+    "intelligence_engine": false,
+    "intelligence_external_sources": false,
+    "hybrid_retrieval": false,
+    "semantic_retrieval": false,
+    "knowledge_graph": false,
+    "weak_signal_detection": false,
+    "gap_engine": false,
+    "invention_engine_v2": false,
+    "prior_art_adversary": false,
+    "opportunity_scoring_v2": false,
+    "evidence_cartographer_shadow": false,
+    "supra_intelligence_bridge": false,
+    "intelligence_ui": false
+  },
+  "tests": {
+    "last_targeted": {},
+    "last_module": {},
+    "last_full": {
+      "criba": "681 passed in 26.64s (2026-09-03)",
+      "supra": "21 passed in 2.00s (2026-09-03)"
+    }
+  },
+  "model_usage": {},
+  "credit_state": {"watermark": "GREEN", "note": "ZCode stats no consultables desde aqui; estimar por turns"},
+  "next_action": "P01-T01 architecture boundaries (MAX role)",
+  "resume_instructions": "Leer CONTINUITY.md. P00 completo y gate aplicado (tag pre-iie-baseline, branch feat/iie-master). Continuar en P01-T01 sin re-auditar (regla Y).",
+  "techniques": {
+    "_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml; ver ADDENDUM seccion 127"
+  }
+}

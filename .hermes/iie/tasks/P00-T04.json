@@ -1,0 +1,20 @@
+{
+  "task_id": "P00-T04",
+  "title": "Audit de riesgos (MAX role)",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "low/high por blueprint",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [],
+  "tests_passed": [],
+  "tests_failed": [],
+  "decisions": [
+    "8 riesgos documentados en checkpoints/P00.md. Mayor: duplicar invention/scoring legacy. Mitigación: TechniqueAdapter + ScoreCard aditivo."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

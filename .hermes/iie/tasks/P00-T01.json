@@ -1,0 +1,20 @@
+{
+  "task_id": "P00-T01",
+  "title": "Repo inventory read-only",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "low/high por blueprint",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [],
+  "tests_passed": [],
+  "tests_failed": [],
+  "decisions": [
+    "CRIBA 68 py / 20787 LOC / 44 paquetes; SUPRA 13 py / 2089 LOC. Sin código intelligence previo. Limpieza: tmp_p00_inventory.py pendiente de borrar."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}
