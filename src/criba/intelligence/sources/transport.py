@@ -51,7 +51,7 @@ class BudgetExceeded(Exception):
 class Transport:
     """GET sender with retry/backoff/429 handling. sender is injectable."""
 
-    RETRY_STATUSES = {429, 500, 502, 503, 504}
+    RETRY_STATUSES = {0, 429, 500, 502, 503, 504}
 
     def __init__(self, sender: Callable[..., Response] | None = None,
                  budget: TransportBudget | None = None,

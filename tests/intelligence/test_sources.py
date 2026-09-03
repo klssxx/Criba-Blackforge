@@ -137,6 +137,39 @@ def test_transport_retries_500_then_200():
     assert calls["n"] == 2
 
 
+def test_transport_propagates_configured_timeout_to_sender():
+    seen = {}
+
+    def sender(url, params=None, timeout=0, headers=None):
+        seen["timeout"] = timeout
+        return Response(200, "{}")
+
+    t = Transport(sender=sender, timeout_s=7.5)
+    assert t.get("https://x").status == 200
+    assert seen["timeout"] == 7.5
+
+
+def test_transport_retries_network_errors_and_returns_final_error(monkeypatch):
+    monkeypatch.setattr(time, "sleep", lambda s: None)
+    calls = {"n": 0}
+
+    def offline(*args, **kwargs):
+        calls["n"] += 1
+        raise ConnectionError("offline")
+
+    t = Transport(sender=offline, budget=TransportBudget(max_requests=10), max_retries=2)
+    result = t.get("https://x")
+    assert result.status == 0 and "offline" in result.text
+    assert calls["n"] == 3
+
+
+def test_transport_budget_honors_runtime_limit():
+    expired = TransportBudget(max_requests=5, max_runtime_s=0, started_at=0)
+    t = Transport(sender=lambda *a, **k: Response(200, "{}"), budget=expired)
+    with pytest.raises(BudgetExceeded):
+        t.get("https://x")
+
+
 def test_transport_429_reports_rate_limited(monkeypatch):
     # no sleep in tests
     monkeypatch.setattr(time, "sleep", lambda s: None)

@@ -1,0 +1,44 @@
+{
+  "task_id": "P03-T09",
+  "title": "Transport rate limiting, timeout, and retry audit",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "src/criba/intelligence/sources/transport.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "tests/intelligence/test_sources.py"
+  ],
+  "files_created": [
+    ".hermes/iie/tasks/P03-T09.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_sources.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sources.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/sources"
+  ],
+  "tests_passed": [
+    "21 passed: sources plus boundaries",
+    "177 passed: intelligence suite",
+    "compileall: success",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "HTTP 429 and 5xx responses, plus normalized network failures (status 0), are retryable through the same bounded retry policy.",
+    "Tests verify configured timeout propagation to injected senders, runtime/request budget enforcement, HTTP retry, and network-error retry without real sleeps or network access."
+  ],
+  "risks": [
+    "Backoff remains deterministic and bounded but has no jitter; production callers may add policy-level jitter later without changing adapters.",
+    "Existing mypy errors in the source sector predate this task and remain tracked separately."
+  ],
+  "follow_up": [
+    "P03-T10: source architecture audit."
+  ],
+  "completed_at": "2026-09-03T21:00:23+02:00"
+}
