@@ -168,6 +168,17 @@ class PromotionStatus(str, Enum):
     NEEDS_MORE_DATA = "needs_more_data"
 
 
+class QualityBaseline(BaseModel):
+    """Versioned numeric baseline used for drift and promotion decisions."""
+
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    version: str = "quality-baseline-v1"
+    metrics: dict[str, float] = Field(default_factory=dict)
+    sample_size: int = 0
+    source_hash: str = ""
+
+
 QUALITY_FORMULA_VERSION = "quality-score-v1"
 QUALITY_WEIGHTS: dict[str, float] = {
     "relevance": 0.20,
@@ -187,7 +198,18 @@ QUALITY_WEIGHTS: dict[str, float] = {
 class MetricsCollector:
     """§13 — Aggregates metrics from all layers."""
 
-    def __init__(self) -> None:
+    def __init__(
+        self,
+        *,
+        drift_threshold: float = 0.20,
+        promotion_threshold: float = 0.05,
+    ) -> None:
+        if not 0.0 <= drift_threshold <= 1.0:
+            raise ValueError("drift_threshold debe estar entre 0 y 1")
+        if not 0.0 <= promotion_threshold <= 1.0:
+            raise ValueError("promotion_threshold debe estar entre 0 y 1")
+        self.drift_threshold = drift_threshold
+        self.promotion_threshold = promotion_threshold
         self.input_metrics: InputMetrics | None = None
         self.generation_metrics: GenerationMetrics | None = None
         self.evaluation_metrics: EvaluationMetrics | None = None
@@ -196,6 +218,8 @@ class MetricsCollector:
         self.result_metrics: ResultMetrics | None = None
         self.explicit_feedback: list[ExplicitFeedback] = []
         self.implicit_feedback: list[ImplicitFeedback] = []
+        self._human_review_count = 0
+        self._return_to_previous_count = 0
 
     def record_explicit_feedback(self, feedback: ExplicitFeedback) -> None:
         """§13.8 — Store user feedback as an immutable typed record."""
@@ -204,6 +228,51 @@ class MetricsCollector:
     def record_implicit_feedback(self, feedback: ImplicitFeedback) -> None:
         """§13.9 — Store behavior signals without treating clicks as quality."""
         self.implicit_feedback.append(feedback)
+
+    def record_human_review(
+        self,
+        duration_ms: float,
+        *,
+        returned_to_previous: bool = False,
+    ) -> ProcessMetrics:
+        """Record HITL review time and phase returns as process evidence."""
+        if duration_ms < 0:
+            raise ValueError("duration_ms no puede ser negativo")
+        self._human_review_count += 1
+        if returned_to_previous:
+            self._return_to_previous_count += 1
+        current = self.process_metrics or ProcessMetrics()
+        self.process_metrics = current.model_copy(update={
+            "human_review_time_ms": current.human_review_time_ms + duration_ms,
+            "return_to_previous_rate": (
+                self._return_to_previous_count / self._human_review_count
+            ),
+        })
+        return self.process_metrics
+
+    @staticmethod
+    def _baseline_metrics(
+        baseline: Mapping[str, float] | QualityBaseline,
+    ) -> Mapping[str, float]:
+        """Accept either a raw golden mapping or a versioned baseline."""
+        return baseline.metrics if isinstance(baseline, QualityBaseline) else baseline
+
+    def capture_baseline(
+        self,
+        *,
+        sample_size: int = 0,
+        source_hash: str = "",
+        version: str = "quality-baseline-v1",
+    ) -> QualityBaseline:
+        """Capture the current numeric metrics as an explicit golden baseline."""
+        if sample_size < 0:
+            raise ValueError("sample_size no puede ser negativo")
+        return QualityBaseline(
+            version=version,
+            metrics=self._flatten(),
+            sample_size=sample_size,
+            source_hash=source_hash,
+        )
 
     def feedback_signal(self) -> float:
         """Return only explicit feedback as a quality signal.
@@ -286,28 +355,57 @@ class MetricsCollector:
         }
 
     def compute_composite(self) -> float:
-        """§13.15 — Backward-compatible composite score with stable summation."""
-        scores: list[float] = []
-        if self.generation_metrics:
-            scores.append(self.generation_metrics.semantic_diversity)
-            scores.append(self.generation_metrics.relevance)
-        if self.evaluation_metrics:
-            scores.append(self.evaluation_metrics.confidence_calibration)
-        if self.process_metrics:
-            scores.append(self.process_metrics.cache_hit_rate)
-        if self.result_metrics:
-            scores.append(self.result_metrics.human_acceptance)
-        return math.fsum(scores) / len(scores) if scores else 0.0
+        """§13.15 — Return the visible weighted quality score."""
+        return float(self.quality_breakdown()["score"])
 
-    def detect_drift(self, baseline: Mapping[str, float]) -> list[str]:
-        """§13.12 — Detect quality drift against baseline."""
+    def detect_drift(
+        self,
+        baseline: Mapping[str, float] | QualityBaseline,
+        *,
+        threshold: float | None = None,
+        per_metric_thresholds: Mapping[str, float] | None = None,
+        directions: Mapping[str, str] | None = None,
+    ) -> list[str]:
+        """§13.12 — Detect configurable quality drift against a golden baseline."""
+        default_threshold = self.drift_threshold if threshold is None else threshold
+        if not 0.0 <= default_threshold <= 1.0:
+            raise ValueError("threshold debe estar entre 0 y 1")
         alerts: list[str] = []
         current = self._flatten()
-        for key, base_val in baseline.items():
+        baseline_metrics = self._baseline_metrics(baseline)
+        lower_is_better = {
+            "duplication_rate",
+            "invalid_output_rate",
+            "arbitrary_score_rate",
+            "false_winner_rate",
+            "latency_per_stage",
+            "retries",
+            "cancellations",
+            "summarization_loss",
+            "abandonment_rate",
+            "regressions",
+        }
+        for key, base_val in baseline_metrics.items():
             cur_val = current.get(key)
             if cur_val is None:
                 continue
-            if cur_val < base_val * 0.8:
+            limit = (
+                per_metric_thresholds.get(key, default_threshold)
+                if per_metric_thresholds
+                else default_threshold
+            )
+            if not 0.0 <= limit <= 1.0:
+                raise ValueError("cada threshold debe estar entre 0 y 1")
+            direction = (directions or {}).get(
+                key,
+                "lower_is_better" if key in lower_is_better else "higher_is_better",
+            )
+            changed = (
+                cur_val > base_val * (1.0 + limit)
+                if direction == "lower_is_better"
+                else cur_val < base_val * (1.0 - limit)
+            )
+            if changed:
                 alerts.append(f"drift:{key}:{base_val:.2f}->{cur_val:.2f}")
         return alerts
 
@@ -328,38 +426,77 @@ class MetricsCollector:
                         flat[k] = float(v)
         return dict(flat)
 
-    def evaluate_promotion(self, baseline: Mapping[str, float]) -> tuple[PromotionStatus, list[str]]:
-        """§13.13 — Decide if a change should be promoted."""
+    def evaluate_promotion(
+        self,
+        baseline: Mapping[str, float] | QualityBaseline,
+        *,
+        threshold: float | None = None,
+        min_human_acceptance: float = 0.5,
+        require_human_review: bool = False,
+        minimum_sample_size: int = 0,
+    ) -> tuple[PromotionStatus, list[str]]:
+        """§13.13 — Decide promotion with regression and HITL fail-closed gates."""
+        if not 0.0 <= min_human_acceptance <= 1.0:
+            raise ValueError("min_human_acceptance debe estar entre 0 y 1")
+        if minimum_sample_size < 0:
+            raise ValueError("minimum_sample_size no puede ser negativo")
+        change_threshold = self.promotion_threshold if threshold is None else threshold
+        if not 0.0 <= change_threshold <= 1.0:
+            raise ValueError("threshold debe estar entre 0 y 1")
         reasons: list[str] = []
         current = self._flatten()
+        baseline_metrics = self._baseline_metrics(baseline)
 
-        # Blackforge must not degrade.
+        # Blackforge must not degrade and requires an observed HITL review.
         if self.blackforge_metrics:
             if self.blackforge_metrics.authorization_completeness < 1.0:
                 reasons.append("blackforge_authorization_incomplete")
+            require_human_review = True
 
         # Must not break traceability.
-        if self.process_metrics and self.process_metrics.schema_failures > 0:
-            reasons.append("schema_failures_present")
+        if self.process_metrics:
+            if self.process_metrics.schema_failures > 0:
+                reasons.append("schema_failures_present")
+            if self.process_metrics.traceability_failures > 0:
+                reasons.append("traceability_failures_present")
+
+        if require_human_review and (
+            self.process_metrics is None
+            or self.process_metrics.human_review_time_ms <= 0
+        ):
+            reasons.append("human_review_required")
+
+        if self.result_metrics:
+            if self.result_metrics.human_acceptance < min_human_acceptance:
+                reasons.append("human_acceptance_below_threshold")
+            if self.result_metrics.regressions > 0:
+                reasons.append("result_regressions_present")
+            sample_size = max(
+                self.result_metrics.ideas_validated,
+                self.result_metrics.ideas_implemented,
+            )
+            if sample_size < minimum_sample_size:
+                reasons.append("insufficient_sample_size")
+        elif minimum_sample_size > 0:
+            reasons.append("result_metrics_required")
 
         # Explicit user feedback is a promotion signal; clicks are not.
         if self.explicit_feedback and self.feedback_signal() < 0.5:
             reasons.append("negative_explicit_feedback")
 
-        # Hard blockers reject immediately.
         if reasons:
             return PromotionStatus.REJECTED, reasons
 
-        # Count improvements and regressions.
+        # Count improvements and regressions using the configurable threshold.
         improvements = 0
         regressions = 0
-        for key, base_val in baseline.items():
+        for key, base_val in baseline_metrics.items():
             cur_val = current.get(key)
             if cur_val is None:
                 continue
-            if cur_val > base_val * 1.05:
+            if cur_val > base_val * (1.0 + change_threshold):
                 improvements += 1
-            elif cur_val < base_val * 0.95:
+            elif cur_val < base_val * (1.0 - change_threshold):
                 regressions += 1
 
         if regressions > improvements:

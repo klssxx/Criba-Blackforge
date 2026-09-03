@@ -21,6 +21,7 @@ from typing import Any
 
 from pydantic import BaseModel, ConfigDict, Field
 
+from .adversarial_self import AdversarialSelfReinforcement
 from .blackforge_causal import canonical_hash
 
 # ---------------------------------------------------------------------------
@@ -133,6 +134,10 @@ class Stage5Output(BaseModel):
     rejected_proposals: list[str] = Field(default_factory=list)
     surviving_proposals: list[str] = Field(default_factory=list)
     evidence_needed: list[str] = Field(default_factory=list)
+    adversarial_reinforcement: dict[str, Any] = Field(default_factory=dict)
+    kill_criteria: list[str] = Field(default_factory=list)
+    survivable_parts: list[str] = Field(default_factory=list)
+    residual_risk: str = ""
 
 
 class Stage6Output(BaseModel):
@@ -398,21 +403,38 @@ class ChainRunner:
         """§7.7 — Crítica, ataque y validación."""
         packet = ctx.packet
         directions = ctx.memory.candidate_directions or []
+        is_blackforge = packet.get("mode") == "blackforge" or bool(packet.get("blackforge_context"))
+        thesis_packet = dict(packet)
+        thesis_packet.setdefault("central_problem", ctx.memory.current_problem_definition)
+        thesis_packet.setdefault("implementation_plan", " ".join(directions[:3]))
+        thesis_packet.setdefault("success_criteria", ["La prueba debe falsar el mecanismo causal"])
+        thesis, adversarial, resolution = AdversarialSelfReinforcement().run(
+            thesis_packet,
+            is_blackforge=is_blackforge,
+        )
+        extension = adversarial.blackforge_extension
+        residual_risk = extension.residual_risk if extension is not None else ""
         return Stage5Output(
             adversarial_reviews=[
                 "Verificar dependencias frágiles",
                 "Buscar escenarios de fallo no cubiertos",
             ],
-            falsification_tests=[
-                "Definir observación que invalide el mecanismo",
-            ],
+            falsification_tests=list(adversarial.falsification_tests),
             likely_failures=["Fallo por dependencia no verificada"],
-            simple_alternatives=["Versión mínima sin nueva abstracción"],
+            simple_alternatives=list(adversarial.simpler_alternatives),
             cost_analysis={"implementation": "medium", "maintenance": "low"},
             revised_scores={"value": 0.7, "feasibility": 0.6, "risk": 0.3},
             rejected_proposals=[d for d in directions[3:]],
             surviving_proposals=directions[:3],
-            evidence_needed=["Traza reproducible", "Prueba que mida el mecanismo"],
+            evidence_needed=list(resolution.evidence_required),
+            adversarial_reinforcement={
+                "thesis": thesis.model_dump(mode="json"),
+                "adversarial": adversarial.model_dump(mode="json"),
+                "resolution": resolution.model_dump(mode="json"),
+            },
+            kill_criteria=list(adversarial.kill_criteria),
+            survivable_parts=list(adversarial.survivable_parts),
+            residual_risk=residual_risk,
         )
 
     def _execute_stage_6(self, ctx: StageContext) -> Stage6Output:

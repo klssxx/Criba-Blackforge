@@ -255,17 +255,21 @@ class AdversarialSelfReinforcement:
         survived: list[str] = []
         failed: list[str] = []
 
-        # If thesis has evidence, causal challenges may fail.
+        # Evaluate every challenge, not only the first one.  A partial list
+        # would make the resolution optimistic when the adversary produced
+        # multiple independent failure modes.
+        causal_challenges = [item for item in adversarial.causal_challenges if item]
+        implementation_failures = [item for item in adversarial.implementation_failures if item]
         if thesis.supporting_evidence:
-            failed.append(adversarial.causal_challenges[0] if adversarial.causal_challenges else "")
+            failed.extend(causal_challenges)
         else:
-            survived.append(adversarial.causal_challenges[0] if adversarial.causal_challenges else "")
+            survived.extend(causal_challenges)
 
         # If thesis has implementation details, implementation failures may fail.
         if thesis.implementation:
-            failed.append(adversarial.implementation_failures[0] if adversarial.implementation_failures else "")
+            failed.extend(implementation_failures)
         else:
-            survived.append(adversarial.implementation_failures[0] if adversarial.implementation_failures else "")
+            survived.extend(implementation_failures)
 
         survived = [s for s in survived if s]
         failed = [f for f in failed if f]
