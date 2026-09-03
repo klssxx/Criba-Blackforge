@@ -10,19 +10,19 @@
   },
   "current": {
     "phase": "P08",
-    "task": "P08-T09",
-    "subtask": "sleeping-beauty detector",
+    "task": "P08-T10",
+    "subtask": "gap-engine audit",
     "status": "NOT_STARTED",
     "started_at": "",
-    "last_updated": "2026-09-03T09:26:59+02:00"
+    "last_updated": "2026-09-03T09:33:50+02:00"
   },
   "last_good_state": {
-    "commit": "86fa59c4a5b984752143e8354f8e64f221dd710e",
+    "commit": "77e55b1f00e9c0ea89324ee7966850744dc3d0b4",
     "phase": "P08",
-    "task": "P08-T08",
+    "task": "P08-T09",
     "tests": [
-      "python -m pytest tests/intelligence/test_dormant.py tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider: 39 passed",
-      "python -m pytest -q -p no:cacheprovider: 840 passed",
+      "python -m pytest tests/intelligence/test_sleeping_beauty.py tests/intelligence/test_dormant.py tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider: 43 passed",
+      "python -m pytest -q -p no:cacheprovider: 844 passed",
       "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py: success"
     ]
   },
@@ -35,11 +35,11 @@
     "P04-T01", "P04-T02", "P04-T03", "P04-T04", "P04-T05", "P04-T06",
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
     "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08", "P06-T09",
-    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06", "P07-T07", "P07-T08", "P07-T09", "P07-T10", "P08-T01", "P08-T02", "P08-T03", "P08-T04", "P08-T05", "P08-T06", "P08-T07", "P08-T08"
+    "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06", "P07-T07", "P07-T08", "P07-T09", "P07-T10", "P08-T01", "P08-T02", "P08-T03", "P08-T04", "P08-T05", "P08-T06", "P08-T07", "P08-T08", "P08-T09"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
-  "pending_tasks": ["P08-T09", "BF-P00-T06"],
+  "pending_tasks": ["P08-T10", "BF-P00-T06"],
   "skipped_tasks": [],
   "failed_tasks": [],
   "decisions": [
@@ -76,7 +76,8 @@
     "D-P08-5: T071 technology resurrection exige evidencia histórica de bloqueo y evidencia actual de cambio de restricción y factibilidad; soporta metadata estructurada y extracción textual determinista sin afirmar restricciones desaparecidas sin prueba.",
     "D-P08-6: T086 white-space analysis emite sólo ausencias o subcoberturas explícitas con procedencia; clasifica research/patent/market y excluye lenguaje que ya declara resuelto el gap.",
     "D-P08-7: patent expiration opportunity queda como contrato y extractor de señales explícitas; fechas, mantenimiento, jurisdicción y claim scope requieren verificación legal y nunca se convierten en freedom to operate automático.",
-    "D-P08-8: dormant paper detection requiere evidencia explícita de edad y baja atención; no basta con que un artículo sea antiguo, y el cálculo temporal usa as_of explícito para mantener determinismo."
+    "D-P08-8: dormant paper detection requiere evidencia explícita de edad y baja atención; no basta con que un artículo sea antiguo, y el cálculo temporal usa as_of explícito para mantener determinismo.",
+    "D-P08-9: sleeping beauty se separa de dormancy: requiere ventana inicial observada y salto posterior de citas por umbral absoluto y razón; texto explícito sin métricas queda como menor confianza."
   ],
   "open_questions": ["NEON-ARCH-AUDIT: audit existing persistence/CLI/configuration and choose the provider-neutral PostgreSQL adapter boundary before any Neon integration or dependency install."],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
@@ -101,31 +102,31 @@
       "P05": "65 passed; mypy success (2026-09-03)",
       "P06": "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed; mypy success (2026-09-03)",
       "P07": "11 semantics audit + 11 synthetic tests passed; 52 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
-      "P08": "39 targeted gap/contract tests passed; mypy success (2026-09-03)",
+      "P08": "43 targeted gap/contract tests passed; mypy success (2026-09-03)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "840 passed in P08-T08 (2026-09-03)",
+      "criba": "844 passed in P08-T09 (2026-09-03)",
       "supra": "21 passed in 2.00s (2026-09-03)"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P08-T09: implement sleeping-beauty detector.",
-  "resume_instructions": "P08-T08 is verified at 86fa59c with 4 focused dormant-paper tests and 840 full CRIBA tests passing. Resume at P08-T09 sleeping-beauty detector. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
+  "next_action": "P08-T10: perform gap-engine audit.",
+  "resume_instructions": "P08-T09 is verified at 77e55b1 with 4 focused sleeping-beauty tests and 844 full CRIBA tests passing. Resume at P08-T10 gap-engine audit. BF-P00-T06 still needs golden validation in an isolated copy; do not start BF-P01 or overwrite live goldens.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
       "path": "E:/PROYECTS/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "86fa59c4a5b984752143e8354f8e64f221dd710e",
+      "commit": "77e55b1f00e9c0ea89324ee7966850744dc3d0b4",
       "tags_at_head": [],
       "dirty_files": [" M docs/FINAL_REPORT.md", "?? .pre-commit-config.yaml", "?? docs/TOOLCHAIN.md", "?? docs/architecture/", "?? scripts/verify-dev-environment.ps1", "?? scripts/verify-dev-environment.sh"],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "86fa59c4a5b984752143e8354f8e64f221dd710e",
-      "last_good_tests": ["P08 dormant papers: 4 focused passed; full CRIBA: 840 passed; mypy success"]
+      "last_good_commit": "77e55b1f00e9c0ea89324ee7966850744dc3d0b4",
+      "last_good_tests": ["P08 sleeping beauty: 4 focused passed; full CRIBA: 844 passed; mypy success"]
     },
     "SUPRA": {
       "path": "E:/PROYECTS/SUPRA",
@@ -169,5 +170,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-03T09:26:59+02:00"
+  "last_updated": "2026-09-03T09:33:50+02:00"
 }

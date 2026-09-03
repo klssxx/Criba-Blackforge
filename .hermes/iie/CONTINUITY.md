@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 09:26:59+02:00 — P08-T08 VERIFIED; P08-T09 NOT_STARTED
+**Última actualización:** 2026-09-03 09:33:50+02:00 — P08-T09 VERIFIED; P08-T10 NOT_STARTED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -34,10 +34,11 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P08-T06 committed in `60b710f`: deterministic white-space analysis with research/patent/market classification, explicit provenance and 4 focused tests; full regression is `832 passed`; mypy and compileall are clean.
 - P08-T07 committed in `a8b84ba`: evidence-gated patent-expiration opportunity contract and extractor, with 4 focused tests; full regression is `836 passed`; mypy and compileall are clean.
 - P08-T08 committed in `86fa59c`: dormant-paper candidate contract and deterministic age/low-attention detector, with 4 focused tests; full regression is `840 passed`; mypy and compileall are clean.
+- P08-T09 committed in `77e55b1`: sleeping-beauty candidate contract and delayed-attention detector, with 4 focused tests; full regression is `844 passed`; mypy and compileall are clean.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05, P06 and P07 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T08 are verified. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
+P05, P06 and P07 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T09 are verified. No in-scope code is currently uncommitted; unrelated untracked files are preserved and excluded from commits; the next task is recorded in `STATE.json`.
 
 ## WHAT FAILED?
 No runtime failure. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -49,7 +50,7 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-P08-T08 code verified in `86fa59c`: dormant-paper candidate contract and detector, with 4 focused tests, 39 focused gap/contract tests, and full CRIBA regression at 840 passed.
+P08-T09 code verified in `77e55b1`: sleeping-beauty candidate contract and detector, with 4 focused tests, 43 focused gap/contract tests, and full CRIBA regression at 844 passed.
 
 ## WHAT TESTS CURRENTLY PASS?
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
@@ -111,6 +112,11 @@ P08-T08 code verified in `86fa59c`: dormant-paper candidate contract and detecto
 - `mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
 - `python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
 - `python -m pytest -q -p no:cacheprovider` → 840 passed, 1 dependency deprecation warning.
+- `python -m pytest tests/intelligence/test_sleeping_beauty.py -q -p no:cacheprovider` → 4 passed.
+- `python -m pytest tests/intelligence/test_sleeping_beauty.py tests/intelligence/test_dormant.py tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider` → 43 passed.
+- `mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
+- `python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py` → success.
+- `python -m pytest -q -p no:cacheprovider` → 844 passed, 1 dependency deprecation warning.
 - `mypy --no-incremental src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities` → success.
 - `mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py` → success.
@@ -123,7 +129,7 @@ None. All IIE feature flags remain `false`.
 The Neon steering directive is recorded as a cross-cutting architecture addendum, not as a signal-layer dependency. Before any provider implementation: audit the existing persistence/configuration boundary; keep PostgreSQL as the standard contract; isolate Neon-specific code under infrastructure/adapters; never write to Neon `production`; do not expose connection strings; and stop only billable, admin, destructive, production-write or authentication-gated actions for explicit user approval. Local PostgreSQL portability remains mandatory.
 
 ## WHAT IS THE NEXT EXACT TASK?
-P08-T09: sleeping-beauty detector. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
+P08-T10: gap-engine audit. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-GPT-5.6 Terra high, per blueprint. Required verification: implement sleeping-beauty detection as a distinct delayed-attention pattern over dormant papers, add focused tests, run strict mypy for touched modules, `git diff --check`, and the full regression before advancing the checkpoint.
+GPT-5.6 Sol high, per blueprint. Required verification: audit all P08 gap modules for contract, provenance, determinism and false-positive defects; fix only objective issues, add regression tests when needed, run strict mypy, `git diff --check`, and the full regression before advancing the checkpoint.
