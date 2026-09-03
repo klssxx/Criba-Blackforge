@@ -15,11 +15,23 @@ _LIMITATION_CUES = re.compile(
     re.IGNORECASE,
 )
 _RESOLVED_CUE = re.compile(
-    r"\b(?:overcomes?|addresses?|resolved?|mitigates?|removes?)\b.*"
+    r"\b(?:overcomes?|addresses?|resolved?|mitigates?|removes?|"
+    r"satisf(?:y|ies|ied)|meets?|eliminates?)\b[^.!?\n]*"
     r"\b(?:limitation|constraint|shortcoming)\b",
     re.IGNORECASE,
 )
+_NEGATED_RESOLVED_CUE = re.compile(
+    r"\b(?:no|never)\s+(?:(?!and\b)[\w-]+\s+){0,3}"
+    r"(?:addresses?|addressed|overcomes?|overcome|resolves?|resolved|"
+    r"mitigates?|removes?)\b|"
+    r"\b(?:does|did|do)\s+not\s+(?:address|overcome|resolve|mitigate|remove)\w*\b",
+    re.IGNORECASE,
+)
 _SENTENCE = re.compile(r"[^.!?\n]+(?:[.!?]|$)")
+
+
+def _is_resolved(sentence: str) -> bool:
+    return bool(_RESOLVED_CUE.search(sentence)) and not _NEGATED_RESOLVED_CUE.search(sentence)
 
 
 def _sentences(text: str) -> Iterable[str]:
@@ -40,7 +52,7 @@ class LimitationExtractor:
         for document in documents:
             for fragment in document.fragments:
                 for sentence in _sentences(fragment.text):
-                    if not _LIMITATION_CUES.search(sentence) or _RESOLVED_CUE.search(sentence):
+                    if not _LIMITATION_CUES.search(sentence) or _is_resolved(sentence):
                         continue
                     if scope and scope.casefold() not in sentence.casefold():
                         continue

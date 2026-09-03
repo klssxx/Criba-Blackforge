@@ -74,7 +74,7 @@ def _citation_series(metadata: dict[str, Any]) -> dict[int, int]:
         parsed_year = _year(raw_year)
         parsed_count = _int(raw_count)
         if parsed_year is not None and parsed_count is not None:
-            series[parsed_year] = parsed_count
+            series[parsed_year] = max(series.get(parsed_year, 0), parsed_count)
     return series
 
 

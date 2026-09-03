@@ -21,7 +21,17 @@ _RESOLVED_CUE = re.compile(
     r"\b(?:open question|research gap|gap)\b",
     re.IGNORECASE,
 )
+_NEGATED_RESOLVED_CUE = re.compile(
+    r"\b(?:no|never)\s+(?:(?!and\b)[\w-]+\s+){0,3}"
+    r"(?:addresses?|addressed|resolves?|resolved|answers?|answered)\b|"
+    r"\b(?:does|did|do)\s+not\s+(?:address|resolve|answer)\w*\b",
+    re.IGNORECASE,
+)
+_SENTENCE = re.compile(r"[^.!?\n]+(?:[.!?]|$)")
 
+
+def _is_resolved(sentence: str) -> bool:
+    return bool(_RESOLVED_CUE.search(sentence)) and not _NEGATED_RESOLVED_CUE.search(sentence)
 
 def _sentences(text: str) -> Iterable[str]:
     for match in _SENTENCE.finditer(text):
@@ -41,7 +51,7 @@ class ResearchGapExtractor:
         for document in documents:
             for fragment in document.fragments:
                 for sentence in _sentences(fragment.text):
-                    if not _GAP_CUES.search(sentence) or _RESOLVED_CUE.search(sentence):
+                    if not _GAP_CUES.search(sentence) or _is_resolved(sentence):
                         continue
                     statement = sentence[:500]
                     if topic and topic.casefold() not in statement.casefold():

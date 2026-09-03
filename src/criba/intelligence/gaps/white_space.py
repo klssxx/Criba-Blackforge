@@ -17,7 +17,9 @@ __all__ = [
 ]
 
 _SPACE_CUES = re.compile(
-    r"\b(?:white[- ]space|whitespace|few|little|scarce|"
+    r"\b(?:white[- ]space|whitespace|"
+    r"(?:few|little|scarce)\s+(?:stud(?:y|ies)|research|evidence|data|"
+    r"patents?|products?|coverage|options?|solutions?)|"
     r"underexplored|unexplored|unaddressed|overlooked|underserved|"
     r"no\s+(?:research|stud(?:y|ies)|patent|product|coverage)|"
     r"lack(?:s|ing)?\s+of|not\s+(?:covered|addressed|served))\b",
@@ -29,7 +31,18 @@ _RESOLVED_CUE = re.compile(
     r"underserved|unserved|unexplored)\b",
     re.IGNORECASE,
 )
+_NEGATED_RESOLVED_CUE = re.compile(
+    r"\b(?:no|never)\s+(?:(?!and\b)[\w-]+\s+){0,3}"
+    r"(?:addresses?|addressed|fills?|closes?|solves?|covers?|serves?|"
+    r"resolves?)\b|"
+    r"\b(?:does|did|do)\s+not\s+(?:address|fill|close|solve|cover|serve|resolve)\w*\b",
+    re.IGNORECASE,
+)
 _SENTENCE = re.compile(r"[^.!?\n]+(?:[.!?]|$)")
+
+
+def _is_resolved(sentence: str) -> bool:
+    return bool(_RESOLVED_CUE.search(sentence)) and not _NEGATED_RESOLVED_CUE.search(sentence)
 
 
 def _sentences(text: str) -> list[str]:
@@ -52,8 +65,9 @@ def _clean(value: str) -> str:
 
 
 def _space_type(text: str, document: EvidenceDocument, requested: str = "") -> str:
-    if requested:
-        return requested.casefold()
+    requested_type = requested.casefold().strip()
+    if requested_type in {"patent", "research", "market"}:
+        return requested_type
     lowered = text.casefold()
     if re.search(r"\b(?:patent|patents|intellectual property|\bip\b)\b", lowered):
         return "patent"
@@ -77,9 +91,10 @@ def _metadata_candidate(document: EvidenceDocument) -> WhiteSpaceCandidate | Non
     if not statement:
         return None
     explicit = metadata.get("white_space")
-    if explicit is not None and str(explicit).casefold() not in {"true", "1", "yes"}:
+    explicit_enabled = str(explicit).casefold() in {"true", "1", "yes"}
+    if explicit is not None and not explicit_enabled:
         return None
-    if explicit is not True and not _SPACE_CUES.search(statement):
+    if not explicit_enabled and not _SPACE_CUES.search(statement):
         return None
     requested = _text(metadata.get("space_type", ""))
     return WhiteSpaceCandidate(
@@ -115,7 +130,7 @@ class WhiteSpaceAnalyzer:
                 )
                 for fragment in document.fragments
                 for sentence in _sentences(fragment.text)
-                if _SPACE_CUES.search(sentence) and not _RESOLVED_CUE.search(sentence)
+                if _SPACE_CUES.search(sentence) and not _is_resolved(sentence)
             )
             for candidate in extracted:
                 if requested_type and candidate.space_type != requested_type:
