@@ -45,6 +45,7 @@ class LinkPredictionInterface:
         return {
             edge["dst"] if edge["src"] == entity_id else edge["src"]
             for edge in self.store.neighbors(entity_id)
+            if edge["src"] != edge["dst"]
         }
 
 

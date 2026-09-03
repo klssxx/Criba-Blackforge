@@ -92,7 +92,7 @@ def test_upsert_edge_updates_without_duplicate_edges(tmp_path):
         assert store.stats() == {"nodes": 2, "edges": 1}
         assert store.neighbors(source.entity_id)[0]["relation_id"] == 1
         assert store.neighbors(source.entity_id)[0]["weight"] == 0.9
-        assert store.neighbors(source.entity_id)[0]["source_doc_ids"] == ["doc-2"]
+        assert store.neighbors(source.entity_id)[0]["source_doc_ids"] == ["doc-1", "doc-2"]
     finally:
         store.close()
 

@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import json
-import sqlite3
 from collections import deque
 from collections.abc import Iterable, Mapping
 from pathlib import Path
@@ -43,6 +42,12 @@ def _unjson(value: str, default: Any) -> Any:
         return default
 
 
+def _merge_source_doc_ids(existing: str | None, incoming: Any) -> str:
+    existing_ids = _unjson(existing or "", [])
+    incoming_ids = incoming or []
+    return _json(sorted(set(existing_ids) | set(incoming_ids)))
+
+
 def _as_dict(value: EntityNode | RelationEdge | Mapping[str, Any]) -> dict[str, Any]:
     if isinstance(value, (EntityNode, RelationEdge)):
         return value.to_dict()
@@ -62,6 +67,14 @@ class SQLiteKnowledgeGraphStore:
     def upsert_node(self, node: EntityNode | Mapping[str, Any]) -> None:
         payload = _as_dict(node)
         entity_id = payload["entity_id"]
+        existing = self._conn.execute(
+            "SELECT source_doc_ids FROM intel_entities WHERE entity_id=?",
+            (entity_id,),
+        ).fetchone()
+        source_doc_ids = _merge_source_doc_ids(
+            existing["source_doc_ids"] if existing else None,
+            payload.get("source_doc_ids"),
+        )
         self._conn.execute(
             """
             INSERT INTO intel_entities
@@ -78,7 +91,7 @@ class SQLiteKnowledgeGraphStore:
                 payload.get("label", ""),
                 payload.get("node_type", ""),
                 _json(payload.get("properties") or {}),
-                _json(payload.get("source_doc_ids") or []),
+                source_doc_ids,
             ),
         )
         for alias in payload.get("aliases") or []:
@@ -131,12 +144,15 @@ class SQLiteKnowledgeGraphStore:
         src = payload["src"]
         dst = payload["dst"]
         relation = payload["relation"]
-        source_doc_ids = _json(payload.get("source_doc_ids") or [])
         existing = self._conn.execute(
-            "SELECT relation_id FROM intel_relations "
+            "SELECT relation_id, source_doc_ids FROM intel_relations "
             "WHERE src=? AND dst=? AND relation=? ORDER BY relation_id LIMIT 1",
             (src, dst, relation),
         ).fetchone()
+        source_doc_ids = _merge_source_doc_ids(
+            existing["source_doc_ids"] if existing else None,
+            payload.get("source_doc_ids"),
+        )
         if existing is None:
             self._conn.execute(
                 "INSERT INTO intel_relations (src, dst, relation, weight, source_doc_ids) "

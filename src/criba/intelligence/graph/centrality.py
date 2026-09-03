@@ -30,6 +30,7 @@ class GraphCentrality:
                 edge["dst"] if edge["src"] == entity_id else edge["src"]
                 for edge in self.store.neighbors(entity_id)
                 if edge["src"] in allowed and edge["dst"] in allowed
+                and edge["src"] != edge["dst"]
             }
             scores[entity_id] = len(neighbors) / denominator
         return scores
