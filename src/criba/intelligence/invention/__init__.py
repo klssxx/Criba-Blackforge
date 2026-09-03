@@ -5,6 +5,7 @@ from .registry import OperatorContext, OperatorRegistry
 from .rare_combinations import detect_rare_combinations
 from .cross_domain import detect_cross_domain_analogies
 from .scamper import generate_scamper_hypotheses
+from .triz import generate_triz_hypotheses
 
 __all__ = [
     "OPERATORS_BY_KEY",
@@ -14,6 +15,7 @@ __all__ = [
     "detect_rare_combinations",
     "detect_cross_domain_analogies",
     "generate_scamper_hypotheses",
+    "generate_triz_hypotheses",
     "get_operator",
     "operator_definitions",
 ]

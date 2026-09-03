@@ -17,6 +17,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from ..contracts import InventionCandidate
+
 TRIZ_TECHNIQUE_ID = "T057"
 
 #: Explicitly False until a sourced, licensed contradiction-matrix dataset is
@@ -104,3 +106,34 @@ def get_principle(number: int) -> TrizPrinciple:
     if not 1 <= number <= PRINCIPLES_COUNT:
         raise KeyError(f"unknown TRIZ principle number: {number}")
     return _PRINCIPLES[number - 1]
+
+
+def generate_triz_hypotheses(
+    problem: str, *, limit: int = 40
+) -> list[InventionCandidate]:
+    """Produce deterministic TRIZ reasoning prompts, never asserted solutions.
+
+    Each of the canonical principles becomes one InventionCandidate prompt
+    bound to T057. A prompt is a question for investigation; it does NOT
+    assert feasibility, novelty or patentability, and no contradiction matrix
+    is consulted (see CONTRADICTION_MATRIX_AVAILABLE).
+    """
+    normalized_problem = problem.strip()
+    if not normalized_problem:
+        raise ValueError("problem must not be empty")
+    if limit < 0:
+        raise ValueError("limit must not be negative")
+    candidates: list[InventionCandidate] = []
+    for principle in _PRINCIPLES[:limit]:
+        candidates.append(
+            InventionCandidate(
+                title=f"TRIZ {principle.number:02d}: {principle.name}",
+                description=(
+                    f"{TRIZ_TECHNIQUE_ID} TRIZ hypothesis prompt for '{normalized_problem}': "
+                    f"{principle.description} This is a reasoning prompt from the canonical "
+                    "principle list, not evidence of feasibility, novelty or patentability."
+                ),
+                operators=("T057",),
+            )
+        )
+    return candidates
