@@ -209,6 +209,17 @@ class CheapValidation(BaseModel):
     failures: tuple[str, ...] = ()
 
 
+def promote_candidate(
+    candidate: ProgressiveCandidate,
+    validation: CheapValidation,
+    full_architecture: Mapping[str, Any],
+) -> ProgressiveCandidate:
+    """Promote only a cheap-validated outline to the expensive full stage."""
+    if not validation.valid:
+        raise ValueError("candidate_failed_cheap_validation")
+    return candidate.model_copy(update={"full_architecture": dict(full_architecture)})
+
+
 def validate_candidate_cheap(
     candidate: Mapping[str, Any],
     *,

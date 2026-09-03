@@ -17,6 +17,7 @@ from criba.latency import (
     ParallelismConfig,
     ProgressiveCandidate,
     SemanticCacheKey,
+    promote_candidate,
     validate_candidate_cheap,
 )
 from criba.metrics import (
@@ -206,6 +207,12 @@ def test_cheap_validation_rejects_unsafe_or_incomplete_outline() -> None:
         context_hash="ctx",
     )
     assert candidate.full_architecture is None
+    promoted = promote_candidate(
+        candidate,
+        valid,
+        {"stages": ["outline", "full"], "experiment": "controlled"},
+    )
+    assert promoted.full_architecture["experiment"] == "controlled"
     invalid = validate_candidate_cheap(
         {
             "id": "idea-1",
@@ -228,6 +235,8 @@ def test_cheap_validation_rejects_unsafe_or_incomplete_outline() -> None:
         "generic_mechanism",
         "context_mismatch",
     } <= set(invalid.failures)
+    with pytest.raises(ValueError, match="candidate_failed_cheap_validation"):
+        promote_candidate(candidate, invalid, {})
 
 
 def test_metrics_use_weighted_breakdown_and_configurable_drift() -> None:
