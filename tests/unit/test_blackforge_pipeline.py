@@ -23,6 +23,7 @@ from pathlib import Path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from criba import blackforge_pipeline as bp
+from criba.output_format import format_blackforge_output
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
 
@@ -63,6 +64,23 @@ def test_measurement_cca_convergence_present():
     assert all("convergence" in i and "value_score" in i["convergence"] for i in p["ideas"])
     # causal signal present on survivors
     assert p["causal_axes_represented"]
+    assert all(i["bypass_probable"] and i["residual_risk"] for i in p["ideas"])
+
+
+def test_blackforge_formatter_populates_winner_security_fields():
+    out = format_blackforge_output(
+        context={"central_problem": "protect API", "protected_assets": ["API"]},
+        ideas=[{
+            "title": "Containment proposal",
+            "mechanism": "sandbox and rollback",
+            "bypass_probable": "telemetry gap",
+            "residual_risk": "medium",
+            "description": "defensive design",
+        }],
+    )
+    assert out.winner.name == "Containment proposal"
+    assert out.winner.likely_bypass == "telemetry gap"
+    assert out.winner.residual_risk == "medium"
 
 
 def test_frozen_problem_model_referenced():

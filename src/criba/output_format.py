@@ -482,12 +482,31 @@ def format_blackforge_output(
         reason="Primary proposal meets criteria" if top else "No proposals generated",
     )
 
+    winner = BlackforgeWinner(
+        name=top.get("title", ""),
+        security_problem=ctx.get("central_problem", ctx.get("query", "")),
+        technical_mechanism=top.get("mechanism", top.get("defensive_mechanism", "")),
+        protected_assets=ctx.get("protected_assets", []),
+        threat_actor=", ".join(ctx.get("threat_actors", [])),
+        attack_surface=top.get("attack_surface", ""),
+        security_property=top.get("security_property", ""),
+        offensive_hypothesis=top.get("offensive_hypothesis", ""),
+        defensive_response=top.get("defensive_response", top.get("mechanism", "")),
+        validation_plan=top.get("validation_plan", top.get("verification_method", "")),
+        expected_evidence=top.get("expected_evidence", []),
+        likely_bypass=top.get("bypass_probable", top.get("bypass", "")),
+        residual_risk=top.get("residual_risk", top.get("risk_level", "")),
+        implementation_cost=str(top.get("implementation_cost", "")),
+        why_it_wins=top.get("why_it_wins", top.get("description", "")),
+    )
+
     return BlackforgeOutput(
         security_summary=sec_summary,
         authorization=authorization,
         threat_model=threat_mdl,
         findings=findings_rows,
         ranking=bf_rank,
+        winner=winner,
         decision=decision,
     )
 

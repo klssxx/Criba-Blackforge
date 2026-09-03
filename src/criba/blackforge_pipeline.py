@@ -126,6 +126,12 @@ def run_headless(
             "pipeline_stage": record.get("pipeline_stage"),
             "safety_class": record.get("safety_class"),
             "quality_score_v2": record.get("quality_score_v2", 0),
+            "bypass_probable": record.get("bypass_probable")
+            or record.get("manual_review_reason")
+            or "No evaluado; requiere prueba explícita de bypass.",
+            "residual_risk": record.get("residual_risk")
+            or record.get("risk_level")
+            or "No cuantificado; requiere validación antes de cualquier ejecución.",
             "method1_name": record.get("title", ""),
             "method2_name": record.get("description", "")[:50],
             "method1_desc": record.get("description", ""),
