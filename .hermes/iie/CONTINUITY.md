@@ -1,6 +1,6 @@
 # IIE CONTINUITY — CRIBA · BLACKFORGE · SUPRA
 
-**Última actualización:** 2026-09-03 10:11:40+02:00 — P08-T10 VERIFIED; BF-P00-T06 DEFERRED
+**Última actualización:** 2026-09-04 02:50:48+02:00 — P09-T18 VERIFIED; BF-P00-T06 DEFERRED
 
 ## WHAT IS THE PROJECT?
 Preservation-first extension of CRIBA with the additive `src/criba/intelligence/` engine. CRIBA remains the canonical innovation engine; IIE owns external evidence intelligence; BLACKFORGE specializes cyber safety and authorization; SUPRA orchestrates workflows.
@@ -37,10 +37,12 @@ Preservation-first extension of CRIBA with the additive `src/criba/intelligence/
 - P08-T09 committed in `77e55b1`: sleeping-beauty candidate contract and delayed-attention detector, with 4 focused tests; full regression is `844 passed`; mypy and compileall are clean.
 - P08-T10 committed in `0ecc058`: gap-engine audit fixed negated-resolution handling, generic white-space cues, metadata type normalization and duplicate citation-year ordering; 6 audit regressions, 169 intelligence tests and full regression at `851 passed`; mypy, compileall and staged security scan are clean.
 - P08-T10 corrective commit `e863b58`: independent review caught the remaining `but`/`yet`/`however` conjoined-resolution ambiguity; the guard and regression coverage were expanded to `and`/`but`/`yet`/`however`; focused and full suites remained green.
+- P09-T01 through P09-T18 closed in atomic commits through `937f150`: additive invention taxonomy/registry, corpus-bounded and evidence-bounded hypothesis operators, generator-backed technique registry reconciliation, and an architecture audit. P09 full regression is `903 passed, 1 warning`; mypy is clean in 127 source files and compileall is clean.
+- P09 leaves T054/T056/T058/T061/T066/T067 as `PLANNED`; it does not claim their implementation. T063 consumes already-retrieved documents; P12 owns feature-flagged CRIBA application integration.
 - Legacy BLACKFORGE baseline: 138 targeted tests passed; 4 tracked-artifact emission tests intentionally deselected to avoid overwriting goldens in the live tree.
 
 ## WHAT IS CURRENTLY IN PROGRESS?
-P05, P06, P07 and P08 are closed. P07-T01 through P07-T10 and P08-T01 through P08-T10 are verified. No in-scope code is currently uncommitted; unrelated docs/FINAL_REPORT.md and untracked files are preserved and excluded from commits; the corrective checkpoint is recorded in `STATE.json`.
+P05–P09 are closed. P09-T01 through P09-T18 are verified. No in-scope P09 code is currently uncommitted; unrelated tracked and untracked work is preserved and excluded from commits. The P09 checkpoint and `STATE.json` record the exact P09 audit commit.
 
 ## WHAT FAILED?
 No runtime failure. The first delegated review exhausted its iteration budget with an invalid response; its concrete regex finding was reproduced, corrected in `e863b58`, and then accepted by a fresh independent review. The prior state ledger was stale: it omitted P00-T04/P00-GATE, listed P02-T01 both complete and pending, and did not identify the P05 WIP. It is reconciled in `STATE.json` from Git and actual test evidence.
@@ -52,9 +54,13 @@ Nothing. BF-P00-T06 is deferred until existing tracked goldens are validated in 
 `engine.py`, `hybrid.py`, `gates.py`, `blackforge_safety.py`, canonical BLACKFORGE catalog, tracked golden outputs, `criba.sqlite3`, and SUPRA providers are read-only unless a specific approved task requires them.
 
 ## WHAT IS THE LAST VERIFIED COMMIT?
-P08-T10 code verified in `e863b58`: gap-engine audit fixes plus the independently reviewed conjoined-resolution guard, with 6 focused audit tests, 169 intelligence tests, and full CRIBA regression at 851 passed.
+P09-T18 code verified in `937f150`: additive innovation architecture audit, full operator metadata and backward-compatible `InnovationOperatorRegistry`, with 49 focused P09 tests, 903 full CRIBA tests, mypy success in 127 source files, and compileall success.
 
 ## WHAT TESTS CURRENTLY PASS?
+- `uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_invention_registry.py tests/intelligence/test_technique_registry.py tests/intelligence/test_triz.py` → 49 passed.
+- `uv run --locked pytest -q --no-header` → 903 passed, 1 Starlette/httpx deprecation warning.
+- `uv run --locked mypy src/criba` → success in 127 source files.
+- `uv run --locked python -m compileall -q src` → success.
 - `python -m pytest tests/intelligence/test_provenance.py tests/intelligence/test_multi_repo_state.py -q -p no:cacheprovider` → 9 passed.
 - `python -m pytest tests/intelligence -q -p no:cacheprovider` → 65 passed.
 - `python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider` → 13 passed.
@@ -140,7 +146,7 @@ None. All IIE feature flags remain `false`.
 The Neon steering directive is recorded as a cross-cutting architecture addendum, not as a signal-layer dependency. Before any provider implementation: audit the existing persistence/configuration boundary; keep PostgreSQL as the standard contract; isolate Neon-specific code under infrastructure/adapters; never write to Neon `production`; do not expose connection strings; and stop only billable, admin, destructive, production-write or authentication-gated actions for explicit user approval. Local PostgreSQL portability remains mandatory.
 
 ## WHAT IS THE NEXT EXACT TASK?
-BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated copy. Do not start BF-P01 or overwrite live goldens.
+P10-T01 — design the adversarial prior-art search protocol. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated in an isolated worktree. Do not start BF-P01 or overwrite live goldens.
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
-No model execution is needed for the checkpoint. If BF-P00-T06 is resumed, use its existing isolated-golden validation protocol; do not modify tracked BLACKFORGE goldens in the live tree.
+P10-T01 is an adversarial architecture design task: high reasoning, evidence-first, with no `PROVEN_NEW` verdict. If BF-P00-T06 is resumed, use its isolated-golden validation protocol; do not modify tracked BLACKFORGE goldens in the live tree.
