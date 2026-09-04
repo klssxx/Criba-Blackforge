@@ -1,0 +1,45 @@
+{
+  "task_id": "P10-T06",
+  "phase": "P10",
+  "title": "ProductScout against Wikipedia",
+  "status": "VERIFIED",
+  "files_read": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py",
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_code_scout.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/sources/wikipedia.py",
+    "tests/intelligence/test_product_scout.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "tests": [
+    "uv run --locked pytest -q tests/intelligence/test_product_scout.py -p no:cacheprovider -> 3 passed",
+    "Live probe: WikipediaSource with TransportBudget(max_requests=1) -> 2 normalized documents, provenance present, 1 request"
+  ],
+  "decisions": [
+    "ProductScout mirrors PatentScout/ScienceScout/CodeScout: thin wrapper retaining query variant text.",
+    "Wikipedia chosen as actually probed product/company source (free, no-key).",
+    "Live probe verifies normalization only; no product originality or market verdict asserted."
+  ],
+  "risks": [
+    "Wikipedia is a third-party endpoint and may change schema or availability.",
+    "Encyclopedic content is discovery evidence; no market, product or competitive conclusion is implied."
+  ],
+  "external_evidence": {
+    "source_ids": ["wikipedia"],
+    "probe_query": "thermal management",
+    "request_budget": 1,
+    "documents_normalized": 2
+  },
+  "follow_up": [
+    "Determine and implement the next P10 task from the canonical blueprint."
+  ],
+  "completed_at": "2026-09-04T18:50:00+02:00"
+}
