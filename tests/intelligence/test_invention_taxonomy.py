@@ -3,17 +3,17 @@ from __future__ import annotations
 
 import pytest
 
-from criba.intelligence.contracts import InventionCandidate
-from criba.intelligence.contracts import EvidenceDocument
+from criba.intelligence.contracts import EvidenceDocument, InventionCandidate
 from criba.intelligence.invention import (
     OPERATORS_BY_KEY,
     OperatorContext,
     OperatorRegistry,
+    detect_cross_domain_analogies,
+    detect_rare_combinations,
+    generate_morphological_hypotheses,
+    generate_scamper_hypotheses,
     get_operator,
     operator_definitions,
-    detect_rare_combinations,
-    detect_cross_domain_analogies,
-    generate_scamper_hypotheses,
 )
 
 
@@ -97,6 +97,23 @@ def test_cross_domain_analogies_require_explicit_shared_concepts_and_domains():
 def test_cross_domain_analogies_validate_limit():
     with pytest.raises(ValueError, match="limit"):
         detect_cross_domain_analogies([], limit=-1)
+
+
+def test_t059_morphological_analysis_generates_deterministic_hypotheses():
+    candidates = generate_morphological_hypotheses(
+        "reduce heat",
+        {"material": ["graphite", "copper"], "geometry": ["plate", "fin"]},
+        limit=3,
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Morphology: geometry=fin; material=copper",
+        "Morphology: geometry=fin; material=graphite",
+        "Morphology: geometry=plate; material=copper",
+    ]
+    assert all(candidate.operators == ("T059",) for candidate in candidates)
+    assert all("not evidence" in candidate.description for candidate in candidates)
+    assert all(candidate.epistemic_state.value == "HYPOTHESIS" for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

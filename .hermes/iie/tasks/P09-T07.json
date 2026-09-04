@@ -1,0 +1,56 @@
+{
+  "task_id": "P09-T07",
+  "title": "Morphological analysis",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/engine.py",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/registry.py",
+    "src/criba/intelligence/invention/rare_combinations.py",
+    "src/criba/intelligence/invention/cross_domain.py",
+    "src/criba/intelligence/invention/scamper.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/morphology.py",
+    ".hermes/iie/tasks/P09-T07.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t059_morphological_analysis_generates_deterministic_hypotheses",
+    "uv run --locked ruff check src/criba/intelligence/invention/morphology.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/morphology.py",
+    "git diff --check -- src/criba/intelligence/invention/morphology.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T059 contract",
+    "12 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T059 code and test",
+    "mypy: success, no issues in morphology.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The new IIE T059 module consumes caller-supplied dimensions and does not replace the legacy morphological frame in src/criba/engine.py.",
+    "Combinations are deterministic, capped by limit, traceable as T059, and remain HYPOTHESIS candidates.",
+    "The global technique registry is intentionally not marked T059-only: T053/T055/T060 are already implemented but remain stale PLANNED entries; P09-T17 owns that consistency audit."
+  ],
+  "risks": [
+    "Morphological candidates enumerate explicit combinations only; they do not establish feasibility, novelty, compatibility, or a mechanism.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T07 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/morphology.py .hermes/iie/tasks/P09-T07.json before commit.",
+  "follow_up": ["P09-T08: functional decomposition."],
+  "completed_at": "2026-09-04T02:03:53+02:00"
+}
