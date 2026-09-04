@@ -1,7 +1,10 @@
 """IIE invention sector."""
 
 from .cross_domain import detect_cross_domain_analogies
-from .functions import decompose_functional_hypotheses
+from .functions import (
+    decompose_functional_hypotheses,
+    search_function_to_mechanism_hypotheses,
+)
 from .morphology import generate_morphological_hypotheses
 from .rare_combinations import detect_rare_combinations
 from .registry import OperatorContext, OperatorRegistry
@@ -25,4 +28,5 @@ __all__ = [
     "generate_scamper_hypotheses",
     "get_operator",
     "operator_definitions",
+    "search_function_to_mechanism_hypotheses",
 ]

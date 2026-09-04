@@ -1,9 +1,9 @@
-"""Explicit functional-decomposition hypotheses (P09-T08 / T062)."""
+"""Functional-decomposition and mechanism-search hypotheses (P09 / T062-T063)."""
 from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 
-from ..contracts import InventionCandidate
+from ..contracts import EvidenceDocument, InventionCandidate
 
 
 def _normalized_functions(
@@ -68,4 +68,76 @@ def decompose_functional_hypotheses(
             )
             if len(candidates) == limit:
                 return candidates
+    return candidates
+
+
+def _normalized_requested_functions(functions: Sequence[str]) -> tuple[str, ...]:
+    if isinstance(functions, str) or not isinstance(functions, (list, tuple, set)):
+        raise TypeError("functions must be a sequence of function names")
+    return tuple(sorted({str(function).strip() for function in functions if str(function).strip()}))
+
+
+def search_function_to_mechanism_hypotheses(
+    problem: str,
+    functions: Sequence[str],
+    documents: Sequence[EvidenceDocument],
+    *,
+    limit: int = 20,
+) -> list[InventionCandidate]:
+    """Return T063 hypotheses only from explicit retrieved function/mechanism data.
+
+    Retrieval is deliberately outside this function: callers supply documents
+    returned by an IIE retriever. A document contributes only when its metadata
+    contains a ``function_mechanisms`` mapping from function name to mechanism
+    names; prose and unrelated metadata are not inferred.
+    """
+
+    normalized_problem = problem.strip()
+    if not normalized_problem:
+        raise ValueError("problem must not be empty")
+    if limit < 0:
+        raise ValueError("limit must not be negative")
+    requested = _normalized_requested_functions(functions)
+    if not requested or limit == 0:
+        return []
+    if isinstance(documents, str) or not isinstance(documents, (list, tuple, set)):
+        raise TypeError("documents must be a sequence of EvidenceDocument values")
+
+    requested_by_key = {function.casefold(): function for function in requested}
+    records: set[tuple[str, str, str]] = set()
+    for document in documents:
+        if not isinstance(document, EvidenceDocument):
+            raise TypeError("documents must contain EvidenceDocument values")
+        raw_mapping = (document.metadata or {}).get("function_mechanisms")
+        if not isinstance(raw_mapping, Mapping):
+            continue
+        for raw_function, raw_mechanisms in raw_mapping.items():
+            function = str(raw_function).strip()
+            requested_function = requested_by_key.get(function.casefold())
+            if not requested_function:
+                continue
+            if isinstance(raw_mechanisms, str) or not isinstance(raw_mechanisms, (list, tuple, set)):
+                continue
+            for raw_mechanism in raw_mechanisms:
+                mechanism = str(raw_mechanism).strip()
+                if mechanism:
+                    records.add((requested_function, mechanism, document.doc_id))
+
+    candidates: list[InventionCandidate] = []
+    for function, mechanism, doc_id in sorted(records):
+        candidates.append(
+            InventionCandidate(
+                title=f"Mechanism: {function} → {mechanism}",
+                description=(
+                    f"T063 function-to-mechanism hypothesis for {normalized_problem}: "
+                    f"retrieved document {doc_id} explicitly maps {function} to {mechanism}. "
+                    "This is a retrieval lead, not evidence that the mechanism solves the "
+                    "problem or is feasible, novel, or complete."
+                ),
+                mechanism=mechanism,
+                operators=("T063",),
+            )
+        )
+        if len(candidates) == limit:
+            break
     return candidates

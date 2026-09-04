@@ -15,6 +15,7 @@ from criba.intelligence.invention import (
     generate_scamper_hypotheses,
     get_operator,
     operator_definitions,
+    search_function_to_mechanism_hypotheses,
 )
 
 
@@ -134,6 +135,35 @@ def test_t062_functional_decomposition_is_explicit_and_deterministic():
     assert all(candidate.operators == ("T062",) for candidate in candidates)
     assert all("not evidence" in candidate.description for candidate in candidates)
     assert all(candidate.mechanism == "" for candidate in candidates)
+
+
+def test_t063_function_to_mechanism_search_requires_explicit_source_metadata():
+    documents = [
+        EvidenceDocument(
+            doc_id="d2",
+            metadata={"function_mechanisms": {"reject heat": ["phase change"]}},
+        ),
+        EvidenceDocument(
+            doc_id="d1",
+            metadata={"function_mechanisms": {"reject heat": ["microchannel"]}},
+        ),
+        EvidenceDocument(doc_id="ignored", metadata={"mechanisms": ["fan"]}),
+    ]
+
+    candidates = search_function_to_mechanism_hypotheses(
+        "reduce battery heat",
+        ["reject heat"],
+        documents,
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Mechanism: reject heat → microchannel",
+        "Mechanism: reject heat → phase change",
+    ]
+    assert [candidate.mechanism for candidate in candidates] == ["microchannel", "phase change"]
+    assert all(candidate.operators == ("T063",) for candidate in candidates)
+    assert "d1" in candidates[0].description
+    assert all("not evidence" in candidate.description for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():
