@@ -8,6 +8,7 @@ from .functions import (
     decompose_functional_hypotheses,
     search_function_to_mechanism_hypotheses,
 )
+from .future_back import generate_future_back_hypotheses
 from .inversion import generate_constraint_inversion_hypotheses
 from .morphology import generate_morphological_hypotheses
 from .rare_combinations import detect_rare_combinations
@@ -32,6 +33,7 @@ __all__ = [
     "generate_adjacent_possible_hypotheses",
     "generate_constraint_inversion_hypotheses",
     "generate_counterfactual_hypotheses",
+    "generate_future_back_hypotheses",
     "generate_morphological_hypotheses",
     "generate_scamper_hypotheses",
     "get_operator",

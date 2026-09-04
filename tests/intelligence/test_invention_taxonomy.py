@@ -15,6 +15,7 @@ from criba.intelligence.invention import (
     generate_adjacent_possible_hypotheses,
     generate_constraint_inversion_hypotheses,
     generate_counterfactual_hypotheses,
+    generate_future_back_hypotheses,
     generate_morphological_hypotheses,
     generate_scamper_hypotheses,
     get_operator,
@@ -234,6 +235,20 @@ def test_t129_counterfactual_keeps_alternate_outcomes_as_hypotheses():
     assert candidates[0].operators == ("T129",)
     assert "not evidence" in candidates[0].description
     assert "does not predict the outcome" in candidates[0].description
+
+
+def test_t129_future_back_never_claims_the_future_state_will_be_reached():
+    candidates = generate_future_back_hypotheses(
+        "reduce battery heat",
+        {"thermal control is deployed": ["validate sensor calibration"]},
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Future-back: thermal control is deployed ← validate sensor calibration",
+    ]
+    assert candidates[0].operators == ("T129",)
+    assert "not evidence" in candidates[0].description
+    assert "does not establish that the future state will be reached" in candidates[0].description
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():
