@@ -8,6 +8,7 @@ from criba.intelligence.invention import (
     OPERATORS_BY_KEY,
     OperatorContext,
     OperatorRegistry,
+    decompose_first_principles_hypotheses,
     decompose_functional_hypotheses,
     detect_cross_domain_analogies,
     detect_rare_combinations,
@@ -164,6 +165,24 @@ def test_t063_function_to_mechanism_search_requires_explicit_source_metadata():
     assert all(candidate.operators == ("T063",) for candidate in candidates)
     assert "d1" in candidates[0].description
     assert all("not evidence" in candidate.description for candidate in candidates)
+
+
+def test_t064_first_principles_decomposition_keeps_premises_explicit():
+    candidates = decompose_first_principles_hypotheses(
+        "reduce battery heat",
+        {
+            "heat flows down a temperature gradient": ["lower thermal resistance"],
+            "energy is conserved": ["measure where losses become heat"],
+        },
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "First principle: energy is conserved → measure where losses become heat",
+        "First principle: heat flows down a temperature gradient → lower thermal resistance",
+    ]
+    assert all(candidate.operators == ("T064",) for candidate in candidates)
+    assert all("not evidence" in candidate.description for candidate in candidates)
+    assert all(candidate.mechanism == "" for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

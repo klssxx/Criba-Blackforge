@@ -1,6 +1,7 @@
 """IIE invention sector."""
 
 from .cross_domain import detect_cross_domain_analogies
+from .first_principles import decompose_first_principles_hypotheses
 from .functions import (
     decompose_functional_hypotheses,
     search_function_to_mechanism_hypotheses,
@@ -21,6 +22,7 @@ __all__ = [
     "OperatorContext",
     "OperatorDefinition",
     "OperatorRegistry",
+    "decompose_first_principles_hypotheses",
     "decompose_functional_hypotheses",
     "detect_cross_domain_analogies",
     "detect_rare_combinations",
