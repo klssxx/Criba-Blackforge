@@ -18,6 +18,7 @@ from criba.intelligence.invention import (
     generate_counterfactual_hypotheses,
     generate_future_back_hypotheses,
     generate_morphological_hypotheses,
+    generate_nth_order_effect_hypotheses,
     generate_scamper_hypotheses,
     get_operator,
     operator_definitions,
@@ -264,6 +265,24 @@ def test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal():
     assert candidates[0].operators == ("T129",)
     assert "not evidence" in candidates[0].description
     assert "does not establish causality" in candidates[0].description
+
+
+def test_t129_nth_order_effects_never_claim_the_effect_chain_will_occur():
+    candidates = generate_nth_order_effect_hypotheses(
+        "reduce battery heat",
+        {
+            "add thermal sensor": [
+                ("measure temperature", "adjust cooling", "increase cycling wear"),
+            ],
+        },
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Nth-order: add thermal sensor → measure temperature → adjust cooling → increase cycling wear",
+    ]
+    assert candidates[0].operators == ("T129",)
+    assert "not evidence" in candidates[0].description
+    assert "does not establish that the effect chain will occur" in candidates[0].description
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

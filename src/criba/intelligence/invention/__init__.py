@@ -12,6 +12,7 @@ from .functions import (
 from .future_back import generate_future_back_hypotheses
 from .inversion import generate_constraint_inversion_hypotheses
 from .morphology import generate_morphological_hypotheses
+from .nth_order import generate_nth_order_effect_hypotheses
 from .rare_combinations import detect_rare_combinations
 from .registry import OperatorContext, OperatorRegistry
 from .scamper import generate_scamper_hypotheses
@@ -37,6 +38,7 @@ __all__ = [
     "generate_counterfactual_hypotheses",
     "generate_future_back_hypotheses",
     "generate_morphological_hypotheses",
+    "generate_nth_order_effect_hypotheses",
     "generate_scamper_hypotheses",
     "get_operator",
     "operator_definitions",
