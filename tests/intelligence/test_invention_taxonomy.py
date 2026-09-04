@@ -14,6 +14,7 @@ from criba.intelligence.invention import (
     detect_rare_combinations,
     generate_adjacent_possible_hypotheses,
     generate_constraint_inversion_hypotheses,
+    generate_counterfactual_hypotheses,
     generate_morphological_hypotheses,
     generate_scamper_hypotheses,
     get_operator,
@@ -219,6 +220,20 @@ def test_t116_adjacent_possible_excludes_explicit_known_combinations():
     assert all(candidate.operators == ("T116",) for candidate in candidates)
     assert get_operator("adjacent_possible").technique_ids == ("T116",)
     assert all("not evidence" in candidate.description for candidate in candidates)
+
+
+def test_t129_counterfactual_keeps_alternate_outcomes_as_hypotheses():
+    candidates = generate_counterfactual_hypotheses(
+        "reduce battery heat",
+        {"no thermal sensor": ["temperature drift is unobserved"]},
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Counterfactual: no thermal sensor → temperature drift is unobserved",
+    ]
+    assert candidates[0].operators == ("T129",)
+    assert "not evidence" in candidates[0].description
+    assert "does not predict the outcome" in candidates[0].description
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():
