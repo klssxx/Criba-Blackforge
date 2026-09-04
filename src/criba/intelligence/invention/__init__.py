@@ -1,5 +1,6 @@
 """IIE invention sector."""
 
+from .adjacent_possible import generate_adjacent_possible_hypotheses
 from .cross_domain import detect_cross_domain_analogies
 from .first_principles import decompose_first_principles_hypotheses
 from .functions import (
@@ -27,6 +28,7 @@ __all__ = [
     "decompose_functional_hypotheses",
     "detect_cross_domain_analogies",
     "detect_rare_combinations",
+    "generate_adjacent_possible_hypotheses",
     "generate_constraint_inversion_hypotheses",
     "generate_morphological_hypotheses",
     "generate_scamper_hypotheses",

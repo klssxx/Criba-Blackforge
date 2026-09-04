@@ -12,6 +12,7 @@ from criba.intelligence.invention import (
     decompose_functional_hypotheses,
     detect_cross_domain_analogies,
     detect_rare_combinations,
+    generate_adjacent_possible_hypotheses,
     generate_constraint_inversion_hypotheses,
     generate_morphological_hypotheses,
     generate_scamper_hypotheses,
@@ -202,6 +203,22 @@ def test_t065_constraint_inversion_never_claims_constraint_is_removed():
     assert all(candidate.operators == ("T065",) for candidate in candidates)
     assert all("not evidence" in candidate.description for candidate in candidates)
     assert all("does not establish that the constraint is removed" in candidate.description for candidate in candidates)
+
+
+def test_t116_adjacent_possible_excludes_explicit_known_combinations():
+    candidates = generate_adjacent_possible_hypotheses(
+        "reduce battery heat",
+        ["battery cycling", "thermal sensing", "phase change"],
+        known_combinations=[("battery cycling", "phase change")],
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Adjacent possible: battery cycling + thermal sensing",
+        "Adjacent possible: phase change + thermal sensing",
+    ]
+    assert all(candidate.operators == ("T116",) for candidate in candidates)
+    assert get_operator("adjacent_possible").technique_ids == ("T116",)
+    assert all("not evidence" in candidate.description for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

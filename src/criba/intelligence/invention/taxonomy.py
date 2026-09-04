@@ -38,7 +38,7 @@ _OPERATORS = (
     OperatorDefinition("constraint_inversion", "Constraint inversion", "constraint", ("T065",), "invention.inversion"),
     OperatorDefinition("assumption_mining", "Assumption mining", "constraint", ("T066",), "invention.assumptions"),
     OperatorDefinition("contradiction_mining", "Contradiction mining", "constraint", ("T067",), "gaps.contradictions"),
-    OperatorDefinition("adjacent_possible", "Adjacent possible", "temporal", ("T129",), "invention.adjacent_possible"),
+    OperatorDefinition("adjacent_possible", "Adjacent possible", "temporal", ("T116",), "invention.adjacent_possible"),
     OperatorDefinition("counterfactual", "Counterfactual", "temporal", ("T129",), "invention.counterfactual"),
     OperatorDefinition("future_back", "Future-back", "temporal", ("T129",), "invention.future_back"),
     OperatorDefinition("bottleneck_mapping", "Bottleneck mapping", "temporal", ("T129",), "invention.bottlenecks"),
