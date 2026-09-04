@@ -3,7 +3,11 @@ from __future__ import annotations
 
 import pytest
 
-from criba.intelligence.prior_art import AdversarialSearchProtocol, PriorArtStage
+from criba.intelligence.prior_art import (
+    AdversarialSearchProtocol,
+    PriorArtStage,
+    build_query_lattice,
+)
 
 
 def test_adversarial_protocol_is_ordered_bounded_and_forbids_proven_new():
@@ -46,3 +50,31 @@ def test_adversarial_protocol_allows_initial_search_without_mutation_budget():
 
     assert protocol.can_execute(rounds_completed=0, mutations_completed=0)
     assert not protocol.can_mutate(mutations_completed=0)
+
+
+def test_query_lattice_adds_traceable_classification_variants_deterministically():
+    first = build_query_lattice(
+        "cooling energy",
+        classifications=["Y02E", "F25B", "Y02E"],
+        max_variants=20,
+    )
+    second = build_query_lattice(
+        "cooling energy",
+        classifications=["F25B", "Y02E"],
+        max_variants=20,
+    )
+
+    assert [(variant.text, variant.language, variant.origin, variant.technique_ids) for variant in first] == [
+        (variant.text, variant.language, variant.origin, variant.technique_ids) for variant in second
+    ]
+    assert first[0].text == "cooling energy"
+    assert first[0].origin == "original"
+    assert [
+        (variant.text, variant.origin, variant.technique_ids)
+        for variant in first
+        if variant.origin == "classification"
+    ] == [
+        ("F25B cooling energy", "classification", ("T003",)),
+        ("Y02E cooling energy", "classification", ("T003",)),
+    ]
+    assert len({(variant.text, variant.language) for variant in first}) == len(first)

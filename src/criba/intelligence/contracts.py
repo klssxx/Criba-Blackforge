@@ -106,7 +106,7 @@ class QueryVariant:
     """One mutated/expanded variant of the user query (T033/T035/T122)."""
     text: str
     language: str = "en"
-    origin: str = "original"       # original|synonym|ontology|multilingual|mutation|decomposition
+    origin: str = "original"       # original|synonym|ontology|semantic|classification|multilingual|mutation|decomposition
     technique_ids: tuple[str, ...] = ()
 
     def to_dict(self) -> dict[str, Any]:
