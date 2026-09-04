@@ -13,6 +13,7 @@ from criba.intelligence.invention import (
     detect_cross_domain_analogies,
     detect_rare_combinations,
     generate_adjacent_possible_hypotheses,
+    generate_bottleneck_mapping_hypotheses,
     generate_constraint_inversion_hypotheses,
     generate_counterfactual_hypotheses,
     generate_future_back_hypotheses,
@@ -249,6 +250,20 @@ def test_t129_future_back_never_claims_the_future_state_will_be_reached():
     assert candidates[0].operators == ("T129",)
     assert "not evidence" in candidates[0].description
     assert "does not establish that the future state will be reached" in candidates[0].description
+
+
+def test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal():
+    candidates = generate_bottleneck_mapping_hypotheses(
+        "reduce battery heat",
+        {"thermal interface resistance": ["measure junction-to-case gradient"]},
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Bottleneck map: thermal interface resistance → measure junction-to-case gradient",
+    ]
+    assert candidates[0].operators == ("T129",)
+    assert "not evidence" in candidates[0].description
+    assert "does not establish causality" in candidates[0].description
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

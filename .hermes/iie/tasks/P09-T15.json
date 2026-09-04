@@ -1,0 +1,51 @@
+{
+  "task_id": "P09-T15",
+  "title": "Bottleneck mapping",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/counterfactual.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/bottlenecks.py",
+    ".hermes/iie/tasks/P09-T15.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal",
+    "uv run --locked ruff check src/criba/intelligence/invention/bottlenecks.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/bottlenecks.py",
+    "git diff --check -- src/criba/intelligence/invention/bottlenecks.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T129 bottleneck-mapping contract",
+    "20 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T129 code, package surface, and test",
+    "mypy: success, no issues in bottlenecks.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T129 bottleneck mapping pairs caller-supplied bottlenecks with caller-supplied probes in deterministic order.",
+    "Every candidate states that it is not evidence and does not establish causality, that a bottleneck is limiting, or that a probe improves the system."
+  ],
+  "risks": [
+    "Bottlenecks and probes require later evidence-based evaluation; this operator only makes a diagnostic hypothesis inspectable.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T15 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/bottlenecks.py .hermes/iie/tasks/P09-T15.json before commit.",
+  "follow_up": ["P09-T16: second/nth-order effects."],
+  "completed_at": "2026-09-04T02:34:38+02:00"
+}
