@@ -8,6 +8,7 @@ from criba.intelligence.invention import (
     OPERATORS_BY_KEY,
     OperatorContext,
     OperatorRegistry,
+    decompose_functional_hypotheses,
     detect_cross_domain_analogies,
     detect_rare_combinations,
     generate_morphological_hypotheses,
@@ -114,6 +115,25 @@ def test_t059_morphological_analysis_generates_deterministic_hypotheses():
     assert all(candidate.operators == ("T059",) for candidate in candidates)
     assert all("not evidence" in candidate.description for candidate in candidates)
     assert all(candidate.epistemic_state.value == "HYPOTHESIS" for candidate in candidates)
+
+
+def test_t062_functional_decomposition_is_explicit_and_deterministic():
+    candidates = decompose_functional_hypotheses(
+        "reduce battery heat",
+        {
+            "thermal system": ["route coolant", "reject heat"],
+            "control": ["measure temperature"],
+        },
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Function: control → measure temperature",
+        "Function: thermal system → reject heat",
+        "Function: thermal system → route coolant",
+    ]
+    assert all(candidate.operators == ("T062",) for candidate in candidates)
+    assert all("not evidence" in candidate.description for candidate in candidates)
+    assert all(candidate.mechanism == "" for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():
