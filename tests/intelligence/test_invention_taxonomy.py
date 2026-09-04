@@ -12,6 +12,7 @@ from criba.intelligence.invention import (
     decompose_functional_hypotheses,
     detect_cross_domain_analogies,
     detect_rare_combinations,
+    generate_constraint_inversion_hypotheses,
     generate_morphological_hypotheses,
     generate_scamper_hypotheses,
     get_operator,
@@ -183,6 +184,24 @@ def test_t064_first_principles_decomposition_keeps_premises_explicit():
     assert all(candidate.operators == ("T064",) for candidate in candidates)
     assert all("not evidence" in candidate.description for candidate in candidates)
     assert all(candidate.mechanism == "" for candidate in candidates)
+
+
+def test_t065_constraint_inversion_never_claims_constraint_is_removed():
+    candidates = generate_constraint_inversion_hypotheses(
+        "reduce battery heat",
+        {
+            "only CPU is available": ["dedicated GPU is available"],
+            "must operate offline": ["continuous network access is available"],
+        },
+    )
+
+    assert [candidate.title for candidate in candidates] == [
+        "Constraint inversion: must operate offline → continuous network access is available",
+        "Constraint inversion: only CPU is available → dedicated GPU is available",
+    ]
+    assert all(candidate.operators == ("T065",) for candidate in candidates)
+    assert all("not evidence" in candidate.description for candidate in candidates)
+    assert all("does not establish that the constraint is removed" in candidate.description for candidate in candidates)
 
 
 def test_scamper_generates_all_seven_question_types_without_claiming_solution():

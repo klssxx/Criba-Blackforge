@@ -6,6 +6,7 @@ from .functions import (
     decompose_functional_hypotheses,
     search_function_to_mechanism_hypotheses,
 )
+from .inversion import generate_constraint_inversion_hypotheses
 from .morphology import generate_morphological_hypotheses
 from .rare_combinations import detect_rare_combinations
 from .registry import OperatorContext, OperatorRegistry
@@ -26,6 +27,7 @@ __all__ = [
     "decompose_functional_hypotheses",
     "detect_cross_domain_analogies",
     "detect_rare_combinations",
+    "generate_constraint_inversion_hypotheses",
     "generate_morphological_hypotheses",
     "generate_scamper_hypotheses",
     "get_operator",
