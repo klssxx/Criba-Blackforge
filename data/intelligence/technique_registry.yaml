@@ -1255,12 +1255,14 @@
   cost_class: LOCAL_COMPUTE
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.rare_combinations.detect_rare_combinations"
+  input_contracts:
+    - "Sequence[EvidenceDocument] with metadata.concepts"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t053_rare_combination_detection
+    - test_rare_combinations_are_deterministic_and_explicitly_corpus_local
 
 - id: T054
   name: "Technological recombination"
@@ -1301,12 +1303,14 @@
   cost_class: LOCAL_COMPUTE
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.cross_domain.detect_cross_domain_analogies"
+  input_contracts:
+    - "Sequence[EvidenceDocument] with metadata.domain and metadata.concepts"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t055_cross_domain_analogy
+    - test_cross_domain_analogies_require_explicit_shared_concepts_and_domains
 
 - id: T056
   name: "Biomimicry"
@@ -1347,12 +1351,14 @@
   cost_class: CHEAP_LOCAL
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.triz.list_principles/get_principle"
+  input_contracts:
+    - "principle number: int (1..40)"
+  output_contracts:
+    - "tuple[TrizPrinciple, ...]"
   tests:
-    - test_t057_triz
+    - test_triz_principles_are_complete_and_stably_ordered
 
 - id: T058
   name: "TRIZ contradiction mining"
@@ -1396,12 +1402,15 @@
   cost_class: LOCAL_COMPUTE
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.morphology.generate_morphological_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "dimensions: Mapping[str, Sequence[str]]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t059_morphological_analysis
+    - test_t059_morphological_analysis_generates_deterministic_hypotheses
 
 - id: T060
   name: "SCAMPER"
@@ -1419,12 +1428,15 @@
   cost_class: CHEAP_LOCAL
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.scamper.generate_scamper_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "components: Sequence[str]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t060_scamper
+    - test_scamper_generates_all_seven_question_types_without_claiming_solution
 
 - id: T061
   name: "Attribute substitution"
@@ -1465,12 +1477,15 @@
   cost_class: CHEAP_LOCAL
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.functions.decompose_functional_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "component_functions: Mapping[str, Sequence[str]]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t062_functional_decomposition
+    - test_t062_functional_decomposition_is_explicit_and_deterministic
 
 - id: T063
   name: "Function-to-mechanism search"
@@ -1490,12 +1505,16 @@
   cost_class: FREE_NETWORK
   requires_network: true
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.functions.search_function_to_mechanism_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "functions: Sequence[str]"
+    - "retrieved EvidenceDocument metadata.function_mechanisms"
+  output_contracts:
+    - "list[InventionCandidate] with source doc_id in description"
   tests:
-    - test_t063_function_to_mechanism_search
+    - test_t063_function_to_mechanism_search_requires_explicit_source_metadata
 
 - id: T064
   name: "First-principles decomposition"
@@ -1513,12 +1532,15 @@
   cost_class: CHEAP_LOCAL
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.first_principles.decompose_first_principles_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "premise_implications: Mapping[str, Sequence[str]]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t064_first_principles_decomposition
+    - test_t064_first_principles_decomposition_keeps_premises_explicit
 
 - id: T065
   name: "Constraint inversion"
@@ -1536,12 +1558,15 @@
   cost_class: CHEAP_LOCAL
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.inversion.generate_constraint_inversion_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "constraint_inversions: Mapping[str, Sequence[str]]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t065_constraint_inversion
+    - test_t065_constraint_inversion_never_claims_constraint_is_removed
 
 - id: T066
   name: "Assumption mining"
@@ -2732,12 +2757,16 @@
   cost_class: LOCAL_COMPUTE
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.adjacent_possible.generate_adjacent_possible_hypotheses"
+  input_contracts:
+    - "problem: str"
+    - "capabilities: Sequence[str]"
+    - "known_combinations: Sequence[Sequence[str]]"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t116_adjacent_possible
+    - test_t116_adjacent_possible_excludes_explicit_known_combinations
 
 - id: T117
   name: "Combinatorial invention engine"
@@ -3065,12 +3094,18 @@
   cost_class: LOCAL_COMPUTE
   requires_network: false
   requires_credentials: false
-  status: PLANNED
-  implementation: null
-  input_contracts: []
-  output_contracts: []
+  status: IMPLEMENTED
+  implementation: "criba.intelligence.invention.{counterfactual,future_back,bottlenecks,nth_order}"
+  input_contracts:
+    - "problem: str"
+    - "caller-supplied temporal/counterfactual mappings"
+  output_contracts:
+    - "list[InventionCandidate]"
   tests:
-    - test_t129_second_n_th_order_counterfactual_future_back_bot
+    - test_t129_counterfactual_keeps_alternate_outcomes_as_hypotheses
+    - test_t129_future_back_never_claims_the_future_state_will_be_reached
+    - test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal
+    - test_t129_nth_order_effects_never_claim_the_effect_chain_will_occur
   subtechniques:
     - "second-order effects"
     - "N-th-order effects"

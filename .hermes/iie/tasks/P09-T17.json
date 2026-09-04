@@ -1,0 +1,62 @@
+{
+  "task_id": "P09-T17",
+  "title": "Invention registry/operator audit",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    ".hermes/iie/gen_registry.py",
+    ".hermes/iie/reg_parts/p2.txt",
+    ".hermes/iie/reg_parts/p3.txt",
+    ".hermes/iie/reg_parts/p4.txt",
+    "data/intelligence/technique_registry.yaml",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/registry.py",
+    "tests/intelligence/test_technique_registry.py",
+    "tests/intelligence/test_invention_taxonomy.py",
+    "tests/intelligence/test_triz.py"
+  ],
+  "files_created": [
+    "tests/intelligence/test_invention_registry.py",
+    ".hermes/iie/tasks/P09-T17.json"
+  ],
+  "files_modified": [
+    ".hermes/iie/gen_registry.py",
+    "data/intelligence/technique_registry.yaml"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_registry.py::test_implemented_invention_operators_match_registry_contracts",
+    "uv run --locked pytest -q tests/intelligence/test_technique_registry.py",
+    "uv run --locked ruff check .hermes/iie/gen_registry.py tests/intelligence/test_invention_registry.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_invention_registry.py tests/intelligence/test_technique_registry.py tests/intelligence/test_triz.py",
+    "uv run --locked mypy src/criba/intelligence/invention src/criba/intelligence/registry.py",
+    "uv run --locked python .hermes/iie/gen_registry.py (twice) + sha256sum data/intelligence/technique_registry.yaml",
+    "git diff --check -- .hermes/iie/gen_registry.py data/intelligence/technique_registry.yaml tests/intelligence/test_invention_registry.py"
+  ],
+  "tests_passed": [
+    "RED: registry reported PLANNED for the implemented P09 techniques",
+    "GREEN: 1 passed for the implemented-operator/registry contract",
+    "10 passed: registry integrity suite",
+    "49 passed: taxonomy, implementation registry, registry integrity, and TRIZ suites",
+    "Ruff: all checks passed for generator and new registry test",
+    "mypy: success, no issues in 17 invention/registry source files",
+    "Generator determinism: registry SHA-256 0791ec39ce4bb2fea449c1c563196c0d4c67387112a310b8976394af3be9ef34 before and after regeneration",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The generator remains the only source that writes technique_registry.yaml; no manual YAML edit was made.",
+    "T053, T055, T057, T059, T060, T062, T063, T064, T065, T116, and T129 are IMPLEMENTED with nonempty implementation, input/output contracts, and real test identifiers.",
+    "T054, T056, T058, T061, T066, and T067 remain PLANNED because their dedicated P09 implementations do not exist."
+  ],
+  "risks": [
+    "T063's local transformer is implemented but depends on documents retrieved elsewhere; it does not itself make a network request.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T17 commit> after commit, or git restore --source=HEAD -- .hermes/iie/gen_registry.py data/intelligence/technique_registry.yaml && git clean -f -- tests/intelligence/test_invention_registry.py .hermes/iie/tasks/P09-T17.json before commit.",
+  "follow_up": ["P09-T18: phase checkpoint and full regression."],
+  "completed_at": "2026-09-04T02:42:58+02:00"
+}
