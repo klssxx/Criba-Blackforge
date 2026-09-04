@@ -1,0 +1,69 @@
+{
+  "task_id": "P09-T18",
+  "title": "Innovation architecture audit",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "xhigh",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    ".hermes/iie/checkpoints/P00.md",
+    "src/criba/engine.py",
+    "src/criba/methods.py",
+    "src/criba/ensemble.py",
+    "src/criba/chain.py",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/registry.py",
+    "src/criba/intelligence/invention/__init__.py",
+    "src/criba/intelligence/invention/*.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [".hermes/iie/tasks/P09-T18.json"],
+  "files_modified": [
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/registry.py",
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "git diff --quiet 2bfbc9d..HEAD -- src/criba/engine.py src/criba/methods.py src/criba/ensemble.py src/criba/chain.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_innovation_operator_contract_exposes_required_architecture_metadata",
+    "uv run --locked ruff check src/criba/intelligence/invention/taxonomy.py src/criba/intelligence/invention/registry.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention",
+    "uv run --locked python -m compileall -q src/criba/intelligence/invention",
+    "search for PROVEN_NEW and explicit FACT/INFERENCE promotion in src/criba/intelligence/invention",
+    "uv run --locked pytest -q --no-header",
+    "uv run --locked mypy src/criba && uv run --locked python -m compileall -q src",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "RED: InnovationOperatorRegistry public name and mandatory metadata were absent",
+    "GREEN: 1 passed for the architecture-contract test",
+    "22 passed: P09 taxonomy/operator suite",
+    "Ruff: all checks passed for architecture files and test",
+    "mypy: success, no issues in 16 invention source files",
+    "compileall: success for invention package and all src",
+    "legacy_core_diff_exit=0: engine.py, methods.py, ensemble.py and chain.py are unchanged since P09 start",
+    "No PROVEN_NEW or explicit FACT/INFERENCE promotion found in the invention package",
+    "Full CRIBA regression: 903 passed, 1 known Starlette/httpx deprecation warning",
+    "Full mypy: success, no issues in 127 source files",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "InnovationOperatorRegistry is the blueprint-facing alias of existing OperatorRegistry; the existing name remains public for backward compatibility.",
+    "Every declared operator now exposes id/key, description, input requirements, output contract, deterministic=true, model_optional=true, and an explicit evidence_required flag.",
+    "The IIE registry remains additive and the legacy CRIBA core remains unchanged; P12 owns application integration and feature-flag wiring."
+  ],
+  "risks": [
+    "T054, T056, T058, T061, T066 and T067 remain declared but PLANNED; P09 does not represent them as implemented.",
+    "T063 consumes retrieved documents but does not issue a network request itself.",
+    "The full suite retains one pre-existing Starlette/httpx deprecation warning."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T18 audit commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/taxonomy.py src/criba/intelligence/invention/registry.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- .hermes/iie/tasks/P09-T18.json before commit.",
+  "follow_up": ["Create P09 checkpoint/state metadata, then begin P10-T01 adversarial search protocol."],
+  "completed_at": "2026-09-04T02:50:48+02:00"
+}

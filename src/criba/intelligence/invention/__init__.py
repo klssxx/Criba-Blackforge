@@ -14,7 +14,7 @@ from .inversion import generate_constraint_inversion_hypotheses
 from .morphology import generate_morphological_hypotheses
 from .nth_order import generate_nth_order_effect_hypotheses
 from .rare_combinations import detect_rare_combinations
-from .registry import OperatorContext, OperatorRegistry
+from .registry import InnovationOperatorRegistry, OperatorContext, OperatorRegistry
 from .scamper import generate_scamper_hypotheses
 from .taxonomy import (
     OPERATORS_BY_KEY,
@@ -25,6 +25,7 @@ from .taxonomy import (
 
 __all__ = [
     "OPERATORS_BY_KEY",
+    "InnovationOperatorRegistry",
     "OperatorContext",
     "OperatorDefinition",
     "OperatorRegistry",

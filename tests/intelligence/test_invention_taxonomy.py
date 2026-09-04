@@ -6,6 +6,7 @@ import pytest
 from criba.intelligence.contracts import EvidenceDocument, InventionCandidate
 from criba.intelligence.invention import (
     OPERATORS_BY_KEY,
+    InnovationOperatorRegistry,
     OperatorContext,
     OperatorRegistry,
     decompose_first_principles_hypotheses,
@@ -43,6 +44,20 @@ def test_taxonomy_lookup_is_stable_and_does_not_make_up_unknown_operators():
 def test_taxonomy_mapping_cannot_be_mutated_by_consumers():
     with pytest.raises(TypeError):
         OPERATORS_BY_KEY["invented"] = get_operator("triz")
+
+
+def test_innovation_operator_contract_exposes_required_architecture_metadata():
+    registry = InnovationOperatorRegistry()
+    assert registry.registered_keys() == ()
+
+    for definition in operator_definitions():
+        assert definition.id == definition.key
+        assert definition.description
+        assert definition.input_requirements
+        assert definition.output_contract
+        assert definition.deterministic is True
+        assert definition.model_optional is True
+        assert isinstance(definition.evidence_required, bool)
 
 
 def test_registry_executes_only_declared_and_traceable_operators():

@@ -57,3 +57,8 @@ class OperatorRegistry:
                     f"for {key}"
                 )
         return candidates
+
+
+# Blueprint name for the additive IIE registry.  The original public name is
+# intentionally retained so existing callers are not broken.
+InnovationOperatorRegistry = OperatorRegistry
