@@ -91,7 +91,7 @@ def run_stdio(database: Path | str | None = None) -> None:
             ident = request.get("id")
             result: Any
             if method == "initialize":
-                result = {"protocolVersion": "2024-11-05", "serverInfo": {"name": "criba-current-engine", "version": "0.1.0"}, "capabilities": {"tools": {}}}
+                result = {"protocolVersion": "2024-11-05", "serverInfo": {"name": "criba", "version": "0.2.0"}, "capabilities": {"tools": {}}}
             elif method == "tools/list":
                 result = {"tools": TOOLS}
             elif method == "tools/call":

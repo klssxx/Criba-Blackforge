@@ -56,8 +56,11 @@ class Technique:
 
 
 def _default_registry_path() -> Path:
-    # src/criba/intelligence/registry.py -> repo_root/data/intelligence/...
-    return Path(__file__).resolve().parents[3] / "data" / "intelligence" / "technique_registry.yaml"
+    # registry.py lives inside src/criba/intelligence; the registry data ships
+    # under the CRIBA data root (portable bundle, checkout or installed wheel).
+    from criba.constants import DATA_ROOT
+
+    return DATA_ROOT / "intelligence" / "technique_registry.yaml"
 
 
 class TechniqueRegistry:

@@ -3,14 +3,44 @@ import sys
 from pathlib import Path
 
 PACKAGE_ROOT = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[2]))
-DATA_ROOT = PACKAGE_ROOT / "data"
+
+
+def _source_checkout_root() -> Path:
+    """Repo root when running from a checkout (has pyproject.toml beside data)."""
+    return Path(__file__).resolve().parents[2]
+
+
+def _resolve_data_root() -> Path:
+    """Locate the method/intelligence data in portable, checkout and wheel layouts."""
+    frozen = getattr(sys, "_MEIPASS", None)
+    if frozen:
+        return Path(frozen) / "data"  # portable executable bundle
+    source_root = _source_checkout_root()
+    if (source_root / "pyproject.toml").is_file():
+        return source_root / "data"  # source checkout / editable install
+    try:
+        # pip-installed wheel: data ships as a top-level namespace package.
+        from importlib.util import find_spec
+
+        spec = find_spec("data")
+        if spec is not None and spec.submodule_search_locations:
+            return Path(next(iter(spec.submodule_search_locations)))
+    except Exception:
+        pass
+    return source_root / "data"
+
+
+DATA_ROOT = _resolve_data_root()
+_DB_BASE = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
 if getattr(sys, "frozen", False):
     # Portable executable: keep the SQLite store in a persistent, user-writable
     # location (the frozen bundle dir is ephemeral / read-only on some setups).
-    _DB_BASE = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
     DEFAULT_DB = _DB_BASE / "criba.sqlite3"
-else:
+elif (Path(__file__).resolve().parents[2] / "pyproject.toml").is_file():
     DEFAULT_DB = PACKAGE_ROOT / "artifacts" / "criba.sqlite3"
+else:
+    # pip-installed: site-packages is not writable, keep state user-local.
+    DEFAULT_DB = _DB_BASE / "criba.sqlite3"
 MAX_QUERY_CHARS = 20_000
 SELECTOR_VERSION = "1.0.0"
 CURRENT_CATALOG_VERSION = "1.0.0"

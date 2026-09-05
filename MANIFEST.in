@@ -1,0 +1,8 @@
+include LICENSE
+include THIRD_PARTY_NOTICES.md
+include CHANGELOG.md
+include FIRST_RUN_ES.md
+include FIRST_RUN_EN.md
+recursive-include data *
+include examples/getting_started.py
+recursive-include examples/notebooks *

@@ -71,3 +71,7 @@ verification/capture_blackforge_standalone.py
 # Hermes tmp
 .hermes-tmp.*
 src/**/.hermes-tmp.*
+
+# Local agent tooling (personal config, not part of the product)
+.agents/
+.codex/
