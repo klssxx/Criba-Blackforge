@@ -1,0 +1,31 @@
+{
+  "task_id": "P04-T06",
+  "title": "Recursive search",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high",
+  "files_read": [
+    "src/criba/intelligence/retrieval/recursive.py",
+    "tests/intelligence/test_retrieval.py"
+  ],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/test_retrieval.py"
+  ],
+  "tests_passed": [
+    "10 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The ledger title was reconciled to the original P04 blueprint ID; recursive retrieval uses explicit depth and query budgets."
+  ],
+  "risks": [
+    "Recursive quality is only tested against local deterministic documents, not a live corpus benchmark."
+  ],
+  "follow_up": [
+    "P04-T10 records the corrected single-query budget behavior."
+  ],
+  "completed_at": "2026-09-03"
+}

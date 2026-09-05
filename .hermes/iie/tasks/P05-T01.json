@@ -1,0 +1,18 @@
+{
+  "task_id": "P05-T01",
+  "title": "Epistemic semantics",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": ["src/criba/intelligence/contracts.py"],
+  "files_created": [],
+  "files_modified": ["src/criba/intelligence/provenance.py"],
+  "commits": ["6de29de"],
+  "tests_run": ["python -m pytest tests/intelligence/test_provenance.py -q -p no:cacheprovider"],
+  "tests_passed": ["8 passed"],
+  "tests_failed": [],
+  "decisions": ["FACT without resolvable evidence is downgraded to INFERENCE."],
+  "risks": [],
+  "follow_up": ["P05-T03 Claim store"],
+  "completed_at": "2026-09-03"
+}

@@ -1,0 +1,53 @@
+{
+  "task_id": "P08-T01",
+  "title": "Research-gap extraction",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3880-3885",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/claims.py",
+    "src/criba/intelligence/provenance.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/research.py",
+    "tests/intelligence/test_gaps.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_gaps.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/gaps",
+    "python -m compileall -q src/criba/intelligence/gaps",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "4 focused research-gap tests passed",
+    "mypy success in 2 source files",
+    "compileall success",
+    "812 full CRIBA tests passed; 1 existing deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Extraction is deterministic and stdlib-only: explicit linguistic cues, sentence-level statements, stable provenance to doc_id, case-insensitive topic filter and semantic deduplication.",
+    "Gap objects remain HYPOTHESIS and do not promote evidence to FACT.",
+    "Resolved language such as 'addresses the open question' is excluded to prevent false-positive gaps.",
+    "An accidentally conflicting top-level gaps.py was moved to ../QUARANTINE_CRIBA_P08/gaps.py, reversibly, because gaps is an existing package."
+  ],
+  "risks": [
+    "Rule-based English cue coverage does not cover every domain-specific or non-English formulation.",
+    "Sentence segmentation is deliberately lightweight and punctuation-based."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P08-T01 commit>; restore ../QUARANTINE_CRIBA_P08/gaps.py only if required",
+  "limitations": [
+    "No network sources, LLMs, external dependencies, database writes or production artifacts were used."
+  ],
+  "commits": ["c855fc97f0b5a3334812e880902b42880e7502d6"],
+  "completed_at": "2026-09-03T08:36:00+02:00"
+}

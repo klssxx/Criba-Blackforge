@@ -1,0 +1,21 @@
+{
+  "task_id": "P08-T03",
+  "title": "Contradiction analysis",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3892-3895",
+  "files_read": ["src/criba/intelligence/contracts.py", "src/criba/intelligence/claims.py"],
+  "files_created": ["src/criba/intelligence/gaps/contradictions.py", "tests/intelligence/test_contradictions.py"],
+  "files_modified": ["src/criba/intelligence/gaps/__init__.py"],
+  "tests_run": ["python -m pytest tests/intelligence/test_contradictions.py -q -p no:cacheprovider", "mypy --no-incremental src/criba/intelligence/gaps", "python -m compileall -q src/criba/intelligence/gaps", "python -m pytest -q -p no:cacheprovider", "git diff --check"],
+  "tests_passed": ["3 focused tests", "mypy success in 4 files", "compileall success", "819 full tests; 1 existing warning", "git diff --check success"],
+  "tests_failed": [],
+  "decisions": ["Contradictions are detected only for normalized subject/object pairs with explicit opposing verbs; provenance is unioned in input order and duplicate same-polarity claims are ignored."],
+  "remaining_risks": ["Rule-based English relation coverage is limited to explicit polarity verbs; nuanced negation is outside this task."],
+  "cost": "COST=0",
+  "rollback": "git revert <P08-T03 commit>",
+  "limitations": ["No network, external dependencies, database writes or production artifacts."],
+  "commits": [],
+  "completed_at": "2026-09-03T08:45:00+02:00"
+}

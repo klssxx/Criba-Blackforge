@@ -1,0 +1,18 @@
+{
+  "task_id": "P05-T05",
+  "title": "Entity resolver",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": ["src/criba/intelligence/contracts.py"],
+  "files_created": ["src/criba/intelligence/entities/resolver.py"],
+  "files_modified": [],
+  "commits": ["6de29de"],
+  "tests_run": ["python -m pytest tests/intelligence/test_provenance.py -q -p no:cacheprovider", "mypy --no-incremental src/criba/intelligence/entities"],
+  "tests_passed": ["8 passed", "mypy success"],
+  "tests_failed": [],
+  "decisions": ["Resolution is type-aware and merge rejects entities with different node types."],
+  "risks": [],
+  "follow_up": ["P06 graph builder"],
+  "completed_at": "2026-09-03"
+}

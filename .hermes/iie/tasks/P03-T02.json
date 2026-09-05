@@ -1,0 +1,51 @@
+{
+  "task_id": "P03-T02",
+  "title": "Crossref adapter",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_sources.py"
+  ],
+  "files_created": [],
+  "files_modified": [
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/__init__.py",
+    "tests/intelligence/test_sources.py",
+    ".hermes/iie/tasks/P03-T02.json"
+  ],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sources.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/sources",
+    "mypy --no-incremental src/criba/intelligence/sources"
+  ],
+  "tests_passed": [
+    "16 passed: sources plus boundaries",
+    "172 passed: intelligence suite",
+    "compileall: success",
+    "git diff --check: success"
+  ],
+  "tests_failed": [
+    "mypy sources: 8 pre-existing errors outside Crossref scope (protocol.py, transport.py, __init__.py, and legacy _inverted_index_to_text annotation)"
+  ],
+  "decisions": [
+    "Crossref uses the public Works API through the injected Transport; no API key, network call, or dependency was added.",
+    "Response normalization preserves DOI, authors, container title, type, citation count, date parts, and text-only abstract fragments.",
+    "The previous P03-T02 transport label was inconsistent with the master blueprint; transport reconciliation belongs to P03-T09."
+  ],
+  "risks": [
+    "Crossref response fields are optional and heterogeneous; absent or malformed values are normalized conservatively to empty values.",
+    "The adapter is mock-tested only; no live request was made by this task."
+  ],
+  "follow_up": [
+    "RECOVERY-AUDIT-001: reconcile the earlier transport evidence under P03-T09.",
+    "P03-T07: ClinicalTrials and funding skeletons.",
+    "P03-T10: source architecture audit."
+  ],
+  "completed_at": "2026-09-03T20:55:17+02:00"
+}

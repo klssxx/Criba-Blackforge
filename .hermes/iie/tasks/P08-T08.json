@@ -1,0 +1,58 @@
+{
+  "task_id": "P08-T08",
+  "title": "Dormant paper detection",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3917-3920; technique registry T128 dormant research boundary",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py",
+    "src/criba/intelligence/gaps/resurrection.py",
+    "src/criba/intelligence/gaps/patent_expiration.py",
+    "data/intelligence/technique_registry.yaml"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/dormant.py",
+    "tests/intelligence/test_dormant.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_dormant.py -q -p no:cacheprovider (4 passed)",
+    "python -m pytest tests/intelligence/test_dormant.py tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider (39 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success in 10 files)",
+    "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success)",
+    "python -m pytest -q -p no:cacheprovider (840 passed, 1 existing warning)",
+    "git diff --check (success)"
+  ],
+  "tests_passed": [
+    "4 focused dormant-paper tests",
+    "39 focused gap/contract tests",
+    "mypy success in 10 source files",
+    "compileall success",
+    "840 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "DormantPaperCandidate records publication age, recent citation/attention metrics, dormant_since and provenance without inventing missing measurements.",
+    "Detection requires explicit low-attention evidence from structured recent metrics or text cues; an old paper without attention evidence is excluded.",
+    "Age checks are deterministic and use an explicit as_of parameter; no wall-clock date or network lookup is hidden in the analyzer.",
+    "The module supports structured metadata and English text cues, preserves document order independence, and leaves sleeping-beauty semantics for P08-T09."
+  ],
+  "remaining_risks": [
+    "Metrics are accepted as supplied and are not independently verified against citation providers.",
+    "Text extraction is English and heuristic; nuanced citation trajectories need structured time-series evidence."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert 86fa59c4a5b984752143e8354f8e64f221dd710e",
+  "limitations": [
+    "No network, credentials, external dependencies, registry lookup or production write was used.",
+    "The unrelated docs/FINAL_REPORT.md, .agents/, .codex/, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/, scripts/verify-dev-environment.* and skills-lock.json remain untouched and uncommitted."
+  ],
+  "commits": ["86fa59c4a5b984752143e8354f8e64f221dd710e"],
+  "completed_at": "2026-09-03T09:26:59+02:00"
+}

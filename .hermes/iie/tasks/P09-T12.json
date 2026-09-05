@@ -1,0 +1,52 @@
+{
+  "task_id": "P09-T12",
+  "title": "Adjacent possible",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/contracts.py",
+    "data/intelligence/technique_registry.yaml",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/adjacent_possible.py",
+    ".hermes/iie/tasks/P09-T12.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t116_adjacent_possible_excludes_explicit_known_combinations",
+    "uv run --locked ruff check src/criba/intelligence/invention/adjacent_possible.py src/criba/intelligence/invention/taxonomy.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/adjacent_possible.py src/criba/intelligence/invention/taxonomy.py",
+    "git diff --check -- src/criba/intelligence/invention/adjacent_possible.py src/criba/intelligence/invention/taxonomy.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T116 contract",
+    "17 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for T116 code, taxonomy, package surface, and test",
+    "mypy: success, no issues in adjacent_possible.py and taxonomy.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T116 enumerates only capability pairs absent from caller-supplied known combinations and labels them as corpus-bounded hypotheses.",
+    "The taxonomy mapping for adjacent_possible was corrected from T129 to T116, matching the blueprint technique registry; T129 remains assigned to counterfactual, future-back, bottleneck, and nth-order operators."
+  ],
+  "risks": [
+    "Absence from supplied known combinations is not global novelty, feasibility, compatibility, or value evidence.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T12 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/taxonomy.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/adjacent_possible.py .hermes/iie/tasks/P09-T12.json before commit.",
+  "follow_up": ["P09-T13: counterfactual."],
+  "completed_at": "2026-09-04T02:23:56+02:00"
+}

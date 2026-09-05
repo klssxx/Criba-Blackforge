@@ -1,0 +1,59 @@
+{
+  "task_id": "P08-T06",
+  "title": "White-space engine",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3907-3910 and 4797-4799; technique registry T086",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/research.py",
+    "src/criba/intelligence/gaps/limitations.py",
+    "src/criba/intelligence/gaps/contradictions.py",
+    "src/criba/intelligence/gaps/failures.py",
+    "src/criba/intelligence/gaps/resurrection.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/white_space.py",
+    "tests/intelligence/test_white_space.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_white_space.py -q -p no:cacheprovider (4 passed)",
+    "python -m pytest tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider (31 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success in 8 files)",
+    "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success)",
+    "python -m pytest -q -p no:cacheprovider (832 passed, 1 existing warning)",
+    "git diff --check (success)"
+  ],
+  "tests_passed": [
+    "4 focused white-space tests",
+    "31 focused gap/contract tests",
+    "mypy success in 8 source files",
+    "compileall success",
+    "832 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "White-space analysis is deterministic and local: explicit absence/under-coverage cues are converted to WhiteSpaceCandidate objects with stable document provenance.",
+    "The engine classifies candidates as research, patent or market using explicit metadata/text first, then document kind; callers can filter by type or topic.",
+    "Resolved language such as fills, closes or directly addresses a gap is excluded; unsupported free-form claims are not promoted without a white-space cue.",
+    "The existing WhiteSpaceCandidate contract is reused without touching storage, legacy CRIBA, BLACKFORGE goldens or SUPRA."
+  ],
+  "remaining_risks": [
+    "Cue extraction is English and sentence-based; it does not infer latent gaps from statistical cluster density.",
+    "Patent and market classification is heuristic unless space_type is supplied in metadata or as a filter."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert 60b710f81dba20b1f42a7743c4fde856c30369e0",
+  "limitations": [
+    "No network, external dependencies, database writes or production artifacts were used.",
+    "The unrelated pre-existing docs/FINAL_REPORT.md, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/ and scripts/verify-dev-environment.* remain untouched and uncommitted."
+  ],
+  "commits": ["60b710f81dba20b1f42a7743c4fde856c30369e0"],
+  "completed_at": "2026-09-03T09:08:47+02:00"
+}

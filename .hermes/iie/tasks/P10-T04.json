@@ -1,0 +1,46 @@
+{
+  "task_id": "P10-T04",
+  "phase": "P10",
+  "title": "ScienceScout against OpenAlex",
+  "status": "VERIFIED",
+  "files_read": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py",
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_patent_scout.py"
+  ],
+  "files_created": [
+    "tests/intelligence/test_science_scout.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "tests": [
+    "uv run --locked pytest -q tests/intelligence/test_science_scout.py -p no:cacheprovider -> 3 passed",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider -> 911 passed, 1 warning",
+    "Live probe: OpenAlexSource with TransportBudget(max_requests=1) -> 2 normalized documents, provenance present, 1 request"
+  ],
+  "decisions": [
+    "ScienceScout mirrors PatentScout: thin wrapper retaining query variant text.",
+    "OpenAlex chosen as the actually probed scientific source (free, no-key, stable).",
+    "Live probe verifies normalization only; no novelty or prior-art verdict asserted."
+  ],
+  "risks": [
+    "OpenAlex is a third-party endpoint and may change schema or availability.",
+    "Scientific metadata is discovery evidence, not a novelty or prior-art legal opinion."
+  ],
+  "external_evidence": {
+    "citation_ledger": "C:/Users/KLSX/Music/INNOVATIONS/_AUDIT/p10-t04-citation-ledger.json",
+    "source_ids": ["openalex"],
+    "probe_query": "thermal management",
+    "request_budget": 1,
+    "documents_normalized": 2
+  },
+  "follow_up": [
+    "Determine and implement the next P10 task from the canonical blueprint."
+  ],
+  "completed_at": "2026-09-04T18:30:00+02:00"
+}

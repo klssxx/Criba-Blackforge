@@ -1,0 +1,57 @@
+{
+  "task_id": "P07-T10",
+  "title": "Signal semantics audit",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Sol",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3875: Signal semantics audit",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T10 block)",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/bursts.py",
+    "src/criba/intelligence/signals/changepoints.py",
+    "src/criba/intelligence/signals/anomaly.py",
+    "src/criba/intelligence/signals/weak_signals.py",
+    "src/criba/intelligence/signals/lead_lag.py",
+    "src/criba/intelligence/signals/scurve.py",
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "files_created": [
+    "tests/intelligence/test_signal_semantics.py"
+  ],
+  "files_modified": [],
+  "commits": ["ef2abb834fd49a97a84a791f1244870895fa9181"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_semantics.py -q -p no:cacheprovider (1 initial failure: environment-level numeric-stack probe replaced by an AST import audit of the signal sources)",
+    "python -m pytest tests/intelligence/test_signal_semantics.py tests/intelligence/test_signal_synthetic.py tests/intelligence/test_signal_observations.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_scurve.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "11 signal semantics audit tests passed",
+    "52 targeted signal/storage/contract tests passed",
+    "808 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 9 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The audit verifies determinism, input-order independence and cross-topic isolation across burst/anomaly/change-point/S-curve outputs; all held without implementation changes.",
+    "Lead/lag antisymmetry (lag inverts, correlation is preserved under topic swap) is now an enforced invariant.",
+    "Velocity over period gaps is documented semantics: periods are labels, not a continuous time axis; deltas are computed across gaps.",
+    "The dependency check audits the AST imports of the signal sector itself rather than the environment, because numpy exists globally for unrelated dependencies but no signal module imports it.",
+    "No semantic defect requiring implementation changes was found; the sector was already hardened by the P07-T09 fixture alignment."
+  ],
+  "risks": [
+    "Aggregation provenance and antisymmetry are enforced at the fixture scale; pathological real-world series remain outside synthetic coverage.",
+    "AST import audit does not catch dynamic imports resolved at runtime; none exist in the sector."
+  ],
+  "follow_up": [
+    "P08-T01 research-gap extraction",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T08:33:46+02:00"
+}

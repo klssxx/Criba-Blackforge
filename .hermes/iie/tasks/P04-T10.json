@@ -1,0 +1,18 @@
+{
+  "task_id": "P04-T10",
+  "title": "Retrieval quality review",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": ["src/criba/intelligence/retrieval/lexical.py", "src/criba/intelligence/retrieval/expansion.py", "src/criba/intelligence/retrieval/hybrid.py", "src/criba/intelligence/retrieval/recursive.py", "tests/intelligence/test_retrieval.py", "tests/intelligence/test_boundaries.py"],
+  "files_created": [".hermes/iie/tasks/P04-T10.json"],
+  "files_modified": ["src/criba/intelligence/retrieval/hybrid.py", "src/criba/intelligence/retrieval/recursive.py", "tests/intelligence/test_retrieval.py", ".hermes/iie/tasks/P04-T04.json", ".hermes/iie/tasks/P04-T05.json", ".hermes/iie/tasks/P04-T06.json", ".hermes/iie/checkpoints/P04.md"],
+  "commits": [],
+  "tests_run": ["python -m pytest tests/intelligence/test_retrieval.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider", "python -m pytest tests/intelligence -q -p no:cacheprovider", "python -m compileall -q src/criba/intelligence/retrieval", "git diff --check"],
+  "tests_passed": ["17 passed: retrieval plus boundaries", "182 passed: intelligence suite", "compileall: success", "single-query recursive budget, RRF weights validation, and deterministic tie handling covered"],
+  "tests_failed": ["No live retrieval-corpus benchmark was run; this review only verifies deterministic local behavior."],
+  "decisions": ["A max_queries value of one must execute the initial query once; query usage is recorded after the search call.", "The P04-T04 through P04-T06 ledger titles were reconciled to original blueprint IDs without rewriting historical commits."],
+  "risks": ["BM25-lite is local, token-based, and non-positional; it has not been calibrated against a production corpus.", "RecursiveSearcher's new_doc_bonus_threshold argument is presently not applied, so it must not be presented as an active stopping policy."],
+  "follow_up": ["P05 provenance should populate source and citation metadata for production-scale retrieval evaluation."],
+  "completed_at": "2026-09-03T21:06:31+02:00"
+}

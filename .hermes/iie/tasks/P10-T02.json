@@ -1,0 +1,56 @@
+{
+  "task_id": "P10-T02",
+  "title": "Deterministic query lattice",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/retrieval/expansion.py",
+    "src/criba/intelligence/prior_art/protocol.py",
+    "data/intelligence/technique_registry.yaml"
+  ],
+  "files_created": [
+    "src/criba/intelligence/prior_art/lattice.py",
+    ".hermes/iie/tasks/P10-T02.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/__init__.py",
+    "src/criba/intelligence/contracts.py",
+    "tests/intelligence/test_prior_art_protocol.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py::test_query_lattice_adds_traceable_classification_variants_deterministically",
+    "uv run --locked ruff check src/criba/intelligence/prior_art tests/intelligence/test_prior_art_protocol.py",
+    "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py tests/intelligence/test_contracts.py",
+    "uv run --locked mypy src/criba/intelligence/prior_art",
+    "uv run --locked python -m compileall -q src/criba/intelligence/prior_art src/criba/intelligence/contracts.py",
+    "git diff --check -- src/criba/intelligence/prior_art src/criba/intelligence/contracts.py tests/intelligence/test_prior_art_protocol.py"
+  ],
+  "tests_passed": [
+    "RED: build_query_lattice was not exported",
+    "GREEN: 1 lattice contract test passed",
+    "Ruff on task code/tests: all checks passed",
+    "Prior-art protocol plus P01 contract regression: 10 passed",
+    "mypy: success, no issues found in 3 source files",
+    "compileall: success",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Reused P04 QueryExpander for original/synonym/ontology/multilingual/decomposition variants instead of duplicating expansion logic.",
+    "Added only deterministic CPC/IPC-style classification variants using origin=classification and technique T003.",
+    "Deduplication key is text plus language; input classifications are normalized, deduplicated and sorted.",
+    "No external search is performed by this task; the lattice is an input to later scouts."
+  ],
+  "risks": [
+    "The max_variants cap is applied after P04 expansion followed by classification variants; callers requesting a cap smaller than the P04 expansion set may not receive every classification variant.",
+    "Ruff over src/criba/intelligence/contracts.py still reports six pre-existing, auto-fixable issues (I001, F401, UP035, RUF022); task code and tests are clean. Deferred explicitly to repair-quality."
+  ],
+  "cost": "COST=0; no network calls or billable services used.",
+  "rollback": "git revert <P10-T02 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/prior_art/__init__.py src/criba/intelligence/contracts.py tests/intelligence/test_prior_art_protocol.py && git clean -f -- src/criba/intelligence/prior_art/lattice.py .hermes/iie/tasks/P10-T02.json before commit.",
+  "follow_up": ["P10-T03: implement PatentScout against an actually probed external source."],
+  "completed_at": "2026-09-04T03:09:01+02:00"
+}

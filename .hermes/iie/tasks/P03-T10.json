@@ -1,0 +1,57 @@
+{
+  "task_id": "P03-T10",
+  "title": "Source architecture audit",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "src/criba/intelligence/sources/__init__.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "src/criba/intelligence/sources/adapters.py",
+    "tests/intelligence/test_sources.py",
+    "tests/intelligence/test_boundaries.py"
+  ],
+  "files_created": [
+    ".hermes/iie/tasks/P03-T10.json"
+  ],
+  "files_modified": [
+    "tests/intelligence/test_sources.py",
+    ".hermes/iie/tasks/P03-T03.json",
+    ".hermes/iie/tasks/P03-T04.json",
+    ".hermes/iie/tasks/P03-T05.json",
+    ".hermes/iie/tasks/P03-T06.json",
+    ".hermes/iie/checkpoints/P03.md"
+  ],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sources.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/sources",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "23 passed: sources plus boundaries",
+    "179 passed: intelligence suite",
+    "compileall: success",
+    "registry IDs unique; all seven public sources registered; adapters have no direct HTTP-client imports"
+  ],
+  "tests_failed": [
+    "ruff executable unavailable in the current environment; no lint success is claimed",
+    "mypy sources has 8 pre-existing errors outside this audit's changes"
+  ],
+  "decisions": [
+    "Adapters remain thin normalization layers; only Transport imports httpx lazily.",
+    "All adapters are constructed through one registry and use injected transport/context, preserving mock-only CI tests.",
+    "The P03-T03 through P03-T06 ledger titles were reconciled to original blueprint IDs without changing historical implementation commits."
+  ],
+  "risks": [
+    "Health reports configuration availability, not live endpoint reachability; a live probe is intentionally not part of deterministic CI.",
+    "Upstream schema drift remains isolated to adapters; EPO OPS response compatibility is not revalidated against the network in this task."
+  ],
+  "follow_up": [
+    "P04 retrieval work is already implemented but requires its own ledger reconciliation and P04-T10 review.",
+    "Resolve or explicitly baseline the pre-existing source-sector mypy errors before claiming strict typing for P03."
+  ],
+  "completed_at": "2026-09-03T21:03:42+02:00"
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "P07-T01",
+  "title": "Time-series observations",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3830: Time-series observations",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T01 block)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/storage/store.py",
+    "src/criba/intelligence/storage/__init__.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_storage.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/dynamics.py",
+    "tests/intelligence/test_signal_observations.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py",
+    "src/criba/intelligence/storage/store.py"
+  ],
+  "commits": ["b24efbdbcfb1db8435113d2ee607fddbcadcad6d"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_observations.py::test_observation_series_orders_points_by_period -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_observations.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN test passed after implementation",
+    "3 signal observation tests passed",
+    "21 targeted signal/storage/contract tests passed",
+    "777 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 3 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "ObservationSeries stores TopicObservation values immutably and exposes deterministic topic/period ordering for later signal dynamics.",
+    "IntelligenceStore appends observations to the isolated intel_topic_observations table and lists them by topic, period and insertion id.",
+    "Observation metadata is serialized as JSON on disk and decoded on read; topic and period remain explicit fields for filtering and future dynamics.",
+    "No legacy database, external service or paid provider is involved."
+  ],
+  "risks": [
+    "Period ordering is lexical and therefore expects canonical comparable period values such as YYYY-MM.",
+    "The persistence method is append-only and does not deduplicate repeated topic/period observations; aggregation belongs to later signal tasks.",
+    "The contract currently permits empty topic, period and negative counters; validation policy remains for the signal semantics audit."
+  ],
+  "follow_up": [
+    "P07-T02 velocity + acceleration",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T07:27:54+02:00"
+}

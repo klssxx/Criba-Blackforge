@@ -1,0 +1,58 @@
+{
+  "task_id": "P07-T07",
+  "title": "Lead/lag framework",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3860: lead/lag framework",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T07 block)",
+    "data/intelligence/technique_registry.yaml (T101 Cross-source lead/lag)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/weak_signals.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_weak_signals.py",
+    ".hermes/iie/tasks/P07-T06.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/lead_lag.py",
+    "tests/intelligence/test_signal_lead_lag.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["e638dbcc4d21b2ff5e649c058a309c96e233187f"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_lead_lag.py::test_lead_lag_analyzer_identifies_delayed_follower -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/lead_lag.py src/criba/intelligence/signals/weak_signals.py src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN lead/lag test passed",
+    "28 targeted signal/storage/contract tests passed",
+    "784 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 8 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Lead/lag compares topic frequency series with bounded integer shifts using Pearson correlation over overlapping periods.",
+    "A positive lag means the follower series is shifted later and therefore follows the leader; negative lags represent the inverse relation.",
+    "Selection prioritizes absolute correlation, then the smallest absolute lag, then positive lag deterministically; strength is absolute correlation.",
+    "Insufficient or constant series return no result rather than inventing a relationship; the framework is local and dependency-free."
+  ],
+  "risks": [
+    "Correlation does not establish causality and can be inflated by shared trends; causal validation is outside this framework.",
+    "The current API compares topic series, while source-specific cross-source grouping requires a future source identity contract."
+  ],
+  "follow_up": [
+    "P07-T08 S-curve approximation",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T08:08:30+02:00"
+}

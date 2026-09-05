@@ -1,0 +1,22 @@
+{
+  "task_id": "P03-T03",
+  "title": "OpenAlex adapter",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/test_sources.py"
+  ],
+  "tests_passed": [
+    "10 passed + live OpenAlex"
+  ],
+  "tests_failed": [],
+  "decisions": ["Ledger title reconciled to the master blueprint; OpenAlex normalization is implemented in the consolidated P03 adapter commit 3cea520."],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

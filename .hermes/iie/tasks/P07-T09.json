@@ -1,0 +1,57 @@
+{
+  "task_id": "P07-T09",
+  "title": "Synthetic time-series tests",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "medium",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3870: synthetic time-series tests",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T09 block)",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/bursts.py",
+    "src/criba/intelligence/signals/changepoints.py",
+    "src/criba/intelligence/signals/anomaly.py",
+    "src/criba/intelligence/signals/weak_signals.py",
+    "src/criba/intelligence/signals/lead_lag.py",
+    "src/criba/intelligence/signals/scurve.py",
+    "src/criba/intelligence/storage/store.py",
+    "tests/intelligence/test_signal_observations.py"
+  ],
+  "files_created": [
+    "tests/intelligence/signal_fixtures.py",
+    "tests/intelligence/test_signal_synthetic.py"
+  ],
+  "files_modified": [],
+  "commits": ["4db46bc3b09487909db4b4c066857c208c2ba8b9"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_synthetic.py -q -p no:cacheprovider (3 initial expectation failures fixed: store row shape obs_id, change-point window alignment, S-curve r_squared threshold)",
+    "python -m pytest tests/intelligence/test_signal_synthetic.py tests/intelligence/test_signal_observations.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_lead_lag.py tests/intelligence/test_signal_scurve.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals src/criba/intelligence/storage/store.py",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "11 synthetic signal tests passed",
+    "41 targeted signal/storage/contract tests passed",
+    "797 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 9 signal/storage source files",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "A shared synthetic fixture module provides four stable topics over eight contiguous monthly periods: a smooth monotonic ramp (quantum), the same ramp lagged by one period (cooling), a flat control (robotics) and a single-period spike (solid).",
+    "Fixture tests verify internal alignment invariants (sorted unique periods, cooling == quantum shifted by one) instead of re-deriving the fixture from itself.",
+    "Store roundtrip reconstructs TopicObservation from explicit row fields because list_observations exposes the obs_id surrogate key that the contract does not carry.",
+    "Change-point expectations follow the two-window semantics: the first candidate period is window+1 (index 2) because earlier periods lack a full before-window.",
+    "S-curve r_squared threshold set to >0.8 reflecting the explainable logit approximation over the synthetic ramp, not a fitted-by-construction guarantee."
+  ],
+  "risks": [
+    "Synthetic fixtures validate deterministic semantics, not production-scale volume or irregular real periods.",
+    "Fixture frequencies are integer counts; fractional or missing-period series remain uncovered."
+  ],
+  "follow_up": [
+    "P07-T10 signal semantics audit",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T08:29:25+02:00"
+}

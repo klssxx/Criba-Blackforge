@@ -1,0 +1,26 @@
+name: Feature request
+description: An idea on how CRIBA could innovate or solve better.
+title: "feat: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem or opportunity
+      description: What should CRIBA be able to do that it cannot today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behaviour
+      description: Describe the CLI flag, method, adapter or pipeline you have in mind.
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why it matters
+      description: How does this bring better ideas or better evidence, deterministically?
+    validations:
+      required: true

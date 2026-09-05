@@ -1,0 +1,64 @@
+{
+  "task_id": "P09-T05",
+  "title": "TRIZ registry/operator mappings",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "isolated_worktree": {
+    "path": "E:/PROYECTS/_P09T05_WT",
+    "branch": "p09-t05-triz",
+    "base_commit": "1b7bb2d7ebcbf4152e5ec8fce33d9f1db359f6a4"
+  },
+  "files_read": [
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/registry.py",
+    "src/criba/intelligence/invention/cross_domain.py",
+    ".hermes/iie/tasks/P09-T04.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/triz.py",
+    "tests/intelligence/test_triz.py"
+  ],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_triz.py -q -p no:cacheprovider",
+    "post-integration: python -m pytest tests/intelligence/test_triz.py tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "post-integration: python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/invention/triz.py",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "16 passed: TRIZ registry contracts",
+    "207 passed: intelligence suite (191 pre-existing + 16 new)",
+    "35 passed: post-integration TRIZ, invention, and contract tests",
+    "210 passed: post-integration intelligence suite",
+    "compileall: success",
+    "git diff --check: clean"
+  ],
+"tests_failed": [],
+  "verified_facts": [
+    "The registry contains exactly 40 immutable principles numbered 1..40 with unique numbers, stable ascending order across calls, and non-empty name/description.",
+    "Every returned TrizPrinciple carries technique_id T057; invalid lookups raise KeyError instead of returning a substitute.",
+    "CONTRADICTION_MATRIX_AVAILABLE is explicitly False: no 39x39 contradiction matrix is implemented, embedded or simulated."
+  ],
+  "limits": [
+    "A principle in this registry is a reasoning prompt only: listing it does NOT demonstrate that any derived proposal is feasible, novel or patentable.",
+    "The 39x39 contradiction matrix is not included because no sourced, licensed numeric dataset is available in this repo; fabricating one is prohibited by the task.",
+    "Principle names follow the widely published canonical list; short descriptions are paraphrases written for this registry, not verbatim quotes from any single licensed source."
+  ],
+  "decisions": [
+    "triz.py declares module-level TRIZ_TECHNIQUE_ID='T057' matching taxonomy.py operator 'triz'; __init__.py and registry.py were NOT touched per task constraints.",
+    "Dataclass is frozen with __post_init__ validation (range 1..40, non-empty fields) so malformed entries cannot be constructed silently.",
+    "Post-integration hardening rejects any constructed TrizPrinciple whose technique_id is not T057, preserving the every-result traceability contract.",
+    "CONTRADICTION_MATRIX_AVAILABLE=False is exposed for consumers instead of any partial or invented matrix."
+  ],
+  "risks": [
+    "Without wiring in invention/__init__.py or registry handlers, T057 is declared in taxonomy but not yet executable through OperatorRegistry; that wiring belongs to a later integration task."
+  ],
+  "follow_up": [
+    "Integration task may register a 'triz' OperatorHandler and export symbols from invention/__init__.py once the shared-file conflict with P09-T06 is resolved."
+  ],
+  "completed_at": "2026-09-03T22:05:00+02:00"
+}

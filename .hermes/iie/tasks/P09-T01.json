@@ -1,0 +1,41 @@
+{
+  "task_id": "P09-T01",
+  "title": "Freeze operator taxonomy",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_contracts.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/taxonomy.py",
+    "tests/intelligence/test_invention_taxonomy.py",
+    ".hermes/iie/tasks/P09-T01.json"
+  ],
+  "files_modified": ["src/criba/intelligence/invention/__init__.py"],
+  "commits": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m compileall -q src/criba/intelligence/invention",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "10 passed: taxonomy plus contract tests",
+    "185 passed: intelligence suite",
+    "compileall: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The taxonomy records only technique IDs explicitly present in the blueprint; P09 temporal strategies share the blueprint's umbrella ID T129 rather than receiving invented IDs.",
+    "A frozen taxonomy describes scope but does not claim that an operator heuristic has been implemented."
+  ],
+  "risks": [
+    "No executable registry exists until P09-T02, so taxonomy entries are not yet invocable."
+  ],
+  "follow_up": ["P09-T02: register executable operator contracts."],
+  "completed_at": "2026-09-03T21:22:00+02:00"
+}

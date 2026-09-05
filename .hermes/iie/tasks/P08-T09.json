@@ -1,0 +1,58 @@
+{
+  "task_id": "P08-T09",
+  "title": "Sleeping-beauty detector",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt lines 3922-3925; technique registry T128 sleeping-beauty boundary",
+  "files_read": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py",
+    "src/criba/intelligence/gaps/dormant.py",
+    "src/criba/intelligence/gaps/resurrection.py",
+    "data/intelligence/technique_registry.yaml"
+  ],
+  "files_created": [
+    "src/criba/intelligence/gaps/sleeping_beauty.py",
+    "tests/intelligence/test_sleeping_beauty.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/gaps/__init__.py"
+  ],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_sleeping_beauty.py -q -p no:cacheprovider (4 passed)",
+    "python -m pytest tests/intelligence/test_sleeping_beauty.py tests/intelligence/test_dormant.py tests/intelligence/test_patent_expiration.py tests/intelligence/test_white_space.py tests/intelligence/test_resurrection.py tests/intelligence/test_failures.py tests/intelligence/test_gaps.py tests/intelligence/test_limitations.py tests/intelligence/test_contradictions.py tests/intelligence/test_contracts.py -q -p no:cacheprovider (43 passed)",
+    "mypy --no-incremental src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success in 11 files)",
+    "python -m compileall -q src/criba/intelligence/gaps src/criba/intelligence/contracts.py (success)",
+    "python -m pytest -q -p no:cacheprovider (844 passed, 1 existing warning)",
+    "git diff --check (success)"
+  ],
+  "tests_passed": [
+    "4 focused sleeping-beauty tests",
+    "43 focused gap/contract tests",
+    "mypy success in 11 source files",
+    "compileall success",
+    "844 full CRIBA tests; 1 existing Starlette/httpx deprecation warning",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "SleepingBeautyCandidate separates delayed recognition from ordinary dormant-paper detection and records awakening year, beauty period and citation evidence.",
+    "Citation-series detection requires an observed early window and a later citation peak above both an absolute threshold and an early-attention ratio; flat series are excluded.",
+    "Explicit sleeping-beauty text may produce a lower-confidence candidate with unknown citation counts; the detector does not invent missing metrics.",
+    "The detector has no hidden wall-clock date, network lookup or production side effect; structured time series are the authoritative quantitative input."
+  ],
+  "remaining_risks": [
+    "The default early window is four years and the thresholds are heuristics, not a bibliometric standard.",
+    "Text extraction is English and cannot independently validate a delayed-recognition claim without a citation series."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert 77e55b1f00e9c0ea89324ee7966850744dc3d0b4",
+  "limitations": [
+    "No network, credentials, external dependencies, registry lookup or production write was used.",
+    "The unrelated docs/FINAL_REPORT.md, .agents/, .codex/, .pre-commit-config.yaml, docs/TOOLCHAIN.md, docs/architecture/, scripts/verify-dev-environment.* and skills-lock.json remain untouched and uncommitted."
+  ],
+  "commits": ["77e55b1f00e9c0ea89324ee7966850744dc3d0b4"],
+  "completed_at": "2026-09-03T09:33:50+02:00"
+}

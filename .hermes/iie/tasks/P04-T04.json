@@ -1,0 +1,31 @@
+{
+  "task_id": "P04-T04",
+  "title": "Query decomposition",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high",
+  "files_read": [
+    "src/criba/intelligence/retrieval/expansion.py",
+    "tests/intelligence/test_retrieval.py"
+  ],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/test_retrieval.py"
+  ],
+  "tests_passed": [
+    "10 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "The ledger title was reconciled to the original P04 blueprint ID; deterministic decomposition remains implemented in QueryExpander."
+  ],
+  "risks": [
+    "The current decomposition rule is intentionally lightweight and only recognizes conjunction-based splits."
+  ],
+  "follow_up": [
+    "P04-T10 records the retrieval quality audit and evidence."
+  ],
+  "completed_at": "2026-09-03"
+}

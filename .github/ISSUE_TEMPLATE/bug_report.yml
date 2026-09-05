@@ -1,0 +1,51 @@
+name: Bug report
+description: Something is not behaving deterministically or as documented.
+title: "bug: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report a problem. Including the exact seed,
+        command and environment makes the bug reproducible — which is the whole
+        point of CRIBA.
+  - type: input
+    id: command
+    attributes:
+      label: Command or code that failed
+      description: Paste the exact `criba ...` invocation or the Python snippet.
+      placeholder: criba lottery --query "..." --seed 42
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+      description: What should have happened (including expected identical output on re-run).
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behaviour
+      description: Paste the output or traceback.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Version / commit
+      description: `pip show criba` version or the git commit you are on.
+    validations:
+      required: true
+  - type: dropdown
+    id: env
+    attributes:
+      label: Environment
+      options:
+        - Windows
+        - macOS
+        - Linux
+        - Other
+    validations:
+      required: true

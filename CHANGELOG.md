@@ -6,6 +6,28 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ## [Unreleased]
 
 ### Added
+- **Public launch productization**: distribution renamed to `criba` (PyPI-ready,
+  `pip install criba`), package metadata with license/classifiers/URLs, and ship the
+  `data/` catalog in the wheel as a namespace package so installed copies work out of
+  the box (data resolution now falls back to site-packages and user-local SQLite).
+- Bilingual public README: `README.md` (English, canonical) and `README.es.md`
+  (Spanish); removed the old minimal `README.en.md`/`README_MVP.md`.
+- `examples/getting_started.py` and `examples/notebooks/reproducible_ideation.ipynb`:
+  a 60-second reproducible demo (same seed, same ideas, 0€, offline).
+- Community scaffolding: bug/feature issue templates, PR template, `CONTRIBUTING.md`,
+  `SECURITY.md`, `CODE_OF_CONDUCT.md`.
+- Apache-2.0 `LICENSE` text aligned with the declared license.
+
+- Canonical `uv 0.11.28` project management for CRIBA and its BLACKFORGE runtime:
+  dependencies and audit tools are declared in `pyproject.toml`, resolved in
+  `uv.lock`, and installed with `uv sync --all-extras --locked`.
+- SUPRA now follows the same contract with its own checked-in `uv.lock`.
+- CI uses `astral-sh/setup-uv` v9.0.0 pinned to commit
+  `c771a70e6277c0a99b617c7a806ffedaca235ff9`; cache pruning is explicit and
+  keyed by `uv.lock`.
+- Ruff, mypy, pip-audit, Bandit, Semgrep, pre-commit, and CycloneDX are declared
+  in the project development extras instead of being installed ad hoc.
+
 - **Meta-level methodology libraries**: 11 new sources with 235 items total:
   - Innovation Frameworks (35): Design Thinking, JTBD, Blue Ocean, FMEA, etc.
   - Security Frameworks (15): MITRE ATT&CK, OWASP, STRIDE, Kill Chain, etc.

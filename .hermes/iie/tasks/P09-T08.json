@@ -1,0 +1,53 @@
+{
+  "task_id": "P09-T08",
+  "title": "Functional decomposition",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/engine.py",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "data/intelligence/technique_registry.yaml",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/functions.py",
+    ".hermes/iie/tasks/P09-T08.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t062_functional_decomposition_is_explicit_and_deterministic",
+    "uv run --locked ruff check src/criba/intelligence/invention/functions.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/functions.py",
+    "git diff --check -- src/criba/intelligence/invention/functions.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T062 contract",
+    "13 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T062 code, package surface, and test",
+    "mypy: success, no issues in functions.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T062 accepts explicitly declared component-to-function mappings, sorted deterministically and capped by limit.",
+    "The output remains an InventionCandidate HYPOTHESIS with T062 traceability and no mechanism; mechanism search is reserved for P09-T09.",
+    "The package public surface was ordered to satisfy Ruff without altering legacy CRIBA behavior."
+  ],
+  "risks": [
+    "The decomposition does not infer omitted components/functions or validate whether caller-supplied functions are complete or correct.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T08 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/functions.py .hermes/iie/tasks/P09-T08.json before commit.",
+  "follow_up": ["P09-T09: function-to-mechanism search."],
+  "completed_at": "2026-09-04T02:08:06+02:00"
+}

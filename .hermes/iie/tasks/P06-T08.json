@@ -1,0 +1,51 @@
+{
+  "task_id": "P06-T08",
+  "title": "Graph fixtures",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3821: graph fixtures",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P06-T08 block)",
+    "tests/intelligence/__init__.py",
+    "tests/intelligence/test_graph_communities.py",
+    "tests/intelligence/test_graph_bridges.py",
+    "tests/intelligence/test_graph_link_prediction.py"
+  ],
+  "files_created": [
+    "tests/intelligence/graph_fixtures.py",
+    "tests/intelligence/test_graph_fixtures.py"
+  ],
+  "files_modified": [],
+  "commits": ["d2dc31ecc227f16ec561ba0a0a483cd8b1cdab3e"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_fixtures.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_graph_bridges.py tests/intelligence/test_graph_link_prediction.py tests/intelligence/test_graph_fixtures.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "27 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/boundary tests passed",
+    "769 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 8 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Fixtures remain under tests/intelligence and do not ship as production graph data.",
+    "The fixture topology has seven stable node ids, six typed relations, one isolated node, one weak community split and one articulation point.",
+    "Tests consume the canonical fixture IDs and exercise CommunityDetector and BridgeNodeAnalyzer against the same topology."
+  ],
+  "risks": [
+    "The fixture is intentionally small and synthetic; it validates semantics, not production-scale performance.",
+    "The helper returns an open store and requires callers to close it explicitly."
+  ],
+  "follow_up": [
+    "P06-T09 graph semantics audit",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T06:20:07+02:00"
+}

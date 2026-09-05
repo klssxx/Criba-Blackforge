@@ -1,0 +1,57 @@
+{
+  "task_id": "P07-T03",
+  "title": "Burst detection",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3840: burst detection",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T03 block)",
+    "data/intelligence/technique_registry.yaml (T096 Burst detection)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/dynamics.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_observations.py",
+    ".hermes/iie/tasks/P07-T02.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/bursts.py",
+    "tests/intelligence/test_signal_bursts.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["1a7063a0d30ba703aca7bedf14e82ab8f7110690"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_bursts.py::test_burst_detector_returns_velocity_spikes_with_period_and_strength -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN burst detection test passed",
+    "24 targeted signal/storage/contract tests passed",
+    "780 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 4 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Burst detection identifies upward frequency jumps at or above an explicit minimum velocity threshold.",
+    "Each BurstEvent preserves topic, period, velocity and normalized strength, making the result explainable and period-addressable.",
+    "Burst strength is capped at 1.0 and scales as velocity divided by the configured threshold; detection is deterministic and local.",
+    "Downward changes, zero changes and sub-threshold changes are not bursts; adaptive baselines are deferred."
+  ],
+  "risks": [
+    "The default threshold is a fixed discrete velocity of 2.0 and is not learned from a baseline distribution.",
+    "Burst detection inherits the equally spaced-period assumption from TopicDynamics and does not normalize calendar gaps."
+  ],
+  "follow_up": [
+    "P07-T04 change-point framework",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T07:43:10+02:00"
+}

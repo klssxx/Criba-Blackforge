@@ -1,0 +1,53 @@
+{
+  "task_id": "P09-T10",
+  "title": "First-principles decomposition",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/functions.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/first_principles.py",
+    ".hermes/iie/tasks/P09-T10.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t064_first_principles_decomposition_keeps_premises_explicit",
+    "uv run --locked ruff check src/criba/intelligence/invention/first_principles.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/first_principles.py",
+    "git diff --check -- src/criba/intelligence/invention/first_principles.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T064 contract",
+    "15 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T064 code, package surface, and test",
+    "mypy: success, no issues in first_principles.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T064 maps caller-supplied premises to caller-supplied implications in deterministic order and caps output by limit.",
+    "The implementation keeps each output as a T064 HYPOTHESIS and never upgrades supplied premises to facts.",
+    "Import ordering was corrected only in the touched test surface to satisfy Ruff I001."
+  ],
+  "risks": [
+    "The caller is responsible for the validity, provenance, and completeness of premises and implications.",
+    "The output does not establish feasibility, novelty, sufficiency, or factual truth.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T10 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/first_principles.py .hermes/iie/tasks/P09-T10.json before commit.",
+  "follow_up": ["P09-T11: constraint inversion."],
+  "completed_at": "2026-09-04T02:15:40+02:00"
+}

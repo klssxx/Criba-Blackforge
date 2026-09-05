@@ -1,0 +1,47 @@
+{
+  "task_id": "P05-T03",
+  "title": "Claim store",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "files_read": [
+    "src/criba/intelligence/storage/store.py",
+    "src/criba/intelligence/contracts.py",
+    "tests/intelligence/test_storage.py",
+    "tests/intelligence/test_provenance.py",
+    ".hermes/iie/STATE.json",
+    ".hermes/iie/CONTINUITY.md"
+  ],
+  "files_created": ["tests/intelligence/test_claim_store.py"],
+  "files_modified": ["src/criba/intelligence/storage/store.py"],
+  "commits": ["89b065739f764cade8a038e62f60873d9bec36e2"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_claim_store.py tests/intelligence/test_storage.py tests/intelligence/test_provenance.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence -q -p no:cacheprovider",
+    "python -m pytest -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/storage/store.py src/criba/intelligence/claims.py src/criba/intelligence/provenance.py src/criba/intelligence/entities",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "23 targeted tests passed",
+    "65 intelligence tests passed",
+    "746 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 6 source files",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Claim persistence uses an explicit whitelist of canonical intel_claims columns, so contract extensions cannot become SQL column names.",
+    "JSON reference fields are decoded on reads as Python lists; epistemic Enum inputs are stored as their string value.",
+    "The optional run_id storage field is supported without changing the public Claim contract."
+  ],
+  "risks": [
+    "Claims do not have a created_at column, so list_claims orders by SQLite rowid rather than event time.",
+    "The existing IntelligenceStore schema remains version 1; no destructive migration was needed."
+  ],
+  "follow_up": [
+    "P06-T01 graph store",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T05:19:55+02:00"
+}

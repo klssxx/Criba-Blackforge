@@ -1,0 +1,51 @@
+{
+  "task_id": "P06-T07",
+  "title": "Link prediction interface",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3816: Link prediction interface",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P06-T07 block)",
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/communities.py",
+    "src/criba/intelligence/graph/bridges.py",
+    "src/criba/intelligence/graph/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/graph/link_prediction.py",
+    "tests/intelligence/test_graph_link_prediction.py"
+  ],
+  "files_modified": ["src/criba/intelligence/graph/__init__.py"],
+  "commits": ["0266852dfbf18a19466877c45b38a8de3f6bd07e"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_link_prediction.py -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_graph_bridges.py tests/intelligence/test_graph_link_prediction.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "25 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/boundary tests passed",
+    "767 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 8 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Link prediction uses explainable common-neighbor Jaccard scoring over the weak graph.",
+    "Existing links and self-links are excluded; candidates are sorted by descending score then destination id.",
+    "Both LinkPredictionInterface and LinkPredictor are exported to keep the public interface explicit and ergonomic."
+  ],
+  "risks": [
+    "The interface is unweighted and relation-agnostic; relation-specific or learned embeddings are outside P06-T07.",
+    "Unknown source ids return no candidates rather than creating a node implicitly."
+  ],
+  "follow_up": [
+    "P06-T08 graph fixtures",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T06:14:19+02:00"
+}

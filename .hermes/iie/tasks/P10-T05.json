@@ -1,0 +1,44 @@
+{
+  "task_id": "P10-T05",
+  "phase": "P10",
+  "title": "CodeScout against GitHub",
+  "status": "VERIFIED",
+  "files_read": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py",
+    "src/criba/intelligence/sources/adapters.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/transport.py",
+    "tests/intelligence/test_science_scout.py"
+  ],
+  "files_created": [
+    "tests/intelligence/test_code_scout.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "tests": [
+    "uv run --locked pytest -q tests/intelligence/test_code_scout.py -p no:cacheprovider -> 3 passed",
+    "Live probe: GitHubSource with TransportBudget(max_requests=1) -> 2 normalized documents, provenance present, 1 request"
+  ],
+  "decisions": [
+    "CodeScout mirrors PatentScout/ScienceScout: thin wrapper retaining query variant text.",
+    "GitHub chosen as actually probed code source (free unauthenticated).",
+    "Live probe verifies normalization only; no code originality or IP verdict asserted."
+  ],
+  "risks": [
+    "GitHub is a third-party endpoint and may change schema or availability.",
+    "Repository metadata is discovery evidence; no IP, licensing or novelty conclusion is implied."
+  ],
+  "external_evidence": {
+    "source_ids": ["github"],
+    "probe_query": "thermal management",
+    "request_budget": 1,
+    "documents_normalized": 2
+  },
+  "follow_up": [
+    "Determine and implement the next P10 task from the canonical blueprint."
+  ],
+  "completed_at": "2026-09-04T18:40:00+02:00"
+}

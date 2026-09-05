@@ -1,0 +1,56 @@
+{
+  "task_id": "P10-T01",
+  "title": "Adversarial prior-art search protocol",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "xhigh",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/enums.py",
+    "src/criba/intelligence/prior_art/__init__.py",
+    "tests/intelligence/test_contracts.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/prior_art/protocol.py",
+    "tests/intelligence/test_prior_art_protocol.py",
+    ".hermes/iie/tasks/P10-T01.json"
+  ],
+  "files_modified": ["src/criba/intelligence/prior_art/__init__.py"],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py::test_adversarial_protocol_is_ordered_bounded_and_forbids_proven_new",
+    "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py",
+    "uv run --locked ruff check src/criba/intelligence/prior_art tests/intelligence/test_prior_art_protocol.py",
+    "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py tests/intelligence/test_contracts.py",
+    "uv run --locked mypy src/criba/intelligence/prior_art",
+    "uv run --locked python -m compileall -q src/criba/intelligence/prior_art",
+    "git diff --check -- src/criba/intelligence/prior_art tests/intelligence/test_prior_art_protocol.py"
+  ],
+  "tests_passed": [
+    "RED: public protocol symbols were absent",
+    "GREEN: 1 passed for ordered/bounded protocol",
+    "RED: mutation budget zero blocked the initial search and no can_mutate API existed",
+    "GREEN: 2 protocol tests passed after separating search rounds from mutations",
+    "Ruff: all checks passed",
+    "Protocol plus P01 contract regression: 9 passed",
+    "mypy: success, no issues found in 2 source files",
+    "compileall: success",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "P10-T01 reuses P01 PriorArtQuery/PriorArtMatch/PriorArtAssessment rather than duplicating result contracts.",
+    "Protocol stages are immutable and ordered: lattice, five search variants, five scouts, skeptic, verdict.",
+    "Search-round and mutation budgets are independent so max_mutations=0 permits the first evidence search but forbids mutations.",
+    "Allowed verdicts are derived from PriorArtVerdict and cannot include PROVEN_NEW."
+  ],
+  "risks": [
+    "No query lattice, scout adapter, external query, similarity comparison, skeptic, verdict engine, or mutation loop exists yet; they belong to P10-T02 through P10-T10.",
+    "The protocol constrains caller scheduling but does not persist executions; persistence/integration is later phase work."
+  ],
+  "cost": "COST=0; no network calls or billable services used.",
+  "rollback": "git revert <P10-T01 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/prior_art/__init__.py && git clean -f -- src/criba/intelligence/prior_art/protocol.py tests/intelligence/test_prior_art_protocol.py .hermes/iie/tasks/P10-T01.json before commit.",
+  "follow_up": ["P10-T02: implement a deterministic query lattice."],
+  "completed_at": "2026-09-04T03:03:26+02:00"
+}

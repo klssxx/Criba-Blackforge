@@ -1,0 +1,58 @@
+{
+  "task_id": "P07-T06",
+  "title": "Weak-signal aggregation",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3855: weak-signal aggregation",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P07-T06 block)",
+    "data/intelligence/technique_registry.yaml (T099 Weak-signal detection)",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/signals/anomaly.py",
+    "src/criba/intelligence/signals/__init__.py",
+    "tests/intelligence/test_signal_anomaly.py",
+    "tests/intelligence/test_signal_changepoints.py",
+    ".hermes/iie/tasks/P07-T05.json"
+  ],
+  "files_created": [
+    "src/criba/intelligence/signals/weak_signals.py",
+    "tests/intelligence/test_signal_weak_signals.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/signals/__init__.py"
+  ],
+  "commits": ["740016897608ed1ccbc07e2e5d381517b120cc5e"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_signal_weak_signals.py::test_weak_signal_aggregator_merges_support_without_double_counting_ids -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_signal_weak_signals.py tests/intelligence/test_signal_anomaly.py tests/intelligence/test_signal_changepoints.py tests/intelligence/test_signal_bursts.py tests/intelligence/test_signal_observations.py tests/intelligence/test_storage.py tests/intelligence/test_contracts.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/signals/weak_signals.py src/criba/intelligence/signals/anomaly.py src/criba/intelligence/signals/changepoints.py src/criba/intelligence/signals/bursts.py src/criba/intelligence/signals/dynamics.py src/criba/intelligence/signals/__init__.py src/criba/intelligence/storage/store.py",
+    "python -m compileall -q src/criba/intelligence/signals src/criba/intelligence/storage",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "1 focused RED-GREEN weak-signal aggregation test passed",
+    "27 targeted signal/storage/contract tests passed",
+    "783 full CRIBA tests passed; 1 pre-existing Starlette/httpx deprecation warning",
+    "mypy success in 7 touched source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Weak signals are grouped by topic, kind, direction and lead/lag hint so semantically different indicators are not merged.",
+    "Repeated signal IDs are ignored to prevent double-counting; evidence and technique IDs are merged as stable sorted unions.",
+    "Combined strength and confidence use a bounded independent-support formula, 1 minus the product of remaining uncertainty, capped to 0..1.",
+    "Aggregation is deterministic, local and dependency-free; no external sources or model calls are introduced."
+  ],
+  "risks": [
+    "The independent-support formula can overstate confidence when signals are correlated; correlation-aware evidence weighting is deferred.",
+    "Signals with empty IDs are not deduplicated because no stable identity exists."
+  ],
+  "follow_up": [
+    "P07-T07 lead/lag framework",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T08:02:36+02:00"
+}

@@ -1,0 +1,52 @@
+{
+  "task_id": "P09-T09",
+  "title": "Function-to-mechanism search",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/retrieval/lexical.py",
+    "src/criba/intelligence/retrieval/recursive.py",
+    "src/criba/intelligence/invention/functions.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [".hermes/iie/tasks/P09-T09.json"],
+  "files_modified": [
+    "src/criba/intelligence/invention/functions.py",
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t063_function_to_mechanism_search_requires_explicit_source_metadata",
+    "uv run --locked ruff check src/criba/intelligence/invention/functions.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/functions.py",
+    "git diff --check -- src/criba/intelligence/invention/functions.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T063 contract",
+    "14 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T063 code, package surface, and test",
+    "mypy: success, no issues in functions.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T063 consumes EvidenceDocument values already returned by an IIE retrieval layer rather than modifying or simulating the retriever.",
+    "Only explicit metadata function_mechanisms maps are accepted; prose, unrelated mechanism fields, absent metadata, and unrequested functions are ignored.",
+    "Candidates preserve the source document id in their description, carry T063 traceability, and expose mechanism without changing the canonical candidate contract."
+  ],
+  "risks": [
+    "The mapping is a retrieval lead, not proof that a mechanism solves the problem, is feasible, novel, complete, or patentable.",
+    "No live network retrieval is performed by T063; P12 must wire feature-gated retrieval into the end-to-end IIE pipeline.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T09 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/functions.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- .hermes/iie/tasks/P09-T09.json before commit.",
+  "follow_up": ["P09-T10: first-principles decomposition."],
+  "completed_at": "2026-09-04T02:13:01+02:00"
+}

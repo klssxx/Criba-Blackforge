@@ -1,0 +1,51 @@
+{
+  "task_id": "P06-T05",
+  "title": "Community detection",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Luna",
+  "reasoning": "standard",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3806: Community detection",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt (P06-T05 block)",
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/centrality.py",
+    "src/criba/intelligence/graph/__init__.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/graph/communities.py",
+    "tests/intelligence/test_graph_communities.py"
+  ],
+  "files_modified": ["src/criba/intelligence/graph/__init__.py"],
+  "commits": ["04b31c2fd39df0bf2cf781cf0da272ad9e191df6"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_communities.py::test_detect_returns_sorted_weak_communities -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_communities.py::test_detect_restricts_communities_to_requested_subset -q -p no:cacheprovider",
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check"
+  ],
+  "tests_passed": [
+    "20 targeted graph/builder/traversal/centrality/community/boundary tests passed",
+    "762 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 6 source files",
+    "compileall success",
+    "git diff --check success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "P06-T05 follows the blueprint's exact Community detection label; an earlier handoff typo naming signals was corrected before implementation.",
+    "Community detection is deterministic weakly connected components: edge direction is ignored, node ids and communities are sorted, and optional subsets induce their own communities.",
+    "No probabilistic clustering or NetworkX dependency was introduced."
+  ],
+  "risks": [
+    "Weak components are a conservative community definition; modularity or label-propagation clustering is not implemented because the blueprint gives no further algorithmic contract.",
+    "Subset detection treats requested ids as vertices even if an id is absent from storage; absent ids remain isolated."
+  ],
+  "follow_up": [
+    "P06-T06 bridge node analysis",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T06:03:19+02:00"
+}

@@ -1,0 +1,60 @@
+{
+  "task_id": "P06-T09",
+  "title": "Graph semantics audit and provenance hardening",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Sol",
+  "reasoning": "xhigh",
+  "spec_source": "CRIBA BLUEPRINT ULTIMATE.txt line 3823: Graph semantics audit",
+  "files_read": [
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/centrality.py",
+    "src/criba/intelligence/graph/link_prediction.py",
+    "tests/intelligence/test_graph_store.py",
+    "tests/intelligence/test_graph_semantics.py",
+    "tests/intelligence/test_boundaries.py"
+  ],
+  "files_created": [
+    "tests/intelligence/test_graph_semantics.py"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/graph/store.py",
+    "src/criba/intelligence/graph/centrality.py",
+    "src/criba/intelligence/graph/link_prediction.py",
+    "tests/intelligence/test_graph_store.py",
+    ".hermes/iie/tasks/P06-T01.json"
+  ],
+  "commits": ["2114144ee6b95ecfd34da01ba5c8a951d0303549"],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_graph_store.py tests/intelligence/test_graph_builder.py tests/intelligence/test_graph_traversal.py tests/intelligence/test_graph_centrality.py tests/intelligence/test_graph_communities.py tests/intelligence/test_graph_bridges.py tests/intelligence/test_graph_link_prediction.py tests/intelligence/test_graph_fixtures.py tests/intelligence/test_graph_semantics.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider",
+    "mypy --no-incremental src/criba/intelligence/graph/store.py src/criba/intelligence/graph/builder.py src/criba/intelligence/graph/traversal.py src/criba/intelligence/graph/centrality.py src/criba/intelligence/graph/communities.py src/criba/intelligence/graph/bridges.py src/criba/intelligence/graph/link_prediction.py src/criba/intelligence/graph/__init__.py",
+    "python -m compileall -q src/criba/intelligence/graph",
+    "python -m pytest -q -p no:cacheprovider",
+    "git diff --check",
+    "git grep -n -E '^[[:space:]]*(from|import)[[:space:]]+(networkx|neo4j|google\\.cloud|boto3|requests)([[:space:]]|$)' -- src/criba/intelligence/graph tests/intelligence"
+  ],
+  "tests_passed": [
+    "32 targeted graph/builder/traversal/centrality/community/bridge/link-prediction/fixture/semantics/boundary tests passed",
+    "774 full CRIBA tests passed; 1 pre-existing dependency deprecation warning",
+    "mypy success in 8 graph source files",
+    "compileall success",
+    "git diff --check success",
+    "graph dependency scan clean; no NetworkX, Neo4j or cloud imports"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "Repeated node and edge upserts merge source_doc_ids deterministically instead of replacing provenance.",
+    "Self-loops are excluded from weak undirected neighbor sets, so they do not inflate degree centrality or contaminate link prediction.",
+    "The audit preserves directed shortest-path semantics and weak undirected semantics for centrality, communities, articulation points and link prediction.",
+    "The legacy database and external graph services remain untouched; the isolated IntelligenceStore schema version remains 1."
+  ],
+  "risks": [
+    "The graph store still composes the private IntelligenceStore connection; a future storage facade could make this boundary explicit.",
+    "Community and bridge analysis are deterministic weak-graph semantics, not probabilistic clustering or directed articulation analysis.",
+    "Link prediction remains an explainable common-neighbor/Jaccard heuristic, not an embedding model."
+  ],
+  "follow_up": [
+    "P07-T01 time-series observations",
+    "BF-P00-T06 golden validation in an isolated copy; do not overwrite live tracked artifacts"
+  ],
+  "completed_at": "2026-09-03T06:56:06+02:00"
+}

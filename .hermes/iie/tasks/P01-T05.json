@@ -1,0 +1,24 @@
+{
+  "task_id": "P01-T05",
+  "title": "TechniqueRegistry T001-T130",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high/low",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/"
+  ],
+  "tests_passed": [
+    "21 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "YAML con 130 exactas + registry.py con validate() §106-§113. 10 tests passed."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

@@ -1,0 +1,24 @@
+{
+  "task_id": "P01-T04",
+  "title": "Serialization tests",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high/low",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/"
+  ],
+  "tests_passed": [
+    "21 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "7 passed: roundtrip IntelligencePacket completo, enums exactos, ids con prefijo."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

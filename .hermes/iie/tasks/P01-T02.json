@@ -1,0 +1,24 @@
+{
+  "task_id": "P01-T02",
+  "title": "Package skeleton",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high/low",
+  "files_read": [],
+  "files_created": [],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": [
+    "pytest tests/intelligence/"
+  ],
+  "tests_passed": [
+    "21 passed"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "13 modulos + 13 sectores en src/criba/intelligence/. Zero touched legacy."
+  ],
+  "risks": [],
+  "follow_up": [],
+  "completed_at": "2026-09-03"
+}

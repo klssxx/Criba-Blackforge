@@ -1,0 +1,51 @@
+{
+  "task_id": "P09-T14",
+  "title": "Future-back",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "high",
+  "files_read": [
+    "C:/Users/KLSX/Desktop/CRIBA BLUEPRINT ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/invention/taxonomy.py",
+    "src/criba/intelligence/invention/counterfactual.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/invention/future_back.py",
+    ".hermes/iie/tasks/P09-T14.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/invention/__init__.py",
+    "tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "commits": [],
+  "tests_run": [
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py::test_t129_future_back_never_claims_the_future_state_will_be_reached",
+    "uv run --locked ruff check src/criba/intelligence/invention/future_back.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py",
+    "uv run --locked mypy src/criba/intelligence/invention/future_back.py",
+    "git diff --check -- src/criba/intelligence/invention/future_back.py src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py"
+  ],
+  "tests_passed": [
+    "RED: missing public import failed as expected before implementation",
+    "GREEN: 1 passed for the T129 future-back contract",
+    "19 passed: invention taxonomy/operator module",
+    "Ruff: all checks passed for touched T129 code, package surface, and test",
+    "mypy: success, no issues in future_back.py",
+    "git diff --check: success"
+  ],
+  "tests_failed": [],
+  "decisions": [
+    "T129 future-back pairs caller-supplied future states with caller-supplied precursor steps in deterministic order.",
+    "Every candidate states that it is not evidence and does not establish that the future state will be reached, that a step is sufficient, or that the path is feasible."
+  ],
+  "risks": [
+    "States and precursor steps require later evidence-based evaluation; this operator only makes the backcasting hypothesis inspectable.",
+    "No full CRIBA regression has been rerun for this individual task; that is required at the P09 phase gate."
+  ],
+  "cost": "COST=0",
+  "rollback": "git revert <P09-T14 commit> after commit, or git restore --source=HEAD -- src/criba/intelligence/invention/__init__.py tests/intelligence/test_invention_taxonomy.py && git clean -f -- src/criba/intelligence/invention/future_back.py .hermes/iie/tasks/P09-T14.json before commit.",
+  "follow_up": ["P09-T15: bottleneck mapping."],
+  "completed_at": "2026-09-04T02:32:08+02:00"
+}

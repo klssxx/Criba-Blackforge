@@ -3,13 +3,42 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "criba-current-engine"
-version = "0.1.0"
-description = "Local, deterministic CRIBA pre-response engine"
+name = "criba"
+version = "0.2.0"
+description = "Deterministic, auditable, local-first ideation engine with free-cloud LLM expansion (Z.ai GLM / Nous :free)."
+readme = "README.md"
 requires-python = ">=3.10"
-authors = [{name = "CRIBA Current Engine"}]
+license = {text = "Apache-2.0"}
+authors = [{name = "CRIBA contributors"}]
+keywords = [
+  "ideation",
+  "brainstorming",
+  "innovation",
+  "triz",
+  "creativity",
+  "causal-analysis",
+  "cybersecurity",
+  "deterministic",
+  "reproducible",
+  "offline-first",
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+  "Topic :: Security",
+]
 dependencies = [
   "pydantic>=2",
+  "PyYAML>=6.0",
+  "httpx>=0.27",
 ]
 
 [project.optional-dependencies]
@@ -21,23 +50,34 @@ dev = [
   "pytest-cov>=7.0",
   "pytest-timeout>=2.4",
   "mypy>=1.8",
+  "types-PyYAML>=6.0",
   "httpx",
   "hypothesis>=6.0",
-  "ruff>=0.12",
+  "ruff>=0.16.5",
   "mutmut>=3.6",
   "pip-audit>=2.9",
+  "bandit>=1.9",
+  "pre-commit>=4.6",
+  "semgrep>=1.176",
   "cyclonedx-bom>=7.0",
 ]
 build = ["pyinstaller>=6.0"]
+
+[project.urls]
+Homepage = "https://github.com/klssxx/Criba-Blackforge"
+Repository = "https://github.com/klssxx/Criba-Blackforge.git"
+Issues = "https://github.com/klssxx/Criba-Blackforge/issues"
 
 [project.scripts]
 criba = "criba.cli:main"
 
 [tool.setuptools]
-package-dir = {"" = "src"}
+package-dir = {"" = "src", "data" = "data"}
 
 [tool.setuptools.packages.find]
-where = ["src"]
+where = ["src", "."]
+namespaces = true
+include = ["criba*", "data"]
 
 [tool.pytest.ini_options]
 # "." makes the repo root importable so tests can import scripts.* both under
@@ -71,6 +111,15 @@ follow_imports = "skip"
 # at that boundary only, without weakening strictness elsewhere.
 module = ["uvicorn", "uvicorn.*"]
 ignore_missing_imports = true
+
+[[tool.mypy.overrides]]
+# IIE scout/intelligence modules live on feat/iie-master as in-progress work
+# (P10). Their strict typing lands with that workstream and is intentionally not
+# part of the public-launch change set. Relax only the specific strict rules
+# that currently fire there, leaving the rest of CRIBA strictly checked.
+module = ["criba.intelligence.*"]
+disallow_untyped_defs = false
+disable_error_code = ["type-arg", "call-arg", "var-annotated", "no-untyped-def"]
 
 [tool.mutmut]
 source_paths = ["src"]

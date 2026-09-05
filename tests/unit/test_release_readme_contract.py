@@ -20,8 +20,11 @@ def test_portable_build_includes_user_facing_documents() -> None:
 
 
 def test_readme_describes_the_separated_local_runtime() -> None:
-    readme = (ROOT / "README.md").read_text(encoding="utf-8")
-    assert "Motor local y determinista" in readme
-    assert "scripts\\launch_workbench.bat" in readme
-    assert "SUPRA_AGENTIC" not in readme
-    assert "api/v1" not in readme
+    readme_en = (ROOT / "README.md").read_text(encoding="utf-8")
+    readme_es = (ROOT / "README.es.md").read_text(encoding="utf-8")
+    assert "scripts\\launch_workbench.bat" in readme_en
+    assert "Motor local y determinista" in readme_es
+    assert "SUPRA_AGENTIC" not in readme_en
+    assert "SUPRA_AGENTIC" not in readme_es
+    assert "api/v1" not in readme_en
+    assert "api/v1" not in readme_es

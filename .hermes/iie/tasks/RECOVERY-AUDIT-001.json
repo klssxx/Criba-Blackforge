@@ -1,0 +1,24 @@
+{
+  "task_id": "RECOVERY-AUDIT-001",
+  "title": "Reconcile blueprint task ledger against Git and code evidence",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "scope": "read-only evidence audit",
+  "files_created": [
+    ".hermes/iie/RECOVERY_AUDIT_2026-09-03.md",
+    ".hermes/iie/tasks/RECOVERY-AUDIT-001.json"
+  ],
+  "files_modified": [],
+  "tests_run": [
+    "python -m pytest tests/intelligence/test_storage.py tests/intelligence/test_sources.py tests/intelligence/test_retrieval.py -q -p no:cacheprovider: 31 passed",
+    "git diff --check: success"
+  ],
+  "findings": [
+    "P02-T06, P03 and P04 were partly task-consolidated, so code evidence exists for several missing journals.",
+    "Crossref, ClinicalTrials/funding adapters, source architecture audit, retrieval quality review, and P08 checkpoint are not evidenced as complete.",
+    "P09-P19 have no journals or checkpoints and must not be inferred as started."
+  ],
+  "next_task": "High-reasoning recovery decision: complete missing obligations or approve a documented superseding decomposition before any P09 work.",
+  "completed_at": "2026-09-03T20:39:36+02:00"
+}

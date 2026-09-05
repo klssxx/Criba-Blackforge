@@ -1,0 +1,18 @@
+{
+  "task_id": "P00-GATE",
+  "title": "Baseline freeze: tag pre-iie-baseline + branch feat/iie-master + estado persistente",
+  "status": "VERIFIED",
+  "model": "GLM-5.3",
+  "reasoning": "high (supervisor)",
+  "files_read": ["src/criba/*.py superficie via grep", "tests/ layout", "SUPRA src/supra_agentic/ completo"],
+  "files_created": [".hermes/iie/STATE.json", ".hermes/iie/CONTINUITY.md", ".hermes/iie/checkpoints/P00.md", ".hermes/iie/tasks/P00-T01.json", ".hermes/iie/tasks/P00-T02.json", ".hermes/iie/tasks/P00-T03.json", ".hermes/iie/tasks/P00-T04.json"],
+  "files_modified": [],
+  "commits": [],
+  "tests_run": ["pytest CRIBA full", "pytest SUPRA full"],
+  "tests_passed": ["CRIBA 681 passed", "SUPRA 21 passed"],
+  "tests_failed": [],
+  "decisions": ["IIE fresh start (AR)", "commit .hermes/iie en feat/iie-master", "riesgos legacy-duplicacion documentados en checkpoint"],
+  "risks": ["invention operators legacy (mitigar con TechniqueAdapter en P09)", "scoring legacy (ScoreCard aditivo en P11)"],
+  "follow_up": ["P01-T01 boundaries"],
+  "completed_at": "2026-09-03"
+}

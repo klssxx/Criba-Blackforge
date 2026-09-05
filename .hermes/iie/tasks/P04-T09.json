@@ -1,0 +1,18 @@
+{
+  "task_id": "P04-T09",
+  "title": "Dedup/rerank/fusion",
+  "status": "VERIFIED",
+  "model": "GPT-5.6 Terra",
+  "reasoning": "medium",
+  "files_read": ["src/criba/intelligence/retrieval/hybrid.py", "tests/intelligence/test_retrieval.py"],
+  "files_created": [".hermes/iie/tasks/P04-T09.json"],
+  "files_modified": ["src/criba/intelligence/retrieval/hybrid.py", "tests/intelligence/test_retrieval.py"],
+  "commits": [],
+  "tests_run": ["python -m pytest tests/intelligence/test_retrieval.py tests/intelligence/test_boundaries.py -q -p no:cacheprovider", "python -m pytest tests/intelligence -q -p no:cacheprovider"],
+  "tests_passed": ["17 passed: retrieval plus boundaries", "182 passed: intelligence suite"],
+  "tests_failed": [],
+  "decisions": ["RRF now rejects a weights/result-list cardinality mismatch instead of silently truncating through zip.", "Deduplication and equal-score fusion use document-ID tie breaks so input order cannot change the selected result."],
+  "risks": ["Jaccard token overlap is a transparent near-duplicate heuristic, not semantic equivalence."],
+  "follow_up": ["P04-T10 records the retrieval quality audit and evidence."],
+  "completed_at": "2026-09-03T21:06:31+02:00"
+}
