@@ -180,7 +180,7 @@ jobs:
             "$env:ARCHIVE_NAME.sha256",
             'CRIBA-Blackforge-Portable-Windows-x64.cdx.json'
           )
-          & gh release upload $env:RELEASE_TAG @assets --clobber
+          & gh release upload $env:RELEASE_TAG @assets --clobber -R $env:GITHUB_REPOSITORY
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           @(
             '## Portable release evidence',
