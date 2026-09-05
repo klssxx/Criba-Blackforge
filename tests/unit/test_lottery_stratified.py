@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import pytest
 
-from criba.lottery import DRAW_CLASSES, DOMAIN_CLASS, LotteryEngine
+from criba.lottery import DOMAIN_CLASS, DRAW_CLASSES, LotteryEngine
 
 
 def _synthetic_catalog(per_class: int = 50, domain: int = 30) -> list[dict]:
