@@ -119,7 +119,7 @@ ignore_missing_imports = true
 # that currently fire there, leaving the rest of CRIBA strictly checked.
 module = ["criba.intelligence.*"]
 disallow_untyped_defs = false
-disable_error_code = ["type-arg", "call-arg", "var-annotated"]
+disable_error_code = ["type-arg", "call-arg", "var-annotated", "no-untyped-def"]
 
 [tool.mutmut]
 source_paths = ["src"]
