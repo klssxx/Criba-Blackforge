@@ -297,7 +297,7 @@ def test_source_error_never_raises():
 
 
 def test_source_registry_has_unique_ids_and_expected_public_sources():
-    sources = build_sources(ctx(lambda *a, **k: Response(200, "{}")))
+    sources = build_sources(ctx(lambda *a, **k: Response(200, "{}")), extra=True)
     ids = [source.source_id() for source in sources]
     assert len(ids) == len(set(ids))
     expected = {
@@ -305,6 +305,12 @@ def test_source_registry_has_unique_ids_and_expected_public_sources():
     }
     assert expected <= set(ids)
     assert all(source.health() == "AVAILABLE" for source in sources)
+
+
+def test_source_registry_defaults_to_free_pair():
+    sources = build_sources(ctx(lambda *a, **k: Response(200, "{}")))
+    ids = {source.source_id() for source in sources}
+    assert ids == {"wikipedia", "google_patents"}
 
 
 def test_adapters_do_not_import_http_client_directly():
