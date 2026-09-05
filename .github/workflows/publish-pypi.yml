@@ -38,7 +38,7 @@ jobs:
           python -m build
       # v2.x, verify tag before enabling.
       - name: Attest distributions
-        uses: actions/attest-build-provenance@v2
+        uses: actions/attest-build-provenance@v4
         with:
           subject-path: '${{ github.workspace }}/dist/*'
       # release/v1, verify tag before enabling. Requires a trusted publisher
