@@ -1,8 +1,7 @@
-# The core runs using the Python standard library. Install these for the rich adapters:
-PySide6>=6.7
-fastapi>=0.115
-uvicorn>=0.30
-mcp>=1.0
-pytest>=8.0
-pyinstaller>=6.0
-
+# DEPRECATED: uv.lock + pyproject.toml are the only dependency sources.
+# Do not install this file with pip. Use one of these commands from the repo root:
+#   uv sync --all-extras --locked
+#   uv sync --extra gui --locked
+#   uv sync --extra api --locked
+# This compatibility marker is retained so old links fail closed instead of
+# silently creating an unmanaged environment.

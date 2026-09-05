@@ -1,0 +1,34 @@
+# CRIBA pre-commit hooks - fast validations only
+repos:
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: uv run --locked ruff check
+        language: system
+        types: [python]
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+        name: ruff-format
+        entry: uv run --locked ruff format --check
+        language: system
+        types: [python]
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-added-large-files
+
+  - repo: local
+    hooks:
+      - id: gitleaks
+        name: gitleaks
+        entry: gitleaks detect --source . --no-banner --verbose
+        language: system
+        types: [text]
+        exclude: \.(lock|json)$
+        stages: [commit]

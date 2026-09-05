@@ -50,11 +50,12 @@ jobs:
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97
         with:
           python-version: '3.11'
-      # v7.0.0, tag verified with git ls-remote on 2026-07-26.
-      - uses: astral-sh/setup-uv@37802adc94f370d6bfd71619e3f0bf239e1f3b78
+      # v9.0.0, tag verified with git ls-remote on 2026-09-03.
+      - uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9
         with:
           version: '0.11.28'
           enable-cache: true
+          prune-cache: true
           cache-dependency-glob: uv.lock
       - name: Install locked dependencies
         shell: pwsh
@@ -107,7 +108,7 @@ jobs:
       attestations: write
     steps:
       # v4.6.2, tag verified with git ls-remote on 2026-07-26.
-      - uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: portable-release
       # v4, tag verified with git ls-remote on 2026-07-26.
@@ -134,7 +135,7 @@ jobs:
       ARCHIVE_NAME: ${{ needs.package.outputs.archive-name }}
     steps:
       # v4.6.2, tag verified with git ls-remote on 2026-07-26.
-      - uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: portable-release
       - name: Verify trusted provenance before publication
@@ -169,7 +170,7 @@ jobs:
       ARCHIVE_SHA256: ${{ needs.package.outputs.sha256 }}
     steps:
       # v4.6.2, tag verified with git ls-remote on 2026-07-26.
-      - uses: actions/download-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093
         with:
           name: portable-release
       - name: Upload the tested artifact and evidence

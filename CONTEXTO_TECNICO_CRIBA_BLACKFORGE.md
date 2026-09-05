@@ -1,10 +1,9 @@
 # CONTEXTO TÉCNICO — CRIBA + BLACKFORGE
 
-Documento de ubicación para un modelo local (GGUF/Ollama). Todo lo escrito aquí
-fue verificado contra el código fuente real de `E:\PROJECTS\CRIBA`
-(commit canónico main, 723-registros de catálogo BLACKFORGE, motor CRIBA
-determinista). No inventa APIs ni números: donde falta una firma exacta, se
-describe el comportamiento comprobado.
+Todo lo escrito aquí fue verificado contra el código fuente real de
+`C:\Users\KLSX\Music\INNOVATIONS\ACTIVE\CRIBA` en la auditoría del 2026-09-04.
+No se deben reutilizar las rutas absolutas ni los claims de estado del dossier
+histórico que originó este archivo.
 
 ---
 
@@ -41,14 +40,14 @@ seguridad.
 
 ## 1. UBICACIÓN Y ESTRUCTURA REAL (árbol verificado)
 
-Raíz: `E:\PROJECTS\CRIBA`
+Raíz actual: `C:\Users\KLSX\Music\INNOVATIONS\ACTIVE\CRIBA`
 
 ```
 CRIBA-Blackforge.spec          # PyInstaller (build portable)
 CRIBA.spec
 README.md  README.en.md  README_MVP.md  FIRST_RUN_ES.md  FIRST_RUN_EN.md
 HANDOFF.md  RESUME_NEXT_SESSION.txt  CHANGELOG.md  LICENSE  THIRD_PARTY_NOTICES.md
-pyproject.toml  uv.lock  requirements-optional.txt  .gitignore
+pyproject.toml  uv.lock  requirements-optional.txt (legacy marker)  .gitignore
 docs/                         # ARCHITECTURE.md, LOCAL_MODELS.md, INTEGRATION.md,
                               # STATE_MATRIX_*, STYLE_GUIDE_*, UI_CONTRACT_*,
                               # WIDGET_TREE_*, prompts/, phases/, assets/
@@ -363,7 +362,6 @@ Límites conocidos (verídicos):
 - DB usuario: `%LOCALAPPDATA%\CRIBA-Blackforge\criba.sqlite3`
 
 ---
-*Generado como dossier de ubicación técnica. Todo lo aquí descrito fue
-verificado contra el árbol de archivos y el código fuente de
-E:\PROJECTS\CRIBA al momento de la creación. No contiene secretos ni
-credenciales.*
+*Dossier histórico actualizado con una nota de limitación durante la auditoría del
+2026-09-04. Para el estado actual usar `C:\Users\KLSX\Music\INNOVATIONS\WORK\02_CURRENT_STATE.md`
+y `C:\Users\KLSX\Desktop\INNOVATIONS_DOC_AUDIT_2026-09-04.md`.*

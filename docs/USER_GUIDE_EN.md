@@ -19,12 +19,13 @@ Double-click `CRIBA-Blackforge.exe` to open the desktop app:
 The database is stored at `%LOCALAPPDATA%\CRIBA-Blackforge\criba.sqlite3`.
 
 ## Advanced usage (CLI, optional)
-When running from source with the CLI installed (`pip install -e .`):
+When running from source, prepare the environment with `uv sync --all-extras --locked` and use `uv run criba`:
 ```text
-criba list-currents
-criba activate --query "your innovation question"
-criba activate --file samples\query_example.txt
-criba --database my.sqlite3 explain --session <activation_id>
+uv sync --all-extras --locked
+uv run --locked criba list-currents
+uv run --locked criba activate --query "your innovation question"
+uv run --locked criba activate --file samples\query_example.txt
+uv run --locked criba --database my.sqlite3 explain --session <activation_id>
 ```
 
 ## Flows
