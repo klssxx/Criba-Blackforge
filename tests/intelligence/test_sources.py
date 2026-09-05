@@ -268,9 +268,17 @@ def test_epo_parses_ops_json():
 def test_cache_first_avoids_second_request():
     calls = {"n": 0}
     class MemCache:
-        def __init__(self): self.d = {}
-        def cache_get(self, k): return self.d.get(k)
-        def cache_set(self, k, v, ttl=60): self.d[k] = v
+        def __init__(self):
+            self.d = {}
+            self.ttl = None
+
+        def cache_get(self, k):
+            return self.d.get(k)
+
+        def cache_set(self, k, v, ttl):
+            self.d[k] = v
+            self.ttl = ttl
+
     cache = MemCache()
     def sender(*a, **k):
         calls["n"] += 1

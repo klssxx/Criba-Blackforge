@@ -20,7 +20,7 @@
     "src/criba/intelligence/contracts.py",
     "tests/intelligence/test_prior_art_protocol.py"
   ],
-  "commits": [],
+  "commits": ["d7a258b4b9f5845ff9bd808e46d6b4ca24f901ee"],
   "tests_run": [
     "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py::test_query_lattice_adds_traceable_classification_variants_deterministically",
     "uv run --locked ruff check src/criba/intelligence/prior_art tests/intelligence/test_prior_art_protocol.py",

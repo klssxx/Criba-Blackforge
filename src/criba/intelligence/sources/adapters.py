@@ -1,4 +1,4 @@
-"""IIE source adapters: free-first (§34). No paid APIs, no keys required.
+"""IIE source adapters: free-first (section 34). No paid APIs, no keys required.
 
 OpenAlex (science), arXiv (preprints), GitHub (code radar), EPO OPS
 (patents, no-key search endpoint). Each normalizes to EvidenceDocument.
@@ -307,7 +307,7 @@ def _string_list(value: Any) -> list[str]:
     return [item.strip() for item in value if isinstance(item, str) and item.strip()] if isinstance(value, list) else []
 
 
-def _inverted_index_to_text(inv: dict) -> str:
+def _inverted_index_to_text(inv: dict[str, list[int]]) -> str:
     if not inv:
         return ""
     positions: list[tuple[int, str]] = []

@@ -5,7 +5,7 @@
   "model": "GPT-5.6 Terra",
   "reasoning": "medium",
   "isolated_worktree": {
-    "path": "E:/PROYECTS/_P09T05_WT",
+    "path": "C:/Users/KLSX/Music/INNOVATIONS/WORKTREES/CRIBA_TRIZ_WIRING",
     "branch": "p09-t05-triz",
     "base_commit": "1b7bb2d7ebcbf4152e5ec8fce33d9f1db359f6a4"
   },

@@ -1,0 +1,92 @@
+{
+  "task_id": "P10-T07",
+  "phase": "P10",
+  "title": "CrossDomainScout",
+  "status": "PARTIAL",
+  "model": "Luna",
+  "reasoning": "high",
+  "risk": "R2",
+  "files_read": [
+    "docs/architecture/CRIBA_BLUEPRINT_ULTIMATE.txt",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/sources/protocol.py",
+    "src/criba/intelligence/sources/adapters.py",
+    "tests/intelligence/test_cross_domain_scout.py",
+    "spec/CRIBA_BLACKFORGE_MASTER_SPEC.md",
+    "src/criba/intelligence/invention/cross_domain.py",
+    "docs/architecture/adr/ADR-P10-T07-cross-domain-contract.md"
+  ],
+  "files_created": [
+    "tests/intelligence/test_cross_domain_scout.py",
+    "docs/architecture/adr/ADR-P10-T07-cross-domain-contract.md",
+    ".hermes/iie/tasks/P10-T07.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/scouts.py",
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "tests": [
+    "PYTHONDONTWRITEBYTECODE=1 uv run --locked python C:/Users/KLSX/AppData/Local/Temp/hermes-p10-t07-red-replay.py (in-memory pre-contract replay, no tree mutation) -> 12 failed, 3 passed, 1 deselected; TEMPFILE_REMOVED=True",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_cross_domain_scout.py (RED before production change) -> 12 failed, 3 passed",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_cross_domain_scout.py::test_cross_domain_scout_rejects_wrong_budget_type (incremental RED before type guard) -> 1 failed",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_cross_domain_scout.py::test_cross_domain_scout_rejects_spent_budget_state (incremental RED before spent-state guard) -> 1 failed",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_cross_domain_scout.py -> 17 passed",
+    "uv run --locked ruff check src/criba/intelligence/prior_art/scouts.py tests/intelligence/test_cross_domain_scout.py -> All checks passed",
+    "uv run --locked mypy src/criba/intelligence/prior_art/scouts.py -> Success: no issues found in 1 source file",
+    "uv run --locked python -m compileall -q src/criba/intelligence/prior_art -> exit 0",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_cross_domain_scout.py tests/intelligence/test_sources.py tests/intelligence/test_prior_art_protocol.py tests/intelligence/test_contracts.py tests/intelligence/test_invention_taxonomy.py -> 68 passed",
+    "LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider -> 934 passed, 1 Starlette/httpx deprecation warning",
+    "git diff --check -> exit 0"
+  ],
+  "tests_passed": [
+    "The initial RED was observed: 12 contract tests failed against the pre-change implementation, while the 3 pre-existing tests passed; two later budget-state negatives also failed with the expected pre-guard behavior before their controlled validation fixes.",
+    "The collector rejects same-domain-only input, duplicate source_id values, invalid limits and invalid global budgets.",
+    "The collector shares one transport budget, never schedules sources after exhaustion, and returns controlled budget failures without overrunning the cap.",
+    "Results are ordered by source_id independently of source injection order.",
+    "An exception in one source is represented as SOURCE_EXCEPTION:<ExceptionType> and does not discard another source result.",
+    "Downstream handoff rejects missing Skeptic, missing verdict, forbidden/rejected verdicts and contradictory evidence gaps or partial failures.",
+    "Focused T07 tests passed: 17. Related intelligence tests passed: 68. Full CRIBA regression passed: 934 tests with 1 dependency deprecation warning.",
+    "Ruff, mypy, compileall and git diff --check passed for the reviewed surface."
+  ],
+  "decisions": [
+    "T07 is an evidence collector, not a semantic analogy generator; a true analogy requires explicit transferable mechanism/concept evidence and remains outside this scout.",
+    "A cross-domain run requires at least two distinct normalized source KIND values; same-domain fan-out is rejected.",
+    "source_id values are required to be unique, non-blank and already trimmed; duplicate IDs fail before any source call.",
+    "One TransportBudget instance is shared across every source in a run; source-local budgets are temporarily replaced during the call and restored afterward.",
+    "Results are emitted in stable source_id order and every configured source receives either its result or a controlled failure result.",
+    "A source exception is isolated as SOURCE_EXCEPTION:<ExceptionType>; exception text is not copied into the result to avoid leaking secrets.",
+    "validate_downstream_handoff is a fail-closed boundary guard only. It does not implement Skeptic or verdict and cannot prove their end-to-end integration.",
+    "No external source probe was run for this task; tests use injected transports and cost zero."
+  ],
+  "limitations": [
+    "The scout does not compute semantic similarity, map concepts, create analogy records, merge documents across sources or rank analogies; the contract explicitly treats it as evidence collection.",
+    "Domain identity is the adapter KIND after trim/casefold comparison. The existing adapter catalog uses both patent and patents, so broader taxonomy normalization remains a human decision and is not silently applied.",
+    "The global budget is enforced at the injected Transport.budget boundary. A custom source that bypasses its injected transport is outside the accepted source contract.",
+    "The output remains the existing dict[str, SourceQueryResult] API; it does not add a first-class analogy object or global metadata envelope.",
+    "validate_downstream_handoff verifies only a fail-closed payload boundary. No productive Skeptic or verdict module/consumer exists in the current tree, so end-to-end integration is not verified and P10-T07 remains PARTIAL.",
+    "The full suite warning is the pre-existing Starlette/httpx deprecation; it is unrelated to T07 and was not changed."
+  ],
+  "complexity_markers": [
+    {
+      "tag": "HIGH_REVIEW",
+      "status": "OPEN",
+      "reason": "The canonical blueprint assigns Terra high. T07 now has an explicit evidence/budget/order/failure contract, but the semantic analogy consumer and productive Skeptic/verdict stages are not present in this tree."
+    },
+    {
+      "tag": "SECOND_PASS",
+      "status": "REQUIRED",
+      "scope": "The local contract, negative tests and fail-closed boundary are implemented. Keep the marker open until a real Skeptic/verdict consumer is available and tested; do not expand T07 into semantic analogy generation or later phase implementation."
+    }
+  ],
+  "commits": [],
+  "cost": "COST=0; no paid service or external source call used in this pass.",
+  "rollback": "Do not clean the shared dirty tree. Preserve the current diff, isolate the P10-T07 write-set, then restore only its paths from HEAD after explicit review; the exact safe restore scope is src/criba/intelligence/prior_art/scouts.py, src/criba/intelligence/prior_art/__init__.py, tests/intelligence/test_cross_domain_scout.py and this journal.",
+  "follow_up": [
+    "Keep P10-T07 PARTIAL: the local evidence contract is documented and tested, but no productive Skeptic/verdict consumer exists in the current CRIBA tree.",
+    "When the separately authorized downstream stages exist, adapt their real output to validate_downstream_handoff and run an end-to-end test; do not infer compatibility from this boundary guard.",
+    "Do not add semantic analogy scoring, new providers, migrations, external probes or changes to SUPRA under this T07 scope.",
+    "Do not mark P10-T07 VERIFIED until the downstream integration test and all completion evidence are present."
+  ],
+  "completed_at": null
+}

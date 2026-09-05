@@ -82,7 +82,11 @@ class IntelligenceSource:
         result.query_text = query
 
         if result.ok and self.context.cache_set is not None:
-            self.context.cache_set(cache_key, [d.to_dict() for d in result.documents])
+            self.context.cache_set(
+                cache_key,
+                [d.to_dict() for d in result.documents],
+                86400.0,
+            )
         return result
 
     # -- subclass hook --------------------------------------------------------

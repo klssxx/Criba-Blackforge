@@ -63,8 +63,8 @@ class Transport:
         self.timeout_s = timeout_s
         self.user_agent = user_agent
 
-    def _real_sender(self, url: str, params: dict | None, timeout: float,
-                     headers: dict | None) -> Response:
+    def _real_sender(self, url: str, params: dict[str, Any] | None, timeout: float,
+                     headers: dict[str, Any] | None) -> Response:
         import httpx  # lazy: only hit when actually going online
         h = {"User-Agent": self.user_agent}
         if headers:
@@ -74,8 +74,8 @@ class Transport:
             return Response(status=r.status_code, text=r.text,
                             headers=dict(r.headers))
 
-    def get(self, url: str, params: dict | None = None,
-            headers: dict | None = None) -> Response:
+    def get(self, url: str, params: dict[str, Any] | None = None,
+            headers: dict[str, Any] | None = None) -> Response:
         """Single GET honoring budget + retries. Raises BudgetExceeded."""
         last: Response | None = None
         for attempt in range(self.max_retries + 1):

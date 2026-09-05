@@ -38,9 +38,9 @@ class RecursiveSearcher:
         self.max_queries = max_queries
         self.expander = expander or QueryExpander()
 
-    def _salient_terms(self, docs: list[EvidenceDocument], known: Counter,
+    def _salient_terms(self, docs: list[EvidenceDocument], known: Counter[str],
                        top: int = 3) -> list[str]:
-        c = Counter()
+        c: Counter[str] = Counter()
         for d in docs[:5]:
             for t in tokenize((d.title or "") + " " + (d.abstract or "")[:400]):
                 c[t] += 1
@@ -52,7 +52,7 @@ class RecursiveSearcher:
         seen_ids: set[str] = set()
         all_docs: list[EvidenceDocument] = []
         queries = [query]
-        known_terms: Counter = Counter(tokenize(query))
+        known_terms: Counter[str] = Counter(tokenize(query))
 
         for depth in range(self.max_depth):
             round_docs: list[EvidenceDocument] = []

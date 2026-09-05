@@ -1,0 +1,80 @@
+{
+  "task_id": "P10-T08",
+  "phase": "P10",
+  "title": "PriorArtSkeptic",
+  "status": "VERIFIED",
+  "model": "Luna",
+  "reasoning": "high",
+  "risk": "R2",
+  "requirements": [
+    "Implement the P10 Skeptic stage after cross-domain evidence and before the P10-T09 verdict engine.",
+    "Preserve the allowed PriorArtVerdict boundary and never infer PROVEN_NEW from absence of evidence.",
+    "Keep the component deterministic, evidence-bound, provider-free and compatible with the T07 handoff guard."
+  ],
+  "files_read": [
+    "docs/architecture/CRIBA_BLUEPRINT_ULTIMATE.txt",
+    "spec/CRIBA_BLACKFORGE_MASTER_SPEC.md",
+    "docs/architecture/adr/ADR-P10-T07-cross-domain-contract.md",
+    "src/criba/intelligence/contracts.py",
+    "src/criba/intelligence/enums.py",
+    "src/criba/intelligence/prior_art/protocol.py",
+    "src/criba/intelligence/prior_art/scouts.py",
+    "tests/intelligence/test_cross_domain_scout.py",
+    "tests/intelligence/test_boundaries.py"
+  ],
+  "files_created": [
+    "src/criba/intelligence/prior_art/skeptic.py",
+    "tests/intelligence/test_prior_art_skeptic.py",
+    "docs/architecture/adr/ADR-P10-T08-prior-art-skeptic-contract.md",
+    ".hermes/iie/tasks/P10-T08.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "contract": {
+    "input": "InventionCandidate plus non-empty Mapping[str, SourceQueryResult] from the prior-art source stages.",
+    "output": "PriorArtSkepticReport: JSON-safe Mapping with adversarial-pass fields and a non-final process verdict.",
+    "process_verdicts": ["requires_experiment", "survives_with_conditions"],
+    "final_prior_art_verdicts_owned_by": "P10-T09 verdict engine",
+    "forbidden": ["PROVEN_NEW", "similarity scoring", "semantic matching", "network", "provider calls"]
+  },
+  "tests": [
+    "RED: tests/intelligence/test_prior_art_skeptic.py -> ModuleNotFoundError for missing prior_art.skeptic before production module existed.",
+    "RED: public import from criba.intelligence.prior_art -> ImportError before PriorArtSkeptic was exported.",
+    "RED: malformed document -> AttributeError before the EvidenceDocument fail-closed guard.",
+    "RED: source document without provenance -> survives_with_conditions before missing_provenance was added.",
+    "PYTHONDONTWRITEBYTECODE=1 LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_prior_art_skeptic.py -> 6 passed",
+    "PYTHONDONTWRITEBYTECODE=1 uv run --locked ruff check src/criba/intelligence/prior_art/skeptic.py src/criba/intelligence/prior_art/__init__.py tests/intelligence/test_prior_art_skeptic.py -> All checks passed",
+    "PYTHONDONTWRITEBYTECODE=1 uv run --locked mypy src/criba/intelligence/prior_art/skeptic.py -> Success: no issues found in 1 source file",
+    "PYTHONDONTWRITEBYTECODE=1 uv run --locked python -m compileall -q src/criba/intelligence/prior_art -> exit 0",
+    "PYTHONDONTWRITEBYTECODE=1 LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked pytest -q -p no:cacheprovider tests/intelligence/test_prior_art_skeptic.py tests/intelligence/test_cross_domain_scout.py tests/intelligence/test_prior_art_protocol.py tests/intelligence/test_contracts.py tests/intelligence/test_boundaries.py -> 37 passed",
+    "PYTHONDONTWRITEBYTECODE=1 LOCALAPPDATA=C:/Users/KLSX/Music/INNOVATIONS/RUNTIME_STATE uv run --locked --all-extras pytest -q -p no:cacheprovider -> 940 passed, 1 Starlette/httpx deprecation warning"
+  ],
+  "decisions": [
+    "The skeptic is an evidence-coverage adversary, not a similarity, novelty or final-verdict engine.",
+    "PriorArtSkepticReport implements Mapping so the real P10-T07 guard can consume it without a duplicate handoff model.",
+    "Source error text is not copied into gaps or reports; only source identity and controlled error category are retained.",
+    "Coverage gaps force requires_experiment. Formal coverage permits only survives_with_conditions and never a PriorArtVerdict."
+  ],
+  "evidence": [
+    "Source failure, empty success, missing provenance, malformed document and mapping mismatch are covered by focused tests.",
+    "The integration test executes CrossDomainScout -> PriorArtSkeptic -> validate_downstream_handoff with injected transports and no network.",
+    "The full CRIBA regression passed after the final code change."
+  ],
+  "limitations": [
+    "The skeptic does not decide whether a document materially overlaps a candidate mechanism; P10-T09 owns that decision.",
+    "survives_with_conditions is a Skeptic process state, not SURVIVED_SEARCH.",
+    "P10-T07 remains PARTIAL until P10-T09 consumes the real Skeptic report and the full handoff is exercised.",
+    "No external source probe was run in this task; all verification used injected transports at COST=0."
+  ],
+  "commits": [],
+  "commit_reason": "No commit was created: the shared CRIBA worktree already contains P10-T07 and unrelated pre-existing dirty changes; staging the modified package export or global state would mix incomplete T07 work with this task.",
+  "cost": "COST=0; no paid service, provider, credential or external source call was used.",
+  "rollback": "Preserve the shared dirty tree. P10-T08-specific additions are skeptic.py, test_prior_art_skeptic.py, ADR-P10-T08-prior-art-skeptic-contract.md and this journal. The P10-T08 import and __all__ entries in prior_art/__init__.py must be removed only by a reviewed line-level revert because that file also contains pre-existing P10-T07 work.",
+  "follow_up": [
+    "Implement P10-T09 as a separate verdict-engine task consuming PriorArtSkepticReport and SourceQueryResult without treating absence as PROVEN_NEW.",
+    "Then exercise the complete CrossDomainScout -> Skeptic -> verdict path and reassess P10-T07 closure.",
+    "Do not introduce external probes, providers, semantic similarity, mutations or flags under the P10-T08 scope."
+  ],
+  "completed_at": "2026-09-05T00:28:47+02:00"
+}

@@ -8,6 +8,7 @@ from __future__ import annotations
 import math
 import re
 from dataclasses import dataclass
+from typing import Any
 
 from ..storage.store import IntelligenceStore
 
@@ -37,7 +38,7 @@ class LexicalIndex:
 
     def __init__(self, store: IntelligenceStore):
         self.store = store
-        self._docs: dict[str, dict] = {}
+        self._docs: dict[str, dict[str, Any]] = {}
         self._tf: dict[str, dict[str, int]] = {}
         self._df: dict[str, int] = {}
         self._built = False

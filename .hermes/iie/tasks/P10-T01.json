@@ -17,7 +17,7 @@
     ".hermes/iie/tasks/P10-T01.json"
   ],
   "files_modified": ["src/criba/intelligence/prior_art/__init__.py"],
-  "commits": [],
+  "commits": ["bca2bb187dc7a687dffe2911ce8da118e4da31ed"],
   "tests_run": [
     "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py::test_adversarial_protocol_is_ordered_bounded_and_forbids_proven_new",
     "uv run --locked pytest -q tests/intelligence/test_prior_art_protocol.py",
