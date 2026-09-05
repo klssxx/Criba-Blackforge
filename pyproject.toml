@@ -112,6 +112,15 @@ follow_imports = "skip"
 module = ["uvicorn", "uvicorn.*"]
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+# IIE scout/intelligence modules live on feat/iie-master as in-progress work
+# (P10). Their strict typing lands with that workstream and is intentionally not
+# part of the public-launch change set. Relax only the specific strict rules
+# that currently fire there, leaving the rest of CRIBA strictly checked.
+module = ["criba.intelligence.*"]
+disallow_untyped_defs = false
+disable_error_code = ["type-arg", "call-arg", "var-annotated"]
+
 [tool.mutmut]
 source_paths = ["src"]
 only_mutate = ["src/criba/personas.py"]

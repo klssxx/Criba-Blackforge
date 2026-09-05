@@ -1,8 +1,10 @@
 name: Publish criba to PyPI
 
 on:
-  release:
-    types: [published]
+  # `release: published` is NOT attached yet: publishing to PyPI requires the
+  # trusted-publisher mapping (pypi.org -> this repo) that only the owner can
+  # create. Until then run this manually under workflow_dispatch once the
+  # mapping exists.
   workflow_dispatch:
 
 permissions:
