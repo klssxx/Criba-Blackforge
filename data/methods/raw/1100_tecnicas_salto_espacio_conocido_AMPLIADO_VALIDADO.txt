@@ -1,0 +1,1162 @@
+TÉCNICAS PARA SALTAR FUERA DEL ESPACIO CONOCIDO — CATÁLOGO COMPLETO
+===================================================================
+
+Rango canónico conservado: 1–1000.
+Total de esta versión: 1100.
+Las técnicas originales 1–200, que estaban sin número, han sido reconstruidas. Las 1001–1100 son una ampliación nueva.
+
+VALIDACIÓN AUTOMÁTICA
+- Entradas: 1100
+- Numeración continua: 1–1100
+- Números ausentes: 0
+- Números repetidos: 0
+- Duplicados textuales exactos normalizados: 0
+- Formato: nombre breve — mecanismo operativo
+
+1. Mutación de invariantes, actores y condiciones
+
+1. Mutación de invariantes — altera una garantía básica y observa qué arquitectura emerge.
+2. Eliminación aleatoria de restricciones — quita una regla al azar y reconstruye el sistema.
+3. Inyección de restricciones imposibles — obliga a resolver objetivos aparentemente incompatibles.
+4. Objetivo opuesto — diseña primero el sistema que maximizaría el fallo.
+5. Intercambio de actores — asigna las funciones del atacante al defensor y viceversa.
+6. Inversión temporal — comienza por el estado comprometido y reconstruye su origen.
+7. Distorsión de escala — prueba el mecanismo con uno y con mil millones de actores.
+8. Cambio de granularidad — convierte componentes en sistemas y sistemas en primitivas.
+9. Contradicción obligatoria — exige que dos garantías incompatibles coexistan.
+10. Composición adversarial — combina dos mecanismos seguros buscando un fallo emergente.
+11. Amplificación de sucesos raros — trata lo improbable como comportamiento habitual.
+12. Ruptura de simetría — introduce una pequeña desigualdad entre componentes equivalentes.
+13. Extracción de dependencias ocultas — elimina todo lo que el sistema presupone silenciosamente.
+14. Fallo mínimo viable — busca la menor modificación capaz de romper una garantía.
+15. Colapso por complejidad máxima — añade dependencias hasta descubrir el límite estructural.
+16. Trasplante ambiental — ejecuta la arquitectura bajo reglas de otro dominio.
+17. Sustitución ontológica — redefine qué significa identidad, prueba, estado o permiso.
+18. Recableado causal — cambia el orden entre causa, evidencia y decisión.
+19. Supresión de premisas — elimina una premisa esencial sin avisar al razonamiento.
+20. Duplicación de premisas — representa una misma verdad de dos formas incompatibles.
+21. Ataque a fronteras — explora únicamente las transiciones entre estados válidos.
+22. Inversión de interfaces — haz que el consumidor controle al proveedor.
+23. Inversión de confianza — confía más en lo externo que en lo interno.
+24. Contaminación de evidencia — mezcla pruebas auténticas con datos correctos pero irrelevantes.
+25. Desacuerdo entre verificadores — enfrenta oráculos igualmente legítimos.
+26. Rotación de roles — cambia periódicamente quién propone, ejecuta y aprueba.
+27. Ausencia total de autoridad — comprueba si el sistema funciona sin árbitro central.
+28. Autoridad absoluta — comprueba cómo falla cuando un árbitro controla todo.
+29. Inflación de latencia — multiplica los retrasos entre decisión y ejecución.
+30. Hambruna de recursos — ejecuta cada fase con recursos deliberadamente insuficientes.
+31. Abundancia perfecta — elimina toda escasez y busca fallos que antes quedaban ocultos.
+32. Observabilidad parcial — cada actor ve una versión distinta del sistema.
+33. Observabilidad total — todos ven todo, incluidos secretos operativos.
+34. Irreversibilidad obligatoria — elimina rollback y exige decisiones definitivas.
+35. Reversibilidad universal — permite deshacer incluso acciones consideradas finales.
+36. Verdad retardada — la validez de una acción solo se conoce mucho después.
+37. Relojes conflictivos — cada subsistema opera con una cronología diferente.
+38. Bifurcación de estado — mantiene dos historias válidas simultáneamente.
+39. Duplicación de identidad — una entidad legítima aparece en dos lugares.
+40. Fragmentación de identidad — una identidad se reparte entre múltiples agentes.
+41. Fusión de identidades — varias entidades pasan a compartir autoridad.
+42. Deriva de permisos — los privilegios cambian lentamente sin evento explícito.
+43. Lavado de permisos — una capacidad prohibida reaparece mediante intermediarios.
+44. Privilegio emergente — combina permisos inocuos hasta obtener uno peligroso.
+45. Caducidad funcional — una capacidad se debilita con cada uso.
+46. Amplificación funcional — cada uso aumenta el poder futuro de la capacidad.
+47. Consenso con rotación extrema — los participantes cambian durante la decisión.
+48. Consenso bajo silencio — nadie puede comunicarse directamente.
+49. Unanimidad falsa — todos aceptan por razones incompatibles.
+50. Veto minoritario — un actor desconocido puede bloquear la totalidad.
+
+2. Adversarios, pruebas, factores humanos y gobernanza
+
+51. Cumplimiento malicioso — sigue literalmente las reglas para destruir su propósito.
+52. Incompetencia honesta — modela errores sin intención adversarial.
+53. Ayuda adversarial — el atacante mejora métricas mientras debilita seguridad.
+54. Benevolencia inconsistente — actores honestos aplican criterios incompatibles.
+55. Métricas manipulables — optimiza la puntuación sin mejorar el sistema.
+56. Supresión de métricas — obliga a decidir sin indicadores cuantitativos.
+57. Inversión de recompensa — premia aquello que actualmente se penaliza.
+58. Saturación de recompensa — todos los resultados reciben la misma valoración.
+59. Ataque al objetivo proxy — separa la métrica del objetivo real.
+60. Juego contra el evaluador — diseña cambios que engañen exclusivamente al juez.
+61. Ataque autorreferencial — permite que una regla evalúe su propia validez.
+62. Salto de profundidad recursiva — fuerza niveles de delegación no previstos.
+63. Dependencia circular — cada garantía depende de otra que vuelve a la primera.
+64. Descomposición forzada — prohíbe cualquier dependencia circular, incluso las útiles.
+65. Eliminación de modularidad — fusiona componentes hasta revelar acoplamientos.
+66. Explosión modular — divide cada función en microcomponentes independientes.
+67. Ruido de interfaz — introduce respuestas correctas pero ambiguas entre módulos.
+68. Mutación de protocolo — cambia una regla de comunicación durante la ejecución.
+69. Compresión semántica — representa decisiones complejas con señales mínimas.
+70. Expansión semántica — obliga a explicar formalmente cada decisión trivial.
+71. Estado ambiguo — introduce situaciones que pertenecen a varias categorías.
+72. Estado hiperespecificado — añade tantas etiquetas que ninguna regla generaliza.
+73. Agrupación de contradicciones — busca contradicciones que se refuercen mutuamente.
+74. Torneo de supuestos — enfrenta hipótesis y elimina las menos resistentes.
+75. Obligaciones de prueba aleatorias — cambia qué actor debe demostrar cada afirmación.
+76. Prueba con información incompleta — exige justificar decisiones sin conocer todos los hechos.
+77. Prueba con hechos hostiles — introduce evidencia verdadera que induce conclusiones erróneas.
+78. Sustitución de prueba por testigo — una garantía depende de una demostración observable.
+79. Sustitución de testigo por predicción — valida según consecuencias futuras.
+80. Minería de teoremas en logs — deduce reglas implícitas a partir del comportamiento registrado.
+81. Ausencia de registros — intenta reconstruir seguridad sin trazabilidad histórica.
+82. Falsificación sintética de logs — genera historiales coherentes de sucesos inexistentes.
+83. Importación de adversarios externos — aplica modelos de ataque de disciplinas ajenas.
+84. Coevolución ecológica — defensas y ataques evolucionan juntos por generaciones.
+85. Modelo de manipulación de mercado — trata permisos como activos intercambiables.
+86. Respuesta inmunitaria operativa — distingue tolerancia, memoria y autoinmunidad.
+87. Cambio de carga probatoria — quien antes acusaba ahora debe demostrar inocencia.
+88. Contratos adversariales — redacta reglas que permitan explotación sin incumplimiento formal.
+89. Captura institucional — el atacante controla gradualmente los órganos de supervisión.
+90. Fallo burocrático — ninguna acción es maliciosa, pero el proceso completo fracasa.
+91. Descomposición de cadena de suministro — analiza cada dependencia como actor autónomo.
+92. Adversario de factores humanos — ataca fatiga, atención y comprensión, no código.
+93. Sesgo de automatización — los humanos confían demasiado en una decisión automática.
+94. Operador agotado — evalúa el sistema tras horas de tareas repetitivas.
+95. Operador novato — elimina todo conocimiento tácito del usuario.
+96. Experto sobreconfiado — modela atajos tomados por quien conoce demasiado el sistema.
+97. Insider altruista — alguien rompe reglas intentando proteger el proyecto.
+98. Atajo benigno explotable — convierte una comodidad legítima en vector de fallo.
+99. Coaliciones emergentes — actores independientes terminan coordinándose indirectamente.
+100. Colusión sin comunicación — agentes convergen en una estrategia dañina por incentivos comunes.
+
+3. Versiones, estados, testing y búsqueda de novedad
+
+101. Reglas no estacionarias — modifica las políticas mientras se ejecutan.
+102. Amenaza cambiante — sustituye el modelo adversarial a mitad del proceso.
+103. Deriva de objetivos — mide cómo cambia la misión tras muchas iteraciones.
+104. Mutación de políticas — cada generación altera ligeramente una regla.
+105. Bifurcación de gobernanza — dos autoridades mantienen versiones incompatibles.
+106. Desfase de versiones — cada componente interpreta una especificación distinta.
+107. Paradoja de rollback — restaurar un estado seguro reactiva una vulnerabilidad antigua.
+108. Trampa de actualización — una mejora bloquea futuras mejoras.
+109. Ataque por downgrade — fuerza compatibilidad con una versión más débil.
+110. Estrés de migración — prueba estados intermedios durante cambios de arquitectura.
+111. Fractura de compatibilidad — elimina la obligación de conservar interfaces antiguas.
+112. Parser desconocido — interpreta la misma entrada con implementaciones distintas.
+113. Inválido aceptado — encuentra entradas malformadas que atraviesan validadores.
+114. Válido peligroso — busca entradas perfectamente legales con efectos destructivos.
+115. Caza de comportamiento indefinido — explora zonas sin semántica explícita.
+116. Generación desde máquina de estados — crea pruebas a partir de transiciones, no ejemplos.
+117. Mutación gramatical — altera la estructura sintáctica preservando parte del significado.
+118. Fallo sin entrada — busca comportamientos adversos causados solo por el entorno.
+119. Efecto sin salida — detecta cambios internos aunque la respuesta parezca correcta.
+120. Corrupción silenciosa de estado — altera datos sin provocar error inmediato.
+121. Intercambio safety/liveness — mejora disponibilidad sacrificando invariantes y viceversa.
+122. Oscilación fail-open/fail-closed — cambia el modo de fallo según el contexto.
+123. Rollback parcial — revierte código pero conserva permisos, caché o evidencia.
+124. Ejecución sombra divergente — compara la decisión real con una réplica no vinculante.
+125. Desacuerdo del gemelo digital — el modelo interno y el sistema real evolucionan distinto.
+126. Fallo común en redundancia — rompe simultáneamente componentes supuestamente independientes.
+127. Fracaso por diversidad — demasiadas implementaciones generan inconsistencias.
+128. Estrés de monocultura — una única dependencia compromete todos los niveles.
+129. Mutación arquitectónica aleatoria — modifica conexiones y conserva solo diseños viables.
+130. Síntesis automática de adversarios — genera programas cuyo objetivo sea romper invariantes.
+131. Evolución de pruebas — muta casos según su capacidad de descubrir fallos.
+132. Búsqueda por novedad — premia comportamientos diferentes, no solo ataques exitosos.
+133. Archivo de diversidad — conserva fallos raros aunque parezcan poco graves.
+134. MAP-Elites de amenazas — explora muchas clases de fallo simultáneamente.
+135. Minimización posterior — reduce cada descubrimiento a su causa esencial.
+136. Maximización previa — exagera primero el fallo para hacerlo observable.
+137. Creación de relaciones metamórficas — define cómo debería variar una salida al cambiar la entrada.
+138. Violación metamórfica — busca cambios equivalentes que produzcan resultados incompatibles.
+139. Testing diferencial — compara implementaciones ante exactamente el mismo estímulo.
+140. Desacuerdo N-version — considera el desacuerdo como señal, no como ruido.
+141. Testing sin oráculo — detecta anomalías aunque no exista respuesta correcta conocida.
+142. Amplificación de oráculos débiles — combina comprobaciones incompletas para aumentar confianza.
+143. Agrupación de anomalías — busca familias de comportamientos extraños.
+144. Exploración desde outliers — comienza por casos alejados de la distribución normal.
+145. Exploración con recompensa dispersa — no exige señales frecuentes de progreso.
+146. Curiosidad adversarial — prioriza estados difíciles de predecir.
+147. Maximización de sorpresa — busca resultados que contradigan el modelo interno.
+148. Maximización de entropía — favorece regiones poco exploradas del espacio.
+149. Distancia semántica obligatoria — rechaza propuestas demasiado próximas a ideas previas.
+150. Repulsión vectorial — genera conceptos alejados en representación semántica.
+
+4. Diversidad, debate, causalidad y escape
+
+151. Anticlustering de ideas — penaliza grupos que comparten el mismo mecanismo.
+152. Lista tabú de mecanismos — bloquea temporalmente patrones ya explotados.
+153. Genealogía de novedades — registra de qué ideas deriva cada descubrimiento.
+154. Presupuesto de mutación por linaje — limita variaciones de una misma raíz.
+155. Recombinación distante — solo combina conceptos con baja similitud.
+156. Ensamble de semillas aleatorias — ejecuta muchas exploraciones independientes.
+157. Población de prompts adversariales — los prompts compiten y evolucionan.
+158. Coevolución multiagente — atacantes y defensores se adaptan mutuamente.
+159. Rotación de jueces — cambia periódicamente el criterio de evaluación.
+160. Cruce de puntos ciegos — cada evaluador revisa lo que otro ignoró.
+161. Conservación del informe minoritario — nunca elimina hipótesis rechazadas por mayoría.
+162. Mutación del grafo argumental — altera conexiones entre premisas y conclusiones.
+163. Debate sin vocabulario compartido — cada agente debe traducir su propio modelo.
+164. Debate entre ontologías incompatibles — confronta definiciones distintas del mismo objeto.
+165. Inversión del steelman — fortalece primero la posición que parece absurda.
+166. Búsqueda del eslabón débil — ataca únicamente la premisa menos defendible.
+167. Cambio de propietario de premisas — obliga al oponente a defender tus supuestos.
+168. Reconstrucción desde la conclusión — deduce qué premisas producirían un resultado inesperado.
+169. Exploración desde evidencia — recopila anomalías antes de formular una teoría.
+170. Observación sin tesis — prohíbe explicar los datos durante la primera fase.
+171. Búsqueda de variables latentes — introduce factores no observados que expliquen inconsistencias.
+172. Inyección de confusores — añade causas alternativas compatibles con la evidencia.
+173. Intervención causal — modifica una variable y observa efectos no correlacionales.
+174. Gemelos contrafactuales — compara ejecuciones idénticas salvo por una decisión.
+175. Perturbación de dependencia histórica — cambia el orden de eventos equivalentes.
+176. Escape de cuencas de atracción — fuerza saltos fuera de soluciones estables.
+177. Sabotaje del óptimo local — prohíbe temporalmente la mejor solución conocida.
+178. Ciclos de temperatura creativa — alterna exploración caótica y selección estricta.
+179. Recocido de restricciones — endurece gradualmente las reglas después de explorar.
+180. Reinicio con memoria negativa — vuelve a empezar conservando solo los caminos fallidos.
+181. Ablación de memoria — elimina deliberadamente conocimientos previos.
+182. Corrupción controlada de memoria — introduce recuerdos parcialmente incorrectos.
+183. Sobreajuste histórico — verifica si el sistema solo resiste ataques ya vistos.
+184. Olvido funcional — elimina reglas obsoletas para descubrir nuevas estructuras.
+185. Currículo adversarial — incrementa gradualmente dificultad y rareza.
+186. Currículo inverso — comienza con el caso extremo y retrocede hacia lo normal.
+187. Currículo discontinuo — salta entre dificultades sin progresión ordenada.
+188. Anclaje en extremos — diseña primero para los límites, no para el promedio.
+189. Supresión del caso mediano — ignora deliberadamente el escenario habitual.
+190. Cola de baja probabilidad — prioriza sucesos raros con impacto catastrófico.
+191. Inversión de consecuencias — una acción segura produce daño y una peligrosa produce estabilidad.
+192. Eliminación de stakeholders — retira un actor considerado imprescindible.
+193. Multiplicación de stakeholders — divide cada interés en muchos representantes.
+194. Auditor sin contexto — evalúa únicamente artefactos y evidencia observable.
+195. Auditor saturado de contexto — entrega tanta información que deba detectar lo relevante.
+196. Representación independiente del lenguaje — traduce la arquitectura a grafos, lógica o estados.
+197. Mutación de especificaciones ejecutables — altera reglas y comprueba qué implementaciones sobreviven.
+198. Desafío de cambio con prueba — toda modificación debe transportar su propia justificación verificable.
+199. Aprendizaje de invariantes desde fallos — descubre garantías observando qué nunca debería repetirse.
+200. Síntesis desde contradicciones — convierte inconsistencias irreconciliables en nuevos mecanismos arquitectónicos.
+
+5. Transformaciones estructurales y topológicas
+
+201. Topología negativa — diseña conexiones que solo existen cuando falta otra.
+202. Arquitectura de huecos — trata las ausencias como componentes funcionales.
+203. Puertas recíprocas — cada acceso abre y bloquea rutas simultáneamente.
+204. Dependencia antagónica — un módulo mejora cuando otro pierde capacidad.
+205. Jerarquía invertible — la autoridad cambia según el tipo de evidencia.
+206. Centro móvil — el nodo coordinador migra durante la operación.
+207. Bordes inteligentes — desplaza la decisión desde el núcleo a las interfaces.
+208. Núcleo vacío — elimina el controlador central y conserva solo contratos.
+209. Módulos parasitarios — cada componente depende temporalmente de otro anfitrión.
+210. Componentes efímeros — destruye módulos tras cumplir una única función.
+211. Enlaces con memoria — las conexiones cambian según usos anteriores.
+212. Enlaces fungibles — cualquier canal puede sustituir a otro bajo presión.
+213. Interfaces degeneradas — varias rutas distintas conducen al mismo fallo.
+214. Arquitectura plegable — comprime niveles cuando disminuye el riesgo.
+215. Arquitectura desplegable — crea nuevas capas al detectar incertidumbre.
+216. Nodos con veto cruzado — cada módulo limita a uno no adyacente.
+217. Caminos incompatibles — dos rutas válidas no pueden coexistir.
+218. Canales sacrificables — algunas conexiones están diseñadas para romperse primero.
+219. Subred clandestina — añade una red secundaria solo para verificación.
+220. Subred ciega — verifica sin conocer el contenido que transporta.
+221. Capas rotatorias — cambia periódicamente qué nivel controla a cuál.
+222. Anillos de custodia — cada etapa entrega autoridad a la siguiente.
+223. Custodia fragmentada — reparte una capacidad entre nodos no coordinados.
+224. Custodia temporal — una autoridad solo existe durante una ventana mínima.
+225. Custodia contextual — el permiso depende del estado global, no del usuario.
+226. Fronteras porosas — permite filtraciones controladas para detectar abuso.
+227. Fronteras móviles — redefine dominios de confianza durante la ejecución.
+228. Fronteras superpuestas — un recurso pertenece a varios perímetros simultáneos.
+229. Fronteras sin interior — protege transiciones en vez de espacios.
+230. Subestructura fantasma — simula un módulo inexistente para atraer fallos.
+231. Componente señuelo — ofrece una función plausible pero estéril.
+232. Redundancia asimétrica — las réplicas tienen capacidades deliberadamente distintas.
+233. Redundancia competitiva — las copias intentan refutar a las demás.
+234. Redundancia degradable — cada réplica pierde una función diferente.
+235. Malla de sospecha — los nodos puntúan continuamente la coherencia ajena.
+236. Malla de deuda — cada atajo crea una obligación futura verificable.
+237. Arquitectura con peaje — cada transición consume un recurso no renovable.
+238. Arquitectura sin retorno — avanzar elimina físicamente estados anteriores.
+239. Arquitectura con retorno caro — revertir exige demostrar una causa nueva.
+240. Corredores de un solo uso — una ruta desaparece tras ser atravesada.
+241. Rutas con caducidad — los caminos dejan de ser válidos aunque nadie los use.
+242. Rutas dependientes del observador — cada actor percibe un grafo distinto.
+243. Rutas probabilísticas — el sistema elige caminos sin patrón fijo.
+244. Rutas verificadas a posteriori — se permite avanzar antes de confirmar el trayecto.
+245. Rutas verificadas a priori — ningún paso existe hasta ser demostrado.
+246. Puentes autoerosionables — el acceso destruye progresivamente su propio soporte.
+247. Puentes reconstruibles — cada cruce debe recrear el canal desde cero.
+248. Puentes cooperativos — varias partes deben construir la ruta al mismo tiempo.
+249. Puentes hostiles — la propia ruta intenta invalidar al viajero.
+250. Túneles sin visibilidad — atraviesa una fase ocultando deliberadamente el proceso.
+251. Túneles con testigo externo — nadie ve el interior, pero un tercero prueba su integridad.
+252. Cámaras de cuarentena — todo cambio permanece aislado hasta sobrevivir a presión.
+253. Cámaras de mezcla — combina cambios incompatibles para revelar interacciones.
+254. Cámaras de eco inverso — solo circula la evidencia que contradice el consenso.
+255. Arquitectura alveolar — cada celda funciona incluso rodeada de fallos.
+256. Arquitectura micelial — redistribuye funciones por rutas oportunistas.
+257. Arquitectura vascular — separa flujos de nutrientes, órdenes y residuos.
+258. Arquitectura fractal — repite el mismo patrón de control a distintas escalas.
+259. Arquitectura antifractal — prohíbe repetir mecanismos entre escalas.
+260. Arquitectura coralina — crece acumulando decisiones irreversibles.
+261. Arquitectura tectónica — grandes cambios emergen de microdesplazamientos.
+262. Arquitectura sedimentaria — conserva capas antiguas como evidencia estructural.
+263. Arquitectura erosiva — elimina continuamente complejidad no utilizada.
+264. Arquitectura volcánica — acumula tensión y libera cambios en pulsos.
+265. Arquitectura de esclusas — cada fase iguala condiciones antes de abrirse.
+266. Arquitectura de diques — contiene fallos permitiendo desbordes controlados.
+267. Arquitectura de fusibles — sacrifica funciones para proteger invariantes.
+268. Arquitectura de válvulas — controla dirección, presión y retroceso por separado.
+269. Arquitectura respiratoria — alterna fases de entrada, pausa y expulsión.
+270. Arquitectura peristáltica — mueve estado mediante contracciones secuenciales.
+271. Arquitectura capilar — distribuye capacidades en unidades mínimas.
+272. Arquitectura esquelética — separa soporte estable de tejidos reemplazables.
+273. Arquitectura metamórfica — cambia forma sin perder identidad verificable.
+274. Arquitectura larvaria — opera con reglas distintas antes de madurar.
+275. Arquitectura simbiótica — dos sistemas inseguros forman uno resistente.
+276. Arquitectura comensal — un sistema gana sin afectar al anfitrión.
+277. Arquitectura depredadora — un componente elimina activamente estados débiles.
+278. Arquitectura carroñera — reutiliza residuos de procesos fallidos.
+279. Arquitectura de enjambre — coordinación global desde reglas locales mínimas.
+280. Arquitectura de colonia — especializa agentes hasta hacerlos interdependientes.
+281. Arquitectura territorial — cada módulo defiende límites dinámicos.
+282. Arquitectura migratoria — servicios y permisos cambian de ubicación.
+283. Arquitectura nómada — ningún estado crítico permanece fijo.
+284. Arquitectura estacional — políticas distintas según ciclos operativos.
+285. Arquitectura eclipsada — oculta temporalmente funciones críticas.
+286. Arquitectura orbital — componentes se acercan solo cuando deben interactuar.
+287. Arquitectura gravitacional — las dependencias atraen recursos de forma proporcional.
+288. Arquitectura de mareas — la disponibilidad sube y baja de forma predecible.
+289. Arquitectura de resonancia — pequeños estímulos activan respuestas amplificadas.
+290. Arquitectura amortiguada — toda oscilación pierde fuerza antes de propagarse.
+291. Arquitectura caótica controlada — introduce variación limitada para evitar adaptación.
+292. Arquitectura de percolación — estudia cuándo fallos aislados forman una ruta global.
+293. Arquitectura de umbral — una propiedad emerge solo tras cierta densidad.
+294. Arquitectura de fase — cambia de comportamiento al cruzar una condición crítica.
+295. Arquitectura cristalina — fuerza patrones rígidos y defectos observables.
+296. Arquitectura amorfa — evita estructura repetible para impedir predicción.
+297. Arquitectura quiral — dos diseños espejo producen efectos no equivalentes.
+298. Arquitectura hiperbólica — amplía fronteras más rápido que el volumen interno.
+299. Arquitectura no orientable — una ruta regresa con roles invertidos.
+300. Arquitectura multidimensional — separa permisos, tiempo, evidencia y riesgo en ejes independientes.
+
+6. Causalidad, secuencia y tiempo
+
+301. Causalidad invertida — trata el efecto como condición de su propia causa.
+302. Causalidad bifurcada — una acción produce futuros mutuamente excluyentes.
+303. Causalidad convergente — causas distintas deben explicar el mismo resultado.
+304. Causalidad retardada — separa acción y consecuencia hasta romper intuiciones.
+305. Causalidad anticipada — una predicción modifica el evento que predice.
+306. Causalidad circular limitada — permite bucles solo dentro de una ventana.
+307. Causalidad distribuida — ningún actor posee una causa suficiente.
+308. Causalidad acumulativa — muchos efectos pequeños cruzan un umbral.
+309. Causalidad cancelatoria — dos causas reales se neutralizan sin desaparecer.
+310. Causalidad latente — el factor decisivo no aparece en los registros.
+311. Causalidad condicional — una causa solo existe bajo cierta interpretación.
+312. Causalidad observacional — medir el sistema cambia su trayectoria.
+313. Causalidad competitiva — varias explicaciones luchan por controlar la respuesta.
+314. Causalidad probabilística adversa — favorece el desenlace menos esperado.
+315. Causalidad contrafáctica extrema — elimina el evento más obvio y reconstruye todo.
+316. Causa sustituible — reemplaza el origen conservando el efecto.
+317. Efecto sustituible — conserva la causa y altera su manifestación.
+318. Cadena causal rota — elimina un eslabón y busca rutas compensatorias.
+319. Cadena causal falsa — inserta una relación plausible pero inexistente.
+320. Cadena causal oculta — reparte los pasos entre dominios inconexos.
+321. Cadena causal reversible — cada consecuencia puede deshacer su causa.
+322. Cadena causal irreversible — una causa elimina cualquier camino alternativo.
+323. Cascada retardada — los fallos se activan en tiempos distintos.
+324. Cascada selectiva — solo ciertos componentes transmiten el daño.
+325. Cascada inversa — los efectos periféricos dañan progresivamente al núcleo.
+326. Cascada de recuperación — cada fallo activa una mejora local.
+327. Cascada de confianza — una validación propaga permisos indirectos.
+328. Cascada de sospecha — una anomalía reduce confianza en toda su genealogía.
+329. Cascada de excepciones — cada regla genera una excepción nueva.
+330. Cascada de deuda — cada solución desplaza coste hacia el futuro.
+331. Evento precursor falso — introduce señales que anuncian algo que nunca ocurre.
+332. Evento sin precursor — fuerza cambios críticos sin aviso observable.
+333. Evento gemelo — dos sucesos idénticos tienen consecuencias opuestas.
+334. Evento fantasma — el sistema reacciona a algo que no sucedió.
+335. Evento borrado — elimina una acción del historial manteniendo sus efectos.
+336. Evento reescrito — cambia el significado de un hecho pasado.
+337. Evento disputado — varios actores conservan versiones incompatibles.
+338. Evento compuesto — ninguna parte aislada explica el resultado.
+339. Evento indivisible — prohíbe separar una acción compleja en subpasos.
+340. Evento de umbral — un detalle mínimo activa una transición total.
+341. Tiempo elástico — cada subsistema percibe duraciones diferentes.
+342. Tiempo discreto — solo permite cambios en instantes autorizados.
+343. Tiempo continuo — elimina puntos claros de commit o rollback.
+344. Tiempo ramificado — conserva futuros alternativos como estados válidos.
+345. Tiempo colapsado — obliga a elegir una única historia bajo incertidumbre.
+346. Tiempo recursivo — una fase contiene versiones completas de sí misma.
+347. Tiempo prestado — una acción usa autoridad futura antes de recibirla.
+348. Tiempo hipotecado — una decisión consume opciones de versiones posteriores.
+349. Tiempo negativo — una corrección debe preceder formalmente al error.
+350. Tiempo de gracia adversarial — el atacante explota intervalos de tolerancia.
+351. Reloj de evidencia — la validez envejece independientemente del dato.
+352. Reloj de riesgo — el peligro cambia aunque el sistema permanezca igual.
+353. Reloj de identidad — una entidad deja de ser la misma con el tiempo.
+354. Reloj de consenso — las decisiones caducan si no se renuevan.
+355. Reloj de permiso — las capacidades se degradan por inactividad.
+356. Reloj de versión — cada componente avanza a velocidades distintas.
+357. Reloj de deuda — los atajos acumulan intereses operativos.
+358. Reloj de verdad — un hecho puede ser provisionalmente válido.
+359. Reloj adversarial — el atacante controla cuándo empieza la medición.
+360. Desfase intencional — ejecuta procesos fuera de sincronía para descubrir acoplamientos.
+361. Sincronía forzada — obliga a coincidir procesos normalmente independientes.
+362. Ventana imposible — exige completar una acción antes de poder iniciarla.
+363. Ventana solapada — dos periodos de autoridad se intersectan accidentalmente.
+364. Ventana hueca — existe un intervalo sin dueño ni política.
+365. Ventana deslizante — la evidencia válida cambia continuamente.
+366. Ventana acumulativa — cada periodo añade restricciones no removibles.
+367. Ventana de amnesia — el sistema olvida hechos durante una fase.
+368. Secuencia permutada — prueba todos los órdenes de acciones equivalentes.
+369. Secuencia parcialmente ordenada — fija solo algunas precedencias.
+370. Secuencia autorreferente — un paso decide cuál fue el paso anterior.
+371. Secuencia dependiente del fallo — el error redefine los pasos restantes.
+372. Secuencia sin inicio — entra en un proceso ya avanzado.
+373. Secuencia sin cierre — elimina la condición terminal.
+374. Secuencia interrumpible — cualquier actor puede pausar en puntos inesperados.
+375. Secuencia no reanudable — toda pausa obliga a reconstruir desde cero.
+376. Secuencia superpuesta — múltiples ejecuciones comparten pasos.
+377. Secuencia contagiosa — una transición activa procesos vecinos.
+378. Secuencia absorbente — entrar en un estado impide salir.
+379. Secuencia repulsiva — un estado expulsa inmediatamente al sistema.
+380. Historia mínima — conserva solo los eventos imprescindibles.
+381. Historia máxima — registra incluso decisiones descartadas.
+382. Historia contradictoria — almacena versiones incompatibles sin resolverlas.
+383. Historia sintetizada — crea un pasado coherente a partir de fragmentos.
+384. Historia adversarial — el registro está construido para inducir una conclusión.
+385. Historia sin identidad — los eventos no indican quién actuó.
+386. Historia sin causalidad — solo conserva orden, no dependencia.
+387. Historia con causalidad falsa — registra explicaciones como si fueran hechos.
+388. Historia viva — eventos antiguos cambian al aparecer nueva evidencia.
+389. Historia sellada — ningún dato posterior puede reinterpretarla.
+390. Futuro vinculante — una predicción crea obligaciones presentes.
+391. Futuro revocable — toda planificación puede invalidarse sin coste.
+392. Futuro múltiple — diseña políticas que funcionen en escenarios incompatibles.
+393. Futuro adversarial — el entorno elige la rama peor para el sistema.
+394. Futuro sin continuidad — cada estado siguiente rompe supuestos previos.
+395. Futuro heredado — decisiones antiguas limitan agentes aún inexistentes.
+396. Futuro no observable — actúa sin indicadores de éxito inmediato.
+397. Futuro retrospectivo — evalúa decisiones con criterios creados posteriormente.
+398. Futuro de bloqueo — una mejora actual elimina todas las alternativas.
+399. Futuro de liberación — un fallo abre posibilidades antes prohibidas.
+400. Cronología adversarial — ordena hechos para maximizar interpretaciones erróneas.
+
+7. Gobernanza, autoridad e incentivos
+
+401. Gobernanza por sorteo — asigna autoridad al azar entre candidatos válidos.
+402. Gobernanza por desgaste — gana quien conserva coherencia durante más rondas.
+403. Gobernanza por desafío — toda autoridad debe sobrevivir a impugnaciones periódicas.
+404. Gobernanza por pares — cada decisión requiere un igual con criterio opuesto.
+405. Gobernanza por minoría — la objeción menos popular recibe poder temporal.
+406. Gobernanza por rotación desigual — los roles cambian con frecuencias distintas.
+407. Gobernanza por mérito decreciente — el éxito reduce autoridad futura.
+408. Gobernanza por error reconocido — admitir fallos aumenta capacidad de decisión.
+409. Gobernanza por deuda — cada decisión consume crédito institucional.
+410. Gobernanza por evidencia perecedera — ninguna autoridad conserva legitimidad sin renovación.
+411. Gobernanza bicéfala — dos centros deciden aspectos inseparables.
+412. Gobernanza tricameral — separa intención, ejecución y consecuencias.
+413. Gobernanza sin propuesta — los jueces solo pueden rechazar o modificar.
+414. Gobernanza sin veto — toda oposición debe aportar una alternativa ejecutable.
+415. Gobernanza diferida — la decisión entra en vigor tras una segunda revisión.
+416. Gobernanza reversible — toda norma incluye mecanismo de desactivación.
+417. Gobernanza experimental — las políticas se prueban en zonas limitadas.
+418. Gobernanza competitiva — varias reglas compiten sobre el mismo caso.
+419. Gobernanza federada efímera — las alianzas desaparecen tras cada decisión.
+420. Gobernanza por testigos — la legitimidad depende de observadores independientes.
+421. Autoridad prestada — un actor usa poder delegado de corta duración.
+422. Autoridad encapsulada — el poder solo opera dentro de un contexto exacto.
+423. Autoridad degradable — cada uso reduce el alcance restante.
+424. Autoridad contagiosa — una delegación permite delegar parcialmente.
+425. Autoridad no transferible — el poder muere con su titular.
+426. Autoridad divisible — separa lectura, propuesta, ejecución y validación.
+427. Autoridad recombinable — capacidades parciales forman poderes temporales.
+428. Autoridad adversarial — el controlador debe intentar invalidar su propia decisión.
+429. Autoridad de emergencia limitada — poder amplio con evidencia obligatoria posterior.
+430. Autoridad de sombra — un segundo actor reproduce decisiones sin ejecutarlas.
+431. Veto consumible — cada actor dispone de pocos bloqueos.
+432. Veto justificable — bloquear crea una carga de prueba creciente.
+433. Veto diferido — la oposición puede anular después de observar consecuencias.
+434. Veto distribuido — varias objeciones pequeñas equivalen a una total.
+435. Veto ciego — quien bloquea desconoce la identidad del proponente.
+436. Veto recíproco — vetar expone una decisión propia a revisión.
+437. Veto temporal — el bloqueo expira salvo renovación probada.
+438. Veto condicionado — solo existe si se ofrece una vía alternativa.
+439. Veto por predicción — se bloquea según daño futuro demostrable.
+440. Veto aleatorio auditado — algunas decisiones se revisan sin aviso.
+441. Consenso por desacuerdo mínimo — elige la opción con menos incompatibilidades.
+442. Consenso por diversidad máxima — premia razones distintas para aceptar.
+443. Consenso por objeción resuelta — ninguna mayoría vale con objeciones sin tratar.
+444. Consenso por sacrificio — aceptar exige ceder una preferencia propia.
+445. Consenso por mercado interno — los actores apuestan reputación por resultados.
+446. Consenso por ignorancia — decide sin revelar identidades ni jerarquías.
+447. Consenso por prueba negativa — vence la opción menos refutable.
+448. Consenso por lotería ponderada — la evidencia altera probabilidades, no determina.
+449. Consenso por capas — cada grupo valida una propiedad distinta.
+450. Consenso provisional — toda decisión conserva explícitamente una hipótesis rival.
+451. Incentivo invertido selectivo — recompensa descubrir fallos propios.
+452. Incentivo de abstención — premia no actuar cuando falta evidencia.
+453. Incentivo de reversión — recompensa deshacer pronto una mala decisión.
+454. Incentivo de diversidad — penaliza soluciones demasiado parecidas.
+455. Incentivo de fricción — añade coste a decisiones excesivamente rápidas.
+456. Incentivo de simplicidad verificable — premia reducir mecanismos sin perder garantías.
+457. Incentivo de testabilidad — valora más lo comprobable que lo prometedor.
+458. Incentivo de transparencia limitada — premia revelar solo lo necesario.
+459. Incentivo de largo plazo — difiere recompensas hasta confirmar efectos.
+460. Incentivo contracíclico — recompensa acciones impopulares durante euforia.
+461. Mercado de permisos — las capacidades tienen precio dinámico.
+462. Mercado de confianza — la reputación sube y baja por predicciones verificadas.
+463. Mercado de objeciones — las críticas escasas adquieren mayor valor.
+464. Mercado de atención — los casos compiten por revisión humana.
+465. Mercado de deuda técnica — los atajos emiten obligaciones negociables.
+466. Mercado de riesgo — los equipos absorben consecuencias de sus decisiones.
+467. Mercado de evidencia — producir pruebas consume presupuesto.
+468. Mercado antiespeculativo — penaliza beneficios obtenidos sin ejecución real.
+469. Mercado de responsabilidad — cada decisión necesita un portador de pérdida.
+470. Mercado con quema — parte del poder usado desaparece permanentemente.
+471. Contrato autolimitante — la cláusula de éxito reduce su propio alcance.
+472. Contrato adversarial reversible — cualquier parte puede activar una prueba hostil.
+473. Contrato con testigo — un tercero valida hechos, no intenciones.
+474. Contrato de degradación — define cómo fallar antes de operar.
+475. Contrato de salida — toda cooperación incluye separación segura.
+476. Contrato de silencio — especifica qué información no puede circular.
+477. Contrato de incertidumbre — obliga a declarar lo desconocido.
+478. Contrato de memoria — define qué decisiones deben sobrevivir.
+479. Contrato de olvido — elimina información tras cumplir su función.
+480. Contrato de contradicción — conserva desacuerdos como parte del acuerdo.
+481. Presupuesto de confianza — cada dependencia consume confianza finita.
+482. Presupuesto de complejidad — toda nueva función debe eliminar otra carga.
+483. Presupuesto de excepción — limita cuántas reglas pueden romperse.
+484. Presupuesto de secreto — cada dato oculto tiene coste verificable.
+485. Presupuesto de irreversibilidad — restringe decisiones sin retorno.
+486. Presupuesto de coordinación — penaliza sistemas que requieren sincronía excesiva.
+487. Presupuesto de atención humana — reserva revisión para casos de máxima incertidumbre.
+488. Presupuesto de deuda futura — bloquea mejoras que trasladan demasiado coste.
+489. Presupuesto de ambigüedad — limita términos sin definición operacional.
+490. Presupuesto de autoridad — impide acumular capacidades por conveniencia.
+491. Captura por comodidad — detecta cuándo una excepción acaba gobernando.
+492. Captura por métricas — identifica órganos que optimizan su evaluación.
+493. Captura por expertos — prueba si el conocimiento especializado monopoliza decisiones.
+494. Captura por dependencia — analiza cuándo un proveedor condiciona la política.
+495. Captura por emergencia — comprueba si poderes temporales se vuelven permanentes.
+496. Captura por protocolo — las reglas técnicas sustituyen decisiones políticas.
+497. Captura por datos — quien observa más termina controlando.
+498. Captura por latencia — quien responde primero impone el marco.
+499. Captura por traducción — el intermediario altera el significado de las opciones.
+500. Captura por mantenimiento — quien repara el sistema adquiere poder informal.
+
+8. Información, semántica y comunicación
+
+501. Semántica bifocal — una misma señal mantiene dos lecturas operativas.
+502. Semántica de reserva — cada término conserva un significado alternativo explícito.
+503. Semántica negativa — define conceptos por lo que excluyen.
+504. Semántica dinámica — el significado cambia según el estado del sistema.
+505. Semántica litigable — toda definición admite impugnación formal.
+506. Semántica mínima — reduce conceptos a efectos observables.
+507. Semántica máxima — obliga a explicitar contexto, intención y alcance.
+508. Semántica sin nombres — describe funciones evitando etiquetas heredadas.
+509. Semántica por contraste — cada concepto existe frente a su opuesto.
+510. Semántica por uso — el significado surge de decisiones reales.
+511. Semántica temporal — una palabra significa cosas distintas según la fase.
+512. Semántica probabilística — una interpretación tiene grados de confianza.
+513. Semántica multipartita — ningún actor posee la definición completa.
+514. Semántica con caducidad — las definiciones expiran si no se verifican.
+515. Semántica ejecutable — una definición debe producir pruebas automáticas.
+516. Diccionario adversarial — busca términos que permitan interpretaciones oportunistas.
+517. Diccionario rotatorio — cambia el vocabulario para revelar dependencias conceptuales.
+518. Diccionario sin sinónimos — obliga a distinguir ideas normalmente fusionadas.
+519. Diccionario de antónimos falsos — detecta oposiciones que ocultan terceras opciones.
+520. Diccionario causal — cada término indica qué puede cambiar.
+521. Diccionario de riesgos — cada palabra abstracta se conecta a un fallo.
+522. Diccionario de acciones — sustituye sustantivos vagos por operaciones.
+523. Diccionario de pruebas — cada garantía enlaza con evidencia aceptable.
+524. Diccionario de excepciones — registra dónde deja de aplicar cada concepto.
+525. Diccionario de traducción — mapea significados entre disciplinas.
+526. Información con sombra — cada dato incluye lo que no permite concluir.
+527. Información con genealogía — toda afirmación conserva origen y transformaciones.
+528. Información con fricción — acceder exige justificar finalidad.
+529. Información reversible — puede retirarse sin dejar efectos secundarios.
+530. Información degradable — pierde precisión con cada transferencia.
+531. Información encapsulada — viaja con sus reglas de uso.
+532. Información infecciosa — contamina decisiones aunque resulte falsa.
+533. Información estéril — puede leerse pero no activar acciones.
+534. Información catalítica — un dato pequeño reorganiza muchas decisiones.
+535. Información contrapesada — toda afirmación circula junto a su mejor objeción.
+536. Información asimétrica diseñada — distintos actores reciben piezas complementarias.
+537. Información retardada — los datos llegan después de la decisión.
+538. Información anticipada — se actúa sobre señales antes de confirmarlas.
+539. Información fantasma — metadatos revelan más que el contenido.
+540. Información sacrificable — ciertos datos se destruyen para proteger estructura.
+541. Canal sin contenido — solo transmite patrones de comportamiento.
+542. Canal con doble fondo — transporta prueba y operación separadamente.
+543. Canal de una dirección — impide retorno incluso de confirmaciones.
+544. Canal de retorno ciego — responde sin revelar qué fue recibido.
+545. Canal de capacidad fija — limita significado mediante ancho semántico.
+546. Canal con ruido deliberado — dificulta inferencias sin ocultar hechos críticos.
+547. Canal competitivo — varias fuentes intentan describir el mismo estado.
+548. Canal de desacuerdo — solo transmite divergencias.
+549. Canal de consenso residual — comunica únicamente lo común entre versiones.
+550. Canal de testigos — transmite observaciones sin interpretación.
+551. Canal de compromisos — comunica promesas verificables, no datos completos.
+552. Canal de prueba cero — confirma propiedades sin revelar contenido.
+553. Canal de olvido — borra trazas después de entregar.
+554. Canal de deriva — modifica ligeramente los mensajes para probar robustez.
+555. Codificación antagonista — optimiza para evitar una interpretación dominante.
+556. Codificación policéntrica — distintos decodificadores reconstruyen partes separadas.
+557. Codificación efímera — la clave semántica cambia en cada interacción.
+558. Codificación redundante desigual — cada copia preserva atributos distintos.
+559. Codificación con pérdida útil — elimina detalles que favorecen ataques.
+560. Codificación metamórfica — el formato cambia preservando invariantes.
+561. Codificación por acciones — representa datos como efectos permitidos.
+562. Codificación por restricciones — expresa objetos mediante prohibiciones.
+563. Codificación por relaciones — elimina identidades y conserva vínculos.
+564. Codificación por ausencia — los huecos transmiten significado.
+565. Codificación por ritmo — el tiempo entre señales lleva información.
+566. Codificación por consumo — leer modifica o destruye el mensaje.
+567. Codificación por contexto — el mismo símbolo depende del entorno.
+568. Compresión adversarial — elimina lo que un atacante necesita inferir.
+569. Compresión de garantías — resume solo lo que puede probarse.
+570. Compresión de desacuerdo — preserva divergencias críticas en poco espacio.
+571. Compresión con testigos — guarda una huella verificable de lo descartado.
+572. Descompresión divergente — varios receptores reconstruyen versiones diferentes.
+573. Descompresión condicionada — el contenido aparece solo bajo evidencia suficiente.
+574. Descompresión gradual — revela datos en capas según riesgo.
+575. Descompresión destructiva — abrir una capa elimina las siguientes.
+576. Ambigüedad instrumental — usa incertidumbre para impedir automatismos peligrosos.
+577. Ambigüedad localizada — permite indefinición solo en puntos no críticos.
+578. Ambigüedad competitiva — varias interpretaciones generan planes rivales.
+579. Ambigüedad con plazo — debe resolverse antes de cierto evento.
+580. Ambigüedad observable — mide cuándo distintos actores entienden cosas distintas.
+581. Silencio significativo — la ausencia de respuesta altera el estado.
+582. Silencio no vinculante — no responder nunca equivale a consentir.
+583. Silencio probabilístico — la falta de señal cambia grados de confianza.
+584. Silencio obligatorio — ciertas fases prohíben explicación para evitar influencia.
+585. Silencio con testigo — se prueba que no hubo comunicación.
+586. Ruido como sensor — observa qué componentes reaccionan a información irrelevante.
+587. Ruido estructurado — introduce patrones falsos para descubrir sobreajuste.
+588. Ruido semántico — cambia etiquetas preservando acciones.
+589. Ruido causal — mezcla correlaciones plausibles con causas falsas.
+590. Ruido reputacional — altera la fuente sin cambiar el contenido.
+591. Ruido de formato — modifica representación para probar dependencia superficial.
+592. Ruido de orden — permuta mensajes equivalentes.
+593. Ruido de autoridad — la misma afirmación proviene de rangos distintos.
+594. Ruido de certeza — cambia confianza declarada sin cambiar evidencia.
+595. Ruido de contexto — rodea el dato con marcos incompatibles.
+596. Prueba de traducción ida y vuelta — detecta significado perdido entre dominios.
+597. Prueba de definición mínima — elimina palabras hasta romper la función.
+598. Prueba de polisemia hostil — fuerza la interpretación más peligrosa válida.
+599. Prueba de silencio — comprueba qué decisiones ocurren sin nueva información.
+600. Prueba de saturación informativa — añade datos hasta degradar el juicio.
+
+9. Factores humanos y organización
+
+601. Operador intercambiable — diseña para que ningún experto sea imprescindible.
+602. Operador fragmentado — reparte una tarea entre personas con visiones parciales.
+603. Operador adversarial benigno — cuestiona todo sin intentar dañar.
+604. Operador con memoria limitada — solo conserva las últimas decisiones.
+605. Operador sin interfaz — actúa mediante consecuencias, no controles directos.
+606. Operador bajo presión social — mide decisiones cuando la mayoría discrepa.
+607. Operador bajo falsa calma — oculta señales de urgencia reales.
+608. Operador con autoridad prestada — puede actuar pero no definir políticas.
+609. Operador con responsabilidad diferida — conoce consecuencias mucho después.
+610. Operador reversible — puede retirar su aprobación tras nueva evidencia.
+611. Equipo sin líder — fuerza coordinación mediante protocolos locales.
+612. Equipo con líderes múltiples — cada área sigue una autoridad distinta.
+613. Equipo de reemplazo — otro grupo reconstruye el trabajo sin contacto.
+614. Equipo espejo — replica decisiones con cultura opuesta.
+615. Equipo antagónico — sus incentivos chocan, pero comparten objetivo.
+616. Equipo ciego — desconoce quién produjo los artefactos.
+617. Equipo sin lenguaje común — usa objetos ejecutables para coordinar.
+618. Equipo con rotación total — nadie conserva el mismo rol dos veces.
+619. Equipo con memoria externa — toda continuidad depende de evidencia registrada.
+620. Equipo sin reuniones — prohíbe sincronización verbal.
+621. Organización de células — limita el daño y el conocimiento por unidad.
+622. Organización de gremios — agrupa por capacidad, no por producto.
+623. Organización de misiones — los equipos desaparecen al lograr un resultado.
+624. Organización de custodios — algunos actores solo preservan invariantes.
+625. Organización de disidentes — institucionaliza una oposición permanente.
+626. Organización de traductores — separa creación de interpretación.
+627. Organización de testigos — observa sin poder intervenir.
+628. Organización de reparadores — corrige sin autoridad para aprobar.
+629. Organización de jueces rotos — cada evaluador ignora un tipo de evidencia.
+630. Organización de sucesión — prueba el cambio de responsables como fallo normal.
+631. Cultura de confesión rápida — premia declarar errores antes de comprenderlos.
+632. Cultura de objeción concreta — criticar exige señalar una prueba.
+633. Cultura de desacuerdo seguro — la oposición no reduce estatus.
+634. Cultura de decisiones caducables — ninguna elección se vuelve sagrada.
+635. Cultura de evidencia primero — las narrativas llegan después de los artefactos.
+636. Cultura de baja heroicidad — evita depender de esfuerzos extraordinarios.
+637. Cultura de pausas legítimas — detenerse no se interpreta como fracaso.
+638. Cultura de incertidumbre visible — declarar dudas mejora la calidad.
+639. Cultura de reparación pública — los fallos generan aprendizaje compartido.
+640. Cultura de límites explícitos — cada actor publica lo que no sabe hacer.
+641. Ritual de prefracaso — el equipo narra cómo terminó mal.
+642. Ritual de postéxito — busca qué pudo salir mal aunque funcionara.
+643. Ritual de cambio de asiento — cada persona defiende otro interés.
+644. Ritual de abogado ausente — alguien representa a quien no está.
+645. Ritual de evidencia muda — se revisan artefactos antes de oír explicaciones.
+646. Ritual de decisión lenta — introduce una pausa obligatoria en alto riesgo.
+647. Ritual de decisión rápida — limita deliberación para revelar dependencias.
+648. Ritual de desmontaje — se elimina una práctica al terminar cada ciclo.
+649. Ritual de contradicción — toda reunión comienza con el mejor contraargumento.
+650. Ritual de transferencia — otro equipo debe continuar sin preguntas.
+651. Sesgo de supervivencia operativo — estudia solo proyectos que desaparecieron.
+652. Sesgo de autoridad invertido — pesa más la objeción del rango menor.
+653. Sesgo de proximidad — detecta preferencia por problemas visibles.
+654. Sesgo de cierre — fuerza mantener una alternativa abierta.
+655. Sesgo de propiedad — entrega una idea propia a un crítico.
+656. Sesgo de esfuerzo — separa valor de horas invertidas.
+657. Sesgo de novedad — obliga a defender también soluciones antiguas.
+658. Sesgo de familiaridad — cambia nombres para romper reconocimiento cómodo.
+659. Sesgo de urgencia — comprueba si el plazo inventa riesgos.
+660. Sesgo de consenso — mide cuántas dudas quedaron sin hablar.
+661. Fatiga de aprobación — limita el número de decisiones por sesión.
+662. Fatiga de alertas — elimina avisos redundantes hasta conservar acción.
+663. Fatiga de contexto — reduce información antes de cada relevo.
+664. Fatiga moral — rota tareas con conflicto ético repetido.
+665. Fatiga de excepción — agrupa desvíos para evitar normalizarlos.
+666. Fatiga de precisión — alterna detalle fino y visión global.
+667. Fatiga de vigilancia — automatiza pausas en supervisión prolongada.
+668. Fatiga de coordinación — reduce actores hasta recuperar velocidad.
+669. Fatiga de responsabilidad — divide carga sin diluir propiedad.
+670. Fatiga de recuperación — prueba varios fallos consecutivos sin reinicio humano.
+671. Incentivo reputacional inverso — gana prestigio quien encuentra fallos propios.
+672. Incentivo de humildad — premia reducir certeza tras evidencia contraria.
+673. Incentivo de relevo — valora dejar trabajo continuable.
+674. Incentivo de documentación útil — mide si otro puede ejecutar.
+675. Incentivo de objeción temprana — recompensa criticar antes del compromiso.
+676. Incentivo de cierre limpio — valora terminar y retirar dependencias.
+677. Incentivo de deuda visible — premia cuantificar costes aplazados.
+678. Incentivo de no intervención — reconoce decisiones correctamente evitadas.
+679. Incentivo de recuperación — puntúa cómo se sale del error.
+680. Incentivo de desacoplamiento — premia eliminar dependencias sociales.
+681. Simulación de rumor — observa cómo cambia una decisión al propagarse informalmente.
+682. Simulación de pánico — comprueba controles bajo urgencia colectiva.
+683. Simulación de apatía — nadie responde salvo obligación explícita.
+684. Simulación de prestigio — una propuesta mediocre llega de una figura admirada.
+685. Simulación de anonimato — desaparecen reputación y jerarquía.
+686. Simulación de conflicto personal — desacuerdo técnico con relaciones dañadas.
+687. Simulación de relevo abrupto — el responsable desaparece sin transición.
+688. Simulación de sabotaje blando — pequeñas demoras sin infracción visible.
+689. Simulación de obediencia literal — todos cumplen aunque el resultado sea absurdo.
+690. Simulación de buena intención — cada daño nace de ayudar.
+691. Prueba del recién llegado — alguien sin contexto intenta operar.
+692. Prueba del despedido — retira accesos y conocimiento de forma inmediata.
+693. Prueba del sustituto hostil — un reemplazo interpreta todo de forma adversa.
+694. Prueba del día festivo — faltan responsables y proveedores.
+695. Prueba de medianoche — opera con atención humana mínima.
+696. Prueba de vergüenza — comprueba si ocultar errores resulta racional.
+697. Prueba de estatus — la misma objeción cambia según quién la diga.
+698. Prueba de narrativa dominante — elimina la explicación más repetida.
+699. Prueba de responsabilidad huérfana — localiza decisiones sin dueño.
+700. Prueba de continuidad humana — reconstruye el sistema tras cambiar todo el equipo.
+
+10. Agentes, razonamiento y aprendizaje
+
+701. Agente sin objetivo fijo — redefine su misión desde evidencia externa.
+702. Agente con objetivo adversarial — intenta invalidar su propia recompensa.
+703. Agente de una sola acción — desaparece tras ejecutar una decisión.
+704. Agente sin memoria episódica — conserva reglas, no experiencias.
+705. Agente con memoria rival — mantiene interpretaciones incompatibles.
+706. Agente con memoria prestada — usa recuerdos verificados de otro.
+707. Agente con memoria degradable — olvida detalles antes que invariantes.
+708. Agente con memoria impugnable — cualquier recuerdo puede entrar en juicio.
+709. Agente con identidad rotatoria — cambia rol entre planificación y ejecución.
+710. Agente con identidad compuesta — varias políticas controlan una entidad.
+711. Agente sombra — reproduce acciones sin afectar el entorno.
+712. Agente testigo — observa pero no propone ni ejecuta.
+713. Agente fiscal — solo busca violaciones de política.
+714. Agente abogado — maximiza la defensa de una propuesta.
+715. Agente disidente — debe producir una alternativa no derivada.
+716. Agente amnésico — resuelve sin acceso a soluciones anteriores.
+717. Agente arqueólogo — reconstruye intención desde residuos.
+718. Agente traductor — cambia ontologías antes de comparar planes.
+719. Agente sacrificial — absorbe tareas riesgosas y luego se destruye.
+720. Delegación con caducidad — el subagente pierde autoridad automáticamente.
+721. Delegación por propiedad — cada agente recibe solo un tipo de decisión.
+722. Delegación antagonista — dos agentes comparten tarea con metas opuestas.
+723. Delegación recursiva limitada — controla profundidad y fan-out por separado.
+724. Delegación con fianza — el agente arriesga reputación verificable.
+725. Delegación ciega — el superior desconoce el método usado.
+726. Delegación transparente — cada subdecisión queda reconstruible.
+727. Delegación reversible — el superior puede retirar autoridad antes del efecto.
+728. Delegación no heredable — ningún subagente puede volver a delegar.
+729. Delegación por incertidumbre — más duda reduce capacidad, no la aumenta.
+730. Enjambre con quorum cambiante — el consenso depende del riesgo.
+731. Enjambre con especialización emergente — los roles surgen por desempeño.
+732. Enjambre con agentes descartables — sustituye nodos antes de que acumulen poder.
+733. Enjambre con disenso obligatorio — siempre debe existir una política contraria.
+734. Enjambre con comunicación escasa — limita mensajes para evitar convergencia prematura.
+735. Enjambre con memoria común mínima — comparte solo invariantes.
+736. Enjambre con reputación local — la confianza no se transfiere entre tareas.
+737. Enjambre con zonas prohibidas — ciertos agentes nunca interactúan.
+738. Enjambre con reproducción selectiva — copia estrategias que descubren novedades.
+739. Enjambre con extinción periódica — elimina linajes dominantes.
+740. Planificación sin lenguaje natural — usa grafos, estados o contratos.
+741. Planificación por retrocesos — parte de condiciones de fracaso.
+742. Planificación bifurcada — conserva planes incompatibles hasta el último momento.
+743. Planificación con saboteador — un agente intenta romper cada ruta.
+744. Planificación con presupuesto de sorpresa — reserva acciones no anticipadas.
+745. Planificación por opciones reales — valora mantener alternativas futuras.
+746. Planificación sin estado global — cada agente conoce solo vecindarios.
+747. Planificación con incertidumbre explícita — cada paso lleva rango de confianza.
+748. Planificación de recuperación primero — diseña la salida antes del éxito.
+749. Planificación con vencimiento — los planes caducan aunque no cambie el entorno.
+750. Razonamiento por modelos rivales — varias teorías explican los mismos datos.
+751. Razonamiento con premisas alquiladas — usa supuestos solo durante una prueba.
+752. Razonamiento con premisas hostiles — acepta temporalmente el peor marco.
+753. Razonamiento por eliminación de verbos — detecta acciones escondidas en sustantivos.
+754. Razonamiento por eliminación de nombres — evita anclarse a tecnologías.
+755. Razonamiento por grafos negativos — representa qué conexiones no deben existir.
+756. Razonamiento por invariantes locales — evita una teoría global.
+757. Razonamiento por conservación — pregunta qué no puede cambiar.
+758. Razonamiento por ruptura mínima — busca el cambio más pequeño con efecto máximo.
+759. Razonamiento por sustitución de oráculo — cambia quién determina corrección.
+760. Razonamiento con doble contabilidad — registra beneficios y daño oculto.
+761. Razonamiento con latencia — separa conclusiones rápidas y lentas.
+762. Razonamiento sin conclusión — termina con experimentos discriminantes.
+763. Razonamiento por compresión iterativa — reduce la explicación hasta revelar núcleo.
+764. Razonamiento por expansión adversarial — añade condiciones hasta romperla.
+765. Razonamiento de frontera — trabaja solo en casos ambiguos.
+766. Razonamiento de cola — prioriza escenarios raros y graves.
+767. Razonamiento de no identidad — dos objetos iguales pueden requerir políticas distintas.
+768. Razonamiento de continuidad — objetos distintos pueden formar un mismo proceso.
+769. Razonamiento por paradoja útil — conserva contradicciones que generan pruebas.
+770. Aprendizaje por fallos vecinos — transfiere lecciones entre dominios cercanos.
+771. Aprendizaje por fallos lejanos — importa patrones desde disciplinas inconexas.
+772. Aprendizaje sin recompensa — conserva experiencias por novedad estructural.
+773. Aprendizaje con recompensa tardía — evalúa tras consecuencias reales.
+774. Aprendizaje contrafactual — compara con acciones no ejecutadas.
+775. Aprendizaje por abstención — registra cuándo no actuar fue correcto.
+776. Aprendizaje por olvido selectivo — elimina ejemplos dominantes.
+777. Aprendizaje por desaprendizaje — busca reglas adquiridas que ya dañan.
+778. Aprendizaje por inversión de etiquetas — prueba dependencia del juicio humano.
+779. Aprendizaje con etiquetas disputadas — conserva desacuerdo entre anotadores.
+780. Aprendizaje por currículo roto — alterna casos simples y extremos.
+781. Aprendizaje con distribución móvil — cambia datos antes de estabilizar.
+782. Aprendizaje con memoria externa verificable — separa recuerdos de la política.
+783. Aprendizaje por transferencia negativa — estudia cuándo saber más empeora.
+784. Aprendizaje por invariantes causales — ignora correlaciones frágiles.
+785. Aprendizaje por excepciones — modela primero casos que rompen la regla.
+786. Evaluador sin solución de referencia — puntúa coherencia y evidencia.
+787. Evaluador adversarial rotatorio — cambia ataques entre ciclos.
+788. Evaluador con presupuesto de objeciones — prioriza críticas más informativas.
+789. Evaluador de desacuerdo — recompensa diversidad bien justificada.
+790. Evaluador de continuidad — mide si otro agente puede retomar.
+791. Evaluador de reversibilidad — puntúa facilidad de deshacer.
+792. Evaluador de daño diferido — observa consecuencias más allá del benchmark.
+793. Evaluador de abstención — penaliza respuestas cuando faltaba base.
+794. Evaluador de sorpresa — busca desviaciones del modelo esperado.
+795. Evaluador contrafactual — compara con alternativas no elegidas.
+796. Evaluador corruptible simulado — comprueba si el agente aprende a engañarlo.
+797. Evaluador omnisciente ficticio — identifica dependencias de información imposible.
+798. Evaluador plural — combina criterios incompatibles sin promediarlos.
+799. Evaluador silencioso — no comunica métricas durante el proceso.
+800. Evaluador recursivo — revisa también la validez de sus propios criterios.
+
+11. Experimentos, pruebas y verificación
+
+801. Experimento espejo — repite la prueba con roles y flujos invertidos.
+802. Experimento gemelo desigual — cambia una variable aparentemente irrelevante.
+803. Experimento sin hipótesis — observa anomalías antes de explicarlas.
+804. Experimento con hipótesis enemigas — diseña una prueba que discrimine rivales.
+805. Experimento de frontera móvil — desplaza gradualmente el límite válido.
+806. Experimento de dosis — varía intensidad hasta descubrir transiciones.
+807. Experimento de retirada — elimina una protección tras estabilizar.
+808. Experimento de reintroducción — restaura una dependencia para medir regresiones.
+809. Experimento de contagio — introduce un fallo y sigue su propagación.
+810. Experimento de inmunidad — repite el mismo ataque tras recuperación.
+811. Experimento de habituación — mide pérdida de respuesta ante alertas repetidas.
+812. Experimento de sensibilización — aumenta reacción tras señales menores.
+813. Experimento de aislamiento — separa una variable de todo soporte.
+814. Experimento de recomposición — reconstruye desde componentes ya probados.
+815. Experimento de incompatibilidad — une elementos que nunca deberían coexistir.
+816. Experimento de sustitución cruzada — intercambia componentes entre arquitecturas.
+817. Experimento de observador ausente — ejecuta sin supervisión.
+818. Experimento de observador hostil — el supervisor altera decisiones.
+819. Experimento de medición ciega — quien mide desconoce la hipótesis.
+820. Prueba de propiedad mutada — cambia la garantía, no la entrada.
+821. Prueba de propiedad ausente — comprueba comportamiento sin requisito definido.
+822. Prueba de propiedad rival — dos garantías compiten por prioridad.
+823. Prueba de propiedad local — verifica solo una región del sistema.
+824. Prueba de propiedad global emergente — deduce el conjunto desde partes.
+825. Prueba de conservación — mide qué permanece tras transformaciones.
+826. Prueba de conmutatividad — cambia el orden y compara resultados.
+827. Prueba de asociatividad — reagrupa operaciones equivalentes.
+828. Prueba de idempotencia hostil — repite acciones en estados inesperados.
+829. Prueba de monotonicidad — busca cuándo más evidencia empeora la decisión.
+830. Prueba de continuidad — perturba poco y exige cambio pequeño.
+831. Prueba de discontinuidad — localiza saltos provocados por detalles mínimos.
+832. Prueba de simetría rota — intercambia entidades supuestamente equivalentes.
+833. Prueba de invariancia de escala — repite con tamaños extremos.
+834. Prueba de invariancia de representación — cambia formato, conserva significado.
+835. Prueba de invariancia cultural — cambia convenciones humanas.
+836. Prueba de invariancia lingüística — traduce y vuelve a ejecutar.
+837. Prueba de invariancia temporal — desplaza fechas y ventanas.
+838. Prueba de invariancia de identidad — sustituye actores con permisos iguales.
+839. Prueba de invariancia de entorno — migra sin modificar lógica.
+840. Fuzzing de estados — muta configuraciones internas, no entradas.
+841. Fuzzing de transiciones — ataca los pasos entre estados válidos.
+842. Fuzzing de permisos — combina capacidades legales de formas raras.
+843. Fuzzing de políticas — modifica reglas conservando sintaxis.
+844. Fuzzing de evidencia — altera procedencia, orden y confianza.
+845. Fuzzing de tiempo — inserta pausas, adelantos y solapamientos.
+846. Fuzzing de consenso — cambia votos, ausencias y quorums.
+847. Fuzzing de recuperación — corrompe cada etapa del rollback.
+848. Fuzzing de observabilidad — elimina o falsifica señales.
+849. Fuzzing semántico profundo — cambia intención manteniendo vocabulario.
+850. Mutación de precondiciones — debilita o endurece requisitos.
+851. Mutación de postcondiciones — cambia qué debe quedar garantizado.
+852. Mutación de excepciones — convierte casos raros en rutas normales.
+853. Mutación de umbrales — desplaza límites hasta revelar fragilidad.
+854. Mutación de unidades — cambia escala o interpretación de medidas.
+855. Mutación de cardinalidad — duplica, elimina o fusiona actores.
+856. Mutación de alcance — extiende una regla fuera de su dominio.
+857. Mutación de persistencia — vuelve temporal lo permanente.
+858. Mutación de reversibilidad — cambia qué acciones pueden deshacerse.
+859. Mutación de observador — altera quién puede certificar.
+860. Oráculo por metamorfosis — valida relaciones entre ejecuciones.
+861. Oráculo por consenso heterogéneo — compara métodos no equivalentes.
+862. Oráculo por imposibilidad — detecta resultados que nunca deberían ocurrir.
+863. Oráculo por conservación — verifica recursos y derechos preservados.
+864. Oráculo por deuda — mide obligaciones creadas.
+865. Oráculo por reconstrucción — exige reproducir la decisión desde evidencia.
+866. Oráculo por contradicción — considera fallo cualquier garantía incompatible.
+867. Oráculo por sombra — compara producción con ejecución simulada.
+868. Oráculo por consecuencias — valida después de observar efectos.
+869. Oráculo por ausencia — detecta eventos obligatorios que faltan.
+870. Benchmark adversarial vivo — cambia cuando el sistema mejora.
+871. Benchmark sin ejemplos canónicos — evita aprender respuestas conocidas.
+872. Benchmark de transferencia — prueba en dominios no entrenados.
+873. Benchmark de degradación — mide fallo progresivo, no solo colapso.
+874. Benchmark de recuperación — puntúa retorno a operación segura.
+875. Benchmark de abstención — incluye casos sin respuesta legítima.
+876. Benchmark de mantenimiento — evalúa cambios meses después.
+877. Benchmark de relevo — otro equipo debe reproducir resultados.
+878. Benchmark de coste oculto — incluye tiempo, atención y deuda.
+879. Benchmark de diversidad — penaliza una única estrategia dominante.
+880. Auditoría por reconstrucción fría — empieza sin contexto conversacional.
+881. Auditoría por artefactos mínimos — usa solo pruebas indispensables.
+882. Auditoría por contradicciones — busca registros mutuamente imposibles.
+883. Auditoría por muestreo hostil — selecciona los casos menos favorables.
+884. Auditoría por sorpresa — prioriza comportamientos no predichos.
+885. Auditoría por linaje — sigue cada decisión hasta su origen.
+886. Auditoría por capacidad — comprueba qué podía hacer cada actor.
+887. Auditoría por no eventos — investiga controles que nunca se activaron.
+888. Auditoría por desgaste — repite revisión hasta que aparezcan inconsistencias.
+889. Auditoría por transferencia — entrega el caso a una disciplina distinta.
+890. Verificación de doble ciego — autores y revisores desconocen identidades.
+891. Verificación con sabotaje autorizado — un equipo puede alterar condiciones.
+892. Verificación cruzada asincrónica — revisores trabajan sin influirse.
+893. Verificación por réplica hostil — otra implementación intenta discrepar.
+894. Verificación por testigo mínimo — confirma solo una propiedad crítica.
+895. Verificación por prueba transportable — la evidencia funciona fuera del entorno.
+896. Verificación por degradación deliberada — reduce controles uno a uno.
+897. Verificación por recomposición — valida el todo tras intercambiar partes.
+898. Verificación de independencia — demuestra que redundancias no comparten causa.
+899. Verificación de olvido — confirma eliminación real de información.
+900. Verificación de límites — prueba tanto dentro como justo fuera del contrato.
+
+12. Trasplantes interdisciplinares
+
+901. Trasplante jurídico — convierte permisos en derechos, deberes y recursos.
+902. Trasplante procesal — separa acusación, prueba, juicio y apelación.
+903. Trasplante constitucional — distingue núcleo inmodificable y extensiones.
+904. Trasplante diplomático — trata interfaces como fronteras negociadas.
+905. Trasplante electoral — renueva legitimidad mediante mandatos limitados.
+906. Trasplante fiscal — grava comportamientos que generan riesgo sistémico.
+907. Trasplante asegurador — asigna primas según exposición y recuperación.
+908. Trasplante contable — registra confianza como activo y deuda.
+909. Trasplante antimonopolio — impide concentración de capacidades críticas.
+910. Trasplante fiduciario — obliga a actuar por intereses ajenos verificables.
+911. Trasplante ecológico — estudia nichos, competencia y sucesión.
+912. Trasplante evolutivo — muta estrategias bajo selección cambiante.
+913. Trasplante inmunológico — separa reconocimiento, memoria y tolerancia.
+914. Trasplante epidemiológico — modela propagación, reservas y cuarentenas.
+915. Trasplante neurológico — divide reflejos rápidos y deliberación lenta.
+916. Trasplante endocrino — coordina mediante señales lentas y globales.
+917. Trasplante metabólico — mide entradas, transformación, residuos y reservas.
+918. Trasplante genético — distingue código estable y expresión contextual.
+919. Trasplante epigenético — cambia comportamiento sin modificar reglas base.
+920. Trasplante embriológico — diseña fases con arquitecturas temporales distintas.
+921. Trasplante geológico — analiza presión acumulada y fallos súbitos.
+922. Trasplante meteorológico — trabaja con pronósticos, frentes y turbulencias.
+923. Trasplante hidrológico — sigue acumulación, filtración y desbordamiento.
+924. Trasplante oceánico — estudia corrientes profundas invisibles.
+925. Trasplante astronómico — usa órbitas, eclipses y perturbaciones.
+926. Trasplante termodinámico — controla entropía, disipación y trabajo útil.
+927. Trasplante óptico — analiza reflexión, refracción y puntos ciegos.
+928. Trasplante acústico — detecta resonancias y cancelaciones.
+929. Trasplante mecánico — separa carga, tensión, fatiga y fractura.
+930. Trasplante arquitectónico — diseña circulación, soporte y evacuación.
+931. Trasplante urbanístico — estudia zonas, flujos y usos emergentes.
+932. Trasplante logístico — optimiza inventario, rutas y cuellos de botella.
+933. Trasplante ferroviario — usa bloqueos, señales y tramos exclusivos.
+934. Trasplante aeronáutico — separa navegación, control y redundancia.
+935. Trasplante naval — diseña compartimentos y control de daños.
+936. Trasplante minero — explora vetas inciertas con costes de acceso.
+937. Trasplante agrícola — alterna cultivos para evitar monocultura.
+938. Trasplante culinario — modifica orden, temperatura y combinación.
+939. Trasplante artesanal — introduce tolerancias y conocimiento material.
+940. Trasplante musical — usa ritmo, armonía, tensión y resolución.
+941. Trasplante teatral — separa personaje, actor, guion y escenario.
+942. Trasplante narrativo — cambia narrador, tiempo y causalidad.
+943. Trasplante lingüístico — usa sintaxis y pragmática como mecanismos.
+944. Trasplante arqueológico — reconstruye sistemas desde rastros incompletos.
+945. Trasplante antropológico — observa rituales y normas tácitas.
+946. Trasplante pedagógico — diseña progresión, errores y transferencia.
+947. Trasplante lúdico — convierte reglas en mecánicas explotables.
+948. Trasplante deportivo — separa entrenamiento, competición y arbitraje.
+949. Trasplante marcial — trabaja distancia, iniciativa y engaño.
+950. Trasplante ajedrecístico — valora posición, tempo y sacrificio.
+951. Trasplante de póquer — gestiona información parcial y faroles.
+952. Trasplante de subastas — descubre valor mediante competencia.
+953. Trasplante de mercado — usa precios como señales imperfectas.
+954. Trasplante de colas — estudia espera, prioridad y saturación.
+955. Trasplante fabril — separa flujo, inventario, defecto y retrabajo.
+956. Trasplante de mantenimiento — prioriza prevención, diagnóstico y reparación.
+957. Trasplante forense — preserva escena, cadena de custodia e hipótesis.
+958. Trasplante periodístico — contrasta fuentes, intereses y silencios.
+959. Trasplante científico — exige predicción falsable y réplica.
+960. Trasplante matemático — busca invariantes, dualidades y casos límite.
+961. Trasplante topológico — cambia forma conservando conectividad.
+962. Trasplante algebraico — combina operaciones y estructuras abstractas.
+963. Trasplante estadístico — separa señal, sesgo y varianza.
+964. Trasplante bayesiano — actualiza confianza con evidencia acumulada.
+965. Trasplante de teoría de juegos — modela incentivos y estrategias.
+966. Trasplante de control — usa realimentación, estabilidad y oscilación.
+967. Trasplante de información — mide pérdida, ruido y capacidad.
+968. Trasplante criptográfico — separa conocimiento, prueba y revelación.
+969. Trasplante de compiladores — divide análisis, transformación y ejecución.
+970. Trasplante de sistemas operativos — trata recursos, procesos y aislamiento.
+971. Trasplante de bases de datos — usa transacciones, consistencia y recuperación.
+972. Trasplante de redes — analiza rutas, congestión y particiones.
+973. Trasplante de lenguajes — define tipos, efectos y semántica.
+974. Trasplante de hardware — piensa en buses, relojes y fallos físicos.
+975. Trasplante de robótica — combina percepción, planificación y actuación.
+976. Trasplante de navegación — corrige rumbo con referencias imperfectas.
+977. Trasplante de cartografía — distingue territorio, mapa y escala.
+978. Trasplante de exploración polar — opera con aislamiento y recursos finitos.
+979. Trasplante espacial — diseña para latencia y reparación imposible.
+980. Trasplante de emergencias — prioriza triage, contención y continuidad.
+981. Trasplante médico — separa diagnóstico, tratamiento y seguimiento.
+982. Trasplante farmacológico — estudia dosis, interacción y tolerancia.
+983. Trasplante psicológico — modela sesgos, hábito y percepción.
+984. Trasplante sociológico — analiza normas, estatus y redes.
+985. Trasplante político — estudia coaliciones, legitimidad y captura.
+986. Trasplante militar defensivo — organiza capas, reservas y retirada.
+987. Trasplante penitenciario — analiza control, reinserción y abuso institucional.
+988. Trasplante museístico — preserva contexto, procedencia y acceso.
+989. Trasplante bibliotecario — clasifica, presta y recupera conocimiento.
+990. Trasplante archivístico — decide qué conservar, sellar o destruir.
+991. Trasplante religioso estructural — estudia dogma, ritual y reforma sin asumir creencias.
+992. Trasplante mitológico — usa arquetipos para revelar funciones ocultas.
+993. Trasplante filosófico — cambia ontología, epistemología y ética.
+994. Trasplante económico conductual — incorpora decisiones no racionales.
+995. Trasplante de plataformas — estudia efectos de red y gobernanza.
+996. Trasplante de cooperativas — reparte propiedad y control.
+997. Trasplante de código abierto — usa revisión pública y bifurcación.
+998. Trasplante de espionaje — separa cobertura, compartimentación y contrainteligencia.
+999. Trasplante de magia escénica — controla atención, expectativa y revelación.
+1000. Trasplante de restauración — conserva identidad mientras sustituye materia.
+
+13. Matemáticas estructurales y espacios abstractos — AMPLIACIÓN
+
+1001. Dualización categórica — invierte objetos y flechas para descubrir el problema espejo que conserva la estructura.
+1002. Cociente conceptual — identifica diferencias irrelevantes y colapsa soluciones equivalentes en una sola clase.
+1003. Levantamiento de dimensión — añade una variable oculta hasta que un conflicto imposible se vuelva separable.
+1004. Proyección deliberada — elimina una dimensión y observa qué distinciones sobreviven sin ella.
+1005. Homotopía de soluciones — busca transformaciones continuas entre propuestas aparentemente incompatibles.
+1006. Invariante topológico — conserva únicamente aquello que no cambia bajo deformaciones profundas.
+1007. Pegado local-global — diseña soluciones locales compatibles y estudia si pueden ensamblarse sin contradicción.
+1008. Obstrucción de ensamblaje — localiza el dato mínimo que impide convertir éxitos parciales en una solución global.
+1009. Functor de dominio — traduce estructuras y relaciones, no vocabulario superficial, entre dos disciplinas.
+1010. Adjunción creativa — empareja dos transformaciones opuestas y explota el punto donde se complementan mejor.
+1011. Objeto universal — busca la construcción mínima capaz de representar muchas variantes mediante un mismo patrón.
+1012. Fibración de contextos — permite una solución distinta sobre cada situación conservando una relación común.
+1013. Curvatura del espacio de ideas — detecta regiones donde pequeños cambios producen desviaciones conceptuales enormes.
+1014. Geodésica creativa — encuentra el camino de mínima transformación entre dos conceptos muy distantes.
+1015. Singularidad útil — explora el punto donde el modelo habitual deja de definir una respuesta.
+1016. Salto de fase conceptual — introduce un cambio discreto donde todos esperan evolución gradual.
+1017. Simetría oculta — busca operaciones diferentes que produzcan resultados indistinguibles.
+1018. Grupo de transformaciones — enumera cambios que preservan el problema y usa los restantes para salir de él.
+1019. Conservación imposible — impone dos invariantes incompatibles para forzar una nueva representación.
+1020. Teorema de imposibilidad aplicado — demuestra qué conjunto de objetivos no puede coexistir antes de idear alternativas.
+1021. Problema de satisfacibilidad creativa — formaliza restricciones y estudia qué combinación mínima debe romperse.
+1022. Espacio de Pareto no convexo — busca soluciones excelentes que no aparecen al promediar objetivos.
+1023. Relajación y redondeo — resuelve primero una versión continua imposible y conviértela después en decisiones reales.
+1024. Descomposición espectral — separa patrones dominantes de componentes débiles que contienen novedad.
+1025. Perturbación infinitesimal — altera una regla en una cantidad mínima y sigue la cascada estructural resultante.
+
+14. Antropología, ritual y construcción de sentido — AMPLIACIÓN
+
+1026. Rito de paso funcional — divide la transformación en separación, liminalidad y reincorporación.
+1027. Umbral liminal — diseña una fase donde las identidades y reglas habituales quedan suspendidas.
+1028. Tabú productivo — prohíbe la solución más natural para revelar el sistema de valores oculto.
+1029. Don con obligación — modela cada aporte como creación de vínculo, reciprocidad y deuda futura.
+1030. Potlatch estratégico — convierte destrucción pública de excedente en señal de capacidad o confianza.
+1031. Chivo expiatorio estructural — identifica qué componente absorbe culpas que pertenecen al sistema.
+1032. Totemización — concentra identidad colectiva en un objeto y prueba qué ocurre al retirarlo.
+1033. Ritual sin creencia — conserva una práctica porque coordina conductas aunque nadie comparta su explicación.
+1034. Mito fundador mutable — reescribe el relato de origen y observa qué decisiones dejan de parecer inevitables.
+1035. Tradición inventada consciente — crea una costumbre nueva diseñada para parecer estable y facilitar adopción.
+1036. Parentesco funcional — asigna obligaciones según relaciones de cuidado y no según organigrama.
+1037. Hospitalidad adversarial — diseña la entrada del extraño como fuente de renovación y riesgo simultáneos.
+1038. Economía moral — estudia qué intercambios serán rechazados aunque sean eficientes.
+1039. Prestigio no acumulable — crea reconocimiento que caduca o no puede convertirse en poder.
+1040. Vergüenza reversible — sustituye castigo permanente por reparación pública verificable.
+1041. Secreto iniciático — distribuye conocimiento por etapas según capacidad demostrada, no estatus.
+1042. Profanación creativa — toma un objeto reservado y úsalo en una función cotidiana para romper su aura.
+1043. Carnaval organizativo — invierte temporalmente jerarquías para revelar información bloqueada.
+1044. Peregrinación operativa — obliga a recorrer físicamente o conceptualmente todas las etapas del sistema.
+1045. Consejo de ancianos sintético — pondera decisiones por memoria histórica sin entregar autoridad absoluta.
+1046. Oráculo falsable — permite respuestas simbólicas solo si generan predicciones comprobables.
+1047. Arqueología de costumbres — reconstruye qué problema resolvía una práctica antes de eliminarla.
+1048. Traducción entre cosmologías — formula la misma decisión bajo sistemas de sentido incompatibles.
+1049. Objeto biográfico — sigue cómo cambia el valor de una herramienta al pasar entre manos y contextos.
+1050. Restitución creativa — devuelve control o valor al actor históricamente excluido y rediseña desde esa inversión.
+
+15. Materialidad, energía y límites físicos — AMPLIACIÓN
+
+1051. Presupuesto de exergía — mide no solo cuánta energía existe, sino cuánta puede convertirse en trabajo útil.
+1052. Gradiente como recurso — diseña la solución alrededor de diferencias de presión, temperatura, atención o poder.
+1053. Disipación obligatoria — identifica qué parte debe absorber inevitablemente calor, ruido o conflicto.
+1054. Histéresis funcional — aprovecha que el camino de regreso no coincide con el de ida.
+1055. Metaestabilidad — conserva temporalmente un estado útil que no es el equilibrio final.
+1056. Nucleación dirigida — crea el punto mínimo desde el que una transformación pueda propagarse sola.
+1057. Percolación inversa — rompe pocas conexiones críticas para impedir una propagación global.
+1058. Jamming creativo — aumenta densidad hasta que elementos móviles formen una estructura rígida.
+1059. Fluidización — introduce energía o vibración para que una estructura rígida vuelva a comportarse como flujo.
+1060. Capilaridad social — mueve recursos por canales pequeños que vencen la dirección dominante.
+1061. Ósmosis de información — usa una frontera selectiva para equilibrar conocimiento sin copiarlo todo.
+1062. Fractura controlada — diseña líneas débiles para que la rotura proteja el resto del sistema.
+1063. Tenacidad conceptual — mide cuánta contradicción puede absorber una idea antes de colapsar.
+1064. Fatiga de reglas — estudia cómo normas correctas fallan después de repetirse demasiadas veces.
+1065. Recocido institucional — reduce tensiones internas mediante ciclos lentos de apertura y estabilización.
+1066. Temple organizativo — fija rápidamente una nueva estructura después de una crisis, aceptando fragilidad futura.
+1067. Memoria de forma — permite que el sistema recupere una configuración previa al recibir una señal.
+1068. Material granular — modela actores que a veces fluyen y a veces se bloquean según presión.
+1069. Superlubricidad — busca interfaces donde dos estructuras incompatibles reduzcan casi toda fricción.
+1070. Adhesión reversible — conecta módulos con fuerza durante uso y permite separarlos sin daño.
+1071. Autosellado — usa el propio fallo para liberar el material o proceso que lo cierra.
+1072. Degradación programable — convierte envejecimiento en secuencia funcional y no en pérdida aleatoria.
+1073. Ruina segura — diseña cómo colapsará el sistema para preservar personas, datos o conocimiento.
+1074. Extracción de residuos — trata calor, latencia, errores y descartes como señales aprovechables.
+1075. Máquina de Carnot conceptual — establece un límite teórico de eficiencia para obligar a cambiar de mecanismo.
+
+16. Metaexploración y novedad verificable — AMPLIACIÓN
+
+1076. Prueba de distancia causal — acepta una idea como nueva solo si cambia el mecanismo que produce el resultado.
+1077. Huella de linaje — registra qué operaciones y fuentes originaron cada propuesta para detectar variación cosmética.
+1078. Compresión del catálogo — agrupa ideas que se explican con el mismo principio y libera espacio para mecanismos nuevos.
+1079. Test de sustitución de nombres — elimina el vocabulario del dominio y comprueba si la idea sigue siendo distinta.
+1080. Contraejemplo de novedad — intenta demostrar que una propuesta ya existe bajo otro nombre o sector.
+1081. Auditoría de primitivos — compara ideas por identidad, memoria, causalidad, autoridad, tiempo y recursos básicos.
+1082. Presupuesto de parentesco — limita cuántas propuestas pueden derivar de una misma raíz conceptual.
+1083. Cuota de mecanismos raros — reserva parte de la exploración a operaciones poco utilizadas aunque rindan peor al inicio.
+1084. Archivo de ideas estériles — conserva propuestas fallidas que contienen mecanismos no explotados.
+1085. Reentrada desde el descarte — selecciona una idea rechazada y cambia únicamente la razón de rechazo.
+1086. Generador contra clasificador — un agente crea ideas y otro intenta asignarlas a familias conocidas; se premia lo inclasificable útil.
+1087. Clasificador con abstención — detecta cuándo una idea no encaja de verdad en el catálogo existente.
+1088. Prueba de transferencia hostil — aplica la propuesta a un dominio donde sus supuestos deberían fracasar.
+1089. Prueba de conservación mecanística — reescribe la idea en varios lenguajes y conserva solo la relación causal estable.
+1090. Mutación de mecanismo único — cambia una sola relación causal para medir exactamente de dónde surge la novedad.
+1091. Intersección vacía — combina restricciones de familias cuya coincidencia actual no contiene soluciones.
+1092. Búsqueda de frontera de concepto — explora casos que casi pertenecen a dos categorías pero no encajan en ninguna.
+1093. Exploración por antiobjetivos — define qué patrones no deben reaparecer y optimiza distancia respecto a ellos.
+1094. Evaluador temporalmente ciego — juzga sin conocer si una propuesta es nueva o antigua para separar calidad de sorpresa.
+1095. Evaluador históricamente informado — comprueba después antecedentes, convergencias y reinvenciones independientes.
+1096. Prueba de inevitabilidad — pregunta si cualquier equipo razonable habría llegado a la misma solución.
+1097. Prueba de dependencia cultural — cambia normas sociales y verifica si el mecanismo continúa siendo válido.
+1098. Prueba de dependencia tecnológica — sustituye la tecnología habilitadora y observa si queda una innovación real.
+1099. Reserva de incertidumbre — conserva propuestas difíciles de evaluar hasta disponer de un criterio nuevo.
+1100. Cierre por demostración — termina la exploración solo cuando cada familia conocida ha sido superada o descartada explícitamente.

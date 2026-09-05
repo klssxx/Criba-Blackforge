@@ -7,13 +7,28 @@
     "template": "Reglas: 1) No criticar, 2) Cantidad libre, 3) Combinar/mejorar, 4) Ideas wild bienvenidas. Cronometrar 15-20 min.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion"],
-    "tags": ["brainstorming", "clasico", "libre", "sin_juicio", "grupo"],
+    "categories": [
+      "innovacion",
+      "facilitacion"
+    ],
+    "tags": [
+      "brainstorming",
+      "clasico",
+      "libre",
+      "sin_juicio",
+      "grupo"
+    ],
     "origin": "external",
-    "external_refs": ["osborn_1953"],
-    "related_internal_ids": ["ideo_brainstorming_sessions", "ls_1_2_4_all"],
+    "external_refs": [
+      "osborn_1953"
+    ],
+    "related_internal_ids": [
+      "ideo_brainstorming_sessions",
+      "ls_1_2_4_all"
+    ],
     "normalized_mechanism": "generacion_libre_ideas_grupo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_brainwriting",
@@ -23,13 +38,27 @@
     "template": "6 personas escriben 3 ideas cada una (5 min) → Pasar hoja al siguiente → Mejorar ideas del otro → 4 rondas.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion"],
-    "tags": ["brainwriting", "silencioso", "rotacion", "6_3_5"],
+    "categories": [
+      "innovacion",
+      "facilitacion"
+    ],
+    "tags": [
+      "brainwriting",
+      "silencioso",
+      "rotacion",
+      "6_3_5"
+    ],
     "origin": "external",
-    "external_refs": ["bernd_1969"],
-    "related_internal_ids": ["brain_classic_brainstorming", "ls_1_2_4_all"],
+    "external_refs": [
+      "bernd_1969"
+    ],
+    "related_internal_ids": [
+      "brain_classic_brainstorming",
+      "ls_1_2_4_all"
+    ],
     "normalized_mechanism": "generacion_escrita_ideas_rotacion",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_round_robin",
@@ -39,13 +68,27 @@
     "template": "Cada persona dice 1 idea en turno → Se registra → Siguiente persona → Repetir hasta agotar.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion"],
-    "tags": ["round_robin", "turno", "obligatorio", "igualitario"],
+    "categories": [
+      "innovacion",
+      "facilitacion"
+    ],
+    "tags": [
+      "round_robin",
+      "turno",
+      "obligatorio",
+      "igualitario"
+    ],
     "origin": "external",
-    "external_refs": ["creativivity_techniques"],
-    "related_internal_ids": ["brain_classic_brainstorming", "ls_1_2_4_all"],
+    "external_refs": [
+      "creativivity_techniques"
+    ],
+    "related_internal_ids": [
+      "brain_classic_brainstorming",
+      "ls_1_2_4_all"
+    ],
     "normalized_mechanism": "contribucion_turno_obligatoria",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_brain_net",
@@ -55,13 +98,28 @@
     "template": "Cada uno envía 3 ideas → Se distribuyen → Cada uno amplía las del otro → Se sintetizan las mejores.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion", "colaboracion"],
-    "tags": ["red", "digital", "asincrono", "combinacion"],
+    "categories": [
+      "innovacion",
+      "facilitacion",
+      "colaboracion"
+    ],
+    "tags": [
+      "red",
+      "digital",
+      "asincrono",
+      "combinacion"
+    ],
     "origin": "external",
-    "external_refs": ["van_gundy_1994"],
-    "related_internal_ids": ["brain_brainwriting", "ls_shift_share"],
+    "external_refs": [
+      "van_gundy_1994"
+    ],
+    "related_internal_ids": [
+      "brain_brainwriting",
+      "ls_shift_share"
+    ],
     "normalized_mechanism": "brainstorming_red_digital_asincrono",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_random_word",
@@ -71,13 +129,27 @@
     "template": "Elegir palabra aleatoria → Forzar conexiones con el problema → Generar ideas derivadas.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "creatividad"],
-    "tags": ["aleatorio", "palabra", "asociacion", "de_bono"],
+    "categories": [
+      "innovacion",
+      "creatividad"
+    ],
+    "tags": [
+      "aleatorio",
+      "palabra",
+      "asociacion",
+      "de_bono"
+    ],
     "origin": "external",
-    "external_refs": ["de_bono_1967"],
-    "related_internal_ids": ["ls_lateral_thinking", "framework_scamper"],
+    "external_refs": [
+      "de_bono_1967"
+    ],
+    "related_internal_ids": [
+      "ls_lateral_thinking",
+      "framework_scamper"
+    ],
     "normalized_mechanism": "forzar_asociaciones_palabra_aleatoria",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_morphological_box",
@@ -87,13 +159,28 @@
     "template": "Definir 4-6 dimensiones → Listar opciones por dimensión → Combinar aleatoriamente → Evaluar viabilidad.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno", "sistematico"],
-    "tags": ["morfologico", "zwicky", "combinaciones", "dimensiones"],
+    "categories": [
+      "innovacion",
+      "diseno",
+      "sistematico"
+    ],
+    "tags": [
+      "morfologico",
+      "zwicky",
+      "combinaciones",
+      "dimensiones"
+    ],
     "origin": "external",
-    "external_refs": ["zwicky_1967"],
-    "related_internal_ids": ["framework_scamper", "framework_triz_classic"],
+    "external_refs": [
+      "zwicky_1967"
+    ],
+    "related_internal_ids": [
+      "framework_scamper",
+      "framework_triz_classic"
+    ],
     "normalized_mechanism": "combinaciones_sistematicas_dimensiones",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_six_hats",
@@ -103,13 +190,28 @@
     "template": "Gorro Blanco (datos) → Rojo (emociones) → Negro (riesgos) → Amarillo (beneficios) → Verde (ideas) → Azul (proceso).",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion", "decision_riesgo"],
-    "tags": ["gorros", "pensamiento", "roles", "6_perspectivas"],
+    "categories": [
+      "innovacion",
+      "facilitacion",
+      "decision_riesgo"
+    ],
+    "tags": [
+      "gorros",
+      "pensamiento",
+      "roles",
+      "6_perspectivas"
+    ],
     "origin": "external",
-    "external_refs": ["de_bono_1985"],
-    "related_internal_ids": ["brain_random_word", "dec_six_hats"],
+    "external_refs": [
+      "de_bono_1985"
+    ],
+    "related_internal_ids": [
+      "brain_random_word",
+      "dec_six_hats"
+    ],
     "normalized_mechanism": "separar_pensamiento_6_perspectivas",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_scamper",
@@ -119,13 +221,27 @@
     "template": "Sustituir (¿qué componente cambiar?) → Combinar (¿qué unir?) → Adaptar (¿de dónde copiar?) → Modificar (¿qué ampliar?) → Poner otro uso (¿para qué más?) → Eliminar (¿qué quitar?) → Reordenar (¿qué invertir?).",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno"],
-    "tags": ["scamper", "7_operaciones", "profundo", "sistematico"],
+    "categories": [
+      "innovacion",
+      "diseno"
+    ],
+    "tags": [
+      "scamper",
+      "7_operaciones",
+      "profundo",
+      "sistematico"
+    ],
     "origin": "external",
-    "external_refs": ["eberta_1971"],
-    "related_internal_ids": ["framework_scamper", "brain_morphological_box"],
+    "external_refs": [
+      "eberta_1971"
+    ],
+    "related_internal_ids": [
+      "framework_scamper",
+      "brain_morphological_box"
+    ],
     "normalized_mechanism": "operaciones_creaticas_sistematicas",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_concept_fan",
@@ -135,13 +251,27 @@
     "template": "Objetivo → Conceptos amplios → Conceptos específicos → Soluciones concretas. Expandir hacia afuera.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "creatividad"],
-    "tags": ["concepto", "fan", "expansion", "caminos_multiples"],
+    "categories": [
+      "innovacion",
+      "creatividad"
+    ],
+    "tags": [
+      "concepto",
+      "fan",
+      "expansion",
+      "caminos_multiples"
+    ],
     "origin": "external",
-    "external_refs": ["de_bono_1990"],
-    "related_internal_ids": ["brain_random_word", "ls_lateral_thinking"],
+    "external_refs": [
+      "de_bono_1990"
+    ],
+    "related_internal_ids": [
+      "brain_random_word",
+      "ls_lateral_thinking"
+    ],
     "normalized_mechanism": "explorar_caminos_multiples_concepto",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_synectics",
@@ -151,13 +281,28 @@
     "template": "Identificar problema → Buscar analogías directas, personales, simbólicas, fantasiosas → Mapear soluciones de vuelta.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "creatividad", "analogias"],
-    "tags": ["synectics", "analogia", "metafora", "desconectar"],
+    "categories": [
+      "innovacion",
+      "creatividad",
+      "analogias"
+    ],
+    "tags": [
+      "synectics",
+      "analogia",
+      "metafora",
+      "desconectar"
+    ],
     "origin": "external",
-    "external_refs": ["gordon_1961"],
-    "related_internal_ids": ["brain_random_word", "EE800-0031"],
+    "external_refs": [
+      "gordon_1961"
+    ],
+    "related_internal_ids": [
+      "brain_random_word",
+      "EE800-0031"
+    ],
     "normalized_mechanism": "resolver_problemas_via_analogias_metaforas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_attribute_listing",
@@ -167,13 +312,27 @@
     "template": "Listar todos los atributos → Modificar cada uno (¿cómo ampliar? ¿cómo eliminar? ¿cómo invertir?) → Recombinar mejoras.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno"],
-    "tags": ["atributos", "descomposicion", "modificacion", "individual"],
+    "categories": [
+      "innovacion",
+      "diseno"
+    ],
+    "tags": [
+      "atributos",
+      "descomposicion",
+      "modificacion",
+      "individual"
+    ],
     "origin": "external",
-    "external_refs": ["crawford_1954"],
-    "related_internal_ids": ["brain_morphological_box", "framework_scamper"],
+    "external_refs": [
+      "crawford_1954"
+    ],
+    "related_internal_ids": [
+      "brain_morphological_box",
+      "framework_scamper"
+    ],
     "normalized_mechanism": "descomponer_modificar_atributos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_crazy_8s",
@@ -183,13 +342,26 @@
     "template": "Doblar papel en 8 secciones → 1 idea por sección → 1 min por idea → No parar de escribir.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion", "diseno"],
-    "tags": ["crazy_8s", "rapido", "presion_temporal", "visual"],
+    "categories": [
+      "innovacion",
+      "facilitacion",
+      "diseno"
+    ],
+    "tags": [
+      "crazy_8s",
+      "rapido",
+      "presion_temporal",
+      "visual"
+    ],
     "origin": "external",
     "external_refs": [],
-    "related_internal_ids": ["brain_classic_brainstorming", "brain_brainwriting"],
+    "related_internal_ids": [
+      "brain_classic_brainstorming",
+      "brain_brainwriting"
+    ],
     "normalized_mechanism": "generar_ideas_rapido_presion_temporal",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_storyboarding",
@@ -199,13 +371,28 @@
     "template": "Crear viñetas: Problema → Momento de insight → Solución → Resultado → Impacto.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno", "comunicacion"],
-    "tags": ["storyboard", "narrativa", "visual", "viñetas"],
+    "categories": [
+      "innovacion",
+      "diseno",
+      "comunicacion"
+    ],
+    "tags": [
+      "storyboard",
+      "narrativa",
+      "visual",
+      "viñetas"
+    ],
     "origin": "external",
-    "external_refs": ["ideo_method_cards"],
-    "related_internal_ids": ["ideo_storyboards", "brain_crazy_8s"],
+    "external_refs": [
+      "ideo_method_cards"
+    ],
+    "related_internal_ids": [
+      "ideo_storyboards",
+      "brain_crazy_8s"
+    ],
     "normalized_mechanism": "narrar_solucion_visual_historieta",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain rahats",
@@ -215,13 +402,27 @@
     "template": "¿Cómo podemos EMPEORAR el problema? → Listar formas de causar fallo → Invertir cada una → Soluciones.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diagnostico"],
-    "tags": ["reverse", "inversion", "fallo", "anti_problema"],
+    "categories": [
+      "innovacion",
+      "diagnostico"
+    ],
+    "tags": [
+      "reverse",
+      "inversion",
+      "fallo",
+      "anti_problema"
+    ],
     "origin": "external",
-    "external_refs": ["van_gundy_1994"],
-    "related_internal_ids": ["EE800-0001", "EE800-0214"],
+    "external_refs": [
+      "van_gundy_1994"
+    ],
+    "related_internal_ids": [
+      "EE800-0001",
+      "EE800-0214"
+    ],
     "normalized_mechanism": "invertir_problema_para_solucionar",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_starbursting",
@@ -231,13 +432,27 @@
     "template": "Dibujar estrella de 6 puntas → Cada punta es una pregunta (5W1H) → Generar múltiples preguntas por punta.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diagnostico"],
-    "tags": ["starbursting", "preguntas", "5w1h", "exploracion"],
+    "categories": [
+      "innovacion",
+      "diagnostico"
+    ],
+    "tags": [
+      "starbursting",
+      "preguntas",
+      "5w1h",
+      "exploracion"
+    ],
     "origin": "external",
-    "external_refs": ["creativivity_techniques"],
-    "related_internal_ids": ["ls_9_whys", "brain_concept_fan"],
+    "external_refs": [
+      "creativivity_techniques"
+    ],
+    "related_internal_ids": [
+      "ls_9_whys",
+      "brain_concept_fan"
+    ],
     "normalized_mechanism": "generar_preguntas_multiples_exploracion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_lottery_draft",
@@ -247,13 +462,27 @@
     "template": "Escribir todas las ideas → Sacar al azar → Desarrollar obligatoriamente la elegida → Combinar.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion"],
-    "tags": ["loteria", "aleatorio", "obligatorio", "desarrollo"],
+    "categories": [
+      "innovacion",
+      "facilitacion"
+    ],
+    "tags": [
+      "loteria",
+      "aleatorio",
+      "obligatorio",
+      "desarrollo"
+    ],
     "origin": "external",
-    "external_refs": ["lottery_engine_criba"],
-    "related_internal_ids": ["brain_random_word", "brain_brainwriting"],
+    "external_refs": [
+      "lottery_engine_criba"
+    ],
+    "related_internal_ids": [
+      "brain_random_word",
+      "brain_brainwriting"
+    ],
     "normalized_mechanism": "seleccion_aleatoria_forzar_desarrollo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_mashup",
@@ -263,13 +492,27 @@
     "template": "Seleccionar 2 ideas aleatorias → Forzar combinación → Generar concepto híbrido → Evaluar.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "creatividad"],
-    "tags": ["mashup", "combinacion", "hibrido", "aleatorio"],
+    "categories": [
+      "innovacion",
+      "creatividad"
+    ],
+    "tags": [
+      "mashup",
+      "combinacion",
+      "hibrido",
+      "aleatorio"
+    ],
     "origin": "external",
-    "external_refs": ["ideo_conceptual_mashup"],
-    "related_internal_ids": ["brain_synectics", "brain_lottery_draft"],
+    "external_refs": [
+      "ideo_conceptual_mashup"
+    ],
+    "related_internal_ids": [
+      "brain_synectics",
+      "brain_lottery_draft"
+    ],
     "normalized_mechanism": "combinar_ideas_forzar_concepto_nuevo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_how_might_we",
@@ -279,13 +522,27 @@
     "template": "Partir de un insight → Reformular como 'How Might We...' → Generar múltiples HMW → Explorar cada uno.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno"],
-    "tags": ["hmw", "reformulacion", "oportunidad", "diseno"],
+    "categories": [
+      "innovacion",
+      "diseno"
+    ],
+    "tags": [
+      "hmw",
+      "reformulacion",
+      "oportunidad",
+      "diseno"
+    ],
     "origin": "external",
-    "external_refs": ["ideo_dschool"],
-    "related_internal_ids": ["brain_starbursting", "ls_wicked_questions"],
+    "external_refs": [
+      "ideo_dschool"
+    ],
+    "related_internal_ids": [
+      "brain_starbursting",
+      "ls_wicked_questions"
+    ],
     "normalized_mechanism": "reformular_problema_oportunidad_diseno",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_challenge_assumptions",
@@ -295,13 +552,27 @@
     "template": "Listar supuestos → Cada uno: '¿Qué pasaría si NO fuera cierto?' → Generar ideas que asumen lo contrario.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diagnostico"],
-    "tags": ["supuestos", "cuestionar", "inversion", "diagnostico"],
+    "categories": [
+      "innovacion",
+      "diagnostico"
+    ],
+    "tags": [
+      "supuestos",
+      "cuestionar",
+      "inversion",
+      "diagnostico"
+    ],
     "origin": "external",
-    "external_refs": ["design_thinking_practice"],
-    "related_internal_ids": ["EE800-0021", "EE800-0022"],
+    "external_refs": [
+      "design_thinking_practice"
+    ],
+    "related_internal_ids": [
+      "EE800-0021",
+      "EE800-0022"
+    ],
     "normalized_mechanism": "cuestionar_supuestos_invertir",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_bodystorm",
@@ -311,13 +582,27 @@
     "template": "Levantarse → Actuar el escenario de uso → Sentir fricciones → Generar ideas desde la experiencia física.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "diseno"],
-    "tags": ["cuerpo", "actuacion", "fisico", "experiencia"],
+    "categories": [
+      "innovacion",
+      "diseno"
+    ],
+    "tags": [
+      "cuerpo",
+      "actuacion",
+      "fisico",
+      "experiencia"
+    ],
     "origin": "external",
-    "external_refs": ["IDEO_bodystorming"],
-    "related_internal_ids": ["ideo_bodystorm", "brain_crazy_8s"],
+    "external_refs": [
+      "IDEO_bodystorming"
+    ],
+    "related_internal_ids": [
+      "ideo_bodystorm",
+      "brain_crazy_8s"
+    ],
     "normalized_mechanism": "generar_ideas_via_experiencia_fisica",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_analogy_transfer",
@@ -327,13 +612,27 @@
     "template": "Identificar problema → Buscar dominio análogo → Extraer mecanismo → Transferir al problema original.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "analogias"],
-    "tags": ["analogia", "trasplante", "dominio", "transferencia"],
+    "categories": [
+      "innovacion",
+      "analogias"
+    ],
+    "tags": [
+      "analogia",
+      "trasplante",
+      "dominio",
+      "transferencia"
+    ],
     "origin": "external",
-    "external_refs": ["gentner_1983"],
-    "related_internal_ids": ["brain_synectics", "EE800-0031"],
+    "external_refs": [
+      "gentner_1983"
+    ],
+    "related_internal_ids": [
+      "brain_synectics",
+      "EE800-0031"
+    ],
     "normalized_mechanism": "importar_soluciones_dominios_distintos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "brain_what_if",
@@ -343,12 +642,26 @@
     "template": "Elegir variable → '¿Qué pasaría si [cambio radical]?' → Explorar consecuencias → Generar ideas.",
     "source": "brainstorming_techniques",
     "granularity": "method",
-    "categories": ["innovacion", "creatividad"],
-    "tags": ["hipotetico", "escenarios", "radical", "exploracion"],
+    "categories": [
+      "innovacion",
+      "creatividad"
+    ],
+    "tags": [
+      "hipotetico",
+      "escenarios",
+      "radical",
+      "exploracion"
+    ],
     "origin": "external",
-    "external_refs": ["counterfactual_thinking"],
-    "related_internal_ids": ["brain_reverse_brainstorming", "ls_critical_uncertainties"],
+    "external_refs": [
+      "counterfactual_thinking"
+    ],
+    "related_internal_ids": [
+      "brain_reverse_brainstorming",
+      "ls_critical_uncertainties"
+    ],
     "normalized_mechanism": "explorar_escenarios_hipoteticos_radicales",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   }
 ]

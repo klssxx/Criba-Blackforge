@@ -7,13 +7,26 @@
     "template": "Definir hipótesis → Diseñar experimento → Controlar variables → Recopilar datos → Análisis estadístico → Conclusión.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["causalidad", "hipotesis", "validacion", "control", "estadistica"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "causalidad",
+      "hipotesis",
+      "validacion",
+      "control",
+      "estadistica"
+    ],
     "origin": "external",
-    "external_refs": ["cook_campbell_1979"],
-    "related_internal_ids": ["framework_six_sigma_dmaic"],
+    "external_refs": [
+      "cook_campbell_1979"
+    ],
+    "related_internal_ids": [
+      "framework_six_sigma_dmaic"
+    ],
     "normalized_mechanism": "medir_causalidad_experimento_controlado",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_quantitative_descriptive",
@@ -23,13 +36,25 @@
     "template": "Definir variables → Diseñar instrumento → Recopilar datos → Análisis descriptivo → Reportar hallazgos.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["encuesta", "medicion", "frecuencia", "descriptivo"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "encuesta",
+      "medicion",
+      "frecuencia",
+      "descriptivo"
+    ],
     "origin": "external",
-    "external_refs": ["methodology_textbooks"],
-    "related_internal_ids": ["research_quantitative_experimental"],
+    "external_refs": [
+      "methodology_textbooks"
+    ],
+    "related_internal_ids": [
+      "research_quantitative_experimental"
+    ],
     "normalized_mechanism": "describir_fenomenos_mediciones_numericas",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_qualitative_exploratory",
@@ -39,13 +64,26 @@
     "template": "Definir pregunta abierta → Recopilar datos cualitativos → Codificar → Categorizar → Interpretar significados.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["entrevista", "observacion", "significado", "exploratorio"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "entrevista",
+      "observacion",
+      "significado",
+      "exploratorio"
+    ],
     "origin": "external",
-    "external_refs": ["denzin_lincoln_2018"],
-    "related_internal_ids": ["research_grounded_theory", "research_ethnography"],
+    "external_refs": [
+      "denzin_lincoln_2018"
+    ],
+    "related_internal_ids": [
+      "research_grounded_theory",
+      "research_ethnography"
+    ],
     "normalized_mechanism": "explorar_fenomenos_significado_cualitativo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_grounded_theory",
@@ -55,13 +93,25 @@
     "template": "Recopilar datos → Codificación abierta → Codificación axial → Codificación selectiva → Teoría emergente.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["teoria_emergente", "codificacion", "constante", "glaser_strauss"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "teoria_emergente",
+      "codificacion",
+      "constante",
+      "glaser_strauss"
+    ],
     "origin": "external",
-    "external_refs": ["glaser_strauss_1967"],
-    "related_internal_ids": ["research_qualitative_exploratory"],
+    "external_refs": [
+      "glaser_strauss_1967"
+    ],
+    "related_internal_ids": [
+      "research_qualitative_exploratory"
+    ],
     "normalized_mechanism": "construir_teoria_desde_datos_codificacion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_ethnography",
@@ -71,13 +121,27 @@
     "template": "Inmersión en contexto → Observación participante → Entrevistas → Notas de campo → Análisis cultural → Reporte.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["cultura", "contexto", "inmersion", "observacion_participante"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "cultura",
+      "contexto",
+      "inmersion",
+      "observacion_participante"
+    ],
     "origin": "external",
-    "external_refs": ["malinowski_1922", "hammersley_atkinson_2019"],
-    "related_internal_ids": ["research_qualitative_exploratory", "ls_simple_ethnography"],
+    "external_refs": [
+      "malinowski_1922",
+      "hammersley_atkinson_2019"
+    ],
+    "related_internal_ids": [
+      "research_qualitative_exploratory",
+      "ls_simple_ethnography"
+    ],
     "normalized_mechanism": "inmersion_cultural_comprender_practicas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_case_study",
@@ -87,13 +151,26 @@
     "template": "Definir caso → Recopilar múltiples fuentes → Triangulación → Análisis del caso → Generalizar con cautela.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["particular", "profundidad", "contexto", "multiple_fuentes"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "particular",
+      "profundidad",
+      "contexto",
+      "multiple_fuentes"
+    ],
     "origin": "external",
-    "external_refs": ["yin_2018", "stake_1995"],
-    "related_internal_ids": ["research_qualitative_exploratory"],
+    "external_refs": [
+      "yin_2018",
+      "stake_1995"
+    ],
+    "related_internal_ids": [
+      "research_qualitative_exploratory"
+    ],
     "normalized_mechanism": "analisis_profundo_caso_particular",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_action",
@@ -103,13 +180,26 @@
     "template": "Planificar → Actuar → Observar → Reflexionar → Re-planificar → Ciclo iterativo con participantes.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["cambio", "participativa", "ciclica", "accion_reflexion"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "cambio",
+      "participativa",
+      "ciclica",
+      "accion_reflexion"
+    ],
     "origin": "external",
-    "external_refs": ["lewin_1946", "freire_1970"],
-    "related_internal_ids": ["research_participatory_action"],
+    "external_refs": [
+      "lewin_1946",
+      "freire_1970"
+    ],
+    "related_internal_ids": [
+      "research_participatory_action"
+    ],
     "normalized_mechanism": "ciclos_accion_reflexion_generar_cambio",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_evaluative",
@@ -119,13 +209,27 @@
     "template": "Definir criterios de evaluación → Recopilar evidencia → Comparar contra estándares → Emitir juicio → Recomendar.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion", "mejora"],
-    "tags": ["efectividad", "impacto", "valoracion", "juicio"],
+    "categories": [
+      "investigacion",
+      "mejora"
+    ],
+    "tags": [
+      "efectividad",
+      "impacto",
+      "valoracion",
+      "juicio"
+    ],
     "origin": "external",
-    "external_refs": ["scriven_1991", "patton_2018"],
-    "related_internal_ids": ["research_quantitative_experimental"],
+    "external_refs": [
+      "scriven_1991",
+      "patton_2018"
+    ],
+    "related_internal_ids": [
+      "research_quantitative_experimental"
+    ],
     "normalized_mechanism": "evaluar_efectividad_impacto_programas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_correlational",
@@ -135,13 +239,25 @@
     "template": "Definir variables → Recopilar datos → Calcular coeficiente de correlación → Interpretar fuerza y dirección.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["relacion", "asociacion", "prediccion", "coeficiente"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "relacion",
+      "asociacion",
+      "prediccion",
+      "coeficiente"
+    ],
     "origin": "external",
-    "external_refs": ["cohen_1988"],
-    "related_internal_ids": ["research_quantitative_descriptive"],
+    "external_refs": [
+      "cohen_1988"
+    ],
+    "related_internal_ids": [
+      "research_quantitative_descriptive"
+    ],
     "normalized_mechanism": "identificar_relaciones_variables_medir",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_mixed",
@@ -151,13 +267,26 @@
     "template": "Diseñar preguntas mixtas → Recopilar datos quant + qual → Análisis integrado → Triangulación → Conclusiones robustas.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["triangulacion", "complementariedad", "mixto", "robustez"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "triangulacion",
+      "complementariedad",
+      "mixto",
+      "robustez"
+    ],
     "origin": "external",
-    "external_refs": ["creswell_plano_clark_2017"],
-    "related_internal_ids": ["research_quantitative_experimental", "research_qualitative_exploratory"],
+    "external_refs": [
+      "creswell_plano_clark_2017"
+    ],
+    "related_internal_ids": [
+      "research_quantitative_experimental",
+      "research_qualitative_exploratory"
+    ],
     "normalized_mechanism": "combinar_quant_qual_triangulacion",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_dbr",
@@ -167,13 +296,28 @@
     "template": "Analizar problemas prácticos → Desarrollar solución → Evaluar → Rediseñar → Iterar en múltiples ciclos.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion", "diseno"],
-    "tags": ["iterativa", "contextual", "pragmatismo", "solucion"],
+    "categories": [
+      "investigacion",
+      "diseno"
+    ],
+    "tags": [
+      "iterativa",
+      "contextual",
+      "pragmatismo",
+      "solucion"
+    ],
     "origin": "external",
-    "external_refs": ["collins_2004", "barab_squire_2004"],
-    "related_internal_ids": ["research_action", "framework_design_thinking"],
+    "external_refs": [
+      "collins_2004",
+      "barab_squire_2004"
+    ],
+    "related_internal_ids": [
+      "research_action",
+      "framework_design_thinking"
+    ],
     "normalized_mechanism": "investigacion_iterativa_diseno_soluciones",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_phenomenological",
@@ -183,13 +327,26 @@
     "template": "Entrevistar sobre experiencia vivida → Describir significados → Identificar esencia → Descripción comprensiva.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["experiencia", "esencia", "vivencia", "fenomeno"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "experiencia",
+      "esencia",
+      "vivencia",
+      "fenomeno"
+    ],
     "origin": "external",
-    "external_refs": ["husserl_1913", "moustakas_1994"],
-    "related_internal_ids": ["research_qualitative_exploratory"],
+    "external_refs": [
+      "husserl_1913",
+      "moustakas_1994"
+    ],
+    "related_internal_ids": [
+      "research_qualitative_exploratory"
+    ],
     "normalized_mechanism": "comprender_esencia_experiencia_vivida",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_narrative",
@@ -199,13 +356,26 @@
     "template": "Recopilar historias → Analizar estructura narrativa → Identificar temas → Interpretar significado.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["historia", "significado", "secuencia", "narrativa"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "historia",
+      "significado",
+      "secuencia",
+      "narrativa"
+    ],
     "origin": "external",
-    "external_refs": ["clandinin_connelly_2000"],
-    "related_internal_ids": ["research_qualitative_exploratory", "brain_storyboarding"],
+    "external_refs": [
+      "clandinin_connelly_2000"
+    ],
+    "related_internal_ids": [
+      "research_qualitative_exploratory",
+      "brain_storyboarding"
+    ],
     "normalized_mechanism": "comprender_experiencias_via_historias",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_longitudinal",
@@ -215,13 +385,25 @@
     "template": "Seleccionar muestra → Medir en T1 → Medir en T2...Tn → Analizar cambios → Identificar tendencias.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["tiempo", "cambio", "tendencia", "seguimiento"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "tiempo",
+      "cambio",
+      "tendencia",
+      "seguimiento"
+    ],
     "origin": "external",
-    "external_refs": ["menard_2008"],
-    "related_internal_ids": ["research_cross_sectional"],
+    "external_refs": [
+      "menard_2008"
+    ],
+    "related_internal_ids": [
+      "research_cross_sectional"
+    ],
     "normalized_mechanism": "estudiar_cambios_tiempo_mismo_sujeto",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_cross_sectional",
@@ -231,13 +413,25 @@
     "template": "Seleccionar muestra → Medir variables en un momento → Comparar grupos → Identificar diferencias.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["momento", "comparacion", "prevalencia", "transversal"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "momento",
+      "comparacion",
+      "prevalencia",
+      "transversal"
+    ],
     "origin": "external",
-    "external_refs": ["methodology_textbooks"],
-    "related_internal_ids": ["research_longitudinal"],
+    "external_refs": [
+      "methodology_textbooks"
+    ],
+    "related_internal_ids": [
+      "research_longitudinal"
+    ],
     "normalized_mechanism": "medir_comparar_grupos_mismo_momento",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_meta_analysis",
@@ -247,13 +441,26 @@
     "template": "Definir pregunta → Buscar estudios → Extraer efectos → Calcular tamaño combinado → Interpretar heterogeneidad.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["sintesis", "evidencia", "agregacion", "efecto_combinado"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "sintesis",
+      "evidencia",
+      "agregacion",
+      "efecto_combinado"
+    ],
     "origin": "external",
-    "external_refs": ["glass_1976", "cooper_2017"],
-    "related_internal_ids": ["research_systematic_review"],
+    "external_refs": [
+      "glass_1976",
+      "cooper_2017"
+    ],
+    "related_internal_ids": [
+      "research_systematic_review"
+    ],
     "normalized_mechanism": "sintetizar_resultados_multiples_estudios",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_systematic_review",
@@ -263,13 +470,25 @@
     "template": "Protocolo → Búsqueda exhaustiva → Criterios de inclusión/exclusión → Calidad → Síntesis → Conclusiones.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["revision", "protocolo", "rigor", "exhaustivo"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "revision",
+      "protocolo",
+      "rigor",
+      "exhaustivo"
+    ],
     "origin": "external",
-    "external_refs": ["moher_2009_prisma"],
-    "related_internal_ids": ["research_meta_analysis"],
+    "external_refs": [
+      "moher_2009_prisma"
+    ],
+    "related_internal_ids": [
+      "research_meta_analysis"
+    ],
     "normalized_mechanism": "revision_exhaustiva_reproducible_evidencia",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_participatory_action",
@@ -279,13 +498,25 @@
     "template": "Comunidad define problema → Co-diseña investigación → Co-ejecuta → Co-analiza → Co-actúa para cambio.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["comunidad", "empowerment", "cogeneracion", "colaborativa"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "comunidad",
+      "empowerment",
+      "cogeneracion",
+      "colaborativa"
+    ],
     "origin": "external",
-    "external_refs": ["fals_borda_1987"],
-    "related_internal_ids": ["research_action"],
+    "external_refs": [
+      "fals_borda_1987"
+    ],
+    "related_internal_ids": [
+      "research_action"
+    ],
     "normalized_mechanism": "investigacion_colaborativa_participantes_co_investigadores",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_pragmatic",
@@ -295,13 +526,26 @@
     "template": "Definir problema práctico → Elegir método que mejor responda → Generar conocimiento útil → Aplicar.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["solucion", "efectividad", "contexto", "pragmatismo"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "solucion",
+      "efectividad",
+      "contexto",
+      "pragmatismo"
+    ],
     "origin": "external",
-    "external_refs": ["dewey_1938", "creswell_2014"],
-    "related_internal_ids": ["research_mixed"],
+    "external_refs": [
+      "dewey_1938",
+      "creswell_2014"
+    ],
+    "related_internal_ids": [
+      "research_mixed"
+    ],
     "normalized_mechanism": "enfocar_resolver_problemas_practicos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   },
   {
     "id": "research_critical",
@@ -311,12 +555,25 @@
     "template": "Identificar injusticia → Investigar estructuras de poder → Generar conocimiento emancipatorio → Acción transformadora.",
     "source": "research_taxonomies",
     "granularity": "framework",
-    "categories": ["investigacion"],
-    "tags": ["poder", "emancipacion", "transformacion", "justicia"],
+    "categories": [
+      "investigacion"
+    ],
+    "tags": [
+      "poder",
+      "emancipacion",
+      "transformacion",
+      "justicia"
+    ],
     "origin": "external",
-    "external_refs": ["horkheimer_1937", "freire_1970"],
-    "related_internal_ids": ["research_action"],
+    "external_refs": [
+      "horkheimer_1937",
+      "freire_1970"
+    ],
+    "related_internal_ids": [
+      "research_action"
+    ],
     "normalized_mechanism": "cuestionar_poder_promover_transformacion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "dominio"
   }
 ]

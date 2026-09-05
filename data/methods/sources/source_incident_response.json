@@ -7,13 +7,28 @@
     "template": "NIST IR: Preparar → Detectar y Analizar → Contener, Erradicar, Recuperar → Post-Incidente.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso", "gobernanza"],
-    "tags": ["nist", "ciclo", "4_fases", "respuesta"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "gobernanza"
+    ],
+    "tags": [
+      "nist",
+      "ciclo",
+      "4_fases",
+      "respuesta"
+    ],
     "origin": "external",
-    "external_refs": ["nist_sp_800_61_r2"],
-    "related_internal_ids": ["sec_nist_csf", "ir_sans"],
+    "external_refs": [
+      "nist_sp_800_61_r2"
+    ],
+    "related_internal_ids": [
+      "sec_nist_csf",
+      "ir_sans"
+    ],
     "normalized_mechanism": "ciclo_respuesta_incidentes_nist",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_sans",
@@ -23,13 +38,26 @@
     "template": "SANS IR: Preparar → Identificar → Contener → Erradicar → Recuperar → Lecciones Aprendidas.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso"],
-    "tags": ["sans", "6_pasos", "lecciones_aprendidas"],
+    "categories": [
+      "seguridad",
+      "proceso"
+    ],
+    "tags": [
+      "sans",
+      "6_pasos",
+      "lecciones_aprendidas"
+    ],
     "origin": "external",
-    "external_refs": ["sans_incident_handling"],
-    "related_internal_ids": ["ir_nist_cycle", "ir_picerl"],
+    "external_refs": [
+      "sans_incident_handling"
+    ],
+    "related_internal_ids": [
+      "ir_nist_cycle",
+      "ir_picerl"
+    ],
     "normalized_mechanism": "proceso_respuesta_incidentes_sans",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_picerl",
@@ -39,13 +67,26 @@
     "template": "PICERL: Preparar → Identificar → Contener → Erradicar → Recuperar → Aprender.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso"],
-    "tags": ["picerl", "modelo", "6_fases"],
+    "categories": [
+      "seguridad",
+      "proceso"
+    ],
+    "tags": [
+      "picerl",
+      "modelo",
+      "6_fases"
+    ],
     "origin": "external",
-    "external_refs": ["picerl_framework"],
-    "related_internal_ids": ["ir_sans", "ir_nist_cycle"],
+    "external_refs": [
+      "picerl_framework"
+    ],
+    "related_internal_ids": [
+      "ir_sans",
+      "ir_nist_cycle"
+    ],
     "normalized_mechanism": "modelo_picerl_respuesta_incidentes",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_kill_chain_ir",
@@ -55,13 +96,28 @@
     "template": "IR Kill Chain: Detectar → Analizar → Contener → Erradicar → Recuperar con métricas por fase.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso", "estrategia"],
-    "tags": ["kill_chain", "adaptado", "metricas", "fases"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "estrategia"
+    ],
+    "tags": [
+      "kill_chain",
+      "adaptado",
+      "metricas",
+      "fases"
+    ],
     "origin": "external",
-    "external_refs": ["lockheed_martin_2011"],
-    "related_internal_ids": ["sec_kill_chain", "ir_nist_cycle"],
+    "external_refs": [
+      "lockheed_martin_2011"
+    ],
+    "related_internal_ids": [
+      "sec_kill_chain",
+      "ir_nist_cycle"
+    ],
     "normalized_mechanism": "kill_chain_adaptado_respuesta",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_triage",
@@ -71,13 +127,28 @@
     "template": "Triage: Detectar → Clasificar (P1-P4) → Asignar → Escalar según severidad → Timeline de respuesta.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso", "gobernanza"],
-    "tags": ["triage", "clasificacion", "severidad", "priorizacion"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "gobernanza"
+    ],
+    "tags": [
+      "triage",
+      "clasificacion",
+      "severidad",
+      "priorizacion"
+    ],
     "origin": "external",
-    "external_refs": ["itsm_triage"],
-    "related_internal_ids": ["ir_nist_cycle", "sec_cvss"],
+    "external_refs": [
+      "itsm_triage"
+    ],
+    "related_internal_ids": [
+      "ir_nist_cycle",
+      "sec_cvss"
+    ],
     "normalized_mechanism": "clasificar_priorizar_incidentes",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_forensics",
@@ -87,13 +158,28 @@
     "template": "Forensics: Recolección (imaging) → Examinación (hash, timeline) → Análisis (correlación) → Reporte (evidencia legal).",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso", "investigacion"],
-    "tags": ["forensics", "cadena_custodia", "evidencia", "legal"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "investigacion"
+    ],
+    "tags": [
+      "forensics",
+      "cadena_custodia",
+      "evidencia",
+      "legal"
+    ],
     "origin": "external",
-    "external_refs": ["nist_sp_800_86"],
-    "related_internal_ids": ["ir_nist_cycle", "ir_memory_forensics"],
+    "external_refs": [
+      "nist_sp_800_86"
+    ],
+    "related_internal_ids": [
+      "ir_nist_cycle",
+      "ir_memory_forensics"
+    ],
     "normalized_mechanism": "proceso_forense_digital_estandar",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_memory_forensics",
@@ -103,13 +189,30 @@
     "template": "Memory Forensics: Capture RAM → Extract processes → Analyze network connections → Find injected code → Extract malware artifacts.",
     "source": "incident_response",
     "granularity": "method",
-    "categories": ["seguridad", "proceso", "investigacion"],
-    "tags": ["memory", "forensics", "ram", "procesos", "malware"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "investigacion"
+    ],
+    "tags": [
+      "memory",
+      "forensics",
+      "ram",
+      "procesos",
+      "malware"
+    ],
     "origin": "external",
-    "external_refs": ["volatility_framework", "rekall"],
-    "related_internal_ids": ["ir_forensics", "ir_disk_forensics"],
+    "external_refs": [
+      "volatility_framework",
+      "rekall"
+    ],
+    "related_internal_ids": [
+      "ir_forensics",
+      "ir_disk_forensics"
+    ],
     "normalized_mechanism": "analisis_memoria_volatil",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_disk_forensics",
@@ -119,13 +222,30 @@
     "template": "Disk Forensics: Image disk → Mount read-only → Analyze file system → Recover deleted files → Create timeline → Correlate events.",
     "source": "incident_response",
     "granularity": "method",
-    "categories": ["seguridad", "proceso", "investigacion"],
-    "tags": ["disk", "forensics", "imaging", "timeline", "deleted_files"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "investigacion"
+    ],
+    "tags": [
+      "disk",
+      "forensics",
+      "imaging",
+      "timeline",
+      "deleted_files"
+    ],
     "origin": "external",
-    "external_refs": ["autopsy", "ftk"],
-    "related_internal_ids": ["ir_forensics", "ir_memory_forensics"],
+    "external_refs": [
+      "autopsy",
+      "ftk"
+    ],
+    "related_internal_ids": [
+      "ir_forensics",
+      "ir_memory_forensics"
+    ],
     "normalized_mechanism": "analisis_digital_discos",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_log_analysis",
@@ -135,13 +255,30 @@
     "template": "Log Analysis: Collect logs → Normalize → Correlate → Detect anomalies → Investigate alerts → Create timeline → Report.",
     "source": "incident_response",
     "granularity": "method",
-    "categories": ["seguridad", "proceso", "investigacion"],
-    "tags": ["logs", "siem", "correlacion", "anomalias", "timeline"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "investigacion"
+    ],
+    "tags": [
+      "logs",
+      "siem",
+      "correlacion",
+      "anomalias",
+      "timeline"
+    ],
     "origin": "external",
-    "external_refs": ["elastic_siem", "splunk"],
-    "related_internal_ids": ["ir_forensics", "sec_nist_csf"],
+    "external_refs": [
+      "elastic_siem",
+      "splunk"
+    ],
+    "related_internal_ids": [
+      "ir_forensics",
+      "sec_nist_csf"
+    ],
     "normalized_mechanism": "analisis_logs_seguridad_sistematico",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_playbook",
@@ -151,13 +288,28 @@
     "template": "IR Playbook: Definir triggers → Steps por fase → Roles y responsabilidades → Communication plan → Escalation path → Recovery steps.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "proceso", "gobernanza"],
-    "tags": ["playbook", "especifico", "tipo_incidente", "roles"],
+    "categories": [
+      "seguridad",
+      "proceso",
+      "gobernanza"
+    ],
+    "tags": [
+      "playbook",
+      "especifico",
+      "tipo_incidente",
+      "roles"
+    ],
     "origin": "external",
-    "external_refs": ["sans_playbooks"],
-    "related_internal_ids": ["ir_nist_cycle", "ir_sans"],
+    "external_refs": [
+      "sans_playbooks"
+    ],
+    "related_internal_ids": [
+      "ir_nist_cycle",
+      "ir_sans"
+    ],
     "normalized_mechanism": "playbooks_respuesta_por_tipo_incidente",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ir_communication",
@@ -167,12 +319,29 @@
     "template": "IR Comms: Internal stakeholders → Legal counsel → Regulatory notification → Customer notification → Media response → Board update.",
     "source": "incident_response",
     "granularity": "framework",
-    "categories": ["seguridad", "gobernanza", "comunicacion"],
-    "tags": ["comunicacion", "stakeholders", "legal", "regulatorio", "prensa"],
+    "categories": [
+      "seguridad",
+      "gobernanza",
+      "comunicacion"
+    ],
+    "tags": [
+      "comunicacion",
+      "stakeholders",
+      "legal",
+      "regulatorio",
+      "prensa"
+    ],
     "origin": "external",
-    "external_refs": ["gdpr_notification", "sec_breach_notification"],
-    "related_internal_ids": ["ir_nist_cycle", "ir_playbook"],
+    "external_refs": [
+      "gdpr_notification",
+      "sec_breach_notification"
+    ],
+    "related_internal_ids": [
+      "ir_nist_cycle",
+      "ir_playbook"
+    ],
     "normalized_mechanism": "comunicacion_estructurada_incidentes",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   }
 ]

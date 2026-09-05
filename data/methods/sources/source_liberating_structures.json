@@ -7,13 +7,28 @@
     "template": "1: Cada uno piensa en silencio (1 min) → 2: Comparten en parejas (2 min) → 4: Grupos de 4 sintetizan (5 min) → All: Comparten con el grupo.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "divergencia"],
-    "tags": ["divergencia", "convergencia", "participacion_total", "escala"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "divergencia"
+    ],
+    "tags": [
+      "divergencia",
+      "convergencia",
+      "participacion_total",
+      "escala"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["EE1700-0096", "ideo_brainstorming_sessions"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "EE1700-0096",
+      "ideo_brainstorming_sessions"
+    ],
     "normalized_mechanism": "escalar_participacion_individuo_grupo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_25_10_crowdsourcing",
@@ -23,13 +38,28 @@
     "template": "25 personas anotan ideas → circulan → cada uno vota → se sintetizan las más votadas.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "proceso"],
-    "tags": ["crowdsourcing", "votacion", "filtrado", "rapido"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "proceso"
+    ],
+    "tags": [
+      "crowdsourcing",
+      "votacion",
+      "filtrado",
+      "rapido"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_1_2_4_all", "dec_eisenhower"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_1_2_4_all",
+      "dec_eisenhower"
+    ],
     "normalized_mechanism": "priorizar_ideas_rapido_grupo_grande",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_9_whys",
@@ -39,13 +69,28 @@
     "template": "Pregunta original → ¿por qué? × 9 iteraciones → llegar al propósito fundamental.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "diagnostico", "innovacion"],
-    "tags": ["profundidad", "proposito", "causal", "raiz"],
+    "categories": [
+      "facilitacion",
+      "diagnostico",
+      "innovacion"
+    ],
+    "tags": [
+      "profundidad",
+      "proposito",
+      "causal",
+      "raiz"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["M100-01", "EE1000-0043"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "M100-01",
+      "EE1000-0043"
+    ],
     "normalized_mechanism": "profundizar_proposito迭代ativo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_15_percent_solutions",
@@ -55,13 +100,28 @@
     "template": "¿Qué puedo hacer con el 15% que sí controlo? → Acción inmediata sin esperar autorización.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "accion"],
-    "tags": ["autonomia", "recursos_disponibles", "agencia", "accion_inmediata"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "accion"
+    ],
+    "tags": [
+      "autonomia",
+      "recursos_disponibles",
+      "agencia",
+      "accion_inmediata"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["EE800-0041", "EE800-0042"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "EE800-0041",
+      "EE800-0042"
+    ],
     "normalized_mechanism": "encontrar_soluciones_dentro_control",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_appel_to_ideas",
@@ -71,13 +131,27 @@
     "template": "Presentar problema → Cada uno escribe ideas → Compartir sin criticar → Recopilar todas.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion"],
-    "tags": ["invitacion", "abierto", "diversidad", "sin_juicio"],
+    "categories": [
+      "facilitacion",
+      "innovacion"
+    ],
+    "tags": [
+      "invitacion",
+      "abierto",
+      "diversidad",
+      "sin_juicio"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_1_2_4_all", "ideo_brainstorming_sessions"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_1_2_4_all",
+      "ideo_brainstorming_sessions"
+    ],
     "normalized_mechanism": "invitar_ideas_abiertas_grupo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_critical_uncertainties",
@@ -87,13 +161,28 @@
     "template": "Identificar 2 incertidumbres críticas → Crear matrix 2×2 → Desarrollar estrategias por cuadrante.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "estrategia", "innovacion"],
-    "tags": ["incertidumbre", "escenarios", "bifurcacion", "estrategia"],
+    "categories": [
+      "facilitacion",
+      "estrategia",
+      "innovacion"
+    ],
+    "tags": [
+      "incertidumbre",
+      "escenarios",
+      "bifurcacion",
+      "estrategia"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["dec_2x2_matrix", "framework_cynefin"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "dec_2x2_matrix",
+      "framework_cynefin"
+    ],
     "normalized_mechanism": "explorar_escenarios_incertidumbres_criticas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_ecocycle_planning",
@@ -103,13 +192,28 @@
     "template": "Mapear elementos en 4 cuadrantes: Creativos → Maduros → En declive → Renaciendo → Planificar transiciones.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "estrategia", "innovacion"],
-    "tags": ["ciclo", "renovacion", "creative_destruction", "transiciones"],
+    "categories": [
+      "facilitacion",
+      "estrategia",
+      "innovacion"
+    ],
+    "tags": [
+      "ciclo",
+      "renovacion",
+      "creative_destruction",
+      "transiciones"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["framework_wardley", "EE1700-0025"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "framework_wardley",
+      "EE1700-0025"
+    ],
     "normalized_mechanism": "mapear_ciclo_vida_sistema",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_wicked_questions",
@@ -119,13 +223,28 @@
     "template": "Identificar paradojas → Formular preguntas tipo '¿Cómo podemos X al mismo tiempo que Y?' → Explorar tensiones.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "diagnostico", "innovacion"],
-    "tags": ["paradoja", "complejidad", "formulacion", "tension"],
+    "categories": [
+      "facilitacion",
+      "diagnostico",
+      "innovacion"
+    ],
+    "tags": [
+      "paradoja",
+      "complejidad",
+      "formulacion",
+      "tension"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["EE800-0213", "framework_cynefin"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "EE800-0213",
+      "framework_cynefin"
+    ],
     "normalized_mechanism": "formular_preguntas_paradoja_complejidad",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_wise_crowds",
@@ -135,13 +254,28 @@
     "template": "Presentar problema → Grupo diverso opina independientemente → Sintetizar → Decidir.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "colectivo"],
-    "tags": ["sabiduria_colectiva", "diversidad", "convergencia", "decision"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "colectivo"
+    ],
+    "tags": [
+      "sabiduria_colectiva",
+      "diversidad",
+      "convergencia",
+      "decision"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_25_10_crowdsourcing", "dec_delphi"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_25_10_crowdsourcing",
+      "dec_delphi"
+    ],
     "normalized_mechanism": "aprovechar_sabiduria_grupo_diverso",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_triz_for_groups",
@@ -151,13 +285,29 @@
     "template": "Identificar contradicción grupal → Aplicar principios TRIZ → Generar soluciones colectivas.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "resolucion"],
-    "tags": ["triz", "contradiccion", "innovacion", "sistematico", "grupo"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "resolucion"
+    ],
+    "tags": [
+      "triz",
+      "contradiccion",
+      "innovacion",
+      "sistematico",
+      "grupo"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["framework_triz_classic", "ls_wicked_questions"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "framework_triz_classic",
+      "ls_wicked_questions"
+    ],
     "normalized_mechanism": "aplicar_triz_contexto_grupal",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_fishbowl",
@@ -167,13 +317,27 @@
     "template": "Círculo interno (4-5 personas) dialoga → Círculo externo observa → Rotación de sillas.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "dialogo", "innovacion"],
-    "tags": ["dialogo", "observacion", "rotacion", "foco"],
+    "categories": [
+      "facilitacion",
+      "dialogo",
+      "innovacion"
+    ],
+    "tags": [
+      "dialogo",
+      "observacion",
+      "rotacion",
+      "foco"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_conversation_cafe"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_conversation_cafe"
+    ],
     "normalized_mechanism": "dialogo_concentrado_rotacion",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_conversation_cafe",
@@ -183,13 +347,28 @@
     "template": "Mesa de 4-6 → Pregunta central → 1 min silencio → Round robin → Escucha profunda → Síntesis.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "dialogo", "exploracion"],
-    "tags": ["dialogo", "escucha", "reflexion", "profundidad"],
+    "categories": [
+      "facilitacion",
+      "dialogo",
+      "exploracion"
+    ],
+    "tags": [
+      "dialogo",
+      "escucha",
+      "reflexion",
+      "profundidad"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_fishbowl", "ls_9_whys"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_fishbowl",
+      "ls_9_whys"
+    ],
     "normalized_mechanism": "dialogo_profundo_reglas_escucha",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_disrupting_patterns",
@@ -199,13 +378,28 @@
     "template": "Identificar patrón → Explorar por qué persiste → Generar alternativas → Experimentar con lo nuevo.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "ruptura"],
-    "tags": ["patron", "ruptura", "alternativa", "cambio"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "ruptura"
+    ],
+    "tags": [
+      "patron",
+      "ruptura",
+      "alternativa",
+      "cambio"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["EE1000-0051", "framework_cynefin"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "EE1000-0051",
+      "framework_cynefin"
+    ],
     "normalized_mechanism": "identificar_romper_patrones_establecidos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_who_what_when",
@@ -215,13 +409,28 @@
     "template": "Después de cada decisión: ¿Quién? → ¿Qué exactamente? → ¿Para cuándo? → Registrar compromisos.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "proceso", "accion"],
-    "tags": ["compromiso", "claridad", "asignacion", "accountability"],
+    "categories": [
+      "facilitacion",
+      "proceso",
+      "accion"
+    ],
+    "tags": [
+      "compromiso",
+      "claridad",
+      "asignacion",
+      "accountability"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["dec_hoshin", "dec_okr"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "dec_hoshin",
+      "dec_okr"
+    ],
     "normalized_mechanism": "asegurar_compromisos_claros_accion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_purpose_to_passion",
@@ -231,13 +440,28 @@
     "template": "Declarar propósito grupal → Cada uno conecta con su pasión personal → Buscar intersección → Actuar.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "alineamiento", "innovacion"],
-    "tags": ["proposito", "pasion", "significado", "alineamiento"],
+    "categories": [
+      "facilitacion",
+      "alineamiento",
+      "innovacion"
+    ],
+    "tags": [
+      "proposito",
+      "pasion",
+      "significado",
+      "alineamiento"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["dec_okr", "EE1700-0067"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "dec_okr",
+      "EE1700-0067"
+    ],
     "normalized_mechanism": "conectar_proposito_pasion_individual",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_investigative_world_cafe",
@@ -247,13 +471,28 @@
     "template": "Mesas temáticas → Host presenta tema → Visitantes entrevistan → Rotación → Síntesis global.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "investigacion", "exploracion"],
-    "tags": ["cafe", "entrevista", "profundidad", "rotacion"],
+    "categories": [
+      "facilitacion",
+      "investigacion",
+      "exploracion"
+    ],
+    "tags": [
+      "cafe",
+      "entrevista",
+      "profundidad",
+      "rotacion"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_conversation_cafe", "ls_fishbowl"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_conversation_cafe",
+      "ls_fishbowl"
+    ],
     "normalized_mechanism": "investigacion_cruzada_mesas_temáticas",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_lateral_thinking",
@@ -263,13 +502,28 @@
     "template": "Usar técnicas laterales: Random Word, Challenge, Analogy, Concept Fan, Provocation.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "creatividad"],
-    "tags": ["lateral", "de_bono", "creatividad", "no_convencional"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "creatividad"
+    ],
+    "tags": [
+      "lateral",
+      "de_bono",
+      "creatividad",
+      "no_convencional"
+    ],
     "origin": "external",
-    "external_refs": ["de_bono_1967"],
-    "related_internal_ids": ["framework_scamper", "dec_six_hats"],
+    "external_refs": [
+      "de_bono_1967"
+    ],
+    "related_internal_ids": [
+      "framework_scamper",
+      "dec_six_hats"
+    ],
     "normalized_mechanism": "generar_ideas_no_convencionales_lateral",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_shift_share",
@@ -279,13 +533,27 @@
     "template": "Grupos especializados → Cada uno presenta → Rotación → Los visitantes llevan ideas al siguiente grupo.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "intercambio"],
-    "tags": ["rotacion", "transferencia", "difusion", "conocimiento"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "intercambio"
+    ],
+    "tags": [
+      "rotacion",
+      "transferencia",
+      "difusion",
+      "conocimiento"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_investigative_world_cafe"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_investigative_world_cafe"
+    ],
     "normalized_mechanism": "transferir_conocimiento_rotacion_grupos",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_simple_ethnography",
@@ -295,13 +563,28 @@
     "template": "Observar en contexto natural → Anotar comportamientos → Identificar patrones → Compartir hallazgos.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "investigacion", "puntos_de_vista"],
-    "tags": ["etnografia", "observacion", "contexto", "inmersivo"],
+    "categories": [
+      "facilitacion",
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "etnografia",
+      "observacion",
+      "contexto",
+      "inmersivo"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ideo_shadowing", "ideo_immersion"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ideo_shadowing",
+      "ideo_immersion"
+    ],
     "normalized_mechanism": "observacion_participante_contexto",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_troika_consulting",
@@ -311,13 +594,27 @@
     "template": "Persona A describe problema → B y C consultan (5 min) → A da la espalda y escucha → A decide acción.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "innovacion", "consultoria"],
-    "tags": ["trio", "consejo", "perspectivas", "rapido"],
+    "categories": [
+      "facilitacion",
+      "innovacion",
+      "consultoria"
+    ],
+    "tags": [
+      "trio",
+      "consejo",
+      "perspectivas",
+      "rapido"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_wise_crowds"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_wise_crowds"
+    ],
     "normalized_mechanism": "consultoria_rapida_trios",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_spiral_journal",
@@ -327,13 +624,27 @@
     "template": "Escribir 2 min → Compartir frase clave → Repetir con nueva profundidad → 3-4 espirales.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "reflexion", "innovacion"],
-    "tags": ["escritura", "reflexion", "iterativo", "espiral"],
+    "categories": [
+      "facilitacion",
+      "reflexion",
+      "innovacion"
+    ],
+    "tags": [
+      "escritura",
+      "reflexion",
+      "iterativo",
+      "espiral"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_conversation_cafe"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_conversation_cafe"
+    ],
     "normalized_mechanism": "escritura_reflexiva_iterativa",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_string_of_pearls",
@@ -343,13 +654,28 @@
     "template": "Presentar proyecto como cadena de perlas (hitos) → Grupo comenta cada perla → Identificar gaps.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "proceso", "innovacion"],
-    "tags": ["secuencia", "fases", "flujo", "hitos"],
+    "categories": [
+      "facilitacion",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "secuencia",
+      "fases",
+      "flujo",
+      "hitos"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["framework_stage_gate", "ls_who_what_when"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "framework_stage_gate",
+      "ls_who_what_when"
+    ],
     "normalized_mechanism": "presentar_proyecto_secuencia_hitos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_panorama",
@@ -359,13 +685,28 @@
     "template": "Presentar panorama amplio → Grupo identifica señales clave → Priorizar para investigación profunda.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "exploracion", "estrategia"],
-    "tags": ["panorama", "contexto", "amplitud", "señales"],
+    "categories": [
+      "facilitacion",
+      "exploracion",
+      "estrategia"
+    ],
+    "tags": [
+      "panorama",
+      "contexto",
+      "amplitud",
+      "señales"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_critical_uncertainties", "framework_pestel"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_critical_uncertainties",
+      "framework_pestel"
+    ],
     "normalized_mechanism": "obtener_vista_amplia_contexto",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_integrated_autonomy",
@@ -375,13 +716,28 @@
     "template": "Identificar qué debe ser autónomo y qué coordinado → Establecer reglas de interfaz → Ejecutar.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "organizacion", "proceso"],
-    "tags": ["autonomia", "coordinacion", "balance", "organizacion"],
+    "categories": [
+      "facilitacion",
+      "organizacion",
+      "proceso"
+    ],
+    "tags": [
+      "autonomia",
+      "coordinacion",
+      "balance",
+      "organizacion"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["framework_agile_scrum", "sec_zero_trust"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "framework_agile_scrum",
+      "sec_zero_trust"
+    ],
     "normalized_mechanism": "balancear_autonomia_coordinacion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "ls_generative_relationships",
@@ -391,12 +747,26 @@
     "template": "Explorar: ¿Qué generamos juntos? → ¿Qué nos bloquea? → ¿Qué necesitamos del otro? → Acuerdos.",
     "source": "liberating_structures",
     "granularity": "facilitation_pattern",
-    "categories": ["facilitacion", "relaciones", "colaboracion"],
-    "tags": ["relaciones", "dinamica", "interaccion", "generativo"],
+    "categories": [
+      "facilitacion",
+      "relaciones",
+      "colaboracion"
+    ],
+    "tags": [
+      "relaciones",
+      "dinamica",
+      "interaccion",
+      "generativo"
+    ],
     "origin": "external",
-    "external_refs": ["lipmanowicz_mccandless_2013"],
-    "related_internal_ids": ["ls_purpose_to_passion"],
+    "external_refs": [
+      "lipmanowicz_mccandless_2013"
+    ],
+    "related_internal_ids": [
+      "ls_purpose_to_passion"
+    ],
     "normalized_mechanism": "fortalecer_relaciones_productivas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   }
 ]

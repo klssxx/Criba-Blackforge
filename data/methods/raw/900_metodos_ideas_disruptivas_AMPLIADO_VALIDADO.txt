@@ -1,0 +1,1056 @@
+MÉTODOS PARA GENERAR IDEAS DISRUPTIVAS — CATÁLOGO COMPLETO
+==========================================================
+
+Rango canónico conservado: 1–800.
+Total de esta versión: 900.
+Los métodos 801–900 son una ampliación nueva organizada en cinco familias.
+
+VALIDACIÓN AUTOMÁTICA
+- Entradas: 900
+- Numeración continua: 1–900
+- Números ausentes: 0
+- Números repetidos: 0
+- Duplicados textuales exactos normalizados: 0
+- Formato: nombre breve — mecanismo operativo
+
+PROTOCOLO DE USO
+- Define un problema concreto.
+- Selecciona de 3 a 7 métodos de familias distintas.
+- Genera al menos una propuesta por método.
+- Combina las propuestas más fuertes.
+- Verifica novedad, utilidad, viabilidad, riesgo y reversibilidad.
+
+FAMILIA 1. Inversión estructural
+
+1. Invertir el objetivo — Definir el resultado opuesto al deseado y usarlo para descubrir caminos ocultos.
+2. Invertir al usuario — Convertir al receptor del valor en productor, validador o distribuidor.
+3. Invertir el pago — Hacer que pague quien obtiene el beneficio indirecto, no quien usa la solución.
+4. Invertir la propiedad — Sustituir posesión permanente por acceso, uso compartido o custodia temporal.
+5. Invertir el flujo — Comenzar por la salida final y reconstruir hacia atrás los pasos mínimos.
+6. Invertir la autoridad — Dar capacidad de decisión al actor que normalmente solo ejecuta órdenes.
+7. Invertir la confianza — Partir de desconfianza verificable y ganar privilegios mediante pruebas.
+8. Invertir la interfaz — Hacer que el sistema formule preguntas y prepare acciones antes de recibir comandos.
+9. Invertir la escasez — Convertir el recurso limitado en abundante y localizar la nueva restricción dominante.
+10. Invertir la espera — Predecir y preparar el resultado antes de que exista una petición explícita.
+11. Invertir el mantenimiento — Diseñar para que el uso revele, corrija o prevenga el desgaste.
+12. Invertir la obsolescencia — Crear un producto cuyo valor aumente con la edad, el historial o la comunidad.
+13. Invertir la recomendación — Mostrar primero qué evitar y por qué, antes de sugerir una opción.
+14. Invertir la formación — Adaptar el sistema al novato en vez de obligar al novato a adaptarse.
+15. Invertir la distribución — Fabricar o ensamblar en el punto de consumo en lugar de transportar el resultado.
+16. Invertir el soporte — Eliminar preventivamente las causas de ayuda en vez de mejorar la atención posterior.
+17. Invertir la documentación — Generar la documentación desde la ejecución real y no desde promesas de diseño.
+18. Invertir el riesgo — Trasladar el riesgo al actor que controla la decisión y puede reducirlo.
+19. Invertir la fidelización — Premiar que el usuario necesite menos el producto, no que dependa más de él.
+20. Invertir la escala — Resolver primero el caso extremo y derivar después una versión para el promedio.
+
+FAMILIA 2. Supuestos y axiomas
+
+21. Inventario de supuestos — Enumerar todo lo que se considera cierto antes de proponer soluciones.
+22. Supuesto cero — Eliminar el supuesto más básico y reconstruir el sistema sin él.
+23. Supuesto heredado — Detectar reglas que existen solo por tradición y no por necesidad actual.
+24. Supuesto invisible — Observar lo que nadie discute porque está integrado en el lenguaje o la interfaz.
+25. Supuesto contractual — Reescribir las obligaciones implícitas entre proveedor, usuario y terceros.
+26. Supuesto tecnológico — Imaginar la misma solución sin la tecnología que hoy parece imprescindible.
+27. Supuesto económico — Cuestionar quién paga, cuándo paga y qué se considera coste.
+28. Supuesto temporal — Eliminar la creencia de que las etapas deben ocurrir en ese orden o momento.
+29. Supuesto de escala — Comprobar si una regla solo funciona porque se piensa en tamaño pequeño o grande.
+30. Supuesto de identidad — Separar lo que alguien es de lo que puede demostrar en una situación concreta.
+31. Supuesto de calidad — Preguntar si la calidad se está midiendo por una señal que ya no representa valor.
+32. Supuesto de normalidad — Diseñar como si el caso excepcional fuese el caso dominante.
+33. Supuesto de propiedad — Examinar por qué algo debe pertenecer a una persona o entidad concreta.
+34. Supuesto de permanencia — Tratar datos, permisos, componentes o relaciones como temporales por defecto.
+35. Supuesto de centralidad — Eliminar la necesidad de un centro coordinador único.
+36. Supuesto de experto — Suponer que no habrá especialistas disponibles para operar la solución.
+37. Supuesto de abundancia — Diseñar como si el recurso barato de hoy fuese escaso mañana.
+38. Supuesto de escasez — Diseñar como si el recurso caro de hoy fuese prácticamente gratuito.
+39. Supuesto moral — Separar restricciones éticas reales de costumbres disfrazadas de principios.
+40. Auditoría de axiomas — Clasificar cada principio en necesario, útil, histórico o arbitrario.
+
+FAMILIA 3. Restricciones extremas
+
+41. Presupuesto cero — Resolver el problema utilizando únicamente recursos ya disponibles.
+42. Tiempo cero — Eliminar preparación, instalación y espera hasta acercarse a una respuesta inmediata.
+43. Personal cero — Diseñar una operación que no requiera equipo permanente.
+44. Datos cero — Crear utilidad sin recopilar información personal persistente.
+45. Código cero — Sustituir software nuevo por reglas, configuraciones o acuerdos.
+46. Hardware cero — Trabajar solo con dispositivos que el usuario ya posee.
+47. Formación cero — Permitir uso correcto sin manual, curso ni acompañamiento.
+48. Error cero por diseño — Impedir estados inválidos en lugar de detectarlos después.
+49. Dependencias cero — Aislar la solución de proveedores, servicios o componentes externos.
+50. Un botón — Concentrar la experiencia completa en una única acción decisiva.
+51. Una pantalla — Eliminar navegación y mostrar solo lo necesario en contexto.
+52. Una función — Reducir el producto al valor esencial que justifica su existencia.
+53. Un minuto — Obligar a completar el flujo principal en sesenta segundos.
+54. Un archivo — Encapsular configuración, estado y evidencia en una unidad portable.
+55. Una oportunidad — Diseñar para un intento único y sin posibilidad de repetir.
+56. Una métrica — Optimizar solo el indicador que mejor representa el resultado real.
+57. Diez veces más rápido — Forzar una arquitectura distinta en vez de una mejora incremental.
+58. Diez veces más barato — Cambiar el modelo operativo hasta que el coste caiga un orden de magnitud.
+59. Solo decisiones reversibles — Bloquear acciones que no puedan deshacerse de forma segura.
+60. Solo tecnología antigua — Innovar usando componentes maduros, baratos y ampliamente disponibles.
+
+FAMILIA 4. Eliminación y simplificación
+
+61. Sustracción sistemática — Eliminar componentes uno a uno y observar cuándo aparece una solución mejor.
+62. Eliminar el paso central — Quitar la fase considerada imprescindible y conectar directamente sus extremos.
+63. Eliminar el intermediario — Permitir interacción directa entre origen y destino.
+64. Eliminar la interfaz — Hacer que el servicio funcione de manera ambiental o automática.
+65. Eliminar la elección — Seleccionar por defecto la opción segura según contexto verificable.
+66. Eliminar la configuración — Inferir parámetros razonables y pedir solo excepciones.
+67. Eliminar la cuenta — Permitir valor sin registro permanente de usuario.
+68. Eliminar la contraseña — Sustituir secretos memorizados por pruebas contextuales o criptográficas.
+69. Eliminar el inventario — Producir o adquirir únicamente cuando existe demanda confirmada.
+70. Eliminar la actualización — Diseñar componentes que evolucionen sin instalaciones destructivas.
+71. Eliminar la sincronización — Hacer que cada parte funcione de forma autónoma y converja después.
+72. Eliminar la notificación — Sustituir interrupciones por información visible en el momento oportuno.
+73. Eliminar la propiedad — Convertir bienes en servicios, acceso o capacidad compartida.
+74. Eliminar la permanencia — Hacer efímeros los datos, permisos y recursos por defecto.
+75. Eliminar la jerarquía — Distribuir decisiones mediante reglas transparentes.
+76. Eliminar el experto — Encapsular conocimiento especializado dentro del proceso.
+77. Eliminar el formulario — Capturar la información a partir de acciones ya realizadas.
+78. Eliminar el catálogo — Generar la opción adecuada en vez de obligar a buscar entre muchas.
+79. Eliminar la marca — Comprobar si el valor se sostiene sin reputación ni estética.
+80. Eliminar la función favorita — Retirar el elemento más valorado para descubrir el verdadero núcleo.
+
+FAMILIA 5. Reordenamiento temporal
+
+81. Retroceso desde el futuro — Definir un estado exitoso y reconstruir las condiciones previas necesarias.
+82. Precompromiso — Tomar decisiones seguras antes de que aparezca presión o tentación.
+83. Ejecución anticipada — Preparar resultados probables antes de recibir la solicitud final.
+84. Verificación previa — Comprobar riesgos antes de permitir que exista el cambio.
+85. Aprendizaje posterior — Dejar que el usuario actúe primero y enseñar solo donde falla.
+86. Pago diferido — Cobrar después de demostrar valor medible.
+87. Pago anticipado inverso — Entregar incentivos por adelantado y recuperar valor con resultados.
+88. Actualización continua — Sustituir versiones grandes por cambios pequeños y reversibles.
+89. Caducidad programada — Hacer que permisos, datos o compromisos expiren automáticamente.
+90. Ventana crítica — Concentrar recursos únicamente en el momento de máximo impacto.
+91. Procesamiento nocturno — Mover trabajo intensivo a periodos de baja demanda.
+92. Entrega progresiva — Proporcionar valor parcial útil mientras se completa el resultado.
+93. Decisión retardada — Posponer compromisos irreversibles hasta disponer de mejor información.
+94. Retroalimentación instantánea — Reducir al mínimo la distancia entre acción y consecuencia.
+95. Feedback diferido — Ocultar señales ruidosas hasta que exista suficiente evidencia.
+96. Ciclo ultracorto — Reducir planificación, prueba y aprendizaje a iteraciones mínimas.
+97. Ciclo largo — Diseñar pensando en décadas y consecuencias acumulativas.
+98. Tiempo elástico — Permitir que cada usuario avance a ritmos distintos sin romper coordinación.
+99. Evento en vez de calendario — Activar procesos por condiciones reales y no por fechas fijas.
+100. Calendario en vez de evento — Programar decisiones antes de que las urgencias dominen.
+
+FAMILIA 6. Reconfiguración espacial
+
+101. Producción en destino — Fabricar o ensamblar donde se consume para reducir transporte y espera.
+102. Procesamiento en el borde — Resolver localmente para disminuir latencia y exposición de datos.
+103. Centro móvil — Llevar el recurso central al lugar donde aparece la necesidad.
+104. Espacio compartido — Hacer que distintos actores utilicen la misma infraestructura en horarios distintos.
+105. Espacio invisible — Integrar la función en superficies, objetos o recorridos ya existentes.
+106. Microespacios — Dividir una instalación grande en unidades pequeñas y cercanas.
+107. Espacio reversible — Permitir que un lugar cambie rápidamente de función.
+108. Zona segura dinámica — Modificar límites de acceso según contexto y evidencia.
+109. Ruta única — Diseñar un flujo físico que impida retroceder o saltarse etapas críticas.
+110. Ruta redundante — Crear caminos alternativos para evitar un único punto de fallo.
+111. Geografía invertida — Mover actividades periféricas al centro y las centrales a la periferia.
+112. Proximidad obligatoria — Exigir presencia física solo en los pasos donde aporta confianza.
+113. Distancia obligatoria — Separar actores para reducir conflicto, contagio o colusión.
+114. Espacio por demanda — Asignar capacidad únicamente cuando existe una necesidad comprobada.
+115. Local primero — Operar sin red y sincronizar solo cuando sea posible.
+116. Global primero — Compartir una capa común y adaptar únicamente los extremos locales.
+117. Espacio como interfaz — Usar posición, recorrido y proximidad como controles.
+118. Descentralización física — Distribuir recursos críticos entre múltiples ubicaciones.
+119. Concentración selectiva — Agrupar únicamente lo que gana eficiencia real al centralizarse.
+120. Gemelo espacial — Crear una réplica digital que permita ensayar cambios antes de aplicarlos.
+
+FAMILIA 7. Cambio de actores y roles
+
+121. Usuario productor — Permitir que quien consume también genere contenido, capacidad o datos útiles.
+122. Cliente auditor — Dar al usuario herramientas para verificar la calidad recibida.
+123. Proveedor asegurador — Hacer que quien presta el servicio asuma parte del riesgo.
+124. Competidor colaborador — Compartir infraestructura no diferenciadora con rivales.
+125. Máquina supervisada — Automatizar la ejecución pero mantener aprobación humana en puntos críticos.
+126. Humano supervisado — Usar sistemas para detectar sesgos, omisiones o inconsistencias humanas.
+127. Comunidad moderadora — Distribuir control y cumplimiento entre participantes.
+128. Experto bajo demanda — Reemplazar puestos permanentes por intervención puntual en excepciones.
+129. Novato como detector — Usar la confusión del principiante para revelar complejidad innecesaria.
+130. Tercero neutral — Introducir un actor que verifique sin participar en el beneficio principal.
+131. Actor rotatorio — Cambiar periódicamente quién decide para reducir captura y rutina.
+132. Doble aprobación — Separar ejecución y autorización entre personas independientes.
+133. Rol temporal — Conceder capacidades solo durante una tarea concreta.
+134. Rol demostrable — Asignar privilegios por competencias verificadas, no por título.
+135. Rol inverso — Hacer que directivos ejecuten tareas de primera línea de forma periódica.
+136. Usuario ausente — Diseñar como si la persona no pudiera intervenir en tiempo real.
+137. Actor sintético — Introducir agentes simulados para explorar comportamientos emergentes.
+138. Beneficiario oculto — Identificar quién obtiene valor sin aparecer en la transacción.
+139. Perjudicado como diseñador — Incluir a quien soporta externalidades en la creación de la solución.
+140. Actor eliminable — Rediseñar el proceso para que cualquier participante pueda ser sustituido.
+
+FAMILIA 8. Cambio de incentivos
+
+141. Pagar por resultado — Vincular ingresos al efecto conseguido y no a la actividad realizada.
+142. Premiar la prevención — Incentivar que el problema no llegue a ocurrir.
+143. Cobrar por desperdicio — Hacer visible y costoso el uso ineficiente de recursos.
+144. Recompensar la salida — Facilitar y premiar que el usuario deje de necesitar el servicio.
+145. Incentivo colectivo — Pagar cuando mejora el resultado del grupo, no solo el individual.
+146. Incentivo diferido — Entregar la recompensa después de comprobar permanencia del resultado.
+147. Incentivo reversible — Recuperar beneficios si se incumplen condiciones acordadas.
+148. Bono por honestidad — Premiar la declaración temprana de errores o incertidumbre.
+149. Penalización al controlador — Asignar el coste del fallo a quien podía evitarlo.
+150. Prestigio verificable — Sustituir popularidad por pruebas públicas de buen desempeño.
+151. Mercado de predicciones — Usar apuestas informadas para agregar conocimiento disperso.
+152. Precio dinámico ético — Ajustar coste según capacidad, impacto y contexto, con reglas auditables.
+153. Subsidio entre segmentos — Financiar a usuarios de alto valor social con ingresos de otros segmentos.
+154. Depósito de compromiso — Bloquear un recurso que se recupera al cumplir la conducta prevista.
+155. Recompensa por compartir — Premiar contribuciones que aumenten valor para otros participantes.
+156. Recompensa por reducir uso — Cobrar menos a quien consume menos o evita demanda punta.
+157. Incentivo antiadicción — Optimizar bienestar y no tiempo de permanencia.
+158. Competencia cooperativa — Hacer que equipos compitan en resultados pero compartan descubrimientos.
+159. Incentivo por evidencia — Recompensar decisiones respaldadas por datos reproducibles.
+160. Incentivo por reversibilidad — Dar ventaja a opciones que mantienen abiertas alternativas futuras.
+
+FAMILIA 9. Analogías intersectoriales
+
+161. Hospital aplicado a software — Usar triaje, diagnóstico y aislamiento para gestionar incidencias técnicas.
+162. Aviación aplicada a operaciones — Adoptar listas de comprobación y cajas negras para tareas críticas.
+163. Logística aplicada a información — Tratar datos como inventario con rutas, pérdidas y tiempos de entrega.
+164. Seguros aplicados a producto — Distribuir riesgo mediante primas, franquicias y cobertura condicional.
+165. Restauración aplicada a servicios — Diseñar capacidad, reservas y rotación como si fueran mesas y cocina.
+166. Agricultura aplicada a talento — Cultivar capacidades con ciclos, temporadas y diversidad.
+167. Urbanismo aplicado a interfaces — Diseñar navegación como calles, plazas, señales y barrios.
+168. Ecología aplicada a empresas — Modelar nichos, competencia, simbiosis y resiliencia.
+169. Teatro aplicado a experiencia — Construir escenas, transiciones, backstage y momentos culminantes.
+170. Juegos aplicados a aprendizaje — Usar niveles, feedback, retos y dominio progresivo.
+171. Bibliotecas aplicadas a datos — Catalogar, prestar, conservar y retirar información con reglas claras.
+172. Banca aplicada a reputación — Tratar confianza como capital que se deposita, audita y arriesga.
+173. Justicia aplicada a algoritmos — Separar acusación, defensa, evidencia y decisión.
+174. Arquitectura aplicada a procesos — Diseñar cimientos, cargas, circulaciones y zonas de fallo.
+175. Música aplicada a coordinación — Usar ritmo, pausas, armonía y variación para sincronizar equipos.
+176. Deporte aplicado a ventas — Separar entrenamiento, estrategia, ejecución y revisión de jugadas.
+177. Meteorología aplicada a riesgo — Trabajar con probabilidades, alertas y escenarios cambiantes.
+178. Mantenimiento industrial aplicado a salud — Usar condición, desgaste y mantenimiento predictivo.
+179. Ciberseguridad aplicada a organización — Gestionar permisos, segmentación y mínimos privilegios en equipos.
+180. Museos aplicados a comercio — Curar pocas opciones con relato en lugar de mostrar catálogos infinitos.
+
+FAMILIA 10. Biomimética
+
+181. Colmena distribuida — Coordinar decisiones locales simples que produzcan orden global.
+182. Hormiguero explorador — Enviar múltiples exploradores baratos y reforzar las rutas exitosas.
+183. Sistema inmune — Detectar anomalías, aislar amenazas y conservar memoria de ataques.
+184. Bosque resiliente — Favorecer diversidad y redundancia frente a monocultivos eficientes pero frágiles.
+185. Micelio conectivo — Crear una red oculta que redistribuya recursos entre nodos.
+186. Piel autorreparable — Diseñar materiales o software capaces de cerrar daños menores.
+187. Semilla durmiente — Mantener capacidad inactiva hasta que aparezcan condiciones adecuadas.
+188. Bandada coordinada — Lograr movimiento colectivo mediante pocas reglas locales.
+189. Mutación controlada — Introducir variaciones pequeñas y conservar solo las que mejoran adaptación.
+190. Depredador como regulador — Usar presión selectiva para evitar crecimiento descontrolado.
+191. Simbiosis obligatoria — Hacer que dos actores solo prosperen cuando colaboran.
+192. Metamorfosis — Permitir que el producto cambie completamente de forma según la etapa.
+193. Homeostasis — Mantener variables clave dentro de rangos mediante retroalimentación.
+194. Caparazón modular — Proteger el núcleo y permitir reemplazar capas externas.
+195. Raíz oportunista — Dirigir recursos hacia zonas donde aparece mayor disponibilidad.
+196. Migración estacional — Mover capacidad según ciclos previsibles de demanda.
+197. Camuflaje contextual — Adaptar apariencia o comportamiento al entorno sin perder identidad.
+198. Fotosíntesis de residuos — Convertir entradas de bajo valor en energía o utilidad.
+199. Enjambre reparador — Usar muchas unidades pequeñas para mantener una infraestructura grande.
+200. Evolución convergente — Buscar soluciones similares surgidas independientemente en contextos distintos.
+
+FAMILIA 11. Contradicciones TRIZ
+
+201. Más velocidad, menos daño — Buscar un mecanismo que aumente rapidez sin elevar el riesgo.
+202. Más control, menos fricción — Separar supervisión continua de interrupción constante.
+203. Más personalización, menos datos — Adaptar mediante procesamiento local o señales mínimas.
+204. Más seguridad, menos complejidad — Eliminar decisiones peligrosas en vez de añadir controles.
+205. Más capacidad, menos tamaño — Reorganizar estructura, densidad o uso temporal.
+206. Más variedad, menos inventario — Generar bajo demanda a partir de componentes comunes.
+207. Más calidad, menos coste — Prevenir defectos en origen y reutilizar evidencia.
+208. Más autonomía, más gobernanza — Permitir libertad dentro de límites verificables.
+209. Más transparencia, más privacidad — Revelar procesos y pruebas sin exponer contenido sensible.
+210. Más robustez, menos material — Usar geometría, redundancia selectiva o estructuras tensadas.
+211. Más precisión, menos medición — Inferir variables difíciles mediante proxies fiables.
+212. Más acceso, menos abuso — Otorgar permisos graduales según pruebas de comportamiento.
+213. Más integración, menos acoplamiento — Compartir estándares y desacoplar implementaciones.
+214. Más innovación, más estabilidad — Experimentar en capas aisladas sin tocar el núcleo.
+215. Más participación, menos ruido — Filtrar aportaciones mediante reputación o evidencia.
+216. Más automatización, más control humano — Reservar aprobación humana para decisiones irreversibles.
+217. Más rapidez, más reflexión — Automatizar lo rutinario y frenar solo los puntos críticos.
+218. Más apertura, más protección — Abrir interfaces y proteger activos internos.
+219. Más vida útil, más actualización — Diseñar componentes sustituibles y compatibilidad progresiva.
+220. Más escala, más cercanía — Centralizar infraestructura y descentralizar relación.
+
+FAMILIA 12. SCAMPER profundo
+
+221. Sustituir la materia prima — Cambiar el recurso base por otro más abundante o renovable.
+222. Sustituir el canal — Mover la interacción al medio donde ya está el usuario.
+223. Sustituir la evidencia — Reemplazar declaraciones por pruebas observables.
+224. Sustituir el actor — Intercambiar humano, máquina, comunidad o tercero neutral.
+225. Combinar etapas — Fusionar pasos que no necesitan separación real.
+226. Combinar productos — Unir ofertas usadas consecutivamente por el mismo objetivo.
+227. Combinar incentivos — Alinear recompensa individual, colectiva y de largo plazo.
+228. Combinar datos — Cruzar fuentes complementarias sin centralizar información sensible.
+229. Adaptar una solución vecina — Trasladar un mecanismo probado desde un sector cercano.
+230. Adaptar una solución lejana — Importar una lógica desde un campo aparentemente incompatible.
+231. Modificar la escala — Cambiar radicalmente tamaño, volumen o duración.
+232. Modificar la frecuencia — Pasar de uso ocasional a continuo o al contrario.
+233. Modificar la visibilidad — Hacer visible lo oculto u ocultar lo que distrae.
+234. Proponer otro uso — Reutilizar capacidades existentes para un problema distinto.
+235. Proponer otro beneficiario — Encontrar valor para un actor que no era el objetivo inicial.
+236. Eliminar una dependencia — Quitar el proveedor o recurso que limita autonomía.
+237. Eliminar una decisión — Convertir una elección repetitiva en regla automática.
+238. Reordenar el flujo — Cambiar la secuencia hasta reducir esperas y transferencias.
+239. Reordenar prioridades — Optimizar primero seguridad, aprendizaje o confianza en vez de velocidad.
+240. Revertir la relación — Cambiar quién solicita, quién ofrece y quién demuestra.
+
+FAMILIA 13. Morfología combinatoria
+
+241. Matriz de actores y canales — Cruzar cada actor posible con cada medio de interacción.
+242. Matriz de funciones y momentos — Asignar funciones a distintas etapas temporales.
+243. Matriz de recursos y restricciones — Explorar qué recurso resuelve mejor cada limitación.
+244. Matriz de datos y decisiones — Relacionar cada dato con la decisión exacta que habilita.
+245. Matriz de riesgos y controles — Emparejar amenazas con mecanismos preventivos, detectivos y correctivos.
+246. Matriz de escalas — Probar la solución en tamaño individual, comunitario, industrial y global.
+247. Matriz de propiedad — Combinar propiedad privada, compartida, pública y temporal.
+248. Matriz de automatización — Decidir qué partes ejecuta humano, máquina o sistema híbrido.
+249. Matriz de confianza — Asignar distintos niveles de prueba a cada transición.
+250. Matriz de localización — Distribuir procesos entre dispositivo, borde, nube y humano.
+251. Cruce de extremos — Combinar los valores máximos de dos dimensiones.
+252. Cruce de mínimos — Diseñar con mínimos simultáneos de coste, tiempo y datos.
+253. Cruce imposible — Unir opciones que normalmente se consideran incompatibles.
+254. Cruce asimétrico — Dar capacidades distintas a actores según riesgo y contexto.
+255. Combinación aleatoria filtrada — Generar cruces al azar y evaluar solo los que rompen supuestos.
+256. Combinación evolutiva — Mezclar soluciones prometedoras y conservar rasgos superiores.
+257. Combinación por ausencia — Diseñar omitiendo simultáneamente dos componentes habituales.
+258. Combinación por conflicto — Elegir parejas de variables que se obstaculizan mutuamente.
+259. Combinación por complementariedad — Unir elementos cuyos residuos o límites se compensan.
+260. Combinación por reversibilidad — Preferir configuraciones que puedan separarse sin daño.
+
+FAMILIA 14. Exaptación y usos inesperados
+
+261. Reutilizar una función secundaria — Convertir un efecto lateral útil en el propósito principal.
+262. Reutilizar un residuo — Transformar desechos físicos, digitales o temporales en insumo.
+263. Reutilizar una infraestructura ociosa — Dar uso alternativo a activos durante periodos vacíos.
+264. Reutilizar datos operativos — Extraer valor de información ya producida por el proceso.
+265. Reutilizar errores — Usar fallos recurrentes como sensores de necesidades ocultas.
+266. Reutilizar una comunidad — Aplicar una red existente a una nueva clase de problema.
+267. Reutilizar capacidad nocturna — Mover trabajo a franjas de baja demanda.
+268. Reutilizar reputación — Permitir que la confianza demostrada se transfiera entre contextos.
+269. Reutilizar calor o energía — Capturar pérdidas energéticas para alimentar otra función.
+270. Reutilizar trayectos — Añadir valor logístico a movimientos que ya ocurren.
+271. Reutilizar embalajes — Convertir el contenedor en parte funcional del producto.
+272. Reutilizar interfaces — Añadir nuevas capacidades a controles que el usuario ya conoce.
+273. Reutilizar permisos — Derivar capacidades temporales de autorizaciones existentes.
+274. Reutilizar mantenimiento — Convertir revisiones obligatorias en oportunidades de mejora.
+275. Reutilizar espera — Transformar tiempos muertos en aprendizaje, validación o preparación.
+276. Reutilizar excedentes — Canalizar sobreproducción hacia usos complementarios.
+277. Reutilizar modelos — Adaptar una representación entrenada para tareas vecinas.
+278. Reutilizar espacio residual — Aprovechar huecos físicos o digitales no diseñados para uso.
+279. Reutilizar una obligación — Convertir cumplimiento normativo en ventaja operativa.
+280. Reutilizar una crisis — Transformar capacidad creada para emergencia en servicio permanente.
+
+FAMILIA 15. Diseño adversarial
+
+281. Pensar como atacante — Imaginar cómo se explotaría la solución antes de construirla.
+282. Pensar como competidor — Diseñar la respuesta que haría irrelevante la propuesta actual.
+283. Pensar como saboteador interno — Buscar formas de daño desde posiciones legítimas.
+284. Pensar como usuario oportunista — Explorar cómo maximizar beneficio sin respetar la intención.
+285. Pensar como regulador hostil — Identificar qué aspecto sería bloqueado bajo una interpretación estricta.
+286. Pensar como crítico público — Buscar el punto más difícil de defender ante terceros.
+287. Ataque al supuesto principal — Intentar demostrar falso el fundamento de la idea.
+288. Ataque al incentivo — Comprobar si la recompensa produce conductas no deseadas.
+289. Ataque al dato — Explorar entradas falsas, incompletas o manipuladas.
+290. Ataque al flujo — Buscar saltos, bucles y estados imposibles.
+291. Ataque a la escala — Forzar el sistema con volúmenes extremos.
+292. Ataque al tiempo — Probar retrasos, carreras y decisiones fuera de orden.
+293. Ataque a la dependencia — Simular la caída del proveedor más crítico.
+294. Ataque reputacional — Imaginar una narrativa negativa plausible y verificable.
+295. Ataque de colusión — Evaluar qué ocurre si varios actores cooperan para abusar.
+296. Ataque de captura — Comprobar si un grupo puede apropiarse de la gobernanza.
+297. Ataque de imitación — Analizar qué queda del valor cuando un rival copia la función.
+298. Ataque de abandono — Simular la salida súbita de usuarios, expertos o financiadores.
+299. Ataque jurídico — Buscar obligaciones, responsabilidades y conflictos contractuales.
+300. Ataque de ambigüedad — Identificar decisiones donde dos interpretaciones razonables chocan.
+
+FAMILIA 16. Fracaso y resiliencia
+
+301. Premortem — Imaginar que la idea fracasó y enumerar las causas más probables.
+302. Autopsia comparada — Estudiar fallos de soluciones similares y extraer mecanismos comunes.
+303. Fallo seguro — Diseñar para que el error deje el sistema en un estado controlado.
+304. Degradación elegante — Mantener funciones esenciales cuando faltan recursos.
+305. Modo aislado — Permitir operación mínima sin dependencias externas.
+306. Recuperación automática — Detectar daño y restaurar un estado conocido.
+307. Punto de restauración — Crear hitos reversibles antes de cambios peligrosos.
+308. Redundancia diversa — Usar alternativas que no compartan el mismo modo de fallo.
+309. Prueba de abandono — Operar temporalmente sin el componente más importante.
+310. Simulación de desastre — Ensayar escenarios extremos antes del despliegue.
+311. Tolerancia al error humano — Asumir omisiones, confusiones y acciones accidentales.
+312. Tolerancia al dato corrupto — Aislar información inconsistente sin detener todo el sistema.
+313. Resiliencia económica — Mantener viabilidad ante caída de ingresos o aumento de costes.
+314. Resiliencia social — Evitar que el sistema dependa de una única comunidad o líder.
+315. Resiliencia regulatoria — Diseñar rutas alternativas ante cambios normativos.
+316. Resiliencia temporal — Conservar utilidad durante interrupciones prolongadas.
+317. Resiliencia de conocimiento — Documentar para sobrevivir a la salida de expertos.
+318. Aprendizaje postfallo — Convertir cada incidente en reglas, pruebas y evidencia reutilizable.
+319. Caos controlado — Introducir fallos pequeños para revelar fragilidad antes de una crisis.
+320. Presupuesto de error — Aceptar un nivel medido de fallo para acelerar aprendizaje.
+
+FAMILIA 17. Redes y plataformas
+
+321. Efecto de red directo — Aumentar valor para cada usuario a medida que entran más participantes.
+322. Efecto de red indirecto — Conectar grupos distintos que se benefician mutuamente.
+323. Nodo semilla — Comenzar con participantes capaces de atraer a otros.
+324. Lado escaso primero — Resolver antes el grupo más difícil de incorporar.
+325. Mercado de dos caras — Diseñar reglas distintas para oferta y demanda.
+326. Protocolo abierto — Permitir que terceros construyan sobre una base común.
+327. Interoperabilidad estratégica — Facilitar entrada y salida para acelerar adopción.
+328. Reputación portable — Permitir que la confianza viaje entre servicios.
+329. Gobernanza federada — Coordinar nodos autónomos mediante reglas compartidas.
+330. Red local autosuficiente — Mantener valor incluso con pocos participantes cercanos.
+331. Puerta de enlace — Conectar redes incompatibles sin obligarlas a fusionarse.
+332. Curador de red — Reducir ruido seleccionando participantes o contenidos de calidad.
+333. Incentivo al primer contribuyente — Compensar a quienes crean valor antes de que exista escala.
+334. Coste marginal decreciente — Diseñar para que servir a un usuario adicional cueste casi cero.
+335. Capacidad aportada por usuarios — Hacer que cada participante añada recursos al sistema.
+336. Moderación distribuida — Repartir control entre miembros con reputación verificable.
+337. Antifragmentación — Usar estándares comunes sin imponer una única plataforma.
+338. Salida sin castigo — Permitir exportar datos y relaciones para aumentar confianza.
+339. Mercado de complementos — Crear valor permitiendo productos secundarios de terceros.
+340. Red de respaldo — Usar nodos vecinos para sustituir temporalmente a uno caído.
+
+FAMILIA 18. Modularidad y arquitectura
+
+341. Núcleo mínimo — Conservar estable solo la lógica esencial.
+342. Capas reemplazables — Permitir cambiar interfaz, datos o proveedores sin rehacer el sistema.
+343. Módulos autónomos — Dar a cada unidad entradas, salidas y responsabilidad claras.
+344. Arquitectura celular — Replicar unidades pequeñas que puedan crecer por multiplicación.
+345. Arquitectura fractal — Aplicar las mismas reglas de gobernanza en cada nivel.
+346. Arquitectura efímera — Crear componentes que desaparecen tras cumplir su tarea.
+347. Arquitectura reversible — Hacer que cada cambio tenga un camino claro de retorno.
+348. Doble núcleo — Separar autoridad operativa y autoridad de verificación.
+349. Sin núcleo — Coordinar mediante protocolo en lugar de servidor central.
+350. Bus de eventos — Conectar módulos mediante hechos registrados en vez de llamadas directas.
+351. Contratos explícitos — Definir interfaces verificables entre componentes.
+352. Aislamiento por riesgo — Separar funciones según su potencial de daño.
+353. Aislamiento por frecuencia — Desacoplar operaciones cotidianas de excepciones raras.
+354. Módulo sombra — Probar una nueva lógica en paralelo sin controlar el resultado.
+355. Módulo canario — Desplegar cambios primero en una fracción pequeña.
+356. Composición bajo demanda — Ensamblar capacidades solo cuando se necesitan.
+357. Extensión por plugins — Permitir crecimiento sin modificar el núcleo.
+358. Arquitectura parasitaria — Apoyarse en infraestructura existente sin duplicarla.
+359. Arquitectura simbiótica — Producir valor adicional para la plataforma anfitriona.
+360. Monolito deliberado — Evitar fragmentación cuando la simplicidad supera la flexibilidad.
+
+FAMILIA 19. Datos e información
+
+361. Minimización de datos — Recoger solo la información estrictamente necesaria.
+362. Procesamiento local — Extraer utilidad sin enviar datos sensibles.
+363. Datos efímeros — Eliminar información automáticamente tras completar la tarea.
+364. Prueba sin revelación — Demostrar una condición sin exponer el dato subyacente.
+365. Datos sintéticos — Sustituir información real por ejemplos estadísticamente útiles.
+366. Trazabilidad total — Registrar origen, transformación y uso de cada dato.
+367. Versionado de decisiones — Guardar qué información sustentó cada resultado.
+368. Datos como producto — Asignar responsables, calidad y usuarios a cada conjunto de datos.
+369. Datos como pasivo — Calcular riesgo y coste de conservar información.
+370. Mercado de datos consentido — Permitir intercambio con control y compensación explícita.
+371. Fusión sin centralización — Combinar resultados manteniendo fuentes separadas.
+372. Dato negativo — Registrar ausencias y rechazos que suelen perderse.
+373. Dato contextual — Interpretar una señal según momento, lugar y objetivo.
+374. Dato accionable — Eliminar información que no cambia ninguna decisión.
+375. Dato adversarial — Probar el sistema con entradas diseñadas para confundirlo.
+376. Dato incompleto por diseño — Funcionar razonablemente aunque falten campos.
+377. Dato reversible — Permitir corregir y reconstruir decisiones históricas.
+378. Caducidad informativa — Reducir peso de datos antiguos según su relevancia.
+379. Proveniencia verificable — Firmar o enlazar evidencia con su fuente.
+380. Silencio informativo — No mostrar métricas cuando inducen decisiones peores.
+
+FAMILIA 20. Confianza, identidad y gobernanza
+
+381. Mínimo privilegio — Conceder solo las capacidades necesarias para la tarea actual.
+382. Confianza progresiva — Ampliar permisos según evidencia acumulada.
+383. Identidad contextual — Demostrar atributos concretos sin revelar una identidad completa.
+384. Separación de poderes — Dividir propuesta, ejecución, revisión y aprobación.
+385. Doble llave — Exigir dos actores independientes para acciones críticas.
+386. Gobernanza por protocolo — Sustituir decisiones discrecionales por reglas auditables.
+387. Veto temporal — Permitir detener una acción durante una ventana de revisión.
+388. Mandato caducable — Hacer que toda autoridad expire salvo renovación explícita.
+389. Prueba de trabajo — Exigir esfuerzo verificable antes de conceder influencia.
+390. Prueba de competencia — Asignar capacidad según habilidades demostradas.
+391. Prueba de integridad — Vincular decisiones a registros que no puedan alterarse sin dejar rastro.
+392. Reputación específica — Separar confianza por dominio en vez de usar una puntuación general.
+393. Apelación incorporada — Diseñar una vía clara para revisar decisiones.
+394. Gobernanza experimental — Probar nuevas reglas en ámbitos limitados.
+395. Constitución mínima — Definir pocos principios superiores que limiten cualquier cambio.
+396. Transparencia de proceso — Mostrar cómo se decide sin exponer datos protegidos.
+397. Anonimato responsable — Permitir privacidad con mecanismos contra abuso.
+398. Consentimiento granular — Autorizar usos concretos en vez de aceptar paquetes amplios.
+399. Salida soberana — Garantizar que el usuario pueda recuperar datos y control.
+400. Gobernanza de emergencia — Activar poderes excepcionales con duración y auditoría limitadas.
+
+FAMILIA 21. Modelos de negocio
+
+401. Pago por uso — Cobrar solo cuando se consume capacidad real.
+402. Pago por resultado — Vincular ingresos a un efecto medible.
+403. Suscripción inversa — Reducir la cuota cuando disminuye la necesidad del servicio.
+404. Freemium de capacidad — Ofrecer valor básico y cobrar por escala o control.
+405. Marketplace — Conectar oferta y demanda y monetizar coordinación.
+406. Producto como servicio — Mantener propiedad y vender disponibilidad.
+407. Servicio como producto — Estandarizar una actividad humana para hacerla repetible.
+408. Licencia por riesgo — Ajustar precio según exposición asumida.
+409. Compartición de ahorro — Cobrar una parte del coste evitado.
+410. Subsidio cruzado — Financiar un segmento mediante otro.
+411. Patrocinio funcional — Hacer que un tercero pague por un beneficio indirecto verificable.
+412. Modelo cooperativo — Dar propiedad y decisión a quienes aportan valor.
+413. Modelo de protocolo — Monetizar servicios alrededor de un estándar abierto.
+414. Modelo de garantía — Cobrar por asegurar el cumplimiento de un resultado.
+415. Modelo de recompra — Recuperar productos para reutilizar materiales o componentes.
+416. Precio por confianza — Reducir coste cuando el usuario aporta evidencia de bajo riesgo.
+417. Precio por tiempo — Cobrar según urgencia, reserva o flexibilidad.
+418. Modelo de cartera — Combinar varias fuentes pequeñas para reducir dependencia.
+419. Modelo anticrecimiento — Optimizar margen, resiliencia y utilidad sin perseguir volumen.
+420. Modelo de salida — Crear valor facilitando migración, exportación o cierre ordenado.
+
+FAMILIA 22. Innovación frugal
+
+421. Diseño con lo disponible — Partir de recursos presentes en el entorno.
+422. Reparabilidad primero — Priorizar acceso, piezas comunes y diagnóstico sencillo.
+423. Componentes estándar — Evitar piezas propietarias cuando no aportan valor esencial.
+424. Función esencial — Conservar solo capacidades que resuelven el problema principal.
+425. Producción local — Reducir transporte mediante fabricación cercana.
+426. Mano de obra complementada — Usar herramientas simples para aumentar productividad humana.
+427. Infraestructura compartida — Repartir activos costosos entre múltiples usuarios.
+428. Mantenimiento comunitario — Capacitar a usuarios para reparar y mejorar.
+429. Diseño tolerante — Aceptar variaciones de materiales, energía y habilidad.
+430. Energía mínima — Funcionar con consumo muy bajo o fuentes intermitentes.
+431. Conectividad opcional — Mantener utilidad sin internet continuo.
+432. Formación embebida — Enseñar durante el uso mediante señales contextuales.
+433. Reutilización creativa — Convertir objetos comunes en componentes funcionales.
+434. Pago gradual — Permitir acceso mediante cuotas pequeñas ligadas al uso.
+435. Escala artesanal — Comenzar con procesos manuales antes de automatizar.
+436. Calidad suficiente — Optimizar el nivel que resuelve la necesidad sin sobreingeniería.
+437. Diseño abierto — Compartir instrucciones para facilitar adaptación local.
+438. Logística mínima — Reducir variedad y complejidad de piezas.
+439. Diagnóstico visual — Hacer que fallos sean detectables sin instrumentos especiales.
+440. Actualización incremental — Mejorar por módulos sin sustituir todo el producto.
+
+FAMILIA 23. Experiencia de usuario
+
+441. Valor antes del registro — Entregar utilidad antes de pedir datos personales.
+442. Revelado progresivo — Mostrar complejidad solo cuando se vuelve necesaria.
+443. Camino feliz único — Ofrecer una ruta principal clara y segura.
+444. Prevención contextual — Evitar errores en el momento exacto de la decisión.
+445. Recuperación visible — Explicar cómo deshacer una acción antes de ejecutarla.
+446. Interfaz anticipatoria — Preparar opciones probables sin tomar control irreversible.
+447. Interfaz silenciosa — Reducir interrupciones y mostrar señales en contexto.
+448. Interfaz conversacional — Permitir expresar objetivos en lenguaje natural.
+449. Interfaz tangible — Usar objetos, gestos o espacio físico como controles.
+450. Interfaz adaptable — Cambiar densidad y ayudas según experiencia del usuario.
+451. Modo principiante real — Eliminar funciones avanzadas en lugar de solo ocultarlas.
+452. Modo experto real — Permitir velocidad, automatización y control detallado.
+453. Diseño para confianza — Mostrar evidencia, límites y consecuencias antes de pedir acción.
+454. Diseño para abandono — Facilitar exportar datos y cerrar la cuenta.
+455. Diseño sin culpa — Evitar patrones que castigan al usuario por no volver.
+456. Diseño inclusivo extremo — Resolver primero para limitaciones severas y derivar al resto.
+457. Feedback multisensorial — Usar sonido, tacto y visuales de forma complementaria.
+458. Personalización reversible — Permitir adaptar sin crear dependencia irreversible.
+459. Experiencia por excepción — Automatizar lo normal y pedir atención solo en casos ambiguos.
+460. Microéxito inicial — Dar una victoria útil en los primeros minutos.
+
+FAMILIA 24. Conducta y psicología
+
+461. Arquitectura de elección — Ordenar opciones para favorecer decisiones beneficiosas.
+462. Compromiso previo — Permitir que la persona limite sus futuras opciones.
+463. Norma social verificable — Mostrar conductas reales de pares relevantes.
+464. Feedback inmediato — Conectar acción y consecuencia sin retraso.
+465. Recompensa variable ética — Introducir sorpresa sin fomentar dependencia.
+466. Pérdida evitada — Presentar claramente el coste de no actuar.
+467. Meta mínima — Reducir el primer paso hasta hacerlo casi inevitable.
+468. Identidad aspiracional — Vincular la conducta con el tipo de persona que se desea ser.
+469. Fricción selectiva — Añadir pasos solo a decisiones de alto riesgo.
+470. Fricción eliminada — Quitar obstáculos a conductas deseables.
+471. Ritual de inicio — Crear una señal repetible que active la conducta.
+472. Ritual de cierre — Marcar finalización para reforzar aprendizaje.
+473. Progreso visible — Mostrar avance hacia un resultado concreto.
+474. Comparación consigo mismo — Sustituir competencia social por mejora personal.
+475. Elección diferida — Posponer decisiones impulsivas mediante una pausa configurable.
+476. Recordatorio contextual — Activar la señal en el lugar y momento relevantes.
+477. Recompensa colectiva — Vincular beneficios individuales al éxito del grupo.
+478. Autonomía guiada — Ofrecer opciones reales dentro de límites seguros.
+479. Deshabituación — Cambiar periódicamente señales para evitar automatismos ciegos.
+480. Diseño antiadicción — Optimizar utilidad y bienestar, no permanencia.
+
+FAMILIA 25. Organización y trabajo
+
+481. Equipos por misión — Organizar alrededor de resultados y no departamentos.
+482. Roles rotatorios — Cambiar responsabilidades para evitar dependencia y silos.
+483. Decisión distribuida — Permitir que decida quien posee mejor información local.
+484. Regla de dos niveles — Escalar solo decisiones que superan un umbral de riesgo.
+485. Reunión sustituida — Usar documentos y comentarios antes de convocar.
+486. Reunión invertida — Leer y decidir durante la sesión, no escuchar presentaciones.
+487. Trabajo asíncrono — Separar coordinación de coincidencia horaria.
+488. Semana de mantenimiento — Reservar tiempo periódico para deuda y mejora.
+489. Mercado interno de talento — Permitir que personas se unan temporalmente a proyectos.
+490. Presupuesto descentralizado — Dar recursos pequeños a equipos con límites claros.
+491. Doble carrera — Reconocer influencia técnica sin exigir gestión de personas.
+492. Aprendizaje operativo — Convertir errores reales en material de entrenamiento.
+493. Objetivos antiobjetivo — Definir resultados que no deben perseguirse aunque mejoren métricas.
+494. Equipo sombra — Encargar a otro grupo que diseñe una alternativa independiente.
+495. Red team interno — Asignar explícitamente el papel de refutar planes.
+496. Documentación viva — Actualizar conocimiento desde cambios reales.
+497. Responsabilidad por sistema — Evaluar el diseño del proceso, no culpar solo a individuos.
+498. Salida planificada — Diseñar continuidad antes de que una persona clave se marche.
+499. Tiempo protegido — Bloquear franjas sin interrupciones para trabajo profundo.
+500. Organización modular — Crear unidades pequeñas con contratos claros entre ellas.
+
+FAMILIA 26. Regulación y políticas
+
+501. Sandbox regulatorio — Probar reglas nuevas en un entorno limitado y supervisado.
+502. Regulación por resultados — Definir efectos obligatorios en vez de procesos concretos.
+503. Licencia progresiva — Ampliar permisos según evidencia de cumplimiento.
+504. Caducidad normativa — Hacer que reglas expiren salvo revisión explícita.
+505. Cláusula experimental — Permitir excepciones controladas para aprender.
+506. Cumplimiento por diseño — Integrar obligaciones en la arquitectura del sistema.
+507. Auditoría continua — Sustituir revisiones puntuales por evidencia permanente.
+508. Transparencia selectiva — Publicar decisiones y criterios sin exponer datos sensibles.
+509. Regulación interoperable — Crear estándares compatibles entre jurisdicciones.
+510. Incentivo normativo — Premiar cumplimiento superior en vez de castigar solo infracciones.
+511. Responsabilidad proporcional — Asignar obligaciones según control real sobre el riesgo.
+512. Derecho a explicación útil — Exigir razones accionables y no descripciones técnicas vacías.
+513. Derecho a salida — Garantizar portabilidad y cierre sin bloqueo.
+514. Gobernanza participativa — Incluir afectados directos en la creación de reglas.
+515. Evaluación contrafactual — Comparar la política con lo que ocurriría sin ella.
+516. Regla reversible — Empezar con medidas fáciles de retirar si generan daño.
+517. Política adaptativa — Cambiar umbrales según evidencia y contexto.
+518. Estándar mínimo común — Acordar una base compartida y permitir mejoras locales.
+519. Regulación por capas — Separar obligaciones universales de requisitos según riesgo.
+520. Prueba pública de impacto — Exigir evidencia verificable de efectos reales.
+
+FAMILIA 27. Sostenibilidad y circularidad
+
+521. Desmontaje circular — Facilitar separar materiales y componentes.
+522. Producto reparable — Permitir diagnóstico y sustitución de piezas.
+523. Pasaporte de materiales — Registrar composición, origen y rutas de reutilización.
+524. Bucle cerrado — Recuperar productos para convertirlos en nuevos insumos.
+525. Residuo como recurso — Diseñar una salida útil para cada desperdicio.
+526. Durabilidad modular — Conservar el cuerpo principal y actualizar solo partes.
+527. Uso compartido — Aumentar utilización de activos infrausados.
+528. Mantenimiento predictivo — Intervenir antes del fallo usando señales de condición.
+529. Energía flexible — Adaptar consumo a disponibilidad renovable.
+530. Producción regenerativa — Mejorar el entorno en vez de solo reducir daño.
+531. Logística inversa — Diseñar desde el inicio el retorno de productos.
+532. Envase funcional — Convertir embalaje en parte reutilizable del producto.
+533. Material monocomponente — Reducir mezclas difíciles de reciclar.
+534. Sustitución renovable — Cambiar insumos finitos por recursos regenerables.
+535. Diseño de larga vida — Evitar obsolescencia estética y técnica.
+536. Mercado de segunda vida — Planificar reventa, alquiler o reacondicionamiento.
+537. Huella visible — Mostrar impacto en el momento de decisión.
+538. Suficiencia — Reducir demanda sin reducir bienestar.
+539. Simbiosis industrial — Usar residuos de una organización como insumo de otra.
+540. Circularidad de datos — Reutilizar evidencia y conocimiento sin duplicar recopilación.
+
+FAMILIA 28. IA y automatización
+
+541. Copiloto, no piloto — Usar IA para proponer y dejar aprobación humana en decisiones críticas.
+542. Automatización por excepción — Ejecutar lo normal y escalar solo anomalías.
+543. Modelo pequeño especializado — Sustituir sistemas generales por modelos ligeros en tareas concretas.
+544. Enrutamiento de modelos — Asignar cada tarea al modelo con coste y capacidad adecuados.
+545. Verificación cruzada — Hacer que modelos independientes revisen resultados.
+546. IA con herramientas — Combinar razonamiento con acciones verificables.
+547. Memoria limitada — Conservar solo contexto útil y caducable.
+548. Aprendizaje humano en el bucle — Usar correcciones reales para mejorar políticas.
+549. Generación con restricciones — Bloquear salidas que violen reglas estructurales.
+550. IA local — Procesar datos sensibles en el dispositivo.
+551. IA federada — Aprender de múltiples nodos sin centralizar datos.
+552. Agente con presupuesto — Limitar tiempo, coste, permisos y alcance.
+553. Agente reversible — Registrar y poder deshacer cada acción.
+554. Agente constitucional — Someter decisiones a principios superiores verificables.
+555. Modelo sombra — Comparar una nueva IA sin darle control.
+556. Consenso de agentes — Aceptar resultados solo cuando convergen revisores diversos.
+557. Explicación operativa — Mostrar evidencia y pasos reproducibles, no solo texto persuasivo.
+558. Detección de incertidumbre — Escalar cuando el sistema no puede justificar confianza.
+559. Automatización frugal — Usar reglas simples antes de aplicar IA compleja.
+560. IA como simulador — Probar estrategias en escenarios sintéticos antes de actuar.
+
+FAMILIA 29. Ciberseguridad
+
+561. Zero Trust — Verificar cada acceso sin confiar por ubicación o identidad previa.
+562. Defensa en profundidad — Superponer controles independientes.
+563. Segmentación — Limitar el alcance de una intrusión.
+564. Privilegio temporal — Conceder permisos solo durante la tarea.
+565. Capacidad efímera — Crear credenciales que desaparecen tras usarse.
+566. Aislamiento por ejecución — Ejecutar cambios en entornos desechables.
+567. Prueba antes de despliegue — Verificar artefactos en aislamiento antes de promoverlos.
+568. Registro encadenado — Vincular eventos para detectar alteraciones.
+569. Rotación automática — Cambiar secretos y claves sin intervención manual.
+570. Secreto dividido — Requerir varias partes para reconstruir una credencial.
+571. Autorización contextual — Evaluar dispositivo, riesgo, tarea y momento.
+572. Engaño defensivo — Crear señuelos que revelen atacantes.
+573. Superficie mínima — Eliminar servicios, puertos y funciones innecesarias.
+574. Fail closed — Bloquear por defecto cuando la verificación falla.
+575. Fail safe — Mantener funciones esenciales sin exponer privilegios.
+576. Verificación reproducible — Permitir reconstruir y comprobar artefactos.
+577. Atestación remota — Demostrar el estado de un sistema sin inspección directa.
+578. Control de salida — Limitar qué información puede abandonar cada zona.
+579. Ruta unidireccional — Impedir que datos críticos retrocedan hacia zonas menos seguras.
+580. Consentimiento de alto riesgo — Exigir aprobación informada para operaciones críticas.
+
+FAMILIA 30. Prospectiva y escenarios
+
+581. Escenario tendencial — Extender fuerzas actuales hasta observar tensiones futuras.
+582. Escenario de ruptura — Introducir un cambio brusco y explorar consecuencias.
+583. Escenario de colapso — Diseñar para pérdida prolongada de recursos o instituciones.
+584. Escenario de abundancia — Suponer coste casi cero del recurso central.
+585. Escenario de escasez — Suponer desaparición del recurso principal.
+586. Escenario regulado — Imaginar control normativo extremo.
+587. Escenario desregulado — Imaginar ausencia casi total de restricciones.
+588. Escenario local — Priorizar autosuficiencia y proximidad.
+589. Escenario global — Asumir coordinación e interoperabilidad planetarias.
+590. Escenario de automatización — Suponer que la mayor parte del trabajo rutinario desaparece.
+591. Escenario de desconfianza — Diseñar para instituciones con legitimidad baja.
+592. Escenario climático — Incorporar calor, migración y volatilidad de recursos.
+593. Escenario demográfico — Explorar envejecimiento, urbanización o despoblación.
+594. Escenario tecnológico inverso — Imaginar retroceso o prohibición de tecnologías actuales.
+595. Escenario de soberanía digital — Asumir control local de datos e infraestructura.
+596. Escenario de identidad fluida — Diseñar para roles y afiliaciones cambiantes.
+597. Escenario multipolar — Coordinar entre bloques con estándares incompatibles.
+598. Escenario de hiperpersonalización — Ofrecer una solución diferente a cada individuo.
+599. Escenario de anonimato — Operar sin identidades persistentes.
+600. Escenario deseable — Partir del futuro preferido y retroceder hasta acciones presentes.
+
+FAMILIA 31. Contrafactuales históricos
+
+601. Sin internet — Imaginar cómo evolucionaría el problema sin conectividad global.
+602. Sin smartphones — Diseñar una solución que no dependa de pantallas personales.
+603. Sin combustibles fósiles — Reconstruir logística y producción con energía limitada.
+604. Sin patentes — Explorar competencia basada en ejecución y servicio.
+605. Sin publicidad — Crear adquisición y financiación sin atención pagada.
+606. Sin bancos — Diseñar confianza, ahorro y crédito por otros medios.
+607. Sin estados nacionales — Imaginar gobernanza basada en redes o ciudades.
+608. Sin grandes empresas — Resolver mediante cooperativas y microproductores.
+609. Sin universidades — Rediseñar acreditación y aprendizaje.
+610. Sin dinero físico — Explorar pagos totalmente digitales y sus riesgos.
+611. Sin nube — Construir infraestructura local y federada.
+612. Sin trabajo fijo — Diseñar protección e ingresos para carreras fragmentadas.
+613. Sin propiedad intelectual — Competir mediante comunidad, marca o velocidad.
+614. Sin cadenas globales — Producir con recursos locales.
+615. Sin anonimato — Analizar efectos de identidad permanente.
+616. Sin privacidad — Diseñar salvaguardas en un entorno de exposición total.
+617. Sin crecimiento económico — Optimizar bienestar dentro de recursos estables.
+618. Sin energía barata — Priorizar eficiencia y baja potencia.
+619. Sin expertos — Distribuir conocimiento en herramientas y protocolos.
+620. Sin confianza institucional — Basar coordinación en evidencia verificable.
+
+FAMILIA 32. Ciencia ficción aplicada
+
+621. Teleportación simulada — Eliminar transporte mediante fabricación o presencia remota.
+622. Memoria externa total — Diseñar como si todo pudiera recordarse y buscar qué debería olvidarse.
+623. Identidades múltiples — Permitir que una persona opere con roles completamente separados.
+624. Objetos inteligentes — Hacer que cada producto informe estado y necesidades.
+625. Ciudades autónomas — Imaginar servicios que se coordinan sin control central.
+626. Materiales programables — Diseñar productos capaces de cambiar de forma o función.
+627. Trabajo posthumano — Explorar valor y propósito cuando la automatización domina.
+628. Economía de reputación — Usar confianza verificable como principal medio de acceso.
+629. Mercados predictivos totales — Asignar recursos según probabilidades agregadas.
+630. Privacidad perfecta — Diseñar servicios sin capacidad de observar al usuario.
+631. Transparencia perfecta — Diseñar instituciones donde toda decisión sea auditable.
+632. Longevidad extrema — Crear productos y contratos para vidas de cien años.
+633. Colonias aisladas — Diseñar autosuficiencia con recursos limitados.
+634. Realidad aumentada ubicua — Integrar información en el entorno en vez de pantallas.
+635. Agentes delegados — Permitir que representantes digitales negocien en nombre del usuario.
+636. Gemelos digitales personales — Simular consecuencias antes de tomar decisiones.
+637. Producción molecular ficticia — Suponer fabricación instantánea y buscar qué valor permanece.
+638. Comunicación sin lenguaje — Diseñar interacción mediante señales, gestos o estados.
+639. Gobierno algorítmico limitado — Automatizar reglas y reservar excepciones a humanos.
+640. Mundo posescasez — Explorar problemas que sobreviven cuando bienes básicos abundan.
+
+FAMILIA 33. Paradojas y tensiones
+
+641. Control mediante libertad — Definir límites claros y permitir autonomía dentro de ellos.
+642. Seguridad mediante apertura — Usar revisión pública para detectar fallos.
+643. Privacidad mediante transparencia — Exponer procesos mientras se oculta contenido.
+644. Velocidad mediante pausa — Detenerse solo en puntos que previenen grandes retrabajos.
+645. Simplicidad mediante complejidad interna — Ocultar sofisticación detrás de una experiencia mínima.
+646. Estabilidad mediante cambio — Introducir ajustes pequeños y continuos.
+647. Escala mediante descentralización — Replicar unidades autónomas en vez de ampliar un centro.
+648. Personalización mediante estandarización — Usar módulos comunes combinables.
+649. Confianza mediante desconfianza — Verificar por defecto para reducir disputas.
+650. Abundancia mediante límites — Crear más valor concentrando recursos en menos opciones.
+651. Crecimiento mediante reducción — Eliminar líneas poco valiosas para liberar capacidad.
+652. Cooperación mediante competencia — Premiar resultados comparables y compartir aprendizajes.
+653. Autonomía mediante reglas — Usar protocolos para evitar supervisión constante.
+654. Calidad mediante velocidad — Acortar ciclos para detectar errores antes.
+655. Innovación mediante restricciones — Limitar recursos para forzar nuevas arquitecturas.
+656. Transparencia mediante abstracción — Mostrar lo relevante y ocultar detalles irrelevantes.
+657. Resiliencia mediante fragilidad local — Permitir fallos pequeños para evitar fallos sistémicos.
+658. Individualización mediante comunidad — Usar aportaciones colectivas para adaptar experiencias.
+659. Permanencia mediante reemplazo — Conservar identidad mientras se sustituyen componentes.
+660. Precisión mediante incertidumbre — Expresar probabilidades para evitar falsas certezas.
+
+FAMILIA 34. Escala y crecimiento
+
+661. Escalar por replicación — Copiar unidades pequeñas autosuficientes.
+662. Escalar por plataforma — Permitir que terceros añadan capacidad.
+663. Escalar por automatización — Reducir trabajo humano por unidad.
+664. Escalar por estandarización — Definir interfaces comunes y variación interna.
+665. Escalar por federación — Coordinar entidades autónomas.
+666. Escalar por licencias — Transferir método y marca a operadores locales.
+667. Escalar por comunidad — Hacer que usuarios enseñen, soporten y creen.
+668. Escalar por autoservicio — Permitir adopción sin intervención comercial.
+669. Escalar por especialización — Dividir tareas y optimizar cada una.
+670. Escalar por simplificación — Reducir variantes antes de aumentar volumen.
+671. Escalar por densidad — Aumentar utilización de infraestructura existente.
+672. Escalar por tiempo — Repartir demanda entre horarios distintos.
+673. Escalar por compatibilidad — Integrarse con sistemas ya desplegados.
+674. Escalar por evidencia — Usar resultados demostrados para acelerar confianza.
+675. Escalar hacia abajo — Adaptar la solución a unidades más pequeñas y baratas.
+676. No escalar — Optimizar valor local, resiliencia y margen.
+677. Escala reversible — Poder reducir capacidad sin colapso.
+678. Escala selectiva — Aumentar solo componentes con economías reales.
+679. Escala híbrida — Centralizar infraestructura y descentralizar servicio.
+680. Escala por protocolo — Expandir mediante reglas compartidas en vez de una organización única.
+
+FAMILIA 35. Mercado y competencia
+
+681. Crear una categoría — Definir un problema que no encaja en segmentos existentes.
+682. Cambiar la unidad de valor — Cobrar por resultado, tiempo, acceso o riesgo en vez de producto.
+683. No cliente primero — Diseñar para quienes hoy no pueden o no quieren comprar.
+684. Segmento extremo — Resolver necesidades intensas y luego simplificar.
+685. Competir con no consumo — Hacer accesible algo que antes no se hacía.
+686. Competir con trabajo manual — Automatizar una tarea que no se considera mercado.
+687. Cooperar en infraestructura — Compartir lo básico y competir en experiencia.
+688. Mercado de nichos conectados — Unir pequeños segmentos mediante una plataforma común.
+689. Oferta invertida — Dejar que la demanda publique necesidades y los proveedores respondan.
+690. Precio transparente — Mostrar coste, margen y razones del precio.
+691. Precio negociado por agente — Automatizar acuerdos según preferencias.
+692. Garantía radical — Asumir riesgo para reducir duda de compra.
+693. Prueba antes de compra — Permitir experimentar valor real.
+694. Salida como ventaja — Competir haciendo fácil cambiar de proveedor.
+695. Compatibilidad como ventaja — Crecer integrándose con competidores.
+696. Marca sin producto — Construir confianza y curación sobre ofertas de terceros.
+697. Producto sin marca — Competir por utilidad verificable y bajo coste.
+698. Mercado temporal — Activar oferta solo durante ventanas concretas.
+699. Mercado comunitario — Dar propiedad o gobernanza a compradores y vendedores.
+700. Mercado preventivo — Cobrar por evitar que aparezca la necesidad.
+
+FAMILIA 36. Comunidad y participación
+
+701. Co-diseño — Incluir usuarios en decisiones tempranas.
+702. Presupuesto participativo — Permitir que la comunidad asigne recursos.
+703. Moderación por pares — Distribuir control entre miembros reputados.
+704. Conocimiento comunitario — Construir documentación desde casos reales.
+705. Recompensa a contribuidores — Compartir valor con quienes mejoran el sistema.
+706. Gobernanza por delegación — Permitir ceder voto a personas de confianza.
+707. Círculos locales — Organizar grupos pequeños con autonomía.
+708. Consenso aproximado — Avanzar sin unanimidad cuando existe apoyo suficiente.
+709. Derecho a bifurcar — Permitir que una comunidad cree su propia versión.
+710. Rituales compartidos — Reforzar identidad y coordinación mediante prácticas repetidas.
+711. Mentoría en cadena — Cada persona formada ayuda a formar a la siguiente.
+712. Banco de tiempo — Intercambiar horas en lugar de dinero.
+713. Propiedad colectiva — Vincular participación con derechos sobre el sistema.
+714. Reputación multidimensional — Separar confianza técnica, social y organizativa.
+715. Comunidades temporales — Formar grupos que desaparecen tras resolver una misión.
+716. Jurados ciudadanos — Usar muestras diversas para evaluar decisiones.
+717. Prueba comunitaria — Validar soluciones mediante adopción y evidencia local.
+718. Conflicto productivo — Diseñar espacios donde desacuerdo produzca opciones mejores.
+719. Archivo común — Conservar decisiones, razones y aprendizajes.
+720. Salida sin ruptura — Permitir abandonar sin perder contribuciones ni relaciones.
+
+FAMILIA 37. Materiales y fabricación
+
+721. Material multifunción — Usar una misma sustancia para estructura, aislamiento o señalización.
+722. Geometría en vez de masa — Ganar resistencia mediante forma y no más material.
+723. Fabricación aditiva — Crear solo el volumen necesario.
+724. Fabricación distribuida — Producir cerca del usuario con diseños compartidos.
+725. Personalización masiva — Variar geometría manteniendo procesos comunes.
+726. Diseño para reparación — Facilitar acceso y sustitución de piezas.
+727. Diseño para desmontaje — Separar componentes sin destruirlos.
+728. Material local — Elegir insumos disponibles en la región.
+729. Material reciclado — Convertir residuos en materia prima.
+730. Material biodegradable — Planificar fin de vida seguro.
+731. Material autorreparable — Incorporar mecanismos que cierren daños.
+732. Estructura modular — Ensamblar unidades repetibles.
+733. Herramienta universal — Reducir variedad de útiles necesarios.
+734. Molde reconfigurable — Adaptar producción sin crear utillaje nuevo.
+735. Fabricación bajo demanda — Producir solo con pedido confirmado.
+736. Calidad en proceso — Detectar defectos durante fabricación.
+737. Gemelo de producción — Simular cambios antes de modificar la línea.
+738. Robótica colaborativa — Combinar precisión de máquina y flexibilidad humana.
+739. Tolerancia a variación — Diseñar para materiales y medidas imperfectas.
+740. Producto reconfigurable — Permitir cambiar función mediante piezas móviles o software.
+
+FAMILIA 38. Servicios y operaciones
+
+741. Servicio preventivo — Actuar antes de que el cliente detecte el problema.
+742. Autoservicio guiado — Permitir resolver tareas con apoyo contextual.
+743. Operación por eventos — Activar trabajo cuando aparece una condición real.
+744. Capacidad flexible — Ajustar recursos según demanda.
+745. Cola inteligente — Priorizar por impacto y urgencia.
+746. Resolución en primer contacto — Dar al primer punto suficiente autoridad.
+747. Servicio modular — Combinar bloques según necesidad.
+748. Servicio invisible — Integrar la operación en el flujo habitual.
+749. Operación local — Tomar decisiones cerca del usuario.
+750. Centro de excelencia — Concentrar conocimiento raro y distribuir ejecución.
+751. Turno predictivo — Asignar personal según patrones de demanda.
+752. Mantenimiento basado en condición — Intervenir cuando las señales lo justifican.
+753. Control visual — Hacer estado y problemas visibles de un vistazo.
+754. Poka-yoke — Diseñar procesos que impidan errores comunes.
+755. Trabajo estandarizado adaptable — Definir base común y permitir excepciones justificadas.
+756. Escalado por riesgo — Enviar a expertos solo casos peligrosos.
+757. Cierre con evidencia — No considerar terminado sin prueba verificable.
+758. Operación reversible — Poder deshacer cambios sin interrupción.
+759. Reserva de resiliencia — Mantener capacidad para picos y emergencias.
+760. Postservicio útil — Convertir seguimiento en prevención y aprendizaje.
+
+FAMILIA 39. Metainnovación y cartera
+
+761. Cartera de horizontes — Equilibrar mejoras cercanas, adyacentes y radicales.
+762. Presupuesto de exploración — Reservar recursos para ideas sin retorno inmediato.
+763. Tesis de innovación — Definir qué cambios futuros se consideran plausibles.
+764. Mapa de supuestos — Clasificar ideas según incertidumbres críticas.
+765. Experimento mínimo decisivo — Diseñar la prueba más pequeña que cambie una decisión.
+766. Criterio de abandono — Definir antes cuándo detener una idea.
+767. Criterio de ampliación — Establecer qué evidencia justifica invertir más.
+768. Opciones reales — Mantener varias rutas abiertas con inversiones pequeñas.
+769. Embudo inverso — Comenzar con pocas hipótesis profundas y expandir alternativas.
+770. Embudo amplio — Generar muchas opciones y filtrar por evidencia.
+771. Equipo separado — Proteger exploración de métricas del negocio actual.
+772. Integración gradual — Incorporar innovaciones por capas.
+773. Innovación abierta — Buscar ideas fuera de la organización.
+774. Compra de aprendizaje — Adquirir proyectos pequeños por conocimiento, no ingresos.
+775. Métrica de incertidumbre — Medir cuánto se ha aprendido y no solo cuánto se ha construido.
+776. Revisión predefinida — Evaluar proyectos en hitos con criterios acordados.
+777. Comparación contrafactual — Valorar una idea frente a no hacer nada.
+778. Canibalización voluntaria — Crear el producto que podría sustituir al actual.
+779. Archivo de descartes — Conservar ideas rechazadas y razones.
+780. Metaexperimento — Probar distintos procesos de innovación y comparar resultados.
+
+FAMILIA 40. Exploración aleatoria controlada
+
+781. Palabra aleatoria — Forzar conexiones entre el problema y un término externo.
+782. Objeto aleatorio — Importar propiedades de un objeto cotidiano.
+783. Industria aleatoria — Aplicar la lógica operativa de un sector escogido al azar.
+784. Usuario aleatorio — Diseñar para un perfil inesperado.
+785. Restricción aleatoria — Imponer una limitación no prevista.
+786. Tecnología aleatoria — Combinar la idea con una capacidad emergente o antigua.
+787. Momento aleatorio — Trasladar el uso a otra hora, etapa o ciclo vital.
+788. Lugar aleatorio — Reubicar la solución en un entorno distinto.
+789. Metáfora aleatoria — Interpretar el sistema como organismo, juego, mercado o ritual.
+790. Regla aleatoria — Adoptar temporalmente una norma externa.
+791. Combinación de tres — Cruzar tres elementos elegidos al azar y buscar coherencia.
+792. Mutación de parámetro — Cambiar radicalmente una variable y observar consecuencias.
+793. Sustitución sorpresa — Reemplazar el componente principal por uno inesperado.
+794. Provocación absurda — Aceptar una afirmación imposible y extraer implicaciones útiles.
+795. Error intencional — Introducir un fallo y buscar valor emergente.
+796. Cambio de escala aleatorio — Multiplicar o dividir una dimensión por cien.
+797. Cambio de actor aleatorio — Asignar la función a otra persona, máquina o comunidad.
+798. Cambio de objetivo aleatorio — Optimizar una métrica secundaria durante una iteración.
+799. Selección evolutiva — Generar variantes y conservar las que rompen más supuestos.
+800. Ruleta de prohibiciones — Prohibir temporalmente una solución, recurso o canal evidente.
+
+FAMILIA 41. Intervención causal y diseño contrafactual — AMPLIACIÓN
+
+801. Mapa causal mínimo — Representar solo las variables capaces de cambiar el resultado mediante intervención.
+802. Intervención de palanca — Modificar la causa con mayor efecto indirecto y menor coste operativo.
+803. Gemelo contrafactual — Comparar dos escenarios idénticos salvo por una única decisión.
+804. Contrafactual imposible — Imaginar una condición físicamente imposible para revelar dependencias lógicas.
+805. Causa sustituible — Reemplazar el mecanismo causal conservando el mismo resultado observable.
+806. Efecto desacoplado — Mantener el beneficio eliminando la actividad que tradicionalmente lo produce.
+807. Variable mediadora — Introducir un paso intermedio controlable entre acción y resultado.
+808. Confusor deliberado — Añadir una causa alternativa para comprobar si la explicación actual es robusta.
+809. Prueba de transporte — Aplicar una relación causal en otra población, escala o contexto y medir qué cambia.
+810. Intervención reversible — Diseñar un experimento que permita restaurar el estado previo con evidencia completa.
+811. Intervención secuencial — Dividir un cambio grande en pequeñas decisiones condicionadas por resultados.
+812. Causa latente — Buscar el factor no observado que explica varios síntomas aparentemente independientes.
+813. Efecto retardado — Diseñar valor que aparezca después de que desaparezca la acción inicial.
+814. Causalidad circular útil — Crear un ciclo donde cada mejora refuerce la siguiente sin crecer sin control.
+815. Ruptura del bucle — Identificar el punto mínimo donde cortar una dinámica perjudicial.
+816. Prevenir la causa — Sustituir tratamiento del problema por eliminación de las condiciones que lo generan.
+817. Convertir efecto en sensor — Usar una consecuencia secundaria como señal temprana del estado principal.
+818. Cadena causal visible — Hacer que cada transformación muestre qué entrada la produjo y qué salida habilita.
+819. Responsabilidad causal — Asignar coste y capacidad de corrección al actor que puede modificar la causa.
+820. Cartera contrafactual — Mantener varias explicaciones rivales y financiar experimentos que las separen.
+
+FAMILIA 42. Arquitectura de información y compresión — AMPLIACIÓN
+
+821. Compresión semántica — Reducir una solución a la menor representación que conserve su mecanismo.
+822. Descompresión contextual — Generar detalle únicamente cuando una situación concreta lo exige.
+823. Información por capas — Revelar contenido según necesidad, riesgo y competencia demostrada.
+824. Resumen verificable — Acompañar cada síntesis con enlaces o pruebas que permitan reconstruirla.
+825. Datos como producto perecedero — Definir caducidad, mantenimiento y retirada para cada conjunto de información.
+826. Esquema evolutivo — Permitir que la estructura de datos cambie sin invalidar todo el historial.
+827. Representación dual — Mantener una vista comprensible para humanos y otra ejecutable para máquinas.
+828. Índice antes que contenido — Diseñar primero cómo se encontrará, relacionará y descartará la información.
+829. Consulta como interfaz — Sustituir paneles fijos por preguntas que generan la vista necesaria.
+830. Información negativa — Registrar qué opciones se descartaron, por qué y bajo qué evidencia.
+831. Presupuesto de atención — Limitar cuánta información puede exigir una decisión.
+832. Señal de rareza — Destacar datos atípicos aunque no superen un umbral absoluto.
+833. Proveniencia incorporada — Guardar origen, transformaciones y responsables junto a cada resultado.
+834. Datos divisibles — Repartir información para que ninguna parte revele por sí sola el contenido completo.
+835. Consulta soberana — Ejecutar preguntas aprobadas sobre datos sin entregar copias ni acceso general.
+836. Memoria selectiva — Conservar patrones útiles y eliminar detalles que crean riesgo o ruido.
+837. Olvido demostrable — Permitir verificar que determinada información dejó de estar disponible.
+838. Redundancia semántica — Expresar lo crítico de varias formas independientes para reducir malentendidos.
+839. Traducción con pérdida medida — Adaptar información a otro público declarando qué matices desaparecen.
+840. Catálogo autodepurable — Retirar automáticamente elementos que no aportan decisiones, aprendizaje ni uso.
+
+FAMILIA 43. Diseño de mecanismos y gobernanza — AMPLIACIÓN
+
+841. Regla compatible con incentivos — Diseñar el proceso para que decir la verdad sea la estrategia más conveniente.
+842. Participación voluntaria real — Asegurar que cada actor obtiene más valor entrando que permaneciendo fuera.
+843. Mecanismo resistente a colusión — Mantener resultados aceptables aunque varios participantes coordinen sus respuestas.
+844. Subasta inversa de problemas — Permitir que proveedores compitan por resolver una necesidad definida por resultados.
+845. Mercado de capacidad ociosa — Convertir recursos infrautilizados en oferta temporal verificable.
+846. Voto cuadrático — Aumentar expresión de preferencias intensas sin permitir dominio ilimitado.
+847. Delegación revocable — Permitir transferir decisión por tema y recuperarla en cualquier momento.
+848. Sorteo competente — Elegir responsables al azar dentro de un grupo previamente cualificado.
+849. Veto con depósito — Exigir que bloquear una decisión comprometa un recurso recuperable si la objeción se valida.
+850. Microjurados de gasto — Asignar pequeñas partidas a grupos sorteados entre quienes sufren cada problema.
+851. Contrato con salida automática — Terminar acuerdos cuando métricas verificables dejan de cumplirse.
+852. Cláusula de aprendizaje — Permitir modificar reglas solo cuando existe evidencia documentada de una mejora.
+853. Autoridad temporal — Conceder poder únicamente durante una misión, incidente o ventana definida.
+854. Separación propuesta-ejecución — Impedir que quien diseña una decisión controle también su aplicación.
+855. Revisión por afectados — Dar capacidad de impugnación a quienes soportan costes o externalidades.
+856. Bien común con custodia — Separar propiedad colectiva de operación profesional temporal.
+857. Competencia por confianza — Hacer que proveedores compitan en verificabilidad, reparación y transparencia.
+858. Seguro de reversión — Reservar recursos para deshacer cambios que produzcan daños no previstos.
+859. Dividendo de externalidad — Repartir parte del valor con quienes aportan datos, espacio, riesgo o atención.
+860. Gobernanza bifurcable — Permitir que una comunidad copie reglas y recursos para explorar otra dirección.
+
+FAMILIA 44. Algoritmos de búsqueda y novedad — AMPLIACIÓN
+
+861. Búsqueda por novedad — Puntuar propuestas por diferencia de mecanismo y no solo por rendimiento inmediato.
+862. MAP-Elites creativo — Conservar las mejores ideas de muchas categorías de comportamiento simultáneamente.
+863. Recocido creativo — Alternar fases de alta variación con selección progresivamente más estricta.
+864. Lista tabú conceptual — Bloquear temporalmente familias y soluciones ya dominantes.
+865. Reinicio con memoria negativa — Comenzar de nuevo conservando únicamente rutas fallidas y restricciones aprendidas.
+866. Archivo de diversidad — Mantener ideas raras aunque todavía no superen a las convencionales.
+867. Mutación dirigida por fallo — Cambiar específicamente la parte responsable de una debilidad observada.
+868. Cruce distante — Combinar propuestas con baja similitud semántica y alta complementariedad funcional.
+869. Exploración de frontera — Buscar ideas donde dos familias dejan de explicar correctamente el mecanismo.
+870. Curiosidad predictiva — Priorizar zonas donde el modelo actual no puede anticipar resultados.
+871. Maximización de sorpresa útil — Favorecer resultados inesperados que resuelvan una necesidad real.
+872. Anticlustering — Penalizar grupos de ideas que repiten la misma estructura causal.
+873. Selección por desacuerdo — Explorar propuestas que evaluadores competentes valoran de manera muy distinta.
+874. Oráculo débil combinado — Sumar varias pruebas parciales cuando no existe una evaluación definitiva.
+875. Optimización multiobjetivo — Conservar una frontera de soluciones en vez de forzar una puntuación única.
+876. Simulación de población — Probar cómo compiten y cooperan muchas variantes en un entorno común.
+877. Coevolución de problema y solución — Permitir que las necesidades cambien mientras las propuestas se adaptan.
+878. Minimización de descubrimiento — Reducir una idea novedosa hasta el elemento exacto que causa su valor.
+879. Prueba fuera de distribución — Evaluar la propuesta en contextos ausentes durante su generación.
+880. Genealogía creativa — Registrar qué métodos, ideas y mutaciones originan cada resultado.
+
+FAMILIA 45. Diseño regenerativo y largo plazo — AMPLIACIÓN
+
+881. Diseño regenerativo — Crear una solución que mejore el sistema del que extrae recursos.
+882. Balance de capitales — Medir efectos sobre capital financiero, humano, social, natural y conocimiento.
+883. Presupuesto de carbono incorporado — Contabilizar emisiones de fabricación, uso, mantenimiento y retirada.
+884. Agua positiva — Diseñar operaciones que devuelvan más agua útil de la que consumen.
+885. Biodiversidad neta — Convertir infraestructura o actividad en hábitat adicional verificable.
+886. Material saludable — Eliminar sustancias que impiden reutilización segura o dañan durante el ciclo de vida.
+887. Mapa de separabilidad material — Registrar qué uniones impiden recuperar cada componente y rediseñarlas.
+888. Desmontaje rentable — Hacer que recuperar componentes tenga más valor que desecharlos.
+889. Producto como banco de recursos — Diseñar cada objeto como inventario temporal de materiales recuperables.
+890. Derecho local a reparar — Garantizar piezas, manuales y diagnósticos para talleres independientes.
+891. Vida útil adaptable — Permitir actualizar solo las partes cuya obsolescencia sea real.
+892. Uso en cascada — Reutilizar un recurso sucesivamente en funciones de menor exigencia.
+893. Infraestructura reversible — Construir sin impedir que el lugar recupere otro uso futuro.
+894. Escenario de cien años — Evaluar quién mantendrá, comprenderá y desmantelará la solución a largo plazo.
+895. Custodia intergeneracional — Asignar derechos de revisión a representantes de usuarios futuros.
+896. Indicador de suficiencia — Definir cuánto valor es bastante y detener crecimiento sin propósito.
+897. Economía de mantenimiento — Competir por duración, reparación y coste total, no por reemplazo.
+898. Autonomía territorial mínima — Mantener funciones esenciales con recursos y conocimiento disponibles en el territorio.
+899. Capacidad durmiente — Reservar infraestructura inactiva que pueda reactivarse durante crisis.
+900. Legado verificable — Diseñar para que una persona futura pueda reconstruir decisiones, materiales y riesgos.
