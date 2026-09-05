@@ -1,1 +1,0 @@
-"""IIE techniques sector."""
