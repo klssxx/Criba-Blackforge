@@ -104,3 +104,84 @@ def test_format_report_mentions_real_numbers(tmp_path) -> None:
 def test_refresh_rejects_blank_queries() -> None:
     with pytest.raises(ValueError):
         refresh_sources(["  "], sources=[])
+
+
+# ---------------------------------------------------------------------------
+# CH1-CH7 (megaprompt §21): huella de contenido vs identidad documental
+# ---------------------------------------------------------------------------
+
+from criba.intelligence.contracts import EvidenceFragment  # noqa: E402
+from criba.intelligence.refresh import _doc_content_fingerprint, _doc_identity  # noqa: E402
+
+
+def _rich_doc(**overrides):
+    base = {
+        "doc_id": "kev-2026-1111", "source_id": "cisa_kev",
+        "title": "CVE-2026-1111: inyección de comandos",
+        "kind": "kev_entry", "published": "2026-09-01", "language": "en",
+        "url": "https://nvd.nist.gov/view/vuln/detail?vulnId=CVE-2026-1111",
+        "abstract": "Parchear el dispositivo afectado.",
+        "fragments": [EvidenceFragment(text="Actualizar a la versión 9.1", locator="requiredAction")],
+    }
+    base.update(overrides)
+    return EvidenceDocument(**base)
+
+
+def test_ch1_identical_content_same_hash() -> None:
+    assert _doc_content_fingerprint(_rich_doc()) == _doc_content_fingerprint(_rich_doc())
+
+
+def test_ch2_abstract_change_changes_hash_and_classifies_modified(tmp_path) -> None:
+    a = _rich_doc()
+    b = _rich_doc(abstract="Parchear el dispositivo afectado URGENTEMENTE.")
+    assert _doc_content_fingerprint(a) != _doc_content_fingerprint(b)
+    store = IntelligenceStore(str(tmp_path / "i.sqlite3"))
+    refresh_sources(["q"], store=store, sources=[_StubSource([a])])
+    report = refresh_sources(["q"], store=store, sources=[_StubSource([b])])
+    assert report["totals"]["modificados"] == 1
+
+
+def test_ch3_fragment_change_changes_hash() -> None:
+    a = _rich_doc()
+    b = _rich_doc(fragments=[EvidenceFragment(text="Actualizar a la versión 9.2", locator="requiredAction")])
+    assert _doc_content_fingerprint(a) != _doc_content_fingerprint(b)
+
+
+def test_ch4_volatile_provenance_does_not_change_hash() -> None:
+    a = _rich_doc()
+    b = _rich_doc()
+    b.provenance = ProvenanceRecord(
+        source_id="cisa_kev", url=b.url, method="api", retrieved_at="2099-01-01T00:00:00Z")
+    assert _doc_content_fingerprint(a) == _doc_content_fingerprint(b)
+
+
+def test_ch5_random_fragment_id_does_not_change_hash() -> None:
+    a = _rich_doc()
+    b = _rich_doc(fragments=[EvidenceFragment(
+        text="Actualizar a la versión 9.1", locator="requiredAction",
+        fragment_id="frag-totalmente-distinto-1234")])
+    assert _doc_content_fingerprint(a) == _doc_content_fingerprint(b)
+
+
+def test_ch6_identical_reacquisition_is_duplicate(tmp_path) -> None:
+    store = IntelligenceStore(str(tmp_path / "i.sqlite3"))
+    refresh_sources(["q"], store=store, sources=[_StubSource([_rich_doc()])])
+    report = refresh_sources(["q"], store=store, sources=[_StubSource([_rich_doc()])])
+    assert report["totals"]["duplicados"] == 1
+    assert report["totals"]["nuevos"] == 0
+
+
+def test_ch7_identity_preserved_when_content_changes(tmp_path) -> None:
+    store = IntelligenceStore(str(tmp_path / "i.sqlite3"))
+    refresh_sources(["q"], store=store, sources=[_StubSource([_rich_doc()])])
+    changed = _rich_doc(abstract="Contenido sustantivo nuevo.")
+    refresh_sources(["q"], store=store, sources=[_StubSource([changed])])
+    stored = store.get_document(changed.doc_id)
+    assert stored is not None  # misma identidad documental
+    assert stored["abstract"] == "Contenido sustantivo nuevo."
+
+
+def test_identity_prefers_stable_upstream_id_over_url() -> None:
+    assert _doc_identity(_rich_doc()) == "cisa_kev|id:kev-2026-1111"
+    no_id = _rich_doc(doc_id="doc_aleatorio_123")
+    assert _doc_identity(no_id) == "cisa_kev|url:https://nvd.nist.gov/view/vuln/detail?vulnId=CVE-2026-1111"

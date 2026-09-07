@@ -9,6 +9,7 @@ declara y el informe muestra el bloqueo, nunca «0 errores».
 from __future__ import annotations
 
 import hashlib
+import json
 import time
 from typing import Any
 
@@ -23,10 +24,50 @@ PROFILE_BLACKFORGE = ("cisa_kev", "mitre_attack")
 PROFILE_EXTRA = ("openalex", "arxiv", "epo", "clinicaltrials", "nsf_awards")
 
 
+def _doc_identity(doc: EvidenceDocument) -> str:
+    """Identidad documental: ¿es el mismo recurso upstream?
+
+    Preferencia: identificador estable del adaptador (CVE/DOI/Txxx — los
+    doc_id generados aleatoriamente NO son identidad) → URL canónica →
+    source+título como último recurso. NO describe el contenido.
+    """
+    if doc.doc_id and not doc.doc_id.startswith(("doc_", "kev-unknown", "attack-")):
+        return f"{doc.source_id}|id:{doc.doc_id}"
+    if doc.url:
+        return f"{doc.source_id}|url:{doc.url}"
+    return f"{doc.source_id}|title:{doc.title}"
+
+
+def _norm(value: Any) -> str:
+    """Normalización determinista: colapsa espacios, casefold."""
+    return " ".join(str(value or "").split()).casefold()
+
+
+def _doc_content_fingerprint(doc: EvidenceDocument) -> str:
+    """Huella de CONTENIDO sustantivo (megaprompt §18-§20): cambia si y solo
+    si cambia el contenido lógico del documento. Excluye explícitamente los
+    campos volátiles: retrieved_at, timestamps, ids aleatorios de fragmento,
+    previous_hash y metadatos no estables.
+
+    Serialización canónica: JSON con claves ordenadas y separadores compactos,
+    UTF-8; fragmentos ordenados por su TEXTO normalizado (no por id aleatorio).
+    """
+    fragments = sorted(_norm(f.text) for f in doc.fragments if _norm(f.text))
+    canonical = {
+        "title": _norm(doc.title),
+        "kind": _norm(doc.kind),
+        "published": _norm(doc.published),
+        "language": _norm(doc.language),
+        "abstract": _norm(doc.abstract),
+        "fragments": fragments,
+    }
+    payload = json.dumps(canonical, ensure_ascii=False, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
 def _doc_fingerprint(doc: EvidenceDocument) -> str:
-    """Huella de contenido estable: URL (o título como fallback) + fuente."""
-    key = f"{doc.source_id}|{doc.url or doc.title}|{doc.title}"
-    return hashlib.sha256(key.encode("utf-8")).hexdigest()
+    """Compatibilidad con llamadas existentes: huella de contenido."""
+    return _doc_content_fingerprint(doc)
 
 
 def _build_profile(profile: str, *, offline: bool, extra: bool = False,
