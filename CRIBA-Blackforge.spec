@@ -65,7 +65,15 @@ cli_a = Analysis(
     pathex=[ROOT + '/src'],
     binaries=[],
     datas=DATAS,
-    hiddenimports=[],
+    # execution.py resuelve los operadores canónicos vía importlib (cadenas
+    # dinámicas): PyInstaller no los ve en el análisis estático y el portable
+    # los perdería. El paquete invention importa estáticamente sus módulos.
+    hiddenimports=[
+        'criba.intelligence.execution',
+        'criba.intelligence.invention',
+        'criba.intelligence.router',
+        'criba.intelligence.registry',
+    ],
     hookspath=[],
     hooksconfig={},
     runtime_hooks=[],
