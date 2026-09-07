@@ -29,11 +29,11 @@ foreach ($tool in $tools) {
 }
 
 # --- Project roots ---
+# SUPRA retirado del producto (2026-09-07): conservado e inactivo en
+# ACTIVE/SUPRA; ya no forma parte de la verificación del entorno de CRIBA.
 $cribaRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$supraRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\SUPRA")).Path
 $projects = @(
-    @{name="CRIBA"; path=$cribaRoot},
-    @{name="SUPRA"; path=$supraRoot}
+    @{name="CRIBA"; path=$cribaRoot}
 )
 if ($env:THEKEY_ROOT -and (Test-Path $env:THEKEY_ROOT)) {
     $projects += @{name="THEKEY"; path=(Resolve-Path $env:THEKEY_ROOT).Path}

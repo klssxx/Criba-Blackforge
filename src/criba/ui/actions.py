@@ -821,7 +821,19 @@ def _on_hibrido_done(win: Any, result: Any) -> None:
 
 
 def on_blackforge(win: Any) -> None:
+    """Conmutación a BLACKFORGE (mandato §7): una vista activa y como máximo
+    una generación activa. Con trabajo en curso NO se lanza el cambio: la
+    ventana nunca se oculta dejando workers vivos (defecto 8)."""
     win.nav["navBlackforge"].setChecked(False)
+    live = getattr(win, "_live_workers", [])
+    if live:
+        show_error(
+            win, "BLACKFORGE",
+            "Hay una generación en curso: espera a que termine o cancélala "
+            "antes de cambiar de espacio. Estado: deteniendo generación.",
+        )
+        _activity(win, "orange", "Cambio a BLACKFORGE retenido: trabajo en curso")
+        return
     win.show_blackforge_page()
 
 

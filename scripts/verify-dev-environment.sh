@@ -20,12 +20,13 @@ for tool in $TOOLS_SYSTEM; do
 done
 
 # --- Project roots ---
+# SUPRA retirado del producto (2026-09-07): conservado e inactivo en
+# ACTIVE/SUPRA; ya no forma parte de la verificación del entorno de CRIBA.
 SCRIPT_DIR=$(CDPATH= cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)
 CRIBA_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/.." && pwd)
-SUPRA_ROOT=$(CDPATH= cd -- "$SCRIPT_DIR/../../SUPRA" && pwd)
 THEKEY_ROOT=${THEKEY_ROOT:-}
-PROJECT_ROOTS=("$CRIBA_ROOT" "$SUPRA_ROOT")
-PROJECT_NAMES=("CRIBA" "SUPRA")
+PROJECT_ROOTS=("$CRIBA_ROOT")
+PROJECT_NAMES=("CRIBA")
 if [ -n "$THEKEY_ROOT" ] && [ -d "$THEKEY_ROOT" ]; then
     PROJECT_ROOTS+=("$THEKEY_ROOT")
     PROJECT_NAMES+=("THEKEY")
