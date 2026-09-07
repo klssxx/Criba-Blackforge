@@ -24,6 +24,7 @@ class SourceContext:
     cache_get: Callable[[str], Any] | None = None
     cache_set: Callable[[str, Any, float], None] | None = None
     credentials: dict[str, str] = field(default_factory=dict)
+    offline: bool = False                # defense in depth: gate also here
 
     def has_credential(self, name: str) -> bool:
         return bool(self.credentials.get(name))
@@ -70,6 +71,13 @@ class IntelligenceSource:
                 res.documents = [EvidenceDocument(**d) for d in cached]
                 return res
 
+        # Offline gate (cache local ya servido): ninguna fuente puede red.
+        if getattr(self.context, "offline", False):
+            return SourceQueryResult(
+                source_id=self.SOURCE_ID, query_text=query, ok=False,
+                error="OFFLINE_BLOCKED",
+            )
+
         now = _t.monotonic()
         wait = self._last_request_ts + self.RATE_LIMIT_S - now
         if wait > 0:
@@ -94,4 +102,6 @@ class IntelligenceSource:
         raise NotImplementedError
 
     def fetch(self, doc_id: str) -> EvidenceDocument | None:
+        if getattr(self.context, "offline", False):
+            return None
         return None

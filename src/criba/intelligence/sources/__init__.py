@@ -45,10 +45,15 @@ def build_sources(context: SourceContext, *, extra: bool = False) -> list[Intell
 
 
 def default_context(cache: Any = None, credentials: dict[str, str] | None = None,
-                    budget: TransportBudget | None = None) -> SourceContext:
-    """Wire cache + transport. cache = IntelligenceStore or None."""
+                    budget: TransportBudget | None = None,
+                    offline: bool = False) -> SourceContext:
+    """Wire cache + transport. cache = IntelligenceStore or None.
+
+    ``offline=True`` blocks every network request at the shared transport,
+    regardless of which acquisition stage attempts it.
+    """
     return SourceContext(
-        transport=Transport(budget=budget),
+        transport=Transport(budget=budget, offline=offline),
         cache_get=cache.cache_get if cache else None,
         cache_set=cache.cache_set if cache else None,
         credentials=credentials or {},

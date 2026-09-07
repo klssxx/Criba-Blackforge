@@ -48,6 +48,14 @@ class BudgetExceeded(Exception):
     pass
 
 
+class OfflineBlocked(Exception):
+    """Raised when a request is attempted while offline mode is active.
+
+    The offline gate lives here — at the shared transport every source must
+    cross — so no acquisition path can leak a network request (mandate §6).
+    """
+
+
 class Transport:
     """GET sender with retry/backoff/429 handling. sender is injectable."""
 
@@ -56,12 +64,14 @@ class Transport:
     def __init__(self, sender: Callable[..., Response] | None = None,
                  budget: TransportBudget | None = None,
                  max_retries: int = 2, timeout_s: float = 20.0,
-                 user_agent: str = "criba-iie/0.1 (+research)"):
+                 user_agent: str = "criba-iie/0.1 (+research)",
+                 offline: bool = False):
         self._sender = sender
         self.budget = budget or TransportBudget()
         self.max_retries = max_retries
         self.timeout_s = timeout_s
         self.user_agent = user_agent
+        self.offline = offline
 
     def _real_sender(self, url: str, params: dict[str, Any] | None, timeout: float,
                      headers: dict[str, Any] | None) -> Response:
@@ -76,7 +86,9 @@ class Transport:
 
     def get(self, url: str, params: dict[str, Any] | None = None,
             headers: dict[str, Any] | None = None) -> Response:
-        """Single GET honoring budget + retries. Raises BudgetExceeded."""
+        """Single GET honoring offline gate + budget + retries. Raises BudgetExceeded."""
+        if self.offline:
+            raise OfflineBlocked(f"offline: request to {url} blocked at transport")
         last: Response | None = None
         for attempt in range(self.max_retries + 1):
             if not self.budget.spend():

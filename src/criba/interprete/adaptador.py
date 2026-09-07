@@ -74,6 +74,81 @@ class LocalInterprete:
             log.error("Interpretación local fallida para idea %s: %s", idea.get("id"), e)
             return self._offline_fallback(query, idea)
 
+    def proponer(
+        self, query: str, idea: dict[str, Any], domain: dict[str, Any] | None = None
+    ) -> dict[str, Any]:
+        """Genera hipótesis con mecanismo a partir del cruce aplicado al problema.
+
+        Sin API key o ante fallo devuelve estado ``PENDIENTE_INTERPRETACION``
+        sin fabricar contenido: una plantilla nunca se presenta como propuesta.
+        """
+        if self._offline:
+            return {"estado": "PENDIENTE_INTERPRETACION", "hipotesis": "",
+                    "mecanismo": "", "aportacion_por_tecnica": [], "supuestos": [],
+                    "prueba_concreta": "", "error": "sin NOUS_API_KEY"}
+        domain_title = str((domain or {}).get("title") or "general")
+        prompt = f"""Aplica el cruce de técnicas a este problema concreto.
+
+PROBLEMA: {query}
+DOMINIO DE ACOPLAMIENTO: {domain_title}
+
+CRUCE (dos operadores):
+Técnica A: {idea.get('method1', idea.get('title', ''))}
+Técnica B: {idea.get('method2', '')}
+Título del cruce: {idea.get('title', '')}
+
+Responde ÚNICAMENTE con JSON válido (nada de markdown) con esta estructura:
+{{
+  "hipotesis": "propuesta específica para ESTE problema",
+  "mecanismo": "cómo funciona causalmente, en términos del dominio",
+  "aportacion_por_tecnica": ["qué aporta la técnica A aquí", "qué aporta la técnica B aquí"],
+  "supuestos": ["supuesto cuestionable 1"],
+  "prueba_concreta": "comparación mínima con métrica y condición de fracaso"
+}}
+
+El mecanismo es obligatorio y debe referirse al problema, no a los nombres
+de las técnicas. Si el cruce no produce nada pertinente, dilo en hipótesis."""
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": "Eres un intérprete de cruces de técnicas. Respondes solo JSON válido."},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.2,
+            "max_tokens": 2048,
+        }
+        headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+        pending = {"estado": "PENDIENTE_INTERPRETACION", "hipotesis": "",
+                   "mecanismo": "", "aportacion_por_tecnica": [], "supuestos": [],
+                   "prueba_concreta": "", "error": ""}
+        try:
+            with httpx.Client(timeout=TIMEOUT) as client:
+                resp = client.post(f"{self.base}/chat/completions", json=payload, headers=headers)
+            if resp.status_code == 429:
+                pending["error"] = "plan_agotado_429"
+                return pending
+            resp.raise_for_status()
+            content = resp.json()["choices"][0]["message"]["content"].strip()
+            raw = content
+            if raw.startswith("```json"):
+                raw = raw[7:]
+            if raw.endswith("```"):
+                raw = raw[:-3]
+            parsed = json.loads(raw)
+            return {
+                "estado": "PROPUESTA",
+                "hipotesis": str(parsed.get("hipotesis", "")),
+                "mecanismo": str(parsed.get("mecanismo", "")),
+                "aportacion_por_tecnica": list(parsed.get("aportacion_por_tecnica", [])),
+                "supuestos": list(parsed.get("supuestos", [])),
+                "prueba_concreta": str(parsed.get("prueba_concreta", "")),
+                "error": "",
+            }
+        except Exception as e:  # noqa: BLE001 - la propuesta nunca rompe el loop
+            log.error("Propuesta fallida para idea %s: %s", idea.get("id"), e)
+            pending["error"] = str(e)
+            return pending
+
     def _offline_fallback(self, query: str, idea: dict[str, Any]) -> dict[str, Any]:
         """Scoring semántico offline (sin red) - usado cuando no hay API key o falla la red."""
         cv = idea.get("causal_variables", {})

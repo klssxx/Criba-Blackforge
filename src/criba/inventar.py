@@ -5,23 +5,32 @@ Cadena (siempre 0€, reproducible por semilla, nunca afirma novedad):
 1. **Lotería estratificada** — divergencia determinista por clases de
    pensamiento (perspectiva/generación/ruptura/escape) con banco de dominio
    como segundo dado opcional.
-2. **Juez** — ``LocalInterprete`` (pool free de Nous con NOUS_API_KEY; sin
-   clave usa scoring semántico offline, sin red).
-3. **Prior-art adversarial acotado** — lattice determinista → par gratuito
+2. **Propuesta** — el intérprete aplica el cruce al problema y devuelve
+   hipótesis + mecanismo + aportación de cada técnica. Sin modelo disponible
+   el estado queda ``PENDIENTE_INTERPRETACION``: no se fabrica contenido.
+3. **Juez (crítica automática)** — ``LocalInterprete`` evalúa la propuesta;
+   sin clave, scoring offline. Una llamada distinta no es validación
+   independiente.
+4. **Prior-art del mecanismo** — la búsqueda de antecedentes usa el
+   MECANISMO interpretado (no el título del cruce). Sin mecanismo no hay
+   búsqueda: ``UNRESOLVED`` honesto. Lattice determinista → par gratuito
    (Wikipedia + Google Patents) → skeptic → verdict → mutation loop
-   fail-closed. Veredictos posibles: ``UNRESOLVED`` / ``PARTIAL_PRIOR_ART`` /
-   ``SURVIVED_SEARCH``.
-4. **Ficha + ledger** — salida legible y ``invention_ledger/verdicts.jsonl``
-   append-only (trazabilidad de cada veredicto emitido).
+   fail-closed. Veredictos posibles: ``UNRESOLVED`` / ``PARTIAL_PRIOR_ART``
+   / ``SURVIVED_SEARCH``.
+5. **Ficha + ledger** — salida legible y ``invention_ledger/verdicts.jsonl``
+   append-only con el registro completo por candidato.
+
+Modo offline: bloquea TODA adquisición en el transporte común
+(``Transport.offline``) y no construye fuentes de red.
 """
 from __future__ import annotations
 
+import hashlib
 import json
 import os
-import random
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable
 
 from .catalog import methods as catalog_methods
 from .intelligence.contracts import InventionCandidate, SourceQueryResult
@@ -36,6 +45,24 @@ from .intelligence.sources.protocol import IntelligenceSource
 from .interprete.adaptador import LocalInterprete
 from .lottery import LotteryEngine
 
+_PROPOSER = Callable[[str, dict[str, Any], dict[str, Any] | None], dict[str, Any]]
+
+_PENDING: dict[str, Any] = {
+    "estado": "PENDIENTE_INTERPRETACION",
+    "hipotesis": "",
+    "mecanismo": "",
+    "aportacion_por_tecnica": [],
+    "supuestos": [],
+    "prueba_concreta": "",
+    "error": "",
+}
+
+
+def _pending_proposal(error: str) -> dict[str, Any]:
+    pending = dict(_PENDING)
+    pending["error"] = error
+    return pending
+
 
 def _ledger_dir() -> Path:
     base = Path(os.environ.get("LOCALAPPDATA") or Path.home())
@@ -48,8 +75,26 @@ def _offline_mode(offline: bool | None) -> bool:
     return os.environ.get("CRIBA_INVENTAR_OFFLINE", "") == "1"
 
 
+def _stable_run_id(query: str, seed: int) -> str:
+    """Huella estable entre procesos: sha256 de semilla+consulta.
+
+    Sustituye a ``hash()`` de Python (aleatorio entre procesos).
+    """
+    digest = hashlib.sha256(f"{seed}|{query}".encode("utf-8")).hexdigest()[:12]
+    return f"invent-{seed}-{digest}"
+
+
+def _default_proponer(
+    query: str, idea: dict[str, Any], domain: dict[str, Any] | None
+) -> dict[str, Any]:
+    try:
+        return LocalInterprete().proponer(query, idea, domain)
+    except Exception as exc:  # noqa: BLE001 - la propuesta nunca rompe el loop
+        return _pending_proposal(str(exc))
+
+
 def _judge(query: str, idea: dict[str, Any], offline: bool) -> dict[str, Any]:
-    """Interpretación por el juez; falla cerrado a PENDIENTE sin red."""
+    """Crítica automática; falla cerrado a PENDIENTE sin red."""
     if offline:
         return {"veredicto": "PENDIENTE_OFFLINE", "labels": [], "score": 0.0, "analisis": ""}
     try:
@@ -62,21 +107,40 @@ def _assess_candidate(
     candidate: InventionCandidate,
     sources: list[IntelligenceSource],
 ) -> dict[str, Any]:
-    """Lattice → scout (≥2 dominios) → skeptic → verdict → mutation loop."""
+    """Lattice → scout (≥2 dominios) → skeptic → verdict → mutation loop.
+
+    La búsqueda parte del MECANISMO. Sin mecanismo interpretado no hay
+    búsqueda: ``UNRESOLVED`` con detalle honesto (no equivale a novedad).
+    """
     protocol = AdversarialSearchProtocol(
         candidate_id=candidate.candidate_id,
         max_prior_art_rounds=2,
         max_mutations_per_candidate=1,
     )
-    lattice = build_query_lattice(candidate.mechanism or candidate.title, max_variants=4)
+    verdict_engine = PriorArtVerdictEngine()
+    mechanism = (candidate.mechanism or "").strip()
+    if not mechanism:
+        return {
+            "verdict": "UNRESOLVED",
+            "queries": [],
+            "rounds": 0,
+            "mutations": 0,
+            "detail": "sin-mecanismo: interpretación pendiente, no se buscó antecedente",
+        }
+
+    lattice = build_query_lattice(mechanism, max_variants=4)
     variant = lattice[0] if lattice else None
+    if variant is None:
+        return {
+            "verdict": "UNRESOLVED",
+            "queries": [],
+            "rounds": 0,
+            "mutations": 0,
+            "detail": "lattice-vacío",
+        }
+
     scout = CrossDomainScout(sources)
     skeptic = PriorArtSkeptic()
-    verdict_engine = PriorArtVerdictEngine()
-
-    if variant is None:
-        return {"verdict": "UNRESOLVED", "queries": [], "rounds": 0, "mutations": 0, "detail": "empty lattice"}
-
     results: dict[str, SourceQueryResult] = scout.cross_search(variant, limit_per_source=3)
     report = skeptic.review(candidate, results)
     assessment = verdict_engine.assess(candidate, results, report, matches=[])
@@ -119,14 +183,17 @@ def invent(
     offline: bool | None = None,
     methods: list[dict[str, Any]] | None = None,
     sources: list[IntelligenceSource] | None = None,
+    proponer: _PROPOSER | None = None,
 ) -> dict[str, Any]:
     """Ejecuta el loop completo y devuelve la ficha de invención.
 
-    ``methods``/``sources`` son inyectables para pruebas deterministas.
+    ``methods``/``sources``/``proponer`` son inyectables para pruebas
+    deterministas.
     """
     if not query.strip():
         raise ValueError("query must not be blank")
     is_offline = _offline_mode(offline)
+    proponer_fn = proponer or _default_proponer
 
     engine = LotteryEngine.from_methods(methods or catalog_methods(), seed=seed)
     for _ in range(rounds):
@@ -134,34 +201,53 @@ def invent(
     domain = engine.draw_domain()
     top_ideas = engine.get_top_ideas(top)
 
-    active_sources = sources if sources is not None else build_sources(default_context())
-    interpreter_id = f"invent-{seed}-{abs(hash(query)) % 10_000:04d}"
-    rng = random.Random(seed)
+    # Offline: sin fuentes de red. El transporte común también bloquea
+    # cualquier intento de conexión que escape (defensa en profundidad).
+    if sources is not None:
+        active_sources = sources
+    elif is_offline:
+        active_sources = []
+    else:
+        active_sources = build_sources(default_context(offline=is_offline))
+    run_id = _stable_run_id(query, seed)
 
     entries: list[dict[str, Any]] = []
     for idea in top_ideas:
+        # 1) Propuesta: aplicar el cruce al problema ANTES de buscar antecedentes.
+        proposal = proponer_fn(query, idea, domain)
+        if proposal.get("estado") != "PROPUESTA" or not str(proposal.get("mecanismo", "")).strip():
+            if proposal.get("estado") == "PROPUESTA":
+                proposal = _pending_proposal("PROPUESTA sin mecanismo")
         candidate = InventionCandidate(
-            candidate_id=f"{interpreter_id}-{len(entries) + 1:02d}",
+            candidate_id=f"{run_id}-{len(entries) + 1:02d}",
             title=str(idea.get("title", ""))[:120],
             description=str(idea.get("description", ""))[:400],
-            mechanism=str(idea.get("title", ""))[:200],
+            mechanism=str(proposal.get("mecanismo", ""))[:200],
             origin="NEW_IIE",
         )
-        judged = _judge(query, idea, is_offline)
+        # 2) Crítica automática sobre la propuesta (no validación independiente).
+        judged = _judge(query, {**idea, "mecanismo": candidate.mechanism}, is_offline)
+        # 3) Antecedentes del mecanismo (nunca del título).
         assessment = _assess_candidate(candidate, active_sources)
         entries.append(
             {
                 "candidate_id": candidate.candidate_id,
                 "title": candidate.title,
                 "score": idea.get("score", 0.0),
-                "quality": idea.get("quality", ""),
+                "score_kind": "heuristica_local",
                 "classes": [idea.get("class1", ""), idea.get("class2", "")],
                 "methods": [idea.get("method1", ""), idea.get("method2", "")],
+                "hipotesis": proposal.get("hipotesis", ""),
+                "mecanismo": candidate.mechanism,
+                "estado_interpretacion": proposal.get("estado", "PENDIENTE_INTERPRETACION"),
+                "aportacion_por_tecnica": list(proposal.get("aportacion_por_tecnica", [])),
+                "supuestos": list(proposal.get("supuestos", [])),
+                "prueba_concreta": proposal.get("prueba_concreta", ""),
+                "interpretacion_error": proposal.get("error", ""),
                 "judge": judged,
                 "prior_art": assessment,
             }
         )
-        rng.random()  # consume para mantener el ritmo determinista del loop
 
     sheet = {
         "query": query,
@@ -172,10 +258,14 @@ def invent(
         "domain_coupling": {
             "id": domain.get("id") if domain else None,
             "title": domain.get("title") if domain else None,
+            "usado_en_interpretacion": True,
         },
         "entries": entries,
         "totals": {
             "ideas": len(engine.all_ideas),
+            "pending_interpretation": sum(
+                1 for e in entries if e["estado_interpretacion"] != "PROPUESTA"
+            ),
             "unresolved": sum(1 for e in entries if e["prior_art"]["verdict"] == "UNRESOLVED"),
             "partial_prior_art": sum(1 for e in entries if e["prior_art"]["verdict"] == "PARTIAL_PRIOR_ART"),
             "survived_search": sum(1 for e in entries if e["prior_art"]["verdict"] == "SURVIVED_SEARCH"),
@@ -185,7 +275,7 @@ def invent(
 
 
 def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path:
-    """Añade la ficha al ledger append-only (JSONL)."""
+    """Añade el registro completo al ledger append-only (JSONL)."""
     directory = ledger_dir or _ledger_dir()
     directory.mkdir(parents=True, exist_ok=True)
     path = directory / "verdicts.jsonl"
@@ -193,9 +283,23 @@ def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path
         "generated_at": sheet["generated_at"],
         "query": sheet["query"],
         "seed": sheet["seed"],
+        "mode": sheet["mode"],
+        "rounds": sheet["rounds"],
+        "domain_coupling": sheet["domain_coupling"],
         "totals": sheet["totals"],
         "entries": [
-            {"candidate_id": e["candidate_id"], "verdict": e["prior_art"]["verdict"]}
+            {
+                "candidate_id": e["candidate_id"],
+                "title": e["title"],
+                "estado_interpretacion": e["estado_interpretacion"],
+                "mecanismo": e["mecanismo"],
+                "score": e["score"],
+                "score_kind": e["score_kind"],
+                "methods": e["methods"],
+                "verdict": e["prior_art"]["verdict"],
+                "queries": e["prior_art"]["queries"],
+                "detail": e["prior_art"]["detail"],
+            }
             for e in sheet["entries"]
         ],
     }
@@ -218,14 +322,20 @@ def print_sheet(sheet: dict[str, Any]) -> None:
         judge = entry["judge"]
         print()
         print(f"{i}. {entry['title']}")
-        print(f"   clases: {' x '.join(c or '?' for c in entry['classes'])} | score {entry['score']}")
+        print(f"   clases: {' x '.join(c or '?' for c in entry['classes'])} | score {entry['score']} ({entry['score_kind']})")
+        print(f"   interpretación: {entry['estado_interpretacion']}")
+        if entry["hipotesis"]:
+            print(f"   hipótesis: {entry['hipotesis'][:200]}")
+            print(f"   mecanismo: {entry['mecanismo'][:200]}")
+            print(f"   prueba: {entry['prueba_concreta'][:200]}")
         print(f"   juez: {judge.get('veredicto', '?')} ({judge.get('score', 0)})")
         print(f"   prior-art: {prior['verdict']} (rondas={prior['rounds']}, mutaciones={prior['mutations']})")
     totals = sheet["totals"]
     print()
     print(line)
     print(
-        f"Ideas: {totals['ideas']} | UNRESOLVED: {totals['unresolved']} | "
+        f"Ideas: {totals['ideas']} | pendientes: {totals['pending_interpretation']} | "
+        f"UNRESOLVED: {totals['unresolved']} | "
         f"PARTIAL: {totals['partial_prior_art']} | SURVIVED: {totals['survived_search']}"
     )
     print(line)

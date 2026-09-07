@@ -1,12 +1,14 @@
 """Tests del loop `criba inventar` (offline, determinista, sin red)."""
 from __future__ import annotations
 
+import hashlib
 import json
 
 import pytest
 
 from criba.intelligence.contracts import SourceQueryResult
-from criba.intelligence.sources.transport import TransportBudget
+from criba.intelligence.sources.protocol import IntelligenceSource, SourceContext
+from criba.intelligence.sources.transport import OfflineBlocked, Transport, TransportBudget
 from criba.inventar import append_ledger, invent
 
 
@@ -134,3 +136,113 @@ def test_ledger_appends_jsonl(tmp_path) -> None:
         record = json.loads(line)
         assert record["seed"] == 3
         assert all(e["verdict"] in {"UNRESOLVED", "PARTIAL_PRIOR_ART", "SURVIVED_SEARCH"} for e in record["entries"])
+
+
+# ---------------------------------------------------------------------------
+# Fase 1: contrato corregido (mecanismo antes de antecedentes, IDs estables,
+# offline en el transporte, ficha honesta). Comportamiento nuevo intencionado;
+# ver CHECKPOINT_20260907.md.
+# ---------------------------------------------------------------------------
+
+def test_candidate_ids_stable_across_processes() -> None:
+    """Los IDs usan sha256(semilla|consulta), no hash() de Python."""
+    sheet = invent("stable id query", seed=42, rounds=1, batch_size=4, top=2,
+                   offline=True, methods=_methods(), sources=_sources())
+    expected = "invent-42-" + hashlib.sha256(b"42|stable id query").hexdigest()[:12]
+    assert all(e["candidate_id"].startswith(expected) for e in sheet["entries"])
+
+
+def test_offline_transport_blocks_all_requests() -> None:
+    transport = Transport(offline=True)
+    with pytest.raises(OfflineBlocked):
+        transport.get("https://example.org/api")
+
+
+def test_source_search_blocked_offline_never_hits_search() -> None:
+    calls: list[str] = []
+
+    class _Src(IntelligenceSource):
+        SOURCE_ID = "stub"
+
+        def _search(self, query: str, limit: int = 10, **params: object) -> SourceQueryResult:
+            calls.append(query)
+            return SourceQueryResult(source_id=self.SOURCE_ID, query_text=query, ok=True)
+
+    source = _Src(SourceContext(transport=None, offline=True))
+    result = source.search("anything")
+    assert result.ok is False
+    assert result.error == "OFFLINE_BLOCKED"
+    assert calls == []
+
+
+def test_offline_pending_interpretation_without_fabrication() -> None:
+    """Offline: sin modelo no se fabrica hipótesis ni se busca antecedente."""
+    sheet = invent("agente con permisos excesivos", seed=11, rounds=1, batch_size=6,
+                   top=3, offline=True, methods=_methods(), sources=_sources())
+    assert sheet["totals"]["pending_interpretation"] == 3
+    for entry in sheet["entries"]:
+        assert entry["estado_interpretacion"] == "PENDIENTE_INTERPRETACION"
+        assert entry["hipotesis"] == ""
+        assert entry["mecanismo"] == ""
+        assert entry["prior_art"]["verdict"] == "UNRESOLVED"
+        assert "sin-mecanismo" in entry["prior_art"]["detail"]
+
+
+def test_ficha_honest_sin_etiquetas_de_calidad() -> None:
+    """El score se etiqueta como heurística local; sin BASURA/EXTRAORDINARIA."""
+    sheet = invent("q honesta", seed=5, rounds=1, batch_size=4, top=2,
+                   offline=True, methods=_methods(), sources=_sources())
+    for entry in sheet["entries"]:
+        assert entry["score_kind"] == "heuristica_local"
+        assert "quality" not in entry
+
+
+def test_prior_art_searches_mechanism_not_title() -> None:
+    """Con mecanismo interpretado, las consultas salen del mecanismo."""
+    captured: list[str] = []
+
+    class _RecordingSource:
+        def __init__(self, source_id: str, kind: str) -> None:
+            self.SOURCE_ID = source_id
+            self.KIND = kind
+            self.context = _StubContext()
+
+        def source_id(self) -> str:
+            return self.SOURCE_ID
+
+        def health(self) -> str:
+            return "AVAILABLE"
+
+        def search(self, query: str, limit: int = 5) -> SourceQueryResult:
+            captured.append(query)
+            return SourceQueryResult(
+                source_id=self.SOURCE_ID, query_text=query, ok=False, error="NO_RESULTS"
+            )
+
+    def _proponer(query: str, idea: dict, domain: dict | None) -> dict:
+        return {
+            "estado": "PROPUESTA",
+            "hipotesis": "Limitar cada autorización a un único uso por operación.",
+            "mecanismo": "capacidades de un solo uso evitan la reutilización de permisos",
+            "aportacion_por_tecnica": ["A", "B"],
+            "supuestos": ["el agente acepta renovación"],
+            "prueba_concreta": "comparar reutilizaciones rechazadas",
+            "error": "",
+        }
+
+    sheet = invent(
+        "reducir permisos excesivos de un agente",
+        seed=9, rounds=1, batch_size=6, top=2, offline=True,
+        methods=_methods(),
+        sources=[_RecordingSource("s1", "product"), _RecordingSource("s2", "patent")],
+        proponer=_proponer,
+    )
+    assert sheet["totals"]["pending_interpretation"] == 0
+    for entry in sheet["entries"]:
+        assert entry["estado_interpretacion"] == "PROPUESTA"
+        assert "un solo uso" in entry["mecanismo"]
+    assert captured, "el mecanismo debe disparar búsqueda de antecedentes"
+    # La búsqueda parte del mecanismo, nunca del título del cruce.
+    titles = {e["title"] for e in sheet["entries"]}
+    for query in captured:
+        assert not any(t in query for t in titles)
