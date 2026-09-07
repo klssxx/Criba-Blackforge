@@ -19,6 +19,32 @@ incluye explícitamente y añade en memoria `source=foundational_methods`,
 `granularity=method` y `origin=internal` cuando faltan esos campos. No se carga
 ningún otro archivo de `archive/`.
 
+## Clases de pensamiento (v0.3.0, sorteo estratificado)
+
+Cada entrada lleva `thinking_class`. La lotería estratificada sortea las cuatro
+clases con peso idéntico (25%) y técnica uniforme dentro de la clase, para que
+ningún catálogo grande aplaste por tamaño a los curados.
+
+| thinking_class | Entradas | Contenido |
+|---|---:|---|
+| `perspectiva` | 1.700 | Lentes / puntos de vista |
+| `generacion` | 1.115 | Disruptivos + ideación curada (incl. familia `blackforge_seguridad`) |
+| `ruptura` | 1.100 | Ruptura de marco |
+| `escape` | 1.130 | Salto fuera del espacio conocido (+ 30 del MASTER) |
+| `dominio` | 2.090 | **Banco de dominio** (no clase de sorteo): metodologías sectoriales, `tecnicas_max`, taxonomías |
+
+`dominio` actúa como segundo dado opcional de acoplamiento
+(`LotteryEngine.draw_domain()`): «aplica la técnica sorteada VÍA X». El mapeo
+fuente→clase vive en `scripts/structure_catalog.py` (idempotente) y la
+integridad se verifica con `scripts/verify_catalog.py` (clases válidas +
+checksums de las fuentes crudas).
+
+## Procedencia cruda
+
+Los catálogos .txt originales (lentes 1-1700, ruptura 1100, escape 1100,
+disruptivos 900, metodologías 2000, técnicas max) están congelados en
+`data/methods/raw/` con manifiesto SHA-256 (`raw/manifest.sha256`).
+
 ## Composición por granularidad
 
 | Granularidad | Cantidad |

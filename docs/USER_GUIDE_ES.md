@@ -28,6 +28,23 @@ uv run --locked criba activate --file samples\query_example.txt
 uv run --locked criba --database mi.sqlite3 explain --session <activation_id>
 ```
 
+## Inventa con evidencia (v0.3.0)
+
+El comando estrella ejecuta el loop completo: lotería estratificada por clases
+de pensamiento → juez → verificación de prior-art honesta:
+
+```text
+uv run criba inventar "aprobaciones seguras para agentes autónomos" --seed 42
+uv run criba inventar "tu problema" --seed 7 --top 3 --offline
+```
+
+- La misma `--seed` produce siempre las mismas ideas (reproducible, auditable).
+- Cada idea recibe un veredicto honesto: `UNRESOLVED` (sin cobertura),
+  `PARTIAL_PRIOR_ART` (hay coincidencias) o `SURVIVED_SEARCH` (sobrevivió la
+  búsqueda). Nunca afirma novedad.
+- `--offline` funciona sin red ni claves (juez offline, veredictos UNRESOLVED).
+- Cada corrida se registra en `%LOCALAPPDATA%\CRIBA-Blackforge\invention_ledger\verdicts.jsonl`.
+
 ## Flujos
 - **Nueva idea**: `activate` genera 12 ideas por defecto.
 - **Generar**: implícito en `activate` (divergencia + cross-consistency).
