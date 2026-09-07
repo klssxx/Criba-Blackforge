@@ -158,6 +158,27 @@ def test_offline_transport_blocks_all_requests() -> None:
         transport.get("https://example.org/api")
 
 
+def test_offline_blocks_proposer_even_with_credentials(monkeypatch) -> None:
+    """Offline + NOUS_API_KEY presente: el proponente no se llama jamás.
+
+    Regresión del escape: el gate no puede depender solo del estado interno
+    de LocalInterprete (que considera «online» si hay clave).
+    """
+    from criba.interprete import adaptador
+
+    def _must_not_run(self, query, idea, domain=None):  # type: ignore[no-untyped-def]
+        raise AssertionError("proponer() fue llamado en modo offline")
+
+    monkeypatch.setattr(adaptador.LocalInterprete, "proponer", _must_not_run)
+    monkeypatch.setenv("NOUS_API_KEY", "test-key-offline-guard")
+
+    sheet = invent("consulta con clave presente", seed=2, rounds=1, batch_size=4,
+                   top=2, offline=True, methods=_methods(), sources=_sources())
+    for entry in sheet["entries"]:
+        assert entry["estado_interpretacion"] == "PENDIENTE_INTERPRETACION"
+        assert entry["interpretacion_error"] == "modo offline"
+
+
 def test_source_search_blocked_offline_never_hits_search() -> None:
     calls: list[str] = []
 

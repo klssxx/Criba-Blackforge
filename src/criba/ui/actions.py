@@ -19,7 +19,7 @@ from ..engine import activate
 from .ranking import RankingModel
 from .widgets import set_chip
 
-MUTATORS = ("navNuevaIdea", "navGenerar", "navEvaluar", "navGuardar", "navActualizar")
+MUTATORS = ("navNuevaIdea", "navGenerar", "navInventar", "navEvaluar", "navGuardar", "navActualizar")
 
 
 class _Signals(QObject):
@@ -130,6 +130,7 @@ def enter_s1(win: Any) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": False,
+            "navInventar": False,
             "navEvaluar": False,
             "navGuardar": False,
             "navActualizar": True,
@@ -196,6 +197,7 @@ def _apply_new_problem(win: Any, problem: str) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": False,
             "navGuardar": False,
             "navActualizar": True,
@@ -277,6 +279,7 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": True,
             "navGuardar": False,
             "navActualizar": True,
@@ -285,6 +288,94 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
         },
     )
     _suggest(win, "navEvaluar")
+
+
+# ---------------------------------------------------------------------------
+# S3b — INVENTAR (mismo servicio criba.inventar.invent que la CLI)
+# ---------------------------------------------------------------------------
+def _run_inventar(problem: str) -> dict[str, Any]:
+    """Ejecuta el servicio compartido `invent` y registra el ledger.
+
+    Misma ruta que `criba inventar` (CLI): interfaz y CLI usan el mismo
+    servicio, sin duplicar lógica.
+    """
+    from ..inventar import append_ledger, invent
+
+    sheet = invent(problem)
+    ledger = append_ledger(sheet)
+    sheet["ledger_path"] = str(ledger)
+    return sheet
+
+
+def on_inventar(win: Any) -> None:
+    win.nav["navInventar"].setChecked(False)
+    if not win.problem:
+        show_error(win, "Inventar", "Define primero el problema base (Nueva idea).")
+        return
+    _lock_mutators(win)
+    _suggest(win, None)
+    win.nav["navInventar"].set_state("running", "Cruce → hipótesis → antecedentes...")
+    _activity(win, "blue", "Inventar iniciado (cruce → interpretación → antecedentes)")
+    worker = Worker(lambda: _run_inventar(win.problem))
+    worker.signals.done.connect(lambda sheet: _on_invented(win, sheet))
+    worker.signals.fail.connect(
+        lambda msg: on_operation_error(win, "navInventar", None, msg)
+    )
+    _start_worker(win, worker)
+
+
+def _on_invented(win: Any, sheet: dict[str, Any]) -> None:
+    """Muestra la ficha honesta: pendientes como pendientes, sin fabricar."""
+    win.invent_sheet = sheet
+    win.nav["navInventar"].set_state("done")
+    r = win.refs
+    totals = sheet["totals"]
+    n_entries = len(sheet["entries"])
+    pending = totals["pending_interpretation"]
+
+    r["ideaTitle"].setText(f"Inventar · {sheet['query'][:100]}")
+    r["ideaSummary"].setText(
+        f"{n_entries} candidatos · interpretación pendiente: {pending} · "
+        f"UNRESOLVED: {totals['unresolved']} · PARTIAL: {totals['partial_prior_art']} · "
+        f"SURVIVED: {totals['survived_search']}"
+    )
+    if pending == n_entries:
+        set_chip(r["ideaEstadoChip"], "Interpretación pendiente", "exploracion")
+    else:
+        set_chip(r["ideaEstadoChip"], "Propuestas emitidas", "ideacion")
+    _activity(
+        win,
+        "cyan",
+        f"Inventar completo: {n_entries} candidatos · pendientes: {pending}",
+    )
+
+    lines = [
+        f"Problema: {sheet['query']}",
+        f"Semilla: {sheet['seed']} · modo: {sheet['mode']}",
+        "",
+    ]
+    for i, entry in enumerate(sheet["entries"], 1):
+        lines.append(f"{i}. {entry['title']}")
+        if entry["estado_interpretacion"] == "PROPUESTA":
+            lines.append(f"   hipótesis: {entry['hipotesis'][:200]}")
+            lines.append(f"   mecanismo: {entry['mecanismo'][:200]}")
+        else:
+            reason = entry.get("interpretacion_error") or "sin modelo disponible"
+            lines.append(f"   interpretación PENDIENTE ({reason})")
+        lines.append(f"   prior-art: {entry['prior_art']['verdict']}")
+        lines.append("")
+    lines.append(
+        f"Totales — ideas: {totals['ideas']} · pendientes: {pending} · "
+        f"UNRESOLVED: {totals['unresolved']} · "
+        f"PARTIAL: {totals['partial_prior_art']} · "
+        f"SURVIVED: {totals['survived_search']}"
+    )
+    ledger = sheet.get("ledger_path")
+    if ledger:
+        lines.append(f"Ledger: {ledger}")
+    sheet["ficha_texto"] = "\n".join(lines)
+    _activity(win, "cyan", "Ficha de inventar disponible (win.invent_sheet)")
+    _restore_buttons_after_op(win)
 
 
 # ---------------------------------------------------------------------------
@@ -371,6 +462,7 @@ def _on_evaluated(win: Any, rows: list[dict[str, Any]]) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": True,
             "navGuardar": True,
             "navActualizar": True,
@@ -595,6 +687,7 @@ def _restore_buttons_after_op(win: Any) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": has_problem,
+            "navInventar": has_problem,
             "navEvaluar": has_packet,
             "navGuardar": has_packet,
             "navActualizar": True,

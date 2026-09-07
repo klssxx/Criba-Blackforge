@@ -41,6 +41,7 @@ from .widgets import FooterSegment, NavButton, apply_neon_breath
 NAV_SPEC = [
     ("navNuevaIdea", "◉", "Nueva idea", "Inicia el flujo, pide el problema base"),
     ("navGenerar", "⚙", "Generar", "Ejecuta los 16 operadores"),
+    ("navInventar", "✦", "Inventar", "Cruce → hipótesis → antecedentes"),
     ("navEvaluar", "▥", "Evaluar", "Ranking por value_score"),
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
     ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
@@ -218,6 +219,7 @@ class CribaMainWindow(QMainWindow):
         # conexiones nav
         self.nav["navNuevaIdea"].clicked.connect(lambda: actions.on_nueva_idea(self))
         self.nav["navGenerar"].clicked.connect(lambda: actions.on_generar(self))
+        self.nav["navInventar"].clicked.connect(lambda: actions.on_inventar(self))
         self.nav["navEvaluar"].clicked.connect(lambda: actions.on_evaluar(self))
         self.nav["navGuardar"].clicked.connect(lambda: actions.on_guardar(self))
         self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))

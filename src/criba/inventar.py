@@ -85,8 +85,19 @@ def _stable_run_id(query: str, seed: int) -> str:
 
 
 def _default_proponer(
-    query: str, idea: dict[str, Any], domain: dict[str, Any] | None
+    query: str,
+    idea: dict[str, Any],
+    domain: dict[str, Any] | None,
+    offline: bool = False,
 ) -> dict[str, Any]:
+    """Ruta real de propuesta. Con ``offline=True`` nunca toca la red.
+
+    La comprobación vive AQUÍ y no solo dentro de ``LocalInterprete`` (cuyo
+    estado depende de NOUS_API_KEY): el modo offline del comando debe bloquear
+    la propuesta aunque haya credenciales configuradas.
+    """
+    if offline:
+        return _pending_proposal("modo offline")
     try:
         return LocalInterprete().proponer(query, idea, domain)
     except Exception as exc:  # noqa: BLE001 - la propuesta nunca rompe el loop
@@ -193,7 +204,7 @@ def invent(
     if not query.strip():
         raise ValueError("query must not be blank")
     is_offline = _offline_mode(offline)
-    proponer_fn = proponer or _default_proponer
+    proponer_fn = proponer or (lambda q, i, d: _default_proponer(q, i, d, is_offline))
 
     engine = LotteryEngine.from_methods(methods or catalog_methods(), seed=seed)
     for _ in range(rounds):
