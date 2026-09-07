@@ -89,6 +89,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Removed
 - `.pytest_tmp2/` (130 artefactos temporales subidos por accidente en
   80362fa); `.gitignore` generalizado a `.pytest_tmp*/`.
+- Extra `[mcp]` del paquete: el servidor `criba mcp` es stdlib puro y nunca
+  importó el paquete `mcp` (queda solo como transitiva de semgrep en dev);
+  READMEs actualizados a `pip install "criba[gui,api]"`.
+
+### Changed (CI)
+- Python 3.12 añadido al matrix de CI: el classifier ya lo declaraba sin
+  probarlo; ahora se prueba en cada push. 3.10/3.11 se mantienen (retirada
+  de 3.10 diferida a su EOL, oct-2026).
 
 ## [Unreleased]
 
