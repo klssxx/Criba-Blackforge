@@ -1,0 +1,65 @@
+{
+  "selector": "score_top_n",
+  "fixtures": {
+    "anti_convergence": {
+      "duplication_rate": 1.0,
+      "close_variant_rate": 0.0,
+      "structural_diversity": 0.0784,
+      "unique_mechanisms": 1,
+      "family_coverage": 0.25,
+      "pair_reuse_rate": 0.3333,
+      "finalists": [
+        "A",
+        "A2",
+        "A3"
+      ],
+      "pair_verdicts": [
+        [
+          "A",
+          "A2",
+          "probable_duplicate"
+        ],
+        [
+          "A",
+          "A3",
+          "probable_duplicate"
+        ],
+        [
+          "A2",
+          "A3",
+          "probable_duplicate"
+        ]
+      ]
+    },
+    "pair_reuse": {
+      "duplication_rate": 0.0,
+      "close_variant_rate": 0.3333,
+      "structural_diversity": 0.7647,
+      "unique_mechanisms": 2,
+      "family_coverage": 0.6667,
+      "pair_reuse_rate": 0.3333,
+      "finalists": [
+        "R1",
+        "R2",
+        "R3"
+      ],
+      "pair_verdicts": [
+        [
+          "R1",
+          "R2",
+          "close_variant"
+        ],
+        [
+          "R1",
+          "R3",
+          "structurally_distinct"
+        ],
+        [
+          "R2",
+          "R3",
+          "structurally_distinct"
+        ]
+      ]
+    }
+  }
+}
