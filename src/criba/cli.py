@@ -190,7 +190,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="Loop completo: lotería estratificada -> juez -> prior-art -> ficha",
     )
     inventar_parser.add_argument("query", help="Problema o dominio de invención")
-    inventar_parser.add_argument("--seed", type=int, default=42, help="Semilla (reproducibilidad)")
+    inventar_parser.add_argument(
+        "--seed", type=int, default=None,
+        help="Semilla explícita (reproduce la exploración). Sin ella se genera una nueva con secrets.randbits(64).",
+    )
     inventar_parser.add_argument("--rounds", type=int, default=2, help="Rondas de lotería")
     inventar_parser.add_argument("--batch-size", type=int, default=8, help="Métodos por ronda")
     inventar_parser.add_argument("--top", type=int, default=3, help="Ideas a evaluar con prior-art")

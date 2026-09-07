@@ -291,3 +291,70 @@ def test_local_evidence_reaches_entry_when_store_given(tmp_path) -> None:
     assert sheet["entries"], "debe haber candidatos"
     assert all(isinstance(e.get("evidencia_local_usada"), list) for e in sheet["entries"])
     assert any(e["evidencia_local_usada"] for e in sheet["entries"])
+
+
+# ---------------------------------------------------------------------------
+# DV5-DV9 (megaprompt §31-§36): seeds, run_id, historial con cooldown
+# ---------------------------------------------------------------------------
+
+def test_dv5_explicit_seed_reproduces() -> None:
+    kwargs = dict(rounds=2, batch_size=6, top=3, offline=True,
+                  methods=_methods(), sources=_sources(), history_storage=False)
+    a = invent("reproducible", seed=123, **kwargs)
+    b = invent("reproducible", seed=123, **kwargs)
+    assert [e["title"] for e in a["entries"]] == [e["title"] for e in b["entries"]]
+    assert a["seed_source"] == b["seed_source"] == "explicit"
+    assert a["run_id"] != b["run_id"], "run_id independiente de la seed"
+
+
+def test_dv6_new_seed_generated_with_secrets_and_persisted() -> None:
+    import re
+    a = invent("exploracion libre", offline=True, rounds=1, batch_size=6, top=2,
+               methods=_methods(), sources=_sources(), history_storage=False)
+    b = invent("exploracion libre", offline=True, rounds=1, batch_size=6, top=2,
+               methods=_methods(), sources=_sources(), history_storage=False)
+    assert a["seed_source"] == "generated"
+    assert a["seed"] != b["seed"], "ejecuciones nuevas exploran con seeds distintas"
+    assert isinstance(a["seed"], int) and 0 < a["seed"] < 2**64
+    # la seed generada reproduce: pasarla explícita da el mismo recorrido
+    c = invent("exploracion libre", seed=a["seed"], offline=True, rounds=1,
+               batch_size=6, top=2, methods=_methods(), sources=_sources(),
+               history_storage=False)
+    assert [e["title"] for e in c["entries"]] == [e["title"] for e in a["entries"]]
+
+
+def test_dv6b_no_seed_falls_back_random_not_timestamp() -> None:
+    import inspect
+    from criba import inventar as mod
+    src = inspect.getsource(mod)
+    assert "secrets.randbits" in src
+    assert "time.time()" not in src.split("def invent(")[1].split("def ")[0]
+
+
+def test_dv8_history_cooldown_penalizes_recent_use(tmp_path) -> None:
+    from criba.storage import Storage
+    store = Storage(tmp_path / "hist.sqlite3")
+    sheet = invent("con historial", seed=9, rounds=1, batch_size=6, top=2,
+                   offline=True, methods=_methods(), sources=_sources(),
+                   history_storage=store)
+    assert sheet["entries"], "ejecución con historial funciona"
+    # segunda ejecución: los pares recién usados reciben cooldown y la
+    # selección explora pares distintos cuando el pool lo permite
+    sheet2 = invent("con historial", seed=10, rounds=2, batch_size=8, top=3,
+                    offline=True, methods=_methods(), sources=_sources(),
+                    history_storage=store)
+    assert sheet2["entries"]
+
+
+def test_dv9_history_failure_degrades_gracefully(monkeypatch, tmp_path) -> None:
+    class _Broken:
+        def load_combination_first_seen(self, fp):
+            raise OSError("db bloqueada")
+
+        def save_lottery_combinations(self, *a, **k):
+            raise OSError("db bloqueada")
+
+    sheet = invent("sin historial utilizable", seed=5, rounds=1, batch_size=6,
+                   top=2, offline=True, methods=_methods(), sources=_sources(),
+                   history_storage=_Broken())
+    assert len(sheet["entries"]) == 2

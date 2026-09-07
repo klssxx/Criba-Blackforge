@@ -23,6 +23,7 @@ Contratos:
 """
 from __future__ import annotations
 
+from datetime import datetime, timezone
 from typing import Any
 
 from .similarity import MIN_DUPLICATE_COVERAGE, classify, genome_distance
@@ -39,6 +40,40 @@ NEUTRAL_DISTANCE = 0.5     # genoma insuficiente (cobertura < 0.60): ni igual ni
 # Suelo de calidad relativo: un candidato entra al pool si score >= mejor_score
 # del pool − RELATIVE_QUALITY_FLOOR. Centralizado para poder ablacionar.
 RELATIVE_QUALITY_FLOOR = 0.15
+
+# Fatiga histórica (megaprompt §36): cooldown por decaimiento, NO ban
+# permanente. first_seen reciente → penalización máxima; tras COOLDOWN_DAYS
+# la combinación vuelve a estar neutra y puede reaparecer si es relevante.
+PENALTY_OVERUSE_MAX = 0.30
+COOLDOWN_DAYS = 30.0
+
+
+def _pair_key(candidate: dict[str, Any]) -> tuple[str, str]:
+    methods = sorted(str(m) for m in candidate.get("methods", []) if m)
+    return (methods[0], methods[1]) if len(methods) >= 2 else ("", "")
+
+
+def _historical_penalty(
+    candidate: dict[str, Any],
+    first_seen: dict[tuple[str, str], str] | None,
+) -> float:
+    """[0, PENALTY_OVERUSE_MAX] según antigüedad del primer uso del par.
+
+    Sin historial o par nuevo: 0 (neutro). El decaimiento hace que una
+    combinación excelente pueda reaparecer cuando su relevancia lo justifica.
+    """
+    if not first_seen:
+        return 0.0
+    seen_iso = first_seen.get(_pair_key(candidate))
+    if not seen_iso:
+        return 0.0
+    try:
+        seen = datetime.fromisoformat(str(seen_iso).replace("Z", "+00:00"))
+        age_days = (datetime.now(timezone.utc) - seen).total_seconds() / 86400.0
+    except ValueError:
+        return 0.0
+    remaining = max(0.0, 1.0 - age_days / COOLDOWN_DAYS)
+    return PENALTY_OVERUSE_MAX * remaining
 
 
 def _mechanism(candidate: dict[str, Any]) -> str:
@@ -67,8 +102,13 @@ def select_finalists(
     n: int,
     *,
     quality_floor: float | None = None,
+    historical_first_seen: dict[tuple[str, str], str] | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Selección finalista por utilidad marginal. Devuelve (finalistas, informe).
+
+    ``historical_first_seen``: primer uso registrado por par de métodos
+    (formato combo_key de Storage). Aplica cooldown por decaimiento; nunca
+    prohibición permanente.
 
     El informe incluye el estado de diversidad (OK/DIVERSITY_CONSTRAINED) y
     la explicación de cada elección/descarte (trazabilidad §22).
@@ -136,6 +176,11 @@ def select_finalists(
                 if same_mechanism:
                     utility -= PENALTY_MECHANISM_REPEAT * same_mechanism
                     explain.append(f"mecanismo repetido x{same_mechanism}")
+
+            overuse = _historical_penalty(candidate, historical_first_seen)
+            if overuse:
+                utility -= overuse
+                explain.append(f"fatiga histórica −{overuse:.2f}")
 
             if utility > best_utility:
                 best, best_utility, best_explain = candidate, utility, "; ".join(explain) or "sin vecinos"

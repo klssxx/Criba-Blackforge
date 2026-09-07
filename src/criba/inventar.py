@@ -211,7 +211,7 @@ def _fts_query(query: str) -> str:
 def invent(
     query: str,
     *,
-    seed: int = 42,
+    seed: int | None = None,
     rounds: int = 2,
     batch_size: int = 8,
     top: int = 3,
@@ -220,16 +220,59 @@ def invent(
     sources: list[IntelligenceSource] | None = None,
     proponer: _PROPOSER | None = None,
     store: Any | None = None,
+    history_storage: Any = True,
 ) -> dict[str, Any]:
     """Ejecuta el loop completo y devuelve la ficha de invención.
 
     ``methods``/``sources``/``proponer``/``store`` son inyectables para
     pruebas deterministas.
+
+    Semilla (megaprompt §31-§33): ``seed=None`` genera una NUEVA semilla
+    reproducible con ``secrets.randbits(64)`` (registra seed_source
+    "generated"); una semilla explícita reproduce la exploración
+    (seed_source "explicit"). Nunca timestamps ni ``hash()``.
+
+    Historial (§35-§36): ``history_storage=True`` abre el Storage por
+    defecto y aplica cooldown por decaimiento sobre pares usados (nunca
+    prohibición permanente); ``False``/``None`` desactiva el historial;
+    una instancia de Storage se usa tal cual. Los fallos de historial
+    degradan a ejecución sin memoria (§ DV9).
     """
     if not query.strip():
         raise ValueError("query must not be blank")
     is_offline = _offline_mode(offline)
     proponer_fn = proponer or (lambda q, i, d: _default_proponer(q, i, d, is_offline))
+
+    import secrets
+    import uuid
+
+    if seed is None:
+        seed = secrets.randbits(64)
+        seed_source = "generated"
+    else:
+        seed_source = "explicit"
+    run_id = uuid.uuid4().hex  # identidad de ejecución independiente de la seed
+
+    history = None
+    first_seen: dict[tuple[str, str], str] | None = None
+    if history_storage is True:
+        try:
+            from .storage import Storage
+
+            history = Storage()
+        except Exception:  # noqa: BLE001 — DV9: sin historial el motor funciona
+            history = None
+    elif history_storage:
+        history = history_storage
+    if history is not None:
+        try:
+            import hashlib as _hashlib
+
+            ids = sorted(str(m["id"]) for m in (methods or catalog_methods()))
+            fingerprint = _hashlib.sha256(",".join(ids).encode("utf-8")).hexdigest()
+            first_seen = history.load_combination_first_seen(fingerprint)
+        except Exception:  # noqa: BLE001 — degradación elegante (DV9)
+            first_seen = None
 
     engine = LotteryEngine.from_methods(methods or catalog_methods(), seed=seed)
     for _ in range(rounds):
@@ -242,7 +285,18 @@ def invent(
     from .diversity_selector import select_finalists
 
     pool = engine.get_top_ideas(max(top * 6, 12))
-    top_ideas, selection_report = select_finalists(pool, top)
+    top_ideas, selection_report = select_finalists(pool, top, historical_first_seen=first_seen)
+    if history is not None and selection_report.get("pool_size"):
+        try:  # registrar los pares de ESTA ejecución (first_seen=ahora)
+            history.save_lottery_combinations(
+                engine.catalog_fingerprint,
+                sorted(engine.used_combos),
+                run_id=run_id,
+                mode="stratified",
+                seed=seed,
+            )
+        except Exception:  # noqa: BLE001 — DV9: persistencia opcional
+            pass
 
     # Offline: sin fuentes de red. El transporte común también bloquea
     # cualquier intento de conexión que escape (defensa en profundidad).
@@ -252,7 +306,7 @@ def invent(
         active_sources = []
     else:
         active_sources = build_sources(default_context(offline=is_offline))
-    run_id = _stable_run_id(query, seed)
+    candidate_prefix = _stable_run_id(query, seed)  # reproducible por seed
 
     entries: list[dict[str, Any]] = []
     for idea in top_ideas:
@@ -273,7 +327,7 @@ def invent(
             if proposal.get("estado") == "PROPUESTA":
                 proposal = _pending_proposal("PROPUESTA sin mecanismo")
         candidate = InventionCandidate(
-            candidate_id=f"{run_id}-{len(entries) + 1:02d}",
+            candidate_id=f"{candidate_prefix}-{len(entries) + 1:02d}",
             title=str(idea.get("title", ""))[:120],
             description=str(idea.get("description", ""))[:400],
             mechanism=str(proposal.get("mecanismo", ""))[:200],
@@ -308,6 +362,8 @@ def invent(
     sheet = {
         "query": query,
         "seed": seed,
+        "seed_source": seed_source,
+        "run_id": run_id,
         "mode": "stratified",
         "rounds": rounds,
         "generated_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
@@ -340,6 +396,8 @@ def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path
         "generated_at": sheet["generated_at"],
         "query": sheet["query"],
         "seed": sheet["seed"],
+        "seed_source": sheet["seed_source"],
+        "run_id": sheet["run_id"],
         "mode": sheet["mode"],
         "rounds": sheet["rounds"],
         "domain_coupling": sheet["domain_coupling"],
