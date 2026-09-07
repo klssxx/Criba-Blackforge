@@ -235,7 +235,14 @@ def invent(
     for _ in range(rounds):
         engine.run_round(mode="stratified", batch_size=batch_size, query=query)
     domain = engine.draw_domain()
-    top_ideas = engine.get_top_ideas(top)
+    # Selección finalista diversity-aware (megaprompt §24-§28): pool de alta
+    # calidad → selector MMR → finalistas. get_top_ideas sigue existiendo
+    # para sus otros consumidores; el flujo de invención ya no depende solo
+    # del top-N por score.
+    from .diversity_selector import select_finalists
+
+    pool = engine.get_top_ideas(max(top * 6, 12))
+    top_ideas, selection_report = select_finalists(pool, top)
 
     # Offline: sin fuentes de red. El transporte común también bloquea
     # cualquier intento de conexión que escape (defensa en profundidad).
@@ -309,6 +316,7 @@ def invent(
             "title": domain.get("title") if domain else None,
             "usado_en_interpretacion": True,
         },
+        "seleccion_finalista": selection_report,
         "entries": entries,
         "totals": {
             "ideas": len(engine.all_ideas),

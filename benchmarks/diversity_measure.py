@@ -24,15 +24,21 @@ from typing import Any, Callable
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from benchmarks.diversity_fixtures import ANTI_CONVERGENCE_POOL, PAIR_REUSE_POOL  # noqa: E402
+from src.criba.diversity_selector import select_finalists  # noqa: E402
 from src.criba.similarity import classify  # noqa: E402
 
-SELECTOR = "score_top_n"
 TOP_N = 3
 
 
 def select_score_top_n(pool: list[dict], n: int = TOP_N) -> list[dict]:
     """Comportamiento actual de get_top_ideas: top-N por score."""
     return sorted(pool, key=lambda c: c["score"], reverse=True)[:n]
+
+
+def select_diversity_aware(pool: list[dict], n: int = TOP_N) -> list[dict]:
+    """Selector finalista MMR (criba.diversity_selector), sin genoma ausente."""
+    finalists, _ = select_finalists(pool, n)
+    return finalists
 
 
 def _pair_verdicts(finalists: list[dict]) -> list[tuple[str, str, str]]:
@@ -101,6 +107,7 @@ def measure(finalists: list[dict], pool: list[dict]) -> dict[str, Any]:
 def run_measurement(selector: str) -> dict[str, Any]:
     selectors: dict[str, Callable[[list[dict]], list[dict]]] = {
         "score_top_n": select_score_top_n,
+        "diversity_aware": select_diversity_aware,
     }
     if selector not in selectors:
         raise SystemExit(f"selector desconocido: {selector}; disponibles: {list(selectors)}")
