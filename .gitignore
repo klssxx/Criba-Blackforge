@@ -75,4 +75,4 @@ src/**/.hermes-tmp.*
 # Local agent tooling (personal config, not part of the product)
 .agents/
 .codex/
-.pytest_tmp/
+.pytest_tmp*/
