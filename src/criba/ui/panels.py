@@ -258,6 +258,13 @@ def build_right_column(t: Tokens, refs: dict[str, Any]) -> QWidget:
     refs["actualizarFuentesBtn"].setObjectName("ghost")
     refs["actualizarFuentesBtn"].setCursor(Qt.CursorShape.PointingHandCursor)
     fl.addWidget(refs["actualizarFuentesBtn"])
+    refs["supraBtn"] = QPushButton("Desarrollar con SUPRA")
+    refs["supraBtn"].setObjectName("ghost")
+    refs["supraBtn"].setCursor(Qt.CursorShape.PointingHandCursor)
+    refs["supraBtn"].setToolTip(
+        "Prepara el dossier con prueba discriminante del candidato activo. "
+        "Estado: ejecución SUPRA pendiente — nunca PASS automático.")
+    fl.addWidget(refs["supraBtn"])
     lay.addWidget(fu)
     # 7.3 categorías
     cat, catl = _card(t)

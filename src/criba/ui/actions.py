@@ -862,3 +862,47 @@ def on_tab_changed(win: Any, index: int) -> None:
 def on_ver_todas(win: Any) -> None:
     win.refs["rankingTabs"].setCurrentIndex(0)
     win.refs["rankingProxy"].set_mode("")
+
+
+# ---------------------------------------------------------------------------
+# DESARROLLAR CON SUPRA (paridad con `inventar --dossier`)
+# ---------------------------------------------------------------------------
+def on_desarrollar_supra(win: Any) -> None:
+    """Prepara el dossier con PRUEBA DISCRIMINANTE de cada candidato PROPUESTA.
+
+    Estado honesto: SUPRA_EJECUCION_PENDIENTE — nunca PASS automático
+    (mandato ASTRA §7). Paridad con `criba inventar --dossier`.
+    """
+    sheet = getattr(win, "invent_sheet", None)
+    if not sheet or not sheet.get("entries"):
+        show_error(win, "SUPRA", "Genera candidatos con Inventar antes de desarrollar.")
+        return
+    propuestas = [e for e in sheet["entries"]
+                  if e.get("estado_interpretacion") == "PROPUESTA"]
+    if not propuestas:
+        show_error(
+            win, "SUPRA",
+            "Sin propuestas interpretadas: los candidatos están PENDIENTES "
+            "(se requiere modelo) y no hay mecanismo que desarrollar.",
+        )
+        return
+    from ..supra_dossier import guardar_dossier, preparar_dossier
+
+    dossiers = []
+    for entry in propuestas:
+        dossier = preparar_dossier(
+            entry, sheet["query"], ficha_bloqueo=sheet.get("ficha_bloqueo"))
+        path = guardar_dossier(dossier)
+        dossiers.append(dossier["dossier_id"])
+    sheet["dossiers"] = dossiers
+    sheet["dossiers_path"] = str(path)
+    r = win.refs
+    r["ideaSummary"].setText(
+        f"{len(dossiers)} dossier(s) SUPRA preparados · ejecución PENDIENTE "
+        f"(prueba discriminante incluida)")
+    set_chip(r["ideaEstadoChip"], "SUPRA pendiente", "exploracion")
+    _activity(
+        win, "cyan",
+        f"Desarrollar con SUPRA: {len(dossiers)} dossier(s) preparados, "
+        f"ejecución pendiente -> {path}",
+    )

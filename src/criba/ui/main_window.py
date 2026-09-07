@@ -347,6 +347,8 @@ class CribaMainWindow(QMainWindow):
         right_scroll.setWidget(build_right_column(t, self.refs))
         lay.addWidget(right_scroll)
         # conexiones bloque derecho / central
+        self.refs["supraBtn"].clicked.connect(
+            lambda: actions.on_desarrollar_supra(self))
         self.refs["actualizarFuentesBtn"].clicked.connect(
             lambda: actions.on_actualizar(self))
         self.refs["historialCompletoBtn"].clicked.connect(

@@ -108,3 +108,54 @@ def test_inventar_without_problem_shows_error(qapp) -> None:
         assert "Inventar" in win.errorBannerText.text()
     finally:
         win.close()
+
+
+def test_desarrollar_con_supra_prepara_dossier_pendiente(qapp, tmp_path, monkeypatch) -> None:
+    """Paridad GUI==CLI: cada candidato PROPUESTA genera un dossier con
+    estado SUPRA_EJECUCION_PENDIENTE (nunca PASS). Offscreen."""
+    import json
+
+    from criba.supra_dossier import preparar_dossier as _real  # noqa: F401
+    import criba.supra_dossier as sd
+    from criba.ui import actions
+
+    sheet = _sheet_stub("permisos")
+    sheet["entries"][0]["estado_interpretacion"] = "PROPUESTA"
+    sheet["entries"][0]["prueba_concreta"] = "medir reutilizaciones rechazadas"
+    sheet["ficha_bloqueo"] = {"bloqueo": "permisos reutilizables", "origen_bloqueo": "hipotesis"}
+
+    rutas = []
+    monkeypatch.setattr(sd, "guardar_dossier",
+                        lambda d, directory=None: (rutas.append(d), tmp_path / "d.jsonl")[1])
+    monkeypatch.setattr(sd, "_dossiers_dir", lambda override=None: tmp_path)
+
+    win = CribaMainWindow()
+    try:
+        win.invent_sheet = sheet
+        actions.on_desarrollar_supra(win)
+        qapp.processEvents()
+        assert sheet["dossiers"] and sheet["dossiers"][0].startswith("dossier-")
+        assert "PENDIENTE" in win.refs["ideaSummary"].text().upper()
+        dossier_guardado = rutas[0]
+        assert dossier_guardado["estado"] == "SUPRA_EJECUCION_PENDIENTE"
+        assert dossier_guardado["prueba_discriminante"]["estado_prueba"] == "NO_EJECUTADA"
+        assert dossier_guardado["prueba_discriminante"]["afirmacion_decisiva"]
+        # sin propuesta no hay dossier y hay aviso honesto
+        sheet2 = _sheet_stub("x")
+        sheet2["entries"][0]["estado_interpretacion"] = "PENDIENTE_INTERPRETACION"
+        win.invent_sheet = sheet2
+        win.errorBanner.hide()
+        actions.on_desarrollar_supra(win)
+        assert win.errorBanner.isVisibleTo(win)
+    finally:
+        win.close()
+
+
+def test_desarrollar_supra_sin_sheet_error(qapp) -> None:
+    from criba.ui import actions
+    win = CribaMainWindow()
+    try:
+        actions.on_desarrollar_supra(win)
+        assert win.errorBanner.isVisibleTo(win)
+    finally:
+        win.close()
