@@ -48,7 +48,7 @@ uvx --from criba criba --help
 ```
 
 > The optional desktop and model features pull extra dependencies:
-> `pip install "criba[gui,api,mcp]"`
+> `pip install "criba[gui,api]"`
 
 ### From source
 

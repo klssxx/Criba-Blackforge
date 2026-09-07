@@ -48,7 +48,7 @@ uvx --from criba criba --help
 ```
 
 > Las funciones opcionales de escritorio y de modelo requieren extras:
-> `pip install "criba[gui,api,mcp]"`
+> `pip install "criba[gui,api]"`
 
 ### Desde el código fuente
 
