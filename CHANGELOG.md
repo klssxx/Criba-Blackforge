@@ -61,6 +61,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **CLI `criba tecnicas "<tarea>"`**: acceso de solo lectura al router
   (`--perfil CRIBA|BLACKFORGE`, `--max`, `--max-por-familia`, `--con-red`).
 
+### Fixed (2026-09-07 — atribución del historial de dossiers)
+- **Un resultado positivo antiguo podía atribuirse a un mecanismo nuevo**:
+  el ID del dossier se derivaba del candidate_id (se repetía) y la lectura
+  del historial retenía la última versión del contenido. `supra_dossier.py`:
+  cada preparación recibe un UUID propio; un ID guardado no admite cambios
+  de contenido (solo reexportación idéntica, idempotente); registrar un
+  resultado exige un dossier existente y no ambiguo; el historial antiguo
+  con contenidos distintos bajo un mismo ID queda excluido del aprendizaje
+  con `RuntimeWarning` (archivos intactos); referencias huérfanas omitidas.
+  11 regresiones nuevas (`test_dossier_integrity.py`). Parche externo
+  aislado (base `2f46d37`), integrado con normalización CRLF→LF y una
+  anotación de tipos para mypy estricto.
+
 ### Fixed (2026-09-07 — integridad del registro de técnicas, P0)
 - **El registro declaraba 11 técnicas IMPLEMENTED sobre código eliminado**:
   el commit cbac469 (cirugía ~5.1k líneas, 2026-09-05) retiró los módulos

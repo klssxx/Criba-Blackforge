@@ -13,9 +13,11 @@ from __future__ import annotations
 
 import json
 import os
+import warnings
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 
 def _dossiers_dir(override: Path | None = None) -> Path:
@@ -23,6 +25,39 @@ def _dossiers_dir(override: Path | None = None) -> Path:
         return override
     base = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
     return base / "dossiers"
+
+
+def _contexto(dossier: dict[str, Any]) -> dict[str, Any]:
+    """La fecha de reexportación no cambia el contenido del experimento."""
+    return {k: v for k, v in dossier.items() if k not in ("creado_at", "dossier_id")}
+
+
+def _leer_historial(
+    path: Path,
+) -> tuple[dict[str, dict[str, Any]], set[str], list[dict[str, Any]]]:
+    dossiers: dict[str, dict[str, Any]] = {}
+    ambiguos: set[str] = set()
+    resultados: list[dict[str, Any]] = []
+    if not path.exists():
+        return dossiers, ambiguos, resultados
+    for line in path.read_text(encoding="utf-8").splitlines():
+        try:
+            rec = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not isinstance(rec, dict):
+            continue
+        identity = rec.get("dossier_id")
+        if not isinstance(identity, str) or not identity.strip():
+            continue
+        if rec.get("tipo") == "resultado_observado":
+            resultados.append(rec)
+            continue
+        if identity in dossiers and _contexto(dossiers[identity]) != _contexto(rec):
+            ambiguos.add(identity)
+        else:
+            dossiers.setdefault(identity, rec)
+    return dossiers, ambiguos, resultados
 
 
 def preparar_dossier(
@@ -54,7 +89,7 @@ def preparar_dossier(
         "estado_prueba": "NO_EJECUTADA",
     }
     return {
-        "dossier_id": f"dossier-{entry.get('candidate_id', 'sin-id')}",
+        "dossier_id": f"dossier-{uuid4().hex}",
         "candidate_id": entry.get("candidate_id", ""),
         "run_id": entry.get("run_id", ""),
         "problema": problema[:400],
@@ -72,8 +107,20 @@ def preparar_dossier(
 
 def guardar_dossier(dossier: dict[str, Any], directory: Path | None = None) -> Path:
     directory = _dossiers_dir(directory)
-    directory.mkdir(parents=True, exist_ok=True)
     path = directory / "dossiers.jsonl"
+    identity = dossier.get("dossier_id")
+    if not isinstance(identity, str) or not identity.strip():
+        raise ValueError("dossier_id es obligatorio")
+    if dossier.get("tipo") == "resultado_observado":
+        raise ValueError("usar registrar_resultado para observaciones")
+    existentes, ambiguos, _ = _leer_historial(path)
+    if identity in ambiguos or (
+        identity in existentes and _contexto(existentes[identity]) != _contexto(dossier)
+    ):
+        raise ValueError("dossier_id ambiguo: crear un dossier nuevo para cambiar su contenido")
+    if identity in existentes:
+        return path
+    directory.mkdir(parents=True, exist_ok=True)
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(dossier, ensure_ascii=False) + "\n")
     return path
@@ -94,6 +141,11 @@ def registrar_resultado(
     """
     if resultado not in ("positivo", "negativo", "indeterminado"):
         raise ValueError("resultado debe ser positivo|negativo|indeterminado")
+    directory = _dossiers_dir(directory)
+    path = directory / "dossiers.jsonl"
+    dossiers, ambiguos, _ = _leer_historial(path)
+    if dossier_id not in dossiers or dossier_id in ambiguos:
+        raise ValueError("el resultado requiere un dossier existente y no ambiguo")
     registro = {
         "dossier_id": dossier_id,
         "resultado": resultado,
@@ -101,9 +153,6 @@ def registrar_resultado(
         "registrado_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "autor": "humano/experimento",  # solo experimentos observados escriben aquí
     }
-    directory = _dossiers_dir(directory)
-    directory.mkdir(parents=True, exist_ok=True)
-    path = directory / "dossiers.jsonl"
     with path.open("a", encoding="utf-8") as handle:
         handle.write(json.dumps(
             {**registro, "tipo": "resultado_observado"}, ensure_ascii=False) + "\n")
@@ -117,23 +166,24 @@ def lecciones_previas(query: str, directory: Path | None = None, limit: int = 3)
     'este cambio de mecanismo produjo este resultado en estas condiciones'.
     """
     path = _dossiers_dir(directory) / "dossiers.jsonl"
-    if not path.exists():
+    if not path.exists() or limit <= 0:
         return []
     q = (query or "").casefold()
-    dossiers: dict[str, dict[str, Any]] = {}
-    resultados: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8").splitlines():
-        try:
-            rec = json.loads(line)
-        except json.JSONDecodeError:
-            continue
-        if rec.get("tipo") == "resultado_observado":
-            resultados.append(rec)
-        else:
-            dossiers[rec.get("dossier_id", "")] = rec
+    dossiers, ambiguos, resultados = _leer_historial(path)
+    if ambiguos:
+        warnings.warn(
+            "Historial ambiguo: resultados excluidos del aprendizaje; registros conservados",
+            RuntimeWarning,
+            stacklevel=2,
+        )
     out: list[str] = []
     for res in resultados:
-        d = dossiers.get(res.get("dossier_id", ""), {})
+        identity = res.get("dossier_id", "")
+        if identity in ambiguos or identity not in dossiers:
+            continue
+        if res.get("resultado") not in ("positivo", "negativo", "indeterminado"):
+            continue
+        d = dossiers[identity]
         problema = str(d.get("problema", "")).casefold()
         if q and not any(w in problema for w in q.split() if len(w) >= 4):
             continue
