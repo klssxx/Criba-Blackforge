@@ -17,7 +17,7 @@ La mayoría de herramientas de "ideación con IA" son cajas negras: pides, sale 
 - **Local sin fricción** — sin API key, sin red y sin telemetría para ejecutar el núcleo.
 - **Interpretación opcional con modelo** — trae tu propio proveedor (GGUF/Ollama local o endpoint de nube compatible con OpenAI); sin proveedor, scoring determinista local y la interpretación queda PENDIENTE en lugar de fabricarse.
 - **Catálogo integrado** — más de 130 técnicas de innovación y seguridad (TRIZ, Design Thinking, JTBD, FMEA, MITRE ATT&CK, OWASP, STRIDE, Kill Chain…) congeladas en JSON con esquema versionado.
-- **Probado a conciencia** — 854 tests verificados; el pipeline de release construye un ejecutable portable de Windows firmado con procedencia SLSA.
+- **Probado a conciencia** — 866 tests verificados; el pipeline de release construye un ejecutable portable de Windows firmado con procedencia SLSA.
 
 ## Funcionalidades
 
@@ -110,7 +110,7 @@ tasa (sin red en los tests de CI).
 ## Desarrollo
 
 ```bash
-uv run pytest -q            # 854 tests
+uv run pytest -q            # 866 tests
 uv run mypy src/criba       # tipado estricto sobre el motor
 uv run ruff check src       # lint
 ```

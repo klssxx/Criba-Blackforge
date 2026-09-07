@@ -17,7 +17,7 @@ Most "AI ideation" tools are black boxes: prompt in, text out, no way to know wh
 - **Zero-friction local** — no API key, no network, no telemetry to run the core engine.
 - **Optional model interpretation** — bring your own provider (local GGUF/Ollama or an OpenAI-compatible cloud endpoint); without one, deterministic local scoring runs and interpretation is marked PENDING instead of fabricated.
 - **Integrated method catalog** — 130+ innovation/security techniques (TRIZ, Design Thinking, JTBD, FMEA, MITRE ATT&CK, OWASP, STRIDE, Kill Chain…), frozen in JSON with a versioned schema.
-- **Provably tried** — 854 passing tests and the release pipeline builds a signed portable Windows bundle with SLSA provenance.
+- **Provably tried** — 866 passing tests and the release pipeline builds a signed portable Windows bundle with SLSA provenance.
 
 ## Features
 
@@ -110,7 +110,7 @@ rate-limit controls (no network in CI runs).
 ## Development
 
 ```bash
-uv run pytest -q            # 854 tests
+uv run pytest -q            # 866 tests
 uv run mypy src/criba       # strict typing over the engine
 uv run ruff check src       # lint
 ```

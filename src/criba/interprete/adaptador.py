@@ -294,7 +294,7 @@ PREGUNTAS DE EXPANSIÓN:
             return {
                 "labels": parsed.get("labels", []),
                 "score": float(parsed.get("score", 0.0)),
-                "veredicto": parsed.get("verdicto", "PENDIENTE"),
+                "veredicto": parsed.get("veredicto", "PENDIENTE"),
                 "analisis": parsed.get("analisis", ""),
                 "protocolo_aplicado": protocolo,
             }

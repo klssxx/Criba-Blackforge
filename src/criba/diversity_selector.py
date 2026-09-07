@@ -37,18 +37,52 @@ from .similarity import MIN_DUPLICATE_COVERAGE, WEIGHTS, _effective, classify, g
 # paráfrasis que cambie MÁS de la mitad del vocabulario no se detecta aquí.
 MECHANISM_DUPLICATE_JACCARD = 0.6
 
+# Marcadores de negación: presentes en un lado y no en el otro, invierten el
+# mecanismo aunque el vocabulario coincida (prueba negativa de negación).
+_NEGATION_RE = re.compile(
+    r"\b(no|sin|nunca|jamás|jamais|impide|impedir|prohíbe|prohibir|prohibido|"
+    r"evita|evitar|cancela|cancelar|revoca|revocar)\b")
+
+
+def _content_tokens(text: str) -> list[str]:
+    return [t for t in re.split(r"[^a-z0-9áéíóúñü]+", (text or "").casefold()) if len(t) >= 4]
+
+
+def compare_mechanisms(a: str, b: str) -> str:
+    """Clasificación honesta entre dos mecanismos interpretados.
+
+    Devuelve: ``DUPLICATE`` (misma idea, paráfrasis), ``DISTINCT`` (mecanismos
+    distintos, incluidos negación e inversión de dirección) o ``UNKNOWN``
+    (texto insuficiente o zona gris — NO se auto-descarta por similitud baja).
+    """
+    ta, tb = set(_content_tokens(a)), set(_content_tokens(b))
+    if len(ta) < 3 or len(tb) < 3:
+        return "UNKNOWN"
+    # Negación asimétrica ANTES de comparar vocabulario: "no concede" vs
+    # "concede" comparte todos los tokens pero el mecanismo es opuesto.
+    neg_a = bool(_NEGATION_RE.search((a or "").casefold()))
+    neg_b = bool(_NEGATION_RE.search((b or "").casefold()))
+    if neg_a != neg_b:
+        return "DISTINCT"
+    ra, rb = _content_tokens(a), _content_tokens(b)
+    if ta == tb:
+        # Mismo vocabulario: el reorden de cláusulas es ambiguo desde léxico
+        # (¿inversión de dirección o solo estilo?) → UNKNOWN, no DISTINCT ni
+        # DUPLICATE (auditoría qa-win: la heurística de orden confunde estilo
+        # con causalidad).
+        return "DUPLICATE" if tuple(ra[:3]) == tuple(rb[:3]) else "UNKNOWN"
+    inter, union = len(ta & tb), len(ta | tb)
+    jac = inter / union if union else 0.0
+    if jac >= MECHANISM_DUPLICATE_JACCARD:
+        return "DUPLICATE"
+    if jac >= 0.45:
+        return "UNKNOWN"  # zona gris: no descartar automáticamente
+    return "DISTINCT"
+
 
 def same_idea_mechanism(a: str, b: str) -> bool:
-    """True si dos mecanismos interpretados son esencialmente la misma idea."""
-    def _tokens(text: str) -> set[str]:
-        return {t for t in re.split(r"[^a-z0-9áéíóúñü]+", text.casefold()) if len(t) >= 4}
-    ta, tb = _tokens(a or ""), _tokens(b or "")
-    if not ta or not tb:
-        return False
-    if ta == tb:
-        return True
-    inter, union = len(ta & tb), len(ta | tb)
-    return union > 0 and (inter / union) >= MECHANISM_DUPLICATE_JACCARD
+    """Compatibilidad: True solo si son DUPLICATE (misma idea reescrita)."""
+    return compare_mechanisms(a, b) == "DUPLICATE"
 
 # Pesos centralizados (megaprompt §25/§44). Documentación por término:
 W_QUALITY = 1.0            # score del candidato (heurística local etiquetada)

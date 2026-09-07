@@ -24,6 +24,23 @@ PROFILE_BLACKFORGE = ("cisa_kev", "mitre_attack")
 PROFILE_EXTRA = ("openalex", "arxiv", "epo", "clinicaltrials", "nsf_awards")
 
 
+def default_store() -> IntelligenceStore | None:
+    """Almacén de evidencia por defecto (%LOCALAPPDATA%/CRIBA-Blackforge).
+
+    Compartido por GUI, CLI, API y MCP para que el intérprete reciba
+    evidencia local en todos los recorridos. None si no puede abrirse.
+    """
+    import os
+    from pathlib import Path
+
+    try:
+        base = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
+        base.mkdir(parents=True, exist_ok=True)
+        return IntelligenceStore(base / "intelligence.sqlite3")
+    except Exception:  # noqa: BLE001 — sin almacén, ejecución sin evidencia local
+        return None
+
+
 def _doc_identity(doc: EvidenceDocument) -> str:
     """Identidad documental: ¿es el mismo recurso upstream?
 

@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Inventario de supuestos x Partición de autoridad",
+    "description": "Combinar 'diagnostico' + 'arquitectura'",
+    "method1": "Inventario de supuestos",
+    "method2": "Partición de autoridad",
+    "family1": "diagnostico",
+    "family2": "arquitectura",
+    "quality": "BASURA",
+    "score": 0.507,
+    "mode": "optimized",
+    "round": 1,
+    "convergence": {
+      "novelty": 0.5342,
+      "evidence": 0.4372,
+      "viability": 0.8,
+      "cost": 0.4603,
+      "value_score": 0.5074
+    },
+    "class1": "generacion",
+    "class2": "generacion"
+  }
+]

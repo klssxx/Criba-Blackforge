@@ -117,3 +117,58 @@ def test_mecanismo_incompleto_no_es_diverso_ni_duplicado() -> None:
 
 def test_mecanismo_duplicado_exacto_se_detecta() -> None:
     assert same_idea_mechanism(MEC, MEC.upper())
+
+
+# ---------------------------------------------------------------------------
+# Negación y dirección: el detector no debe confundir opuestos ni inversos
+# ---------------------------------------------------------------------------
+
+from criba.diversity_selector import compare_mechanisms
+
+
+def test_negacion_cambia_el_mecanismo_y_no_es_duplicado() -> None:
+    """'conceder' vs 'no conceder': vocabulario casi idéntico, mecanismo opuesto."""
+    a = "el operador concede permisos amplios al agente para operar"
+    b = "el operador no concede permisos amplios al agente para operar"
+    assert compare_mechanisms(a, b) == "DISTINCT"
+
+
+def test_direccion_invertida_no_es_duplicado() -> None:
+    """Mismo vocabulario, dirección invertida: agente↔operador."""
+    a = "el operador concede permisos amplios al agente revisando solicitudes"
+    b = "el agente concede permisos amplios al operador revisando solicitudes"
+    # Auditoría: la inversión léxica es ambigua -> UNKNOWN, no DISTINCT falso
+    assert compare_mechanisms(a, b) == "UNKNOWN"
+
+
+def test_negacion_falsos_positivos_por_subcadena() -> None:
+    """Regresión qa-win: 'gobierno/entorno/pleno' contienen 'no' como
+    subcadena; solo la negación léxica real debe activar el marcador."""
+    assert compare_mechanisms(
+        "mejorar el gobierno de datos en la organizacion",
+        "mejorar la supervision de datos en la organizacion") == "DUPLICATE"
+    assert compare_mechanisms(
+        "mejorar el entorno de datos en la organizacion",
+        "mejorar el ambiente de datos en la organizacion") != "DISTINCT"
+    assert compare_mechanisms(
+        "operar en pleno rendimiento nocturno",
+        "operar en rendimiento nocturno pleno") != "DISTINCT"
+
+
+def test_reorden_de_clausulas_es_ambiguo_no_distinto() -> None:
+    assert compare_mechanisms(
+        "el sistema limita el uso de la clave a una operacion unica",
+        "a una operacion unica el sistema limita el uso de la clave") == "UNKNOWN"
+
+
+def test_insuficiencia_devuelve_unknown_no_descarta() -> None:
+    """Texto insuficiente → UNKNOWN: no se auto-descarta por similitud baja."""
+    assert compare_mechanisms("m1", MEC) == "UNKNOWN"
+    assert compare_mechanisms("", MEC) == "UNKNOWN"
+
+
+def test_parafraasis_y_distinto_siguen_clasificando() -> None:
+    assert compare_mechanisms(
+        MEC, "restringir cada autorizacion a un unico uso por operacion") == "DUPLICATE"
+    assert compare_mechanisms(
+        MEC, "auditar cada autorizacion otorgada por operadores externos semanalmente") == "DISTINCT"

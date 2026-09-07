@@ -152,9 +152,18 @@ def _assess_candidate(
             "detail": "lattice-vacío",
         }
 
-    scout = CrossDomainScout(sources)
+    try:
+        scout = CrossDomainScout(sources)
+        results: dict[str, SourceQueryResult] = scout.cross_search(variant, limit_per_source=3)
+    except ValueError as exc:
+        return {
+            "verdict": "UNRESOLVED",
+            "queries": [],
+            "rounds": 0,
+            "mutations": 0,
+            "detail": f"fuentes no utilizables: {exc}",
+        }
     skeptic = PriorArtSkeptic()
-    results: dict[str, SourceQueryResult] = scout.cross_search(variant, limit_per_source=3)
     report = skeptic.review(candidate, results)
     assessment = verdict_engine.assess(candidate, results, report, matches=[])
 
@@ -335,7 +344,7 @@ def invent(
             candidate_id=f"{candidate_prefix}-{index + 1:02d}",
             title=str(idea.get("title", ""))[:120],
             description=str(idea.get("description", ""))[:400],
-            mechanism=str(proposal.get("mecanismo", ""))[:200],
+            mechanism=str(proposal.get("mecanismo", "")),
             origin="NEW_IIE",
         )
         # 2) Crítica automática sobre la propuesta (no validación independiente).
@@ -369,52 +378,79 @@ def invent(
     # 4) Revisión post-interpretación (mandato §22: una revisión por candidato;
     # megaprompt §28): el selector eligió finalistas sobre estructura/técnicas
     # porque interpretar TODO el pool no cabe en presupuesto. Una vez
-    # interpretados los mecanismos, si dos son esencialmente la misma idea,
-    # el redundante se sustituye por el siguiente candidato del pool.
-    from .diversity_selector import same_idea_mechanism
+    # interpretados los mecanismos, si dos son la MISMA idea, el redundante
+    # se sustituye por el siguiente candidato del pool. Cada intento
+    # (aceptado o rechazado) se registra con identidad y llamadas consumidas;
+    # UNKNOWN no descarta automáticamente (mandato de verificación §2).
+    from .diversity_selector import compare_mechanisms
 
     pool_rest = [c for c in pool if all(c is not t for t in top_ideas)]
-    revision_log: list[dict[str, Any]] = []
+    intentos: list[dict[str, Any]] = []
+    model_calls = len(entries)  # cada finalista interpretado = 1 llamada
     for idx, entry in enumerate(entries):
         if entry["estado_interpretacion"] != "PROPUESTA" or not entry["mecanismo"]:
             continue
-        # Comparar contra los mecanismos de los OTROS finalistas por índice
-        # (la identidad de cadenas iguales no distingue entry propia/ajena).
         duplicated_with = next(
             (other["mecanismo"] for j, other in enumerate(entries)
              if j != idx and other["estado_interpretacion"] == "PROPUESTA"
              and other["mecanismo"]
-             and same_idea_mechanism(entry["mecanismo"], other["mecanismo"])),
+             and compare_mechanisms(entry["mecanismo"], other["mecanismo"]) == "DUPLICATE"),
             None,
         )
-        if duplicated_with is None or not pool_rest:
+        if duplicated_with is None:
             continue
-        substitute_idea = pool_rest.pop(0)
-        substitute_entry = _desarrollar(substitute_idea, len(entries) + len(revision_log))
-        substitute_ok = (
-            substitute_entry["estado_interpretacion"] == "PROPUESTA"
-            and substitute_entry["mecanismo"]
-            and not any(
-                same_idea_mechanism(substitute_entry["mecanismo"], other["mecanismo"])
-                for j, other in enumerate(entries)
-                if j != idx and other["estado_interpretacion"] == "PROPUESTA"
-                and other["mecanismo"]
-            )
-        )
-        if substitute_ok:
-            revision_log.append({
-                "reemplazado": entry["candidate_id"],
-                "motivo": "mecanismo interpretado duplicado con otro finalista",
-                "sustituto": substitute_entry["candidate_id"],
+        if not pool_rest:
+            intentos.append({
+                "reemplazado_id": entry["candidate_id"],
+                "reemplazado_titulo": entry["title"],
+                "motivo": "mecanismo duplicado; pool sin sustituto disponible",
+                "resultado": "rechazado",
+                "sustituto_id": None,
+                "llamadas_modelo": 0,
             })
-            entries[idx] = substitute_entry
+            entry["mecanismo_duplicado_con"] = "otro finalista (sin sustituto en el pool)"
+            continue
+        sustituto_idea = pool_rest.pop(0)
+        sustituto_entry = _desarrollar(sustituto_idea, len(entries) + len(intentos))
+        model_calls += 1  # el sustituto consume su propia llamada de propuesta
+        distinto_de_todos = all(
+            compare_mechanisms(sustituto_entry["mecanismo"], other["mecanismo"]) != "DUPLICATE"
+            for j, other in enumerate(entries)
+            if j != idx and other["estado_interpretacion"] == "PROPUESTA"
+            and other["mecanismo"]
+        )
+        if (sustituto_entry["estado_interpretacion"] == "PROPUESTA"
+                and sustituto_entry["mecanismo"] and distinto_de_todos):
+            intentos.append({
+                "reemplazado_id": entry["candidate_id"],
+                "reemplazado_titulo": entry["title"],
+                "motivo": "mecanismo interpretado duplicado con otro finalista",
+                "resultado": "aceptado",
+                "sustituto_id": sustituto_entry["candidate_id"],
+                "sustituto_titulo": sustituto_entry["title"],
+                "llamadas_modelo": 1,
+            })
+            entries[idx] = sustituto_entry
         else:
-            entry["mecanismo_duplicado_con"] = "otro finalista (sin sustituto distinto en el pool)"
-    if revision_log or any("mecanismo_duplicado_con" in e for e in entries):
+            motivo = "sustituto sin propuesta válida o aún duplicado"
+            if sustituto_entry["estado_interpretacion"] == "PROPUESTA" and sustituto_entry["mecanismo"]:
+                motivo = "sustituto aún duplicado o incomparable (UNKNOWN no descarta)"
+            intentos.append({
+                "reemplazado_id": entry["candidate_id"],
+                "reemplazado_titulo": entry["title"],
+                "motivo": motivo,
+                "resultado": "rechazado",
+                "sustituto_id": sustituto_entry["candidate_id"],
+                "sustituto_titulo": sustituto_entry["title"],
+                "llamadas_modelo": 1,
+            })
+            entry["mecanismo_duplicado_con"] = "otro finalista (sustitución rechazada)"
+    if intentos:
         selection_report["revision_post_interpretacion"] = {
-            "sustituciones": revision_log,
-            "sin_sustituto": [e["candidate_id"] for e in entries
-                              if "mecanismo_duplicado_con" in e],
+            "intentos": intentos,
+            "llamadas_revision": len(intentos),
+            "llamadas_modelo_total": model_calls,
+            "sustituciones_aceptadas": sum(1 for i in intentos if i["resultado"] == "aceptado"),
         }
 
     sheet = {
@@ -469,6 +505,7 @@ def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path
                 "score": e["score"],
                 "score_kind": e["score_kind"],
                 "methods": e["methods"],
+                "evidencia_local_usada": e["evidencia_local_usada"],
                 "verdict": e["prior_art"]["verdict"],
                 "queries": e["prior_art"]["queries"],
                 "detail": e["prior_art"]["detail"],

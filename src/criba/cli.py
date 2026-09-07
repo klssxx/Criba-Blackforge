@@ -279,6 +279,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.command == "inventar":
             from .inventar import append_ledger, invent, print_sheet
 
+            from .intelligence.refresh import default_store
+
             sheet = invent(
                 args.query,
                 seed=args.seed,
@@ -286,6 +288,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 batch_size=args.batch_size,
                 top=args.top,
                 offline=True if args.offline else None,
+                store=default_store(),
             )
             print_sheet(sheet)
             ledger = append_ledger(sheet)

@@ -419,4 +419,124 @@ def test_mecanismo_duplicado_se_sustituye_desde_el_pool() -> None:
         "no deben coexistir mecanismos esencialmente duplicados tras la revisión"
     )
     revision = sheet["seleccion_finalista"].get("revision_post_interpretacion")
-    assert revision and revision["sustituciones"], "la sustitución debe quedar registrada"
+    assert revision and revision["intentos"], "la sustitución debe quedar registrada"
+    assert revision["sustituciones_aceptadas"] >= 1
+
+
+def test_mecanismo_completo_sin_truncar() -> None:
+    """El mecanismo interpretado se conserva COMPLETO, no recortado a 200."""
+    largo = "mecanismo completo: " + ("el sistema de cola redirige solicitudes hacia réplicas " * 6)
+    def _proponer(query, idea, domain, evidence=None):
+        return {"estado": "PROPUESTA", "hipotesis": "h", "mecanismo": largo,
+                "aportacion_por_tecnica": [], "supuestos": [], "prueba_concreta": "",
+                "error": ""}
+    sheet = invent("q", seed=6, rounds=1, batch_size=6, top=2, offline=True,
+                   methods=_methods(), sources=_sources(), proponer=_proponer)
+    assert all(len(e["mecanismo"]) == len(largo) for e in sheet["entries"])
+
+
+def test_revision_registra_aceptados_rechazados_y_llamadas() -> None:
+    """Cada intento de sustitución queda registrado con identidad y resultado,
+    y el conteo de llamadas del intérprete aparece en el informe."""
+    calls = {"n": 0}
+    def _proponer(query, idea, domain, evidence=None):
+        calls["n"] += 1
+        if calls["n"] in (1, 2):
+            m = "limitar cada autorizacion a un unico uso por operacion"
+        else:
+            m = "auditar permisos otorgados mediante revision mensual externa"
+        return {"estado": "PROPUESTA", "hipotesis": "h", "mecanismo": m,
+                "aportacion_por_tecnica": [], "supuestos": [], "prueba_concreta": "",
+                "error": ""}
+    sheet = invent("permisos", seed=11, rounds=2, batch_size=8, top=3, offline=True,
+                   methods=_methods(), sources=_sources(), proponer=_proponer)
+    rev = sheet["seleccion_finalista"].get("revision_post_interpretacion")
+    assert rev and rev["intentos"], "cada intento debe registrarse (aceptado o rechazado)"
+    for intento in rev["intentos"]:
+        assert intento["resultado"] in ("aceptado", "rechazado")
+        assert intento["llamadas_modelo"] >= 1
+        assert intento.get("reemplazado_id") or intento.get("sustituto_id")
+    assert rev["llamadas_modelo_total"] == 3 + len(rev["intentos"])
+    assert rev["llamadas_revision"] == len(rev["intentos"])
+
+
+def test_cli_inventar_conecta_almacen_de_evidencia(monkeypatch, tmp_path) -> None:
+    """La CLI pasa el almacén de evidencia por defecto a invent()."""
+    import criba.cli as cli_mod
+    import criba.inventar as inventar_mod
+    capturado = {}
+    def _fake_invent(query, **kwargs):
+        capturado.update(kwargs)
+        return {"query": query, "seed": 1, "seed_source": "explicit", "run_id": "r",
+                "mode": "stratified", "rounds": 1, "domain_coupling": {"id": "d", "title": "t"},
+                "entries": [], "totals": {"ideas": 0, "pending_interpretation": 0,
+                "unresolved": 0, "partial_prior_art": 0, "survived_search": 0}}
+    monkeypatch.setattr(inventar_mod, "invent", _fake_invent)
+    monkeypatch.setattr(inventar_mod, "print_sheet", lambda sheet: None)
+    monkeypatch.setattr(inventar_mod, "append_ledger", lambda sheet, ledger_dir=None: __import__("pathlib").Path("x.jsonl"))
+    rc = cli_mod.main(["inventar", "consulta de prueba", "--offline", "--seed", "1"])
+    assert rc == 0
+    assert capturado.get("store") is not None, "la CLI debe pasar el almacén de evidencia"
+
+
+def test_payload_del_proponente_contiene_la_evidencia(monkeypatch) -> None:
+    """La solicitud real al intérprete incluye títulos y extractos de la
+    evidencia: payload capturado del POST, no solo la ficha final."""
+    from criba.interprete import adaptador
+
+    class _Resp:
+        status_code = 200
+        def raise_for_status(self): pass
+        def json(self):
+            return {"choices": [{"message": {"content": '{"hipotesis":"h","mecanismo":"m","aportacion_por_tecnica":[],"supuestos":[],"prueba_concreta":"p"}'}}]}
+    capturado = {}
+    class _Client:
+        def __init__(self, *a, **k): pass
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def post(self, url, json=None, headers=None):
+            capturado["url"] = url
+            capturado["payload"] = json
+            return _Resp()
+    monkeypatch.setattr(adaptador.httpx, "Client", _Client)
+    monkeypatch.setenv("NOUS_API_KEY", "test-key-payload")
+    interp = adaptador.LocalInterprete()
+    ev = [{"title": "Capacidades de un solo uso", "abstract": "evitan reutilizar permisos",
+           "url": "https://x/cap", "doc_id": "doc-e9"}]
+    interp.proponer("permisos de agentes", {"method1": "A", "method2": "B"}, {"title": "seg"}, ev)
+    contenido = capturado["payload"]["messages"][1]["content"]
+    assert "Capacidades de un solo uso" in contenido
+    assert "evitan reutilizar permisos" in contenido
+
+
+def test_cloud_interprete_parser_veredicto(monkeypatch) -> None:
+    """Regresión qa-win: el typo 'verdicto' silenciaba todo veredicto cloud."""
+    from criba.interprete import adaptador
+
+    class _Resp:
+        status_code = 200
+        def raise_for_status(self): pass
+        def json(self):
+            return {"choices": [{"message": {"content": '{"labels":["tangible"],"score":0.7,"veredicto":"novedad_fronteriza","analisis":"a"}'}}]}
+    class _Client:
+        def __init__(self, *a, **k): pass
+        def __enter__(self): return self
+        def __exit__(self, *a): return False
+        def post(self, url, json=None, headers=None): return _Resp()
+    monkeypatch.setattr(adaptador.httpx, "Client", _Client)
+    interp = adaptador.CloudInterprete(api_key="k")
+    res = interp.interpretar("q", {"title": "t"})
+    assert res["veredicto"] == "novedad_fronteriza"
+
+
+def test_scout_con_fuentes_vacias_no_crash() -> None:
+    """Regresión sospecha qa-win: sources=[] + mecanismo no debe crashear."""
+    sheet = invent(
+        "q con mecanismo", seed=3, rounds=1, batch_size=4, top=2, offline=True,
+        methods=_methods(), sources=[], proponer=lambda q, i, d, ev=None: {
+            "estado": "PROPUESTA", "hipotesis": "h",
+            "mecanismo": "mecanismo especifico para este problema concreto aqui",
+            "aportacion_por_tecnica": [], "supuestos": [], "prueba_concreta": "",
+            "error": ""})
+    for e in sheet["entries"]:
+        assert e["prior_art"]["verdict"] == "UNRESOLVED"
