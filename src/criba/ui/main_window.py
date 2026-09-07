@@ -44,7 +44,7 @@ NAV_SPEC = [
     ("navInventar", "✦", "Inventar", "Cruce → hipótesis → antecedentes"),
     ("navEvaluar", "▥", "Evaluar", "Ranking por value_score"),
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
-    ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
+    ("navActualizar", "↻", "Actualizar fuentes", "Adquisición real: Crossref, GitHub…"),
     ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
     ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
     ("navHibrido", "⚡", "Híbrido", "Pipeline completo: ensemble → cadena → adversarial"),

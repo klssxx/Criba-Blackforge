@@ -57,4 +57,5 @@ def default_context(cache: Any = None, credentials: dict[str, str] | None = None
         cache_get=cache.cache_get if cache else None,
         cache_set=cache.cache_set if cache else None,
         credentials=credentials or {},
+        offline=offline,
     )

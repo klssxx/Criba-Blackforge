@@ -244,7 +244,7 @@ def build_right_column(t: Tokens, refs: dict[str, Any]) -> QWidget:
     refs["staleBand"].setObjectName("staleBand")
     sb_lay = QHBoxLayout(refs["staleBand"])
     sb_lay.setContentsMargins(8, 4, 8, 4)
-    sb_txt = QLabel("Fuentes desactualizadas. Pulsa Actualizar innovaciones.")
+    sb_txt = QLabel("Fuentes desactualizadas. Pulsa Actualizar fuentes.")
     sb_txt.setObjectName("staleBandText")
     sb_txt.setWordWrap(True)
     sb_lay.addWidget(sb_txt)
@@ -254,7 +254,7 @@ def build_right_column(t: Tokens, refs: dict[str, Any]) -> QWidget:
         bar = SourceBarWidget(name, 0)
         refs["sourceBars"][name] = bar
         fl.addWidget(bar)
-    refs["actualizarFuentesBtn"] = QPushButton("Actualizar innovaciones")
+    refs["actualizarFuentesBtn"] = QPushButton("Actualizar fuentes")
     refs["actualizarFuentesBtn"].setObjectName("ghost")
     refs["actualizarFuentesBtn"].setCursor(Qt.CursorShape.PointingHandCursor)
     fl.addWidget(refs["actualizarFuentesBtn"])

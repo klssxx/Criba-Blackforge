@@ -589,55 +589,80 @@ def on_historial(win: Any) -> None:
 
 
 # ---------------------------------------------------------------------------
-# S8 — FUENTES (frescura + actualización bajo demanda, sin red: refresco local)
+# S8 — FUENTES (actualización REAL: adquisición → deduplicación → informe)
 # ---------------------------------------------------------------------------
+def _refresh_store():
+    """Almacén de evidencia del perfil activo (fuera del repo del usuario)."""
+    import os
+    from pathlib import Path
+    from ..intelligence.storage.store import IntelligenceStore
+
+    base = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
+    base.mkdir(parents=True, exist_ok=True)
+    return IntelligenceStore(base / "intelligence.sqlite3")
+
+
+def _refresh_queries(problem: str) -> list[str]:
+    """Consultas de adquisición: el problema activo más términos base."""
+    queries = [p for p in (problem.strip(),) if p]
+    queries.extend(["innovation methods", "prior art search"])
+    return queries
+
+
 def on_actualizar(win: Any) -> None:
     win.nav["navActualizar"].setChecked(False)
     r = win.refs
     _lock_mutators(win)
-    win.nav["navActualizar"].set_state("running", "Actualizando fuentes...")
+    win.nav["navActualizar"].set_state("running", "Adquiriendo fuentes...")
     r["actualizarFuentesBtn"].setEnabled(False)
     r["actualizarFuentesBtn"].setText("Actualizando fuentes...")
 
-    def _job() -> dict[str, int]:
-        # Fuentes deterministas: derivadas del catálogo local (sin red por
-        # defecto — security.no_network_by_default del contrato del engine).
-        from ..catalog import currents, methods
+    def _job() -> dict[str, Any]:
+        # Adquisición REAL con deduplicación y cantidades reales (mandato §6).
+        from ..intelligence.refresh import refresh_sources
 
-        cs, ms = currents(), methods()
-        fam = {}
-        names = [
-            "Tecnología emergente",
-            "Tendencias de negocio",
-            "Investigación científica",
-            "Diseño & experiencia",
-            "Comunidad & open source",
-        ]
-        for i, name in enumerate(names):
-            fam[name] = min(100, 40 + (len(ms) * (i + 3)) % 55 + len(cs))
-        return fam
+        try:
+            store = _refresh_store()
+        except Exception:  # noqa: BLE001 — sin almacén, informe sin persistencia
+            store = None
+        return refresh_sources(
+            _refresh_queries(win.problem or ""),
+            profile="general",
+            store=store,
+        )
 
     worker = Worker(_job)
-    worker.signals.done.connect(lambda fam: _on_sources_updated(win, fam))
+    worker.signals.done.connect(lambda report: _on_sources_updated(win, report))
     worker.signals.fail.connect(
         lambda msg: on_operation_error(win, "navActualizar", None, msg)
     )
     _start_worker(win, worker)
 
 
-def _on_sources_updated(win: Any, fam: dict[str, int]) -> None:
+def _on_sources_updated(win: Any, report: dict[str, Any]) -> None:
+    from ..intelligence.refresh import format_report
+
     r = win.refs
+    win.sources_report = report
     win.sources_updated_at = datetime.now()
-    for name, pct in fam.items():
-        if name in r["sourceBars"]:
-            r["sourceBars"][name].set_percent(pct)
+    totals = report["totals"]
+    # Barra lateral: cuenta real de documentos por fuente (no porcentajes).
+    for summary in report["per_source"]:
+        bar = r["sourceBars"].get(summary["source_id"])
+        if bar is not None and hasattr(bar, "set_percent"):
+            bar.set_percent(min(100, summary["documents"] * 10))
     win.nav["navActualizar"].set_state("done")
     r["actualizarFuentesBtn"].setEnabled(True)
-    r["actualizarFuentesBtn"].setText("Actualizar innovaciones")
-    r["actualizarFuentesBtn"].setProperty("freshness", "")
-    r["actualizarFuentesBtn"].style().polish(r["actualizarFuentesBtn"])
+    r["actualizarFuentesBtn"].setText("Actualizar fuentes")
     r["staleBand"].hide()
-    _activity(win, "cyan", "Nuevas tendencias incorporadas")
+    _activity(
+        win,
+        "cyan",
+        f"Fuentes: {totals['documentos']} docs · {totals['nuevos']} nuevos · "
+        f"{totals['duplicados']} duplicados · {totals['errores']} errores",
+    )
+    if totals["documentos"] == 0 and totals["errores"] > 0:
+        _activity(win, "orange", "Ninguna fuente respondió: ver errores en win.sources_report")
     refresh_sources_freshness(win)
     _restore_buttons_after_op(win)
 

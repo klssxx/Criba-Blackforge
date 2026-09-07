@@ -14,7 +14,7 @@ _STRINGS: dict[str, dict[str, str]] = {
         "nav.evaluar.sub":  "Ranking por value_score",
         "nav.guardar":      "Guardar",
         "nav.guardar.sub":  "Persiste la idea en el catálogo",
-        "nav.actualizar":   "Actualizar innovaciones",
+        "nav.actualizar":   "Actualizar fuentes",
         "nav.actualizar.sub": "Tendencias, tecnología, diseño",
         "nav.historial":    "Historial",
         "nav.historial.sub": "Ideas generadas antes",

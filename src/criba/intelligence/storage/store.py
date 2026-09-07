@@ -261,7 +261,7 @@ class IntelligenceStore:
 
     # -- documents (P02-T03: FTS5) ------------------------------------------
     def save_document(self, doc: dict[str, Any], run_id: str = "") -> None:
-        content_hash = ""  # filled by dedup layer later; keep storage dumb
+        content_hash = doc.get("content_hash", "") or ""
         self._conn.execute(
             "INSERT OR REPLACE INTO intel_documents "
             "(doc_id, run_id, source_id, title, kind, published, url, language, abstract, provenance, metadata, content_hash) "
@@ -285,6 +285,22 @@ class IntelligenceStore:
                 (frag["fragment_id"], doc["doc_id"], frag.get("text", ""),
                  frag.get("locator", ""), frag.get("language", "en"),
                  frag.get("epistemic_state", "INFERENCE")))
+        self._conn.commit()
+
+    def find_by_url(self, url: str) -> dict[str, Any] | None:
+        """Último documento guardado con esa URL (deduplicación de evidencia)."""
+        row = self._conn.execute(
+            "SELECT doc_id, content_hash, url, title FROM intel_documents "
+            "WHERE url=? ORDER BY rowid DESC LIMIT 1", (url,)).fetchone()
+        return dict(row) if row else None
+
+    def save_refresh_report(self, report: dict[str, Any]) -> None:
+        """Registro del informe «Actualizar fuentes» (auditoría de adquisición)."""
+        import time as _t
+        self._conn.execute(
+            "INSERT OR REPLACE INTO intel_cache (cache_key, payload, created_at, ttl_s) VALUES (?,?,?,?)",
+            (f"refresh:{report.get('generated_at', '')}",
+             _js(report), _t.time(), 0.0))
         self._conn.commit()
 
     def get_document(self, doc_id: str) -> dict[str, Any] | None:
