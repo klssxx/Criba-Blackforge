@@ -141,6 +141,19 @@ def test_direccion_invertida_no_es_duplicado() -> None:
     assert compare_mechanisms(a, b) == "UNKNOWN"
 
 
+def test_inversion_de_actores_con_prefijo_compartido_no_es_duplicado() -> None:
+    """Auditoría de la base: 'para asegurar X el A hace Y a B' vs 'para
+    asegurar X el B hace Y a A' comparten prefijo y vocabulario; invertir
+    actores cambia el mecanismo — nunca DUPLICATE (que descartaría al
+    finalista). Solo la secuencia idéntica es paráfrasis segura."""
+    a = "para asegurar liquidez el banco concede credito al cliente"
+    b = "para asegurar liquidez el cliente concede credito al banco"
+    assert compare_mechanisms(a, b) == "UNKNOWN"
+    assert not same_idea_mechanism(a, b)
+    # la secuencia idéntica sigue siendo duplicado (paráfrasis exacta):
+    assert compare_mechanisms(a, f"  {a}  ") == "DUPLICATE"
+
+
 def test_negacion_falsos_positivos_por_subcadena() -> None:
     """Regresión qa-win: 'gobierno/entorno/pleno' contienen 'no' como
     subcadena; solo la negación léxica real debe activar el marcador."""

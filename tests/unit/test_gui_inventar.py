@@ -99,6 +99,42 @@ def test_inventar_button_runs_shared_service(qapp, tmp_path, monkeypatch) -> Non
         win.close()
 
 
+def test_inventar_passes_default_store_like_cli(qapp, tmp_path, monkeypatch) -> None:
+    """Auditoría de la base: la GUI llamaba a invent() sin almacén de
+    evidencia — la interpretación desde la interfaz perdía la evidencia
+    local que la CLI sí entrega. El cableado debe ser idéntico."""
+    kwargs_captured: dict[str, object] = {}
+
+    def _fake_invent(query: str, **kw: object) -> dict:
+        kwargs_captured.update(kw)
+        return _sheet_stub(query)
+
+    sentinel = object()  # cualquier almacén no-None sirve: el contrato es pasarlo
+    monkeypatch.setattr(inventar_mod, "invent", _fake_invent)
+    monkeypatch.setattr(
+        inventar_mod, "append_ledger",
+        lambda sheet, ledger_dir=None: tmp_path / "verdicts.jsonl",
+    )
+    import criba.intelligence.refresh as refresh_mod
+    monkeypatch.setattr(refresh_mod, "default_store", lambda: sentinel)
+
+    win = CribaMainWindow()
+    try:
+        actions.on_nueva_idea_no_dialog(win, "permisos excesivos de un agente")
+        qapp.processEvents()
+        actions.on_inventar(win)
+        for _ in range(200):
+            qapp.processEvents()
+            if getattr(win, "invent_sheet", None) is not None:
+                break
+            QTest.qWait(10)
+
+        assert win.invent_sheet is not None
+        assert kwargs_captured.get("store") is sentinel
+    finally:
+        win.close()
+
+
 def test_inventar_without_problem_shows_error(qapp) -> None:
     win = CribaMainWindow()
     try:

@@ -74,6 +74,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   aislado (base `2f46d37`), integrado con normalización CRLF→LF y una
   anotación de tipos para mypy estricto.
 
+### Fixed (2026-09-08 — frontera abierta del parche de dossiers)
+- **Inversión de actores no se clasifica como duplicado**: con vocabulario
+  idéntico, solo una secuencia idéntica es paráfrasis segura; un reorden
+  distinto (p. ej. «el banco concede crédito al cliente» vs «el cliente… al
+  banco» con prefijo compartido) es UNKNOWN — antes podía marcarse DUPLICATE
+  y descartarse un mecanismo genuino.
+- **Las entries arrastran `run_id`** y el **ledger conserva los campos de la
+  propuesta** (hipótesis, prueba concreta, ruta de desbloqueo, supuestos,
+  estado de antecedentes, clases): el historial append-only basta para
+  reconstruir el porqué de cada candidato y la trazabilidad dossier→run.
+- **La GUI «Inventar» entrega el almacén de evidencia** (`store=
+  default_store()`), igual que la CLI — la interpretación desde la interfaz
+  ya no pierde la evidencia local.
+
 ### Fixed (2026-09-07 — integridad del registro de técnicas, P0)
 - **El registro declaraba 11 técnicas IMPLEMENTED sobre código eliminado**:
   el commit cbac469 (cirugía ~5.1k líneas, 2026-09-05) retiró los módulos

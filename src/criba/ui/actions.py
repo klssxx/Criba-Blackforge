@@ -297,11 +297,14 @@ def _run_inventar(problem: str) -> dict[str, Any]:
     """Ejecuta el servicio compartido `invent` y registra el ledger.
 
     Misma ruta que `criba inventar` (CLI): interfaz y CLI usan el mismo
-    servicio, sin duplicar lógica.
+    servicio, sin duplicar lógica — incluido el almacén de evidencia por
+    defecto, para que el intérprete reciba evidencia local también desde
+    la interfaz.
     """
     from ..inventar import append_ledger, invent
+    from ..intelligence.refresh import default_store
 
-    sheet = invent(problem)
+    sheet = invent(problem, store=default_store())
     ledger = append_ledger(sheet)
     sheet["ledger_path"] = str(ledger)
     return sheet

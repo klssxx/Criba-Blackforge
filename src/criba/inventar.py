@@ -368,6 +368,7 @@ def invent(
         assessment = _assess_candidate(candidate, active_sources)
         return {
             "candidate_id": candidate.candidate_id,
+            "run_id": run_id,  # cada entry arrastra su ejecución (trazabilidad dossier)
             "title": candidate.title,
             "score": idea.get("score", 0.0),
             "score_kind": "heuristica_local",
@@ -516,12 +517,19 @@ def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path
         "entries": [
             {
                 "candidate_id": e["candidate_id"],
+                "run_id": e["run_id"],
                 "title": e["title"],
                 "estado_interpretacion": e["estado_interpretacion"],
                 "mecanismo": e["mecanismo"],
                 "score": e["score"],
                 "score_kind": e["score_kind"],
+                "classes": e["classes"],
                 "methods": e["methods"],
+                "hipotesis": e["hipotesis"],
+                "prueba_concreta": e["prueba_concreta"],
+                "ruta_desbloqueo": e["ruta_desbloqueo"],
+                "supuestos": e["supuestos"],
+                "estado_antecedentes": e["estado_antecedentes"],
                 "evidencia_local_usada": e["evidencia_local_usada"],
                 "verdict": e["prior_art"]["verdict"],
                 "queries": e["prior_art"]["queries"],
