@@ -187,7 +187,11 @@ for tid, f in rows.items():
         out += [f"    - {yq(s)}" for s in SUBS[tid]]
     out.append("")
 
-dest = "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA/data/intelligence/technique_registry.yaml"
+# Derive the destination from BASE (repo checkout or portable bundle): this
+# script reads reg_parts/ relative to itself, so it must also write relative
+# to itself instead of a hardcoded absolute path (qa P2-3).
+dest = os.path.normpath(os.path.join(
+    BASE, "..", "..", "data", "intelligence", "technique_registry.yaml"))
 os.makedirs(os.path.dirname(dest), exist_ok=True)
 with open(dest, "w", encoding="utf-8") as fh:
     fh.write("\n".join(out) + "\n")
