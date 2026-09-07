@@ -44,6 +44,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   interpretado sin truncar a 200 chars; revisiones auditadas con
   llamadas contadas.
 
+### Added (2026-09-07 — router del canon T001–T130)
+- **Trazabilidad v2 del registro de técnicas**: `technique_registry.yaml`
+  (regenerado por `gen_registry.py`) lleva `schema_version`, `canon_version`
+  y `provenance` (fuente ADDENDUM s87–94, generador, partes) legibles por
+  máquina; `TechniqueRegistry` acepta el esquema v2 y el formato plano
+  legado, y `validate()` exige la trazabilidad en v2.
+- **Router del canon** (`criba.intelligence.router`): selecciona el
+  subconjunto mínimo relevante de T001–T130 para una tarea — determinista,
+  offline, sin ejecutar nada. Solo técnicas IMPLEMENTED son candidatos de
+  ejecución; las PLANNED relevantes aparecen como brechas honestas (nunca
+  como capacidad). Puente léxico ES→EN acotado al vocabulario del canon,
+  diversidad funcional por familia y supresión de redundancia
+  (mismo módulo + pipeline). El resultado arrastra `canon_version` y
+  `procedencia` del canon consumido.
+- **CLI `criba tecnicas "<tarea>"`**: acceso de solo lectura al router
+  (`--perfil CRIBA|BLACKFORGE`, `--max`, `--max-por-familia`, `--con-red`).
+
 ### Changed
 - README/README.es provider-neutral; cifra de tests verificada.
 - SUPRA retirado de la verificación de entorno; inventario en
