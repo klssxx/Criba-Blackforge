@@ -64,20 +64,30 @@ def _default_registry_path() -> Path:
 
 
 class TechniqueRegistry:
-    """Read-only view over technique_registry.yaml (§105 machine-readable)."""
+    """Read-only view over technique_registry.yaml (§105 machine-readable).
+
+    Schema v2 (dict) carries traceability: canon_version + provenance. The
+    legacy flat list form still loads so older artifacts remain readable.
+    """
 
     def __init__(self, path: Path | str | None = None):
         self.path = Path(path) if path else _default_registry_path()
         self._techniques: dict[str, Technique] = {}
+        self.canon_version: str | None = None
+        self.provenance: dict[str, Any] = {}
         self._load()
 
     def _load(self) -> None:
         import yaml  # lazy: pyyaml is already a CRIBA dependency
 
         raw = yaml.safe_load(self.path.read_text(encoding="utf-8"))
-        if not isinstance(raw, list):
-            raise ValueError(f"registry must be a YAML list: {self.path}")
-        for item in raw:
+        if isinstance(raw, dict):
+            entries = self._load_header(raw)
+        elif isinstance(raw, list):
+            entries = raw  # legacy flat list: no traceability header
+        else:
+            raise ValueError(f"registry must be a list or v2 mapping: {self.path}")
+        for item in entries:
             model = item.get("model") or {}
             t = Technique(
                 id=item["id"], name=item["name"], family=item["family"],
@@ -100,6 +110,20 @@ class TechniqueRegistry:
             if t.id in self._techniques:
                 raise ValueError(f"duplicate technique id: {t.id}")
             self._techniques[t.id] = t
+
+    def _load_header(self, raw: dict[str, Any]) -> list[Any]:
+        provenance = raw.get("provenance")
+        if not isinstance(provenance, dict):
+            raise ValueError("v2 registry requires a provenance mapping")
+        version = raw.get("canon_version")
+        if not isinstance(version, str) or not version.strip():
+            raise ValueError("v2 registry requires a non-empty canon_version")
+        self.provenance = provenance
+        self.canon_version = version
+        entries = raw.get("techniques")
+        if not isinstance(entries, list):
+            raise ValueError("v2 registry requires a techniques list")
+        return entries
 
     # -- queries -----------------------------------------------------------
     def get(self, technique_id: str) -> Technique:
@@ -139,6 +163,13 @@ class TechniqueRegistry:
             errors.append(f"missing={sorted(missing)}")
         if extra:
             errors.append(f"extra={sorted(extra)}")
+        if self.canon_version is not None:  # v2: traceability is mandatory
+            if not self.provenance.get("source"):
+                errors.append("provenance.source missing")
+            if not self.provenance.get("generator"):
+                errors.append("provenance.generator missing")
+            if not self.provenance.get("parts"):
+                errors.append("provenance.parts missing")
         for t in self.all():
             if t.owner not in _VALID_OWNERS:
                 errors.append(f"{t.id}: unknown owner {t.owner}")

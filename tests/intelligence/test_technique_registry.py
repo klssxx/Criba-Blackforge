@@ -86,5 +86,38 @@ def test_supra_owns_only_orchestration(reg):
     assert "orchestrat" in supra[0].module[1].lower() or "supra" in supra[0].module[1].lower()
 
 
+def test_v2_registry_carries_traceability(reg):
+    """Esquema v2: versión del canon y procedencia legibles por máquina."""
+    import yaml
+
+    raw = yaml.safe_load(REGISTRY_PATH.read_text(encoding="utf-8"))
+    assert isinstance(raw, dict) and raw["schema_version"] == 2
+    assert isinstance(raw["canon_version"], str) and raw["canon_version"].strip()
+    prov = raw["provenance"]
+    assert prov["source"] and "130 TECNICAS" in prov["source"]
+    assert prov["generator"].endswith("gen_registry.py")
+    assert len(prov["parts"]) == 4
+    # la vista expone lo mismo que el YAML
+    assert reg.canon_version == raw["canon_version"]
+    assert reg.provenance == prov
+
+
+def test_legacy_flat_list_still_loads(tmp_path):
+    """Compatibilidad: un registro plano (lista) sigue cargando sin cabecera."""
+    import yaml as _yaml
+
+    from criba.intelligence.registry import TechniqueRegistry as TR
+
+    legacy = [{"id": "T001", "name": "x", "family": "PATENT_INTELLIGENCE",
+               "owner": "CRIBA_IIE", "module": ["criba.intelligence.retrieval"],
+               "phase": ["P03"], "pipelines": ["DISCOVERY"],
+               "status": "PLANNED", "tests": ["t"]}]
+    p = tmp_path / "legacy.yaml"
+    p.write_text(_yaml.safe_dump(legacy), encoding="utf-8")
+    r = TR(p)
+    assert r.count() == 1
+    assert r.canon_version is None and r.provenance == {}
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
