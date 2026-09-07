@@ -61,6 +61,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **CLI `criba tecnicas "<tarea>"`**: acceso de solo lectura al router
   (`--perfil CRIBA|BLACKFORGE`, `--max`, `--max-por-familia`, `--con-red`).
 
+### Fixed (2026-09-07 — integridad del registro de técnicas, P0)
+- **El registro declaraba 11 técnicas IMPLEMENTED sobre código eliminado**:
+  el commit cbac469 (cirugía ~5.1k líneas, 2026-09-05) retiró los módulos
+  `intelligence/invention/*` y sus tests, pero `technique_registry.yaml`
+  siguió marcando T053/T055/T057/T059/T060/T062–T065/T116/T129 como
+  IMPLEMENTED con `implementation` apuntando a módulos borrados — el router
+  las ofrecía como `executable: true`. Corrección: vuelven a PLANNED
+  (canon `2026-09-07.2`, regenerado; 0 IMPLEMENTED hasta re-implementación
+  real). Guard nuevo (`test_technique_runtime_traceability.py`): toda
+  IMPLEMENTED debe importar de verdad y sus tests declarados deben existir;
+  todo override futuro en `gen_registry.py` debe citar el commit que
+  introduce el módulo. El router sigue operativo: las técnicas relevantes
+  se ofrecen como brechas honestas, nunca como capacidad.
+
 ### Fixed (2026-09-07 — auditoría qa-win del bloque router)
 - El registro v2 con `provenance` incompleto o vacío ahora falla EN CARGA
   (no solo en `validate()`); entradas corruptas de `techniques` (no-mapping,

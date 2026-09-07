@@ -167,7 +167,9 @@ def test_lottery_cli_uses_packaged_catalog_and_explicit_output_dir(
 
 
 def test_tecnicas_routes_canon_with_traceability(capsys) -> None:
-    """El router del canon T001-T130 es consumible por CLI (solo lectura)."""
+    """El router del canon T001-T130 es consumible por CLI (solo lectura).
+    Desde la cirugía cbac469 el canon no tiene técnicas IMPLEMENTED: la tarea
+    relevante produce solo brechas honestas, nunca ejecutables."""
     result = main(["tecnicas", "análisis morfológico y escenarios contrafactuales",
                    "--max", "3"])
 
@@ -175,9 +177,9 @@ def test_tecnicas_routes_canon_with_traceability(capsys) -> None:
     routing = json.loads(capsys.readouterr().out)
     assert routing["canon_version"]
     assert routing["provenance"]["generator"].endswith("gen_registry.py")
-    selected_ids = [t["id"] for t in routing["selected"]]
-    assert "T059" in selected_ids and "T129" in selected_ids
-    assert all(t["executable"] for t in routing["selected"])
+    assert routing["selected"] == [], "sin IMPLEMENTED no hay ejecutables que inventar"
+    gap_ids = [t["id"] for t in routing["coverage_gaps"]]
+    assert "T059" in gap_ids and "T129" in gap_ids
     for gap in routing["coverage_gaps"]:
         assert gap["reasons"][-1].startswith("no_implementada")
 
