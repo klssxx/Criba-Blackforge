@@ -82,6 +82,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Lote parches SAFE de dependencias (auditoría OSS sin CVEs): pydantic
   2.13.5, fastapi 0.141.1, uvicorn 0.52.4, mypy 2.3.1, ruff 0.16.6,
   semgrep 1.176.1, types-PyYAML, hypothesis 6.167.1.
+- PySide6 6.11.2 + PyInstaller 6.22.2 (hardening del bootloader
+  GHSA-9fxf-4qw3-ghmr): portable reconstruido y verificado (exes
+  offscreen exit 0, canon v2 dentro del bundle).
+
+### Removed
+- `.pytest_tmp2/` (130 artefactos temporales subidos por accidente en
+  80362fa); `.gitignore` generalizado a `.pytest_tmp*/`.
 
 ## [Unreleased]
 
