@@ -5,6 +5,52 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (2026-09-07 — consolidación y bloque bloqueo→desbloqueo)
+- **Diversity-aware finalist selection** (MMR local, pesos centralizados):
+  el flujo de invención ya no depende del top-N por score. PRE/POST en
+  fixtures: duplication_rate 1.0→0.0, mecanismos únicos 1→3.
+- **Ficha de bloqueo** (`criba.bloqueo`): resultado buscado, bloqueo con
+  origen declarado (hecho/hipótesis/pendiente), rutas de desbloqueo
+  (eliminar_necesidad | sustituir_mecanismo | desacoplar_dependencia).
+- **Dossier SUPRA** (`criba.supra_dossier`): prueba discriminante con
+  estado `SUPRA_EJECUCION_PENDIENTE` (nunca PASS); `inventar --dossier`
+  y botón GUI «Desarrollar con SUPRA»; `registrar_resultado` +
+  `lecciones_previas` cierran el circuito de aprendizaje.
+- **Evidence consumida**: la evidencia local del almacén se entrega en la
+  solicitud real al intérprete; CLI conecta el almacén por defecto.
+- **Seeds y memoria**: seeds generadas con `secrets.randbits(64)`,
+  `run_id` independiente, historial conectado con cooldown por
+  decaimiento (sin bans permanentes).
+- **Actualizar fuentes REAL** con dedupe por contenido (CH1–CH7) y
+  perfil BLACKFORGE (CISA KEV + MITRE ATT&CK STIX).
+- **Harness benchmark v0** (A_DIRECT/B_STRONG_PROMPT/C_CRIBA, dataset
+  humo 10 problemas, export JSON, 0 llamadas).
+- Acción GUI «Inventar» (mismo servicio que la CLI) y guard de
+  conmutación con trabajo en curso; módulo `criba.blackforge_gui`.
+- Tres ejemplos completos en `docs/ejemplos/` (general, proceso,
+  BLACKFORGE).
+
+### Fixed (2026-09-07)
+- content_hash separado de identidad documental (abstract/fragmentos
+  modificados → `modificados`, no duplicados).
+- IDs estables sha256 (fin de `hash()`); offline bloquea la red en el
+  transporte común (incluido el proponente con credenciales presentes).
+- Módulo de arranque ausente `criba.blackforge_gui` (defecto de
+  desarrollo y packaging).
+- Botón «Actualizar fuentes» ya no calcula porcentajes sintéticos.
+- Conmutación CRIBA→BLACKFORGE retiene el cambio con workers vivos.
+- Typo `verdicto`→`veredicto` en CloudInterprete; negación léxica por
+  token en el detector (sin falsos positivos de subcadena); mecanismo
+  interpretado sin truncar a 200 chars; revisiones auditadas con
+  llamadas contadas.
+
+### Changed
+- README/README.es provider-neutral; cifra de tests verificada.
+- SUPRA retirado de la verificación de entorno; inventario en
+  `docs/SUPRA_INVENTORY.md`.
+
+## [Unreleased]
+
 ### Added
 - **Public launch productization**: distribution renamed to `criba` (PyPI-ready,
   `pip install criba`), package metadata with license/classifiers/URLs, and ship the
