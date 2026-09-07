@@ -1,0 +1,16 @@
+{
+  "version": "smoke-v0",
+  "nota": "Dataset humo (megaprompt §48): valida schema/runner/métricas, NO concluye superioridad. 5 generales + 5 BLACKFORGE.",
+  "problemas": [
+    {"id": "G01", "perfil": "general", "texto": "Reducir el consumo de agua de un huerto urbano sin penalizar el rendimiento."},
+    {"id": "G02", "perfil": "general", "texto": "Detectar abuso de permisos en agentes de software autónomos."},
+    {"id": "G03", "perfil": "general", "texto": "Reducir la cola de atención de una oficina sin contratar personal."},
+    {"id": "G04", "perfil": "general", "texto": "Recuperar valor de lotes de producción defectuosos en manufactura."},
+    {"id": "G05", "perfil": "general", "texto": "Mejorar la adopción de una herramienta interna que nadie usa."},
+    {"id": "B01", "perfil": "blackforge", "texto": "Reducir autorizaciones excesivas de un agente sin pedir aprobación por operación."},
+    {"id": "B02", "perfil": "blackforge", "texto": "Detectar exfiltración de datos vía DNS en una red corporativa monitorizada."},
+    {"id": "B03", "perfil": "blackforge", "texto": "Priorizar el parcheado de vulnerabilidades con superficie expuesta limitada."},
+    {"id": "B04", "perfil": "blackforge", "texto": "Endurecer pipelines de CI sin bloquear la entrega de los equipos."},
+    {"id": "B05", "perfil": "blackforge", "texto": "Detectar credenciales reutilizadas entre servicios internos autorizados."}
+  ]
+}

@@ -200,6 +200,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     inventar_parser.add_argument(
         "--offline", action="store_true", help="Sin red: juez offline y veredictos UNRESOLVED honestos"
     )
+    inventar_parser.add_argument(
+        "--dossier", action="store_true",
+        help="Prepara dossiers con prueba discriminante (estado SUPRA pendiente, nunca PASS)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -290,6 +294,20 @@ def main(argv: Sequence[str] | None = None) -> int:
                 offline=True if args.offline else None,
                 store=default_store(),
             )
+            if args.dossier:
+                from .supra_dossier import guardar_dossier, preparar_dossier
+
+                dossiers = []
+                for entry in sheet["entries"]:
+                    if entry.get("estado_interpretacion") != "PROPUESTA":
+                        continue
+                    dossier = preparar_dossier(
+                        entry, sheet["query"],
+                        ficha_bloqueo=sheet.get("ficha_bloqueo"))
+                    path = guardar_dossier(dossier)
+                    dossiers.append(dossier["dossier_id"])
+                    print(f"Dossier SUPRA pendiente: {dossier['dossier_id']} -> {path}")
+                sheet["dossiers"] = dossiers
             print_sheet(sheet)
             ledger = append_ledger(sheet)
             print(f"Ledger: {ledger}")

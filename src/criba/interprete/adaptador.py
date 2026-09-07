@@ -101,6 +101,27 @@ class LocalInterprete:
                 "\nEVIDENCIA LOCAL PERTINENTE (apóyate solo en la que sirva y "
                 "cítala por número si la usas):\n" + evidence_block
             )
+        bloqueo_block = ""
+        bloqueo = idea.get("bloqueo") or {}
+        if bloqueo.get("bloqueo"):
+            lecciones = ""
+            for i, lec in enumerate((bloqueo.get("lecciones_previas") or [])[:3], 1):
+                lecciones += f"  {i}. {str(lec)[:200]}\n"
+            if lecciones:
+                lecciones = ("RESULTADOS PREVIOS REGISTRADOS (pueden cambiar la "
+                             "decisión; cítalos si los usas):\n" + lecciones)
+            bloqueo_block = f"""
+
+BLOQUEO IDENTIFICADO (origen declarado: {bloqueo.get('origen_bloqueo', 'hipotesis')}):
+{str(bloqueo.get('bloqueo'))[:400]}
+Explicación: {str(bloqueo.get('explicacion_bloqueo', ''))[:300]}
+Resultado buscado: {str(bloqueo.get('resultado_buscado', ''))[:200]}
+{lecciones}
+Tu propuesta debe atacar ESTA relación concreta. Cuando el bloqueo lo permita,
+elige y declara UNA ruta de desbloqueo entre: eliminar_necesidad |
+sustituir_mecanismo | desacoplar_dependencia. No cuestiones las restricciones
+obligatorias: {str(bloqueo.get('restricciones_obligatorias', []))[:200]}.
+Añade "ruta_desbloqueo" al JSON con la ruta elegida y su justificación."""
         prompt = f"""Aplica el cruce de técnicas a este problema concreto.
 
 PROBLEMA: {query}
@@ -110,7 +131,7 @@ CRUCE (dos operadores):
 Técnica A: {idea.get('method1', idea.get('title', ''))}
 Técnica B: {idea.get('method2', '')}
 Título del cruce: {idea.get('title', '')}
-{evidence_block}
+{bloqueo_block}{evidence_block}
 Responde ÚNICAMENTE con JSON válido (nada de markdown) con esta estructura:
 {{
   "hipotesis": "propuesta específica para ESTE problema",
@@ -156,6 +177,7 @@ de las técnicas. Si el cruce no produce nada pertinente, dilo en hipótesis."""
                 "aportacion_por_tecnica": list(parsed.get("aportacion_por_tecnica", [])),
                 "supuestos": list(parsed.get("supuestos", [])),
                 "prueba_concreta": str(parsed.get("prueba_concreta", "")),
+                "ruta_desbloqueo": str(parsed.get("ruta_desbloqueo", "")),
                 "error": "",
             }
         except Exception as e:  # noqa: BLE001 - la propuesta nunca rompe el loop

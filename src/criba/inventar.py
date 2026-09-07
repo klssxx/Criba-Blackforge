@@ -232,6 +232,7 @@ def invent(
     proponer: _PROPOSER | None = None,
     store: Any | None = None,
     history_storage: Any = True,
+    ficha_bloqueo: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
     """Ejecuta el loop completo y devuelve la ficha de invención.
 
@@ -332,11 +333,25 @@ def invent(
         except Exception:  # noqa: BLE001 — la evidencia nunca rompe el loop
             local_evidence = []
 
+    # Lecciones de dossiers previos (circuito de aprendizaje, astra!.txt §5):
+    # un resultado observado vuelve a la búsqueda como evidencia trazable.
+    lecciones: list[str] = []
+    if ficha_bloqueo:
+        try:
+            from .supra_dossier import lecciones_previas
+            lecciones = lecciones_previas(query)
+        except Exception:  # noqa: BLE001 — el aprendizaje nunca rompe el loop
+            lecciones = []
+
     def _desarrollar(idea: dict[str, Any], index: int) -> dict[str, Any]:
         """Propuesta → crítica → antecedentes para un candidato del pool."""
+        idea_enviada = idea
+        if ficha_bloqueo:
+            idea_enviada = {**idea, "bloqueo": {
+                **ficha_bloqueo, "lecciones_previas": lecciones}}
         # 1) Propuesta: aplicar el cruce al problema (con evidencia) ANTES de
         #    buscar antecedentes.
-        proposal = proponer_fn(query, idea, domain, local_evidence)
+        proposal = proponer_fn(query, idea_enviada, domain, local_evidence)
         if proposal.get("estado") != "PROPUESTA" or not str(proposal.get("mecanismo", "")).strip():
             if proposal.get("estado") == "PROPUESTA":
                 proposal = _pending_proposal("PROPUESTA sin mecanismo")
@@ -364,6 +379,7 @@ def invent(
             "aportacion_por_tecnica": list(proposal.get("aportacion_por_tecnica", [])),
             "supuestos": list(proposal.get("supuestos", [])),
             "prueba_concreta": proposal.get("prueba_concreta", ""),
+            "ruta_desbloqueo": proposal.get("ruta_desbloqueo", ""),
             "interpretacion_error": proposal.get("error", ""),
             "evidencia_local_usada": local_evidence,
             "judge": judged,
@@ -467,6 +483,7 @@ def invent(
             "usado_en_interpretacion": True,
         },
         "seleccion_finalista": selection_report,
+        "ficha_bloqueo": dict(ficha_bloqueo) if ficha_bloqueo else None,
         "entries": entries,
         "totals": {
             "ideas": len(engine.all_ideas),
