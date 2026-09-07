@@ -296,14 +296,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return result if isinstance(result, int) else 0
 
         if args.command in {"blackforge-gui", "blackforge_gui"}:
-            from PySide6.QtWidgets import QApplication
+            from .blackforge_gui import run as run_blackforge_gui
 
-            from .ui.blackforge_window import BlackforgeWindow
-
-            app = QApplication.instance() or QApplication(sys.argv)
-            win = BlackforgeWindow()
-            win.show()
-            return app.exec()
+            result = run_blackforge_gui()
+            return result if isinstance(result, int) else 0
     except (ValueError, OSError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2
