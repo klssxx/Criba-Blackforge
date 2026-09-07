@@ -23,10 +23,32 @@ Contratos:
 """
 from __future__ import annotations
 
+import re
 from datetime import datetime, timezone
 from typing import Any
 
-from .similarity import MIN_DUPLICATE_COVERAGE, classify, genome_distance
+from .similarity import MIN_DUPLICATE_COVERAGE, WEIGHTS, _effective, classify, genome_distance
+
+# Diversidad semántica de mecanismos interpretados (megaprompt §27.3): fallback
+# local, determinista y gratuito — misma idea expresada con otras palabras.
+# Jaccard sobre tokens normalizados (>=4 caracteres). Umbral 0.6: detecta
+# paráfrasis de sinonimo único (~0.67 sobre 6 tokens) sin confundir mecanismos
+# distintos que comparten vocabulario genérico (~0.2). Límite documentado: una
+# paráfrasis que cambie MÁS de la mitad del vocabulario no se detecta aquí.
+MECHANISM_DUPLICATE_JACCARD = 0.6
+
+
+def same_idea_mechanism(a: str, b: str) -> bool:
+    """True si dos mecanismos interpretados son esencialmente la misma idea."""
+    def _tokens(text: str) -> set[str]:
+        return {t for t in re.split(r"[^a-z0-9áéíóúñü]+", text.casefold()) if len(t) >= 4}
+    ta, tb = _tokens(a or ""), _tokens(b or "")
+    if not ta or not tb:
+        return False
+    if ta == tb:
+        return True
+    inter, union = len(ta & tb), len(ta | tb)
+    return union > 0 and (inter / union) >= MECHANISM_DUPLICATE_JACCARD
 
 # Pesos centralizados (megaprompt §25/§44). Documentación por término:
 W_QUALITY = 1.0            # score del candidato (heurística local etiquetada)
@@ -85,12 +107,26 @@ def _mechanism(candidate: dict[str, Any]) -> str:
 
 
 def _structural_distance(a: dict[str, Any], b: dict[str, Any]) -> float:
-    """Distancia estructural [0,1]. Con cobertura insuficiente (<0.60) el
-    genoma no afirma ni igualdad ni diversidad: distancia neutra."""
-    result = genome_distance(a.get("genome") or {}, b.get("genome") or {})
-    if result["coverage"] < MIN_DUPLICATE_COVERAGE:
+    """Distancia estructural [0,1]. Un campo solo compara si AMBOS lados
+    llevan información: lo desconocido NO otorga diversidad ni igualdad —
+    contribuye neutro (mandato §2: mecanismo incompleto queda UNKNOWN).
+    Sin ningún campo comparable en ambos lados: distancia neutra."""
+    ga, gb = a.get("genome") or {}, b.get("genome") or {}
+    if not ga and not gb:
         return NEUTRAL_DISTANCE
-    return float(result["distance"])
+    total = 0.0
+    comparable = False
+    for field, w in WEIGHTS.items():
+        ea = _effective(ga.get(field, ["unknown"]))
+        eb = _effective(gb.get(field, ["unknown"]))
+        if ea and eb:
+            union = len(ea | eb)
+            sim = (len(ea & eb) / union) if union else 0.0
+            total += w * (1 - sim)
+            comparable = True
+        else:
+            total += w * (1 - NEUTRAL_DISTANCE)
+    return round(total, 4) if comparable else NEUTRAL_DISTANCE
 
 
 def _relation(a: dict[str, Any], b: dict[str, Any]) -> str:

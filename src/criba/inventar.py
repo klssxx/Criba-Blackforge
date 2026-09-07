@@ -45,7 +45,7 @@ from .intelligence.sources.protocol import IntelligenceSource
 from .interprete.adaptador import LocalInterprete
 from .lottery import LotteryEngine
 
-_PROPOSER = Callable[[str, dict[str, Any], dict[str, Any] | None], dict[str, Any]]
+_PROPOSER = Callable[..., dict[str, Any]]  # (query, idea, domain, evidence) -> dict
 
 _PENDING: dict[str, Any] = {
     "estado": "PENDIENTE_INTERPRETACION",
@@ -89,17 +89,19 @@ def _default_proponer(
     idea: dict[str, Any],
     domain: dict[str, Any] | None,
     offline: bool = False,
+    evidence: list[dict[str, Any]] | None = None,
 ) -> dict[str, Any]:
     """Ruta real de propuesta. Con ``offline=True`` nunca toca la red.
 
     La comprobación vive AQUÍ y no solo dentro de ``LocalInterprete`` (cuyo
     estado depende de NOUS_API_KEY): el modo offline del comando debe bloquear
-    la propuesta aunque haya credenciales configuradas.
+    la propuesta aunque haya credenciales configuradas. ``evidence`` (documentos
+    locales pertinentes) se entrega al intérprete, no solo se archiva.
     """
     if offline:
         return _pending_proposal("modo offline")
     try:
-        return LocalInterprete().proponer(query, idea, domain)
+        return LocalInterprete().proponer(query, idea, domain, evidence)
     except Exception as exc:  # noqa: BLE001 - la propuesta nunca rompe el loop
         return _pending_proposal(str(exc))
 
@@ -241,7 +243,7 @@ def invent(
     if not query.strip():
         raise ValueError("query must not be blank")
     is_offline = _offline_mode(offline)
-    proponer_fn = proponer or (lambda q, i, d: _default_proponer(q, i, d, is_offline))
+    proponer_fn = proponer or (lambda q, i, d, ev=None: _default_proponer(q, i, d, is_offline, ev))
 
     import secrets
     import uuid
@@ -308,26 +310,29 @@ def invent(
         active_sources = build_sources(default_context(offline=is_offline))
     candidate_prefix = _stable_run_id(query, seed)  # reproducible por seed
 
-    entries: list[dict[str, Any]] = []
-    for idea in top_ideas:
-        # 0) Evidencia local disponible para el intérprete (FTS del almacén).
-        local_evidence: list[dict[str, Any]] = []
-        if store is not None:
-            try:
-                local_evidence = [
-                    {"title": d.get("title", ""), "abstract": (d.get("abstract") or "")[:300],
-                     "url": d.get("url", "")}
-                    for d in (store.search_documents(_fts_query(query), limit=3) or [])
-                ]
-            except Exception:  # noqa: BLE001 — la evidencia nunca rompe el loop
-                local_evidence = []
-        # 1) Propuesta: aplicar el cruce al problema ANTES de buscar antecedentes.
-        proposal = proponer_fn(query, idea, domain)
+    # Evidencia local para el intérprete (FTS del almacén): se RECUPERA UNA
+    # VEZ y se ENTREGA a la llamada de interpretación — no solo se guarda.
+    local_evidence: list[dict[str, Any]] = []
+    if store is not None:
+        try:
+            local_evidence = [
+                {"title": d.get("title", ""), "abstract": (d.get("abstract") or "")[:300],
+                 "url": d.get("url", "")}
+                for d in (store.search_documents(_fts_query(query), limit=3) or [])
+            ]
+        except Exception:  # noqa: BLE001 — la evidencia nunca rompe el loop
+            local_evidence = []
+
+    def _desarrollar(idea: dict[str, Any], index: int) -> dict[str, Any]:
+        """Propuesta → crítica → antecedentes para un candidato del pool."""
+        # 1) Propuesta: aplicar el cruce al problema (con evidencia) ANTES de
+        #    buscar antecedentes.
+        proposal = proponer_fn(query, idea, domain, local_evidence)
         if proposal.get("estado") != "PROPUESTA" or not str(proposal.get("mecanismo", "")).strip():
             if proposal.get("estado") == "PROPUESTA":
                 proposal = _pending_proposal("PROPUESTA sin mecanismo")
         candidate = InventionCandidate(
-            candidate_id=f"{candidate_prefix}-{len(entries) + 1:02d}",
+            candidate_id=f"{candidate_prefix}-{index + 1:02d}",
             title=str(idea.get("title", ""))[:120],
             description=str(idea.get("description", ""))[:400],
             mechanism=str(proposal.get("mecanismo", ""))[:200],
@@ -337,27 +342,80 @@ def invent(
         judged = _judge(query, {**idea, "mecanismo": candidate.mechanism}, is_offline)
         # 3) Antecedentes del mecanismo (nunca del título).
         assessment = _assess_candidate(candidate, active_sources)
-        entries.append(
-            {
-                "candidate_id": candidate.candidate_id,
-                "title": candidate.title,
-                "score": idea.get("score", 0.0),
-                "score_kind": "heuristica_local",
-                "classes": [idea.get("class1", ""), idea.get("class2", "")],
-                "methods": [idea.get("method1", ""), idea.get("method2", "")],
-                "hipotesis": proposal.get("hipotesis", ""),
-                "mecanismo": candidate.mechanism,
-                "estado_interpretacion": proposal.get("estado", "PENDIENTE_INTERPRETACION"),
-                "aportacion_por_tecnica": list(proposal.get("aportacion_por_tecnica", [])),
-                "supuestos": list(proposal.get("supuestos", [])),
-                "prueba_concreta": proposal.get("prueba_concreta", ""),
-                "interpretacion_error": proposal.get("error", ""),
-                "evidencia_local_usada": local_evidence,
-                "judge": judged,
-                "prior_art": assessment,
-                "estado_antecedentes": _estado_antecedentes(assessment),
-            }
+        return {
+            "candidate_id": candidate.candidate_id,
+            "title": candidate.title,
+            "score": idea.get("score", 0.0),
+            "score_kind": "heuristica_local",
+            "classes": [idea.get("class1", ""), idea.get("class2", "")],
+            "methods": [idea.get("method1", ""), idea.get("method2", "")],
+            "hipotesis": proposal.get("hipotesis", ""),
+            "mecanismo": candidate.mechanism,
+            "estado_interpretacion": proposal.get("estado", "PENDIENTE_INTERPRETACION"),
+            "aportacion_por_tecnica": list(proposal.get("aportacion_por_tecnica", [])),
+            "supuestos": list(proposal.get("supuestos", [])),
+            "prueba_concreta": proposal.get("prueba_concreta", ""),
+            "interpretacion_error": proposal.get("error", ""),
+            "evidencia_local_usada": local_evidence,
+            "judge": judged,
+            "prior_art": assessment,
+            "estado_antecedentes": _estado_antecedentes(assessment),
+        }
+
+    entries: list[dict[str, Any]] = [
+        _desarrollar(idea, i) for i, idea in enumerate(top_ideas)
+    ]
+
+    # 4) Revisión post-interpretación (mandato §22: una revisión por candidato;
+    # megaprompt §28): el selector eligió finalistas sobre estructura/técnicas
+    # porque interpretar TODO el pool no cabe en presupuesto. Una vez
+    # interpretados los mecanismos, si dos son esencialmente la misma idea,
+    # el redundante se sustituye por el siguiente candidato del pool.
+    from .diversity_selector import same_idea_mechanism
+
+    pool_rest = [c for c in pool if all(c is not t for t in top_ideas)]
+    revision_log: list[dict[str, Any]] = []
+    for idx, entry in enumerate(entries):
+        if entry["estado_interpretacion"] != "PROPUESTA" or not entry["mecanismo"]:
+            continue
+        # Comparar contra los mecanismos de los OTROS finalistas por índice
+        # (la identidad de cadenas iguales no distingue entry propia/ajena).
+        duplicated_with = next(
+            (other["mecanismo"] for j, other in enumerate(entries)
+             if j != idx and other["estado_interpretacion"] == "PROPUESTA"
+             and other["mecanismo"]
+             and same_idea_mechanism(entry["mecanismo"], other["mecanismo"])),
+            None,
         )
+        if duplicated_with is None or not pool_rest:
+            continue
+        substitute_idea = pool_rest.pop(0)
+        substitute_entry = _desarrollar(substitute_idea, len(entries) + len(revision_log))
+        substitute_ok = (
+            substitute_entry["estado_interpretacion"] == "PROPUESTA"
+            and substitute_entry["mecanismo"]
+            and not any(
+                same_idea_mechanism(substitute_entry["mecanismo"], other["mecanismo"])
+                for j, other in enumerate(entries)
+                if j != idx and other["estado_interpretacion"] == "PROPUESTA"
+                and other["mecanismo"]
+            )
+        )
+        if substitute_ok:
+            revision_log.append({
+                "reemplazado": entry["candidate_id"],
+                "motivo": "mecanismo interpretado duplicado con otro finalista",
+                "sustituto": substitute_entry["candidate_id"],
+            })
+            entries[idx] = substitute_entry
+        else:
+            entry["mecanismo_duplicado_con"] = "otro finalista (sin sustituto distinto en el pool)"
+    if revision_log or any("mecanismo_duplicado_con" in e for e in entries):
+        selection_report["revision_post_interpretacion"] = {
+            "sustituciones": revision_log,
+            "sin_sustituto": [e["candidate_id"] for e in entries
+                              if "mecanismo_duplicado_con" in e],
+        }
 
     sheet = {
         "query": query,

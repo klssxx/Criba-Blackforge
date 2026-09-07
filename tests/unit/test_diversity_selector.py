@@ -85,3 +85,35 @@ def test_selection_is_deterministic() -> None:
     a, _ = select_finalists(ANTI_CONVERGENCE_POOL, 3)
     b, _ = select_finalists(ANTI_CONVERGENCE_POOL, 3)
     assert [c["idea_id"] for c in a] == [c["idea_id"] for c in b]
+
+
+# ---------------------------------------------------------------------------
+# Clasificación semántica de mecanismos (mandato de verificación §2)
+# ---------------------------------------------------------------------------
+
+from criba.diversity_selector import NEUTRAL_DISTANCE, _structural_distance, same_idea_mechanism
+
+MEC = "limitar cada autorizacion a un unico uso por operacion"
+
+
+def test_parafraasis_del_mismo_mecanismo_se_detecta() -> None:
+    assert same_idea_mechanism(MEC, "restringir cada autorizacion a un unico uso por operacion")
+
+
+def test_vocabulario_compartido_con_mecanismo_distinto_no_se_confunde() -> None:
+    assert not same_idea_mechanism(
+        MEC, "auditar cada autorizacion otorgada por operadores externos semanalmente")
+
+
+def test_mecanismo_incompleto_no_es_diverso_ni_duplicado() -> None:
+    assert not same_idea_mechanism("", MEC)
+    assert not same_idea_mechanism("m1", MEC)  # texto insuficiente
+    a = {"genome": {"mechanism": ["unknown"], "trust_model": ["unknown"],
+                    "topology": ["unknown"], "actor": ["unknown"], "time_model": ["unknown"]}}
+    b = {"genome": {"mechanism": ["otro"], "trust_model": ["x"], "topology": ["y"],
+                    "actor": ["z"], "time_model": ["w"]}}
+    assert _structural_distance(a, b) == NEUTRAL_DISTANCE
+
+
+def test_mecanismo_duplicado_exacto_se_detecta() -> None:
+    assert same_idea_mechanism(MEC, MEC.upper())

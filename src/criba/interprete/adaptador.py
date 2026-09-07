@@ -75,10 +75,13 @@ class LocalInterprete:
             return self._offline_fallback(query, idea)
 
     def proponer(
-        self, query: str, idea: dict[str, Any], domain: dict[str, Any] | None = None
+        self, query: str, idea: dict[str, Any], domain: dict[str, Any] | None = None,
+        evidence: list[dict[str, Any]] | None = None,
     ) -> dict[str, Any]:
         """Genera hipótesis con mecanismo a partir del cruce aplicado al problema.
 
+        ``evidence``: documentos locales pertinentes recuperados del almacén;
+        se entregan al intérprete para que la propuesta se apoye en ellos.
         Sin API key o ante fallo devuelve estado ``PENDIENTE_INTERPRETACION``
         sin fabricar contenido: una plantilla nunca se presenta como propuesta.
         """
@@ -87,6 +90,17 @@ class LocalInterprete:
                     "mecanismo": "", "aportacion_por_tecnica": [], "supuestos": [],
                     "prueba_concreta": "", "error": "sin NOUS_API_KEY"}
         domain_title = str((domain or {}).get("title") or "general")
+        evidence_block = ""
+        for i, ev in enumerate((evidence or [])[:3], 1):
+            title = str(ev.get("title") or "").strip()
+            abstract = str(ev.get("abstract") or "").strip()
+            if title or abstract:
+                evidence_block += f"{i}. {title}: {abstract[:200]}\n"
+        if evidence_block:
+            evidence_block = (
+                "\nEVIDENCIA LOCAL PERTINENTE (apóyate solo en la que sirva y "
+                "cítala por número si la usas):\n" + evidence_block
+            )
         prompt = f"""Aplica el cruce de técnicas a este problema concreto.
 
 PROBLEMA: {query}
@@ -96,7 +110,7 @@ CRUCE (dos operadores):
 Técnica A: {idea.get('method1', idea.get('title', ''))}
 Técnica B: {idea.get('method2', '')}
 Título del cruce: {idea.get('title', '')}
-
+{evidence_block}
 Responde ÚNICAMENTE con JSON válido (nada de markdown) con esta estructura:
 {{
   "hipotesis": "propuesta específica para ESTE problema",

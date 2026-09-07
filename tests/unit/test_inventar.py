@@ -240,7 +240,7 @@ def test_prior_art_searches_mechanism_not_title() -> None:
                 source_id=self.SOURCE_ID, query_text=query, ok=False, error="NO_RESULTS"
             )
 
-    def _proponer(query: str, idea: dict, domain: dict | None) -> dict:
+    def _proponer(query: str, idea: dict, domain: dict | None, evidence=None) -> dict:
         return {
             "estado": "PROPUESTA",
             "hipotesis": "Limitar cada autorización a un único uso por operación.",
@@ -358,3 +358,65 @@ def test_dv9_history_failure_degrades_gracefully(monkeypatch, tmp_path) -> None:
                    top=2, offline=True, methods=_methods(), sources=_sources(),
                    history_storage=_Broken())
     assert len(sheet["entries"]) == 2
+
+
+def test_evidencia_local_reaches_proponer(tmp_path) -> None:
+    """La evidencia local se ENTREGA a la llamada del intérprete, no solo
+    se guarda en la ficha (corrección de conducta del recorrido)."""
+    from criba.intelligence.storage.store import IntelligenceStore
+
+    store = IntelligenceStore(str(tmp_path / "intel.sqlite3"))
+    store.save_document({
+        "doc_id": "doc-e9", "source_id": "stub", "title": "Capacidades de un solo uso",
+        "kind": "paper", "url": "https://x/cap",
+        "abstract": "capacidades de un solo uso para agentes",
+    })
+    received: list = []
+
+    def _proponer(query, idea, domain, evidence=None):
+        received.append(evidence)
+        return {
+            "estado": "PROPUESTA", "hipotesis": "h", "mecanismo": "m del problema",
+            "aportacion_por_tecnica": [], "supuestos": [], "prueba_concreta": "",
+            "error": "",
+        }
+
+    sheet = invent("permisos de un solo uso en agentes", seed=4, rounds=1,
+                   batch_size=4, top=2, offline=True, methods=_methods(),
+                   sources=_sources(), proponer=_proponer, store=store)
+    assert received and all(ev for ev in received), "el proponente debe recibir evidencia"
+    assert any("Capacidades de un solo uso" in (e.get("title") or "")
+               for ev in received for e in (ev or []))
+
+
+def test_mecanismo_duplicado_se_sustituye_desde_el_pool() -> None:
+    """Dos finalistas con el MISMO mecanismo interpretado → el redundante se
+    sustituye por otro candidato del pool (una revisión por candidato)."""
+    calls = {"n": 0}
+
+    def _proponer(query, idea, domain, evidence=None):
+        calls["n"] += 1
+        # Los dos primeros candidatos producen la MISMA idea reescrita;
+        # los siguientes producen mecanismos distintos.
+        if calls["n"] in (1, 2):
+            mecanismo = "limitar cada autorizacion a un unico uso por operacion"
+        else:
+            distintas = [
+                "rotar credenciales del agente cada semana completa",
+                "auditar permisos otorgados de forma mensual centralizada",
+                "revocar privilegios sin uso tras treinta dias exactos",
+            ]
+            mecanismo = distintas[(calls["n"] - 3) % len(distintas)]
+        return {"estado": "PROPUESTA", "hipotesis": "h", "mecanismo": mecanismo,
+                "aportacion_por_tecnica": [], "supuestos": [], "prueba_concreta": "",
+                "error": ""}
+
+    sheet = invent("permisos excesivos", seed=8, rounds=2, batch_size=8, top=3,
+                   offline=True, methods=_methods(), sources=_sources(),
+                   proponer=_proponer)
+    mecanismos = [e["mecanismo"] for e in sheet["entries"]]
+    assert len(mecanismos) == len(set(mecanismos)), (
+        "no deben coexistir mecanismos esencialmente duplicados tras la revisión"
+    )
+    revision = sheet["seleccion_finalista"].get("revision_post_interpretacion")
+    assert revision and revision["sustituciones"], "la sustitución debe quedar registrada"
