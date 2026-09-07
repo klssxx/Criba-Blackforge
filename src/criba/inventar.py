@@ -184,6 +184,30 @@ def _assess_candidate(
         }
 
 
+def _estado_antecedentes(assessment: dict[str, Any]) -> str:
+    """Estado honesto de antecedentes (mandato §7). Ninguno equivale a
+    novedad universal; los errores no se convierten en «sin coincidencia»."""
+    verdict = assessment.get("verdict")
+    detail = str(assessment.get("detail") or "")
+    queries = assessment.get("queries") or []
+    if verdict == "PARTIAL_PRIOR_ART":
+        return "antecedente_cercano_encontrado"
+    if verdict == "SURVIVED_SEARCH":
+        return "sin_coincidencia_cercana_en_fuentes_consultadas"
+    if "sin-mecanismo" in detail or not queries:
+        return "pendiente_de_busqueda"
+    if detail.startswith("mutation-loop-fail-closed") or "error" in detail:
+        return "busqueda_incompleta"
+    return "busqueda_incompleta"
+
+
+def _fts_query(query: str) -> str:
+    """Consulta FTS tolerante: OR de tokens relevantes (el MATCH exacto de
+    una frase completa exige TODOS los términos y casi nunca coincide)."""
+    tokens = [t for t in query.split() if len(t) >= 4][:8]
+    return " OR ".join(tokens) if tokens else query
+
+
 def invent(
     query: str,
     *,
@@ -195,11 +219,12 @@ def invent(
     methods: list[dict[str, Any]] | None = None,
     sources: list[IntelligenceSource] | None = None,
     proponer: _PROPOSER | None = None,
+    store: Any | None = None,
 ) -> dict[str, Any]:
     """Ejecuta el loop completo y devuelve la ficha de invención.
 
-    ``methods``/``sources``/``proponer`` son inyectables para pruebas
-    deterministas.
+    ``methods``/``sources``/``proponer``/``store`` son inyectables para
+    pruebas deterministas.
     """
     if not query.strip():
         raise ValueError("query must not be blank")
@@ -224,6 +249,17 @@ def invent(
 
     entries: list[dict[str, Any]] = []
     for idea in top_ideas:
+        # 0) Evidencia local disponible para el intérprete (FTS del almacén).
+        local_evidence: list[dict[str, Any]] = []
+        if store is not None:
+            try:
+                local_evidence = [
+                    {"title": d.get("title", ""), "abstract": (d.get("abstract") or "")[:300],
+                     "url": d.get("url", "")}
+                    for d in (store.search_documents(_fts_query(query), limit=3) or [])
+                ]
+            except Exception:  # noqa: BLE001 — la evidencia nunca rompe el loop
+                local_evidence = []
         # 1) Propuesta: aplicar el cruce al problema ANTES de buscar antecedentes.
         proposal = proponer_fn(query, idea, domain)
         if proposal.get("estado") != "PROPUESTA" or not str(proposal.get("mecanismo", "")).strip():
@@ -255,8 +291,10 @@ def invent(
                 "supuestos": list(proposal.get("supuestos", [])),
                 "prueba_concreta": proposal.get("prueba_concreta", ""),
                 "interpretacion_error": proposal.get("error", ""),
+                "evidencia_local_usada": local_evidence,
                 "judge": judged,
                 "prior_art": assessment,
+                "estado_antecedentes": _estado_antecedentes(assessment),
             }
         )
 

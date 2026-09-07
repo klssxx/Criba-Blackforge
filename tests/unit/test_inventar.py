@@ -267,3 +267,27 @@ def test_prior_art_searches_mechanism_not_title() -> None:
     titles = {e["title"] for e in sheet["entries"]}
     for query in captured:
         assert not any(t in query for t in titles)
+
+
+def test_estado_antecedentes_is_honest() -> None:
+    """Sin mecanismo → pendiente de búsqueda; con propuesta fallida offline
+    nunca se declara «sin coincidencia» (mandato §7)."""
+    sheet = invent("agente con permisos excesivos", seed=11, rounds=1, batch_size=6,
+                   top=3, offline=True, methods=_methods(), sources=_sources())
+    for entry in sheet["entries"]:
+        assert entry["estado_antecedentes"] == "pendiente_de_busqueda"
+
+
+def test_local_evidence_reaches_entry_when_store_given(tmp_path) -> None:
+    from criba.intelligence.storage.store import IntelligenceStore
+
+    store = IntelligenceStore(str(tmp_path / "intel.sqlite3"))
+    store.save_document({
+        "doc_id": "doc-e1", "source_id": "stub", "title": "Capacidades de un solo uso",
+        "kind": "paper", "url": "https://x/cap", "abstract": "capacidades de un solo uso para agentes",
+    })
+    sheet = invent("permisos de un solo uso en agentes", seed=3, rounds=1, batch_size=4,
+                   top=2, offline=True, methods=_methods(), sources=_sources(), store=store)
+    assert sheet["entries"], "debe haber candidatos"
+    assert all(isinstance(e.get("evidencia_local_usada"), list) for e in sheet["entries"])
+    assert any(e["evidencia_local_usada"] for e in sheet["entries"])
