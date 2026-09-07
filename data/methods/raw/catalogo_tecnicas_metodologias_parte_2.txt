@@ -1,0 +1,655 @@
+CATÁLOGO DE 2.000 TÉCNICAS Y METODOLOGÍAS
+PARTE 2 — ENTRADAS 701 A 1350
+Formato: TIPO, SECTOR, ENFOQUE > NÚMERO > NOMBRE > DESCRIPCIÓN
+Nota: las entradas marcadas como APLICACIÓN METODOLÓGICA son adaptaciones sectoriales explícitas, no métodos canónicos nuevos.
+
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 701 > Espectroscopía de absorción > Mide atenuación de radiación para identificar transiciones.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 702 > Espectroscopía de emisión > Analiza radiación emitida por especies excitadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 703 > Espectroscopía UV-Visible > Estudia absorciones electrónicas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 704 > Espectroscopía infrarroja > Identifica vibraciones moleculares.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 705 > FTIR > Obtiene espectros infrarrojos mediante transformada de Fourier.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 706 > Espectroscopía Raman > Mide dispersión inelástica vibracional.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 707 > Raman confocal > Combina resolución espacial y análisis Raman.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 708 > Espectroscopía de fluorescencia > Mide emisión tras excitación.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 709 > Fluorescencia resuelta en tiempo > Mide vidas medias de emisión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 710 > FRET > Estima proximidad molecular por transferencia de energía.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 711 > XPS > Determina composición y estados químicos superficiales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 712 > UPS > Estudia niveles electrónicos de valencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 713 > AES > Analiza composición superficial mediante electrones Auger.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 714 > EELS > Mide pérdidas de energía de electrones.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 715 > NMR > Determina estructura y dinámica molecular.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 716 > NMR de estado sólido > Caracteriza sólidos con secuencias especializadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 717 > EPR > Detecta especies con electrones desapareados.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 718 > Mössbauer Spectroscopy > Estudia interacciones hiperfinas nucleares.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 719 > Espectrometría de masas > Separa iones por masa-carga.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 720 > MALDI-TOF > Analiza moléculas grandes por tiempo de vuelo.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 721 > ICP-MS > Detecta trazas elementales mediante plasma.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 722 > SIMS > Analiza superficies con iones secundarios.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 723 > Difracción de rayos X > Determina estructura cristalina.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 724 > XRD de polvo > Identifica fases policristalinas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 725 > Difracción de monocristal > Resuelve estructuras atómicas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 726 > SAXS > Estudia estructuras nanométricas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 727 > WAXS > Analiza orden a escala corta.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 728 > Reflectometría de rayos X > Mide espesor, densidad y rugosidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 729 > Tomografía de rayos X > Reconstruye interiores tridimensionales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 730 > Micro-CT > Realiza tomografía con resolución micrométrica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 731 > Difracción de neutrones > Determina estructura y magnetismo.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 732 > Reflectometría de neutrones > Caracteriza interfaces y capas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 733 > SANS > Estudia nanoestructuras con neutrones.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 734 > Difracción de electrones > Determina orden cristalino.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 735 > LEED > Caracteriza orden superficial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 736 > RHEED > Monitoriza crecimiento epitaxial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 737 > Microscopía de campo claro > Forma imágenes por transmisión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 738 > Contraste de fases > Convierte cambios de fase en contraste.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 739 > DIC > Genera contraste interferométrico.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 740 > Microscopía de fluorescencia > Localiza moléculas marcadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 741 > Microscopía confocal > Obtiene secciones ópticas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 742 > Microscopía multiphoton > Excita con absorción multifotónica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 743 > STED > Supera difracción por agotamiento estimulado.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 744 > PALM > Localiza moléculas fotoactivables individualmente.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 745 > STORM > Reconstruye superresolución desde emisores intermitentes.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 746 > SEM > Obtiene topografía con haz electrónico.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 747 > TEM > Forma imágenes con electrones transmitidos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 748 > STEM > Barre una sonda electrónica en transmisión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 749 > Cryo-EM > Observa muestras vitrificadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 750 > Cryo-electron tomography > Reconstruye volúmenes vitrificados.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 751 > AFM > Mide fuerzas punta-muestra.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 752 > AFM de contacto > Mantiene la punta en contacto.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 753 > AFM tapping > Oscila la punta reduciendo fuerzas laterales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 754 > Kelvin Probe Force Microscopy > Mapea potencial superficial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 755 > Magnetic Force Microscopy > Detecta gradientes magnéticos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 756 > Scanning Tunneling Microscopy > Mide corriente túnel superficial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 757 > Profilometría de contacto > Mide perfiles con una punta.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 758 > Profilometría óptica > Mide topografía sin contacto.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 759 > Interferometría de luz blanca > Obtiene relieve por coherencia baja.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 760 > Elipsometría > Determina propiedades ópticas y espesores.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 761 > Refractometría > Mide índice de refracción.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 762 > Polarimetría > Mide rotación y polarización.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 763 > Interferometría Michelson > Compara caminos ópticos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 764 > Interferometría Mach-Zehnder > Mide cambios de fase.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 765 > Interferometría Fabry-Pérot > Logra alta resolución espectral.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 766 > Holografía digital > Reconstruye amplitud y fase.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 767 > Digital Image Correlation > Calcula desplazamientos y deformaciones.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 768 > Particle Image Velocimetry > Obtiene campos de velocidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 769 > Laser Doppler Velocimetry > Mide velocidad por efecto Doppler.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 770 > Hot-Wire Anemometry > Mide flujo por enfriamiento de hilo.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 771 > Pitot Tube Measurement > Estima velocidad desde presión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 772 > Schlieren Imaging > Visualiza gradientes de densidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 773 > Shadowgraphy > Visualiza variaciones de índice.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 774 > Planar Laser-Induced Fluorescence > Mapea especies o temperatura.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 775 > LIBS > Analiza composición desde plasma láser.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 776 > Laser Flash Analysis > Mide difusividad térmica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 777 > Differential Scanning Calorimetry > Mide flujo de calor.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 778 > Thermogravimetric Analysis > Mide cambios de masa con temperatura.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 779 > Dynamic Mechanical Analysis > Mide respuesta viscoelástica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 780 > Thermomechanical Analysis > Mide deformación térmica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 781 > Dilatometry > Mide expansión térmica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 782 > Isothermal Titration Calorimetry > Mide termodinámica de interacción.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 783 > Bomb Calorimetry > Mide calor de combustión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 784 > Transient Hot Wire > Mide conductividad térmica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 785 > 3-Omega Method > Mide propiedades térmicas eléctricamente.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 786 > Guarded Hot Plate > Mide conductividad estacionaria.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 787 > Seebeck Measurement > Determina coeficiente termoeléctrico.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 788 > Hall Effect Measurement > Obtiene densidad y movilidad de portadores.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 789 > Four-Point Probe > Mide resistividad reduciendo contactos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 790 > Van der Pauw Method > Determina resistividad en muestras planas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 791 > Impedance Spectroscopy > Caracteriza respuesta eléctrica por frecuencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 792 > Electrochemical Impedance Spectroscopy > Separa procesos electroquímicos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 793 > Cyclic Voltammetry > Estudia reacciones redox.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 794 > Linear Sweep Voltammetry > Mide corriente durante barrido lineal.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 795 > Chronoamperometry > Mide corriente tras escalón de potencial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 796 > Chronopotentiometry > Mide potencial bajo corriente fija.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 797 > Rotating Disk Electrode > Controla transporte de masa.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 798 > Tafel Analysis > Extrae parámetros cinéticos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 799 > Corrosion Coupon Test > Mide pérdida de masa por corrosión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 800 > Salt Spray Test > Acelera corrosión con niebla salina.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 801 > Nanoindentation > Obtiene dureza y módulo a microescala.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 802 > Vickers Hardness > Calcula dureza con huella piramidal.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 803 > Rockwell Hardness > Mide profundidad bajo carga.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 804 > Brinell Hardness > Calcula dureza con bola.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 805 > Scratch Test > Evalúa adhesión o resistencia al rayado.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 806 > Tensile Test > Mide resistencia y ductilidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 807 > Compression Test > Mide respuesta bajo compresión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 808 > Flexural Test > Evalúa resistencia a flexión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 809 > Torsion Test > Mide respuesta torsional.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 810 > Fatigue Test > Determina vida bajo cargas cíclicas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 811 > Creep Test > Mide deformación dependiente del tiempo.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 812 > Stress Relaxation Test > Mide disminución de tensión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 813 > Charpy Impact Test > Mide energía absorbida en impacto.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 814 > Fracture Toughness Test > Determina resistencia a propagación de grietas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 815 > Acoustic Emission > Detecta ondas generadas por daño.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 816 > Ultrasonic Testing > Inspecciona discontinuidades con ultrasonidos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 817 > Phased Array Ultrasonics > Controla haces ultrasónicos electrónicamente.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 818 > Radiographic Testing > Inspecciona interiores con radiación.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 819 > Magnetic Particle Inspection > Detecta grietas en ferromagnéticos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 820 > Dye Penetrant Inspection > Revela discontinuidades superficiales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 821 > Eddy Current Testing > Detecta defectos por corrientes inducidas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 822 > Infrared Thermography > Detecta patrones térmicos anómalos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 823 > Lock-In Thermography > Sincroniza excitación y detección térmica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 824 > Dynamic Light Scattering > Estima tamaño de partículas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 825 > Static Light Scattering > Estima masa y estructura.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 826 > Nanoparticle Tracking Analysis > Sigue partículas individuales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 827 > Zeta Potential > Estima estabilidad coloidal.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 828 > BET Surface Area > Calcula área específica por adsorción.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 829 > Mercury Intrusion Porosimetry > Determina tamaño de poro.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 830 > Gas Pycnometry > Mide densidad real.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 831 > Contact Angle > Evalúa mojabilidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 832 > Pendant Drop Tensiometry > Mide tensión superficial.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 833 > Rotational Rheometry > Mide viscosidad y viscoelasticidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 834 > Capillary Rheometry > Mide flujo en capilares.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 835 > Oscillatory Rheology > Caracteriza módulos viscoelásticos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 836 > Dynamic Vapor Sorption > Mide absorción de humedad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 837 > Laser Diffraction Particle Sizing > Estima granulometría por dispersión.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 838 > Coulter Counter > Cuenta partículas por impedancia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 839 > Flow Cytometry > Analiza células individualmente.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 840 > Patch Clamp > Registra corrientes iónicas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 841 > Electroencephalography > Registra actividad eléctrica cerebral.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 842 > Magnetoencephalography > Mide campos magnéticos neuronales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 843 > Functional MRI > Infere actividad por hemodinámica.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 844 > Positron Emission Tomography > Mapea trazadores radiactivos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 845 > Ultrasound Imaging > Forma imágenes por ecos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 846 > Optical Coherence Tomography > Obtiene secciones por interferometría.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 847 > Photoacoustic Imaging > Combina absorción óptica y ultrasonido.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 848 > Pump-Probe Spectroscopy > Estudia dinámica ultrarrápida.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 849 > Transient Absorption > Mide estados excitados transitorios.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 850 > Cavity Ring-Down Spectroscopy > Mide absorción por decaimiento en cavidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 851 > Terahertz Spectroscopy > Caracteriza materiales en terahercios.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 852 > Rutherford Backscattering > Obtiene composición y profundidad.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 853 > Particle-Induced X-Ray Emission > Analiza elementos por rayos X.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 854 > Accelerator Mass Spectrometry > Mide isótopos ultratraza.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 855 > Cloud Chamber > Visualiza trayectorias ionizantes.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 856 > Scintillation Detection > Convierte radiación en luz.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 857 > Semiconductor Radiation Detection > Mide radiación con pares de carga.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 858 > Geiger-Müller Counting > Cuenta eventos ionizantes.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 859 > Cherenkov Detection > Detecta luz de partículas rápidas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 860 > Time Projection Chamber > Reconstruye trayectorias tridimensionales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 861 > Coincidence Counting > Reduce fondo con detecciones correlacionadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 862 > Lock-In Amplification > Extrae señales débiles sincronizadas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 863 > Boxcar Averaging > Promedia señales repetitivas en ventanas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 864 > Chopper Modulation > Desplaza señales fuera del ruido de baja frecuencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 865 > Wheatstone Bridge > Mide pequeñas variaciones resistivas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 866 > Kelvin Four-Wire Measurement > Elimina resistencia de cables.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 867 > Null Measurement > Compara hasta anular una diferencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 868 > Differential Measurement > Resta señales comunes.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 869 > Allan Variance > Caracteriza estabilidad de osciladores.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 870 > Power Spectral Density > Distribuye potencia por frecuencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 871 > Cross-Spectral Analysis > Estudia relación espectral entre señales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 872 > Coherence Analysis > Cuantifica relación por frecuencia.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 873 > Wavelet Analysis > Descompone señales por tiempo y escala.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 874 > Short-Time Fourier Transform > Obtiene espectros locales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 875 > Matched Filtering > Detecta formas conocidas en ruido.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 876 > Kalman Filtering > Estima estados combinando modelo y medidas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 877 > Particle Filtering > Estima estados no lineales con partículas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 878 > Wiener Filtering > Minimiza error usando estadísticas.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 879 > Savitzky-Golay Filtering > Suaviza con polinomios locales.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 880 > Baseline Correction > Elimina deriva o fondo.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 881 > Blank Subtraction > Resta la señal del blanco.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 882 > Standard Addition > Compensa efectos de matriz.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 883 > Internal Standard Calibration > Normaliza con una referencia interna.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 884 > External Calibration > Relaciona señal con patrones externos.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 885 > Isotope Dilution > Cuantifica con un isótopo enriquecido.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 886 > Spike Recovery > Evalúa exactitud mediante adición conocida.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 887 > Limit of Detection > Estima la menor señal distinguible.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 888 > Limit of Quantification > Estima la menor cantidad cuantificable.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 889 > Uncertainty Budget > Combina fuentes de incertidumbre.
+TÉCNICA EXPERIMENTAL, FÍSICA, QUÍMICA Y MATERIALES, MEDICIÓN Y CARACTERIZACIÓN > 890 > Propagation of Uncertainty > Propaga incertidumbres de entrada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 891 > Divide and Conquer > Divide un problema, resuelve partes y combina resultados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 892 > Dynamic Programming > Reutiliza soluciones de subproblemas superpuestos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 893 > Greedy Algorithm > Elige la mejor opción local en cada paso.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 894 > Backtracking > Explora y revierte ramas inviables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 895 > Branch and Bound > Poda regiones mediante cotas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 896 > Memoization > Almacena resultados para evitar recomputación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 897 > Binary Search > Reduce a la mitad un espacio ordenado.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 898 > Depth-First Search > Explora profundamente antes de retroceder.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 899 > Breadth-First Search > Explora un grafo por niveles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 900 > Bidirectional Search > Busca desde origen y objetivo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 901 > Dijkstra Algorithm > Calcula caminos mínimos con pesos no negativos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 902 > Bellman-Ford > Permite pesos negativos y detecta ciclos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 903 > Floyd-Warshall > Calcula caminos entre todos los pares.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 904 > A* Search > Combina coste acumulado y heurística.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 905 > Topological Sort > Ordena dependencias acíclicas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 906 > Tarjan SCC > Encuentra componentes fuertemente conexas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 907 > Kruskal Algorithm > Construye un árbol de expansión mínimo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 908 > Prim Algorithm > Hace crecer un árbol mínimo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 909 > Union-Find > Mantiene conjuntos disjuntos eficientemente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 910 > Ford-Fulkerson > Calcula flujo máximo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 911 > Edmonds-Karp > Usa caminos aumentantes más cortos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 912 > Dinic Algorithm > Usa niveles y flujos bloqueantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 913 > Hopcroft-Karp > Empareja grafos bipartitos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 914 > Hungarian Algorithm > Resuelve asignación mínima.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 915 > PageRank > Calcula importancia en redes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 916 > Bloom Filter > Comprueba pertenencia aproximada con poco espacio.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 917 > Count-Min Sketch > Estima frecuencias en flujos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 918 > HyperLogLog > Estima cardinalidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 919 > Reservoir Sampling > Mantiene muestra uniforme de un flujo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 920 > Consistent Hashing > Distribuye claves minimizando movimientos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 921 > Merkle Tree > Resume datos mediante hashes jerárquicos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 922 > Skip List > Mantiene orden con niveles probabilísticos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 923 > B-Tree > Indexa grandes volúmenes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 924 > B+ Tree > Optimiza rangos con datos en hojas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 925 > LSM Tree > Optimiza escrituras mediante niveles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 926 > Trie > Indexa cadenas por prefijos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 927 > Suffix Tree > Representa todos los sufijos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 928 > Suffix Array > Ordena sufijos con menor memoria.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 929 > Rabin-Karp > Busca patrones con hashes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 930 > Knuth-Morris-Pratt > Usa prefijos para evitar recomparaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 931 > Boyer-Moore > Salta usando información del patrón.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 932 > Aho-Corasick > Busca múltiples patrones simultáneamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 933 > Burrows-Wheeler Transform > Reordena texto para compresión.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 934 > Huffman Coding > Crea códigos según frecuencia.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 935 > Arithmetic Coding > Codifica mensajes como intervalos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 936 > Lempel-Ziv-Welch > Comprime con diccionario incremental.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 937 > Run-Length Encoding > Comprime repeticiones consecutivas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 938 > Reed-Solomon > Corrige errores con polinomios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 939 > Hamming Code > Corrige errores simples.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 940 > LDPC > Corrige errores con matrices dispersas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 941 > QuickSort > Ordena particionando alrededor de pivotes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 942 > MergeSort > Ordena dividiendo y fusionando.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 943 > HeapSort > Ordena mediante un heap.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 944 > TimSort > Aprovecha secuencias ya ordenadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 945 > Radix Sort > Ordena por dígitos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 946 > Counting Sort > Ordena contando frecuencias.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 947 > External Merge Sort > Ordena datos mayores que memoria.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 948 > MapReduce > Distribuye transformación y agregación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 949 > Actor Model > Modela concurrencia mediante actores y mensajes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 950 > Communicating Sequential Processes > Coordina procesos por canales.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 951 > Fork-Join > Divide tareas paralelas y combina resultados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 952 > Work Stealing > Equilibra carga tomando tareas ajenas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 953 > SIMD Vectorization > Ejecuta una operación sobre múltiples datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 954 > GPU Computing > Paraleliza operaciones masivas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 955 > Pipeline Parallelism > Solapa etapas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 956 > Data Parallelism > Replica operaciones sobre particiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 957 > Model Parallelism > Distribuye un modelo entre dispositivos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 958 > Thread Pool > Reutiliza un conjunto de hilos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 959 > Event Loop > Gestiona eventos asíncronos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 960 > Reactive Programming > Propaga cambios mediante flujos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 961 > Lock-Free Programming > Coordina sin bloqueos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 962 > Compare-and-Swap > Actualiza memoria condicionalmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 963 > Read-Copy-Update > Permite lecturas concurrentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 964 > Transactional Memory > Agrupa accesos de memoria atómicamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 965 > Two-Phase Locking > Serializa mediante fases de bloqueo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 966 > Optimistic Concurrency Control > Valida conflictos al confirmar.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 967 > MVCC > Mantiene múltiples versiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 968 > Two-Phase Commit > Coordina confirmación distribuida.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 969 > Paxos > Logra consenso mediante propuestas y mayorías.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 970 > Raft > Separa elección de líder y replicación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 971 > PBFT > Tolera fallos bizantinos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 972 > Gossip Protocol > Difunde información epidémicamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 973 > Vector Clocks > Representa causalidad parcial.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 974 > Lamport Clocks > Ordena eventos causalmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 975 > CRDT > Permite réplicas concurrentes convergentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 976 > Event Sourcing > Persiste cambios como eventos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 977 > CQRS > Separa escritura y lectura.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 978 > Saga Pattern > Coordina transacciones con compensaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 979 > Outbox Pattern > Publica eventos consistentemente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 980 > Circuit Breaker > Detiene llamadas a dependencias degradadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 981 > Bulkhead Pattern > Aísla recursos y fallos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 982 > Exponential Backoff > Espacia reintentos progresivamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 983 > Idempotency Key > Evita duplicar efectos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 984 > Rate Limiting > Controla frecuencia de solicitudes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 985 > Token Bucket > Permite ráfagas limitadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 986 > Leaky Bucket > Suaviza tráfico.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 987 > Load Shedding > Descarta trabajo durante sobrecarga.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 988 > Backpressure > Regula productores desde consumidores.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 989 > Cache-Aside > Carga datos en caché bajo demanda.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 990 > Write-Through Cache > Escribe en caché y almacenamiento.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 991 > Write-Back Cache > Difiere escrituras persistentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 992 > Cache Invalidation > Renueva datos obsoletos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 993 > Sharding > Divide datos horizontalmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 994 > Replication > Mantiene copias para disponibilidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 995 > Quorum Reads and Writes > Usa mayorías para controlar consistencia.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 996 > Chandy-Lamport Snapshot > Captura un estado distribuido coherente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 997 > CAP Analysis > Evalúa consistencia, disponibilidad y particiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 998 > PACELC Analysis > Añade el compromiso latencia-consistencia.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 999 > Database Normalization > Reduce redundancia y anomalías.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1000 > Denormalization > Añade redundancia controlada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1001 > Star Schema > Organiza hechos y dimensiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1002 > Snowflake Schema > Normaliza dimensiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1003 > Data Vault > Modela historia mediante hubs y enlaces.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1004 > Change Data Capture > Detecta y transmite modificaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1005 > Lambda Architecture > Combina batch y tiempo real.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1006 > Kappa Architecture > Procesa datos como flujos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1007 > Medallion Architecture > Refina datos en capas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1008 > Data Mesh > Distribuye responsabilidad por dominios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1009 > Data Fabric > Integra datos con metadatos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1010 > ETL > Extrae, transforma y carga.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1011 > ELT > Carga antes de transformar.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1012 > Data Lineage > Rastrea origen y transformaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1013 > Data Profiling > Analiza estructura y calidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1014 > Data Cleansing > Corrige y estandariza datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1015 > Entity Resolution > Identifica registros de la misma entidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1016 > Master Data Management > Gobierna datos maestros.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1017 > Feature Engineering > Crea variables útiles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1018 > Feature Selection > Selecciona variables relevantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1019 > One-Hot Encoding > Representa categorías con indicadores.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1020 > Target Encoding > Codifica categorías con estadísticas del objetivo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1021 > Standardization > Centra y escala variables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1022 > Robust Scaling > Escala con mediana e intervalo intercuartílico.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1023 > Multiple Imputation > Refleja incertidumbre de datos ausentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1024 > Isolation Forest > Detecta anomalías por aislamiento.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1025 > Local Outlier Factor > Compara densidad local.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1026 > One-Class SVM > Aprende una frontera de normalidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1027 > Supervised Learning > Aprende desde etiquetas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1028 > Unsupervised Learning > Descubre estructura sin etiquetas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1029 > Semi-Supervised Learning > Combina pocos datos etiquetados y muchos no.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1030 > Self-Supervised Learning > Crea objetivos desde los propios datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1031 > Reinforcement Learning > Aprende políticas mediante recompensa.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1032 > Offline Reinforcement Learning > Aprende desde datos históricos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1033 > Inverse Reinforcement Learning > Infere recompensas desde demostraciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1034 > Imitation Learning > Aprende comportamiento de expertos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1035 > Active Learning > Selecciona ejemplos informativos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1036 > Curriculum Learning > Ordena ejemplos por dificultad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1037 > Transfer Learning > Reutiliza representaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1038 > Domain Adaptation > Ajusta entre distribuciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1039 > Multi-Task Learning > Aprende tareas relacionadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1040 > Meta-Learning > Aprende a adaptarse.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1041 > Federated Learning > Entrena sin centralizar datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1042 > Continual Learning > Aprende reduciendo olvido.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1043 > Online Learning > Actualiza con datos entrantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1044 > Ensemble Learning > Combina varios modelos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1045 > Bagging > Promedia modelos sobre remuestras.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1046 > Random Forest > Combina árboles aleatorios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1047 > Boosting > Corrige errores secuencialmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1048 > AdaBoost > Repondera ejemplos difíciles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1049 > Gradient Boosting > Ajusta modelos a gradientes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1050 > XGBoost > Implementa boosting regularizado.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1051 > LightGBM > Usa histogramas y crecimiento por hojas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1052 > CatBoost > Maneja categorías eficazmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1053 > Stacking > Entrena un metamodelo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1054 > Linear Regression > Predice mediante combinación lineal.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1055 > Decision Tree > Divide el espacio con reglas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1056 > Support Vector Machine > Maximiza margen entre clases.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1057 > K-Nearest Neighbors > Usa vecinos cercanos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1058 > Naive Bayes > Aplica Bayes con independencia condicional.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1059 > Gaussian Process > Define una distribución sobre funciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1060 > Neural Network > Aprende transformaciones no lineales.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1061 > Convolutional Neural Network > Explota estructura local.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1062 > Recurrent Neural Network > Mantiene estado secuencial.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1063 > LSTM > Controla memoria con puertas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1064 > GRU > Simplifica memoria recurrente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1065 > Transformer > Modela relaciones mediante atención.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1066 > Self-Attention > Pondera elementos de una secuencia.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1067 > Cross-Attention > Relaciona dos secuencias.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1068 > Vision Transformer > Aplica atención a parches.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1069 > Graph Neural Network > Propaga información en grafos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1070 > Graph Convolutional Network > Agrega vecindarios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1071 > Graph Attention Network > Pondera vecinos con atención.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1072 > Autoencoder > Aprende representación reconstruyendo entrada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1073 > Variational Autoencoder > Aprende espacio latente probabilístico.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1074 > GAN > Entrena generador y discriminador.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1075 > Diffusion Model > Genera invirtiendo un proceso de ruido.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1076 > Normalizing Flow > Usa transformaciones invertibles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1077 > Contrastive Learning > Acerca positivos y separa negativos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1078 > Knowledge Distillation > Transfiere un modelo grande a uno menor.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1079 > Quantization > Reduce precisión numérica.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1080 > Pruning > Elimina pesos poco importantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1081 > Low-Rank Adaptation > Ajusta matrices de bajo rango.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1082 > Prompt Tuning > Aprende vectores de prompt.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1083 > Retrieval-Augmented Generation > Combina recuperación y generación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1084 > Tool-Augmented Generation > Permite usar herramientas externas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1085 > Mixture of Experts > Activa expertos especializados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1086 > Sparse Attention > Reduce pares de atención.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1087 > Beam Search > Mantiene mejores secuencias parciales.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1088 > Top-k Sampling > Muestrea entre k tokens.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1089 > Nucleus Sampling > Muestrea por masa acumulada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1090 > Temperature Scaling > Ajusta concentración de probabilidades.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1091 > Label Smoothing > Reduce sobreconfianza.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1092 > Dropout > Desactiva unidades aleatoriamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1093 > Batch Normalization > Normaliza activaciones por lote.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1094 > Layer Normalization > Normaliza características por ejemplo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1095 > Weight Decay > Penaliza pesos grandes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1096 > Early Stopping > Detiene al dejar de mejorar.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1097 > Learning Rate Scheduling > Modifica la tasa de aprendizaje.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1098 > Gradient Clipping > Limita gradientes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1099 > Mixed Precision Training > Combina precisiones numéricas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1100 > Data Augmentation > Genera variaciones de ejemplos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1101 > Mixup > Combina ejemplos y etiquetas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1102 > CutMix > Mezcla regiones de imágenes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1103 > Adversarial Training > Entrena con perturbaciones adversarias.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1104 > FGSM > Genera perturbaciones con el signo del gradiente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1105 > Projected Gradient Descent Attack > Genera ejemplos adversariales mediante pasos iterativos de gradiente proyectados dentro de un límite de perturbación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1106 > Model Calibration > Alinea probabilidades con frecuencias.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1107 > Platt Scaling > Calibra mediante regresión logística.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1108 > Isotonic Calibration > Calibra con función monótona.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1109 > Confusion Matrix > Resume aciertos y errores.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1110 > ROC Analysis > Evalúa sensibilidad frente a falsos positivos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1111 > Precision-Recall Analysis > Evalúa precisión y exhaustividad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1112 > Brier Score > Mide error de probabilidades.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1113 > SHAP > Atribuye predicciones a variables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1114 > LIME > Aproxima localmente un modelo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1115 > Permutation Importance > Mide pérdida al permutar variables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1116 > Partial Dependence > Muestra efecto promedio de variables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1117 > Counterfactual Explanation > Busca cambios que alteran una predicción.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1118 > Model Card > Documenta propósito, métricas y límites.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1119 > Datasheet for Datasets > Documenta origen y limitaciones de datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1120 > Experiment Tracking > Registra parámetros y métricas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1121 > Model Registry > Gestiona versiones de modelos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1122 > Data Drift Detection > Detecta cambios de distribución.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1123 > Concept Drift Detection > Detecta cambios en la relación entrada-objetivo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1124 > Shadow Deployment > Ejecuta una versión en paralelo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1125 > Canary Deployment > Expone gradualmente una versión.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1126 > Blue-Green Deployment > Alterna dos entornos completos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1127 > Feature Flags > Activa funcionalidad selectivamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1128 > A/B Testing > Compara variantes aleatoriamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1129 > Multi-Armed Bandit > Asigna tráfico adaptativamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1130 > Unit Testing > Verifica componentes pequeños.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1131 > Integration Testing > Verifica interacción entre componentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1132 > System Testing > Evalúa el sistema completo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1133 > Acceptance Testing > Comprueba criterios del usuario.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1134 > Regression Testing > Detecta roturas por cambios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1135 > Smoke Testing > Comprueba funciones críticas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1136 > End-to-End Testing > Simula flujos completos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1137 > Contract Testing > Verifica acuerdos entre servicios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1138 > Property-Based Testing > Genera casos para comprobar invariantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1139 > Fuzz Testing > Introduce entradas mutadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1140 > Mutation Testing > Modifica código para medir potencia de pruebas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1141 > Differential Testing > Compara implementaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1142 > Metamorphic Testing > Comprueba relaciones entre ejecuciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1143 > Snapshot Testing > Compara salidas estructuradas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1144 > Performance Testing > Mide tiempo y recursos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1145 > Load Testing > Evalúa carga esperada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1146 > Stress Testing > Busca límites de capacidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1147 > Soak Testing > Mantiene carga prolongada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1148 > Chaos Testing > Introduce fallos deliberados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1149 > Static Analysis > Inspecciona sin ejecutar.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1150 > Dynamic Analysis > Observa durante ejecución.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1151 > Symbolic Execution > Explora caminos con valores simbólicos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1152 > Concolic Testing > Combina ejecución concreta y simbólica.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1153 > Model Checking > Explora estados formalmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1154 > Theorem Proving > Demuestra propiedades lógicas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1155 > Abstract Interpretation > Aproxima comportamientos posibles.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1156 > Formal Specification > Describe requisitos matemáticamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1157 > Design by Contract > Define precondiciones e invariantes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1158 > Dependent Types > Expresa propiedades en tipos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1159 > Code Review > Inspecciona cambios por pares.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1160 > Architecture Decision Record > Documenta decisiones arquitectónicas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1161 > Domain-Driven Design > Modela software alrededor del dominio.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1162 > Event Storming > Descubre procesos mediante eventos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1163 > Bounded Context > Delimita modelos consistentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1164 > Hexagonal Architecture > Aísla dominio con puertos y adaptadores.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1165 > Clean Architecture > Separa negocio de detalles externos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1166 > Microservices Architecture > Divide en servicios independientes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1167 > Modular Monolith > Mantiene un despliegue con módulos aislados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1168 > Event-Driven Architecture > Coordina mediante eventos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1169 > Serverless Architecture > Ejecuta funciones gestionadas bajo demanda.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1170 > Layered Architecture > Organiza responsabilidades por capas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1171 > Pipe-and-Filter > Procesa datos en etapas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1172 > Repository Pattern > Aísla persistencia.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1173 > Dependency Injection > Proporciona dependencias externamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1174 > Strategy Pattern > Encapsula algoritmos intercambiables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1175 > Observer Pattern > Notifica cambios a suscriptores.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1176 > Factory Method > Delegar creación de objetos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1177 > Builder Pattern > Construye objetos paso a paso.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1178 > Adapter Pattern > Convierte interfaces.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1179 > Facade Pattern > Simplifica subsistemas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1180 > Decorator Pattern > Añade comportamiento envolviendo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1181 > Command Pattern > Encapsula peticiones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1182 > State Pattern > Cambia comportamiento según estado.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1183 > Zero Trust Architecture > Verifica cada acceso.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1184 > Least Privilege > Concede permisos mínimos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1185 > Defense in Depth > Superpone controles independientes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1186 > Secure by Design > Integra seguridad desde el diseño.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1187 > Threat Modeling > Identifica activos, amenazas y mitigaciones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1188 > STRIDE > Clasifica seis tipos de amenaza.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1189 > PASTA > Modela amenazas centradas en riesgo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1190 > Attack Trees > Descompone objetivos ofensivos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1191 > Attack Graphs > Representa rutas de explotación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1192 > Kill Chain Analysis > Divide un ataque en etapas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1193 > MITRE ATT&CK Mapping > Relaciona comportamiento adversario con técnicas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1194 > CVSS > Puntúa severidad técnica.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1195 > Security Misuse Cases > Describe usos maliciosos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1196 > SAST > Analiza código sin ejecutarlo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1197 > DAST > Prueba aplicaciones en ejecución.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1198 > IAST > Combina instrumentación y prueba dinámica.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1199 > Software Composition Analysis > Analiza dependencias y vulnerabilidades.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1200 > SBOM > Inventaría componentes de software.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1201 > Reproducible Builds > Produce artefactos idénticos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1202 > Code Signing > Verifica origen e integridad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1203 > Secrets Scanning > Detecta credenciales expuestas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1204 > Container Scanning > Busca vulnerabilidades en imágenes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1205 > Penetration Testing > Simula ataques autorizados.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1206 > Red Teaming > Emula adversarios.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1207 > Purple Teaming > Coordina ataque y defensa.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1208 > Tabletop Exercise > Simula decisiones de incidente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1209 > Bug Bounty > Incentiva reportes externos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1210 > Network Segmentation > Divide redes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1211 > Microsegmentation > Aplica controles granulares.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1212 > Sandboxing > Ejecuta código restringidamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1213 > Application Allowlisting > Permite solo software autorizado.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1214 > Role-Based Access Control > Asigna permisos por rol.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1215 > Attribute-Based Access Control > Decide acceso por atributos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1216 > Multi-Factor Authentication > Combina factores de identidad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1217 > Passwordless Authentication > Autentica sin contraseña memorizada.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1218 > PKI > Gestiona certificados y confianza.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1219 > Mutual TLS > Autentica ambos extremos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1220 > OAuth 2.0 > Delegar autorización con tokens.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1221 > OpenID Connect > Añade identidad sobre OAuth.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1222 > Kerberos > Autentica mediante tickets.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1223 > FIDO2 > Usa criptografía resistente a phishing.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1224 > WebAuthn > Permite autenticación fuerte web.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1225 > Hardware Security Module > Protege claves en hardware.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1226 > Trusted Platform Module > Almacena claves y medidas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1227 > Secure Boot > Verifica firmas al arrancar.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1228 > Remote Attestation > Demuestra estado medido.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1229 > Full-Disk Encryption > Cifra un dispositivo completo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1230 > Envelope Encryption > Protege claves de datos con clave maestra.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1231 > Key Rotation > Sustituye claves periódicamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1232 > Shamir Secret Sharing > Divide secretos con umbral.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1233 > Hashing > Resume datos unidireccionalmente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1234 > Authenticated Encryption > Cifra y autentica simultáneamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1235 > Digital Signature > Prueba autenticidad e integridad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1236 > Forward Secrecy > Protege sesiones pasadas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1237 > Network Intrusion Detection > Detecta actividad sospechosa en red.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1238 > Host Intrusion Detection > Detecta cambios sospechosos en hosts.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1239 > SIEM > Correlaciona eventos de seguridad.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1240 > SOAR > Automatiza respuesta a incidentes.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1241 > EDR > Monitoriza y contiene endpoints.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1242 > XDR > Correlaciona telemetría de varias capas.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1243 > UEBA > Detecta desviaciones de comportamiento.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1244 > Deception Technology > Introduce señuelos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1245 > Honeypot > Expone un sistema trampa.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1246 > Honeytoken > Usa datos falsos que alertan.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1247 > YARA Rules > Identifica malware por patrones.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1248 > Sigma Rules > Describe detecciones portables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1249 > Memory Forensics > Analiza memoria volátil.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1250 > Disk Forensics > Analiza almacenamiento.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1251 > Timeline Analysis > Reconstruye eventos cronológicamente.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1252 > Malware Static Analysis > Inspecciona malware sin ejecutarlo.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1253 > Malware Dynamic Analysis > Observa malware ejecutándose.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1254 > Reverse Engineering > Reconstruye funcionamiento desde artefactos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1255 > Taint Analysis > Rastrea datos no confiables.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1256 > Control-Flow Integrity > Restringe destinos de ejecución.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1257 > ASLR > Aleatoriza ubicaciones de memoria.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1258 > Data Execution Prevention > Impide ejecutar regiones de datos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1259 > Stack Canaries > Detecta sobrescritura de pila.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1260 > Immutable Infrastructure > Reemplaza sistemas en lugar de modificarlos.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1261 > Backup 3-2-1 > Mantiene tres copias en dos soportes y una externa.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1262 > Immutable Backup > Impide modificar copias.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1263 > Disaster Recovery Drill > Prueba restauración y recuperación.
+TÉCNICA, COMPUTACIÓN, SOFTWARE E IA, ALGORITMOS, ARQUITECTURA Y SEGURIDAD > 1264 > Business Continuity Planning > Mantiene funciones críticas.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1265 > Espectroscopía de absorción aplicado a física experimental para diagnóstico > Adapta Espectroscopía de absorción a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1266 > Espectroscopía de emisión aplicado a física experimental para diagnóstico > Adapta Espectroscopía de emisión a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1267 > Espectroscopía UV-Visible aplicado a física experimental para diagnóstico > Adapta Espectroscopía UV-Visible a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1268 > Espectroscopía infrarroja aplicado a física experimental para diagnóstico > Adapta Espectroscopía infrarroja a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1269 > FTIR aplicado a física experimental para diagnóstico > Adapta FTIR a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1270 > Espectroscopía Raman aplicado a física experimental para diagnóstico > Adapta Espectroscopía Raman a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1271 > Raman confocal aplicado a física experimental para diagnóstico > Adapta Raman confocal a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1272 > Espectroscopía de fluorescencia aplicado a física experimental para diagnóstico > Adapta Espectroscopía de fluorescencia a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1273 > Fluorescencia resuelta en tiempo aplicado a física experimental para diagnóstico > Adapta Fluorescencia resuelta en tiempo a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1274 > FRET aplicado a física experimental para diagnóstico > Adapta FRET a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1275 > XPS aplicado a física experimental para diagnóstico > Adapta XPS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1276 > UPS aplicado a física experimental para diagnóstico > Adapta UPS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1277 > AES aplicado a física experimental para diagnóstico > Adapta AES a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1278 > EELS aplicado a física experimental para diagnóstico > Adapta EELS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1279 > NMR aplicado a física experimental para diagnóstico > Adapta NMR a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1280 > NMR de estado sólido aplicado a física experimental para diagnóstico > Adapta NMR de estado sólido a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1281 > EPR aplicado a física experimental para diagnóstico > Adapta EPR a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1282 > Mössbauer Spectroscopy aplicado a física experimental para diagnóstico > Adapta Mössbauer Spectroscopy a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1283 > Espectrometría de masas aplicado a física experimental para diagnóstico > Adapta Espectrometría de masas a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1284 > MALDI-TOF aplicado a física experimental para diagnóstico > Adapta MALDI-TOF a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1285 > ICP-MS aplicado a física experimental para diagnóstico > Adapta ICP-MS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1286 > SIMS aplicado a física experimental para diagnóstico > Adapta SIMS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1287 > Difracción de rayos X aplicado a física experimental para diagnóstico > Adapta Difracción de rayos X a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1288 > XRD de polvo aplicado a física experimental para diagnóstico > Adapta XRD de polvo a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1289 > Difracción de monocristal aplicado a física experimental para diagnóstico > Adapta Difracción de monocristal a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1290 > SAXS aplicado a física experimental para diagnóstico > Adapta SAXS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1291 > WAXS aplicado a física experimental para diagnóstico > Adapta WAXS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1292 > Reflectometría de rayos X aplicado a física experimental para diagnóstico > Adapta Reflectometría de rayos X a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1293 > Tomografía de rayos X aplicado a física experimental para diagnóstico > Adapta Tomografía de rayos X a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1294 > Micro-CT aplicado a física experimental para diagnóstico > Adapta Micro-CT a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1295 > Difracción de neutrones aplicado a física experimental para diagnóstico > Adapta Difracción de neutrones a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1296 > Reflectometría de neutrones aplicado a física experimental para diagnóstico > Adapta Reflectometría de neutrones a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1297 > SANS aplicado a física experimental para diagnóstico > Adapta SANS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1298 > Difracción de electrones aplicado a física experimental para diagnóstico > Adapta Difracción de electrones a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1299 > LEED aplicado a física experimental para diagnóstico > Adapta LEED a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1300 > RHEED aplicado a física experimental para diagnóstico > Adapta RHEED a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1301 > Microscopía de campo claro aplicado a física experimental para diagnóstico > Adapta Microscopía de campo claro a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1302 > Contraste de fases aplicado a física experimental para diagnóstico > Adapta Contraste de fases a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1303 > DIC aplicado a física experimental para diagnóstico > Adapta DIC a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1304 > Microscopía de fluorescencia aplicado a física experimental para diagnóstico > Adapta Microscopía de fluorescencia a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1305 > Microscopía confocal aplicado a física experimental para diagnóstico > Adapta Microscopía confocal a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1306 > Microscopía multiphoton aplicado a física experimental para diagnóstico > Adapta Microscopía multiphoton a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1307 > STED aplicado a física experimental para diagnóstico > Adapta STED a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1308 > PALM aplicado a física experimental para diagnóstico > Adapta PALM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1309 > STORM aplicado a física experimental para diagnóstico > Adapta STORM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1310 > SEM aplicado a física experimental para diagnóstico > Adapta SEM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1311 > TEM aplicado a física experimental para diagnóstico > Adapta TEM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1312 > STEM aplicado a física experimental para diagnóstico > Adapta STEM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1313 > Cryo-EM aplicado a física experimental para diagnóstico > Adapta Cryo-EM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1314 > Cryo-electron tomography aplicado a física experimental para diagnóstico > Adapta Cryo-electron tomography a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1315 > AFM aplicado a física experimental para diagnóstico > Adapta AFM a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1316 > AFM de contacto aplicado a física experimental para diagnóstico > Adapta AFM de contacto a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1317 > AFM tapping aplicado a física experimental para diagnóstico > Adapta AFM tapping a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1318 > Kelvin Probe Force Microscopy aplicado a física experimental para diagnóstico > Adapta Kelvin Probe Force Microscopy a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1319 > Magnetic Force Microscopy aplicado a física experimental para diagnóstico > Adapta Magnetic Force Microscopy a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1320 > Scanning Tunneling Microscopy aplicado a física experimental para diagnóstico > Adapta Scanning Tunneling Microscopy a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1321 > Profilometría de contacto aplicado a física experimental para diagnóstico > Adapta Profilometría de contacto a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1322 > Profilometría óptica aplicado a física experimental para diagnóstico > Adapta Profilometría óptica a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1323 > Interferometría de luz blanca aplicado a física experimental para diagnóstico > Adapta Interferometría de luz blanca a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1324 > Elipsometría aplicado a física experimental para diagnóstico > Adapta Elipsometría a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1325 > Refractometría aplicado a física experimental para diagnóstico > Adapta Refractometría a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1326 > Polarimetría aplicado a física experimental para diagnóstico > Adapta Polarimetría a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1327 > Interferometría Michelson aplicado a física experimental para diagnóstico > Adapta Interferometría Michelson a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1328 > Interferometría Mach-Zehnder aplicado a física experimental para diagnóstico > Adapta Interferometría Mach-Zehnder a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1329 > Interferometría Fabry-Pérot aplicado a física experimental para diagnóstico > Adapta Interferometría Fabry-Pérot a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1330 > Holografía digital aplicado a física experimental para diagnóstico > Adapta Holografía digital a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1331 > Digital Image Correlation aplicado a física experimental para diagnóstico > Adapta Digital Image Correlation a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1332 > Particle Image Velocimetry aplicado a física experimental para diagnóstico > Adapta Particle Image Velocimetry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1333 > Laser Doppler Velocimetry aplicado a física experimental para diagnóstico > Adapta Laser Doppler Velocimetry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1334 > Hot-Wire Anemometry aplicado a física experimental para diagnóstico > Adapta Hot-Wire Anemometry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1335 > Pitot Tube Measurement aplicado a física experimental para diagnóstico > Adapta Pitot Tube Measurement a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1336 > Schlieren Imaging aplicado a física experimental para diagnóstico > Adapta Schlieren Imaging a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1337 > Shadowgraphy aplicado a física experimental para diagnóstico > Adapta Shadowgraphy a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1338 > Planar Laser-Induced Fluorescence aplicado a física experimental para diagnóstico > Adapta Planar Laser-Induced Fluorescence a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1339 > LIBS aplicado a física experimental para diagnóstico > Adapta LIBS a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1340 > Laser Flash Analysis aplicado a física experimental para diagnóstico > Adapta Laser Flash Analysis a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1341 > Differential Scanning Calorimetry aplicado a física experimental para diagnóstico > Adapta Differential Scanning Calorimetry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1342 > Thermogravimetric Analysis aplicado a física experimental para diagnóstico > Adapta Thermogravimetric Analysis a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1343 > Dynamic Mechanical Analysis aplicado a física experimental para diagnóstico > Adapta Dynamic Mechanical Analysis a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1344 > Thermomechanical Analysis aplicado a física experimental para diagnóstico > Adapta Thermomechanical Analysis a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1345 > Dilatometry aplicado a física experimental para diagnóstico > Adapta Dilatometry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1346 > Isothermal Titration Calorimetry aplicado a física experimental para diagnóstico > Adapta Isothermal Titration Calorimetry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1347 > Bomb Calorimetry aplicado a física experimental para diagnóstico > Adapta Bomb Calorimetry a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1348 > Transient Hot Wire aplicado a física experimental para diagnóstico > Adapta Transient Hot Wire a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1349 > 3-Omega Method aplicado a física experimental para diagnóstico > Adapta 3-Omega Method a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, FÍSICA EXPERIMENTAL, MEDICIÓN Y CARACTERIZACIÓN > 1350 > Guarded Hot Plate aplicado a física experimental para diagnóstico > Adapta Guarded Hot Plate a medición, instrumentación y análisis de señales para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.

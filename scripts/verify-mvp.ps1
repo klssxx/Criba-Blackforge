@@ -5,24 +5,16 @@ $ErrorActionPreference = "Stop"
 $ROOT = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
 Push-Location $ROOT
 
-if ($env:CRIBA_PYTHON) {
-    $PY = $env:CRIBA_PYTHON
-    if (-not (Test-Path -LiteralPath $PY -PathType Leaf)) {
-        throw "CRIBA_PYTHON does not point to an executable: $PY"
-    }
-}
-else {
-    $PY = Join-Path $ROOT '.venv\Scripts\python.exe'
-    if (-not (Test-Path -LiteralPath $PY -PathType Leaf)) {
-        throw 'Project .venv interpreter not found. Run "uv sync --all-extras --locked" or set CRIBA_PYTHON to Python 3.10+.'
-    }
+$UV = (Get-Command uv -CommandType Application -ErrorAction SilentlyContinue).Source
+if (-not $UV) {
+    throw 'uv not found. Install uv 0.11.28 and run "uv sync --all-extras --locked".'
 }
 
 Write-Host "=== CRIBA MVP GATE ===" -ForegroundColor Cyan
 
 # 1) Generate headless golden master (no PySide6) if missing or stale
 Write-Host "[16] Generando artefacto headless versionado..." -ForegroundColor Yellow
-& $PY -c @"
+& $UV run --locked --all-extras python -c @"
 import sys, json, os
 sys.path.insert(0, r'$ROOT\src')
 import criba.engine as engine
@@ -38,7 +30,7 @@ print('golden master + sample written')
 
 # 2) Run the verification suite (gate)
 Write-Host "[13-16 + causal] Ejecutando pruebas..." -ForegroundColor Yellow
-& $PY -m pytest `
+& $UV run --locked --all-extras pytest `
   tests/test_packet_ideas_invariant.py `
   tests/test_genome_similarity_unknown.py `
   tests/test_packet_v1_regression.py `
@@ -53,7 +45,7 @@ if ($LASTEXITCODE -ne 0) {
 
 # 3) Full relevant suite
 Write-Host "[full] Suite completa relevante..." -ForegroundColor Yellow
-& $PY -m pytest tests/ -q
+& $UV run --locked --all-extras pytest tests/ -q
 if ($LASTEXITCODE -ne 0) {
     Write-Host "Suite completa con fallos." -ForegroundColor Red
     Pop-Location

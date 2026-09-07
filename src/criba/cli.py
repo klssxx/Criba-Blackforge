@@ -168,7 +168,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     lottery_parser.add_argument("--query", help="Consulta para modo asociativo")
     lottery_parser.add_argument("--rounds", type=int, default=20, help="Número de rondas")
     lottery_parser.add_argument("--batch-size", type=int, default=20, help="Métodos por ronda")
-    lottery_parser.add_argument("--mode", choices=["optimized", "alternating", "associative", "pure"],
+    lottery_parser.add_argument("--mode", choices=["optimized", "alternating", "associative", "pure", "stratified"],
                                default="alternating", help="Modo de lotería")
     lottery_parser.add_argument("--seed", type=int, default=42, help="Semilla aleatoria")
     lottery_parser.add_argument("--methods-file", default=None,
@@ -185,6 +185,25 @@ def main(argv: Sequence[str] | None = None) -> int:
     sub.add_parser("mcp")
     sub.add_parser("gui")
     sub.add_parser("blackforge-gui", help="Lanza la aplicación de escritorio nativa BLACKFORGE")
+    inventar_parser = sub.add_parser(
+        "inventar",
+        help="Loop completo: lotería estratificada -> juez -> prior-art -> ficha",
+    )
+    inventar_parser.add_argument("query", help="Problema o dominio de invención")
+    inventar_parser.add_argument(
+        "--seed", type=int, default=None,
+        help="Semilla explícita (reproduce la exploración). Sin ella se genera una nueva con secrets.randbits(64).",
+    )
+    inventar_parser.add_argument("--rounds", type=int, default=2, help="Rondas de lotería")
+    inventar_parser.add_argument("--batch-size", type=int, default=8, help="Métodos por ronda")
+    inventar_parser.add_argument("--top", type=int, default=3, help="Ideas a evaluar con prior-art")
+    inventar_parser.add_argument(
+        "--offline", action="store_true", help="Sin red: juez offline y veredictos UNRESOLVED honestos"
+    )
+    inventar_parser.add_argument(
+        "--dossier", action="store_true",
+        help="Prepara dossiers con prueba discriminante (estado SUPRA pendiente, nunca PASS)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -261,6 +280,39 @@ def main(argv: Sequence[str] | None = None) -> int:
             )
             return 0
 
+        if args.command == "inventar":
+            from .inventar import append_ledger, invent, print_sheet
+
+            from .intelligence.refresh import default_store
+
+            sheet = invent(
+                args.query,
+                seed=args.seed,
+                rounds=args.rounds,
+                batch_size=args.batch_size,
+                top=args.top,
+                offline=True if args.offline else None,
+                store=default_store(),
+            )
+            if args.dossier:
+                from .supra_dossier import guardar_dossier, preparar_dossier
+
+                dossiers = []
+                for entry in sheet["entries"]:
+                    if entry.get("estado_interpretacion") != "PROPUESTA":
+                        continue
+                    dossier = preparar_dossier(
+                        entry, sheet["query"],
+                        ficha_bloqueo=sheet.get("ficha_bloqueo"))
+                    path = guardar_dossier(dossier)
+                    dossiers.append(dossier["dossier_id"])
+                    print(f"Dossier SUPRA pendiente: {dossier['dossier_id']} -> {path}")
+                sheet["dossiers"] = dossiers
+            print_sheet(sheet)
+            ledger = append_ledger(sheet)
+            print(f"Ledger: {ledger}")
+            return 0
+
         if args.command == "gui":
             from .gui import run
 
@@ -268,13 +320,10 @@ def main(argv: Sequence[str] | None = None) -> int:
             return result if isinstance(result, int) else 0
 
         if args.command in {"blackforge-gui", "blackforge_gui"}:
-            from PySide6.QtWidgets import QApplication
-            from .ui.blackforge_window import BlackforgeWindow
+            from .blackforge_gui import run as run_blackforge_gui
 
-            app = QApplication.instance() or QApplication(sys.argv)
-            win = BlackforgeWindow()
-            win.show()
-            return app.exec()
+            result = run_blackforge_gui()
+            return result if isinstance(result, int) else 0
     except (ValueError, OSError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
         return 2

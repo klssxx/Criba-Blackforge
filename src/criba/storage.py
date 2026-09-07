@@ -202,3 +202,26 @@ class Storage:
             return combos
         finally:
             con.close()
+
+    def load_combination_first_seen(self, catalog_fingerprint: str) -> dict[tuple[str, str], str]:
+        """Primer uso registrado por combinación (fatiga por decaimiento).
+
+        La PK (fingerprint, combo_key) impide contar usos sin migración; el
+        cooldown honesto usa first_seen_at: uso reciente = penalización
+        fuerte, uso antiguo = débil, nunca prohibición permanente.
+        """
+        con = self.connect()
+        try:
+            rows = con.execute(
+                "SELECT combo_key, first_seen_at FROM lottery_used_combinations "
+                "WHERE catalog_fingerprint=?",
+                (catalog_fingerprint,),
+            ).fetchall()
+            out: dict[tuple[str, str], str] = {}
+            for r in rows:
+                parts = str(r[0]).split("::")
+                if len(parts) == 2:
+                    out[(parts[0], parts[1])] = str(r[1])
+            return out
+        finally:
+            con.close()

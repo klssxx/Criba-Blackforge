@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "active_profile_id": "857743d3-7ca4-487f-aab5-7f6b60e2a236",
+  "profiles": [
+    {
+      "id": "857743d3-7ca4-487f-aab5-7f6b60e2a236",
+      "name": "Ollama para CRIBA",
+      "backend": "ollama",
+      "endpoint": "http://127.0.0.1:11434",
+      "model": "qwen3:4b",
+      "gguf_path": "",
+      "server_path": "",
+      "auto_start": true,
+      "reasoning": "balanced",
+      "context_size": 8192,
+      "gpu_layers": -1,
+      "temperature": 0.45,
+      "max_output_tokens": 2400
+    }
+  ]
+}

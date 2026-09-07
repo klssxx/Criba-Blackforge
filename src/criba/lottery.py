@@ -15,7 +15,12 @@ from typing import Any
 from .constants import DATA_ROOT
 from .storage import Storage
 
-VALID_LOTTERY_MODES = {"optimized", "associative", "pure", "alternating"}
+VALID_LOTTERY_MODES = {"optimized", "associative", "pure", "alternating", "stratified"}
+
+# Clases de pensamiento del catálogo estructurado (sorteo equitativo 25% cada una).
+# `dominio` NO es clase de sorteo: es el banco de acoplamiento (segundo dado opcional).
+DRAW_CLASSES = ("perspectiva", "generacion", "ruptura", "escape")
+DOMAIN_CLASS = "dominio"
 
 
 def _console_safe(value: object) -> str:
@@ -192,6 +197,70 @@ class LotteryEngine:
             return available
         return self.rng.sample(available, size)
 
+    def select_stratified_batch(self, size: int = 20) -> list[dict[str, Any]]:
+        """Sortea por clases de pensamiento: round-robin equitativo entre las
+        clases ``DRAW_CLASSES`` y técnica uniforme dentro de cada clase.
+
+        Evita que los catálogos grandes (lentes, metodologías) aplasten por
+        tamaño a los curados. Si el catálogo no tiene ``thinking_class``
+        (p. ej. el catálogo propio de BLACKFORGE), degrada a lotería pura.
+        """
+        if size < 1:
+            raise ValueError("El tamaño del lote debe ser positivo.")
+        available = self.get_available_methods()
+        by_class: dict[str, list[dict[str, Any]]] = {}
+        for method in available:
+            by_class.setdefault(str(method.get("thinking_class") or ""), []).append(method)
+        draw_classes = tuple(c for c in DRAW_CLASSES if by_class.get(c))
+        if len(draw_classes) < 2:
+            return self.select_random_batch(size)
+
+        selected: list[dict[str, Any]] = []
+        selected_ids: set[str] = set()
+
+        def _take(class_pool: list[dict[str, Any]]) -> dict[str, Any] | None:
+            while class_pool:
+                chosen = self.rng.choice(class_pool)
+                class_pool.remove(chosen)
+                if str(chosen["id"]) not in selected_ids:
+                    return chosen
+            return None
+
+        while len(selected) < size:
+            active = [c for c in draw_classes if by_class[c]]
+            if not active:
+                break
+            progressed = False
+            for class_name in active:
+                if len(selected) >= size:
+                    break
+                chosen = _take(by_class[class_name])
+                if chosen is not None:
+                    selected.append(chosen)
+                    selected_ids.add(str(chosen["id"]))
+                    progressed = True
+            if not progressed:
+                break
+
+        if len(selected) < size:
+            remaining = [m for m in available if str(m["id"]) not in selected_ids]
+            if remaining:
+                selected.extend(
+                    self.rng.sample(remaining, min(size - len(selected), len(remaining)))
+                )
+        return selected[:size]
+
+    def draw_domain(self) -> dict[str, Any] | None:
+        """Sortea una metodología del banco de dominio (acoplamiento opcional).
+
+        El banco (metodologías sectoriales, taxonomías de investigación) multiplica
+        combinaciones («aplica la técnica VÍA X») sin competir en el sorteo de clases.
+        """
+        pool = [m for m in self.get_available_methods() if m.get("thinking_class") == DOMAIN_CLASS]
+        if not pool:
+            pool = [m for m in self.methods if m.get("thinking_class") == DOMAIN_CLASS]
+        return self.rng.choice(pool) if pool else None
+
     def select_associative_batch(
         self,
         size: int = 20,
@@ -301,6 +370,10 @@ class LotteryEngine:
             idea = self._create_idea(m1, m2, mode)
             ideas.append(idea)
             self.all_ideas.append(idea)
+
+            # Trazabilidad de clases (catálogo estructurado)
+            idea["class1"] = str(m1.get("thinking_class") or "")
+            idea["class2"] = str(m2.get("thinking_class") or "")
 
         if hasattr(self, "storage") and self.storage is not None and new_combos:
             self.storage.save_lottery_combinations(
@@ -427,6 +500,9 @@ class LotteryEngine:
         if mode == "optimized":
             batch = self.select_optimized_batch(batch_size)
             selected_mode = "optimized"
+        elif mode == "stratified":
+            batch = self.select_stratified_batch(batch_size)
+            selected_mode = "stratified"
         elif mode == "associative" or (mode == "alternating" and self.round_number % 2 == 1):
             batch = self.select_associative_batch(batch_size, query=query)
             selected_mode = "associative"
@@ -452,6 +528,7 @@ class LotteryEngine:
             'good': sum(1 for i in ideas if i['quality'] == 'BUENA'),
             'trash': sum(1 for i in ideas if i['quality'] == 'BASURA'),
             'families': sorted({str(m['family']) for m in batch}),
+            'classes': sorted({str(m.get('thinking_class') or '') for m in batch} - {''}),
             'method_ids': [str(m['id']) for m in batch],
         }
 
@@ -491,6 +568,7 @@ class LotteryEngine:
             "optimized": "OPT",
             "associative": "ASC",
             "pure": "RND",
+            "stratified": "STR",
         }[stats['mode']]
         print(f"Ronda {stats['round']:3d} {mode_label} {stats['mode']:12s} | "
               f"Ideas: {stats['ideas_generated']:4d} | "

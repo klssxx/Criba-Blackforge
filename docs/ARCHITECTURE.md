@@ -373,10 +373,33 @@ La alternativa C está aprobada y no debe volver a discutirse:
 - `len(families) >= 4` → `pipeline_action = "PROTOTIPAR"`, `recommended_status = "AMPLIAR PRUEBA"`
 - `len(families) < 4` → `pipeline_action = "DIVERGIR"`, `recommended_status = "AMPLIAR PRUEBA"`
 
+## El loop `inventar` (v0.3.0)
+
+`criba inventar "<problema>" --seed N` encadena las tres capas del producto:
+
+1. **Lotería estratificada** — sorteo equitativo por clases de pensamiento
+   (`perspectiva/generacion/ruptura/escape`, 25% cada una) con banco de dominio
+   como segundo dado opcional (`LotteryEngine.select_stratified_batch`,
+   `draw_domain`). Divergencia determinista y reproducible.
+2. **Juez** — `LocalInterprete` (pool free Nous con `NOUS_API_KEY`; sin clave,
+   scoring semántico offline). Interpreta, nunca genera.
+3. **Prior-art honesto** — lattice determinista → par gratuito (Wikipedia +
+   Google Patents; extras tras `CRIBA_IIE_EXTRA_SOURCES=1`) → skeptic →
+   verdict → mutation loop fail-closed. Veredictos exclusivamente
+   `UNRESOLVED / PARTIAL_PRIOR_ART / SURVIVED_SEARCH`; `PROVEN_NEW` está
+   prohibido por diseño (ADR P10-T09): la ausencia de evidencia no es novedad.
+
+Salida: ficha legible + registro append-only en
+`%LOCALAPPDATA%\CRIBA-Blackforge\invention_ledger\verdicts.jsonl`.
+Implementación: `src/criba/inventar.py`; fuentes IIE supervivientes:
+`intelligence/{contracts,enums,registry,prior_art,sources,storage,retrieval}`.
+
 ## Referencias
 
 - `docs/INTEGRATION.md`: Integración con modelos
 - `docs/STATE_MATRIX_CRIBA.md`: Matriz de estados visuales
 - `docs/STYLE_GUIDE_CRIBA.md`: Tokens y estilo visual CRIBA
 - `docs/STYLE_GUIDE_BLACKFORGE.md`: Tokens y estilo visual BLACKFORGE
-- `docs/FINAL_REPORT.md`: Estado verificable actual
+- `docs/METHODS_INTEGRATION.md`: Catálogo y clases de pensamiento
+- `docs/architecture/adr/`: Decisiones de arquitectura (ADRs)
+- `docs/history/`: Documentos de ejecución congelados

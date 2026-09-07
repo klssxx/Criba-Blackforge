@@ -1,0 +1,285 @@
+LISTADO MAXIMO RENTABLE DE TECNICAS Y METODOLOGIAS
+CAMPO | NOMBRE | DESCRIPCION
+================================================================================
+
+1. CAMPO: Mejora Continua
+   NOMBRE: PDCA / Ciclo de Deming
+   DESCRIPCION: Planificar-Hacer-Verificar-Actuar; ciclo iterativo base de casi toda mejora continua.
+
+2. CAMPO: Mejora Continua
+   NOMBRE: Six Sigma
+   DESCRIPCION: Reduce variabilidad y defectos mediante control estadístico riguroso.
+
+3. CAMPO: Mejora Continua
+   NOMBRE: DMAIC
+   DESCRIPCION: Definir-Medir-Analizar-Mejorar-Controlar; núcleo operativo de Six Sigma.
+
+4. CAMPO: Mejora Continua
+   NOMBRE: DMADV / DFSS
+   DESCRIPCION: Diseño para Six Sigma; se usa al crear procesos o productos nuevos desde cero.
+
+5. CAMPO: Mejora Continua
+   NOMBRE: Kaizen
+   DESCRIPCION: Filosofía de cambios pequeños y constantes con participación de todo el equipo.
+
+6. CAMPO: Mejora Continua
+   NOMBRE: Kata
+   DESCRIPCION: Rutina de 4 pasos basada en PDCA para crear un hábito científico de mejora.
+
+7. CAMPO: Mejora Continua
+   NOMBRE: Lean
+   DESCRIPCION: Elimina desperdicios y optimiza el flujo de valor en procesos.
+
+8. CAMPO: Mejora Continua
+   NOMBRE: 5S
+   DESCRIPCION: Organiza el entorno físico de trabajo: clasificar, ordenar, limpiar, estandarizar, mantener.
+
+9. CAMPO: Mejora Continua
+   NOMBRE: 8D
+   DESCRIPCION: 8 disciplinas para identificar, corregir y prevenir problemas complejos.
+
+10. CAMPO: Mejora Continua
+   NOMBRE: Informe A3
+   DESCRIPCION: PDCA condensado en una sola hoja para forzar concisión y colaboración.
+
+11. CAMPO: Mejora Continua
+   NOMBRE: 5 Porqués
+   DESCRIPCION: Pregunta iterativa que revela la causa raíz de un problema.
+
+12. CAMPO: Mejora Continua
+   NOMBRE: Diagrama de Ishikawa
+   DESCRIPCION: Representa gráficamente causas potenciales de un efecto (espina de pescado).
+
+13. CAMPO: Mejora Continua
+   NOMBRE: TQM - Gestión de Calidad Total
+   DESCRIPCION: Enfoque integral que involucra a toda la organización en la mejora de calidad.
+
+14. CAMPO: Mejora Continua
+   NOMBRE: ISO 9001 / EFQM
+   DESCRIPCION: Marcos normativos que estructuran sistemas de gestión de calidad y mejora.
+
+15. CAMPO: Mejora Continua
+   NOMBRE: Benchmarking
+   DESCRIPCION: Compara procesos propios con referencias externas para detectar oportunidades.
+
+16. CAMPO: Mejora Continua
+   NOMBRE: Poka-yoke
+   DESCRIPCION: Mecanismos que evitan errores humanos en el proceso antes de que ocurran.
+
+17. CAMPO: Mejora Continua
+   NOMBRE: Kanban
+   DESCRIPCION: Visualiza el flujo de trabajo y limita el trabajo en curso para detectar cuellos de botella.
+
+18. CAMPO: Mejora Continua
+   NOMBRE: Retrospectivas ágiles
+   DESCRIPCION: Sesiones periódicas para analizar qué funcionó y qué mejorar en el ciclo.
+
+19. CAMPO: Mejora Continua
+   NOMBRE: Control Estadístico de Procesos (SPC)
+   DESCRIPCION: Usa gráficos de control para detectar variaciones fuera de rango.
+
+20. CAMPO: Mejora Continua
+   NOMBRE: OKR
+   DESCRIPCION: Alinea metas ambiciosas con resultados clave medibles trimestrales.
+
+21. CAMPO: Mejora Continua
+   NOMBRE: Gemba Walk
+   DESCRIPCION: Observación directa del lugar de trabajo real para identificar mejoras.
+
+22. CAMPO: Mejora Continua
+   NOMBRE: Value Stream Mapping
+   DESCRIPCION: Mapea el flujo de valor completo para identificar desperdicios y cuellos de botella.
+
+23. CAMPO: Mejora Continua
+   NOMBRE: QFD - Despliegue de Función de Calidad
+   DESCRIPCION: Traduce requisitos del cliente en especificaciones técnicas de diseño.
+
+24. CAMPO: Investigación Científica
+   NOMBRE: Método Científico
+   DESCRIPCION: Observación, hipótesis, experimentación, análisis y conclusión.
+
+25. CAMPO: Investigación Científica
+   NOMBRE: Investigación-Acción
+   DESCRIPCION: Ciclo de observar, intervenir y reflexionar sobre una práctica.
+
+26. CAMPO: Investigación Científica
+   NOMBRE: Investigación Experimental
+   DESCRIPCION: Manipula variables independientes en condiciones controladas.
+
+27. CAMPO: Investigación Científica
+   NOMBRE: Investigación Cuasi-experimental
+   DESCRIPCION: Similar a la experimental pero sin asignación aleatoria total.
+
+28. CAMPO: Investigación Científica
+   NOMBRE: Investigación Descriptiva
+   DESCRIPCION: Caracteriza fenómenos sin manipular variables.
+
+29. CAMPO: Investigación Científica
+   NOMBRE: Investigación Correlacional
+   DESCRIPCION: Mide relación estadística entre variables sin establecer causalidad.
+
+30. CAMPO: Investigación Científica
+   NOMBRE: Estudio Longitudinal
+   DESCRIPCION: Sigue el mismo fenómeno o sujetos a lo largo del tiempo.
+
+31. CAMPO: Investigación Científica
+   NOMBRE: Estudio Transversal
+   DESCRIPCION: Analiza una población en un único punto temporal.
+
+32. CAMPO: Investigación Científica
+   NOMBRE: Métodos Mixtos
+   DESCRIPCION: Combina técnicas cuantitativas y cualitativas en un mismo estudio.
+
+33. CAMPO: Investigación Científica
+   NOMBRE: Estudio de Caso
+   DESCRIPCION: Análisis exhaustivo de una unidad concreta (persona, organización, fenómeno).
+
+34. CAMPO: Investigación Científica
+   NOMBRE: Revisión Sistemática / Meta-análisis
+   DESCRIPCION: Sintetiza cuantitativamente resultados de múltiples estudios previos.
+
+35. CAMPO: Investigación Científica
+   NOMBRE: Investigación Etnográfica
+   DESCRIPCION: Estudio en profundidad de una cultura o grupo mediante observación participante.
+
+36. CAMPO: Investigación Científica
+   NOMBRE: Investigación Fenomenológica
+   DESCRIPCION: Explora la experiencia vivida de los sujetos respecto a un fenómeno.
+
+37. CAMPO: Física Experimental
+   NOMBRE: Método Científico Experimental
+   DESCRIPCION: Observación, hipótesis, experimento, contrastación y conclusión física.
+
+38. CAMPO: Física Experimental
+   NOMBRE: Reproducibilidad y Repetibilidad
+   DESCRIPCION: Un experimento debe poder repetirse con resultados consistentes.
+
+39. CAMPO: Física Experimental
+   NOMBRE: Diseño de Experimentos (DOE)
+   DESCRIPCION: Pruebas sistemáticas que aíslan variables para optimizar resultados.
+
+40. CAMPO: Física Experimental
+   NOMBRE: Tesis de Duhem-Quine
+   DESCRIPCION: Un experimento no refuta una hipótesis aislada, sino todo el sistema teórico.
+
+41. CAMPO: Física Experimental
+   NOMBRE: Análisis y Control de Errores
+   DESCRIPCION: Cuantifica errores sistemáticos y aleatorios para validar la exactitud del resultado.
+
+42. CAMPO: Física Experimental
+   NOMBRE: Método de Monte Carlo
+   DESCRIPCION: Usa muestreo aleatorio repetido para modelar sistemas complejos o inciertos.
+
+43. CAMPO: Física Experimental
+   NOMBRE: Calibración Instrumental
+   DESCRIPCION: Ajusta instrumentos frente a un patrón de referencia antes de medir.
+
+44. CAMPO: Física Experimental
+   NOMBRE: Inducción y Deducción
+   DESCRIPCION: La experimentación generaliza (induce); la teoría predice nuevos casos (deduce).
+
+45. CAMPO: Física Experimental
+   NOMBRE: Análisis Dimensional
+   DESCRIPCION: Verifica consistencia de ecuaciones físicas mediante unidades de medida.
+
+46. CAMPO: Física Experimental
+   NOMBRE: Método de Mínimos Cuadrados
+   DESCRIPCION: Ajusta un modelo a datos experimentales minimizando el error cuadrático.
+
+47. CAMPO: Computo e Informática
+   NOMBRE: TDD - Desarrollo Guiado por Pruebas
+   DESCRIPCION: Escribe pruebas antes del código para garantizar corrección desde el diseño.
+
+48. CAMPO: Computo e Informática
+   NOMBRE: CI/CD
+   DESCRIPCION: Integración y despliegue continuos que automatizan pruebas y entregas.
+
+49. CAMPO: Computo e Informática
+   NOMBRE: A/B Testing
+   DESCRIPCION: Compara dos variantes con usuarios reales para decidir cuál funciona mejor.
+
+50. CAMPO: Computo e Informática
+   NOMBRE: Ajuste de Hiperparámetros
+   DESCRIPCION: Búsqueda sistemática (grid, random, bayesiana) de la mejor configuración de un modelo.
+
+51. CAMPO: Computo e Informática
+   NOMBRE: Validación Cruzada
+   DESCRIPCION: Divide datos en particiones para evaluar la generalización de un modelo.
+
+52. CAMPO: Computo e Informática
+   NOMBRE: Estudio de Ablación
+   DESCRIPCION: Elimina componentes de un sistema para medir su contribución individual.
+
+53. CAMPO: Computo e Informática
+   NOMBRE: Profiling
+   DESCRIPCION: Mide tiempo y recursos consumidos por partes del código para optimizar.
+
+54. CAMPO: Computo e Informática
+   NOMBRE: Fuzzing
+   DESCRIPCION: Genera entradas aleatorias o malformadas para detectar fallos de seguridad.
+
+55. CAMPO: Computo e Informática
+   NOMBRE: Code Review / Pair Programming
+   DESCRIPCION: Revisión conjunta de código para detectar errores y compartir conocimiento.
+
+56. CAMPO: Computo e Informática
+   NOMBRE: MLOps
+   DESCRIPCION: Aplica prácticas DevOps al ciclo de vida completo de modelos de IA en producción.
+
+57. CAMPO: Computo e Informática
+   NOMBRE: Refactorización
+   DESCRIPCION: Mejora la estructura interna del código sin alterar su comportamiento externo.
+
+58. CAMPO: Computo e Informática
+   NOMBRE: Análisis Big O
+   DESCRIPCION: Evalúa la complejidad temporal y espacial de un algoritmo.
+
+59. CAMPO: Computo e Informática
+   NOMBRE: Programación por Contrato
+   DESCRIPCION: Define precondiciones y postcondiciones formales para funciones y módulos.
+
+60. CAMPO: Matemáticas
+   NOMBRE: Demostración Directa
+   DESCRIPCION: Prueba una proposición a partir de axiomas y pasos lógicos consecutivos.
+
+61. CAMPO: Matemáticas
+   NOMBRE: Demostración por Contradicción
+   DESCRIPCION: Asume lo contrario de la tesis y deriva un absurdo lógico.
+
+62. CAMPO: Matemáticas
+   NOMBRE: Demostración por Inducción
+   DESCRIPCION: Prueba un caso base y un paso inductivo para generalizar a todos los naturales.
+
+63. CAMPO: Matemáticas
+   NOMBRE: Demostración por Contrapositivo
+   DESCRIPCION: Prueba que la negación del consecuente implica la negación del antecedente.
+
+64. CAMPO: Matemáticas
+   NOMBRE: Demostración por Construcción
+   DESCRIPCION: Exhibe un objeto explícito que satisface la propiedad buscada.
+
+65. CAMPO: Matemáticas
+   NOMBRE: Método Axiomático
+   DESCRIPCION: Deriva toda una teoría a partir de un conjunto mínimo de axiomas consistentes.
+
+66. CAMPO: Matemáticas
+   NOMBRE: Heurísticas de Polya
+   DESCRIPCION: Entender el problema, idear plan, ejecutar y revisar; marco clásico de resolución.
+
+67. CAMPO: Matemáticas
+   NOMBRE: Análisis Numérico
+   DESCRIPCION: Métodos aproximados (iterativos, discretización) para resolver problemas no analíticos.
+
+68. CAMPO: Matemáticas
+   NOMBRE: Modelado Matemático
+   DESCRIPCION: Traduce fenómenos reales a ecuaciones o sistemas para predecir comportamiento.
+
+69. CAMPO: Matemáticas
+   NOMBRE: Optimización Combinatoria
+   DESCRIPCION: Busca la mejor solución entre un conjunto finito y discreto de posibilidades.
+
+70. CAMPO: Matemáticas
+   NOMBRE: Teoría de Grafos aplicada
+   DESCRIPCION: Modela relaciones y redes mediante nodos y aristas para resolver problemas estructurales.
+
+TOTAL DE TECNICAS ENUMERADAS: 70

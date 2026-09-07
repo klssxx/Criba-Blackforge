@@ -3,6 +3,7 @@
   "phase": "P10",
   "title": "Google Patents-backed PatentScout",
   "status": "VERIFIED",
+  "commits": ["d4c3a0759c9a273e3a2ef17792a42eea7d172d36"],
   "files_read": [
     "src/criba/intelligence/prior_art/scouts.py",
     "src/criba/intelligence/sources/protocol.py",

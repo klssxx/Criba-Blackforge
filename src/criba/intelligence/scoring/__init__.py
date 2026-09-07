@@ -1,1 +1,0 @@
-"""IIE scoring sector."""

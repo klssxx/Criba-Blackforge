@@ -2,7 +2,7 @@
 
 **The reproducible ideation engine.** Deterministic, auditable, local-first: the same seed always produces the same ideas — no paid APIs required to get useful output.
 
-CRIBA is a self-contained engine for combinatorial exploration, causal analysis and defensive cybersecurity ideation. It couples an immutable, versioned catalog of innovation and security methods with a repeatable, seed-based selector, a SQLite audit trail for every idea, and (optional) free-tier LLM expansion via Z.ai GLM and Nous `:free` models.
+CRIBA is a self-contained engine for combinatorial exploration, causal analysis and defensive cybersecurity ideation. It couples an immutable, versioned catalog of innovation and security methods with a repeatable, seed-based selector, a SQLite audit trail for every idea, and (optional) LLM interpretation through configurable cloud or local providers (OpenAI-compatible endpoints).
 
 > Read this in [Español](./README.es.md).
 
@@ -15,9 +15,9 @@ Most "AI ideation" tools are black boxes: prompt in, text out, no way to know wh
 - **Deterministic by default** — `--seed 42` yields byte-identical results on any machine.
 - **Every idea is audited** — SQLite trail per activation: methods used, scores, order, and the exact catalog version.
 - **Zero-friction local** — no API key, no network, no telemetry to run the core engine.
-- **Free cloud expansion** — optional interpretation of ideas with `GLM-5.3-flash` (Z.ai) and `poolside/laguna-s-2.1:free` (Nous Research), with a deterministic fallback when the network is unavailable.
+- **Optional model interpretation** — bring your own provider (local GGUF/Ollama or an OpenAI-compatible cloud endpoint); without one, deterministic local scoring runs and interpretation is marked PENDING instead of fabricated.
 - **Integrated method catalog** — 130+ innovation/security techniques (TRIZ, Design Thinking, JTBD, FMEA, MITRE ATT&CK, OWASP, STRIDE, Kill Chain…), frozen in JSON with a versioned schema.
-- **Provably tried** — 940+ passing tests and the release pipeline builds a signed portable Windows bundle with SLSA provenance.
+- **Provably tried** — 866 passing tests and the release pipeline builds a signed portable Windows bundle with SLSA provenance.
 
 ## Features
 
@@ -94,8 +94,7 @@ scripts\launch_workbench.bat
 When you configure a local GGUF/Ollama profile *or* set the free cloud routes, CRIBA
 keeps its deterministic core and uses the model only to draft coherent ideas:
 
-- **Z.ai** — `glm-5.3-flash` at `https://api.z.ai/v1`
-- **Nous Research** — `poolside/laguna-s-2.1:free` at `https://api.nousresearch.com/v1` (env `NOUS_API_KEY`)
+- **Any OpenAI-compatible endpoint** — set the base URL, model name and API key in the model settings dialog or via environment variables (e.g. `NOUS_API_KEY` for the Nous endpoint).
 
 If the model is unavailable, CRIBA degrades to its offline deterministic fallback —
 the output never blocks on the network. Cloud keys are read from environment
@@ -111,7 +110,7 @@ rate-limit controls (no network in CI runs).
 ## Development
 
 ```bash
-uv run pytest -q            # 940+ tests
+uv run pytest -q            # 866 tests
 uv run mypy src/criba       # strict typing over the engine
 uv run ruff check src       # lint
 ```

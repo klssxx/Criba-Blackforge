@@ -1,0 +1,705 @@
+CATÁLOGO DE 2.000 TÉCNICAS Y METODOLOGÍAS
+PARTE 1 — ENTRADAS 1 A 700
+Formato: TIPO, SECTOR, ENFOQUE > NÚMERO > NOMBRE > DESCRIPCIÓN
+Nota: las entradas marcadas como APLICACIÓN METODOLÓGICA son adaptaciones sectoriales explícitas, no métodos canónicos nuevos.
+
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 1 > Kaizen > Mejora incremental y sostenida mediante pequeños cambios continuos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 2 > PDCA > Planifica, ejecuta, verifica y actúa para estandarizar o corregir.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 3 > PDSA > Planifica, prueba, estudia resultados y adapta la intervención.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 4 > DMAIC > Define, mide, analiza, mejora y controla procesos existentes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 5 > DMADV > Define, mide, analiza, diseña y verifica procesos nuevos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 6 > DFSS > Integra prevención de defectos y variación desde el diseño.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 7 > Lean Manufacturing > Elimina desperdicios y mejora el flujo de valor industrial.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 8 > Lean Service > Adapta los principios Lean a servicios y oficinas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 9 > Lean Startup > Valida hipótesis mediante ciclos construir, medir y aprender.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 10 > Sistema Toyota de Producción > Integra flujo, calidad en origen y mejora continua.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 11 > Just in Time > Produce y repone solo lo necesario cuando se necesita.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 12 > Jidoka > Detiene el proceso ante una anomalía para evitar defectos posteriores.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 13 > Heijunka > Nivela volumen y variedad para reducir variabilidad y sobrecarga.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 14 > Takt Time > Alinea el ritmo de trabajo con la demanda real.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 15 > Kanban > Limita el trabajo en curso mediante señales visuales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 16 > CONWIP > Limita el trabajo total en proceso con autorización de entrada.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 17 > 5S > Clasifica, ordena, limpia, estandariza y sostiene el puesto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 18 > 6S > Añade seguridad explícita al sistema 5S.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 19 > SMED > Reduce tiempos de cambio separando y simplificando operaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 20 > TPM > Maximiza la efectividad de equipos mediante mantenimiento compartido.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 21 > OEE > Combina disponibilidad, rendimiento y calidad del equipo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 22 > Mantenimiento autónomo > Transfiere cuidados básicos del equipo a operadores.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 23 > Mantenimiento preventivo > Interviene antes del fallo según tiempo o uso.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 24 > Mantenimiento predictivo > Anticipa fallos mediante datos de condición.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 25 > Mantenimiento basado en condición > Interviene cuando indicadores muestran degradación real.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 26 > RCM > Selecciona mantenimiento según funciones, fallos y criticidad.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 27 > Value Stream Mapping > Representa flujos para localizar esperas e inventarios.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 28 > SIPOC > Define proveedores, entradas, proceso, salidas y clientes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 29 > A3 Thinking > Resume problema, causa, contramedidas y seguimiento.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 30 > Gemba Walk > Observa el trabajo real para comprender hechos y obstáculos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 31 > Genchi Genbutsu > Exige verificar la situación directamente en el lugar real.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 32 > Hoshin Kanri > Despliega objetivos estratégicos mediante prioridades y revisión.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 33 > Catchball > Refina objetivos mediante diálogo bidireccional.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 34 > Obeya > Coordina decisiones y seguimiento visual en un espacio compartido.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 35 > Nemawashi > Construye consenso antes de una decisión formal.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 36 > Poka-Yoke > Diseña barreras que previenen o detectan equivocaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 37 > Andon > Hace visible el estado y permite señalar anomalías.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 38 > Trabajo estandarizado > Define secuencia, tiempo y trabajo en curso de referencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 39 > TWI Job Instruction > Enseña tareas mediante demostración, práctica y seguimiento.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 40 > TWI Job Methods > Mejora métodos cuestionando y reorganizando cada detalle.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 41 > TWI Job Relations > Gestiona relaciones laborales a partir de hechos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 42 > Yamazumi > Equilibra cargas visualizando tiempos por tarea.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 43 > One-Piece Flow > Mueve unidades de una en una para acelerar el flujo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 44 > Células de manufactura > Agrupa recursos por familias de producto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 45 > Chaku-Chaku > Organiza células con carga manual y descarga automática.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 46 > Milk Run > Consolida recogidas o entregas en rutas periódicas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 47 > Supermercado Lean > Mantiene inventario controlado con reposición por consumo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 48 > Water Spider > Abastece materiales sin interrumpir a operadores.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 49 > FIFO Lane > Procesa trabajo en orden de entrada dentro de un límite.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 50 > EPEI > Mide la frecuencia de producción de cada referencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 51 > Gestión visual > Representa estado, estándares y desviaciones a simple vista.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 52 > Daily Management System > Estructura seguimiento diario, indicadores y escalado.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 53 > Tiered Huddles > Escala información mediante reuniones breves por niveles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 54 > Leader Standard Work > Estandariza rutinas de liderazgo para sostener mejoras.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 55 > Kamishibai Board > Audita tareas y estándares mediante tarjetas visuales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 56 > Layered Process Audit > Realiza auditorías frecuentes por distintos niveles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 57 > Control Plan > Define controles, frecuencia y reacción ante desviaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 58 > APQP > Planifica de forma avanzada la calidad antes del lanzamiento.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 59 > PPAP > Demuestra que un proceso puede producir conforme a requisitos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 60 > FMEA de diseño > Anticipa modos de fallo del diseño y sus efectos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 61 > FMEA de proceso > Analiza fallos potenciales de fabricación o servicio.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 62 > FMECA > Añade criticidad al análisis de modos y efectos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 63 > Fault Tree Analysis > Descompone un evento no deseado en combinaciones de causas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 64 > Event Tree Analysis > Modela consecuencias a partir de un evento iniciador.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 65 > Bow-Tie Analysis > Relaciona amenazas, evento central, consecuencias y barreras.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 66 > HAZOP > Examina desviaciones usando palabras guía.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 67 > What-If Analysis > Explora fallos mediante preguntas estructuradas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 68 > LOPA > Evalúa si las capas de protección reducen suficientemente el riesgo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 69 > FRACAS > Registra, analiza y corrige fallos de forma trazable.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 70 > 8D > Combina contención, análisis causal y acciones permanentes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 71 > 5 Porqués > Profundiza desde un síntoma hasta causas sistémicas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 72 > Diagrama de Ishikawa > Agrupa causas potenciales por categorías.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 73 > Análisis de Pareto > Prioriza las pocas causas de mayor impacto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 74 > Árbol de causas > Reconstruye condiciones y relaciones causales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 75 > Current Reality Tree > Localiza problemas raíz mediante relaciones causa-efecto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 76 > Future Reality Tree > Proyecta efectos de una solución propuesta.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 77 > Evaporating Cloud > Resuelve conflictos identificando necesidades y supuestos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 78 > Prerequisite Tree > Identifica obstáculos y objetivos intermedios.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 79 > Transition Tree > Convierte una estrategia en acciones y resultados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 80 > Theory of Constraints > Mejora el sistema actuando sobre su restricción principal.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 81 > Drum-Buffer-Rope > Sincroniza flujo con la restricción y buffers.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 82 > Buffer Management > Gestiona prioridades según consumo de buffers.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 83 > Throughput Accounting > Evalúa decisiones por throughput, inventario y gasto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 84 > Critical Chain Project Management > Protege proyectos con buffers y recursos explícitos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 85 > Six Sigma > Reduce defectos mediante disciplina y estadística.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 86 > Lean Six Sigma > Combina flujo Lean y reducción de variación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 87 > Design of Experiments > Planifica cambios controlados para estimar efectos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 88 > Diseño factorial completo > Prueba todas las combinaciones de niveles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 89 > Diseño factorial fraccionado > Estudia muchos factores con menos ensayos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 90 > Diseño Plackett-Burman > Criba numerosos factores con pocos experimentos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 91 > Diseño Box-Behnken > Ajusta superficies sin usar combinaciones extremas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 92 > Diseño central compuesto > Combina puntos factoriales, centrales y axiales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 93 > Método Taguchi > Busca configuraciones robustas frente al ruido.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 94 > Función de pérdida de Taguchi > Cuantifica pérdida al alejarse del objetivo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 95 > Robust Design > Reduce sensibilidad a fuentes de variación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 96 > Response Surface Methodology > Modela y optimiza respuestas experimentales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 97 > EVOP > Introduce pequeñas variaciones durante la operación normal.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 98 > SPC > Controla estabilidad y variación mediante estadística secuencial.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 99 > Carta X-barra R > Controla media y rango de subgrupos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 100 > Carta X-barra S > Controla media y desviación estándar.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 101 > Carta I-MR > Controla observaciones individuales y rango móvil.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 102 > Carta p > Controla proporción de unidades no conformes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 103 > Carta np > Controla número de unidades no conformes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 104 > Carta c > Controla número de defectos con área constante.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 105 > Carta u > Controla defectos por unidad con área variable.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 106 > Carta CUSUM > Detecta cambios pequeños acumulando desviaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 107 > Carta EWMA > Detecta cambios suaves ponderando datos recientes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 108 > Capacidad Cp > Compara tolerancia con variación potencial.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 109 > Capacidad Cpk > Evalúa capacidad considerando centrado.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 110 > Capacidad Pp > Estima desempeño global con variación total.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 111 > Capacidad Ppk > Mide desempeño global y descentramiento.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 112 > MSA > Evalúa el sistema completo de medición.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 113 > Gage R&R > Separa variación de instrumento, operador y pieza.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 114 > QFD > Traduce necesidades del cliente en requisitos técnicos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 115 > House of Quality > Relaciona voz del cliente y características técnicas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 116 > Voice of Customer > Captura necesidades y lenguaje del cliente.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 117 > Kano Model > Clasifica atributos básicos, de desempeño y atractivos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 118 > CTQ Tree > Despliega necesidades en requisitos críticos medibles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 119 > SERVQUAL > Compara expectativas y percepciones del servicio.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 120 > Customer Journey Mapping > Representa etapas, emociones y fricciones del cliente.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 121 > Service Blueprint > Mapea experiencia visible y procesos internos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 122 > Benchmarking competitivo > Compara desempeño con competidores directos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 123 > Benchmarking funcional > Compara funciones con referentes de cualquier sector.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 124 > Benchmarking interno > Compara unidades de una misma organización.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 125 > TQM > Integra cliente, participación y mejora continua.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 126 > Modelo EFQM > Evalúa dirección, ejecución y resultados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 127 > Malcolm Baldrige Framework > Evalúa liderazgo, estrategia, procesos y resultados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 128 > ISO 9001 > Estructura un sistema de gestión de calidad.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 129 > ISO 14001 > Estructura la gestión ambiental.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 130 > ISO 45001 > Gestiona seguridad y salud laboral.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 131 > ISO 31000 > Proporciona principios generales de gestión de riesgos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 132 > ISO 56002 > Estructura sistemas de gestión de innovación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 133 > CMMI > Mejora capacidad de procesos mediante niveles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 134 > SPICE > Evalúa capacidad de procesos con atributos y niveles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 135 > COBIT > Gobierna información y tecnología mediante objetivos y controles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 136 > ITIL Continual Improvement > Identifica y mide mejoras en servicios TI.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 137 > SRE Error Budget > Equilibra fiabilidad e innovación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 138 > Postmortem sin culpa > Analiza incidentes centrándose en condiciones del sistema.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 139 > Chaos Engineering > Introduce fallos controlados para aumentar resiliencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 140 > GameDay > Simula incidentes operativos para practicar respuesta.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 141 > Retrospectiva Agile > Inspecciona proceso y acuerda mejoras.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 142 > Scrum > Gestiona trabajo complejo mediante iteraciones y transparencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 143 > Extreme Programming > Combina pruebas, integración y colaboración intensiva.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 144 > Pair Programming > Dos personas trabajan simultáneamente sobre el mismo código.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 145 > Mob Programming > Todo el equipo trabaja sobre una única tarea.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 146 > Test-Driven Development > Escribe prueba, implementa lo mínimo y refactoriza.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 147 > Behavior-Driven Development > Define comportamiento mediante ejemplos compartidos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 148 > Acceptance Test-Driven Development > Acorda pruebas de aceptación antes de implementar.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 149 > Continuous Integration > Integra cambios frecuentes con pruebas automatizadas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 150 > Continuous Delivery > Mantiene el software siempre desplegable.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 151 > Continuous Deployment > Despliega automáticamente cambios validados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 152 > DevOps > Integra desarrollo y operaciones mediante automatización.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 153 > DevSecOps > Incorpora seguridad continua al ciclo DevOps.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 154 > GitOps > Gestiona despliegues declarativamente desde control de versiones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 155 > DORA Metrics > Mide frecuencia, tiempo de cambio, fallos y recuperación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 156 > TRIZ > Resuelve contradicciones mediante patrones inventivos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 157 > ARIZ > Guía problemas inventivos complejos algorítmicamente.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 158 > Análisis Su-Field > Modela sustancias, campos e interacciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 159 > SCAMPER > Genera alternativas mediante transformaciones sistemáticas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 160 > Design Thinking > Investiga, define, idea, prototipa y prueba.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 161 > Double Diamond > Alterna divergencia y convergencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 162 > Human-Centered Design > Diseña desde necesidades y capacidades humanas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 163 > Co-Design > Involucra a usuarios en la creación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 164 > Participatory Design > Comparte decisiones con personas afectadas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 165 > Design Sprint > Comprime comprensión, prototipado y validación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 166 > Jobs to Be Done > Analiza el progreso que una persona busca.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 167 > Opportunity Solution Tree > Conecta resultados, oportunidades, soluciones y experimentos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 168 > Assumption Mapping > Prioriza supuestos por importancia e incertidumbre.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 169 > Pretotyping > Prueba interés antes de construir el producto real.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 170 > Minimum Viable Product > Construye lo mínimo para validar hipótesis.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 171 > Build-Measure-Learn > Convierte ideas en experimentos y aprendizaje.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 172 > Innovation Accounting > Mide progreso de innovación con aprendizaje validado.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 173 > Business Model Canvas > Representa clientes, propuesta y economía.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 174 > Lean Canvas > Resume problema, solución, métricas y ventaja.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 175 > Value Proposition Canvas > Alinea tareas, dolores y ganancias con la oferta.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 176 > Blue Ocean Strategy > Crea mercado mediante innovación en valor.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 177 > Strategy Canvas > Compara factores competitivos y curvas de valor.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 178 > Four Actions Framework > Decide qué eliminar, reducir, elevar y crear.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 179 > Stage-Gate > Divide innovación en etapas y puertas de decisión.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 180 > Technology Readiness Levels > Evalúa madurez tecnológica.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 181 > Manufacturing Readiness Levels > Evalúa madurez de fabricación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 182 > Open Innovation > Combina conocimiento interno y externo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 183 > Lead User Method > Aprende de usuarios avanzados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 184 > Living Lab > Crea y prueba innovaciones en entornos reales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 185 > Hackathon > Concentra equipos y tiempo para prototipar.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 186 > Innovation Tournament > Genera muchas ideas y aplica filtros sucesivos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 187 > Morphological Analysis > Combina dimensiones para explorar soluciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 188 > Zwicky Box > Construye un espacio morfológico de combinaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 189 > Synectics > Provoca conexiones mediante analogías.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 190 > Lateral Thinking > Rompe patrones mediante provocaciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 191 > Six Thinking Hats > Separa modos de pensamiento.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 192 > Brainwriting 6-3-5 > Hace circular ideas escritas en rondas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 193 > Nominal Group Technique > Genera, discute y prioriza ideas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 194 > Delphi Method > Construye convergencia experta en rondas anónimas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 195 > World Café > Conecta perspectivas mediante conversaciones rotatorias.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 196 > Open Space Technology > Permite sesiones autoorganizadas por participantes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 197 > Appreciative Inquiry > Impulsa cambio desde fortalezas y aspiraciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 198 > SOAR Analysis > Formula estrategia con fortalezas y oportunidades.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 199 > SWOT Analysis > Examina fortalezas, debilidades, oportunidades y amenazas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 200 > TOWS Matrix > Convierte SWOT en opciones estratégicas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 201 > PESTEL Analysis > Analiza factores macroambientales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 202 > Porter Five Forces > Evalúa estructura competitiva.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 203 > Scenario Planning > Construye futuros plausibles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 204 > Backcasting > Retrocede desde un futuro deseado.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 205 > Roadmapping tecnológico > Conecta necesidades, tecnologías y decisiones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 206 > OKR > Define objetivos y resultados clave.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 207 > Balanced Scorecard > Equilibra finanzas, clientes, procesos y aprendizaje.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 208 > Strategy Map > Representa relaciones causales estratégicas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 209 > Action Learning > Aprende resolviendo problemas reales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 210 > After Action Review > Compara intención, resultado y lecciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 211 > Lessons Learned Workshop > Captura experiencia reutilizable.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 212 > Communities of Practice > Mejora una práctica mediante intercambio continuo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 213 > Quality Circles > Equipos analizan problemas de su área.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 214 > Suggestion System > Recoge y ejecuta propuestas del personal.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 215 > Cost of Quality > Clasifica costes de prevención, evaluación y fallo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 216 > Cost of Poor Quality > Cuantifica pérdidas por errores y retrabajo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 217 > Zero Defects > Promueve prevención y conformidad inicial.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 218 > First Pass Yield > Mide unidades correctas sin retrabajo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 219 > Rolled Throughput Yield > Estima calidad global multiplicando rendimientos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 220 > DPMO > Normaliza defectos por millón de oportunidades.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 221 > Line Balancing > Distribuye tareas para reducir ociosidad.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 222 > Work Sampling > Estima uso del tiempo mediante observaciones aleatorias.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 223 > Time Study > Mide ciclos para establecer tiempos estándar.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 224 > MOST > Analiza movimientos mediante secuencias predeterminadas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 225 > MTM > Descompone movimientos humanos en tiempos estándar.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 226 > RULA > Evalúa riesgo postural de extremidades superiores.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 227 > REBA > Evalúa posturas de cuerpo completo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 228 > OWAS > Clasifica posturas y urgencia de corrección.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 229 > 5W2H > Define qué, por qué, dónde, cuándo, quién, cómo y cuánto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 230 > SMART Goals > Formula objetivos específicos, medibles y temporales.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 231 > RACI > Aclara responsable, aprobador, consultado e informado.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 232 > Decision Matrix > Compara alternativas mediante criterios ponderados.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 233 > Pugh Matrix > Compara conceptos frente a una referencia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 234 > Impact-Effort Matrix > Prioriza acciones por impacto y esfuerzo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 235 > MoSCoW Prioritization > Clasifica requisitos por necesidad.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 236 > Weighted Shortest Job First > Prioriza coste de demora frente a tamaño.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 237 > Kepner-Tregoe Problem Analysis > Separa situación, problema, decisión y riesgo.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 238 > Red Team Review > Somete planes a crítica adversarial.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 239 > Pre-Mortem > Imagina un fracaso para anticipar causas.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 240 > Safe-to-Fail Experiments > Ejecuta pruebas pequeñas y reversibles.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 241 > Cynefin Framework > Adapta decisiones al tipo de contexto.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 242 > OODA Loop > Observa, orienta, decide y actúa.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 243 > Wardley Mapping > Mapea valor y evolución para decidir estrategia.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 244 > Systems Thinking > Analiza interdependencias y efectos emergentes.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 245 > Causal Loop Diagram > Representa bucles reforzadores y compensadores.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 246 > Stock and Flow Diagram > Modela acumulaciones y flujos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 247 > System Dynamics > Simula comportamiento de sistemas con retroalimentación.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 248 > Soft Systems Methodology > Estructura problemas humanos mal definidos.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 249 > Viable System Model > Evalúa funciones necesarias para adaptarse.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 250 > CATWOE > Examina clientes, actores, transformación y restricciones.
+METODOLOGÍA, MEJORA CONTINUA Y GESTIÓN, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 251 > Rich Picture > Representa actores, conflictos y procesos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 252 > Método hipotético-deductivo > Formula hipótesis, deriva predicciones y las contrasta.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 253 > Método inductivo > Construye generalizaciones desde observaciones particulares.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 254 > Método deductivo > Deriva consecuencias desde premisas generales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 255 > Método abductivo > Propone la explicación más plausible.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 256 > Método analítico > Descompone un fenómeno en componentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 257 > Método sintético > Integra resultados parciales en una explicación.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 258 > Método comparativo > Contrasta casos para identificar diferencias y causas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 259 > Método histórico > Reconstruye cambios y contextos del pasado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 260 > Método experimental > Manipula variables bajo control para estimar efectos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 261 > Método cuasi-experimental > Estima efectos sin asignación aleatoria completa.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 262 > Estudio observacional > Analiza variables sin intervención deliberada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 263 > Estudio transversal > Mide exposición y resultado en un momento.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 264 > Estudio longitudinal > Sigue unidades a través del tiempo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 265 > Cohorte prospectiva > Sigue grupos desde exposición hacia resultados futuros.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 266 > Cohorte retrospectiva > Reconstruye exposición y resultados históricos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 267 > Casos y controles > Compara exposiciones previas entre casos y controles.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 268 > Estudio ecológico > Analiza asociaciones con datos agregados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 269 > Estudio de panel > Observa repetidamente las mismas unidades.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 270 > Serie temporal interrumpida > Evalúa cambios de nivel o tendencia tras una intervención.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 271 > Ensayo controlado aleatorizado > Asigna intervenciones al azar.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 272 > Ensayo por conglomerados > Aleatoriza grupos completos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 273 > Ensayo cruzado > Cada participante recibe varias intervenciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 274 > Ensayo factorial > Evalúa intervenciones e interacciones simultáneamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 275 > Ensayo pragmático > Estima efectividad en práctica real.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 276 > Ensayo explicativo > Estima eficacia en condiciones controladas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 277 > Ensayo adaptativo > Modifica asignación según información acumulada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 278 > Ensayo de no inferioridad > Prueba que una intervención no es sustancialmente peor.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 279 > Ensayo de equivalencia > Prueba diferencias dentro de márgenes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 280 > Ensayo de superioridad > Prueba que una intervención es mejor.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 281 > N-of-1 Trial > Compara tratamientos repetidamente en una persona.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 282 > Diseño antes-después > Compara resultados previos y posteriores.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 283 > Grupo control no equivalente > Añade un comparador sin aleatorización.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 284 > Regression Discontinuity > Estima causalidad alrededor de un umbral.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 285 > Difference-in-Differences > Compara cambios entre tratado y control.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 286 > Synthetic Control > Construye un contrafactual ponderado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 287 > Instrumental Variables > Usa una variable instrumental para estimar causalidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 288 > Propensity Score Matching > Empareja unidades con propensión similar.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 289 > Inverse Probability Weighting > Repondera observaciones para crear equilibrio.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 290 > Entropy Balancing > Calcula pesos que igualan momentos de covariables.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 291 > Coarsened Exact Matching > Empareja tras discretizar covariables.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 292 > G-Computation > Calcula resultados contrafactuales modelando la respuesta.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 293 > Marginal Structural Models > Trata confusión dependiente del tiempo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 294 > Targeted Maximum Likelihood > Combina modelos y actualización dirigida.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 295 > Double Machine Learning > Usa aprendizaje automático con ortogonalización.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 296 > Causal Forest > Estima heterogeneidad de efectos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 297 > Mediation Analysis > Separa efectos directos e indirectos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 298 > Moderation Analysis > Evalúa si un efecto cambia según otra variable.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 299 > Path Analysis > Modela relaciones direccionales observadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 300 > Structural Equation Modeling > Integra variables latentes y relaciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 301 > Directed Acyclic Graphs > Representa supuestos causales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 302 > Do-Calculus > Deriva efectos identificables desde grafos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 303 > Negative Control > Detecta sesgo con variables que no deberían afectarse.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 304 > Placebo Test > Busca efectos donde no deberían aparecer.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 305 > Sensitivity Analysis for Confounding > Evalúa robustez frente a confusión no medida.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 306 > Triangulación de métodos > Combina métodos para comprobar convergencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 307 > Triangulación de datos > Contrasta fuentes, momentos o lugares.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 308 > Triangulación de investigadores > Incorpora varios analistas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 309 > Triangulación teórica > Interpreta datos desde marcos alternativos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 310 > Métodos mixtos convergentes > Integra cualitativo y cuantitativo en paralelo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 311 > Métodos mixtos secuenciales explicativos > Usa cualitativo para explicar resultados cuantitativos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 312 > Métodos mixtos secuenciales exploratorios > Usa cualitativo para construir medidas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 313 > Diseño embebido > Inserta un método secundario en uno principal.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 314 > Estudio de caso único > Analiza profundamente una unidad delimitada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 315 > Estudio de casos múltiples > Compara varios casos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 316 > Etnografía > Estudia prácticas mediante inmersión.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 317 > Etnografía digital > Estudia comunidades mediadas por tecnología.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 318 > Autoetnografía > Relaciona experiencia personal y cultura.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 319 > Netnografía > Adapta etnografía a comunidades en línea.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 320 > Fenomenología descriptiva > Describe estructuras de la experiencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 321 > Fenomenología hermenéutica > Interpreta significados de experiencias.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 322 > Teoría fundamentada clásica > Genera teoría desde comparación constante.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 323 > Teoría fundamentada constructivista > Construye categorías reconociendo interpretación.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 324 > Análisis narrativo > Estudia cómo las historias organizan experiencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 325 > Análisis del discurso > Examina cómo el lenguaje produce significado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 326 > Análisis crítico del discurso > Relaciona lenguaje, poder e ideología.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 327 > Análisis conversacional > Estudia turnos, secuencias y reparaciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 328 > Análisis temático > Identifica patrones de significado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 329 > Análisis de contenido cualitativo > Codifica significados manifiestos y latentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 330 > Análisis de contenido cuantitativo > Cuenta categorías mediante protocolo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 331 > Framework Analysis > Organiza datos en matrices temáticas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 332 > Interpretative Phenomenological Analysis > Explora interpretación de experiencias.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 333 > Qualitative Comparative Analysis > Identifica configuraciones causales mediante conjuntos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 334 > fsQCA > Usa pertenencias difusas para configuraciones causales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 335 > csQCA > Usa conjuntos binarios.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 336 > mvQCA > Usa conjuntos de múltiples valores.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 337 > Process Tracing > Evalúa mecanismos causales dentro de casos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 338 > Congruence Analysis > Compara predicciones teóricas con patrones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 339 > Most Similar Systems Design > Compara casos similares con resultados distintos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 340 > Most Different Systems Design > Compara casos distintos con resultado común.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 341 > Comparative Historical Analysis > Estudia procesos causales a largo plazo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 342 > Action Research > Combina investigación, acción y reflexión.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 343 > Participatory Action Research > Comparte poder investigador con comunidades.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 344 > Design-Based Research > Diseña y refina intervenciones en contexto.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 345 > Developmental Evaluation > Acompaña innovaciones emergentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 346 > Realist Evaluation > Pregunta qué funciona, para quién y por qué.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 347 > Utilization-Focused Evaluation > Diseña evaluación alrededor de usos concretos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 348 > Theory-Based Evaluation > Contrasta la teoría de cambio.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 349 > Contribution Analysis > Evalúa contribución plausible.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 350 > Outcome Harvesting > Identifica cambios y reconstruye contribuciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 351 > Most Significant Change > Selecciona historias de cambio relevantes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 352 > Process Evaluation > Examina implementación, alcance y fidelidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 353 > Impact Evaluation > Estima efectos atribuibles.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 354 > Economic Evaluation > Compara costes y consecuencias.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 355 > Cost-Effectiveness Analysis > Compara coste por unidad de resultado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 356 > Cost-Utility Analysis > Compara coste por utilidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 357 > Cost-Benefit Analysis > Expresa costes y beneficios monetariamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 358 > Social Return on Investment > Estima valor social por recursos invertidos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 359 > Systematic Review > Busca y sintetiza evidencia mediante protocolo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 360 > Rapid Review > Acelera una revisión simplificando etapas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 361 > Scoping Review > Mapea amplitud y lagunas de un campo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 362 > Umbrella Review > Sintetiza revisiones sistemáticas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 363 > Narrative Review > Integra literatura de forma interpretativa.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 364 > Living Systematic Review > Actualiza una revisión continuamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 365 > Meta-Analysis > Combina cuantitativamente estimaciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 366 > Fixed-Effect Meta-Analysis > Asume un efecto común.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 367 > Random-Effects Meta-Analysis > Modela una distribución de efectos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 368 > Network Meta-Analysis > Compara múltiples intervenciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 369 > Individual Participant Data Meta-Analysis > Reanaliza datos individuales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 370 > Meta-Regression > Explica heterogeneidad entre estudios.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 371 > Cumulative Meta-Analysis > Actualiza la síntesis cronológicamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 372 > Bayesian Meta-Analysis > Usa modelos bayesianos jerárquicos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 373 > Evidence Gap Map > Visualiza dónde existe o falta evidencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 374 > Bibliometric Analysis > Analiza producción, citas y colaboración.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 375 > Co-Citation Analysis > Detecta escuelas intelectuales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 376 > Bibliographic Coupling > Relaciona documentos con referencias comunes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 377 > Co-Word Analysis > Mapea temas por coaparición.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 378 > Science Mapping > Representa estructura y evolución científica.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 379 > Citation Network Analysis > Estudia influencia en redes de citación.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 380 > Systematic Mapping Study > Clasifica literatura de un área.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 381 > Snowballing Review > Sigue referencias hacia atrás y delante.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 382 > Critical Appraisal > Evalúa validez, relevancia y aplicabilidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 383 > GRADE > Califica certeza de evidencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 384 > ROB 2 > Evalúa riesgo de sesgo en ensayos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 385 > ROBINS-I > Evalúa sesgo en estudios no aleatorizados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 386 > QUADAS-2 > Evalúa estudios de precisión diagnóstica.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 387 > AMSTAR 2 > Evalúa revisiones sistemáticas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 388 > PRISMA > Estandariza reporte de revisiones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 389 > CONSORT > Estandariza reporte de ensayos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 390 > STROBE > Estandariza reporte observacional.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 391 > COREQ > Estandariza entrevistas y grupos focales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 392 > SPIRIT > Estandariza protocolos de ensayos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 393 > ARRIVE > Mejora reporte de investigación animal.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 394 > CHEERS > Guía reporte de evaluación económica.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 395 > TIDieR > Describe intervenciones para replicación.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 396 > Preregistration > Registra hipótesis y análisis antes de resultados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 397 > Registered Reports > Revisa pregunta y método antes de resultados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 398 > Open Data > Publica datos reutilizables.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 399 > Open Materials > Comparte protocolos, código y materiales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 400 > Reproducible Research > Vincula datos, código y resultados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 401 > Replication Study > Repite un estudio para evaluar estabilidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 402 > Direct Replication > Mantiene método y condiciones similares.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 403 > Conceptual Replication > Prueba la misma idea con otro diseño.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 404 > Many-Labs Design > Replica coordinadamente en múltiples laboratorios.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 405 > Multiverse Analysis > Ejecuta decisiones analíticas razonables alternativas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 406 > Specification Curve > Muestra resultados de múltiples especificaciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 407 > Robustness Check > Prueba estabilidad bajo supuestos alternativos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 408 > Holdout Validation > Reserva datos para evaluación final.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 409 > Cross-Validation > Divide datos repetidamente para validar.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 410 > Nested Cross-Validation > Separa ajuste y evaluación.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 411 > Bootstrap > Remuestrea con reemplazo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 412 > Jackknife > Elimina observaciones una a una.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 413 > Permutation Test > Construye una distribución nula reordenando.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 414 > Randomization Inference > Usa el mecanismo de asignación real.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 415 > Monte Carlo Simulation > Aproxima cantidades mediante muestreo repetido.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 416 > Latin Hypercube Sampling > Estratifica variables para cubrir el espacio.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 417 > Sobol Sampling > Usa secuencias de baja discrepancia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 418 > Importance Sampling > Concentra muestras en regiones influyentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 419 > Sequential Monte Carlo > Representa distribuciones con partículas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 420 > Markov Chain Monte Carlo > Muestrea distribuciones mediante cadenas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 421 > Gibbs Sampling > Actualiza variables desde condicionales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 422 > Metropolis-Hastings > Acepta propuestas para alcanzar la distribución objetivo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 423 > Hamiltonian Monte Carlo > Usa dinámica hamiltoniana.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 424 > No-U-Turn Sampler > Adapta trayectorias de HMC.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 425 > Approximate Bayesian Computation > Infiere por simulación sin verosimilitud tractable.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 426 > Bayesian Updating > Actualiza creencias con evidencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 427 > Bayes Factor > Compara apoyo relativo entre modelos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 428 > Posterior Predictive Check > Compara datos observados y simulados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 429 > Prior Predictive Check > Evalúa implicaciones previas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 430 > Maximum Likelihood Estimation > Maximiza probabilidad de los datos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 431 > Restricted Maximum Likelihood > Estima varianzas reduciendo sesgo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 432 > Method of Moments > Iguala momentos teóricos y muestrales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 433 > Generalized Method of Moments > Usa múltiples condiciones de momento.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 434 > Ordinary Least Squares > Minimiza residuos cuadrados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 435 > Weighted Least Squares > Pondera observaciones por precisión.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 436 > Generalized Least Squares > Modela correlación en errores.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 437 > Robust Regression > Reduce influencia de atípicos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 438 > Quantile Regression > Modela cuantiles condicionales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 439 > Ridge Regression > Penaliza coeficientes cuadráticamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 440 > Lasso Regression > Penaliza coeficientes de forma absoluta.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 441 > Elastic Net > Combina Ridge y Lasso.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 442 > Logistic Regression > Modela probabilidades binarias.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 443 > Probit Regression > Usa enlace normal acumulado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 444 > Poisson Regression > Modela conteos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 445 > Negative Binomial Regression > Modela conteos sobredispersos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 446 > Zero-Inflated Model > Combina ceros estructurales y conteo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 447 > Hurdle Model > Separa cero y valores positivos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 448 > Cox Proportional Hazards > Modela tasas relativas de evento.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 449 > Kaplan-Meier Estimator > Estima supervivencia con censura.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 450 > Competing Risks Analysis > Modela eventos alternativos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 451 > Frailty Model > Añade heterogeneidad aleatoria.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 452 > Mixed-Effects Model > Combina efectos fijos y aleatorios.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 453 > Generalized Estimating Equations > Estima efectos poblacionales correlacionados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 454 > Hierarchical Linear Model > Modela unidades anidadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 455 > Latent Class Analysis > Identifica clases no observadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 456 > Factor Analysis > Explica correlaciones con factores latentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 457 > Principal Component Analysis > Reduce dimensionalidad maximizando varianza.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 458 > Independent Component Analysis > Separa componentes independientes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 459 > Canonical Correlation Analysis > Relaciona dos conjuntos multivariados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 460 > Correspondence Analysis > Representa asociaciones categóricas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 461 > Multidimensional Scaling > Representa proximidades en pocas dimensiones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 462 > Cluster Analysis > Agrupa unidades por similitud.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 463 > K-Means > Minimiza distancias a centroides.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 464 > Hierarchical Clustering > Construye una jerarquía de grupos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 465 > DBSCAN > Detecta agrupaciones densas y ruido.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 466 > Gaussian Mixture Model > Modela mezcla probabilística de gaussianas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 467 > Discriminant Analysis > Clasifica mediante combinaciones predictoras.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 468 > MANOVA > Contrasta varias dependientes conjuntamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 469 > ANOVA > Compara medias entre grupos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 470 > ANCOVA > Compara grupos ajustando covariables.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 471 > Repeated Measures ANOVA > Analiza mediciones repetidas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 472 > Welch ANOVA > Compara medias con varianzas desiguales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 473 > Kruskal-Wallis Test > Compara varios grupos mediante rangos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 474 > Mann-Whitney U Test > Compara dos grupos independientes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 475 > Wilcoxon Signed-Rank Test > Compara datos relacionados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 476 > Friedman Test > Compara varias condiciones relacionadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 477 > Student t-Test > Compara medias bajo supuestos paramétricos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 478 > Welch t-Test > Compara medias con varianzas desiguales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 479 > Paired t-Test > Compara medias emparejadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 480 > Chi-Square Test > Contrasta asociación categórica.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 481 > Fisher Exact Test > Contrasta tablas pequeñas exactamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 482 > McNemar Test > Compara proporciones apareadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 483 > Kolmogorov-Smirnov Test > Compara distribuciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 484 > Anderson-Darling Test > Evalúa ajuste con énfasis en colas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 485 > Shapiro-Wilk Test > Evalúa normalidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 486 > Levene Test > Contrasta igualdad de varianzas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 487 > Durbin-Watson Test > Detecta autocorrelación residual.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 488 > Breusch-Pagan Test > Detecta heterocedasticidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 489 > Variance Inflation Factor > Cuantifica multicolinealidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 490 > Cook Distance > Mide influencia de observaciones.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 491 > Bland-Altman Analysis > Evalúa acuerdo entre métodos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 492 > Intraclass Correlation > Cuantifica fiabilidad agrupada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 493 > Cohen Kappa > Mide acuerdo categórico corregido.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 494 > Krippendorff Alpha > Mide acuerdo con varios evaluadores.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 495 > Cronbach Alpha > Estima consistencia interna.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 496 > McDonald Omega > Estima fiabilidad factorial.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 497 > Item Response Theory > Modela respuestas y rasgos latentes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 498 > Rasch Model > Mide personas e ítems en escala común.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 499 > Cognitive Interviewing > Evalúa comprensión de preguntas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 500 > Think-Aloud Protocol > Recoge razonamiento verbalizado.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 501 > Focus Group > Genera datos mediante discusión moderada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 502 > Semi-Structured Interview > Combina guía y flexibilidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 503 > Structured Interview > Aplica preguntas uniformes.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 504 > Unstructured Interview > Explora mediante conversación abierta.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 505 > Diary Study > Recoge experiencias repetidamente.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 506 > Experience Sampling > Solicita reportes en momentos seleccionados.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 507 > Ecological Momentary Assessment > Mide estados en tiempo real.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 508 > Participant Observation > Observa participando.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 509 > Non-Participant Observation > Observa sin integrarse.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 510 > Structured Observation > Registra conductas con categorías previas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 511 > Time-Motion Study > Mide secuencias y duración de actividades.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 512 > Content Validation > Evalúa representación de un constructo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 513 > Construct Validation > Comprueba relaciones teóricas esperadas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 514 > Criterion Validation > Compara con un criterio externo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 515 > Convergent Validity > Comprueba relación con medidas similares.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 516 > Discriminant Validity > Comprueba separación de constructos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 517 > Pilot Study > Prueba a pequeña escala el protocolo.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 518 > Feasibility Study > Evalúa viabilidad de procedimientos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 519 > Power Analysis > Calcula tamaño o potencia.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 520 > Sequential Analysis > Evalúa datos acumulados con reglas de parada.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 521 > Simple Random Sampling > Selecciona unidades con igual probabilidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 522 > Systematic Sampling > Selecciona cada k-ésima unidad.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 523 > Stratified Sampling > Muestrea dentro de estratos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 524 > Cluster Sampling > Selecciona grupos naturales.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 525 > Multistage Sampling > Muestrea en varias etapas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 526 > Quota Sampling > Completa cuotas sin selección probabilística.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 527 > Purposive Sampling > Selecciona casos informativos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 528 > Theoretical Sampling > Elige casos para desarrollar teoría.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 529 > Maximum Variation Sampling > Busca diversidad extrema.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 530 > Critical Case Sampling > Selecciona casos estratégicos.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 531 > Snowball Sampling > Recluta mediante referencias.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 532 > Respondent-Driven Sampling > Ajusta muestreo por cadenas.
+MÉTODO, INVESTIGACIÓN Y ESTADÍSTICA, DISEÑO, INFERENCIA Y VALIDACIÓN > 533 > Saturation Sampling > Continúa hasta dejar de obtener categorías nuevas.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 534 > Kaizen aplicado a industria para diagnóstico > Adapta Kaizen a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 535 > PDCA aplicado a industria para diagnóstico > Adapta PDCA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 536 > PDSA aplicado a industria para diagnóstico > Adapta PDSA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 537 > DMAIC aplicado a industria para diagnóstico > Adapta DMAIC a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 538 > DMADV aplicado a industria para diagnóstico > Adapta DMADV a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 539 > DFSS aplicado a industria para diagnóstico > Adapta DFSS a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 540 > Lean Manufacturing aplicado a industria para diagnóstico > Adapta Lean Manufacturing a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 541 > Lean Service aplicado a industria para diagnóstico > Adapta Lean Service a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 542 > Lean Startup aplicado a industria para diagnóstico > Adapta Lean Startup a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 543 > Sistema Toyota de Producción aplicado a industria para diagnóstico > Adapta Sistema Toyota de Producción a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 544 > Just in Time aplicado a industria para diagnóstico > Adapta Just in Time a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 545 > Jidoka aplicado a industria para diagnóstico > Adapta Jidoka a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 546 > Heijunka aplicado a industria para diagnóstico > Adapta Heijunka a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 547 > Takt Time aplicado a industria para diagnóstico > Adapta Takt Time a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 548 > Kanban aplicado a industria para diagnóstico > Adapta Kanban a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 549 > CONWIP aplicado a industria para diagnóstico > Adapta CONWIP a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 550 > 5S aplicado a industria para diagnóstico > Adapta 5S a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 551 > 6S aplicado a industria para diagnóstico > Adapta 6S a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 552 > SMED aplicado a industria para diagnóstico > Adapta SMED a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 553 > TPM aplicado a industria para diagnóstico > Adapta TPM a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 554 > OEE aplicado a industria para diagnóstico > Adapta OEE a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 555 > Mantenimiento autónomo aplicado a industria para diagnóstico > Adapta Mantenimiento autónomo a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 556 > Mantenimiento preventivo aplicado a industria para diagnóstico > Adapta Mantenimiento preventivo a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 557 > Mantenimiento predictivo aplicado a industria para diagnóstico > Adapta Mantenimiento predictivo a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 558 > Mantenimiento basado en condición aplicado a industria para diagnóstico > Adapta Mantenimiento basado en condición a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 559 > RCM aplicado a industria para diagnóstico > Adapta RCM a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 560 > Value Stream Mapping aplicado a industria para diagnóstico > Adapta Value Stream Mapping a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 561 > SIPOC aplicado a industria para diagnóstico > Adapta SIPOC a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 562 > A3 Thinking aplicado a industria para diagnóstico > Adapta A3 Thinking a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 563 > Gemba Walk aplicado a industria para diagnóstico > Adapta Gemba Walk a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 564 > Genchi Genbutsu aplicado a industria para diagnóstico > Adapta Genchi Genbutsu a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 565 > Hoshin Kanri aplicado a industria para diagnóstico > Adapta Hoshin Kanri a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 566 > Catchball aplicado a industria para diagnóstico > Adapta Catchball a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 567 > Obeya aplicado a industria para diagnóstico > Adapta Obeya a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 568 > Nemawashi aplicado a industria para diagnóstico > Adapta Nemawashi a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 569 > Poka-Yoke aplicado a industria para diagnóstico > Adapta Poka-Yoke a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 570 > Andon aplicado a industria para diagnóstico > Adapta Andon a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 571 > Trabajo estandarizado aplicado a industria para diagnóstico > Adapta Trabajo estandarizado a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 572 > TWI Job Instruction aplicado a industria para diagnóstico > Adapta TWI Job Instruction a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 573 > TWI Job Methods aplicado a industria para diagnóstico > Adapta TWI Job Methods a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 574 > TWI Job Relations aplicado a industria para diagnóstico > Adapta TWI Job Relations a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 575 > Yamazumi aplicado a industria para diagnóstico > Adapta Yamazumi a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 576 > One-Piece Flow aplicado a industria para diagnóstico > Adapta One-Piece Flow a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 577 > Células de manufactura aplicado a industria para diagnóstico > Adapta Células de manufactura a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 578 > Chaku-Chaku aplicado a industria para diagnóstico > Adapta Chaku-Chaku a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 579 > Milk Run aplicado a industria para diagnóstico > Adapta Milk Run a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 580 > Supermercado Lean aplicado a industria para diagnóstico > Adapta Supermercado Lean a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 581 > Water Spider aplicado a industria para diagnóstico > Adapta Water Spider a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 582 > FIFO Lane aplicado a industria para diagnóstico > Adapta FIFO Lane a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 583 > EPEI aplicado a industria para diagnóstico > Adapta EPEI a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 584 > Gestión visual aplicado a industria para diagnóstico > Adapta Gestión visual a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 585 > Daily Management System aplicado a industria para diagnóstico > Adapta Daily Management System a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 586 > Tiered Huddles aplicado a industria para diagnóstico > Adapta Tiered Huddles a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 587 > Leader Standard Work aplicado a industria para diagnóstico > Adapta Leader Standard Work a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 588 > Kamishibai Board aplicado a industria para diagnóstico > Adapta Kamishibai Board a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 589 > Layered Process Audit aplicado a industria para diagnóstico > Adapta Layered Process Audit a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 590 > Control Plan aplicado a industria para diagnóstico > Adapta Control Plan a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 591 > APQP aplicado a industria para diagnóstico > Adapta APQP a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 592 > PPAP aplicado a industria para diagnóstico > Adapta PPAP a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 593 > FMEA de diseño aplicado a industria para diagnóstico > Adapta FMEA de diseño a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 594 > FMEA de proceso aplicado a industria para diagnóstico > Adapta FMEA de proceso a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 595 > FMECA aplicado a industria para diagnóstico > Adapta FMECA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 596 > Fault Tree Analysis aplicado a industria para diagnóstico > Adapta Fault Tree Analysis a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 597 > Event Tree Analysis aplicado a industria para diagnóstico > Adapta Event Tree Analysis a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 598 > Bow-Tie Analysis aplicado a industria para diagnóstico > Adapta Bow-Tie Analysis a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 599 > HAZOP aplicado a industria para diagnóstico > Adapta HAZOP a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 600 > What-If Analysis aplicado a industria para diagnóstico > Adapta What-If Analysis a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 601 > LOPA aplicado a industria para diagnóstico > Adapta LOPA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 602 > FRACAS aplicado a industria para diagnóstico > Adapta FRACAS a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 603 > 8D aplicado a industria para diagnóstico > Adapta 8D a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 604 > 5 Porqués aplicado a industria para diagnóstico > Adapta 5 Porqués a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 605 > Diagrama de Ishikawa aplicado a industria para diagnóstico > Adapta Diagrama de Ishikawa a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 606 > Análisis de Pareto aplicado a industria para diagnóstico > Adapta Análisis de Pareto a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 607 > Árbol de causas aplicado a industria para diagnóstico > Adapta Árbol de causas a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 608 > Current Reality Tree aplicado a industria para diagnóstico > Adapta Current Reality Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 609 > Future Reality Tree aplicado a industria para diagnóstico > Adapta Future Reality Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 610 > Evaporating Cloud aplicado a industria para diagnóstico > Adapta Evaporating Cloud a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 611 > Prerequisite Tree aplicado a industria para diagnóstico > Adapta Prerequisite Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 612 > Transition Tree aplicado a industria para diagnóstico > Adapta Transition Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 613 > Theory of Constraints aplicado a industria para diagnóstico > Adapta Theory of Constraints a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 614 > Drum-Buffer-Rope aplicado a industria para diagnóstico > Adapta Drum-Buffer-Rope a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 615 > Buffer Management aplicado a industria para diagnóstico > Adapta Buffer Management a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 616 > Throughput Accounting aplicado a industria para diagnóstico > Adapta Throughput Accounting a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 617 > Critical Chain Project Management aplicado a industria para diagnóstico > Adapta Critical Chain Project Management a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 618 > Six Sigma aplicado a industria para diagnóstico > Adapta Six Sigma a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 619 > Lean Six Sigma aplicado a industria para diagnóstico > Adapta Lean Six Sigma a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 620 > Design of Experiments aplicado a industria para diagnóstico > Adapta Design of Experiments a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 621 > Diseño factorial completo aplicado a industria para diagnóstico > Adapta Diseño factorial completo a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 622 > Diseño factorial fraccionado aplicado a industria para diagnóstico > Adapta Diseño factorial fraccionado a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 623 > Diseño Plackett-Burman aplicado a industria para diagnóstico > Adapta Diseño Plackett-Burman a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 624 > Diseño Box-Behnken aplicado a industria para diagnóstico > Adapta Diseño Box-Behnken a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 625 > Diseño central compuesto aplicado a industria para diagnóstico > Adapta Diseño central compuesto a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 626 > Método Taguchi aplicado a industria para diagnóstico > Adapta Método Taguchi a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 627 > Función de pérdida de Taguchi aplicado a industria para diagnóstico > Adapta Función de pérdida de Taguchi a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 628 > Robust Design aplicado a industria para diagnóstico > Adapta Robust Design a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 629 > Response Surface Methodology aplicado a industria para diagnóstico > Adapta Response Surface Methodology a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 630 > EVOP aplicado a industria para diagnóstico > Adapta EVOP a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 631 > SPC aplicado a industria para diagnóstico > Adapta SPC a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 632 > Carta X-barra R aplicado a industria para diagnóstico > Adapta Carta X-barra R a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 633 > Carta X-barra S aplicado a industria para diagnóstico > Adapta Carta X-barra S a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 634 > Carta I-MR aplicado a industria para diagnóstico > Adapta Carta I-MR a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 635 > Carta p aplicado a industria para diagnóstico > Adapta Carta p a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 636 > Carta np aplicado a industria para diagnóstico > Adapta Carta np a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 637 > Carta c aplicado a industria para diagnóstico > Adapta Carta c a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 638 > Carta u aplicado a industria para diagnóstico > Adapta Carta u a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 639 > Carta CUSUM aplicado a industria para diagnóstico > Adapta Carta CUSUM a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 640 > Carta EWMA aplicado a industria para diagnóstico > Adapta Carta EWMA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 641 > Capacidad Cp aplicado a industria para diagnóstico > Adapta Capacidad Cp a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 642 > Capacidad Cpk aplicado a industria para diagnóstico > Adapta Capacidad Cpk a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 643 > Capacidad Pp aplicado a industria para diagnóstico > Adapta Capacidad Pp a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 644 > Capacidad Ppk aplicado a industria para diagnóstico > Adapta Capacidad Ppk a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 645 > MSA aplicado a industria para diagnóstico > Adapta MSA a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 646 > Gage R&R aplicado a industria para diagnóstico > Adapta Gage R&R a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 647 > QFD aplicado a industria para diagnóstico > Adapta QFD a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 648 > House of Quality aplicado a industria para diagnóstico > Adapta House of Quality a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 649 > Voice of Customer aplicado a industria para diagnóstico > Adapta Voice of Customer a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 650 > Kano Model aplicado a industria para diagnóstico > Adapta Kano Model a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 651 > CTQ Tree aplicado a industria para diagnóstico > Adapta CTQ Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 652 > SERVQUAL aplicado a industria para diagnóstico > Adapta SERVQUAL a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 653 > Customer Journey Mapping aplicado a industria para diagnóstico > Adapta Customer Journey Mapping a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 654 > Service Blueprint aplicado a industria para diagnóstico > Adapta Service Blueprint a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 655 > Benchmarking competitivo aplicado a industria para diagnóstico > Adapta Benchmarking competitivo a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 656 > Benchmarking funcional aplicado a industria para diagnóstico > Adapta Benchmarking funcional a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 657 > Benchmarking interno aplicado a industria para diagnóstico > Adapta Benchmarking interno a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 658 > TQM aplicado a industria para diagnóstico > Adapta TQM a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 659 > Modelo EFQM aplicado a industria para diagnóstico > Adapta Modelo EFQM a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 660 > Malcolm Baldrige Framework aplicado a industria para diagnóstico > Adapta Malcolm Baldrige Framework a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 661 > ISO 9001 aplicado a industria para diagnóstico > Adapta ISO 9001 a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 662 > ISO 14001 aplicado a industria para diagnóstico > Adapta ISO 14001 a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 663 > ISO 45001 aplicado a industria para diagnóstico > Adapta ISO 45001 a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 664 > ISO 31000 aplicado a industria para diagnóstico > Adapta ISO 31000 a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 665 > ISO 56002 aplicado a industria para diagnóstico > Adapta ISO 56002 a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 666 > CMMI aplicado a industria para diagnóstico > Adapta CMMI a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 667 > SPICE aplicado a industria para diagnóstico > Adapta SPICE a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 668 > COBIT aplicado a industria para diagnóstico > Adapta COBIT a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 669 > ITIL Continual Improvement aplicado a industria para diagnóstico > Adapta ITIL Continual Improvement a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 670 > SRE Error Budget aplicado a industria para diagnóstico > Adapta SRE Error Budget a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 671 > Postmortem sin culpa aplicado a industria para diagnóstico > Adapta Postmortem sin culpa a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 672 > Chaos Engineering aplicado a industria para diagnóstico > Adapta Chaos Engineering a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 673 > GameDay aplicado a industria para diagnóstico > Adapta GameDay a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 674 > Retrospectiva Agile aplicado a industria para diagnóstico > Adapta Retrospectiva Agile a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 675 > Scrum aplicado a industria para diagnóstico > Adapta Scrum a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 676 > Extreme Programming aplicado a industria para diagnóstico > Adapta Extreme Programming a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 677 > Pair Programming aplicado a industria para diagnóstico > Adapta Pair Programming a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 678 > Mob Programming aplicado a industria para diagnóstico > Adapta Mob Programming a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 679 > Test-Driven Development aplicado a industria para diagnóstico > Adapta Test-Driven Development a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 680 > Behavior-Driven Development aplicado a industria para diagnóstico > Adapta Behavior-Driven Development a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 681 > Acceptance Test-Driven Development aplicado a industria para diagnóstico > Adapta Acceptance Test-Driven Development a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 682 > Continuous Integration aplicado a industria para diagnóstico > Adapta Continuous Integration a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 683 > Continuous Delivery aplicado a industria para diagnóstico > Adapta Continuous Delivery a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 684 > Continuous Deployment aplicado a industria para diagnóstico > Adapta Continuous Deployment a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 685 > DevOps aplicado a industria para diagnóstico > Adapta DevOps a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 686 > DevSecOps aplicado a industria para diagnóstico > Adapta DevSecOps a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 687 > GitOps aplicado a industria para diagnóstico > Adapta GitOps a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 688 > DORA Metrics aplicado a industria para diagnóstico > Adapta DORA Metrics a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 689 > TRIZ aplicado a industria para diagnóstico > Adapta TRIZ a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 690 > ARIZ aplicado a industria para diagnóstico > Adapta ARIZ a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 691 > Análisis Su-Field aplicado a industria para diagnóstico > Adapta Análisis Su-Field a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 692 > SCAMPER aplicado a industria para diagnóstico > Adapta SCAMPER a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 693 > Design Thinking aplicado a industria para diagnóstico > Adapta Design Thinking a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 694 > Double Diamond aplicado a industria para diagnóstico > Adapta Double Diamond a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 695 > Human-Centered Design aplicado a industria para diagnóstico > Adapta Human-Centered Design a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 696 > Co-Design aplicado a industria para diagnóstico > Adapta Co-Design a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 697 > Participatory Design aplicado a industria para diagnóstico > Adapta Participatory Design a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 698 > Design Sprint aplicado a industria para diagnóstico > Adapta Design Sprint a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 699 > Jobs to Be Done aplicado a industria para diagnóstico > Adapta Jobs to Be Done a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.
+APLICACIÓN METODOLÓGICA, INDUSTRIA, OPTIMIZACIÓN, CALIDAD E INNOVACIÓN > 700 > Opportunity Solution Tree aplicado a industria para diagnóstico > Adapta Opportunity Solution Tree a procesos industriales y calidad para delimitar el problema, establecer una línea base y priorizar hipótesis, definiendo métricas, responsables y criterios de verificación.

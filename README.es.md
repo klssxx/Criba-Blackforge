@@ -2,7 +2,7 @@
 
 **El motor de ideación reproducible.** Determinista, auditable y local-first: la misma semilla siempre produce las mismas ideas — sin APIs de pago para obtener resultados útiles.
 
-Motor local y determinista para exploración combinatoria, análisis causal e ideación de ciberseguridad defensiva. CRIBA combina un catálogo inmutable y versionado de métodos de innovación y seguridad con un selector reproducible basado en semilla, una pista de auditoría SQLite para cada idea y una expansión opcional con modelos gratuitos (Z.ai GLM y Nous `:free`).
+Motor local y determinista para exploración combinatoria, análisis causal e ideación de ciberseguridad defensiva. CRIBA combina un catálogo inmutable y versionado de métodos de innovación y seguridad con un selector reproducible basado en semilla, una pista de auditoría SQLite para cada idea y una interpretación opcional mediante proveedores configurables de modelo (endpoints compatibles con OpenAI, locales o de nube).
 
 > Versión en inglés: [README.md](./README.md).
 
@@ -15,9 +15,9 @@ La mayoría de herramientas de "ideación con IA" son cajas negras: pides, sale 
 - **Determinista por defecto** — `--seed 42` produce resultados idénticos byte a byte en cualquier máquina.
 - **Cada idea queda auditada** — traza SQLite por activación: métodos usados, puntuaciones, orden y versión exacta del catálogo.
 - **Local sin fricción** — sin API key, sin red y sin telemetría para ejecutar el núcleo.
-- **Expansión cloud gratis** — interpretación opcional de ideas con `GLM-5.3-flash` (Z.ai) y `poolside/laguna-s-2.1:free` (Nous Research), con fallback determinista si no hay red.
+- **Interpretación opcional con modelo** — trae tu propio proveedor (GGUF/Ollama local o endpoint de nube compatible con OpenAI); sin proveedor, scoring determinista local y la interpretación queda PENDIENTE en lugar de fabricarse.
 - **Catálogo integrado** — más de 130 técnicas de innovación y seguridad (TRIZ, Design Thinking, JTBD, FMEA, MITRE ATT&CK, OWASP, STRIDE, Kill Chain…) congeladas en JSON con esquema versionado.
-- **Probado a conciencia** — más de 940 tests; el pipeline de release construye un ejecutable portable de Windows firmado con procedencia SLSA.
+- **Probado a conciencia** — 866 tests verificados; el pipeline de release construye un ejecutable portable de Windows firmado con procedencia SLSA.
 
 ## Funcionalidades
 
@@ -94,8 +94,7 @@ scripts\launch_workbench.bat
 Cuando configuras un perfil GGUF/Ollama local *o* activas las rutas cloud gratuitas, CRIBA
 conserva su núcleo determinista y usa el modelo solo para redactar ideas coherentes:
 
-- **Z.ai** — `glm-5.3-flash` en `https://api.z.ai/v1`
-- **Nous Research** — `poolside/laguna-s-2.1:free` en `https://api.nousresearch.com/v1` (env `NOUS_API_KEY`)
+- **Cualquier endpoint compatible con OpenAI** — configura URL base, modelo y clave en el diálogo de modelos o por variables de entorno (p. ej. `NOUS_API_KEY` para el endpoint de Nous).
 
 Si el modelo no responde, CRIBA degrada a su fallback determinista offline — la salida
 nunca depende de la red. Las claves de cloud se leen solo de variables de entorno y
@@ -111,7 +110,7 @@ tasa (sin red en los tests de CI).
 ## Desarrollo
 
 ```bash
-uv run pytest -q            # más de 940 tests
+uv run pytest -q            # 866 tests
 uv run mypy src/criba       # tipado estricto sobre el motor
 uv run ruff check src       # lint
 ```

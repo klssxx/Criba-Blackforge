@@ -3,6 +3,7 @@
   "phase": "P10",
   "title": "CodeScout against GitHub",
   "status": "VERIFIED",
+  "commits": ["211eacbabcdb51923e4789d780a2a2035713c2ec"],
   "files_read": [
     "src/criba/intelligence/prior_art/scouts.py",
     "src/criba/intelligence/prior_art/__init__.py",

@@ -486,7 +486,7 @@ class Window(QMainWindow):
 
 def run(database=None):
     if QApplication is None:
-        print("PySide6 no está instalado. Instala requirements-optional.txt para usar 'criba gui'.", file=sys.stderr)
+        print("PySide6 no está instalado. Ejecute 'uv sync --extra gui --locked' para usar 'criba gui'.", file=sys.stderr)
         return 2
     from .ui.main_window import CribaMainWindow
     app = QApplication.instance() or QApplication(sys.argv)

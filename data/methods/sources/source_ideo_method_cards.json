@@ -7,11 +7,22 @@
     "template": "Aplicar Frame Problems para reformular la pregunta inicial desde ángulos no explorados.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["reformulacion", "problema", "angulos_multiples"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "reformulacion",
+      "problema",
+      "angulos_multiples"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_extremes_mainstreams",
@@ -21,11 +32,22 @@
     "template": "Investigar usuarios extremos y mainstream para contrastar comportamientos y necesidades.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["extremos", "mainstream", "contrastar", "usuarios"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "extremos",
+      "mainstream",
+      "contrastar",
+      "usuarios"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_guided_tour",
@@ -35,11 +57,22 @@
     "template": "Solicitar una visita guiada por el entorno del usuario para observar comportamientos naturales.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["visita", "entorno", "observacion", "acompañamiento"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "visita",
+      "entorno",
+      "observacion",
+      "acompañamiento"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_interview",
@@ -49,11 +82,21 @@
     "template": "Realizar entrevista abierta enfocada en motivaciones, no solo en lo que dicen que hacen.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["entrevista", "profundidad", "motivaciones"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "entrevista",
+      "profundidad",
+      "motivaciones"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_immersion",
@@ -63,11 +106,22 @@
     "template": "Sumergirse en el contexto del usuario para experimentar sus frustraciones y necesidades directamente.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["inmersion", "experiencia", "contexto", "prolongada"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "inmersion",
+      "experiencia",
+      "contexto",
+      "prolongada"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_analogous_inspiration",
@@ -77,11 +131,22 @@
     "template": "Observar cómo se resuelven problemas similares en otros dominios para importar soluciones.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "innovacion", "puntos_de_vista"],
-    "tags": ["analogia", "trasplante", "dominios_distintos"],
+    "categories": [
+      "investigacion",
+      "innovacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "analogia",
+      "trasplante",
+      "dominios_distintos"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_expert_input",
@@ -91,11 +156,21 @@
     "template": "Identificar y entrevistar expertos del dominio para obtener insights técnicos.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["experto", "conocimiento", "especializado"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "experto",
+      "conocimiento",
+      "especializado"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_uncomfortable_truths",
@@ -105,11 +180,23 @@
     "template": "Identificar y confrontar verdades incómodas sobre el problema o la organización.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diagnostico", "puntos_de_vista"],
-    "tags": ["verdad", "incómoda", "confrontacion", "honestidad"],
+    "categories": [
+      "investigacion",
+      "diagnostico",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "verdad",
+      "incómoda",
+      "confrontacion",
+      "honestidad"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_landscape",
@@ -119,11 +206,22 @@
     "template": "Realizar un barrido amplio del contexto para identificar patrones y oportunidades.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["panorama", "contexto", "barrido", "amplio"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "panorama",
+      "contexto",
+      "barrido",
+      "amplio"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_shadowing",
@@ -133,11 +231,21 @@
     "template": "Seguir al usuario durante su actividad normal sin intervenir, anotando observaciones.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["observacion", "silenciosa", "comportamiento_natural"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "observacion",
+      "silenciosa",
+      "comportamiento_natural"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_camera_journal",
@@ -147,11 +255,23 @@
     "template": "Entregar una cámara al usuario para que documente su experiencia diaria con fotos.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["diario", "foto", "autoobservacion", "contexto"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "diario",
+      "foto",
+      "autoobservacion",
+      "contexto"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_photo_study",
@@ -161,11 +281,22 @@
     "template": "Recopilar y analizar fotografías del usuario para identificar patrones visuales.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["foto", "analisis", "patrones", "visual"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "foto",
+      "analisis",
+      "patrones",
+      "visual"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_expert_eyes",
@@ -175,11 +306,21 @@
     "template": "Pedir a un experto que observe el mismo contexto y anote lo que ve diferente.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["experto", "observacion", "perspectiva_especializada"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "experto",
+      "observacion",
+      "perspectiva_especializada"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_scan",
@@ -189,11 +330,22 @@
     "template": "Realizar un barrido rápido del entorno buscando señales relevantes al problema.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["barrido", "rapido", "señales", "contexto"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "barrido",
+      "rapido",
+      "señales",
+      "contexto"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_collage",
@@ -203,11 +355,23 @@
     "template": "Proporcionar materiales y pedir al usuario que cree un collage expresando su perspectiva.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["collage", "expresion", "sentimientos", "visual"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "collage",
+      "expresion",
+      "sentimientos",
+      "visual"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_probes",
@@ -217,11 +381,23 @@
     "template": "Diseñar un kit de probes (tareas, cámaras, diarios) y entregarlo al usuario.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["probes", "kit", "tareas", "auto_documentacion"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "probes",
+      "kit",
+      "tareas",
+      "auto_documentacion"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["IDEO_probes", "gaver_dunne_1999"]
+    "external_refs": [
+      "IDEO_probes",
+      "gaver_dunne_1999"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_bodystorm",
@@ -231,11 +407,23 @@
     "template": "Actuar físicamente un escenario de uso para sentir las interacciones en el cuerpo.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno", "innovacion"],
-    "tags": ["cuerpo", "actuacion", "escenario", "interaccion_fisica"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "innovacion"
+    ],
+    "tags": [
+      "cuerpo",
+      "actuacion",
+      "escenario",
+      "interaccion_fisica"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_collect_stories",
@@ -245,11 +433,22 @@
     "template": "Solicitar al usuario que cuente historias concretas sobre experiencias relevantes.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["historias", "narrativa", "experiencia", "emocional"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "historias",
+      "narrativa",
+      "experiencia",
+      "emocional"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_collect_experiences",
@@ -259,11 +458,22 @@
     "template": "Pedir al usuario que recoja objetos, capturas o artefactos de su experiencia.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["experiencias", "artefactos", "recopilacion", "tangible"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "experiencias",
+      "artefactos",
+      "recopilacion",
+      "tangible"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_sort_cluster",
@@ -273,11 +483,23 @@
     "template": "Agrupar notas y hallazgos en categorías emergentes durante una sesión colaborativa.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "proceso", "innovacion"],
-    "tags": ["clasificacion", "agrupacion", "categorias", "organizacion"],
+    "categories": [
+      "investigacion",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "clasificacion",
+      "agrupacion",
+      "categorias",
+      "organizacion"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_concept_posters",
@@ -287,11 +509,23 @@
     "template": "Crear un póster visual que sintetice los hallazgos y proponga una dirección de diseño.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno", "comunicacion"],
-    "tags": ["poster", "sintesis", "visual", "direccion"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "comunicacion"
+    ],
+    "tags": [
+      "poster",
+      "sintesis",
+      "visual",
+      "direccion"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_conceptual_mashup",
@@ -301,11 +535,23 @@
     "template": "Tomar conceptos de dos dominios distintos y fusionarlos para crear algo nuevo.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["innovacion", "puntos_de_vista", "diseno"],
-    "tags": ["fusion", "conceptos", "dominios_distintos", "creatividad"],
+    "categories": [
+      "innovacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "fusion",
+      "conceptos",
+      "dominios_distintos",
+      "creatividad"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_guiding_principles",
@@ -315,11 +561,23 @@
     "template": "Extraer principios guía de los hallazgos que orienten las decisiones de diseño.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno", "estrategia"],
-    "tags": ["principios", "orientacion", "decisiones", "diseno"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "estrategia"
+    ],
+    "tags": [
+      "principios",
+      "orientacion",
+      "decisiones",
+      "diseno"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_slogan_writing",
@@ -329,11 +587,23 @@
     "template": "Escribir slogans que capturen la esencia de lo aprendido en frases cortas.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "comunicacion", "innovacion"],
-    "tags": ["slogan", "frase", "esencia", "compresion"],
+    "categories": [
+      "investigacion",
+      "comunicacion",
+      "innovacion"
+    ],
+    "tags": [
+      "slogan",
+      "frase",
+      "esencia",
+      "compresion"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_experience_prototypes",
@@ -343,11 +613,23 @@
     "template": "Crear un prototipo que simule la experiencia completa de uso.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "innovacion", "investigacion"],
-    "tags": ["prototipo", "experiencia", "simulacion", "completa"],
+    "categories": [
+      "diseno",
+      "innovacion",
+      "investigacion"
+    ],
+    "tags": [
+      "prototipo",
+      "experiencia",
+      "simulacion",
+      "completa"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_role_playing",
@@ -357,11 +639,23 @@
     "template": "Asignar roles y actuar escenarios para experimentar diferentes perspectivas.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno", "innovacion"],
-    "tags": ["roles", "actuacion", "perspectivas", "interaccion"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "innovacion"
+    ],
+    "tags": [
+      "roles",
+      "actuacion",
+      "perspectivas",
+      "interaccion"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_build_to_think",
@@ -371,11 +665,23 @@
     "template": "Crear prototipos rápidos para pensar mejor, no para presentar resultados finales.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "innovacion", "proceso"],
-    "tags": ["construir", "pensar", "prototipo_rapido", "aprendizaje"],
+    "categories": [
+      "diseno",
+      "innovacion",
+      "proceso"
+    ],
+    "tags": [
+      "construir",
+      "pensar",
+      "prototipo_rapido",
+      "aprendizaje"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_explorations",
@@ -385,11 +691,22 @@
     "template": "Generar y explorar múltiples direcciones de diseño antes de elegir una.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["innovacion", "diseno", "divergencia"],
-    "tags": ["exploracion", "multiples_direcciones", "divergencia"],
+    "categories": [
+      "innovacion",
+      "diseno",
+      "divergencia"
+    ],
+    "tags": [
+      "exploracion",
+      "multiples_direcciones",
+      "divergencia"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_storyboards",
@@ -399,11 +716,23 @@
     "template": "Crear una secuencia visual (historieta) que narre la experiencia de uso paso a paso.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "comunicacion", "investigacion"],
-    "tags": ["storyboard", "historieta", "secuencia", "narrativa_visual"],
+    "categories": [
+      "diseno",
+      "comunicacion",
+      "investigacion"
+    ],
+    "tags": [
+      "storyboard",
+      "historieta",
+      "secuencia",
+      "narrativa_visual"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_extreme_characters",
@@ -413,11 +742,23 @@
     "template": "Diseñar personajes con necesidades extremas para push los límites de la solución.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "innovacion", "investigacion"],
-    "tags": ["personajes", "extremos", "limites", "diseno"],
+    "categories": [
+      "diseno",
+      "innovacion",
+      "investigacion"
+    ],
+    "tags": [
+      "personajes",
+      "extremos",
+      "limites",
+      "diseno"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_beauty_probes",
@@ -427,11 +768,23 @@
     "template": "Diseñar objetos estéticamente potentes que provoquen reflexión sobre el tema.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "innovacion", "investigacion"],
-    "tags": ["belleza", "probes", "reflexion", "futuro"],
+    "categories": [
+      "diseno",
+      "innovacion",
+      "investigacion"
+    ],
+    "tags": [
+      "belleza",
+      "probes",
+      "reflexion",
+      "futuro"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["dunne_raby_2007"]
+    "external_refs": [
+      "dunne_raby_2007"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_wizard_of_oz",
@@ -441,11 +794,23 @@
     "template": "Simular detrás de escena la funcionalidad que el usuario cree que es real.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "investigacion", "innovacion"],
-    "tags": ["simulacion", "falso_funcional", "testeo", "experiencia"],
+    "categories": [
+      "diseno",
+      "investigacion",
+      "innovacion"
+    ],
+    "tags": [
+      "simulacion",
+      "falso_funcional",
+      "testeo",
+      "experiencia"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["video_izo_1975"]
+    "external_refs": [
+      "video_izo_1975"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_empathy_exercises",
@@ -455,11 +820,22 @@
     "template": "Realizar ejercicios de empatía (caminar en zapatos ajenos, reverse role-play).",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["empatia", "ejercicio", "perspectiva_usuario"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "empatia",
+      "ejercicio",
+      "perspectiva_usuario"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_gift_exercises",
@@ -469,11 +845,22 @@
     "template": "Solicitar al usuario que elija un regalo que represente su relación con el problema.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["regalo", "simbolico", "relacion", "tema"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "regalo",
+      "simbolico",
+      "relacion",
+      "tema"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_surveys",
@@ -483,11 +870,21 @@
     "template": "Diseñar y distribuir encuestas para recopilar datos de muchos usuarios.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["encuesta", "cuantitativo", "gran_escala"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "encuesta",
+      "cuantitativo",
+      "gran_escala"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_audits",
@@ -497,11 +894,22 @@
     "template": "Realizar una auditoría completa del producto o servicio actual.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "mejora", "diagnostico"],
-    "tags": ["auditoria", "estado_actual", "revision_sistematica"],
+    "categories": [
+      "investigacion",
+      "mejora",
+      "diagnostico"
+    ],
+    "tags": [
+      "auditoria",
+      "estado_actual",
+      "revision_sistematica"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_card_sorting",
@@ -511,11 +919,21 @@
     "template": "Dar al usuario tarjetas con conceptos y pedir que las organice en categorías.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno"],
-    "tags": ["tarjetas", "clasificacion", "estructura_mental"],
+    "categories": [
+      "investigacion",
+      "diseno"
+    ],
+    "tags": [
+      "tarjetas",
+      "clasificacion",
+      "estructura_mental"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_brainstorming_sessions",
@@ -525,11 +943,22 @@
     "template": "Facilitar sesiones de brainstorming con reglas claras: cantidad sobre calidad, sin juicio.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["innovacion", "facilitacion", "proceso"],
-    "tags": ["brainstorming", "grupo", "generacion_ideas"],
+    "categories": [
+      "innovacion",
+      "facilitacion",
+      "proceso"
+    ],
+    "tags": [
+      "brainstorming",
+      "grupo",
+      "generacion_ideas"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_diary_studies",
@@ -539,11 +968,22 @@
     "template": "Proporcionar un diario y pedir al usuario que registre su experiencia diariamente.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["diario", "prolongado", "seguimiento", "experiencia"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "diario",
+      "prolongado",
+      "seguimiento",
+      "experiencia"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_cultural_probes",
@@ -553,11 +993,23 @@
     "template": "Crear un kit con tareas, cámaras, recortes para que el usuario explore su cultura.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["cultural", "probes", "kit", "auto_exploracion"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "cultural",
+      "probes",
+      "kit",
+      "auto_exploracion"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["gaver_dunne_1999"]
+    "external_refs": [
+      "gaver_dunne_1999"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_probe_toolkit",
@@ -567,11 +1019,22 @@
     "template": "Diseñar un toolkit de probes personalizado para el contexto de investigación.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "diseno"],
-    "tags": ["toolkit", "probes", "herramientas", "personalizado"],
+    "categories": [
+      "investigacion",
+      "diseno"
+    ],
+    "tags": [
+      "toolkit",
+      "probes",
+      "herramientas",
+      "personalizado"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_interview_guide",
@@ -581,11 +1044,22 @@
     "template": "Crear una guía de entrevista con preguntas abiertas y temas clave.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["guia", "entrevista", "estructura", "consistencia"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "guia",
+      "entrevista",
+      "estructura",
+      "consistencia"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_contextual_inquiry",
@@ -595,11 +1069,22 @@
     "template": "Realizar la entrevista en el entorno donde el usuario realiza la actividad.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["contexto", "entrevista", "in situ", "natural"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "contexto",
+      "entrevista",
+      "in situ",
+      "natural"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["holtzblatt_beyer_2017"]
+    "external_refs": [
+      "holtzblatt_beyer_2017"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_cognitive_map",
@@ -609,11 +1094,23 @@
     "template": "Pedir al usuario que dibuje un mapa de cómo entiende el sistema o proceso.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["mapa_cognitivo", "comprension", "sistema", "dibujo"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "mapa_cognitivo",
+      "comprension",
+      "sistema",
+      "dibujo"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_experience_chart",
@@ -623,11 +1120,22 @@
     "template": "Pedir al usuario que grafique los altibajos de su experiencia con el producto/servicio.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["grafico", "experiencia", "tiempo", "altibajos"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "grafico",
+      "experiencia",
+      "tiempo",
+      "altibajos"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_object_analysis",
@@ -637,11 +1145,22 @@
     "template": "Pedir al usuario que traiga objetos significativos y analizar qué representan.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista"],
-    "tags": ["objetos", "simbolico", "valores", "analisis"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista"
+    ],
+    "tags": [
+      "objetos",
+      "simbolico",
+      "valores",
+      "analisis"
+    ],
     "origin": "external",
     "suit": "Ask",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_tour_map",
@@ -651,11 +1170,23 @@
     "template": "Solicitar al usuario que dibuje su recorrido habitual paso a paso.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "puntos_de_vista", "diseno"],
-    "tags": ["mapa", "recorrido", "pasos", "flujo"],
+    "categories": [
+      "investigacion",
+      "puntos_de_vista",
+      "diseno"
+    ],
+    "tags": [
+      "mapa",
+      "recorrido",
+      "pasos",
+      "flujo"
+    ],
     "origin": "external",
     "suit": "Look",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_future_scenarios",
@@ -665,11 +1196,23 @@
     "template": "Narrar escenarios del futuro donde la solución ya existe y sus consecuencias.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["innovacion", "investigacion", "estrategia"],
-    "tags": ["futuro", "escenarios", "implicaciones", "narrativa"],
+    "categories": [
+      "innovacion",
+      "investigacion",
+      "estrategia"
+    ],
+    "tags": [
+      "futuro",
+      "escenarios",
+      "implicaciones",
+      "narrativa"
+    ],
     "origin": "external",
     "suit": "Try",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_impact_map",
@@ -679,11 +1222,23 @@
     "template": "Crear un mapa de impacto: objetivo → actores → impactos → deliverables.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["innovacion", "estrategia", "proceso"],
-    "tags": ["impacto", "stakeholders", "objetivo", "deliverables"],
+    "categories": [
+      "innovacion",
+      "estrategia",
+      "proceso"
+    ],
+    "tags": [
+      "impacto",
+      "stakeholders",
+      "objetivo",
+      "deliverables"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_service_blueprints",
@@ -693,11 +1248,23 @@
     "template": "Diseñar un blueprint del servicio: frontstage, backstage, procesos de soporte.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["diseno", "investigacion", "proceso"],
-    "tags": ["blueprint", "servicio", "puntos_contacto", "frontstage_backstage"],
+    "categories": [
+      "diseno",
+      "investigacion",
+      "proceso"
+    ],
+    "tags": [
+      "blueprint",
+      "servicio",
+      "puntos_contacto",
+      "frontstage_backstage"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["shostack_1984"]
+    "external_refs": [
+      "shostack_1984"
+    ],
+    "thinking_class": "generacion"
   },
   {
     "id": "ideo_jigsaw",
@@ -707,10 +1274,22 @@
     "template": "Dividir el tema en piezas, asignar cada pieza a un equipo, luego recomponer el conocimiento completo.",
     "source": "ideo_method_cards",
     "granularity": "method",
-    "categories": ["investigacion", "facilitacion", "innovacion"],
-    "tags": ["jigsaw", "piezas", "colaborativo", "profundidad"],
+    "categories": [
+      "investigacion",
+      "facilitacion",
+      "innovacion"
+    ],
+    "tags": [
+      "jigsaw",
+      "piezas",
+      "colaborativo",
+      "profundidad"
+    ],
     "origin": "external",
     "suit": "Learn",
-    "external_refs": ["ideo_method_cards_v4"]
+    "external_refs": [
+      "ideo_method_cards_v4"
+    ],
+    "thinking_class": "generacion"
   }
 ]

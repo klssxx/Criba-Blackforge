@@ -190,7 +190,7 @@ def create_app(database: DatabasePath = None) -> Any:
         from pydantic import BaseModel, Field
     except ImportError as exc:
         raise RuntimeError(
-            "FastAPI no está instalado; use el servidor estándar o requirements-optional.txt."
+            "FastAPI no está instalado; ejecute 'uv sync --extra api --locked'."
         ) from exc
 
     class Activation(BaseModel):

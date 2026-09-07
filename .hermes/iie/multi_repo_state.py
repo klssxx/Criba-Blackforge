@@ -22,8 +22,8 @@ from typing import Any
 ROOT = Path(__file__).resolve().parent
 STATE_PATH = ROOT / "STATE.json"
 PHYSICAL_REPOS: dict[str, str] = {
-    "CRIBA": "E:/PROYECTS/CRIBA",
-    "SUPRA": "E:/PROYECTS/SUPRA",
+    "CRIBA": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA",
+    "SUPRA": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/SUPRA",
 }
 BLACKFORGE_PATHS: tuple[str, ...] = ("src/criba/blackforge_",)
 LOCK_FIELDS = {"repo", "path", "holder", "acquired_at", "reason"}

@@ -3,6 +3,7 @@
   "phase": "P10",
   "title": "ProductScout against Wikipedia",
   "status": "VERIFIED",
+  "commits": ["10e1dcc7a30da228ef7992c88beffe9bd47cfca2"],
   "files_read": [
     "src/criba/intelligence/prior_art/scouts.py",
     "src/criba/intelligence/prior_art/__init__.py",

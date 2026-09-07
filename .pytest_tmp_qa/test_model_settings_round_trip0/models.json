@@ -1,0 +1,22 @@
+{
+  "schema_version": 1,
+  "enabled": true,
+  "active_profile_id": "e9e30126-aea4-4ddd-9667-3a624c05a0ef",
+  "profiles": [
+    {
+      "id": "e9e30126-aea4-4ddd-9667-3a624c05a0ef",
+      "name": "Qwen local",
+      "backend": "llama_cpp",
+      "endpoint": "http://127.0.0.1:8080",
+      "model": "criba-local",
+      "gguf_path": "C:\\Users\\KLSX\\Music\\INNOVATIONS\\ACTIVE\\CRIBA\\.pytest_tmp_qa\\test_model_settings_round_trip0\\qwen.gguf",
+      "server_path": "C:\\Users\\KLSX\\Music\\INNOVATIONS\\ACTIVE\\CRIBA\\.pytest_tmp_qa\\test_model_settings_round_trip0\\llama-server.exe",
+      "auto_start": true,
+      "reasoning": "deep",
+      "context_size": 8192,
+      "gpu_layers": -1,
+      "temperature": 0.45,
+      "max_output_tokens": 2400
+    }
+  ]
+}

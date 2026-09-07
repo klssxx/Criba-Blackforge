@@ -41,9 +41,10 @@ from .widgets import FooterSegment, NavButton, apply_neon_breath
 NAV_SPEC = [
     ("navNuevaIdea", "◉", "Nueva idea", "Inicia el flujo, pide el problema base"),
     ("navGenerar", "⚙", "Generar", "Ejecuta los 16 operadores"),
+    ("navInventar", "✦", "Inventar", "Cruce → hipótesis → antecedentes"),
     ("navEvaluar", "▥", "Evaluar", "Ranking por value_score"),
     ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
-    ("navActualizar", "↻", "Actualizar innovaciones", "Tendencias, tecnología, diseño"),
+    ("navActualizar", "↻", "Actualizar fuentes", "Adquisición real: Crossref, GitHub…"),
     ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
     ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
     ("navHibrido", "⚡", "Híbrido", "Pipeline completo: ensemble → cadena → adversarial"),
@@ -218,6 +219,7 @@ class CribaMainWindow(QMainWindow):
         # conexiones nav
         self.nav["navNuevaIdea"].clicked.connect(lambda: actions.on_nueva_idea(self))
         self.nav["navGenerar"].clicked.connect(lambda: actions.on_generar(self))
+        self.nav["navInventar"].clicked.connect(lambda: actions.on_inventar(self))
         self.nav["navEvaluar"].clicked.connect(lambda: actions.on_evaluar(self))
         self.nav["navGuardar"].clicked.connect(lambda: actions.on_guardar(self))
         self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))
@@ -345,6 +347,8 @@ class CribaMainWindow(QMainWindow):
         right_scroll.setWidget(build_right_column(t, self.refs))
         lay.addWidget(right_scroll)
         # conexiones bloque derecho / central
+        self.refs["supraBtn"].clicked.connect(
+            lambda: actions.on_desarrollar_supra(self))
         self.refs["actualizarFuentesBtn"].clicked.connect(
             lambda: actions.on_actualizar(self))
         self.refs["historialCompletoBtn"].clicked.connect(

@@ -1,5 +1,14 @@
-"""IIE source registry (P03): discovery of available sources (§114)."""
+"""IIE source registry: the default active pair is free and key-less (0€).
+
+Wikipedia (encyclopedic/product evidence) + Google Patents (patent evidence)
+run by default. Optional sources (GitHub, OpenAlex, Crossref, arXiv, EPO,
+ClinicalTrials, NSF) activate behind ``CRIBA_IIE_EXTRA_SOURCES=1`` or
+``build_sources(context, extra=True)``.
+"""
 from __future__ import annotations
+
+import os
+from typing import Any
 
 from .adapters import (
     ArxivSource,
@@ -10,30 +19,43 @@ from .adapters import (
     NsfAwardsSource,
     OpenAlexSource,
 )
+from .google_patents import GooglePatentsSource
 from .protocol import IntelligenceSource, SourceContext
 from .transport import Transport, TransportBudget
+from .wikipedia import WikipediaSource
 
-_ALL = [
+_DEFAULT_ACTIVE = (WikipediaSource, GooglePatentsSource)
+_OPTIONAL = (
+    GitHubSource,
     OpenAlexSource,
     CrossrefSource,
     ArxivSource,
-    GitHubSource,
     EpoOpsSource,
     ClinicalTrialsSource,
     NsfAwardsSource,
-]
+)
 
 
-def build_sources(context: SourceContext) -> list[IntelligenceSource]:
-    return [cls(context) for cls in _ALL]
+def build_sources(context: SourceContext, *, extra: bool = False) -> list[IntelligenceSource]:
+    """Build the active sources: the free pair by default, extras opt-in."""
+    classes = list(_DEFAULT_ACTIVE)
+    if extra or os.environ.get("CRIBA_IIE_EXTRA_SOURCES", "") == "1":
+        classes.extend(_OPTIONAL)
+    return [cls(context) for cls in classes]
 
 
-def default_context(cache=None, credentials: dict | None = None,
-                    budget: TransportBudget | None = None) -> SourceContext:
-    """Wire cache + transport. cache = IntelligenceStore or None."""
+def default_context(cache: Any = None, credentials: dict[str, str] | None = None,
+                    budget: TransportBudget | None = None,
+                    offline: bool = False) -> SourceContext:
+    """Wire cache + transport. cache = IntelligenceStore or None.
+
+    ``offline=True`` blocks every network request at the shared transport,
+    regardless of which acquisition stage attempts it.
+    """
     return SourceContext(
-        transport=Transport(budget=budget),
+        transport=Transport(budget=budget, offline=offline),
         cache_get=cache.cache_get if cache else None,
         cache_set=cache.cache_set if cache else None,
         credentials=credentials or {},
+        offline=offline,
     )

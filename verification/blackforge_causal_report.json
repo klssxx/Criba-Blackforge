@@ -19,7 +19,7 @@
     "a_vs_b": {
       "classification": "structurally_distinct",
       "similarity": 0.5555555555555556,
-      "coverage": 0.8999999999999999,
+      "coverage": 0.9,
       "profile_id": "general-causal-distance",
       "profile_version": "1.0.0",
       "exact_signature_match": false,
@@ -50,7 +50,7 @@
     "a_vs_a": {
       "classification": "causal_duplicate",
       "similarity": 1.0,
-      "coverage": 0.8999999999999999,
+      "coverage": 0.9,
       "profile_id": "general-causal-distance",
       "profile_version": "1.0.0",
       "exact_signature_match": true,

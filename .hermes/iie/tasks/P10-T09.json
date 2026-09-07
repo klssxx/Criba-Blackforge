@@ -1,0 +1,59 @@
+{
+  "task_id": "P10-T09",
+  "phase": "P10",
+  "title": "PriorArtVerdictEngine",
+  "status": "VERIFIED",
+  "model": "Luna",
+  "reasoning": "high",
+  "risk": "R2",
+  "requirements": [
+    "Implement the P10 verdict stage after real T07 cross-domain evidence and the real T08 skeptic report.",
+    "Emit only supported PriorArtVerdict values and never infer PROVEN_NEW from missing matches.",
+    "Fail closed on source failures, empty sources and missing provenance; preserve deterministic output."
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/verdict.py",
+    "src/criba/intelligence/prior_art/__init__.py",
+    "tests/intelligence/test_prior_art_verdict_engine.py",
+    "docs/architecture/adr/ADR-P10-T09-prior-art-verdict-engine.md",
+    ".hermes/iie/tasks/P10-T09.json"
+  ],
+  "contract": {
+    "input": "InventionCandidate, non-empty Mapping[str, SourceQueryResult], matching PriorArtSkepticReport and Sequence[PriorArtMatch].",
+    "output": "PriorArtAssessment with one of UNRESOLVED, PARTIAL_PRIOR_ART or SURVIVED_SEARCH.",
+    "forbidden_outputs": ["PROVEN_NEW", "automatic KNOWN", "automatic NEAR_PRIOR_ART"],
+    "ownership": "Known/near materiality needs a later explicit contract; P10-T10 owns mutation/re-search."
+  },
+  "tests": [
+    "RED: missing public PriorArtVerdictEngine import -> ImportError.",
+    "RED: forged T08 report hid empty source -> incorrect SURVIVED_SEARCH.",
+    "RED: public __all__ omitted engine -> assertion failure.",
+    "RED: normalized match returned SURVIVED_SEARCH -> assertion failure.",
+    "RED: reversed matches changed output order -> assertion failure.",
+    "RED: malformed match raised AttributeError -> controlled TypeError required.",
+    "RED: match overrode coverage gap -> incorrect PARTIAL_PRIOR_ART.",
+    "RED: forged T08 report hid missing provenance -> incorrect SURVIVED_SEARCH.",
+    "GREEN: tests/intelligence/test_prior_art_verdict_engine.py -> 8 passed.",
+    "GREEN: directed T07/T08/T09/protocol/contracts/boundaries -> 45 passed.",
+    "GREEN: full CRIBA -> 948 passed, 1 Starlette/httpx deprecation warning."
+  ],
+  "verification": {
+    "ruff": "All checks passed",
+    "mypy": "Success: no issues found in 1 source file",
+    "compileall": "exit 0",
+    "cost": "COST=0; no network, paid provider, credential or external write."
+  },
+  "limitations": [
+    "SURVIVED_SEARCH is not novelty, patentability, originality or a claim of exhaustive absence.",
+    "The engine deliberately does not auto-emit KNOWN or NEAR_PRIOR_ART because PriorArtMatch has no canonical materiality proof or threshold.",
+    "T07/T08/T09 are locally verified but uncommitted because their shared package export and state surface coexist with pre-existing dirty work."
+  ],
+  "commits": [],
+  "commit_reason": "No commit: staging prior_art/__init__.py or shared state would mix P10-T07/T08/P10-T09 and unrelated pre-existing dirty changes.",
+  "rollback": "Preserve the dirty tree. Revert only verdict.py, test_prior_art_verdict_engine.py, ADR-P10-T09 and this journal; review the one P10-T09 export in prior_art/__init__.py line by line. Never use reset --hard or git clean.",
+  "follow_up": [
+    "Implement P10-T10 mutation/re-search using PriorArtAssessment without reclassifying SURVIVED_SEARCH as PROVEN_NEW.",
+    "Run P10-T12 falsification audit against T07 -> T08 -> T09 -> T10 once P10-T10 exists."
+  ],
+  "completed_at": "2026-09-05T00:55:11+02:00"
+}

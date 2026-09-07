@@ -74,6 +74,117 @@ class LocalInterprete:
             log.error("Interpretación local fallida para idea %s: %s", idea.get("id"), e)
             return self._offline_fallback(query, idea)
 
+    def proponer(
+        self, query: str, idea: dict[str, Any], domain: dict[str, Any] | None = None,
+        evidence: list[dict[str, Any]] | None = None,
+    ) -> dict[str, Any]:
+        """Genera hipótesis con mecanismo a partir del cruce aplicado al problema.
+
+        ``evidence``: documentos locales pertinentes recuperados del almacén;
+        se entregan al intérprete para que la propuesta se apoye en ellos.
+        Sin API key o ante fallo devuelve estado ``PENDIENTE_INTERPRETACION``
+        sin fabricar contenido: una plantilla nunca se presenta como propuesta.
+        """
+        if self._offline:
+            return {"estado": "PENDIENTE_INTERPRETACION", "hipotesis": "",
+                    "mecanismo": "", "aportacion_por_tecnica": [], "supuestos": [],
+                    "prueba_concreta": "", "error": "sin NOUS_API_KEY"}
+        domain_title = str((domain or {}).get("title") or "general")
+        evidence_block = ""
+        for i, ev in enumerate((evidence or [])[:3], 1):
+            title = str(ev.get("title") or "").strip()
+            abstract = str(ev.get("abstract") or "").strip()
+            if title or abstract:
+                evidence_block += f"{i}. {title}: {abstract[:200]}\n"
+        if evidence_block:
+            evidence_block = (
+                "\nEVIDENCIA LOCAL PERTINENTE (apóyate solo en la que sirva y "
+                "cítala por número si la usas):\n" + evidence_block
+            )
+        bloqueo_block = ""
+        bloqueo = idea.get("bloqueo") or {}
+        if bloqueo.get("bloqueo"):
+            lecciones = ""
+            for i, lec in enumerate((bloqueo.get("lecciones_previas") or [])[:3], 1):
+                lecciones += f"  {i}. {str(lec)[:200]}\n"
+            if lecciones:
+                lecciones = ("RESULTADOS PREVIOS REGISTRADOS (pueden cambiar la "
+                             "decisión; cítalos si los usas):\n" + lecciones)
+            bloqueo_block = f"""
+
+BLOQUEO IDENTIFICADO (origen declarado: {bloqueo.get('origen_bloqueo', 'hipotesis')}):
+{str(bloqueo.get('bloqueo'))[:400]}
+Explicación: {str(bloqueo.get('explicacion_bloqueo', ''))[:300]}
+Resultado buscado: {str(bloqueo.get('resultado_buscado', ''))[:200]}
+{lecciones}
+Tu propuesta debe atacar ESTA relación concreta. Cuando el bloqueo lo permita,
+elige y declara UNA ruta de desbloqueo entre: eliminar_necesidad |
+sustituir_mecanismo | desacoplar_dependencia. No cuestiones las restricciones
+obligatorias: {str(bloqueo.get('restricciones_obligatorias', []))[:200]}.
+Añade "ruta_desbloqueo" al JSON con la ruta elegida y su justificación."""
+        prompt = f"""Aplica el cruce de técnicas a este problema concreto.
+
+PROBLEMA: {query}
+DOMINIO DE ACOPLAMIENTO: {domain_title}
+
+CRUCE (dos operadores):
+Técnica A: {idea.get('method1', idea.get('title', ''))}
+Técnica B: {idea.get('method2', '')}
+Título del cruce: {idea.get('title', '')}
+{bloqueo_block}{evidence_block}
+Responde ÚNICAMENTE con JSON válido (nada de markdown) con esta estructura:
+{{
+  "hipotesis": "propuesta específica para ESTE problema",
+  "mecanismo": "cómo funciona causalmente, en términos del dominio",
+  "aportacion_por_tecnica": ["qué aporta la técnica A aquí", "qué aporta la técnica B aquí"],
+  "supuestos": ["supuesto cuestionable 1"],
+  "prueba_concreta": "comparación mínima con métrica y condición de fracaso"
+}}
+
+El mecanismo es obligatorio y debe referirse al problema, no a los nombres
+de las técnicas. Si el cruce no produce nada pertinente, dilo en hipótesis."""
+        payload = {
+            "model": self.model,
+            "messages": [
+                {"role": "system", "content": "Eres un intérprete de cruces de técnicas. Respondes solo JSON válido."},
+                {"role": "user", "content": prompt},
+            ],
+            "temperature": 0.2,
+            "max_tokens": 2048,
+        }
+        headers = {"Authorization": f"Bearer {self.api_key}", "Content-Type": "application/json"}
+        pending = {"estado": "PENDIENTE_INTERPRETACION", "hipotesis": "",
+                   "mecanismo": "", "aportacion_por_tecnica": [], "supuestos": [],
+                   "prueba_concreta": "", "error": ""}
+        try:
+            with httpx.Client(timeout=TIMEOUT) as client:
+                resp = client.post(f"{self.base}/chat/completions", json=payload, headers=headers)
+            if resp.status_code == 429:
+                pending["error"] = "plan_agotado_429"
+                return pending
+            resp.raise_for_status()
+            content = resp.json()["choices"][0]["message"]["content"].strip()
+            raw = content
+            if raw.startswith("```json"):
+                raw = raw[7:]
+            if raw.endswith("```"):
+                raw = raw[:-3]
+            parsed = json.loads(raw)
+            return {
+                "estado": "PROPUESTA",
+                "hipotesis": str(parsed.get("hipotesis", "")),
+                "mecanismo": str(parsed.get("mecanismo", "")),
+                "aportacion_por_tecnica": list(parsed.get("aportacion_por_tecnica", [])),
+                "supuestos": list(parsed.get("supuestos", [])),
+                "prueba_concreta": str(parsed.get("prueba_concreta", "")),
+                "ruta_desbloqueo": str(parsed.get("ruta_desbloqueo", "")),
+                "error": "",
+            }
+        except Exception as e:  # noqa: BLE001 - la propuesta nunca rompe el loop
+            log.error("Propuesta fallida para idea %s: %s", idea.get("id"), e)
+            pending["error"] = str(e)
+            return pending
+
     def _offline_fallback(self, query: str, idea: dict[str, Any]) -> dict[str, Any]:
         """Scoring semántico offline (sin red) - usado cuando no hay API key o falla la red."""
         cv = idea.get("causal_variables", {})
@@ -205,7 +316,7 @@ PREGUNTAS DE EXPANSIÓN:
             return {
                 "labels": parsed.get("labels", []),
                 "score": float(parsed.get("score", 0.0)),
-                "veredicto": parsed.get("verdicto", "PENDIENTE"),
+                "veredicto": parsed.get("veredicto", "PENDIENTE"),
                 "analisis": parsed.get("analisis", ""),
                 "protocolo_aplicado": protocolo,
             }

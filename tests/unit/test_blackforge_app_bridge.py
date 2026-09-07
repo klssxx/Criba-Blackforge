@@ -47,3 +47,16 @@ def test_portable_spec_resolves_inputs_from_its_own_checkout() -> None:
 
     assert "ROOT = SPECPATH.replace" in spec
     assert "E:/PROYECTS/CRIBA" not in spec
+
+
+def test_development_launch_module_exists() -> None:
+    """Regresión (defecto 9): ``-m criba.blackforge_gui`` debe ser importable.
+
+    El arranque en desarrollo referenciaba un módulo ausente y el cambio a
+    BLACKFORGE fallaba al lanzar el proceso hijo.
+    """
+    import importlib
+
+    module = importlib.import_module("criba.blackforge_gui")
+
+    assert callable(module.run)

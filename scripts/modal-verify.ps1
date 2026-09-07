@@ -26,15 +26,12 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
 
 $ProjectRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$Python = Join-Path $ProjectRoot ".venv\Scripts\python.exe"
+$UV = (Get-Command uv -CommandType Application -ErrorAction SilentlyContinue).Source
 $Runner = Join-Path $ProjectRoot ".autoregen\cloud\modal_criba_runner.py"
-
-# El runner contiene varios entrypoints.
-# Modal necesita que se indique explícitamente cuál debe ejecutar.
 $RunnerRef = "${Runner}::main"
 
-if (-not (Test-Path -LiteralPath $Python -PathType Leaf)) {
-    throw "No se encontró el intérprete Python: $Python"
+if (-not $UV) {
+    throw "uv no está disponible. Instala uv 0.11.28 y ejecuta 'uv sync --all-extras --locked'."
 }
 
 if (-not (Test-Path -LiteralPath $Runner -PathType Leaf)) {
@@ -55,7 +52,7 @@ try {
     Write-Host "Acción:   $Action"
     Write-Host ""
 
-    & $Python -m modal --version
+    & $UV run --locked --all-extras python -m modal --version
 
     if ($LASTEXITCODE -ne 0) {
         throw "Modal no está disponible en la venv del proyecto."
@@ -92,7 +89,7 @@ try {
     Write-Host ""
     Write-Host "Ejecutando Modal..."
 
-    & $Python @ArgsList
+    & $UV run --locked --all-extras @ArgsList
     $ExitCode = $LASTEXITCODE
 }
 catch {

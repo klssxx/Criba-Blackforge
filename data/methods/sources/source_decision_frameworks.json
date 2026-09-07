@@ -7,13 +7,28 @@
     "template": "Calcular RICE: (Reach × Impact × Confidence) / Effort. Priorizar mayor RICE.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "innovacion"],
-    "tags": ["rice", "priorizacion", "scoring", "impacto"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "rice",
+      "priorizacion",
+      "scoring",
+      "impacto"
+    ],
     "origin": "external",
-    "external_refs": ["intercom_rice"],
-    "related_internal_ids": ["framework_impact_effort", "framework_moscow"],
+    "external_refs": [
+      "intercom_rice"
+    ],
+    "related_internal_ids": [
+      "framework_impact_effort",
+      "framework_moscow"
+    ],
     "normalized_mechanism": "priorizar_por_score_compuesto",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_weighted_scoring",
@@ -23,13 +38,28 @@
     "template": "Definir criterios → asignar pesos → puntuar cada opción → calcular score ponderado → elegir mayor.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "decision_riesgo"],
-    "tags": ["ponderado", "criterios", "pesos", "score"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "decision_riesgo"
+    ],
+    "tags": [
+      "ponderado",
+      "criterios",
+      "pesos",
+      "score"
+    ],
     "origin": "external",
-    "external_refs": ["decision_analysis_classic"],
-    "related_internal_ids": ["dec_rice", "framework_kano"],
+    "external_refs": [
+      "decision_analysis_classic"
+    ],
+    "related_internal_ids": [
+      "dec_rice",
+      "framework_kano"
+    ],
     "normalized_mechanism": "ponderar_criterios_decision",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_decision_matrix",
@@ -39,13 +69,28 @@
     "template": "Crear matrix: opciones en filas, criterios en columnas, puntuar cada celda, sumar por opción.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "diseno"],
-    "tags": ["matrix", "comparacion", "criterios", "pugh"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "diseno"
+    ],
+    "tags": [
+      "matrix",
+      "comparacion",
+      "criterios",
+      "pugh"
+    ],
     "origin": "external",
-    "external_refs": ["pugh_1991"],
-    "related_internal_ids": ["dec_weighted_scoring", "framework_impact_effort"],
+    "external_refs": [
+      "pugh_1991"
+    ],
+    "related_internal_ids": [
+      "dec_weighted_scoring",
+      "framework_impact_effort"
+    ],
     "normalized_mechanism": "comparar_opciones_matrix_criterios",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_cost_benefit",
@@ -55,13 +100,28 @@
     "template": "Listar costos → listar beneficios → cuantificar ambos → calcular ratio B/C → elegir mayor ratio.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "decision_riesgo", "proceso"],
-    "tags": ["costo", "beneficio", "ratio", "cuantificacion"],
+    "categories": [
+      "negocio",
+      "decision_riesgo",
+      "proceso"
+    ],
+    "tags": [
+      "costo",
+      "beneficio",
+      "ratio",
+      "cuantificacion"
+    ],
     "origin": "external",
-    "external_refs": ["nicholson_2020"],
-    "related_internal_ids": ["dec_rice", "dec_weighted_scoring"],
+    "external_refs": [
+      "nicholson_2020"
+    ],
+    "related_internal_ids": [
+      "dec_rice",
+      "dec_weighted_scoring"
+    ],
     "normalized_mechanism": "comparar_costo_beneficio",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_pros_cons",
@@ -71,13 +131,26 @@
     "template": "Listar pros y contras → asignar peso a cada uno → sumar pesos → comparar.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["decision_riesgo", "proceso"],
-    "tags": ["pros", "contras", "ponderado", "simple"],
+    "categories": [
+      "decision_riesgo",
+      "proceso"
+    ],
+    "tags": [
+      "pros",
+      "contras",
+      "ponderado",
+      "simple"
+    ],
     "origin": "external",
-    "external_refs": ["franklin_1772"],
-    "related_internal_ids": ["dec_cost_benefit"],
+    "external_refs": [
+      "franklin_1772"
+    ],
+    "related_internal_ids": [
+      "dec_cost_benefit"
+    ],
     "normalized_mechanism": "listar_ventajas_desventajas_ponderadas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_eisenhower",
@@ -87,13 +160,27 @@
     "template": "Clasificar en 4 cuadrantes: Urgente+Importante (hacer), No Urgente+Importante (programar), Urgente+No Importante (delegar), Ni uno ni otro (eliminar).",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["proceso", "decision_riesgo"],
-    "tags": ["urgencia", "importancia", "delegar", "eliminar"],
+    "categories": [
+      "proceso",
+      "decision_riesgo"
+    ],
+    "tags": [
+      "urgencia",
+      "importancia",
+      "delegar",
+      "eliminar"
+    ],
     "origin": "external",
-    "external_refs": ["eisenhower_method"],
-    "related_internal_ids": ["framework_impact_effort", "framework_moscow"],
+    "external_refs": [
+      "eisenhower_method"
+    ],
+    "related_internal_ids": [
+      "framework_impact_effort",
+      "framework_moscow"
+    ],
     "normalized_mechanism": "clasificar_tareas_urgencia_importancia",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_2x2_matrix",
@@ -103,13 +190,28 @@
     "template": "Elegir 2 dimensiones clave → posicionar opciones → identificar cuadrantes de acción.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "proceso", "estrategia"],
-    "tags": ["matrix", "visual", "2_dimensiones", "cuadrantes"],
+    "categories": [
+      "innovacion",
+      "proceso",
+      "estrategia"
+    ],
+    "tags": [
+      "matrix",
+      "visual",
+      "2_dimensiones",
+      "cuadrantes"
+    ],
     "origin": "external",
-    "external_refs": ["boston_matrix_origin"],
-    "related_internal_ids": ["dec_decision_matrix", "framework_impact_effort"],
+    "external_refs": [
+      "boston_matrix_origin"
+    ],
+    "related_internal_ids": [
+      "dec_decision_matrix",
+      "framework_impact_effort"
+    ],
     "normalized_mechanism": "visualizar_opciones_2_dimensiones",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_delphi",
@@ -119,13 +221,28 @@
     "template": "Ronda 1: expertos independientes → Ronda 2: feedback anónimo → Ronda 3: refinar → Convergencia.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["decision_riesgo", "investigacion", "proceso"],
-    "tags": ["delphi", "expertos", "anonimo", "iterativo", "consenso"],
+    "categories": [
+      "decision_riesgo",
+      "investigacion",
+      "proceso"
+    ],
+    "tags": [
+      "delphi",
+      "expertos",
+      "anonimo",
+      "iterativo",
+      "consenso"
+    ],
     "origin": "external",
-    "external_refs": ["rand_corporation_1950"],
-    "related_internal_ids": ["dec_weighted_scoring"],
+    "external_refs": [
+      "rand_corporation_1950"
+    ],
+    "related_internal_ids": [
+      "dec_weighted_scoring"
+    ],
     "normalized_mechanism": "consulta_expertos_iterativa_anonima",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_six_hats",
@@ -135,13 +252,28 @@
     "template": "Usar cada 'gorro' secuencialmente: Blanco (datos) → Rojo (emociones) → Negro (riesgos) → Amarillo (beneficios) → Verde (creatividad) → Azul (proceso).",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "facilitacion", "decision_riesgo"],
-    "tags": ["gorros", "pensamiento", "roles", "de_bono"],
+    "categories": [
+      "innovacion",
+      "facilitacion",
+      "decision_riesgo"
+    ],
+    "tags": [
+      "gorros",
+      "pensamiento",
+      "roles",
+      "de_bono"
+    ],
     "origin": "external",
-    "external_refs": ["de_bono_1985"],
-    "related_internal_ids": ["dec_pros_cons", "EE1700-0063"],
+    "external_refs": [
+      "de_bono_1985"
+    ],
+    "related_internal_ids": [
+      "dec_pros_cons",
+      "EE1700-0063"
+    ],
     "normalized_mechanism": "separar_pensamiento_6_perspectivas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_9_windows",
@@ -151,13 +283,29 @@
     "template": "Crear matrix 3×3: filas = pasado/presente/futuro, columnas = sub-sistema/sistema/super-sistema. Llenar cada celda.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "innovacion", "investigacion"],
-    "tags": ["9_windows", "tiempo", "nivel", "sistema", "triz"],
+    "categories": [
+      "estrategia",
+      "innovacion",
+      "investigacion"
+    ],
+    "tags": [
+      "9_windows",
+      "tiempo",
+      "nivel",
+      "sistema",
+      "triz"
+    ],
     "origin": "external",
-    "external_refs": ["triz_9_windows"],
-    "related_internal_ids": ["framework_triz_classic", "dec_2x2_matrix"],
+    "external_refs": [
+      "triz_9_windows"
+    ],
+    "related_internal_ids": [
+      "framework_triz_classic",
+      "dec_2x2_matrix"
+    ],
     "normalized_mechanism": "explorar_problema_tiempo_nivel",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_hoshin",
@@ -167,13 +315,29 @@
     "template": "Definir Breakthrough Objective → desplegar a niveles inferiores → X-matrix → revisión trimestral.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "gobernanza", "proceso"],
-    "tags": ["hoshin", "kanri", "despliegue", "alineamiento", "objetivos"],
+    "categories": [
+      "estrategia",
+      "gobernanza",
+      "proceso"
+    ],
+    "tags": [
+      "hoshin",
+      "kanri",
+      "despliegue",
+      "alineamiento",
+      "objetivos"
+    ],
     "origin": "external",
-    "external_refs": ["akao_1991"],
-    "related_internal_ids": ["framework_six_sigma_dmaic", "framework_stage_gate"],
+    "external_refs": [
+      "akao_1991"
+    ],
+    "related_internal_ids": [
+      "framework_six_sigma_dmaic",
+      "framework_stage_gate"
+    ],
     "normalized_mechanism": "alinear_estrategia_objetivos_operativos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_okr",
@@ -183,13 +347,30 @@
     "template": "Definir Objective ambicioso → 3-5 Key Results medibles → Score 0-1 → Revisar trimestralmente.",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "gobernanza"],
-    "tags": ["okr", "objetivos", "resultados", "medibles", "trimestral"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "gobernanza"
+    ],
+    "tags": [
+      "okr",
+      "objetivos",
+      "resultados",
+      "medibles",
+      "trimestral"
+    ],
     "origin": "external",
-    "external_refs": ["doerr_2018", "intel_1970s"],
-    "related_internal_ids": ["dec_hoshin", "framework_moscow"],
+    "external_refs": [
+      "doerr_2018",
+      "intel_1970s"
+    ],
+    "related_internal_ids": [
+      "dec_hoshin",
+      "framework_moscow"
+    ],
     "normalized_mechanism": "definir_objetivos_resultados_medibles",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_ansoff",
@@ -199,13 +380,28 @@
     "template": "Clasificar estrategia: Mercado existente × Producto existente (penetración) → Mercado nuevo × Producto nuevo (diversificación).",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "estrategia", "innovacion"],
-    "tags": ["crecimiento", "mercado", "producto", "diversificacion"],
+    "categories": [
+      "negocio",
+      "estrategia",
+      "innovacion"
+    ],
+    "tags": [
+      "crecimiento",
+      "mercado",
+      "producto",
+      "diversificacion"
+    ],
     "origin": "external",
-    "external_refs": ["ansoff_1957"],
-    "related_internal_ids": ["framework_blue_ocean", "framework_bmc"],
+    "external_refs": [
+      "ansoff_1957"
+    ],
+    "related_internal_ids": [
+      "framework_blue_ocean",
+      "framework_bmc"
+    ],
     "normalized_mechanism": "clasificar_estrategia_crecimiento",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "dec_vrio",
@@ -215,12 +411,25 @@
     "template": "Para cada recurso preguntar: ¿Es valioso? ¿Es raro? ¿Es difícil de imitar? ¿Estamos organizados para explotarlo?",
     "source": "decision_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "estrategia"],
-    "tags": ["vrio", "recursos", "ventaja_competitiva"],
+    "categories": [
+      "negocio",
+      "estrategia"
+    ],
+    "tags": [
+      "vrio",
+      "recursos",
+      "ventaja_competitiva"
+    ],
     "origin": "external",
-    "external_refs": ["barney_1991"],
-    "related_internal_ids": ["framework_porter", "framework_swot"],
+    "external_refs": [
+      "barney_1991"
+    ],
+    "related_internal_ids": [
+      "framework_porter",
+      "framework_swot"
+    ],
     "normalized_mechanism": "evaluar_recursos_ventaja_competitiva",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   }
 ]

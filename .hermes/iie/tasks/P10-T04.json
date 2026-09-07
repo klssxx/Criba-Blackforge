@@ -3,6 +3,7 @@
   "phase": "P10",
   "title": "ScienceScout against OpenAlex",
   "status": "VERIFIED",
+  "commits": ["ef393e7d0e6e464df5b621073eaf79a13666c358"],
   "files_read": [
     "src/criba/intelligence/prior_art/scouts.py",
     "src/criba/intelligence/prior_art/__init__.py",

@@ -7,13 +7,29 @@
     "template": "Aplicar Design Thinking: empatizar con el usuario, definir el problema, idear soluciones, prototipar y testear.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["investigacion", "diseno", "innovacion"],
-    "tags": ["empatia", "prototipado", "iteracion", "usuario"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "innovacion"
+    ],
+    "tags": [
+      "empatia",
+      "prototipado",
+      "iteracion",
+      "usuario"
+    ],
     "origin": "external",
-    "external_refs": ["d.school_stanford", "brown_2008"],
-    "related_internal_ids": ["EE1700-0096", "EE1700-0097"],
+    "external_refs": [
+      "d.school_stanford",
+      "brown_2008"
+    ],
+    "related_internal_ids": [
+      "EE1700-0096",
+      "EE1700-0097"
+    ],
     "normalized_mechanism": "centrar_diseno_en_usuario",
-    "relationship_type": "agrupa"
+    "relationship_type": "agrupa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_double_diamond",
@@ -23,13 +39,30 @@
     "template": "Aplicar Double Diamond: divergir para descubrir, converger para definir, divergir para desarrollar, converger para entregar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["investigacion", "diseno", "innovacion"],
-    "tags": ["descubrir", "definir", "desarrollar", "entregar", "divergencia", "convergencia"],
+    "categories": [
+      "investigacion",
+      "diseno",
+      "innovacion"
+    ],
+    "tags": [
+      "descubrir",
+      "definir",
+      "desarrollar",
+      "entregar",
+      "divergencia",
+      "convergencia"
+    ],
     "origin": "external",
-    "external_refs": ["design_council_2004"],
-    "related_internal_ids": ["EE800-0001", "EE800-0061"],
+    "external_refs": [
+      "design_council_2004"
+    ],
+    "related_internal_ids": [
+      "EE800-0001",
+      "EE800-0061"
+    ],
     "normalized_mechanism": "divergencia_convergencia_ciclica",
-    "relationship_type": "agrupa"
+    "relationship_type": "agrupa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_jtbd",
@@ -39,13 +72,29 @@
     "template": "Identificar el 'job' que el usuario quiere realizar y diseñar la solución que mejor lo ejecuta.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["investigacion", "negocio", "innovacion"],
-    "tags": ["necesidad", "comportamiento", "outcome_driven", "cliente"],
+    "categories": [
+      "investigacion",
+      "negocio",
+      "innovacion"
+    ],
+    "tags": [
+      "necesidad",
+      "comportamiento",
+      "outcome_driven",
+      "cliente"
+    ],
     "origin": "external",
-    "external_refs": ["christensen_2016", "ulwick_2016"],
-    "related_internal_ids": ["EE1700-0054", "EE1700-0066"],
+    "external_refs": [
+      "christensen_2016",
+      "ulwick_2016"
+    ],
+    "related_internal_ids": [
+      "EE1700-0054",
+      "EE1700-0066"
+    ],
     "normalized_mechanism": "identificar_necesidad_funcional",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_blue_ocean",
@@ -55,13 +104,28 @@
     "template": "Aplicar Blue Ocean: eliminar, reducir, elevar, crear para开辟 un mercado nuevo.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "negocio", "estrategia"],
-    "tags": ["valor", "innovacion", "mercado_blanco", "estrategia"],
+    "categories": [
+      "innovacion",
+      "negocio",
+      "estrategia"
+    ],
+    "tags": [
+      "valor",
+      "innovacion",
+      "mercado_blanco",
+      "estrategia"
+    ],
     "origin": "external",
-    "external_refs": ["kim_mauborgne_2005"],
-    "related_internal_ids": ["EE800-0009", "EE800-0020"],
+    "external_refs": [
+      "kim_mauborgne_2005"
+    ],
+    "related_internal_ids": [
+      "EE800-0009",
+      "EE800-0020"
+    ],
     "normalized_mechanism": "crear_mercado_nuevo",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_bmc",
@@ -71,13 +135,28 @@
     "template": "Mapear el modelo de negocio en 9 bloques: socios, actividades, recursos, propuesta, clientes, canales, relación, costes, ingresos.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "innovacion", "diseno"],
-    "tags": ["modelo", "propuesta_valor", "canales", "socios"],
+    "categories": [
+      "negocio",
+      "innovacion",
+      "diseno"
+    ],
+    "tags": [
+      "modelo",
+      "propuesta_valor",
+      "canales",
+      "socios"
+    ],
     "origin": "external",
-    "external_refs": ["osterwalder_2010"],
-    "related_internal_ids": ["EE800-0003", "EE800-0004"],
+    "external_refs": [
+      "osterwalder_2010"
+    ],
+    "related_internal_ids": [
+      "EE800-0003",
+      "EE800-0004"
+    ],
     "normalized_mechanism": "mapear_modelo_negocio",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_vpd",
@@ -87,13 +166,28 @@
     "template": "Diseñar la propuesta de valor mapeando trabajos, dolores y ganancias del cliente contra productos/servicios.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "diseno", "innovacion"],
-    "tags": ["cliente", "propuesta", "ajuste", "dolores", "ganancias"],
+    "categories": [
+      "negocio",
+      "diseno",
+      "innovacion"
+    ],
+    "tags": [
+      "cliente",
+      "propuesta",
+      "ajuste",
+      "dolores",
+      "ganancias"
+    ],
     "origin": "external",
-    "external_refs": ["osterwalder_2014"],
-    "related_internal_ids": ["framework_jtbd"],
+    "external_refs": [
+      "osterwalder_2014"
+    ],
+    "related_internal_ids": [
+      "framework_jtbd"
+    ],
     "normalized_mechanism": "disenar_propuesta_valor",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_wardley",
@@ -103,13 +197,28 @@
     "template": "Mapear la cadena de valor: actores, actividades, datos, componentes y su nivel de evolución.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "seguridad", "negocio"],
-    "tags": ["posicionamiento", "evolucion", "cadena_valor", "visual"],
+    "categories": [
+      "estrategia",
+      "seguridad",
+      "negocio"
+    ],
+    "tags": [
+      "posicionamiento",
+      "evolucion",
+      "cadena_valor",
+      "visual"
+    ],
     "origin": "external",
-    "external_refs": ["wardley_2016"],
-    "related_internal_ids": ["EE1700-0113", "EE800-0034"],
+    "external_refs": [
+      "wardley_2016"
+    ],
+    "related_internal_ids": [
+      "EE1700-0113",
+      "EE800-0034"
+    ],
     "normalized_mechanism": "visualizar_cadena_valor",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_fmea",
@@ -119,13 +228,31 @@
     "template": "Identificar modos de fallo, efectos, causas, controles actuales y calcular RPN para priorizar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["seguridad", "mejora", "riesgo"],
-    "tags": ["fallo", "efecto", "criticidad", "prioridad", "prevencion"],
+    "categories": [
+      "seguridad",
+      "mejora",
+      "riesgo"
+    ],
+    "tags": [
+      "fallo",
+      "efecto",
+      "criticidad",
+      "prioridad",
+      "prevencion"
+    ],
     "origin": "external",
-    "external_refs": ["military_spec_1949", "aiag_fmea_2019"],
-    "related_internal_ids": ["M200-01", "EE1000-0048", "EE1000-0050"],
+    "external_refs": [
+      "military_spec_1949",
+      "aiag_fmea_2019"
+    ],
+    "related_internal_ids": [
+      "M200-01",
+      "EE1000-0048",
+      "EE1000-0050"
+    ],
     "normalized_mechanism": "analisis_modos_fallo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_hazop",
@@ -135,13 +262,28 @@
     "template": "Aplicar guías de desviación (más/menos/no/tanto) a cada nodo del proceso para identificar peligros.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["seguridad", "investigacion", "proceso"],
-    "tags": ["guia_desviacion", "peligro", "operabilidad", "proceso"],
+    "categories": [
+      "seguridad",
+      "investigacion",
+      "proceso"
+    ],
+    "tags": [
+      "guia_desviacion",
+      "peligro",
+      "operabilidad",
+      "proceso"
+    ],
     "origin": "external",
-    "external_refs": ["iec_61882"],
-    "related_internal_ids": ["EE1000-0047", "EE1000-0049"],
+    "external_refs": [
+      "iec_61882"
+    ],
+    "related_internal_ids": [
+      "EE1000-0047",
+      "EE1000-0049"
+    ],
     "normalized_mechanism": "identificar_desviaciones_peligrosas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_six_sigma_dmaic",
@@ -151,13 +293,30 @@
     "template": "Definir → Medir → Analizar → Mejorar → Controlar para reducir variación y defectos.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["mejora", "investigacion", "proceso"],
-    "tags": ["definir", "medir", "analizar", "mejorar", "controlar"],
+    "categories": [
+      "mejora",
+      "investigacion",
+      "proceso"
+    ],
+    "tags": [
+      "definir",
+      "medir",
+      "analizar",
+      "mejorar",
+      "controlar"
+    ],
     "origin": "external",
-    "external_refs": ["geometric_1988", "motorola_1986"],
-    "related_internal_ids": ["EE1000-0051", "EE1000-0052"],
+    "external_refs": [
+      "geometric_1988",
+      "motorola_1986"
+    ],
+    "related_internal_ids": [
+      "EE1000-0051",
+      "EE1000-0052"
+    ],
     "normalized_mechanism": "mejora_proceso_estructurada",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_six_sigma_dmadv",
@@ -167,13 +326,28 @@
     "template": "Definir → Medir → Analizar → Diseñar → Verificar para crear con calidad Six Sigma.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "mejora", "innovacion"],
-    "tags": ["definir", "medir", "analizar", "diseno", "verificar"],
+    "categories": [
+      "diseno",
+      "mejora",
+      "innovacion"
+    ],
+    "tags": [
+      "definir",
+      "medir",
+      "analizar",
+      "diseno",
+      "verificar"
+    ],
     "origin": "external",
-    "external_refs": ["allied_signal_1994"],
-    "related_internal_ids": ["framework_six_sigma_dmaic"],
+    "external_refs": [
+      "allied_signal_1994"
+    ],
+    "related_internal_ids": [
+      "framework_six_sigma_dmaic"
+    ],
     "normalized_mechanism": "diseno_calidad_estructurada",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_qfd",
@@ -183,13 +357,28 @@
     "template": "Crear Casa de la Calidad: requisitos del cliente × características técnicas con pesos y correlaciones.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "negocio", "mejora"],
-    "tags": ["requisitos", "casa_calidad", "voz_cliente", "especificaciones"],
+    "categories": [
+      "diseno",
+      "negocio",
+      "mejora"
+    ],
+    "tags": [
+      "requisitos",
+      "casa_calidad",
+      "voz_cliente",
+      "especificaciones"
+    ],
     "origin": "external",
-    "external_refs": ["akao_1966"],
-    "related_internal_ids": ["framework_jtbd", "framework_vpd"],
+    "external_refs": [
+      "akao_1966"
+    ],
+    "related_internal_ids": [
+      "framework_jtbd",
+      "framework_vpd"
+    ],
     "normalized_mechanism": "traducir_requisitos_tecnicos",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_triz_classic",
@@ -199,13 +388,28 @@
     "template": "Identificar contradicción técnica → consultar tabla de 40 principios → aplicar solución análoga.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "resolucion", "diseno"],
-    "tags": ["contradiccion", "idealidad", "recursos", "40_principios"],
+    "categories": [
+      "innovacion",
+      "resolucion",
+      "diseno"
+    ],
+    "tags": [
+      "contradiccion",
+      "idealidad",
+      "recursos",
+      "40_principios"
+    ],
     "origin": "external",
-    "external_refs": ["altshuller_1956"],
-    "related_internal_ids": ["EE1000-0051", "EE1000-0056"],
+    "external_refs": [
+      "altshuller_1956"
+    ],
+    "related_internal_ids": [
+      "EE1000-0051",
+      "EE1000-0056"
+    ],
     "normalized_mechanism": "resolver_contradicciones_tecnicas",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_scamper",
@@ -215,13 +419,31 @@
     "template": "Aplicar SCAMPER: Sustituir → Combinar → Adaptar → Modificar → Poner otro uso → Eliminar → Reordenar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "diseno", "resolucion"],
-    "tags": ["sustituir", "combinar", "adaptar", "modificar", "eliminar", "reordenar"],
+    "categories": [
+      "innovacion",
+      "diseno",
+      "resolucion"
+    ],
+    "tags": [
+      "sustituir",
+      "combinar",
+      "adaptar",
+      "modificar",
+      "eliminar",
+      "reordenar"
+    ],
     "origin": "external",
-    "external_refs": ["eberta_1971", "pricken_2009"],
-    "related_internal_ids": ["EE800-0061", "EE800-0086"],
+    "external_refs": [
+      "eberta_1971",
+      "pricken_2009"
+    ],
+    "related_internal_ids": [
+      "EE800-0061",
+      "EE800-0086"
+    ],
     "normalized_mechanism": "operaciones_creaticas_sustituir_combinar",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_lean_startup",
@@ -231,13 +453,28 @@
     "template": "Construir MVP → Medir comportamiento → Aprender → Pivotar o perseverar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "negocio", "proceso"],
-    "tags": ["MVP", "validacion", "pivote", "build_measure_learn"],
+    "categories": [
+      "innovacion",
+      "negocio",
+      "proceso"
+    ],
+    "tags": [
+      "MVP",
+      "validacion",
+      "pivote",
+      "build_measure_learn"
+    ],
     "origin": "external",
-    "external_refs": ["ries_2011"],
-    "related_internal_ids": ["EE800-0115", "EE800-0116"],
+    "external_refs": [
+      "ries_2011"
+    ],
+    "related_internal_ids": [
+      "EE800-0115",
+      "EE800-0116"
+    ],
     "normalized_mechanism": "validar_con_mvp_ciclico",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_stage_gate",
@@ -247,13 +484,27 @@
     "template": "Descubrir → Puerta 1 → Delimitar → Puerta 2 → Desarrollar → Puerta 3 → Testear → Puerta 4 → Lanzar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "innovacion", "proceso"],
-    "tags": ["puerta", "fase", "decision", "pipeline"],
+    "categories": [
+      "negocio",
+      "innovacion",
+      "proceso"
+    ],
+    "tags": [
+      "puerta",
+      "fase",
+      "decision",
+      "pipeline"
+    ],
     "origin": "external",
-    "external_refs": ["cooper_2008"],
-    "related_internal_ids": ["framework_six_sigma_dmaic"],
+    "external_refs": [
+      "cooper_2008"
+    ],
+    "related_internal_ids": [
+      "framework_six_sigma_dmaic"
+    ],
     "normalized_mechanism": "gestion_proceso_fases_puertas",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_agile_scrum",
@@ -263,13 +514,27 @@
     "template": "Sprint Planning → Daily Scrum → Sprint Review → Retrospectiva en ciclos de 1-4 semanas.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "innovacion"],
-    "tags": ["sprint", "backlog", "retrospectiva", "iterativo"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "sprint",
+      "backlog",
+      "retrospectiva",
+      "iterativo"
+    ],
     "origin": "external",
-    "external_refs": ["schwaber_sutherland_2020"],
-    "related_internal_ids": ["framework_lean_startup"],
+    "external_refs": [
+      "schwaber_sutherland_2020"
+    ],
+    "related_internal_ids": [
+      "framework_lean_startup"
+    ],
     "normalized_mechanism": "iteracion_incremental_agil",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_kanban",
@@ -279,13 +544,28 @@
     "template": "Visualizar flujo → Limitar WIP → Gestionar flujo → Implementar cambios evolutivamente.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["proceso", "mejora", "negocio"],
-    "tags": ["flujo", "limite_wip", "visual", "pull"],
+    "categories": [
+      "proceso",
+      "mejora",
+      "negocio"
+    ],
+    "tags": [
+      "flujo",
+      "limite_wip",
+      "visual",
+      "pull"
+    ],
     "origin": "external",
-    "external_refs": ["toyota_system", "anderson_2010"],
-    "related_internal_ids": ["framework_agile_scrum"],
+    "external_refs": [
+      "toyota_system",
+      "anderson_2010"
+    ],
+    "related_internal_ids": [
+      "framework_agile_scrum"
+    ],
     "normalized_mechanism": "gestion_flujo_visual",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_toc",
@@ -295,13 +575,28 @@
     "template": "Identificar → Explotar → Subordinar → Elevar → Repetir el cuello de botella.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["mejora", "negocio", "estrategia"],
-    "tags": ["cuello_botella", "elevacion", "subordinar", "throughput"],
+    "categories": [
+      "mejora",
+      "negocio",
+      "estrategia"
+    ],
+    "tags": [
+      "cuello_botella",
+      "elevacion",
+      "subordinar",
+      "throughput"
+    ],
     "origin": "external",
-    "external_refs": ["goldratt_1984"],
-    "related_internal_ids": ["EE800-0083", "EE1700-0083"],
+    "external_refs": [
+      "goldratt_1984"
+    ],
+    "related_internal_ids": [
+      "EE800-0083",
+      "EE1700-0083"
+    ],
     "normalized_mechanism": "identificar_restriccion_dominante",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_systems_thinking",
@@ -311,13 +606,29 @@
     "template": "Mapear bucles de retroalimentación, retardos y efectos no lineales del sistema.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "investigacion", "innovacion"],
-    "tags": ["retroalimentacion", "bucle", "emergente", "holistico"],
+    "categories": [
+      "estrategia",
+      "investigacion",
+      "innovacion"
+    ],
+    "tags": [
+      "retroalimentacion",
+      "bucle",
+      "emergente",
+      "holistico"
+    ],
     "origin": "external",
-    "external_refs": ["senge_1990", "meadows_2008"],
-    "related_internal_ids": ["EE1700-0020", "EE1700-0021"],
+    "external_refs": [
+      "senge_1990",
+      "meadows_2008"
+    ],
+    "related_internal_ids": [
+      "EE1700-0020",
+      "EE1700-0021"
+    ],
     "normalized_mechanism": "analizar_sistemas_retroalimentacion",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_cynefin",
@@ -327,13 +638,29 @@
     "template": "Clasificar el problema → aplicar la estrategia correspondiente al dominio (simple/caótico/complejo/complicado).",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "gobernanza", "diagnostico"],
-    "tags": ["complejo", "complicado", "caotico", "simple", "decision"],
+    "categories": [
+      "estrategia",
+      "gobernanza",
+      "diagnostico"
+    ],
+    "tags": [
+      "complejo",
+      "complicado",
+      "caotico",
+      "simple",
+      "decision"
+    ],
     "origin": "external",
-    "external_refs": ["snowden_2007"],
-    "related_internal_ids": ["EE1700-0021", "EE1000-0044"],
+    "external_refs": [
+      "snowden_2007"
+    ],
+    "related_internal_ids": [
+      "EE1700-0021",
+      "EE1000-0044"
+    ],
     "normalized_mechanism": "clasificar_problema_dominio",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_ooda",
@@ -343,13 +670,29 @@
     "template": "Observar el entorno → Orientar con contexto → Decidir → Actuar → Repetir más rápido que el oponente.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "seguridad", "proceso"],
-    "tags": ["observar", "orientar", "decidir", "actuar", "rapidez"],
+    "categories": [
+      "estrategia",
+      "seguridad",
+      "proceso"
+    ],
+    "tags": [
+      "observar",
+      "orientar",
+      "decidir",
+      "actuar",
+      "rapidez"
+    ],
     "origin": "external",
-    "external_refs": ["boyd_1976"],
-    "related_internal_ids": ["EE1000-0045", "EE1700-0019"],
+    "external_refs": [
+      "boyd_1976"
+    ],
+    "related_internal_ids": [
+      "EE1000-0045",
+      "EE1700-0019"
+    ],
     "normalized_mechanism": "ciclo_decision_rapido",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_pestel",
@@ -359,13 +702,29 @@
     "template": "Analizar factores Políticos, Económicos, Sociales, Tecnológicos, Ecológicos y Legales del entorno.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "negocio", "investigacion"],
-    "tags": ["politico", "economico", "social", "tecnologico", "ecologico", "legal"],
+    "categories": [
+      "estrategia",
+      "negocio",
+      "investigacion"
+    ],
+    "tags": [
+      "politico",
+      "economico",
+      "social",
+      "tecnologico",
+      "ecologico",
+      "legal"
+    ],
     "origin": "external",
-    "external_refs": ["aguilar_1967"],
-    "related_internal_ids": ["framework_swot"],
+    "external_refs": [
+      "aguilar_1967"
+    ],
+    "related_internal_ids": [
+      "framework_swot"
+    ],
     "normalized_mechanism": "analisis_macroentorno",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_swot",
@@ -375,13 +734,29 @@
     "template": "Mapear Fortalezas internas, Debilidades internas, Oportunidades externas, Amenazas externas.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "negocio", "diagnostico"],
-    "tags": ["fortaleza", "debilidad", "oportunidad", "amenaza"],
+    "categories": [
+      "estrategia",
+      "negocio",
+      "diagnostico"
+    ],
+    "tags": [
+      "fortaleza",
+      "debilidad",
+      "oportunidad",
+      "amenaza"
+    ],
     "origin": "external",
-    "external_refs": ["learmonth_1969", "andrews_1971"],
-    "related_internal_ids": ["framework_pestel", "framework_porter"],
+    "external_refs": [
+      "learmonth_1969",
+      "andrews_1971"
+    ],
+    "related_internal_ids": [
+      "framework_pestel",
+      "framework_porter"
+    ],
     "normalized_mechanism": "analisis_fortalezas_amenazas",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_porter",
@@ -391,13 +766,30 @@
     "template": "Evaluar las 5 fuerzas: rivalidad, poder de proveedores, poder de compradores, amenaza de sustitutos, amenaza de nuevos entrantes.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "estrategia", "seguridad"],
-    "tags": ["competidores", "proveedores", "compradores", "sustitutos", "nuevos"],
+    "categories": [
+      "negocio",
+      "estrategia",
+      "seguridad"
+    ],
+    "tags": [
+      "competidores",
+      "proveedores",
+      "compradores",
+      "sustitutos",
+      "nuevos"
+    ],
     "origin": "external",
-    "external_refs": ["porter_1979", "porter_1980"],
-    "related_internal_ids": ["framework_swot", "framework_blue_ocean"],
+    "external_refs": [
+      "porter_1979",
+      "porter_1980"
+    ],
+    "related_internal_ids": [
+      "framework_swot",
+      "framework_blue_ocean"
+    ],
     "normalized_mechanism": "analisis_competitivo_5_fuerzas",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_innovation_canvas",
@@ -407,13 +799,27 @@
     "template": "Mapear: tendencias, propuesta de valor, experiencia, productividad, estructura de costes.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "negocio", "diseno"],
-    "tags": ["innovacion", "modelo", "ecosistema", "tendencias"],
+    "categories": [
+      "innovacion",
+      "negocio",
+      "diseno"
+    ],
+    "tags": [
+      "innovacion",
+      "modelo",
+      "ecosistema",
+      "tendencias"
+    ],
     "origin": "external",
-    "external_refs": ["pigneur_2014"],
-    "related_internal_ids": ["framework_bmc"],
+    "external_refs": [
+      "pigneur_2014"
+    ],
+    "related_internal_ids": [
+      "framework_bmc"
+    ],
     "normalized_mechanism": "mapear_oportunidades_innovacion",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_hpi_dt",
@@ -423,13 +829,28 @@
     "template": "Entender → Observar → Definir → Idear → Prototipar → Testear en ciclos iterativos.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "investigacion", "innovacion"],
-    "tags": ["empatia", "definicion", "ideacion", "prototipo", "prueba"],
+    "categories": [
+      "diseno",
+      "investigacion",
+      "innovacion"
+    ],
+    "tags": [
+      "empatia",
+      "definicion",
+      "ideacion",
+      "prototipo",
+      "prueba"
+    ],
     "origin": "external",
-    "external_refs": ["hpi_potsdam"],
-    "related_internal_ids": ["framework_design_thinking"],
+    "external_refs": [
+      "hpi_potsdam"
+    ],
+    "related_internal_ids": [
+      "framework_design_thinking"
+    ],
     "normalized_mechanism": "diseno_centrado_usuario_iterativo",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_lean_ux",
@@ -439,13 +860,28 @@
     "template": "Hipótesis → Experimento → MVP → Validación → Aprendizaje.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "negocio", "innovacion"],
-    "tags": ["hipotesis", "experimento", "MVP", "validacion"],
+    "categories": [
+      "diseno",
+      "negocio",
+      "innovacion"
+    ],
+    "tags": [
+      "hipotesis",
+      "experimento",
+      "MVP",
+      "validacion"
+    ],
     "origin": "external",
-    "external_refs": ["gorisia_2013"],
-    "related_internal_ids": ["framework_lean_startup", "framework_design_thinking"],
+    "external_refs": [
+      "gorisia_2013"
+    ],
+    "related_internal_ids": [
+      "framework_lean_startup",
+      "framework_design_thinking"
+    ],
     "normalized_mechanism": "diseno_validado_experimentos",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_impact_effort",
@@ -455,13 +891,27 @@
     "template": "Clasificar cada opción en Alta/Baja × Alto/Bajo impacto/esfuerzo. Priorizar Alto Impacto + Bajo Esfuerzo.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["innovacion", "proceso", "negocio"],
-    "tags": ["impacto", "esfuerzo", "priorizar", "matriz"],
+    "categories": [
+      "innovacion",
+      "proceso",
+      "negocio"
+    ],
+    "tags": [
+      "impacto",
+      "esfuerzo",
+      "priorizar",
+      "matriz"
+    ],
     "origin": "external",
-    "external_refs": ["eisenhower_matrix_variant"],
-    "related_internal_ids": ["framework_moscow"],
+    "external_refs": [
+      "eisenhower_matrix_variant"
+    ],
+    "related_internal_ids": [
+      "framework_moscow"
+    ],
     "normalized_mechanism": "priorizar_por_impacto_esfuerzo",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_moscow",
@@ -471,13 +921,28 @@
     "template": "Clasificar cada requisito en Must / Should / Could / Won't para priorizar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "proceso", "innovacion"],
-    "tags": ["must", "should", "could", "wont", "priorizacion"],
+    "categories": [
+      "negocio",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "must",
+      "should",
+      "could",
+      "wont",
+      "priorizacion"
+    ],
     "origin": "external",
-    "external_refs": ["mcdowall_2005"],
-    "related_internal_ids": ["framework_impact_effort"],
+    "external_refs": [
+      "mcdowall_2005"
+    ],
+    "related_internal_ids": [
+      "framework_impact_effort"
+    ],
     "normalized_mechanism": "priorizar_requisitos_4_niveles",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_kano",
@@ -487,13 +952,28 @@
     "template": "Clasificar atributos en Básico / Performance / Excitante y diseñar para sorprender, no solo satisfacer.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "negocio", "investigacion"],
-    "tags": ["basico", "performance", "excitante", "indiferente"],
+    "categories": [
+      "diseno",
+      "negocio",
+      "investigacion"
+    ],
+    "tags": [
+      "basico",
+      "performance",
+      "excitante",
+      "indiferente"
+    ],
     "origin": "external",
-    "external_refs": ["kano_1984"],
-    "related_internal_ids": ["framework_jtbd", "framework_vpd"],
+    "external_refs": [
+      "kano_1984"
+    ],
+    "related_internal_ids": [
+      "framework_jtbd",
+      "framework_vpd"
+    ],
     "normalized_mechanism": "clasificar_atributos_satisfaccion",
-    "relationship_type": "complementa"
+    "relationship_type": "complementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_experience_design",
@@ -503,13 +983,28 @@
     "template": "Mapear journey map → identificar pain points → diseñar momentos de verdad → prototipar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "innovacion", "investigacion"],
-    "tags": ["journey_map", "persona", "experiencia", "momentos_verdad"],
+    "categories": [
+      "diseno",
+      "innovacion",
+      "investigacion"
+    ],
+    "tags": [
+      "journey_map",
+      "persona",
+      "experiencia",
+      "momentos_verdad"
+    ],
     "origin": "external",
-    "external_refs": ["schmitt_1999", "gilmore_pine_1999"],
-    "related_internal_ids": ["framework_design_thinking"],
+    "external_refs": [
+      "schmitt_1999",
+      "gilmore_pine_1999"
+    ],
+    "related_internal_ids": [
+      "framework_design_thinking"
+    ],
     "normalized_mechanism": "disenar_experiencia_completa",
-    "relationship_type": "inspirado_en"
+    "relationship_type": "inspirado_en",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_speculative_design",
@@ -519,13 +1014,28 @@
     "template": "Crear prototipos de futuros posibles → provocar debate → explorar consecuencias no deseadas.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["diseno", "investigacion", "innovacion"],
-    "tags": ["futuro", "escenario", "prototipo_futuro", "provocacion"],
+    "categories": [
+      "diseno",
+      "investigacion",
+      "innovacion"
+    ],
+    "tags": [
+      "futuro",
+      "escenario",
+      "prototipo_futuro",
+      "provocacion"
+    ],
     "origin": "external",
-    "external_refs": ["dunne_raby_2013"],
-    "related_internal_ids": ["EE1700-0122", "EE1700-0123"],
+    "external_refs": [
+      "dunne_raby_2013"
+    ],
+    "related_internal_ids": [
+      "EE1700-0122",
+      "EE1700-0123"
+    ],
     "normalized_mechanism": "explorar_futuros_posibles",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_circular_economy",
@@ -535,13 +1045,29 @@
     "template": "Eliminar residuo_cero → diseñar para durabilidad → reutilizar → reciclar → regenerar.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["negocio", "sostenibilidad", "diseno"],
-    "tags": ["circular", "residuo_cero", "ciclo", "regenerativo"],
+    "categories": [
+      "negocio",
+      "sostenibilidad",
+      "diseno"
+    ],
+    "tags": [
+      "circular",
+      "residuo_cero",
+      "ciclo",
+      "regenerativo"
+    ],
     "origin": "external",
-    "external_refs": ["mcdonough_braungart_2002", "ellen_macarthur_2013"],
-    "related_internal_ids": ["EE800-0073", "EE800-0074"],
+    "external_refs": [
+      "mcdonough_braungart_2002",
+      "ellen_macarthur_2013"
+    ],
+    "related_internal_ids": [
+      "EE800-0073",
+      "EE800-0074"
+    ],
     "normalized_mechanism": "eliminar_residuos_ciclo_cerrado",
-    "relationship_type": "implementa"
+    "relationship_type": "implementa",
+    "thinking_class": "generacion"
   },
   {
     "id": "framework_wardley_cycle",
@@ -551,12 +1077,27 @@
     "template": "Componer el landscape → predecir evolución → ganar experiencia → ejercer poder → recomponer.",
     "source": "innovation_frameworks",
     "granularity": "framework",
-    "categories": ["estrategia", "proceso", "innovacion"],
-    "tags": ["composicion", "clima", "aprendizaje", "poder", "ciclico"],
+    "categories": [
+      "estrategia",
+      "proceso",
+      "innovacion"
+    ],
+    "tags": [
+      "composicion",
+      "clima",
+      "aprendizaje",
+      "poder",
+      "ciclico"
+    ],
     "origin": "external",
-    "external_refs": ["wardley_2016"],
-    "related_internal_ids": ["framework_wardley"],
+    "external_refs": [
+      "wardley_2016"
+    ],
+    "related_internal_ids": [
+      "framework_wardley"
+    ],
     "normalized_mechanism": "ciclo_estrategia_evolucion",
-    "relationship_type": "equivalente"
+    "relationship_type": "equivalente",
+    "thinking_class": "generacion"
   }
 ]

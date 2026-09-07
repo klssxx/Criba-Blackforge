@@ -180,7 +180,7 @@ for tid, f in rows.items():
         out += [f"    - {yq(s)}" for s in SUBS[tid]]
     out.append("")
 
-dest = "E:/PROYECTS/CRIBA/data/intelligence/technique_registry.yaml"
+dest = "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA/data/intelligence/technique_registry.yaml"
 os.makedirs(os.path.dirname(dest), exist_ok=True)
 with open(dest, "w", encoding="utf-8") as fh:
     fh.write("\n".join(out) + "\n")

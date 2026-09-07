@@ -1,0 +1,55 @@
+{
+  "task_id": "P10-T10",
+  "phase": "P10",
+  "title": "PriorArtMutationLoop",
+  "status": "VERIFIED",
+  "model": "Luna",
+  "reasoning": "high",
+  "risk": "R2",
+  "requirements": [
+    "Implement the P10 mutation/re-search loop consuming PriorArtAssessment without reclassifying SURVIVED_SEARCH as PROVEN_NEW.",
+    "Fail closed on UNRESOLVED initial assessment; respect max_prior_art_rounds and max_mutations_per_candidate.",
+    "Keep the component deterministic, provider-free and compatible with the T08/T09 outputs."
+  ],
+  "files_created": [
+    "src/criba/intelligence/prior_art/mutation_loop.py",
+    "tests/intelligence/test_prior_art_mutation_loop.py",
+    "docs/architecture/adr/ADR-P10-T10-mutation-loop.md",
+    ".hermes/iie/tasks/P10-T10.json"
+  ],
+  "files_modified": [
+    "src/criba/intelligence/prior_art/__init__.py"
+  ],
+  "contract": {
+    "input": "InventionCandidate, PriorArtAssessment (verdict PARTIAL_PRIOR_ART or SURVIVED_SEARCH), AdversarialSearchProtocol, CrossDomainScout instance.",
+    "output": "MutationResult with verdict in {UNRESOLVED, PARTIAL_PRIOR_ART, SURVIVED_SEARCH}, rounds_completed <= max_prior_art_rounds, mutations_completed <= max_mutations_per_candidate.",
+    "forbidden_outputs": ["PROVEN_NEW", "automatic KNOWN", "automatic NEAR_PRIOR_ART"],
+    "fail_closed": "ValueError('UNRESOLVED') raised when initial_assessment.verdict == UNRESOLVED."
+  },
+  "tests": [
+    "RED: 5 tests in test_prior_art_mutation_loop.py failed with NotImplementedError before the real implementation existed.",
+    "GREEN: test_prior_art_mutation_loop.py -> 5 passed.",
+    "GREEN: P10 integrados T07/T08/T09/T10/protocol/contracts/boundaries -> 36 passed.",
+    "GREEN: full CRIBA -> 953 passed, 1 Starlette/httpx deprecation warning."
+  ],
+  "verification": {
+    "ruff": "All checks passed on prior_art/ module (7 source files)",
+    "mypy": "Success: no issues found in 7 source files",
+    "compileall": "exit 0",
+    "cost": "COST=0; no network, paid provider, credential or external write.",
+    "verifier": "Subagent sa-0-c373fe01 completed full regression: 953 passed, 1 warning (non-failing Starlette/httpx deprecation)."
+  },
+  "limitations": [
+    "SURVIVED_SEARCH after mutation is not novelty, patentability, originality or a claim of exhaustive absence.",
+    "The mutation variants are deterministic synthetic suffixes; real technique-driven mutations (T063 lattice) are a later task.",
+    "P10-T10 are locally verified but uncommitted because their shared package export coexists with pre-existing dirty P10-T07/T08/T09 work."
+  ],
+  "commits": [],
+  "commit_reason": "No commit: staging mutation_loop.py or shared state would mix P10-T10 and unrelated pre-existing dirty changes in prior_art/__init__.py.",
+  "rollback": "Preserve the dirty tree. Revert only mutation_loop.py, the P10-T10 export lines in prior_art/__init__.py, test_prior_art_mutation_loop.py, ADR-P10-T10 and this journal. Never use reset --hard or git clean.",
+  "follow_up": [
+    "Implement P10-T11 mutation-aware query lattice using T063 operators instead of synthetic suffixes.",
+    "Run P10-T12 adversarial falsification audit against the full T07 -> T08 -> T09 -> T10 chain."
+  ],
+  "completed_at": "2026-09-05T01:30:00+02:00"
+}

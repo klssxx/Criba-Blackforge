@@ -19,7 +19,7 @@ from ..engine import activate
 from .ranking import RankingModel
 from .widgets import set_chip
 
-MUTATORS = ("navNuevaIdea", "navGenerar", "navEvaluar", "navGuardar", "navActualizar")
+MUTATORS = ("navNuevaIdea", "navGenerar", "navInventar", "navEvaluar", "navGuardar", "navActualizar")
 
 
 class _Signals(QObject):
@@ -130,6 +130,7 @@ def enter_s1(win: Any) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": False,
+            "navInventar": False,
             "navEvaluar": False,
             "navGuardar": False,
             "navActualizar": True,
@@ -196,6 +197,7 @@ def _apply_new_problem(win: Any, problem: str) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": False,
             "navGuardar": False,
             "navActualizar": True,
@@ -277,6 +279,7 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": True,
             "navGuardar": False,
             "navActualizar": True,
@@ -285,6 +288,94 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
         },
     )
     _suggest(win, "navEvaluar")
+
+
+# ---------------------------------------------------------------------------
+# S3b — INVENTAR (mismo servicio criba.inventar.invent que la CLI)
+# ---------------------------------------------------------------------------
+def _run_inventar(problem: str) -> dict[str, Any]:
+    """Ejecuta el servicio compartido `invent` y registra el ledger.
+
+    Misma ruta que `criba inventar` (CLI): interfaz y CLI usan el mismo
+    servicio, sin duplicar lógica.
+    """
+    from ..inventar import append_ledger, invent
+
+    sheet = invent(problem)
+    ledger = append_ledger(sheet)
+    sheet["ledger_path"] = str(ledger)
+    return sheet
+
+
+def on_inventar(win: Any) -> None:
+    win.nav["navInventar"].setChecked(False)
+    if not win.problem:
+        show_error(win, "Inventar", "Define primero el problema base (Nueva idea).")
+        return
+    _lock_mutators(win)
+    _suggest(win, None)
+    win.nav["navInventar"].set_state("running", "Cruce → hipótesis → antecedentes...")
+    _activity(win, "blue", "Inventar iniciado (cruce → interpretación → antecedentes)")
+    worker = Worker(lambda: _run_inventar(win.problem))
+    worker.signals.done.connect(lambda sheet: _on_invented(win, sheet))
+    worker.signals.fail.connect(
+        lambda msg: on_operation_error(win, "navInventar", None, msg)
+    )
+    _start_worker(win, worker)
+
+
+def _on_invented(win: Any, sheet: dict[str, Any]) -> None:
+    """Muestra la ficha honesta: pendientes como pendientes, sin fabricar."""
+    win.invent_sheet = sheet
+    win.nav["navInventar"].set_state("done")
+    r = win.refs
+    totals = sheet["totals"]
+    n_entries = len(sheet["entries"])
+    pending = totals["pending_interpretation"]
+
+    r["ideaTitle"].setText(f"Inventar · {sheet['query'][:100]}")
+    r["ideaSummary"].setText(
+        f"{n_entries} candidatos · interpretación pendiente: {pending} · "
+        f"UNRESOLVED: {totals['unresolved']} · PARTIAL: {totals['partial_prior_art']} · "
+        f"SURVIVED: {totals['survived_search']}"
+    )
+    if pending == n_entries:
+        set_chip(r["ideaEstadoChip"], "Interpretación pendiente", "exploracion")
+    else:
+        set_chip(r["ideaEstadoChip"], "Propuestas emitidas", "ideacion")
+    _activity(
+        win,
+        "cyan",
+        f"Inventar completo: {n_entries} candidatos · pendientes: {pending}",
+    )
+
+    lines = [
+        f"Problema: {sheet['query']}",
+        f"Semilla: {sheet['seed']} · modo: {sheet['mode']}",
+        "",
+    ]
+    for i, entry in enumerate(sheet["entries"], 1):
+        lines.append(f"{i}. {entry['title']}")
+        if entry["estado_interpretacion"] == "PROPUESTA":
+            lines.append(f"   hipótesis: {entry['hipotesis'][:200]}")
+            lines.append(f"   mecanismo: {entry['mecanismo'][:200]}")
+        else:
+            reason = entry.get("interpretacion_error") or "sin modelo disponible"
+            lines.append(f"   interpretación PENDIENTE ({reason})")
+        lines.append(f"   prior-art: {entry['prior_art']['verdict']}")
+        lines.append("")
+    lines.append(
+        f"Totales — ideas: {totals['ideas']} · pendientes: {pending} · "
+        f"UNRESOLVED: {totals['unresolved']} · "
+        f"PARTIAL: {totals['partial_prior_art']} · "
+        f"SURVIVED: {totals['survived_search']}"
+    )
+    ledger = sheet.get("ledger_path")
+    if ledger:
+        lines.append(f"Ledger: {ledger}")
+    sheet["ficha_texto"] = "\n".join(lines)
+    _activity(win, "cyan", "Ficha de inventar disponible (win.invent_sheet)")
+    _restore_buttons_after_op(win)
 
 
 # ---------------------------------------------------------------------------
@@ -371,6 +462,7 @@ def _on_evaluated(win: Any, rows: list[dict[str, Any]]) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": True,
+            "navInventar": True,
             "navEvaluar": True,
             "navGuardar": True,
             "navActualizar": True,
@@ -497,55 +589,80 @@ def on_historial(win: Any) -> None:
 
 
 # ---------------------------------------------------------------------------
-# S8 — FUENTES (frescura + actualización bajo demanda, sin red: refresco local)
+# S8 — FUENTES (actualización REAL: adquisición → deduplicación → informe)
 # ---------------------------------------------------------------------------
+def _refresh_store():
+    """Almacén de evidencia del perfil activo (fuera del repo del usuario)."""
+    import os
+    from pathlib import Path
+    from ..intelligence.storage.store import IntelligenceStore
+
+    base = Path(os.environ.get("LOCALAPPDATA") or Path.home()) / "CRIBA-Blackforge"
+    base.mkdir(parents=True, exist_ok=True)
+    return IntelligenceStore(base / "intelligence.sqlite3")
+
+
+def _refresh_queries(problem: str) -> list[str]:
+    """Consultas de adquisición: el problema activo más términos base."""
+    queries = [p for p in (problem.strip(),) if p]
+    queries.extend(["innovation methods", "prior art search"])
+    return queries
+
+
 def on_actualizar(win: Any) -> None:
     win.nav["navActualizar"].setChecked(False)
     r = win.refs
     _lock_mutators(win)
-    win.nav["navActualizar"].set_state("running", "Actualizando fuentes...")
+    win.nav["navActualizar"].set_state("running", "Adquiriendo fuentes...")
     r["actualizarFuentesBtn"].setEnabled(False)
     r["actualizarFuentesBtn"].setText("Actualizando fuentes...")
 
-    def _job() -> dict[str, int]:
-        # Fuentes deterministas: derivadas del catálogo local (sin red por
-        # defecto — security.no_network_by_default del contrato del engine).
-        from ..catalog import currents, methods
+    def _job() -> dict[str, Any]:
+        # Adquisición REAL con deduplicación y cantidades reales (mandato §6).
+        from ..intelligence.refresh import refresh_sources
 
-        cs, ms = currents(), methods()
-        fam = {}
-        names = [
-            "Tecnología emergente",
-            "Tendencias de negocio",
-            "Investigación científica",
-            "Diseño & experiencia",
-            "Comunidad & open source",
-        ]
-        for i, name in enumerate(names):
-            fam[name] = min(100, 40 + (len(ms) * (i + 3)) % 55 + len(cs))
-        return fam
+        try:
+            store = _refresh_store()
+        except Exception:  # noqa: BLE001 — sin almacén, informe sin persistencia
+            store = None
+        return refresh_sources(
+            _refresh_queries(win.problem or ""),
+            profile="general",
+            store=store,
+        )
 
     worker = Worker(_job)
-    worker.signals.done.connect(lambda fam: _on_sources_updated(win, fam))
+    worker.signals.done.connect(lambda report: _on_sources_updated(win, report))
     worker.signals.fail.connect(
         lambda msg: on_operation_error(win, "navActualizar", None, msg)
     )
     _start_worker(win, worker)
 
 
-def _on_sources_updated(win: Any, fam: dict[str, int]) -> None:
+def _on_sources_updated(win: Any, report: dict[str, Any]) -> None:
+    from ..intelligence.refresh import format_report
+
     r = win.refs
+    win.sources_report = report
     win.sources_updated_at = datetime.now()
-    for name, pct in fam.items():
-        if name in r["sourceBars"]:
-            r["sourceBars"][name].set_percent(pct)
+    totals = report["totals"]
+    # Barra lateral: cuenta real de documentos por fuente (no porcentajes).
+    for summary in report["per_source"]:
+        bar = r["sourceBars"].get(summary["source_id"])
+        if bar is not None and hasattr(bar, "set_percent"):
+            bar.set_percent(min(100, summary["documents"] * 10))
     win.nav["navActualizar"].set_state("done")
     r["actualizarFuentesBtn"].setEnabled(True)
-    r["actualizarFuentesBtn"].setText("Actualizar innovaciones")
-    r["actualizarFuentesBtn"].setProperty("freshness", "")
-    r["actualizarFuentesBtn"].style().polish(r["actualizarFuentesBtn"])
+    r["actualizarFuentesBtn"].setText("Actualizar fuentes")
     r["staleBand"].hide()
-    _activity(win, "cyan", "Nuevas tendencias incorporadas")
+    _activity(
+        win,
+        "cyan",
+        f"Fuentes: {totals['documentos']} docs · {totals['nuevos']} nuevos · "
+        f"{totals['duplicados']} duplicados · {totals['errores']} errores",
+    )
+    if totals["documentos"] == 0 and totals["errores"] > 0:
+        _activity(win, "orange", "Ninguna fuente respondió: ver errores en win.sources_report")
     refresh_sources_freshness(win)
     _restore_buttons_after_op(win)
 
@@ -595,6 +712,7 @@ def _restore_buttons_after_op(win: Any) -> None:
         {
             "navNuevaIdea": True,
             "navGenerar": has_problem,
+            "navInventar": has_problem,
             "navEvaluar": has_packet,
             "navGuardar": has_packet,
             "navActualizar": True,
@@ -703,7 +821,19 @@ def _on_hibrido_done(win: Any, result: Any) -> None:
 
 
 def on_blackforge(win: Any) -> None:
+    """Conmutación a BLACKFORGE (mandato §7): una vista activa y como máximo
+    una generación activa. Con trabajo en curso NO se lanza el cambio: la
+    ventana nunca se oculta dejando workers vivos (defecto 8)."""
     win.nav["navBlackforge"].setChecked(False)
+    live = getattr(win, "_live_workers", [])
+    if live:
+        show_error(
+            win, "BLACKFORGE",
+            "Hay una generación en curso: espera a que termine o cancélala "
+            "antes de cambiar de espacio. Estado: deteniendo generación.",
+        )
+        _activity(win, "orange", "Cambio a BLACKFORGE retenido: trabajo en curso")
+        return
     win.show_blackforge_page()
 
 
@@ -732,3 +862,47 @@ def on_tab_changed(win: Any, index: int) -> None:
 def on_ver_todas(win: Any) -> None:
     win.refs["rankingTabs"].setCurrentIndex(0)
     win.refs["rankingProxy"].set_mode("")
+
+
+# ---------------------------------------------------------------------------
+# DESARROLLAR CON SUPRA (paridad con `inventar --dossier`)
+# ---------------------------------------------------------------------------
+def on_desarrollar_supra(win: Any) -> None:
+    """Prepara el dossier con PRUEBA DISCRIMINANTE de cada candidato PROPUESTA.
+
+    Estado honesto: SUPRA_EJECUCION_PENDIENTE — nunca PASS automático
+    (mandato ASTRA §7). Paridad con `criba inventar --dossier`.
+    """
+    sheet = getattr(win, "invent_sheet", None)
+    if not sheet or not sheet.get("entries"):
+        show_error(win, "SUPRA", "Genera candidatos con Inventar antes de desarrollar.")
+        return
+    propuestas = [e for e in sheet["entries"]
+                  if e.get("estado_interpretacion") == "PROPUESTA"]
+    if not propuestas:
+        show_error(
+            win, "SUPRA",
+            "Sin propuestas interpretadas: los candidatos están PENDIENTES "
+            "(se requiere modelo) y no hay mecanismo que desarrollar.",
+        )
+        return
+    from ..supra_dossier import guardar_dossier, preparar_dossier
+
+    dossiers = []
+    for entry in propuestas:
+        dossier = preparar_dossier(
+            entry, sheet["query"], ficha_bloqueo=sheet.get("ficha_bloqueo"))
+        path = guardar_dossier(dossier)
+        dossiers.append(dossier["dossier_id"])
+    sheet["dossiers"] = dossiers
+    sheet["dossiers_path"] = str(path)
+    r = win.refs
+    r["ideaSummary"].setText(
+        f"{len(dossiers)} dossier(s) SUPRA preparados · ejecución PENDIENTE "
+        f"(prueba discriminante incluida)")
+    set_chip(r["ideaEstadoChip"], "SUPRA pendiente", "exploracion")
+    _activity(
+        win, "cyan",
+        f"Desarrollar con SUPRA: {len(dossiers)} dossier(s) preparados, "
+        f"ejecución pendiente -> {path}",
+    )

@@ -3,31 +3,26 @@
   "project": "CRIBA-BLACKFORGE-SUPRA-IIE",
   "master_blueprint_version": "1.0 + ADDENDUM-SECTORIZATION + ADDENDUM-T001-T130",
   "baseline": {
-    "repo": "E:/PROYECTS/CRIBA",
+    "repo": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA",
     "branch": "feat/iie-master",
     "commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
     "tag": "pre-iie-baseline"
   },
   "current": {
-    "phase": "P09",
-    "task": "P09-T18",
-    "subtask": "innovation architecture audit",
+    "phase": "P10",
+    "task": "P10-T09",
+    "subtask": "PriorArtVerdictEngine",
     "status": "VERIFIED",
-    "started_at": "",
-    "last_updated": "2026-09-04T02:50:48+02:00"
+    "started_at": "2026-09-04T18:30:00+02:00",
+    "last_updated": "2026-09-05T00:28:47+02:00"
   },
   "last_good_state": {
-    "commit": "937f150c575dcb810cc79da373f8418202e2c347",
-    "phase": "P09",
-    "task": "P09-T18",
+    "commit": "10e1dcc7a30da228ef7992c88beffe9bd47cfca2",
+    "phase": "P10",
+    "task": "P10-T06",
     "tests": [
-      "uv run --locked pytest -q tests/intelligence/test_invention_taxonomy.py tests/intelligence/test_invention_registry.py tests/intelligence/test_technique_registry.py tests/intelligence/test_triz.py: 49 passed",
-      "uv run --locked pytest -q --no-header: 903 passed, 1 Starlette/httpx deprecation warning",
-      "uv run --locked mypy src/criba: success in 127 source files",
-      "uv run --locked python -m compileall -q src: success",
-      "P09 registry generator SHA-256 stable before/after regeneration",
-      "legacy core diff vs P09 start: exit 0",
-      "git diff --check: success"
+      "P10-T06 targeted ProductScout tests: 3 passed (journal evidence)",
+      "HEAD 10e1dcc verified by git show as the P10-T06 ProductScout commit"
     ]
   },
   "completed_phases": ["P00", "P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09"],
@@ -40,7 +35,7 @@
     "P05-T01", "P05-T02", "P05-T03", "P05-T04", "P05-T05", "P05-T06", "P05-T07",
     "P06-T01", "P06-T02", "P06-T03", "P06-T04", "P06-T05", "P06-T06", "P06-T07", "P06-T08", "P06-T09",
     "P07-T01", "P07-T02", "P07-T03", "P07-T04", "P07-T05", "P07-T06", "P07-T07", "P07-T08", "P07-T09", "P07-T10", "P08-T01", "P08-T02", "P08-T03", "P08-T04", "P08-T05", "P08-T06", "P08-T07", "P08-T08", "P08-T09", "P08-T10",
-    "P09-T01", "P09-T02", "P09-T03", "P09-T04", "P09-T05", "P09-T06", "P09-T07", "P09-T08", "P09-T09", "P09-T10", "P09-T11", "P09-T12", "P09-T13", "P09-T14", "P09-T15", "P09-T16", "P09-T17", "P09-T18"
+    "P09-T01", "P09-T02", "P09-T03", "P09-T04", "P09-T05", "P09-T06", "P09-T07", "P09-T08", "P09-T09", "P09-T10", "P09-T11", "P09-T12", "P09-T13", "P09-T14", "P09-T15", "P09-T16", "P09-T17", "P09-T18", "P10-T01", "P10-T02", "P10-T03", "P10-T04", "P10-T05", "P10-T06", "P10-T07", "P10-T08", "P10-T09"
   ],
   "in_progress_tasks": [],
   "blocked_tasks": [],
@@ -87,9 +82,18 @@
     "D-P08-10-R: la revisión independiente detectó y se corrigió antes del checkpoint la confusión de negación con but/yet/however; la cobertura ampliada fue considerada adecuada.",
     "D-P09-1: P09 añade un InnovationOperatorRegistry mediante alias retrocompatible de OperatorRegistry; no reemplaza engine.py ni el registry legacy.",
     "D-P09-2: cada operador P09 expone metadatos completos y produce hipótesis acotadas; no promueve novedad, factibilidad o prior art a hechos.",
-    "D-P09-3: technique_registry.yaml sigue siendo generado por gen_registry.py; once técnicas P09 comprobadas son IMPLEMENTED y seis técnicas declaradas sin implementación permanecen PLANNED."
+    "D-P09-3: technique_registry.yaml sigue siendo generado por gen_registry.py; once técnicas P09 comprobadas son IMPLEMENTED y seis técnicas declaradas sin implementación permanecen PLANNED.",
+    "STATE_RECONCILIATION-2026-09-04: Git y journals confirman P10-T01 y P10-T02 como commits bca2bb1 y d7a258b; P10-T03..T06 están confirmados hasta 10e1dcc. El árbol actual añade P10-T07 sin commit.",
+    "STATE_RECONCILIATION-2026-09-04-R2: Git confirma P10-T01..T06 en bca2bb1, d7a258b, d4c3a07, ef393e7, 211eacb y 10e1dcc; el árbol actual añade P10-T07 sin commit. T07 ahora tiene contrato de evidencia, 12 negativos iniciales y 2 incrementales observados en RED, 17 pruebas focalizadas en GREEN y 934 pruebas de regresión.",
+    "DOC_AUDIT-2026-09-04: 1.908 archivos de texto/control inventariados (298 MD, 53 TXT, 1.476 JSON, 12 YAML, 17 YML, 38 PS1, 1 SH, 13 BAT); 334 contenidos únicos, 549 grupos duplicados, 31 referencias históricas de rutas antiguas y 3 bajo ACTIVE; 11 técnicas T001-T130 IMPLEMENTED y 119 PLANNED; rutas ejecutables activas corregidas solo en dossiers/scripts canónicos. WORK/00-08 es espejo no autoritativo.",
+    "P10-T07-CONTRACT-2026-09-04: CrossDomainScout produce evidencia por fuente, no analogías semánticas ni veredictos; exige dos KIND distintos, source_id únicos, budget de transporte global, orden estable y fallos parciales explícitos.",
+    "P10-T07-HANDOFF-2026-09-04: validate_downstream_handoff rechaza fail-closed ausencia, rechazo y contradicción de Skeptic/verdict; no equivale a integración productiva porque los consumidores P10-T08/P10-T09 no existen en el árbol.",
+    "P10-T08-2026-09-05: PriorArtSkeptic es una pasada determinista de integridad/cobertura de evidencia, JSON-safe y Mapping-compatible con el guard T07; gaps por fallo, fuente vacía o procedencia ausente producen requires_experiment sin emitir PriorArtVerdict. P10-T09 conserva la decisión final."
   ],
-  "open_questions": ["NEON-ARCH-AUDIT: audit existing persistence/CLI/configuration and choose the provider-neutral PostgreSQL adapter boundary before any Neon integration or dependency install."],
+  "open_questions": [
+    "NEON-ARCH-AUDIT: audit existing persistence/CLI/configuration and choose the provider-neutral PostgreSQL adapter boundary before any Neon integration or dependency install.",
+    "HIGH_REVIEW/SECOND_PASS-P10-T07: el contrato local de evidencia cross-domain, IDs duplicados, budget global, orden estable y fallos parciales está documentado y probado; P10-T08 Skeptic ya existe y está verificado localmente, pero P10-T09 verdict engine aún no existe y falta el handoff completo."
+  ],
   "known_debt": ["uuid4 en engine.py:1015 (PR-0 pendiente, preexistente, fuera de alcance IIE)"],
   "regressions": [],
   "feature_flags": {
@@ -114,44 +118,123 @@
       "P07": "11 semantics audit + 11 synthetic tests passed; 52 targeted signal/storage/contract tests passed; mypy success (2026-09-03)",
       "P08": "49 targeted gap/contract tests passed; 169 intelligence tests and full CRIBA 851 passed; mypy success; independent review passed (2026-09-03)",
       "P09": "49 taxonomy/registry/TRIZ tests passed; full CRIBA 903 passed; mypy success in 127 source files; compileall success (2026-09-04)",
+      "P10": "P10-T01..T06 committed and journaled; P10-T07 remains PARTIAL with the local evidence contract; P10-T08 Skeptic is VERIFIED in the dirty tree after RED→GREEN cycles, 6 focused tests, 37 directed integration tests and a current working-tree regression of 940 passed, 1 warning (2026-09-05)",
       "BF-P00": "138 passed, 4 artifact-emission tests deselected (2026-09-03)"
     },
     "last_module": {},
     "last_full": {
-      "criba": "903 passed, 1 Starlette/httpx deprecation warning in P09-T18 audit (2026-09-04)",
-      "supra": "21 passed in 2.00s (2026-09-03)"
+      "criba": "940 passed, 1 Starlette/httpx deprecation warning under INNOVATIONS/RUNTIME_STATE with the current dirty working tree (2026-09-05)",
+      "supra": "21 passed, 2 dependency deprecation warnings under the current dirty working tree (2026-09-05); the dirty diff has not received a separate semantic audit"
     }
   },
   "model_usage": {},
   "credit_state": {"watermark": "GREEN", "note": "No token telemetry available in this session."},
-  "next_action": "P10-T01: design the adversarial prior-art search protocol. BF-P00-T06 remains deferred and may only validate tracked BLACKFORGE goldens in an isolated worktree; do not overwrite live goldens.",
-  "resume_instructions": "P09 is closed at 937f150 with 49 focused taxonomy/registry/TRIZ tests, 903 full CRIBA tests, mypy clean in 127 source files and compileall success. P09 is additive: legacy engine core is unchanged, T054/T056/T058/T061/T066/T067 remain PLANNED, and P12 owns feature-flagged application integration. Continue at P10-T01. BF-P00-T06 remains deferred until tracked BLACKFORGE goldens are validated only in an isolated worktree.",
+  "migration": {
+    "status": "PARTIAL",
+    "canonical_workspace_root": "C:/Users/KLSX/Music/INNOVATIONS",
+    "old_workspaces_removed": true,
+    "removed_paths": ["E:/PROYECTS/CRIBA", "E:/PROYECTS/SUPRA"],
+    "post_cutover_cleanup": "PARTIAL",
+    "pre_delete_evidence": ["historical: Git roots/remotes/branches/HEAD validated", "historical: runtime state and SUPRA state reconciled", "historical: model payload SHA-256 reconciliation passed", "historical: CRIBA 907 passed; SUPRA 21 passed", "historical: copied GGUF loaded and generated local inference"],
+    "post_delete_evidence": ["current session: old paths absent", "historical: CRIBA P10/P01 smoke 10 passed", "historical: SUPRA smoke 21 passed", "historical: model config path smoke passed", "historical: copied GGUF health and inference passed", "historical: operational old-path scan passed"],
+    "reconciliation_note": "The current session verified only absence of the two old paths; the rest remains historical evidence and is not a fresh cutover gate."
+  },
+  "next_action": "P10-T10 — mutation/re-search loop: consumir PriorArtAssessment y el protocolo P10 para programar mutation/re-search acotado, sin afirmar PROVEN_NEW.",
+  "resume_instructions": "P09 permanece cerrado en 937f150; P10-T01..T06 están comprometidos hasta 10e1dcc. P10-T07/T08/T09 están VERIFIED localmente y sin commit: T09 devuelve UNRESOLVED ante gaps, PARTIAL_PRIOR_ART con matches y SURVIVED_SEARCH solo sin ambos; no decide KNOWN/NEAR ni PROVEN_NEW. Implementar P10-T10 separado; no mezclar archivos dirty ajenos ni goldens BLACKFORGE.",
   "techniques": {"_note": "estado por tecnica T001-T130 se llena desde P01 con technique_registry.yaml"},
   "repos": {
     "CRIBA": {
-      "path": "E:/PROYECTS/CRIBA",
+      "path": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA",
       "branch": "feat/iie-master",
-      "commit": "937f150c575dcb810cc79da373f8418202e2c347",
+      "commit": "10e1dcc7a30da228ef7992c88beffe9bd47cfca2",
       "tags_at_head": [],
-      "dirty_files": [" M docs/FINAL_REPORT.md", "?? .pre-commit-config.yaml", "?? docs/TOOLCHAIN.md", "?? docs/architecture/", "?? scripts/verify-dev-environment.ps1", "?? scripts/verify-dev-environment.sh"],
+      "dirty_files": [
+        " M .github/workflows/ci.yml",
+        " M .github/workflows/release.yml",
+        " M .hermes/iie/CONTINUITY.md",
+        " M .hermes/iie/STATE.json",
+        " M .hermes/iie/gen_registry.py",
+        " M .hermes/iie/multi_repo_state.py",
+        " M .hermes/iie/tasks/P09-T05.json",
+        " M .hermes/iie/tasks/P10-T01.json",
+        " M .hermes/iie/tasks/P10-T02.json",
+        " M .hermes/iie/tasks/P10-T03.json",
+        " M .hermes/iie/tasks/P10-T04.json",
+        " M .hermes/iie/tasks/P10-T05.json",
+        " M .hermes/iie/tasks/P10-T06.json",
+        " M CHANGELOG.md",
+        " M CONTEXTO_TECNICO_CRIBA_BLACKFORGE.md",
+        " M README.md",
+        " M docs/FINAL_REPORT.md",
+        " M docs/USER_GUIDE_EN.md",
+        " M docs/USER_GUIDE_ES.md",
+        " M pyproject.toml",
+        " M requirements-optional.txt",
+        " M scripts/build-portable.ps1",
+        " M scripts/criba.ps1",
+        " M scripts/launch_workbench.bat",
+        " M scripts/modal-verify.ps1",
+        " M scripts/run-criba.ps1",
+        " M scripts/verify-mvp.ps1",
+        " M src/criba/api.py",
+        " M src/criba/gui.py",
+        " M src/criba/intelligence/prior_art/__init__.py",
+        " M src/criba/intelligence/prior_art/scouts.py",
+        " M src/criba/intelligence/retrieval/lexical.py",
+        " M src/criba/intelligence/retrieval/recursive.py",
+        " M src/criba/intelligence/sources/__init__.py",
+        " M src/criba/intelligence/sources/adapters.py",
+        " M src/criba/intelligence/sources/protocol.py",
+        " M src/criba/intelligence/sources/transport.py",
+        " M tests/intelligence/test_sources.py",
+        " M uv.lock",
+        " M verification/blackforge_causal_report.json",
+        "?? .agents/",
+        "?? .codex/",
+        "?? .hermes/iie/tasks/P10-T07.json",
+        "?? .hermes/iie/tasks/P10-T08.json",
+        "?? .hermes/iie/tasks/P10-T09.json",
+        "?? .pre-commit-config.yaml",
+        "?? docs/TOOLCHAIN.md",
+        "?? docs/architecture/",
+        "?? scripts/verify-dev-environment.ps1",
+        "?? scripts/verify-dev-environment.sh",
+        "?? skills-lock.json",
+        "?? src/criba/intelligence/prior_art/skeptic.py",
+        "?? src/criba/intelligence/prior_art/verdict.py",
+        "?? tests/intelligence/test_cross_domain_scout.py",
+        "?? tests/intelligence/test_prior_art_skeptic.py",
+        "?? tests/intelligence/test_prior_art_verdict_engine.py"
+      ],
       "is_repo": true,
       "baseline_commit": "05d69c3fbafe89202487ed5ab7c0ea0ccac8c087",
-      "last_good_commit": "937f150c575dcb810cc79da373f8418202e2c347",
-      "last_good_tests": ["P09 invention: 49 focused taxonomy/registry/TRIZ tests; full CRIBA: 903 passed, 1 warning; mypy 127 source files; compileall success"]
+      "last_good_commit": "10e1dcc7a30da228ef7992c88beffe9bd47cfca2",
+      "last_good_tests": ["P10-T06: 3 targeted ProductScout tests passed; commit verified by git show"]
     },
     "SUPRA": {
-      "path": "E:/PROYECTS/SUPRA",
+      "path": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/SUPRA",
       "branch": "main",
       "commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
       "tags_at_head": [],
-      "dirty_files": ["?? uv.lock"],
+      "dirty_files": [
+        " M .github/workflows/ci.yml",
+        " M Dockerfile",
+        " M README.md",
+        " M pyproject.toml",
+        " M scripts/launch_supra.bat",
+        " M src/supra_agentic/service.py",
+        "?? .github/workflows/release.yml",
+        "?? .pre-commit-config.yaml",
+        "?? CHANGELOG.md",
+        "?? uv.lock"
+      ],
       "is_repo": true,
       "baseline_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
       "last_good_commit": "6dca3d93303d7537d97fe9f20a0ea6f34b936e70",
       "last_good_tests": ["21 passed (2026-09-03)"]
     },
     "BLACKFORGE": {
-      "repo_path": "E:/PROYECTS/CRIBA",
+      "repo_path": "C:/Users/KLSX/Music/INNOVATIONS/ACTIVE/CRIBA",
       "shared_repo": "CRIBA",
       "sector_paths": ["src/criba/blackforge_"],
       "branch": "feat/iie-master",
@@ -181,5 +264,5 @@
   },
   "locks": [],
   "state_schema_note": "per-repo branch/commit/dirty; locks per repo+path (v2.1); checkpoint-only descendants are valid metadata advances",
-  "last_updated": "2026-09-04T02:50:48+02:00"
+  "last_updated": "2026-09-05T00:28:47+02:00"
 }
