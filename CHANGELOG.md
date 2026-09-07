@@ -44,10 +44,44 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   interpretado sin truncar a 200 chars; revisiones auditadas con
   llamadas contadas.
 
+### Added (2026-09-07 — router del canon T001–T130)
+- **Trazabilidad v2 del registro de técnicas**: `technique_registry.yaml`
+  (regenerado por `gen_registry.py`) lleva `schema_version`, `canon_version`
+  y `provenance` (fuente ADDENDUM s87–94, generador, partes) legibles por
+  máquina; `TechniqueRegistry` acepta el esquema v2 y el formato plano
+  legado, y `validate()` exige la trazabilidad en v2.
+- **Router del canon** (`criba.intelligence.router`): selecciona el
+  subconjunto mínimo relevante de T001–T130 para una tarea — determinista,
+  offline, sin ejecutar nada. Solo técnicas IMPLEMENTED son candidatos de
+  ejecución; las PLANNED relevantes aparecen como brechas honestas (nunca
+  como capacidad). Puente léxico ES→EN acotado al vocabulario del canon,
+  diversidad funcional por familia y supresión de redundancia
+  (mismo módulo + pipeline). El resultado arrastra `canon_version` y
+  `procedencia` del canon consumido.
+- **CLI `criba tecnicas "<tarea>"`**: acceso de solo lectura al router
+  (`--perfil CRIBA|BLACKFORGE`, `--max`, `--max-por-familia`, `--con-red`).
+
+### Fixed (2026-09-07 — auditoría qa-win del bloque router)
+- El registro v2 con `provenance` incompleto o vacío ahora falla EN CARGA
+  (no solo en `validate()`); entradas corruptas de `techniques` (no-mapping,
+  sin id, `model` no-mapping) producen `ValueError` claro → el CLI responde
+  `Error: ...` + exit 2 sin traceback.
+- El truncado del motivo «coincide:…» respeta fronteras de token (sin coma
+  colgante ni tokens cortados).
+- `tecnicas --max/--max-por-familia` < 1 → error controlado (exit 2), antes
+  se aceptaban en silencio.
+- Gate de credenciales del router con test de regresión (par sintético
+  T900/T901).
+- `gen_registry.py` escribe el destino relativo a su BASE (fin de ruta
+  absoluta hardcodeada); regeneración idempotente byte a byte re-verificada.
+
 ### Changed
 - README/README.es provider-neutral; cifra de tests verificada.
 - SUPRA retirado de la verificación de entorno; inventario en
   `docs/SUPRA_INVENTORY.md`.
+- Lote parches SAFE de dependencias (auditoría OSS sin CVEs): pydantic
+  2.13.5, fastapi 0.141.1, uvicorn 0.52.4, mypy 2.3.1, ruff 0.16.6,
+  semgrep 1.176.1, types-PyYAML, hypothesis 6.167.1.
 
 ## [Unreleased]
 

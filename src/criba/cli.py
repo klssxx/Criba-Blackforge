@@ -204,6 +204,18 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--dossier", action="store_true",
         help="Prepara dossiers con prueba discriminante (estado SUPRA pendiente, nunca PASS)",
     )
+    tecnicas_parser = sub.add_parser(
+        "tecnicas",
+        help="Router del canon T001-T130: subconjunto mínimo relevante (solo lectura)",
+    )
+    tecnicas_parser.add_argument("query", help="Tarea o problema a rutear")
+    tecnicas_parser.add_argument("--perfil", choices=["CRIBA", "BLACKFORGE"], default="CRIBA")
+    tecnicas_parser.add_argument("--max", type=int, default=6, help="Máximo de técnicas ejecutables")
+    tecnicas_parser.add_argument("--max-por-familia", type=int, default=2)
+    tecnicas_parser.add_argument(
+        "--con-red", action="store_true",
+        help="Permite técnicas que requieren red (por defecto solo offline)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -311,6 +323,21 @@ def main(argv: Sequence[str] | None = None) -> int:
             print_sheet(sheet)
             ledger = append_ledger(sheet)
             print(f"Ledger: {ledger}")
+            return 0
+
+        if args.command == "tecnicas":
+            from .intelligence.registry import TechniqueRegistry
+            from .intelligence.router import TechniqueRouter
+
+            router = TechniqueRouter(TechniqueRegistry())
+            routing = router.select(
+                args.query,
+                profile=args.perfil,
+                max_techniques=args.max,
+                max_per_family=args.max_por_familia,
+                offline_only=not args.con_red,
+            )
+            print(json.dumps(routing.to_dict(), ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "gui":
