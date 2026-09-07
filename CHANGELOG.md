@@ -5,6 +5,32 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (2026-09-08 — restauración selectiva cbac469, slice 1)
+- **Operadores `invention/` restaurados** (16 módulos + 3 suites de tests
+  históricos, ~1.100 LOC) desde `cbac469~1` bajo la CBAC469 Recovery
+  Constitution §74–§85: recuperación selectiva por capacidad, no revert
+  global. Canon `2026-09-08.1`: las 11 técnicas (T053/T055/T057/T059/T060/
+  T062–T065/T116/T129) vuelven a IMPLEMENTED tras la secuencia §79 completa:
+  capability proof (tests históricos verdes contra contratos vivos), §78
+  (`invention/registry`+`taxonomy` auditados como dispatch puro — nunca
+  canon paralelo), §82 (test de cadena canon→router→resolver→operador→
+  salida contractual + negativos), promoción solo vía generador canónico.
+- **`docs/recovery/CBAC469_AUDIT.md`**: triage del 100% de los 93 paths
+  borrados por cbac469 con matriz de decisiones (gaps/signals/graph/
+  entities/provenance DEFER slices 2–3 con condiciones de reapertura;
+  stubs KEEP_DELETED_DEAD con NEGATIVE_KNOWLEDGE).
+- **`.hermes/iie/assurance_ledger.json`**: ledger append-only de assurance
+  (local/premise/effective, attestation A2 por CI objetivo, premises
+  críticas certificadas, eventos de época canónica .1→.2→.3, estados
+  runtime SHADOW — A2 no autoriza más).
+- **Ejecución de técnicas desde el producto** (`criba.intelligence.execution`
+  + `criba tecnicas --ejecutar TXXX`): resolver runtime canon→operador con
+  adaptadores por input_contracts y guardrails (PLANNED/desconocida/creds →
+  error controlado; el canon decide ejecutabilidad). Evidencia por
+  `--entrada docs.json` o `--desde-almacen`. Cierra la cadena §82 de forma
+  accesible E2E; tabla de verificación por técnica en
+  `docs/recovery/CBAC469_AUDIT.md`.
+
 ### Added (2026-09-07 — consolidación y bloque bloqueo→desbloqueo)
 - **Diversity-aware finalist selection** (MMR local, pesos centralizados):
   el flujo de invención ya no depende del top-N por score. PRE/POST en

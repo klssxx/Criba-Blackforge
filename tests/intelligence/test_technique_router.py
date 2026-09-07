@@ -32,12 +32,11 @@ def test_selection_is_deterministic(router: TechniqueRouter) -> None:
 
 
 def test_selected_contains_only_implemented(router: TechniqueRouter) -> None:
-    """El canon real no tiene hoy ninguna técnica IMPLEMENTED (cbac469 eliminó
-    invention/*): nada es ejecutable y todo relevante sale como brecha."""
+    """Solo técnicas IMPLEMENTED son candidatos de ejecución (restauradas
+    desde cbac469~1 en 2026-09-08; canon 2026-09-08.1)."""
     result = router.select("análisis morfológico y scamper de un problema")
-    assert result.selected == ()
-    assert result.coverage_gaps, "las técnicas relevantes deben aparecer como brechas"
-    for candidate in result.selected:  # invariante: si hubiese seleccionadas, ejecutables
+    assert result.selected, "la tarea debe activar al menos una técnica implementada"
+    for candidate in result.selected:
         assert candidate.executable
         assert candidate.technique.status.startswith("IMPLEMENTED")
 
@@ -127,14 +126,10 @@ def test_offline_only_excludes_network_techniques(router: TechniqueRouter) -> No
 
 
 def test_morphological_task_selects_t059(router: TechniqueRouter) -> None:
-    """Caso funcional: una tarea morfológica encuentra T059. Desde la cirugía
-    cbac469 el módulo no existe → T059 es PLANNED y sale como brecha honesta,
-    nunca como ejecutable."""
+    """Caso funcional: una tarea morfológica encuentra T059 (implementada,
+    restaurada)."""
     result = router.select("generar hipótesis con análisis morfológico de dimensiones")
-    t059 = [c for c in result.coverage_gaps if c.id == "T059"]
-    assert t059, "T059 debe aparecer como brecha"
-    assert not t059[0].executable
-    assert t059[0].technique.status == "PLANNED"
+    assert "T059" in [c.id for c in result.selected]
 
 
 def test_executable_path_with_synthetic_registry(tmp_path) -> None:

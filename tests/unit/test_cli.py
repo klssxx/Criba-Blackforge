@@ -168,8 +168,8 @@ def test_lottery_cli_uses_packaged_catalog_and_explicit_output_dir(
 
 def test_tecnicas_routes_canon_with_traceability(capsys) -> None:
     """El router del canon T001-T130 es consumible por CLI (solo lectura).
-    Desde la cirugía cbac469 el canon no tiene técnicas IMPLEMENTED: la tarea
-    relevante produce solo brechas honestas, nunca ejecutables."""
+    Técnicas restauradas (canon 2026-09-08.1): tarea relevante selecciona
+    ejecutables reales y las PLANNED quedan como brechas."""
     result = main(["tecnicas", "análisis morfológico y escenarios contrafactuales",
                    "--max", "3"])
 
@@ -177,9 +177,9 @@ def test_tecnicas_routes_canon_with_traceability(capsys) -> None:
     routing = json.loads(capsys.readouterr().out)
     assert routing["canon_version"]
     assert routing["provenance"]["generator"].endswith("gen_registry.py")
-    assert routing["selected"] == [], "sin IMPLEMENTED no hay ejecutables que inventar"
-    gap_ids = [t["id"] for t in routing["coverage_gaps"]]
-    assert "T059" in gap_ids and "T129" in gap_ids
+    selected_ids = [t["id"] for t in routing["selected"]]
+    assert "T059" in selected_ids and "T129" in selected_ids
+    assert all(t["executable"] for t in routing["selected"])
     for gap in routing["coverage_gaps"]:
         assert gap["reasons"][-1].startswith("no_implementada")
 
@@ -273,3 +273,68 @@ def test_tecnicas_incomplete_provenance_returns_controlled_error(
     assert result == 2
     assert "Error:" in captured.err
     assert "provenance" in captured.err
+
+
+# ---------------------------------------------------------------------------
+# Ejecución de técnicas desde el producto (§82 completo: canon→router→
+# resolver→operador→salida, accesible por CLI). El canon decide ejecutabilidad.
+# ---------------------------------------------------------------------------
+
+def test_tecnicas_ejecuta_t059_con_parametros_canonicos(tmp_path, capsys) -> None:
+    entrada = tmp_path / "entrada.json"
+    entrada.write_text(json.dumps({
+        "params": {"dimensions": {"motor": ["eléctrico", "combustión"],
+                                  "frenado": ["regenerativo", "fricción"]}},
+    }), encoding="utf-8")
+
+    result = main(["tecnicas", "análisis morfológico", "--ejecutar", "T059",
+                   "--problema", "vehículo urbano", "--entrada", str(entrada)])
+
+    assert result == 0
+    outcome = json.loads(capsys.readouterr().out)
+    assert outcome["technique"] == "T059"
+    assert outcome["canon_version"]
+    assert outcome["results"], "el análisis morfológico debe producir hipótesis"
+    for candidate in outcome["results"]:
+        assert "T059" in candidate["operators"], "trazabilidad de operador exigida"
+
+
+def test_tecnicas_ejecuta_t053_con_evidencia_de_entrada(tmp_path, capsys) -> None:
+    docs = [{"title": f"doc{i}", "metadata": {"concepts": ["a", "b"] if i % 2 else ["b", "c"]}}
+            for i in range(8)]
+    docs += [{"title": "raro", "metadata": {"concepts": ["zzz", "yyy"]}}]
+    entrada = tmp_path / "docs.json"
+    entrada.write_text(json.dumps(docs), encoding="utf-8")
+
+    result = main(["tecnicas", "combinaciones raras", "--ejecutar", "T053",
+                   "--entrada", str(entrada)])
+
+    assert result == 0
+    outcome = json.loads(capsys.readouterr().out)
+    assert len(outcome["evidence_doc_ids"]) == 9
+
+
+def test_tecnicas_ejecuta_t059_sin_entrada_da_error_controlado(capsys) -> None:
+    result = main(["tecnicas", "x", "--ejecutar", "T059", "--problema", "p"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "dimensions" in captured.err
+
+
+def test_tecnicas_rechaza_ejecutar_planeada(capsys) -> None:
+    """Negativo §82: el canon no autoriza ejecutar una PLANNED."""
+    result = main(["tecnicas", "curvas de sustitución", "--ejecutar", "T130"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "PLANNED" in captured.err
+    assert "canon" in captured.err
+
+
+def test_tecnicas_rechaza_ejecutar_desconocida(capsys) -> None:
+    result = main(["tecnicas", "x", "--ejecutar", "T999"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "desconocida" in captured.err

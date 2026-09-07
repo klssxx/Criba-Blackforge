@@ -1,0 +1,271 @@
+{
+  "protocol": {
+    "RECOVERY_PROTOCOL_VERSION": "cbac469-constitution-v2.1",
+    "note": "Ledger append-only de assurance. El schema canonico (PLANNED/IMPLEMENTED) no soporta estados runtime; se persisten aqui (constitucion: 'persistirlos en STATE/continuity').",
+    "roles": {
+      "BUILDER_ROLE": "orchestrator-glm (propone; nunca certifica A3+ de su propio trabajo)",
+      "CERTIFIER_ROLE": "CI objetivo (gates mecanicos reproducibles: suite/mypy/guards/scans) para A2",
+      "A3_REVIEWER": "NOT_AVAILABLE (despacho de qa-win caido por infraestructura del host)",
+      "INDEPENDENCE": "INDEPENDENCE_LOGICAL_ONLY"
+    }
+  },
+  "canon_epochs": [
+    {
+      "epoch": "2026-09-07.1",
+      "event": "baseline_pre_auditoria",
+      "implemented": 11,
+      "note": "11 IMPLEMENTED declaradas; resulto ser estado invalido (codigo borrado por cbac469 sin actualizar canon)"
+    },
+    {
+      "epoch": "2026-09-07.2",
+      "event": "DEGRADATION_EVENT",
+      "tombstone": {
+        "TOMBSTONE_ID": "TS-20260907-canon-integrity",
+        "cause": "falso IMPLEMENTED: cbac469 elimino intelligence/invention/* y el registro siguio declarando 11 tecnicas IMPLEMENTED",
+        "old_state": "11 IMPLEMENTED",
+        "new_state": "0 IMPLEMENTED (130 PLANNED)",
+        "affected_txxx": [
+          "T053",
+          "T055",
+          "T057",
+          "T059",
+          "T060",
+          "T062",
+          "T063",
+          "T064",
+          "T065",
+          "T116",
+          "T129"
+        ],
+        "affected_decisions": [
+          "PR #9 router exponia executable=true sobre capacidad inexistente"
+        ],
+        "revalidation_required": true,
+        "closed_by": "PROMOTION_EVENT 2026-09-08.1"
+      }
+    },
+    {
+      "epoch": "2026-09-08.1",
+      "event": "PROMOTION_EVENT",
+      "restoration_commit": "1fc1b5e",
+      "promoted": [
+        "T053",
+        "T055",
+        "T057",
+        "T059",
+        "T060",
+        "T062",
+        "T063",
+        "T064",
+        "T065",
+        "T116",
+        "T129"
+      ],
+      "promotion_basis": "secuencia §79 completa: capability proof (tests historicos restaurados), §78 dispatch-only, §82 cadena canon->router->operador->salida, mapeos desde overrides historicas del generador canonico (§80), promocion solo via generador (§77)",
+      "attestation": "ATT-20260908-A2-CI"
+    }
+  ],
+  "attestations": [
+    {
+      "ATTESTATION_ID": "ATT-20260908-A2-CI",
+      "RECOVERY_TX_ID": "slice1-invention-restore",
+      "CAPABILITY_IDS": [
+        "T053",
+        "T055",
+        "T057",
+        "T059",
+        "T060",
+        "T062",
+        "T063",
+        "T064",
+        "T065",
+        "T116",
+        "T129"
+      ],
+      "PROPOSED_LEVEL": "A2",
+      "CERTIFIER_ROLE": "CI objetivo (mechanico, reproducible)",
+      "CERTIFIER_RESULT": "PASS",
+      "CERTIFIED_LEVEL": "A2",
+      "gate_vector": {
+        "A1.G1_baseline_truth": "PASS (HEAD verificado vs origin; suite antes de tocar: 932)",
+        "A1.G2_minimum_capability_proof": "PASS (modulo+simbolo+contratos+tests conductuales+provenance: overrides historicas del generador)",
+        "A1.G3_asymmetric_loss": "PASS (default PLANNED mantenido hasta prueba completa; FALSE_IMPLEMENTED tratado como 20:1)",
+        "A1.G4_containment": "PASS (operadores son funciones puras; dispatch sin handler no ejecuta; nada los llama en el loop de producto)",
+        "A2.G1_targeted_and_full_tests": "PASS (986 passed; +54 restaurados/cadena)",
+        "A2.G2_mypy": "PASS (Success 99 fuentes)",
+        "A2.G3_runtime_traceability": "PASS (guard: refs importan, tests declarados existen)",
+        "A2.G4_determinism": "PASS (tests historicos de determinismo restaurados)",
+        "A2.G5_negative_tests": "PASS (PLANNED nunca ejecutable; ref rota; test inexistente; dispatch rechaza sin trazabilidad)",
+        "A2.G6_dependency_delta": "PASS (cero dependencias nuevas)",
+        "A2.G7_sast_secret_scan": "PASS via CI (repository scan + dependency audit)",
+        "A3.G1_independent_certifier": "NOT_AVAILABLE (infraestructura de subagentes caida)",
+        "A3.G2_calibration": "NOT_AVAILABLE"
+      },
+      "REASONS": "A1->A2 certificable por CI objetivo reproducible (constitucion). A3+ requiere revisor independiente calibrado: NO se reclama.",
+      "TIMESTAMP": "2026-09-08"
+    },
+    {
+      "ATTESTATION_ID": "ATT-20260908-INT-CLI",
+      "RECOVERY_TX_ID": "slice1-integration-build",
+      "CAPABILITY_IDS": [
+        "T053",
+        "T055",
+        "T057",
+        "T059",
+        "T060",
+        "T062",
+        "T063",
+        "T064",
+        "T065",
+        "T116",
+        "T129"
+      ],
+      "PROPOSED_LEVEL": "A2 (+integración de producto)",
+      "CERTIFIER_ROLE": "CI objetivo",
+      "CERTIFIER_RESULT": "PASS",
+      "CERTIFIED_LEVEL": "A2",
+      "gate_vector": {
+        "INT.G1_producto_accesible": "PASS (criba tecnicas --ejecutar; execution.py resolver+adapters)",
+        "INT.G2_e2e_cli": "PASS (5 tests CLI: T059 params, T053 evidencia, T057 catálogo, error params, PLANNED rechazada, desconocida rechazada)",
+        "INT.G3_negativos_producto": "PASS (PLANNED/unknown/params → exit 2 con mensaje; el canon decide ejecutabilidad)",
+        "INT.G4_sin_regresion": "PASS (991 passed, mypy 100 fuentes)"
+      },
+      "REASONS": "La razón previa de SHADOW por desconexión queda retirada: la integración existe. SHADOW se conserva SOLO por techo A2 (sin revisor A3+ independiente disponible) — razón arquitectónica demostrable, no comodidad.",
+      "TIMESTAMP": "2026-09-08"
+    }
+  ],
+  "premises": [
+    {
+      "PREMISE_ID": "P-CONTRACTS-STABLE",
+      "STATEMENT": "Los contratos InventionCandidate/EvidenceDocument que los operadores consumen/producen son estables y compatibles con HEAD",
+      "DEPENDENTS": [
+        "T053",
+        "T055",
+        "T057",
+        "T059",
+        "T060",
+        "T062",
+        "T063",
+        "T064",
+        "T065",
+        "T116",
+        "T129"
+      ],
+      "CRITICALITY": "CRITICAL",
+      "EVIDENCE": "los 39 tests historicos restaurados pasan SIN cambios contra los contratos vivos de HEAD",
+      "TESTS": [
+        "tests/intelligence/test_invention_taxonomy.py",
+        "tests/intelligence/test_triz.py",
+        "tests/intelligence/test_canon_operator_chain.py"
+      ],
+      "FALSIFIER": "un cambio de contrato que rompa los tests historicos sin adaptacion",
+      "CERTIFIED_PREMISE_ASSURANCE": "A2"
+    },
+    {
+      "PREMISE_ID": "P-CANON-CHAIN",
+      "STATEMENT": "La cadena canon->registry->router->resolver->operador es la unica autoridad y no puede fabricar disponibilidad",
+      "DEPENDENTS": [
+        "todas las Txxx"
+      ],
+      "CRITICALITY": "CRITICAL",
+      "EVIDENCE": "guards + test de coherencia bidireccional canon<->dispatch + negativos §82",
+      "TESTS": [
+        "tests/intelligence/test_technique_runtime_traceability.py",
+        "tests/intelligence/test_canon_operator_chain.py",
+        "tests/intelligence/test_invention_registry.py"
+      ],
+      "FALSIFIER": "router ofreciendo ejecutable una PLANNED, o dispatch ejecutando sin promocion canonica",
+      "CERTIFIED_PREMISE_ASSURANCE": "A2"
+    }
+  ],
+  "capabilities": {
+    "T053": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T055": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T057": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T059": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T060": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T062": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T063": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T064": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T065": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T116": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T129": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "note_shadow": "SHADOW conservado por ceiling A2 (sin certificador A3+ disponible), NO por desconexión: las 11 son accesibles desde el producto via 'criba tecnicas --ejecutar'. Sus salidas no alimentan learning/pesos/priors automaticamente."
+  },
+  "raw_counts_disclosure": {
+    "note": "no vender N GREEN como N pruebas independientes",
+    "RAW_TEST_COUNT_slice1": 54,
+    "INDEPENDENT_EVIDENCE_CLUSTERS": [
+      "tests historicos restaurados (comportamiento de operadores: 39)",
+      "cadena canon->router->operador (integracion: 15)",
+      "coherencia canon<->dispatch (autoridad: 1, ampliado)"
+    ]
+  },
+  "cbac469_recovery_status": "SLICE_1_DONE; slices 2-3 DEFER con condiciones de reapertura en docs/recovery/CBAC469_AUDIT.md; NO se declara CBAC469_RECOVERY_DONE (§84)"
+}

@@ -1,0 +1,10 @@
+# El generador del canon escribe LF; normalizar en el indice evita diffs
+# ruidosos en checkouts con autocrlf=false (auditoria P3-4).
+*.py text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.md text eol=lf
+*.lock text eol=lf
+*.spec text eol=lf
+*.ps1 text eol=crlf
+*.bat text eol=crlf
