@@ -25,79 +25,14 @@ SUBS = {
 
 # Phase-owned capability metadata.  This generator is the single writable
 # source for technique_registry.yaml; techniques absent here remain PLANNED.
-IMPLEMENTATION_OVERRIDES = {
-    "T053": {
-        "implementation": "criba.intelligence.invention.rare_combinations.detect_rare_combinations",
-        "input_contracts": ["Sequence[EvidenceDocument] with metadata.concepts"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_rare_combinations_are_deterministic_and_explicitly_corpus_local"],
-    },
-    "T055": {
-        "implementation": "criba.intelligence.invention.cross_domain.detect_cross_domain_analogies",
-        "input_contracts": ["Sequence[EvidenceDocument] with metadata.domain and metadata.concepts"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_cross_domain_analogies_require_explicit_shared_concepts_and_domains"],
-    },
-    "T057": {
-        "implementation": "criba.intelligence.invention.triz.list_principles/get_principle",
-        "input_contracts": ["principle number: int (1..40)"],
-        "output_contracts": ["tuple[TrizPrinciple, ...]"],
-        "tests": ["test_triz_principles_are_complete_and_stably_ordered"],
-    },
-    "T059": {
-        "implementation": "criba.intelligence.invention.morphology.generate_morphological_hypotheses",
-        "input_contracts": ["problem: str", "dimensions: Mapping[str, Sequence[str]]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_t059_morphological_analysis_generates_deterministic_hypotheses"],
-    },
-    "T060": {
-        "implementation": "criba.intelligence.invention.scamper.generate_scamper_hypotheses",
-        "input_contracts": ["problem: str", "components: Sequence[str]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_scamper_generates_all_seven_question_types_without_claiming_solution"],
-    },
-    "T062": {
-        "implementation": "criba.intelligence.invention.functions.decompose_functional_hypotheses",
-        "input_contracts": ["problem: str", "component_functions: Mapping[str, Sequence[str]]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_t062_functional_decomposition_is_explicit_and_deterministic"],
-    },
-    "T063": {
-        "implementation": "criba.intelligence.invention.functions.search_function_to_mechanism_hypotheses",
-        "input_contracts": ["problem: str", "functions: Sequence[str]", "retrieved EvidenceDocument metadata.function_mechanisms"],
-        "output_contracts": ["list[InventionCandidate] with source doc_id in description"],
-        "tests": ["test_t063_function_to_mechanism_search_requires_explicit_source_metadata"],
-    },
-    "T064": {
-        "implementation": "criba.intelligence.invention.first_principles.decompose_first_principles_hypotheses",
-        "input_contracts": ["problem: str", "premise_implications: Mapping[str, Sequence[str]]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_t064_first_principles_decomposition_keeps_premises_explicit"],
-    },
-    "T065": {
-        "implementation": "criba.intelligence.invention.inversion.generate_constraint_inversion_hypotheses",
-        "input_contracts": ["problem: str", "constraint_inversions: Mapping[str, Sequence[str]]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_t065_constraint_inversion_never_claims_constraint_is_removed"],
-    },
-    "T116": {
-        "implementation": "criba.intelligence.invention.adjacent_possible.generate_adjacent_possible_hypotheses",
-        "input_contracts": ["problem: str", "capabilities: Sequence[str]", "known_combinations: Sequence[Sequence[str]]"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": ["test_t116_adjacent_possible_excludes_explicit_known_combinations"],
-    },
-    "T129": {
-        "implementation": "criba.intelligence.invention.{counterfactual,future_back,bottlenecks,nth_order}",
-        "input_contracts": ["problem: str", "caller-supplied temporal/counterfactual mappings"],
-        "output_contracts": ["list[InventionCandidate]"],
-        "tests": [
-            "test_t129_counterfactual_keeps_alternate_outcomes_as_hypotheses",
-            "test_t129_future_back_never_claims_the_future_state_will_be_reached",
-            "test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal",
-            "test_t129_nth_order_effects_never_claim_the_effect_chain_will_occur",
-        ],
-    },
-}
+# VACIO desde 2026-09-07 (correccion de integridad): el commit cbac469
+# ("remove never-activated engine modules ~5.1k lines") elimino los modulos
+# invention/* y sus tests, pero el registro siguio declarando 11 tecnicas
+# IMPLEMENTED sobre codigo borrado. Vuelven a PLANNED hasta re-implementacion
+# real; todo override futuro debe citar el commit que introduce el modulo y
+# sus tests deben existir en tests/ (verificado por
+# tests/intelligence/test_technique_runtime_traceability.py).
+IMPLEMENTATION_OVERRIDES: dict[str, dict] = {}
 
 def family_of(tid: str) -> str:
     n = int(tid[1:])
@@ -131,7 +66,7 @@ extra = [t for t in ids if t not in expected]
 if missing or extra:
     raise SystemExit(f"MISSING={missing} EXTRA={extra}")
 
-CANON_VERSION = "2026-09-07.1"  # bump when reg_parts/*.txt or overrides change
+CANON_VERSION = "2026-09-07.2"  # bump when reg_parts/*.txt or overrides change
 
 out = [
     "# CRIBA IIE technique registry - T001-T130 (GENERATED by gen_registry.py; do not edit by hand)",

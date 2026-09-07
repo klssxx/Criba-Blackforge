@@ -32,10 +32,12 @@ def test_selection_is_deterministic(router: TechniqueRouter) -> None:
 
 
 def test_selected_contains_only_implemented(router: TechniqueRouter) -> None:
-    """Solo técnicas IMPLEMENTED son candidatos de ejecución."""
+    """El canon real no tiene hoy ninguna técnica IMPLEMENTED (cbac469 eliminó
+    invention/*): nada es ejecutable y todo relevante sale como brecha."""
     result = router.select("análisis morfológico y scamper de un problema")
-    assert result.selected, "la tarea debe activar al menos una técnica implementada"
-    for candidate in result.selected:
+    assert result.selected == ()
+    assert result.coverage_gaps, "las técnicas relevantes deben aparecer como brechas"
+    for candidate in result.selected:  # invariante: si hubiese seleccionadas, ejecutables
         assert candidate.executable
         assert candidate.technique.status.startswith("IMPLEMENTED")
 
@@ -63,9 +65,21 @@ def test_max_techniques_respected(router: TechniqueRouter) -> None:
     assert len(result.selected) <= 2
 
 
-def test_family_diversity_cap(router: TechniqueRouter) -> None:
-    """No colapsar en una sola familia cuando hay relevancia comparable."""
-    result = router.select(
+def test_family_diversity_cap(tmp_path) -> None:
+    """No colapsar en una sola familia cuando hay relevancia comparable
+    (canon sintético con técnicas ejecutables en dos familias)."""
+    implemented_a = _entry(
+        id="T910", name="morphological analysis engine", family="INVENTION",
+        module=["criba.intelligence.prior_art.mutation_loop"],
+        implementation="criba.intelligence.prior_art.mutation_loop.run_prior_art_mutation_loop",
+    )
+    implemented_b = _entry(
+        id="T920", name="counterfactual scenario mapping", family="ADVERSARIAL_FUTURES",
+        module=["criba.intelligence.prior_art.verdict"],
+        implementation="criba.intelligence.prior_art.verdict",
+    )
+    registry = _synthetic_registry(tmp_path, [implemented_a, implemented_b])
+    result = TechniqueRouter(registry).select(
         "análisis morfológico y escenarios contrafactuales",
         max_techniques=6, max_per_family=1,
     )
@@ -113,9 +127,39 @@ def test_offline_only_excludes_network_techniques(router: TechniqueRouter) -> No
 
 
 def test_morphological_task_selects_t059(router: TechniqueRouter) -> None:
-    """Caso funcional: una tarea morfológica encuentra T059 (implementada)."""
+    """Caso funcional: una tarea morfológica encuentra T059. Desde la cirugía
+    cbac469 el módulo no existe → T059 es PLANNED y sale como brecha honesta,
+    nunca como ejecutable."""
     result = router.select("generar hipótesis con análisis morfológico de dimensiones")
-    assert "T059" in [c.id for c in result.selected]
+    t059 = [c for c in result.coverage_gaps if c.id == "T059"]
+    assert t059, "T059 debe aparecer como brecha"
+    assert not t059[0].executable
+    assert t059[0].technique.status == "PLANNED"
+
+
+def test_executable_path_with_synthetic_registry(tmp_path) -> None:
+    """La vía ejecutable sigue probada: una IMPLEMENTED con código real se
+    selecciona (executable=True, bonus aplicado) y la PLANNED gemela queda
+    como brecha en el mismo barrido."""
+    implemented = _entry(
+        id="T910", name="prior art mutation loop engine",
+        family="INVENTION",
+        module=["criba.intelligence.prior_art.mutation_loop"],
+        implementation="criba.intelligence.prior_art.mutation_loop.run_prior_art_mutation_loop",
+    )
+    planned = _entry(
+        id="T911", name="prior art mutation loop future variant",
+        family="INVENTION", status="PLANNED", implementation=None,
+        input_contracts=[], output_contracts=[],
+    )
+    registry = _synthetic_registry(tmp_path, [implemented, planned])
+    result = TechniqueRouter(registry).select("prior art mutation loop engine")
+    selected_ids = [c.id for c in result.selected]
+    gap_ids = [c.id for c in result.coverage_gaps]
+    assert "T910" in selected_ids
+    t910 = result.selected[selected_ids.index("T910")]
+    assert t910.executable and t910.technique.status == "IMPLEMENTED"
+    assert "T911" in gap_ids, "la gemela PLANNED debe salir como brecha"
 
 
 # -- qa P3-1/P3-2/P3-3 ---------------------------------------------------------
