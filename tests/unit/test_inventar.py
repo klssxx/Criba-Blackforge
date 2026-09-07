@@ -138,6 +138,24 @@ def test_ledger_appends_jsonl(tmp_path) -> None:
         assert all(e["verdict"] in {"UNRESOLVED", "PARTIAL_PRIOR_ART", "SURVIVED_SEARCH"} for e in record["entries"])
 
 
+def test_entries_carry_run_id_and_ledger_keeps_proposal_fields(tmp_path) -> None:
+    """Auditoría de la base: las entries sin run_id rompían la trazabilidad
+    del dossier, y el ledger perdía los campos de la propuesta — el historial
+    append-only debe bastar para reconstruir el porqué de cada candidato."""
+    sheet = invent("q", seed=3, rounds=1, batch_size=4, top=2, offline=True,
+                   methods=_methods(), sources=_sources())
+    assert sheet["run_id"]
+    for entry in sheet["entries"]:
+        assert entry["run_id"] == sheet["run_id"]
+    path = append_ledger(sheet, ledger_dir=tmp_path)
+    record = json.loads(path.read_text(encoding="utf-8").strip().splitlines()[-1])
+    for entry in record["entries"]:
+        assert entry["run_id"] == sheet["run_id"]
+        for field in ("classes", "hipotesis", "prueba_concreta",
+                      "ruta_desbloqueo", "supuestos", "estado_antecedentes"):
+            assert field in entry, f"el ledger debe conservar {field}"
+
+
 # ---------------------------------------------------------------------------
 # Fase 1: contrato corregido (mecanismo antes de antecedentes, IDs estables,
 # offline en el transporte, ficha honesta). Comportamiento nuevo intencionado;

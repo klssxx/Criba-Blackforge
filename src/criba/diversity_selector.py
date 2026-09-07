@@ -66,11 +66,12 @@ def compare_mechanisms(a: str, b: str) -> str:
         return "DISTINCT"
     ra, rb = _content_tokens(a), _content_tokens(b)
     if ta == tb:
-        # Mismo vocabulario: el reorden de cláusulas es ambiguo desde léxico
-        # (¿inversión de dirección o solo estilo?) → UNKNOWN, no DISTINCT ni
-        # DUPLICATE (auditoría qa-win: la heurística de orden confunde estilo
-        # con causalidad).
-        return "DUPLICATE" if tuple(ra[:3]) == tuple(rb[:3]) else "UNKNOWN"
+        # Mismo vocabulario: solo una secuencia idéntica es paráfrasis segura.
+        # Un reorden distinto puede ser estilo O inversión de actores ("el banco
+        # presta al cliente" vs "el cliente presta al banco", misma primera
+        # cláusula) → DUPLICATE falso descartaría mecanismos genuinos
+        # (auditoría de la base: confusión de mecanismos al invertir actores).
+        return "DUPLICATE" if ra == rb else "UNKNOWN"
     inter, union = len(ta & tb), len(ta | tb)
     jac = inter / union if union else 0.0
     if jac >= MECHANISM_DUPLICATE_JACCARD:
