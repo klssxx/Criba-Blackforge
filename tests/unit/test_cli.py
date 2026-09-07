@@ -191,3 +191,83 @@ def test_tecnicas_blackforge_profile_changes_order(capsys) -> None:
     adversarial = [t["id"] for t in (*routing["selected"], *routing["coverage_gaps"])
                    if "ADVERSARIAL" in json.dumps(t)]
     assert adversarial
+
+
+def test_tecnicas_invalid_max_returns_controlled_error(capsys) -> None:
+    """qa P3-2: --max 0 es error del llamador, no una selección vacía silenciosa."""
+    result = main(["tecnicas", "análisis morfológico", "--max", "0"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert captured.out == ""
+    assert "Error:" in captured.err
+    assert "max_techniques" in captured.err
+
+
+def test_tecnicas_invalid_max_per_family_returns_controlled_error(capsys) -> None:
+    result = main(["tecnicas", "análisis morfológico", "--max-por-familia", "0"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert captured.out == ""
+    assert "Error:" in captured.err
+    assert "max_per_family" in captured.err
+
+
+def test_tecnicas_corrupt_registry_entry_returns_controlled_error(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    """qa P2-2: una entrada no-mapping en `techniques` era AttributeError crudo
+    con traceback; ahora el CLI la convierte en Error + exit 2."""
+    import yaml
+
+    from criba import constants
+
+    monkeypatch.setattr(constants, "DATA_ROOT", tmp_path)
+    registry_dir = tmp_path / "intelligence"
+    registry_dir.mkdir()
+    raw = {
+        "schema_version": 2,
+        "canon_version": "corrupt.1",
+        "provenance": {"source": "s", "generator": "g", "parts": ["p"]},
+        "techniques": ["foo"],
+    }
+    (registry_dir / "technique_registry.yaml").write_text(
+        yaml.safe_dump(raw), encoding="utf-8"
+    )
+
+    result = main(["tecnicas", "morfologico"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert captured.out == ""
+    assert "Error: technique entry 0 must be a mapping" in captured.err
+
+
+def test_tecnicas_incomplete_provenance_returns_controlled_error(
+    tmp_path, monkeypatch, capsys
+) -> None:
+    """qa P2-1: provenance {} ya no carga en silencio; el CLI reporta el fallo."""
+    import yaml
+
+    from criba import constants
+
+    monkeypatch.setattr(constants, "DATA_ROOT", tmp_path)
+    registry_dir = tmp_path / "intelligence"
+    registry_dir.mkdir()
+    raw = {
+        "schema_version": 2,
+        "canon_version": "corrupt.1",
+        "provenance": {},
+        "techniques": [],
+    }
+    (registry_dir / "technique_registry.yaml").write_text(
+        yaml.safe_dump(raw), encoding="utf-8"
+    )
+
+    result = main(["tecnicas", "morfologico"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "Error:" in captured.err
+    assert "provenance" in captured.err

@@ -157,6 +157,24 @@ def _technique_tokens(t: Technique) -> dict[str, float]:
     return weights
 
 
+def _reason_token_list(tokens: list[str], limit: int = 80) -> str:
+    """Join matched tokens for a reason string without cutting one mid-token.
+
+    Greedy: whole tokens are kept while they fit `limit`; the first token is
+    always kept so a single over-long token is never manufactured into a
+    non-token. Never leaves a trailing comma (qa P3-1).
+    """
+    parts: list[str] = []
+    length = 0
+    for token in tokens:
+        extra = len(token) + (1 if parts else 0)
+        if parts and length + extra > limit:
+            break
+        parts.append(token)
+        length += extra
+    return ",".join(parts)
+
+
 class TechniqueRouter:
     """Read-only router: task text -> minimal relevant technique subset."""
 
@@ -177,6 +195,14 @@ class TechniqueRouter:
     ) -> SelectionResult:
         if profile not in _PROFILE_FAMILY_WEIGHTS:
             raise ValueError(f"unknown profile: {profile}")
+        # 0/negative limits are caller bugs, not empty queries: an empty
+        # selection must stay reachable only through a task with no real
+        # overlap, never through an invalid limit silently collapsing to ()
+        # (qa P3-2).
+        if max_techniques < 1:
+            raise ValueError(f"max_techniques must be >= 1, got {max_techniques}")
+        if max_per_family < 1:
+            raise ValueError(f"max_per_family must be >= 1, got {max_per_family}")
         task_tokens = _tokens(task)
         family_weights = _PROFILE_FAMILY_WEIGHTS[profile]
 
@@ -187,7 +213,7 @@ class TechniqueRouter:
             overlap = sum(w for token, w in doc.items() if token in task_tokens)
             if overlap <= 0.0:
                 continue  # sin coincidencia real: no se selecciona ni se inventa relevancia
-            reasons = [f"coincide:{','.join(sorted(set(doc) & task_tokens))[:80]}"]
+            reasons = [f"coincide:{_reason_token_list(sorted(set(doc) & task_tokens))}"]
             if technique.requires_credentials:
                 excluded.append(f"{technique.id}:requiere_credenciales")
                 continue

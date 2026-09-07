@@ -119,5 +119,87 @@ def test_legacy_flat_list_still_loads(tmp_path):
     assert r.canon_version is None and r.provenance == {}
 
 
+# -- qa P2-1/P2-2: carga estricta de cabecera y de entradas --------------------
+
+VALID_ENTRY = {
+    "id": "T001", "name": "x", "family": "PATENT_INTELLIGENCE",
+    "owner": "CRIBA_IIE", "module": ["criba.intelligence.retrieval"],
+    "phase": ["P03"], "pipelines": ["DISCOVERY"],
+    "status": "PLANNED", "tests": ["t"],
+}
+
+
+def _v2_registry(tmp_path, *, provenance, techniques=None):
+    import yaml as _yaml
+
+    raw = {
+        "schema_version": 2,
+        "canon_version": "test.1",
+        "provenance": provenance,
+        "techniques": [dict(VALID_ENTRY)] if techniques is None else techniques,
+    }
+    p = tmp_path / "registry.yaml"
+    p.write_text(_yaml.safe_dump(raw), encoding="utf-8")
+    return p
+
+
+FULL_PROVENANCE = {"source": "addendum", "generator": "gen_registry.py", "parts": ["p1.txt"]}
+
+
+@pytest.mark.parametrize("provenance", [
+    {},
+    {"source": "s"},
+    {"source": "s", "generator": "g"},
+    {"source": "s", "generator": "g", "parts": []},
+    {"source": "", "generator": "g", "parts": ["p"]},
+    {"source": "s", "generator": None, "parts": ["p"]},
+])
+def test_v2_incomplete_provenance_fails_at_load(tmp_path, provenance):
+    """qa P2-1: una traza v2 sin source/generator/parts no puede CARGAR;
+    el fallo es ValueError en carga, no solo un reporte de validate()."""
+    p = _v2_registry(tmp_path, provenance=provenance)
+    with pytest.raises(ValueError, match="provenance"):
+        TechniqueRegistry(p)
+
+
+def test_v2_complete_provenance_still_loads(tmp_path):
+    """Contraparte: la validación en carga no rompe trazas completas."""
+    r = TechniqueRegistry(_v2_registry(tmp_path, provenance=FULL_PROVENANCE))
+    assert r.canon_version == "test.1"
+    assert r.provenance == FULL_PROVENANCE
+
+
+def test_non_mapping_technique_entry_fails_at_load(tmp_path):
+    """qa P2-2: techniques: ['foo'] era AttributeError crudo; ahora ValueError."""
+    p = _v2_registry(tmp_path, provenance=FULL_PROVENANCE, techniques=["foo"])
+    with pytest.raises(ValueError, match="entry 0 must be a mapping"):
+        TechniqueRegistry(p)
+
+
+@pytest.mark.parametrize("required", ["id", "name", "family", "owner"])
+def test_technique_entry_missing_required_field_fails_at_load(tmp_path, required):
+    """qa P2-2: falta 'id' (o name/family/owner) era KeyError crudo;
+    ahora ValueError con el índice de la entrada."""
+    entry = {k: v for k, v in VALID_ENTRY.items() if k != required}
+    p = _v2_registry(tmp_path, provenance=FULL_PROVENANCE, techniques=[entry])
+    with pytest.raises(ValueError, match=required):
+        TechniqueRegistry(p)
+
+
+def test_technique_entry_non_string_id_fails_at_load(tmp_path):
+    entry = dict(VALID_ENTRY, id=7)
+    p = _v2_registry(tmp_path, provenance=FULL_PROVENANCE, techniques=[entry])
+    with pytest.raises(ValueError, match="'id'"):
+        TechniqueRegistry(p)
+
+
+def test_technique_entry_non_mapping_model_fails_at_load(tmp_path):
+    """Misma clase de defecto: un 'model' escalar también era AttributeError."""
+    entry = dict(VALID_ENTRY, model="fast")
+    p = _v2_registry(tmp_path, provenance=FULL_PROVENANCE, techniques=[entry])
+    with pytest.raises(ValueError, match="'model' must be a mapping"):
+        TechniqueRegistry(p)
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))

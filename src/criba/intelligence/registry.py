@@ -87,8 +87,25 @@ class TechniqueRegistry:
             entries = raw  # legacy flat list: no traceability header
         else:
             raise ValueError(f"registry must be a list or v2 mapping: {self.path}")
-        for item in entries:
-            model = item.get("model") or {}
+        for index, item in enumerate(entries):
+            # Malformed entries must fail as ValueError (CLI maps it to
+            # "Error: ..." + exit 2), never as a raw AttributeError/KeyError
+            # escaping the handler (qa P2-2).
+            if not isinstance(item, dict):
+                raise ValueError(
+                    f"technique entry {index} must be a mapping, got {type(item).__name__}"
+                )
+            for required in ("id", "name", "family", "owner"):
+                value = item.get(required)
+                if not isinstance(value, str) or not value.strip():
+                    raise ValueError(
+                        f"technique entry {index} requires a non-empty string {required!r}"
+                    )
+            model = item.get("model")
+            if model is None:
+                model = {}
+            elif not isinstance(model, dict):
+                raise ValueError(f"technique entry {index}: 'model' must be a mapping")
             t = Technique(
                 id=item["id"], name=item["name"], family=item["family"],
                 owner=item["owner"],
@@ -118,6 +135,18 @@ class TechniqueRegistry:
         version = raw.get("canon_version")
         if not isinstance(version, str) or not version.strip():
             raise ValueError("v2 registry requires a non-empty canon_version")
+        # Traceability content is mandatory at load time: an anonymous/empty
+        # provenance must fail loudly here instead of loading silently and
+        # only surfacing via validate() (qa P2-1).
+        source = provenance.get("source")
+        if not isinstance(source, str) or not source.strip():
+            raise ValueError("v2 registry requires a non-empty provenance.source")
+        generator = provenance.get("generator")
+        if not isinstance(generator, str) or not generator.strip():
+            raise ValueError("v2 registry requires a non-empty provenance.generator")
+        parts = provenance.get("parts")
+        if not isinstance(parts, list) or not parts:
+            raise ValueError("v2 registry requires a non-empty provenance.parts")
         self.provenance = provenance
         self.canon_version = version
         entries = raw.get("techniques")

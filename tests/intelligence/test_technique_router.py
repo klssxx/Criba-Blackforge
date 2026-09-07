@@ -118,5 +118,102 @@ def test_morphological_task_selects_t059(router: TechniqueRouter) -> None:
     assert "T059" in [c.id for c in result.selected]
 
 
+# -- qa P3-1/P3-2/P3-3 ---------------------------------------------------------
+
+def _synthetic_registry(tmp_path, techniques):
+    """Registro v2 sintético (cabecera completa) para casos que el canon real
+    no puede representar (p. ej. requires_credentials=true)."""
+    import yaml as _yaml
+
+    raw = {
+        "schema_version": 2,
+        "canon_version": "synthetic.1",
+        "provenance": {"source": "test", "generator": "test", "parts": ["p1"]},
+        "techniques": techniques,
+    }
+    p = tmp_path / "synthetic_registry.yaml"
+    p.write_text(_yaml.safe_dump(raw), encoding="utf-8")
+    return TechniqueRegistry(p)
+
+
+def _entry(**overrides):
+    base = {
+        "id": "T900", "name": "base", "family": "INVENTION",
+        "owner": "CRIBA_IIE", "module": ["criba.intelligence.invention"],
+        "phase": ["P01"], "pipelines": ["INVENTION"],
+        "status": "IMPLEMENTED", "implementation": "criba.test",
+        "input_contracts": ["x"], "output_contracts": ["y"], "tests": ["t"],
+    }
+    base.update(overrides)
+    return base
+
+
+def test_reasons_truncate_on_token_boundary(tmp_path) -> None:
+    """qa P3-1: con muchos tokens coincidentes el reason nunca corta un token
+    a la mitad ni deja coma colgante; los tokens omitidos desaparecen enteros."""
+    from criba.intelligence.router import TechniqueRouter as TR, _tokens
+
+    words = ["arboleda", "barquito", "carabela", "domino", "espejismo", "frase",
+             "gatito", "hormigon", "iceberg", "jirafa", "koala", "lampara"]
+    long_name = " ".join(words)
+    registry = _synthetic_registry(tmp_path, [_entry(name=long_name)])
+    router = TR(registry)
+    task = long_name  # los 12 tokens coinciden: el join completo supera 80
+    result = router.select(task)
+
+    matched = _tokens(task)
+    full = ",".join(sorted(matched))
+    assert len(full) > 80, "el doc sintético debe forzar el truncado"
+    reasons = [r for c in (*result.selected, *result.coverage_gaps)
+               for r in c.reasons if r.startswith("coincide:")]
+    assert reasons
+    for reason in reasons:
+        inner = reason[len("coincide:"):]
+        assert len(inner) <= 80, "el reason debe seguir acotado"
+        assert not inner.endswith(","), "sin coma colgante"
+        # prefijo del join completo terminando en frontera de token:
+        assert full.startswith(inner)
+        assert full[len(inner):len(inner) + 1] in ("", ",")
+        listed = inner.split(",")
+        assert set(listed) <= matched, "ningún token parcial inventado"
+
+
+def test_invalid_limits_rejected(router: TechniqueRouter) -> None:
+    """qa P3-2: max/max_per_family < 1 son error del llamador, no selección vacía."""
+    with pytest.raises(ValueError, match="max_techniques"):
+        router.select("morfologico", max_techniques=0)
+    with pytest.raises(ValueError, match="max_techniques"):
+        router.select("morfologico", max_techniques=-1)
+    with pytest.raises(ValueError, match="max_per_family"):
+        router.select("morfologico", max_per_family=0)
+    with pytest.raises(ValueError, match="max_per_family"):
+        router.select("morfologico", max_per_family=-1)
+
+
+def test_credentials_gate_excludes_even_with_network_allowed(tmp_path) -> None:
+    """qa P3-3: requiere_credenciales excluye la técnica (nunca selected ni
+    coverage_gaps) incluso con offline_only=False; la técnica gemela sin
+    credenciales sí es seleccionable, demostrando que el gate discrimina."""
+    cred = _entry(
+        id="T900", name="credentialed portal search", requires_credentials=True,
+        requires_network=False,
+    )
+    free = _entry(
+        id="T901", name="local manual search", requires_credentials=False,
+        requires_network=False,
+    )
+    router = TechniqueRouter(_synthetic_registry(tmp_path, [cred, free]))
+    task = "portal search manual"
+
+    for offline_only in (False, True):
+        result = router.select(task, offline_only=offline_only)
+        ids_selected = [c.id for c in result.selected]
+        ids_gaps = [c.id for c in result.coverage_gaps]
+        assert "T900" not in ids_selected
+        assert "T900" not in ids_gaps
+        assert "T900:requiere_credenciales" in result.excluded
+        assert "T901" in ids_selected, "la gemela sin credenciales sí pasa"
+
+
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
