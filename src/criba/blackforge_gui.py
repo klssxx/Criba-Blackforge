@@ -10,9 +10,10 @@ from __future__ import annotations
 
 import os
 import sys
+from typing import Any
 
 
-def run(database=None, query: str = "") -> int:
+def run(database: Any = None, query: str = "") -> int:
     try:
         from PySide6.QtWidgets import QApplication
     except ImportError:

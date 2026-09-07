@@ -164,7 +164,7 @@ def _structural_distance(a: dict[str, Any], b: dict[str, Any]) -> float:
 
 
 def _relation(a: dict[str, Any], b: dict[str, Any]) -> str:
-    return classify(a.get("genome") or {}, b.get("genome") or {})["verdict"]
+    return str(classify(a.get("genome") or {}, b.get("genome") or {})["verdict"])
 
 
 def select_finalists(
