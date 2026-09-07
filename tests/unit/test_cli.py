@@ -273,3 +273,68 @@ def test_tecnicas_incomplete_provenance_returns_controlled_error(
     assert result == 2
     assert "Error:" in captured.err
     assert "provenance" in captured.err
+
+
+# ---------------------------------------------------------------------------
+# Ejecución de técnicas desde el producto (§82 completo: canon→router→
+# resolver→operador→salida, accesible por CLI). El canon decide ejecutabilidad.
+# ---------------------------------------------------------------------------
+
+def test_tecnicas_ejecuta_t059_con_parametros_canonicos(tmp_path, capsys) -> None:
+    entrada = tmp_path / "entrada.json"
+    entrada.write_text(json.dumps({
+        "params": {"dimensions": {"motor": ["eléctrico", "combustión"],
+                                  "frenado": ["regenerativo", "fricción"]}},
+    }), encoding="utf-8")
+
+    result = main(["tecnicas", "análisis morfológico", "--ejecutar", "T059",
+                   "--problema", "vehículo urbano", "--entrada", str(entrada)])
+
+    assert result == 0
+    outcome = json.loads(capsys.readouterr().out)
+    assert outcome["technique"] == "T059"
+    assert outcome["canon_version"]
+    assert outcome["results"], "el análisis morfológico debe producir hipótesis"
+    for candidate in outcome["results"]:
+        assert "T059" in candidate["operators"], "trazabilidad de operador exigida"
+
+
+def test_tecnicas_ejecuta_t053_con_evidencia_de_entrada(tmp_path, capsys) -> None:
+    docs = [{"title": f"doc{i}", "metadata": {"concepts": ["a", "b"] if i % 2 else ["b", "c"]}}
+            for i in range(8)]
+    docs += [{"title": "raro", "metadata": {"concepts": ["zzz", "yyy"]}}]
+    entrada = tmp_path / "docs.json"
+    entrada.write_text(json.dumps(docs), encoding="utf-8")
+
+    result = main(["tecnicas", "combinaciones raras", "--ejecutar", "T053",
+                   "--entrada", str(entrada)])
+
+    assert result == 0
+    outcome = json.loads(capsys.readouterr().out)
+    assert len(outcome["evidence_doc_ids"]) == 9
+
+
+def test_tecnicas_ejecuta_t059_sin_entrada_da_error_controlado(capsys) -> None:
+    result = main(["tecnicas", "x", "--ejecutar", "T059", "--problema", "p"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "dimensions" in captured.err
+
+
+def test_tecnicas_rechaza_ejecutar_planeada(capsys) -> None:
+    """Negativo §82: el canon no autoriza ejecutar una PLANNED."""
+    result = main(["tecnicas", "curvas de sustitución", "--ejecutar", "T130"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "PLANNED" in captured.err
+    assert "canon" in captured.err
+
+
+def test_tecnicas_rechaza_ejecutar_desconocida(capsys) -> None:
+    result = main(["tecnicas", "x", "--ejecutar", "T999"])
+
+    captured = capsys.readouterr()
+    assert result == 2
+    assert "desconocida" in captured.err

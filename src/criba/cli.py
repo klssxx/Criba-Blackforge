@@ -216,6 +216,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--con-red", action="store_true",
         help="Permite técnicas que requieren red (por defecto solo offline)",
     )
+    tecnicas_parser.add_argument(
+        "--ejecutar", default=None, metavar="TXXX",
+        help="Ejecuta la técnica indicada (debe estar IMPLEMENTED en el canon)",
+    )
+    tecnicas_parser.add_argument(
+        "--problema", default="", help="Problema/entrada para la técnica ejecutada",
+    )
+    tecnicas_parser.add_argument(
+        "--entrada", default=None,
+        help="JSON con parámetros canónicos (dimensions/components/...) y/o "
+             "documentos de evidencia para técnicas que los requieren",
+    )
+    tecnicas_parser.add_argument(
+        "--desde-almacen", action="store_true",
+        help="Alimenta la técnica con evidencia del almacén local (búsqueda por problema)",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -329,7 +345,55 @@ def main(argv: Sequence[str] | None = None) -> int:
             from .intelligence.registry import TechniqueRegistry
             from .intelligence.router import TechniqueRouter
 
-            router = TechniqueRouter(TechniqueRegistry())
+            registry = TechniqueRegistry()
+            if args.ejecutar:
+                import json as _json
+                from pathlib import Path as _Path
+
+                from .intelligence.contracts import EvidenceDocument
+                from .intelligence.execution import (
+                    ExecutionError,
+                    document_from_dict,
+                    execute_technique,
+                    store_documents,
+                )
+
+                params: dict[str, Any] = {}
+                documents: list[EvidenceDocument] = []
+                if args.entrada:
+                    entry_path = _Path(args.entrada)
+                    if not entry_path.is_file():
+                        print(f"Error: no se encontró la entrada: {args.entrada}", file=sys.stderr)
+                        return 2
+                    payload = _json.loads(entry_path.read_text(encoding="utf-8"))
+                    if isinstance(payload, dict):
+                        params = payload.get("params") or {k: v for k, v in payload.items() if k != "documents"}
+                        documents = [document_from_dict(d) for d in payload.get("documents", [])]
+                    elif isinstance(payload, list):
+                        documents = [document_from_dict(d) for d in payload]
+                    else:
+                        print("Error: la entrada debe ser un objeto o lista JSON", file=sys.stderr)
+                        return 2
+                if args.desde_almacen:
+                    from .intelligence.refresh import default_store
+
+                    store = default_store()
+                    if store is None:
+                        print("Error: almacén de evidencia no disponible", file=sys.stderr)
+                        return 2
+                    documents = store_documents(store, args.problema or args.query) + documents
+                try:
+                    outcome = execute_technique(
+                        registry, args.ejecutar, args.problema or args.query,
+                        params=params, documents=documents,
+                    )
+                except (ExecutionError, ValueError, OSError) as exc:
+                    print(f"Error: {exc}", file=sys.stderr)
+                    return 2
+                print(_json.dumps(outcome, ensure_ascii=False, indent=2))
+                return 0
+
+            router = TechniqueRouter(registry)
             routing = router.select(
                 args.query,
                 profile=args.perfil,
