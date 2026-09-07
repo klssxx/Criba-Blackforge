@@ -1,1 +1,0 @@
-{"enabled": "true", "profiles": [{"id": [], "name": {"unexpected": "container"}, "endpoint": null, "model": ["not", "text"], "auto_start": "false", "context_size": 999999, "gpu_layers": -4, "temperature": "NaN", "max_output_tokens": "invalid"}]}
