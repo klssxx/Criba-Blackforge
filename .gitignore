@@ -76,3 +76,7 @@ src/**/.hermes-tmp.*
 .agents/
 .codex/
 .pytest_tmp*/
+
+# Runtime sidecars of the IIE STATE tool (atomic write + mutex)
+.hermes/iie/STATE.json.lock
+.hermes/iie/STATE.json.tmp
