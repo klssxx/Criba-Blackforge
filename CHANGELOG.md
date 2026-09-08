@@ -5,6 +5,20 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (2026-09-08 — restauración selectiva cbac469, slice 2)
+- **`gaps/`, `signals/`, `entities/`, `provenance`, `claims` restaurados**
+  (~2.900 LOC + ~1.100 de tests, 85 tests históricos verdes contra
+  contratos vivos sin cambios). Canon `2026-09-08.2`: **26 IMPLEMENTED**
+  (las 11 del slice 1 + 15 nuevas: T019/T048/T049 dinámica de temas,
+  T067–T071 minería de contradicciones/gaps/limitaciones/fallos/resurrección,
+  T086 white-spaces, T096–T099 detección de bursts/cambios/anomalías/señales
+  débiles, T101 lead-lag, T128 expiración+dormant+sleeping-beauty+resurrection
+  compuesta). Mapeo §80 por función real: T047 (emergentes) y T087–T089
+  (white-spaces por tipo) quedan PLANNED con gap documentado (el módulo no
+  distingue esas capacidades). Ejecutables desde el producto con los mismos
+  guardrails (`--ejecutar` + `--entrada` con observaciones/señales o
+  `--desde-almacen`); 16 tests de cadena nuevos.
+
 ### Added (2026-09-08 — restauración selectiva cbac469, slice 1)
 - **Operadores `invention/` restaurados** (16 módulos + 3 suites de tests
   históricos, ~1.100 LOC) desde `cbac469~1` bajo la CBAC469 Recovery

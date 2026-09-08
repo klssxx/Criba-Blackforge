@@ -71,6 +71,11 @@ cli_a = Analysis(
     hiddenimports=[
         'criba.intelligence.execution',
         'criba.intelligence.invention',
+        'criba.intelligence.gaps',
+        'criba.intelligence.signals',
+        'criba.intelligence.entities',
+        'criba.intelligence.claims',
+        'criba.intelligence.provenance',
         'criba.intelligence.router',
         'criba.intelligence.registry',
     ],

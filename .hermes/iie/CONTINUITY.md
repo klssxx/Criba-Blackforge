@@ -170,3 +170,19 @@ The Neon steering directive is recorded as a cross-cutting architecture addendum
 
 ## WHAT MODEL/REASONING SHOULD EXECUTE IT?
 P10-T07 remains a high-reasoning architecture boundary. The local evidence/budget/order/failure contract is now fixed and tested; any future downstream integration must use the real Skeptic/verdict interfaces and be separately authorized. If BF-P00-T06 is resumed, use its isolated-golden validation protocol; do not modify tracked BLACKFORGE goldens in the live tree.
+
+## APÉNDICE 2026-09-08 — locks fenced y atómicos (frontera concurrencia)
+
+`multi_repo_state.py` (v2.2) ya no concede locks duplicados: toda mutación de
+STATE.json corre bajo mutex de fichero (hilos y procesos), la escritura es
+atómica con `.bak`, cada concesión lleva token de vallado monotónico, los
+scopes solapados (padre/hijo y alias BLACKFORGE→CRIBA) conflictan, y
+`lock recover` toma el relevo de un holder interrumpido cercenando su token.
+CLI retrocompatible; nuevos: `release ... [token]`, `lock recover`, códigos
+LOCK_INVALID(2)/LOCK_OVERLAP(4)/LOCK_BUSY(5). Baseline reproducido antes del
+cambio: 15/15 dobles concesiones (hilos) y 13/15 (procesos CLI); tras el
+cambio: 0/15 y 0/15 con ganador único. Tests: tests/intelligence/
+test_multi_repo_state_locks.py (20/20). Límites: editores externos de
+STATE.json siguen fuera de la exclusión (validate los detecta, snapshot
+repara desde .bak); sin TTL — holder caído bloquea hasta `recover`.
+No protege ficheros ni autentica VERIFIED, solo el registro de coordinación.

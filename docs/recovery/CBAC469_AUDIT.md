@@ -94,3 +94,40 @@ MAPPED_ONLY sin módulo (taxonomy declara, código ausente → PLANNED correcto)
 T054/T061 (invention.recombination), T056 (biomimicry), T058
 (triz_contradiction_mining), T066 (assumption_mining), T067
 (contradiction_mining → gaps.contradictions, borrado por cbac469).
+
+
+## Slice 2 — verificación por técnica (canon 2026-09-08.2)
+
+Módulos: gaps/ (10), signals/ (8), entities/ (3), provenance.py, claims.py
+(~2.900 LOC) + 1.100 LOC de tests históricos — 85 tests verdes sin
+modificación contra contratos vivos (§79 capability proof). Promoción §80
+por función real; integración §82 vía execution.py (adaptadores por
+input_contracts) + CLI --ejecutar.
+
+| Txxx | operador | tests(±) | falsifier |
+|---|---|---|---|
+| T019/T049 | TopicDynamics.acceleration | alineación por periodos(+) | aceleración desalineada o no determinista |
+| T048 | TopicDynamics.velocity | ídem | deltas no alineadas a periodos |
+| T067 | analyze_contradictions | polaridades opuestas+procedencia(+); determinismo, misma-polaridad(−) | contradicción sin ambas procedencias o con misma polaridad |
+| T068 | extract_research_gaps | solo-frases-con-cue+procedencia(+); lenguaje-no-gap(−) | «gap» promocionado sin cue |
+| T069 | extract_limitations | scope+procedencia(+); limitación-resuelta(−) | limitación resuelta promocionada |
+| T070 | extract_failures | modo+procedencia(+); fallo-resuelto(−), sin-inventar-modo(−) | modo inventado para fallo no estructurado |
+| T071 | extract_resurrection_candidates | requiere evidencia actual del cambio(−/+) | resurrección sin evidencia del cambio de restricción |
+| T086 | analyze_white_spaces | tipo+procedencia(+); dedup/topic(−) | white-space sin procedencia o no deduplicado |
+| T096 | BurstDetector.detect | pico de velocidad con periodo/fuerza(+) | burst sin periodo o fuerza fuera de rango |
+| T097 | ChangePointDetector.detect | level-shift en periodo candidato(+) | cambio señalado donde la serie es plana |
+| T098 | AnomalyDetector.detect | outlier mediana/MAD(+) | outlier por media no robusta |
+| T099 | WeakSignalAggregator.aggregate | fusión sin doble conteo de ids(+) | soporte doble-contado por señal repetida |
+| T101 | LeadLagAnalyzer.analyze | seguidor retrasado identificado(+) | lag positivo para el líder |
+| T128 | 4 módulos (expiración/dormant/sleeping-beauty/resurrección) | JSON-safe(±); sin FTO declarado(−); sin-evidencia-no-promueve(−) | oportunidad de expiración sin fecha, o afirmación de freedom-to-operate |
+
+PLANNED con gap documentado: T047 (detección de emergentes — dynamics solo
+calcula velocity/acceleration), T087–T089 (white-space por tipo concreto:
+el analizador filtra por space_type pero el detector es genérico), T052
+(convergence — sin módulo), T130 parcial (scurve restaurado; genealogía
+requiere graph/, slice 3).
+
+Restaurados también: entities/ (extractor+resolver, soporte de
+test_provenance), provenance.py (la mitad epistémica assess_claims;
+content_hash queda SUPERSEDED por CH1–CH7), claims.py (extracción regex,
+consumida por T067).
