@@ -117,3 +117,24 @@ def test_reference_resolver_accepts_all_historical_formats():
 
 if __name__ == "__main__":
     raise SystemExit(__import__("pytest").main([__file__, "-q"]))
+
+
+def test_fichas_file_is_coherent_with_canon():
+    """Las fichas (P001–P130) documentan; nunca redefinen el canon: cada
+    ficha debe referenciar un id real y su estado debe coincidir con el
+    canon generado."""
+    import yaml
+
+    fichas_path = REGISTRY_PATH.parent / "technique_fichas.yaml"
+    if not fichas_path.exists():
+        return  # el generador de fichas vive en .hermes (tooling); test aplica si existe
+    doc = yaml.safe_load(fichas_path.read_text(encoding="utf-8"))
+    registry = TechniqueRegistry(REGISTRY_PATH)
+    fichas = {f["id"]: f for f in doc["fichas"]}
+    assert set(fichas) == {t.id for t in registry.all()}, "las fichas cubren exactamente el canon"
+    for technique in registry.all():
+        ficha = fichas[technique.id]
+        if technique.status.startswith("IMPLEMENTED"):
+            assert ficha["runtime_operator"], f"{technique.id}: IMPLEMENTED sin operador documentado"
+            assert ficha["integration_path"], f"{technique.id}: IMPLEMENTED sin integración documentada"
+            assert ficha["falsifier"], f"{technique.id}: IMPLEMENTED sin falsifier"

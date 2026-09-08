@@ -1,0 +1,3142 @@
+schema_version: 1
+generated_by: .hermes/iie/gen_fichas.py
+canon_version: 2026-09-08.3
+provenance_note: reg_parts es canon; blueprint §72 es evidencia histórica (17 divergencias
+  documentadas por técnica). Nada de este archivo redefine status del canon.
+summary:
+  total: 130
+  implemented: 29
+  planned: 98
+  mapped_only_planned: 3
+  canonical_gaps: 3
+fichas:
+- id: T001
+  canonical_requirement: Patent keyword/title/abstract/claim search
+  blueprint_72_name: Patent keyword/title/abstract/claim search
+  name_divergence: false
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  - P04
+  pipelines:
+  - DISCOVERY
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t001_patent_keyword_title_abstract_claim_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T002
+  canonical_requirement: Patent metadata filters (inventor/assignee/date/geo)
+  blueprint_72_name: Inventor/assignee/date/geographic patent search
+  name_divergence: true
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t002_patent_metadata_filters__inventor_assignee_date_
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T003
+  canonical_requirement: CPC/IPC hierarchical classification search
+  blueprint_72_name: CPC/IPC hierarchical search
+  name_divergence: true
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  - P04
+  pipelines:
+  - QUERY_PLANNER
+  - PRIOR_ART
+  status: MAPPED_ONLY_PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t003_cpc_ipc_hierarchical_classification_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: entities.ontology referenciado por el canon y jamás implementado
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T004
+  canonical_requirement: Patent families/equivalents/legal state
+  blueprint_72_name: Patent families/equivalents/legal state
+  name_divergence: false
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t004_patent_families_equivalents_legal_state
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T005
+  canonical_requirement: Patent citations + non-patent literature expansion
+  blueprint_72_name: Patent citation/non-patent literature
+  name_divergence: true
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  - P06
+  - P10
+  pipelines:
+  - PRIOR_ART
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t005_patent_citations___non_patent_literature_expansi
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T006
+  canonical_requirement: Patent similarity/clustering
+  blueprint_72_name: Patent similarity/clustering
+  name_divergence: false
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  - P06
+  pipelines:
+  - DISCOVERY
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t006_patent_similarity_clustering
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T007
+  canonical_requirement: Patent temporal evolution/entrants/bursts
+  blueprint_72_name: Patent temporal evolution/new entrants/bursts
+  name_divergence: true
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t007_patent_temporal_evolution_entrants_bursts
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T008
+  canonical_requirement: Rare CPC combinations
+  blueprint_72_name: Rare CPC combinations
+  name_divergence: false
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t008_rare_cpc_combinations
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T009
+  canonical_requirement: Semantic claim analysis
+  blueprint_72_name: Semantic claim analysis
+  name_divergence: false
+  family: PATENT_INTELLIGENCE
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t009_semantic_claim_analysis
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T010
+  canonical_requirement: Scientific literature/papers/preprints/theses
+  blueprint_72_name: Scientific literature / papers / preprints / theses
+  name_divergence: true
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t010_scientific_literature_papers_preprints_theses
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T011
+  canonical_requirement: Scientific metadata graph
+  blueprint_72_name: Scientific metadata graph
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t011_scientific_metadata_graph
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T012
+  canonical_requirement: Funding/grant/project intelligence
+  blueprint_72_name: Funding/project intelligence
+  name_divergence: true
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t012_funding_grant_project_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T013
+  canonical_requirement: Clinical/experimental registry monitoring
+  blueprint_72_name: Clinical/experimental registry monitoring
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t013_clinical_experimental_registry_monitoring
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T014
+  canonical_requirement: GitHub innovation radar
+  blueprint_72_name: GitHub innovation radar
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t014_github_innovation_radar
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T015
+  canonical_requirement: Repository velocity
+  blueprint_72_name: Repo velocity
+  name_divergence: true
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t015_repository_velocity
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T016
+  canonical_requirement: AI model/dataset/Space intelligence
+  blueprint_72_name: AI model/dataset/Space intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t016_ai_model_dataset_space_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T017
+  canonical_requirement: Product/startup radar
+  blueprint_72_name: Product/startup radar
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t017_product_startup_radar
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T018
+  canonical_requirement: Search trend intelligence
+  blueprint_72_name: Search trend intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  - P07
+  pipelines:
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t018_search_trend_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T019
+  canonical_requirement: Trend acceleration
+  blueprint_72_name: Trend acceleration
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - RADAR
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.dynamics.TopicDynamics.acceleration
+  runtime_operator: signals.dynamics.TopicDynamics.acceleration
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str'
+  output_contracts:
+  - list[float] period-aligned
+  tests:
+  - test_topic_dynamics_aligns_velocity_and_acceleration_to_periods
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: integración en loop RADAR (no existe aún)
+  falsifier: aceleración desalineada a periodos
+- id: T020
+  canonical_requirement: Social weak signals
+  blueprint_72_name: Social weak signals
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  - P07
+  pipelines:
+  - RADAR
+  - SIGNALS
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t020_social_weak_signals
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T021
+  canonical_requirement: Problem mining
+  blueprint_72_name: Problem mining
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  - P09
+  pipelines:
+  - GAP
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t021_problem_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T022
+  canonical_requirement: Job-posting intelligence
+  blueprint_72_name: Job-posting intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t022_job_posting_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T023
+  canonical_requirement: Supply-chain intelligence
+  blueprint_72_name: Supply-chain intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - RADAR
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t023_supply_chain_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T024
+  canonical_requirement: Regulatory intelligence
+  blueprint_72_name: Regulatory intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - VERIFY
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t024_regulatory_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T025
+  canonical_requirement: Standards mining
+  blueprint_72_name: Standards mining
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - VERIFY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t025_standards_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T026
+  canonical_requirement: Procurement mining
+  blueprint_72_name: Procurement mining
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t026_procurement_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T027
+  canonical_requirement: News intelligence
+  blueprint_72_name: News intelligence
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t027_news_intelligence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T028
+  canonical_requirement: Vertical crawling
+  blueprint_72_name: Vertical crawling
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t028_vertical_crawling
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T029
+  canonical_requirement: Page-diff monitoring
+  blueprint_72_name: Page-diff monitoring
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P16
+  pipelines:
+  - WATCH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t029_page_diff_monitoring
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T030
+  canonical_requirement: Release-note mining
+  blueprint_72_name: Release-note mining
+  name_divergence: false
+  family: EXTERNAL_SOURCES
+  owner: CRIBA_IIE
+  phase:
+  - P03
+  - P16
+  pipelines:
+  - WATCH
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t030_release_note_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T031
+  canonical_requirement: Semantic search
+  blueprint_72_name: Semantic search
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t031_semantic_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T032
+  canonical_requirement: Hybrid search
+  blueprint_72_name: Hybrid search
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t032_hybrid_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T033
+  canonical_requirement: Query expansion
+  blueprint_72_name: Query expansion
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - QUERY_PLANNER
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t033_query_expansion
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T034
+  canonical_requirement: Ontology expansion
+  blueprint_72_name: Ontology expansion
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - QUERY_PLANNER
+  status: MAPPED_ONLY_PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t034_ontology_expansion
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: ídem entities.ontology
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T035
+  canonical_requirement: Multilingual search
+  blueprint_72_name: Multilingual search
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - QUERY_PLANNER
+  - DISCOVERY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t035_multilingual_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T036
+  canonical_requirement: Query decomposition
+  blueprint_72_name: Query decomposition
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - QUERY_PLANNER
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t036_query_decomposition
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T037
+  canonical_requirement: Recursive search
+  blueprint_72_name: Recursive search
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - RETRIEVE_EXPAND
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t037_recursive_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T038
+  canonical_requirement: Backward citation chasing
+  blueprint_72_name: Backward citation chasing
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t038_backward_citation_chasing
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T039
+  canonical_requirement: Forward citation chasing
+  blueprint_72_name: Forward citation chasing
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t039_forward_citation_chasing
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T040
+  canonical_requirement: Citation graph analysis
+  blueprint_72_name: Citation graph analysis
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t040_citation_graph_analysis
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T041
+  canonical_requirement: Co-citation analysis
+  blueprint_72_name: Co-citation
+  name_divergence: true
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t041_co_citation_analysis
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T042
+  canonical_requirement: Bibliographic coupling
+  blueprint_72_name: Bibliographic coupling
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t042_bibliographic_coupling
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T043
+  canonical_requirement: Co-authorship networks
+  blueprint_72_name: Co-authorship networks
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t043_co_authorship_networks
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T044
+  canonical_requirement: Inventor networks
+  blueprint_72_name: Inventor networks
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t044_inventor_networks
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T045
+  canonical_requirement: Company migration detection
+  blueprint_72_name: Company migration detection
+  name_divergence: false
+  family: RETRIEVAL_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  - P07
+  pipelines:
+  - GRAPH
+  - SIGNALS
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t045_company_migration_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T046
+  canonical_requirement: Topic modeling
+  blueprint_72_name: Topic modeling
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t046_topic_modeling
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T047
+  canonical_requirement: Emerging topic detection
+  blueprint_72_name: Emerging topic detection
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t047_emerging_topic_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T048
+  canonical_requirement: Topic velocity
+  blueprint_72_name: Topic velocity
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.dynamics.TopicDynamics.velocity
+  runtime_operator: signals.dynamics.TopicDynamics.velocity
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str'
+  output_contracts:
+  - list[float] period-aligned
+  tests:
+  - test_topic_dynamics_aligns_velocity_and_acceleration_to_periods
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: deltas no alineadas
+- id: T049
+  canonical_requirement: Topic acceleration
+  blueprint_72_name: Topic acceleration
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.dynamics.TopicDynamics.acceleration
+  runtime_operator: signals.dynamics.TopicDynamics.acceleration
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str'
+  output_contracts:
+  - list[float] period-aligned
+  tests:
+  - test_topic_dynamics_aligns_velocity_and_acceleration_to_periods
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: ídem T019
+- id: T050
+  canonical_requirement: Topic birth
+  blueprint_72_name: Topic birth
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t050_topic_birth
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T051
+  canonical_requirement: Topic splitting
+  blueprint_72_name: Topic splitting
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t051_topic_splitting
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T052
+  canonical_requirement: Topic convergence
+  blueprint_72_name: Topic convergence
+  name_divergence: false
+  family: TOPIC_DYNAMICS
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t052_topic_convergence
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T053
+  canonical_requirement: Rare-combination detection
+  blueprint_72_name: Rare-combination detection
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.rare_combinations.detect_rare_combinations
+  runtime_operator: rare_combinations.detect_rare_combinations
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - Sequence[EvidenceDocument] with metadata.concepts
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_rare_combinations_are_deterministic_and_explicitly_corpus_local
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: consumidor en loop invent (decisión de arquitectura vigente)
+  falsifier: afirmar novedad global o no determinismo con mismo corpus
+- id: T054
+  canonical_requirement: Technological recombination
+  blueprint_72_name: Technological recombination
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t054_technological_recombination
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T055
+  canonical_requirement: Cross-domain analogy
+  blueprint_72_name: Cross-domain analogy
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.cross_domain.detect_cross_domain_analogies
+  runtime_operator: cross_domain.detect_cross_domain_analogies
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - Sequence[EvidenceDocument] with metadata.domain and metadata.concepts
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_cross_domain_analogies_require_explicit_shared_concepts_and_domains
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: analogía sin conceptos compartidos explícitos
+- id: T056
+  canonical_requirement: Biomimicry
+  blueprint_72_name: Biomimicry
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t056_biomimicry
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T057
+  canonical_requirement: TRIZ
+  blueprint_72_name: TRIZ
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.triz.list_principles/get_principle
+  runtime_operator: triz.list_principles/get_principle
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'principle number: int (1..40)'
+  output_contracts:
+  - tuple[TrizPrinciple, ...]
+  tests:
+  - test_registry_contains_exactly_40_principles
+  - test_numbers_unique_and_cover_1_to_40
+  - test_order_is_stable_across_calls
+  - test_lookup_valid_returns_matching_principle
+  - test_lookup_invalid_raises_key_error
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: aplicación a contradicciones es T058 (PLANNED)
+  falsifier: catálogo mutable o fuera de 1..40
+- id: T058
+  canonical_requirement: TRIZ contradiction mining
+  blueprint_72_name: TRIZ contradiction mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P08
+  - P09
+  pipelines:
+  - INVENTION
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t058_triz_contradiction_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T059
+  canonical_requirement: Morphological analysis
+  blueprint_72_name: Morphological analysis
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.morphology.generate_morphological_hypotheses
+  runtime_operator: morphology.generate_morphological_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'dimensions: Mapping[str, Sequence[str]]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t059_morphological_analysis_generates_deterministic_hypotheses
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem T053
+  falsifier: hipótesis fuera del producto cartesiano declarado
+- id: T060
+  canonical_requirement: SCAMPER
+  blueprint_72_name: SCAMPER
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.scamper.generate_scamper_hypotheses
+  runtime_operator: scamper.generate_scamper_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'components: Sequence[str]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_scamper_generates_all_seven_question_types_without_claiming_solution
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: menos de 7 tipos o afirmar resolver
+- id: T061
+  canonical_requirement: Attribute substitution
+  blueprint_72_name: Attribute substitution
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t061_attribute_substitution
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T062
+  canonical_requirement: Functional decomposition
+  blueprint_72_name: Functional decomposition
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.functions.decompose_functional_hypotheses
+  runtime_operator: functions.decompose_functional_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'component_functions: Mapping[str, Sequence[str]]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t062_functional_decomposition_is_explicit_and_deterministic
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: inventar funciones no declaradas
+- id: T063
+  canonical_requirement: Function-to-mechanism search
+  blueprint_72_name: Function-to-mechanism search
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_PLUS_IIE
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  - DISCOVERY
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.functions.search_function_to_mechanism_hypotheses
+  runtime_operator: functions.search_function_to_mechanism_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'functions: Sequence[str]'
+  - retrieved EvidenceDocument metadata.function_mechanisms
+  output_contracts:
+  - list[InventionCandidate] with source doc_id in description
+  tests:
+  - test_t063_function_to_mechanism_search_requires_explicit_source_metadata
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: requiere evidencia recuperada (fuentes en REFRESH)
+  falsifier: mecanismo sin doc_id fuente
+- id: T064
+  canonical_requirement: First-principles decomposition
+  blueprint_72_name: First-principles decomposition
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.first_principles.decompose_first_principles_hypotheses
+  runtime_operator: first_principles.decompose_first_principles_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'premise_implications: Mapping[str, Sequence[str]]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t064_first_principles_decomposition_keeps_premises_explicit
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: ocultar la premisa de la que deriva
+- id: T065
+  canonical_requirement: Constraint inversion
+  blueprint_72_name: Constraint inversion
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.inversion.generate_constraint_inversion_hypotheses
+  runtime_operator: inversion.generate_constraint_inversion_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'constraint_inversions: Mapping[str, Sequence[str]]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t065_constraint_inversion_never_claims_constraint_is_removed
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: afirmar que la restricción desaparece
+- id: T066
+  canonical_requirement: Assumption mining
+  blueprint_72_name: Assumption mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P08
+  - P09
+  pipelines:
+  - GAP
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t066_assumption_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T067
+  canonical_requirement: Contradiction mining
+  blueprint_72_name: Contradiction mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.contradictions.analyze_contradictions
+  runtime_operator: gaps.contradictions.analyze_contradictions
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - claims from documents via claims.extract_claims_from_fragments
+  output_contracts:
+  - list[Contradiction]
+  tests:
+  - test_detects_opposing_claims_and_unites_document_provenance
+  - test_is_deterministic_and_ignores_unparseable_or_same_polarity_claims
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: claims desde fuentes en vivo (REFRESH)
+  falsifier: contradicción sin ambas procedencias o misma polaridad
+- id: T068
+  canonical_requirement: Research-gap extraction
+  blueprint_72_name: Research-gap extraction
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.research.extract_research_gaps
+  runtime_operator: gaps.research.extract_research_gaps
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument]'
+  - 'topic: str = '''''
+  output_contracts:
+  - list[Gap]
+  tests:
+  - test_extracts_only_cued_sentences_with_provenance
+  - test_extraction_is_deterministic_and_deduplicates_same_document
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: gap sin cue léxica
+- id: T069
+  canonical_requirement: Limitation mining
+  blueprint_72_name: Limitation mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.limitations.extract_limitations
+  runtime_operator: gaps.limitations.extract_limitations
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument]'
+  - 'scope: str = '''''
+  output_contracts:
+  - list[Limitation]
+  tests:
+  - test_extracts_limitations_with_stable_provenance_and_scope
+  - test_resolved_limitation_language_is_not_promoted
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: limitación resuelta promocionada
+- id: T070
+  canonical_requirement: Failure mining
+  blueprint_72_name: Failure mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.failures.extract_failures
+  runtime_operator: gaps.failures.extract_failures
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument]'
+  - 'topic: str = '''''
+  output_contracts:
+  - list[FailureCase]
+  tests:
+  - test_mines_failure_cases_with_mode_and_provenance
+  - test_resolved_failure_language_is_not_promoted
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: modo inventado para fallo no estructurado
+- id: T071
+  canonical_requirement: Technology resurrection
+  blueprint_72_name: Technology resurrection
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.resurrection.extract_resurrection_candidates
+  runtime_operator: gaps.resurrection.extract_resurrection_candidates
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument]'
+  - 'topic: str = '''''
+  output_contracts:
+  - list[ResurrectionCandidate]
+  tests:
+  - test_extracts_structured_resurrection_with_provenance
+  - test_text_extraction_requires_current_evidence_of_constraint_change
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: resurrección sin evidencia del cambio de restricción
+- id: T072
+  canonical_requirement: Capability unlock detection
+  blueprint_72_name: Capability unlock detection
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t072_capability_unlock_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T073
+  canonical_requirement: Cost-curve mining
+  blueprint_72_name: Cost-curve mining
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t073_cost_curve_mining
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T074
+  canonical_requirement: Performance-threshold detection
+  blueprint_72_name: Performance threshold detection
+  name_divergence: true
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t074_performance_threshold_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T075
+  canonical_requirement: Miniaturization detection
+  blueprint_72_name: Miniaturization detection
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t075_miniaturization_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T076
+  canonical_requirement: Energy-efficiency unlock
+  blueprint_72_name: Energy-efficiency unlock
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  - P08
+  pipelines:
+  - SIGNALS
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t076_energy_efficiency_unlock
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T077
+  canonical_requirement: Latency unlock
+  blueprint_72_name: Latency unlock
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  - P08
+  pipelines:
+  - SIGNALS
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t077_latency_unlock
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T078
+  canonical_requirement: Material substitution
+  blueprint_72_name: Material substitution
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t078_material_substitution
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T079
+  canonical_requirement: Technology convergence score
+  blueprint_72_name: Technology convergence score
+  name_divergence: false
+  family: INVENTION
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t079_technology_convergence_score
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T080
+  canonical_requirement: Global novelty search
+  blueprint_72_name: Global novelty search
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  - P11
+  pipelines:
+  - PRIOR_ART
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t080_global_novelty_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T081
+  canonical_requirement: Local novelty
+  blueprint_72_name: Local novelty
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t081_local_novelty
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T082
+  canonical_requirement: Global novelty
+  blueprint_72_name: Global novelty
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t082_global_novelty
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T083
+  canonical_requirement: Temporal novelty
+  blueprint_72_name: Temporal novelty
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t083_temporal_novelty
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T084
+  canonical_requirement: Semantic distance
+  blueprint_72_name: Semantic distance
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t084_semantic_distance
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T085
+  canonical_requirement: Density estimation
+  blueprint_72_name: Density estimation
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t085_density_estimation
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T086
+  canonical_requirement: White-space analysis
+  blueprint_72_name: White-space analysis
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.white_space.analyze_white_spaces
+  runtime_operator: gaps.white_space.analyze_white_spaces
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument]'
+  - 'space_type: str = '''''
+  - 'topic: str = '''''
+  output_contracts:
+  - list[WhiteSpaceCandidate]
+  tests:
+  - test_analyzes_white_spaces_with_type_and_provenance
+  - test_analysis_is_deterministic_deduplicated_and_topic_filtered
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: 'T087-89 por tipo: detector genérico (gap)'
+  falsifier: white-space sin procedencia
+- id: T087
+  canonical_requirement: Patent landscape white spaces
+  blueprint_72_name: Patent landscape white spaces
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t087_patent_landscape_white_spaces
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T088
+  canonical_requirement: Research landscape white spaces
+  blueprint_72_name: Research landscape white spaces
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t088_research_landscape_white_spaces
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T089
+  canonical_requirement: Market white spaces
+  blueprint_72_name: Market white spaces
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t089_market_white_spaces
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T090
+  canonical_requirement: Knowledge graph
+  blueprint_72_name: Knowledge graph
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t090_knowledge_graph
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T091
+  canonical_requirement: Link prediction
+  blueprint_72_name: Link prediction
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: IMPLEMENTED
+  implementation: criba.intelligence.graph.link_prediction.LinkPredictionInterface.predict
+  runtime_operator: graph.link_prediction.LinkPredictionInterface.predict
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - graph store con entidades/relaciones
+  - 'source: str'
+  - 'limit: int = 10'
+  output_contracts:
+  - list[dict] enlaces ausentes rankeados
+  tests:
+  - test_predict_returns_ranked_absent_links_by_common_neighbors
+  - test_predict_excludes_existing_links
+  - test_predict_rejects_negative_limit_and_accepts_zero
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: grafo alimentado desde extracción de entidades en vivo
+  falsifier: predicción sin vecinos comunes o con enlaces existentes
+- id: T092
+  canonical_requirement: Missing-link discovery
+  blueprint_72_name: Missing-link discovery
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t092_missing_link_discovery
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T093
+  canonical_requirement: Graph embeddings
+  blueprint_72_name: Graph embeddings
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: MAPPED_ONLY_PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t093_graph_embeddings
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: 'graph.embeddings nunca existió (no está en el diff de cbac469): GAP canónico'
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T094
+  canonical_requirement: Community detection
+  blueprint_72_name: Community detection
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: IMPLEMENTED
+  implementation: criba.intelligence.graph.communities.CommunityDetector.detect
+  runtime_operator: graph.communities.CommunityDetector.detect
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - graph store
+  - 'entity_ids: Iterable[str] | None = None'
+  output_contracts:
+  - list[list[str]] comunidades
+  tests:
+  - test_detect_returns_sorted_weak_communities
+  - test_detect_restricts_communities_to_requested_subset
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: comunidad no ordenada o fuera de subset
+- id: T095
+  canonical_requirement: Bridge-node detection
+  blueprint_72_name: Bridge-node detection
+  name_divergence: false
+  family: NOVELTY_KNOWLEDGE_GRAPH
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  pipelines:
+  - GRAPH
+  status: IMPLEMENTED
+  implementation: criba.intelligence.graph.bridges.BridgeNodeAnalyzer.articulation_points
+  runtime_operator: graph.bridges.BridgeNodeAnalyzer.articulation_points
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - graph store
+  - 'entity_ids: Iterable[str] | None = None'
+  output_contracts:
+  - list[str] puntos de articulacion
+  tests:
+  - test_articulation_points_are_sorted_and_exclude_leaves
+  - test_articulation_points_respect_requested_subset
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: articulación en un ciclo
+- id: T096
+  canonical_requirement: Burst detection
+  blueprint_72_name: Burst detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.bursts.BurstDetector.detect
+  runtime_operator: signals.bursts.BurstDetector.detect
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str | None = None'
+  output_contracts:
+  - list[BurstEvent]
+  tests:
+  - test_burst_detector_returns_velocity_spikes_with_period_and_strength
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: integración RADAR
+  falsifier: burst sin periodo/fuerza
+- id: T097
+  canonical_requirement: Change-point detection
+  blueprint_72_name: Change-point detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.changepoints.ChangePointDetector.detect
+  runtime_operator: signals.changepoints.ChangePointDetector.detect
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str | None = None'
+  output_contracts:
+  - list[ChangePointEvent]
+  tests:
+  - test_change_point_detector_reports_level_shift_at_candidate_period
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: cambio en serie plana
+- id: T098
+  canonical_requirement: Anomaly detection
+  blueprint_72_name: Anomaly detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.anomaly.AnomalyDetector.detect
+  runtime_operator: signals.anomaly.AnomalyDetector.detect
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'topic: str | None = None'
+  output_contracts:
+  - list[AnomalyEvent]
+  tests:
+  - test_anomaly_detector_reports_robust_frequency_outlier
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: outlier por media no robusta
+- id: T099
+  canonical_requirement: Weak-signal detection
+  blueprint_72_name: Weak-signal detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.weak_signals.WeakSignalAggregator.aggregate
+  runtime_operator: signals.weak_signals.WeakSignalAggregator.aggregate
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'signals: Sequence[WeakSignal]'
+  output_contracts:
+  - list[WeakSignal] merged
+  tests:
+  - test_weak_signal_aggregator_merges_support_without_double_counting_ids
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: doble conteo de soporte
+- id: T100
+  canonical_requirement: Multi-source confirmation
+  blueprint_72_name: Multi-source confirmation
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t100_multi_source_confirmation
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T101
+  canonical_requirement: Cross-source lead/lag
+  blueprint_72_name: Cross-source lead/lag
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P07
+  pipelines:
+  - SIGNALS
+  status: IMPLEMENTED
+  implementation: criba.intelligence.signals.lead_lag.LeadLagAnalyzer.analyze
+  runtime_operator: signals.lead_lag.LeadLagAnalyzer.analyze
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'observations: Sequence[TopicObservation]'
+  - 'leader_topic: str'
+  - 'follower_topic: str'
+  output_contracts:
+  - LeadLagResult | None
+  tests:
+  - test_lead_lag_analyzer_identifies_delayed_follower
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: lag positivo para el líder
+- id: T102
+  canonical_requirement: TRL estimation
+  blueprint_72_name: TRL estimation
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t102_trl_estimation
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T103
+  canonical_requirement: Evidence scoring
+  blueprint_72_name: Evidence scoring
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t103_evidence_scoring
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T104
+  canonical_requirement: Confidence scoring
+  blueprint_72_name: Confidence scoring
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t104_confidence_scoring
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T105
+  canonical_requirement: Hype detection
+  blueprint_72_name: Hype detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t105_hype_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T106
+  canonical_requirement: Underhype detection
+  blueprint_72_name: Underhype detection
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t106_underhype_detection
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T107
+  canonical_requirement: Opportunity scoring
+  blueprint_72_name: Opportunity scoring
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t107_opportunity_scoring
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T108
+  canonical_requirement: Saturation score
+  blueprint_72_name: Saturation score
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t108_saturation_score
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T109
+  canonical_requirement: Competitive density
+  blueprint_72_name: Competitive density
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t109_competitive_density
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T110
+  canonical_requirement: Patent blocking
+  blueprint_72_name: Patent blocking
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_IIE
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t110_patent_blocking
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T111
+  canonical_requirement: Feasibility estimation
+  blueprint_72_name: Feasibility estimation
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t111_feasibility_estimation
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T112
+  canonical_requirement: Prototypeability
+  blueprint_72_name: Prototypeability
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t112_prototypeability
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T113
+  canonical_requirement: Time-to-market
+  blueprint_72_name: Time-to-market
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t113_time_to_market
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T114
+  canonical_requirement: Cost-to-test
+  blueprint_72_name: Cost-to-test
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA
+  phase:
+  - P11
+  pipelines:
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t114_cost_to_test
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T115
+  canonical_requirement: Falsifiability
+  blueprint_72_name: Falsifiability
+  name_divergence: false
+  family: SIGNALS_EVIDENCE_OPPORTUNITY
+  owner: CRIBA_PLUS_IIE
+  phase:
+  - P11
+  - P14
+  pipelines:
+  - OPPORTUNITY
+  - VERIFY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t115_falsifiability
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T116
+  canonical_requirement: Adjacent Possible
+  blueprint_72_name: Adjacent Possible
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.adjacent_possible.generate_adjacent_possible_hypotheses
+  runtime_operator: adjacent_possible.generate_adjacent_possible_hypotheses
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - 'capabilities: Sequence[str]'
+  - 'known_combinations: Sequence[Sequence[str]]'
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t116_adjacent_possible_excludes_explicit_known_combinations
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: proponer par presente en known_combinations
+- id: T117
+  canonical_requirement: Combinatorial invention engine
+  blueprint_72_name: Combinatorial invention engine
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t117_combinatorial_invention_engine
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T118
+  canonical_requirement: Generate-Search-Reject-Mutate
+  blueprint_72_name: Generate→Search→Reject→Mutate
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t118_generate_search_reject_mutate
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T119
+  canonical_requirement: Adversarial novelty checking (skeptic)
+  blueprint_72_name: Adversarial novelty checking
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t119_adversarial_novelty_checking__skeptic
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T120
+  canonical_requirement: Independent search scouts
+  blueprint_72_name: Independent search scouts
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: SUPRA_ORCHESTRATION
+  phase:
+  - P10
+  - P14
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t120_independent_search_scouts
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T121
+  canonical_requirement: Search diversity (query lattice)
+  blueprint_72_name: Search diversity
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t121_search_diversity__query_lattice
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T122
+  canonical_requirement: Query mutation
+  blueprint_72_name: Query mutation
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P04
+  - P10
+  pipelines:
+  - QUERY_PLANNER
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t122_query_mutation
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T123
+  canonical_requirement: Negative search
+  blueprint_72_name: Negative search
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P10
+  pipelines:
+  - PRIOR_ART
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t123_negative_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T124
+  canonical_requirement: Reverse innovation search
+  blueprint_72_name: Reverse innovation search
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA
+  phase:
+  - P08
+  - P09
+  pipelines:
+  - GAP
+  - INVENTION
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t124_reverse_innovation_search
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T125
+  canonical_requirement: Pain-point graph
+  blueprint_72_name: Pain-point graph
+  name_divergence: false
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  - P08
+  pipelines:
+  - GRAPH
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t125_pain_point_graph
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T126
+  canonical_requirement: Unmet needs/reviews/workarounds/workflow friction
+  blueprint_72_name: Unmet-needs/review/workaround/workflow mining
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t126_unmet_needs_reviews_workarounds_workflow_frictio
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T127
+  canonical_requirement: Human bottlenecks + API/hardware/dataset/model/OSS unlocks
+  blueprint_72_name: Human bottleneck + API/hardware/dataset/model/OSS unlocks
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  - OPPORTUNITY
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t127_human_bottlenecks___api_hardware_dataset_model_o
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
+- id: T128
+  canonical_requirement: Patent expiration/abandoned IP/dormant research/sleeping
+    beauty
+  blueprint_72_name: Patent expiration + abandoned IP + dormant/sleeping research
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P08
+  pipelines:
+  - GAP
+  status: IMPLEMENTED
+  implementation: criba.intelligence.gaps.{patent_expiration,dormant,sleeping_beauty,resurrection}
+  runtime_operator: patent_expiration+dormant+sleeping_beauty+resurrection
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'documents: Sequence[EvidenceDocument] con metadata/fragments de expiración, sueño
+    o abandono'
+  output_contracts:
+  - list[PatentExpirationOpportunity|DormantPaperCandidate|SleepingBeautyCandidate|ResurrectionCandidate]
+  tests:
+  - test_analyzes_structured_opportunity_without_declaring_freedom_to_operate
+  - test_detects_old_paper_with_explicit_low_attention_evidence
+  - test_detects_delayed_attention_from_citation_series
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: expiración sin fecha o FTO afirmado
+- id: T129
+  canonical_requirement: Second/N-th order/counterfactual/future-back/bottleneck mapping
+  blueprint_72_name: Second-order / N-th-order / counterfactual / future-back / bottleneck
+    mapping
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA
+  phase:
+  - P09
+  pipelines:
+  - INVENTION
+  status: IMPLEMENTED
+  implementation: criba.intelligence.invention.{counterfactual,future_back,bottlenecks,nth_order}
+  runtime_operator: counterfactual/future_back/bottlenecks/nth_order (4 generadores)
+  integration_path: criba tecnicas --ejecutar (execution.py)
+  input_contracts:
+  - 'problem: str'
+  - caller-supplied temporal/counterfactual mappings
+  output_contracts:
+  - list[InventionCandidate]
+  tests:
+  - test_t129_counterfactual_keeps_alternate_outcomes_as_hypotheses
+  - test_t129_future_back_never_claims_the_future_state_will_be_reached
+  - test_t129_bottleneck_mapping_never_claims_the_bottleneck_is_causal
+  - test_t129_nth_order_effects_never_claim_the_effect_chain_will_occur
+  provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
+  gap: null
+  remaining_gap: ídem
+  falsifier: efecto futuro afirmado como ocurrirá; cuello como causal
+- id: T130
+  canonical_requirement: S-curves/substitution curves/innovation genealogy
+  blueprint_72_name: S-curve / substitution curves / innovation genealogy
+  name_divergence: true
+  family: ADVERSARIAL_FUTURES
+  owner: CRIBA_IIE
+  phase:
+  - P06
+  - P07
+  pipelines:
+  - SIGNALS
+  - RADAR
+  - GRAPH
+  status: PLANNED
+  implementation: null
+  runtime_operator: null
+  integration_path: null
+  input_contracts: []
+  output_contracts: []
+  tests:
+  - test_t130_s_curves_substitution_curves_innovation_genealog
+  provenance: reg_parts → gen_registry.py (canon)
+  gap: null
+  remaining_gap: implementación no materializada — construcción nueva requerida (dimensionar
+    por EV)
+  falsifier: null
