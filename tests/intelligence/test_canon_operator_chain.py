@@ -188,3 +188,74 @@ def test_dispatch_registry_enforces_contract_not_authority() -> None:
 
 if __name__ == "__main__":
     raise SystemExit(pytest.main([__file__, "-q"]))
+
+
+# ---------------------------------------------------------------------------
+# Slice 2 (canon 2026-09-08.2): gaps/signals restaurados + ejecutables.
+# Misma cadena §82, adaptadores por input_contracts, guardrails de canon.
+# ---------------------------------------------------------------------------
+
+def _series(topic: str = "ia") -> list[dict]:
+    return [
+        {"topic": topic, "period": "2026-01", "frequency": 5},
+        {"topic": topic, "period": "2026-02", "frequency": 20},
+        {"topic": topic, "period": "2026-03", "frequency": 22},
+    ]
+
+
+def _doc(abstract: str = "The method fails when load doubles") -> EvidenceDocument:
+    return EvidenceDocument(title="doc sintético", abstract=abstract)
+
+
+SLICE2_CASES = {
+    "T067": {"documents": [_doc()], "expect_type": None},
+    "T068": {"documents": [_doc()], "expect_type": None},
+    "T069": {"documents": [_doc()], "expect_type": None},
+    "T070": {"documents": [_doc()], "expect_type": None},
+    "T071": {"documents": [_doc()], "expect_type": None},
+    "T086": {"documents": [_doc()], "expect_type": None},
+    "T128": {"documents": [_doc()], "expect_type": None},
+    "T019": {"params": {"observations": _series(), "topic": "ia"}},
+    "T048": {"params": {"observations": _series(), "topic": "ia"}},
+    "T049": {"params": {"observations": _series(), "topic": "ia"}},
+    "T096": {"params": {"observations": _series()}},
+    "T097": {"params": {"observations": _series()}},
+    "T098": {"params": {"observations": _series()}},
+    "T099": {"params": {"signals": [{"signal_id": "s1", "kind": "anomaly", "topic": "ia",
+                                     "strength": 0.8, "direction": "up"}]}},
+    "T101": {"params": {"observations": _series() + _series("seguidor"),
+                        "leader_topic": "ia", "follower_topic": "seguidor"}},
+}
+
+
+@pytest.mark.parametrize("tid", sorted(SLICE2_CASES))
+def test_chain_slice2_execute(tid: str) -> None:
+    """Canon 2026-09-08.2 → execute_technique → salida con forma contractual."""
+    from criba.intelligence.execution import execute_technique
+
+    registry = TechniqueRegistry(REGISTRY_PATH)
+    case = SLICE2_CASES[tid]
+    technique = registry.get(tid)
+    assert technique.status.startswith("IMPLEMENTED")
+
+    outcome = execute_technique(
+        registry, tid, "problema",
+        params=case.get("params"), documents=case.get("documents"),
+    )
+    assert outcome["technique"] == tid
+    assert outcome["canon_version"]
+    assert isinstance(outcome["results"], list)
+
+
+def test_slice2_guardrails_still_enforced() -> None:
+    """Negativo: las nuevas también respetan la autoridad del canon."""
+    from criba.intelligence.execution import ExecutionError, execute_technique
+
+    registry = TechniqueRegistry(REGISTRY_PATH)
+    with pytest.raises(ExecutionError, match="PLANNED"):
+        execute_technique(registry, "T052", "p", params={"observations": _series()})
+    with pytest.raises(ExecutionError, match="desconocida"):
+        execute_technique(registry, "T000", "p")
+    # input_contracts honrados: dynamics sin topic → error honrado
+    with pytest.raises(ExecutionError, match="topic"):
+        execute_technique(registry, "T048", "p", params={"observations": _series()})

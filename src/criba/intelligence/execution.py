@@ -109,6 +109,60 @@ def _evidence_first(param: str = "concepts") -> InputAdapter:
     return adapter
 
 
+def _topic_observations(params: Mapping[str, Any]) -> list[Any]:
+    """params['observations'] (dicts) → TopicObservation ordenables por periodo."""
+    from .contracts import TopicObservation
+
+    out = []
+    for raw in params.get("observations") or []:
+        if isinstance(raw, TopicObservation):
+            out.append(raw)
+        elif isinstance(raw, Mapping):
+            out.append(TopicObservation(
+                topic=str(raw.get("topic", "")),
+                period=str(raw.get("period", "")),
+                frequency=int(raw.get("frequency") or 0),
+                source_diversity=int(raw.get("source_diversity") or 0),
+                metadata=dict(raw.get("metadata") or {}),
+            ))
+    return out
+
+
+def _dynamics_method(method: str) -> InputAdapter:
+    def adapter(problem: str, params: Mapping[str, Any], _docs: list[EvidenceDocument]):
+        from .signals.dynamics import TopicDynamics
+
+        topic = str(params.get("topic", ""))
+        if not topic:
+            raise ExecutionError("falta el parámetro canónico: topic")
+        # el resolver devuelve el método NO ligado: se le pasa la instancia
+        return (TopicDynamics(_topic_observations(params)), topic), {}
+    return adapter
+
+
+def _detector_call(class_path: str) -> InputAdapter:
+    """Detectores: el resolver devuelve el método no ligado → (instancia, serie)."""
+    def adapter(problem: str, params: Mapping[str, Any], _docs: list[EvidenceDocument]):
+        from importlib import import_module
+
+        module_name, class_name = class_path.rsplit(".", 1)
+        detector = getattr(import_module(module_name), class_name)()
+        return (detector, _topic_observations(params)), {"topic": params.get("topic")}
+    return adapter
+
+
+def _weak_signal_instance() -> Any:
+    from .signals.weak_signals import WeakSignalAggregator
+
+    return WeakSignalAggregator()
+
+
+def _lead_lag_instance() -> Any:
+    from .signals.lead_lag import LeadLagAnalyzer
+
+    return LeadLagAnalyzer()
+
+
 _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
     "T053": ("criba.intelligence.invention.rare_combinations.detect_rare_combinations",
              _evidence_first()),
@@ -135,7 +189,71 @@ _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
              )),
     "T129": ("criba.intelligence.invention.counterfactual.generate_counterfactual_hypotheses",
              _problem_only(("temporal_map",))),
+    # -- slice 2: gaps (evidencia primero) --------------------------------
+    "T067": ("criba.intelligence.gaps.contradictions.analyze_contradictions",
+             lambda problem, params, docs: (
+                 (_claims_from(docs), docs), {})),
+    "T068": ("criba.intelligence.gaps.research.extract_research_gaps",
+             lambda problem, params, docs: ((docs,), {"topic": str(params.get("topic", ""))})),
+    "T069": ("criba.intelligence.gaps.limitations.extract_limitations",
+             lambda problem, params, docs: ((docs,), {"scope": str(params.get("scope", ""))})),
+    "T070": ("criba.intelligence.gaps.failures.extract_failures",
+             lambda problem, params, docs: ((docs,), {"topic": str(params.get("topic", ""))})),
+    "T071": ("criba.intelligence.gaps.resurrection.extract_resurrection_candidates",
+             lambda problem, params, docs: ((docs,), {"topic": str(params.get("topic", ""))})),
+    "T086": ("criba.intelligence.gaps.white_space.analyze_white_spaces",
+             lambda problem, params, docs: (
+                 (docs,), {"space_type": str(params.get("space_type", "")),
+                           "topic": str(params.get("topic", ""))})),
+    "T128": ("criba.intelligence.gaps.patent_expiration.analyze_patent_expirations",
+             lambda problem, params, docs: (
+                 (docs,), {"jurisdiction": str(params.get("jurisdiction", "")),
+                           "patent_id": str(params.get("patent_id", ""))})),
+    # -- slice 2: signals (series/params) ----------------------------------
+    "T019": ("criba.intelligence.signals.dynamics.TopicDynamics.acceleration",
+             _dynamics_method("acceleration")),
+    "T048": ("criba.intelligence.signals.dynamics.TopicDynamics.velocity",
+             _dynamics_method("velocity")),
+    "T049": ("criba.intelligence.signals.dynamics.TopicDynamics.acceleration",
+             _dynamics_method("acceleration")),
+    "T096": ("criba.intelligence.signals.bursts.BurstDetector.detect",
+             _detector_call("criba.intelligence.signals.bursts.BurstDetector")),
+    "T097": ("criba.intelligence.signals.changepoints.ChangePointDetector.detect",
+             _detector_call("criba.intelligence.signals.changepoints.ChangePointDetector")),
+    "T098": ("criba.intelligence.signals.anomaly.AnomalyDetector.detect",
+             _detector_call("criba.intelligence.signals.anomaly.AnomalyDetector")),
+    "T099": ("criba.intelligence.signals.weak_signals.WeakSignalAggregator.aggregate",
+             lambda problem, params, docs: (
+                 (_weak_signal_instance(), _weak_signals(params)), {})),
+    "T101": ("criba.intelligence.signals.lead_lag.LeadLagAnalyzer.analyze",
+             lambda problem, params, docs: (
+                 (_lead_lag_instance(), _topic_observations(params)),
+                 {"leader_topic": str(params.get("leader_topic", "")),
+                  "follower_topic": str(params.get("follower_topic", ""))})),
 }
+
+
+
+
+def _claims_from(docs: list[EvidenceDocument]) -> list[Any]:
+    from .claims import extract_claims_from_fragments
+
+    claims = []
+    for doc in docs:
+        claims.extend(extract_claims_from_fragments(doc))
+    return claims
+
+
+def _weak_signals(params: Mapping[str, Any]) -> list[Any]:
+    from .contracts import WeakSignal
+
+    out = []
+    for raw in params.get("signals") or []:
+        if isinstance(raw, WeakSignal):
+            out.append(raw)
+        elif isinstance(raw, Mapping):
+            out.append(WeakSignal(**dict(raw)))
+    return out
 
 
 def execute_technique(
@@ -171,7 +289,9 @@ def execute_technique(
     operator_ref, adapt = adapter
     args, kwargs = adapt(problem or "", params or {}, list(documents or []))
     output = resolve_callable(operator_ref)(*args, **kwargs)
-    items = [item.to_dict() if hasattr(item, "to_dict") else item for item in output]
+    # salida contractual: lista de items o escalar (p. ej. LeadLagResult)
+    items_raw = list(output) if isinstance(output, (list, tuple)) else [output]
+    items = [item.to_dict() if hasattr(item, "to_dict") else item for item in items_raw]
     return {
         "technique": technique_id,
         "name": technique.name,

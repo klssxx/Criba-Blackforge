@@ -63,6 +63,29 @@
       ],
       "promotion_basis": "secuencia §79 completa: capability proof (tests historicos restaurados), §78 dispatch-only, §82 cadena canon->router->operador->salida, mapeos desde overrides historicas del generador canonico (§80), promocion solo via generador (§77)",
       "attestation": "ATT-20260908-A2-CI"
+    },
+    {
+      "epoch": "2026-09-08.2",
+      "event": "PROMOTION_EVENT",
+      "promoted": [
+        "T019",
+        "T048",
+        "T049",
+        "T067",
+        "T068",
+        "T069",
+        "T070",
+        "T071",
+        "T086",
+        "T096",
+        "T097",
+        "T098",
+        "T099",
+        "T101",
+        "T128"
+      ],
+      "promotion_basis": "§79 (85 tests historicos verdes) + §80 por funcion real + §82 ejecucion desde producto; restauracion desde cbac469~1",
+      "attestation": "ATT-20260908-A2-SLICE2"
     }
   ],
   "attestations": [
@@ -131,6 +154,42 @@
         "INT.G4_sin_regresion": "PASS (991 passed, mypy 100 fuentes)"
       },
       "REASONS": "La razón previa de SHADOW por desconexión queda retirada: la integración existe. SHADOW se conserva SOLO por techo A2 (sin revisor A3+ independiente disponible) — razón arquitectónica demostrable, no comodidad.",
+      "TIMESTAMP": "2026-09-08"
+    },
+    {
+      "ATTESTATION_ID": "ATT-20260908-A2-SLICE2",
+      "RECOVERY_TX_ID": "slice2-gaps-signals",
+      "CAPABILITY_IDS": [
+        "T019",
+        "T048",
+        "T049",
+        "T067",
+        "T068",
+        "T069",
+        "T070",
+        "T071",
+        "T086",
+        "T096",
+        "T097",
+        "T098",
+        "T099",
+        "T101",
+        "T128"
+      ],
+      "PROPOSED_LEVEL": "A2",
+      "CERTIFIER_ROLE": "CI objetivo",
+      "CERTIFIER_RESULT": "PASS",
+      "CERTIFIED_LEVEL": "A2",
+      "gate_vector": {
+        "A1.G2": "PASS",
+        "A1.G3": "PASS",
+        "A1.G4": "PASS",
+        "A2.G1_tests": "PASS (1111 passed)",
+        "A2.G2_mypy": "PASS (intelligence 67 fuentes; errores locales restantes son de trabajo Nebius NO commiteado de otra sesion)",
+        "A2.G5_negativos": "PASS (PLANNED T052/T000 rechazadas; input_contracts honrados)",
+        "A3.G1_independent_certifier": "NOT_AVAILABLE"
+      },
+      "REASONS": "Promocion por funcion real (no por parecido nominal): T047/T087-89/T052 quedan PLANNED con gap documentado.",
       "TIMESTAMP": "2026-09-08"
     }
   ],
@@ -256,7 +315,112 @@
       "EFFECTIVE": "A2",
       "MAX_RUNTIME_STATE": "SHADOW"
     },
-    "note_shadow": "SHADOW conservado por ceiling A2 (sin certificador A3+ disponible), NO por desconexión: las 11 son accesibles desde el producto via 'criba tecnicas --ejecutar'. Sus salidas no alimentan learning/pesos/priors automaticamente."
+    "note_shadow": "SHADOW conservado por ceiling A2 (sin certificador A3+ disponible), NO por desconexión: las 11 son accesibles desde el producto via 'criba tecnicas --ejecutar'. Sus salidas no alimentan learning/pesos/priors automaticamente.",
+    "T019": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T048": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T049": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T067": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T068": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T069": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T070": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T071": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T086": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T096": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T097": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T098": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T099": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T101": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T128": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    }
   },
   "raw_counts_disclosure": {
     "note": "no vender N GREEN como N pruebas independientes",
