@@ -76,6 +76,7 @@ cli_a = Analysis(
         'criba.intelligence.entities',
         'criba.intelligence.claims',
         'criba.intelligence.provenance',
+        'criba.intelligence.graph',
         'criba.intelligence.router',
         'criba.intelligence.registry',
     ],

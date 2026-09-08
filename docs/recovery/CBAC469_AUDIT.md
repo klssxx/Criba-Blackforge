@@ -131,3 +131,26 @@ Restaurados también: entities/ (extractor+resolver, soporte de
 test_provenance), provenance.py (la mitad epistémica assess_claims;
 content_hash queda SUPERSEDED por CH1–CH7), claims.py (extracción regex,
 consumida por T067).
+
+
+## Slice 3 — verificación por técnica (canon 2026-09-08.3)
+
+graph/ (8 módulos, 625 LOC) + 8 suites de tests (26 verdes sin cambios).
+§78 auditado: SQLiteKnowledgeGraphStore SE APOYA en IntelligenceStore
+(misma BD) — no es store paralelo. Promoción §80 por capacidad real:
+
+| Txxx | operador | evidencia semántica | tests(±) | falsifier |
+|---|---|---|---|---|
+| T091 | LinkPredictionInterface.predict | rankea enlaces ausentes por vecinos comunes (Jaccard explicable) | ranked(+), excluye-existentes(−), limit-negativo(−) | predicción sin explicación de vecinos comunes o incluyendo enlaces existentes |
+| T094 | CommunityDetector.detect | comunidades débiles ordenadas, subset respetado | sorted(+), subset(−) | comunidad no ordenada o fuera del subset |
+| T095 | BridgeNodeAnalyzer.articulation_points | puntos de articulación por eliminación | sorted/sin-hojas(+), subset(−); POSITIVO semántico: línea a-b-c → ['b'], ciclo → [] | articulación inventada en un ciclo |
+
+PLANNED con gap documentado: T092 (missing-link discovery — mismo operador
+que T091: promocionarlo sería monocultivo funcional; requiere capa de
+invención adicional), T093 (graph.embeddings — NUNCA existió: GAP canónico),
+T040–T045 (análisis de citas/coautoría — infraestructura graph existe, la
+lógica específica de cada técnica no). T130 parcial: scurve ✓ (slice 2),
+genealogía requiere la capa de graph no materializada para ese fin.
+
+Restaurados de soporte: builder/centrality/traversal/store/semantics con
+sus tests (infraestructura compartida auditada una vez, §VELOCIDAD).

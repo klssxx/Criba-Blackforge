@@ -86,6 +86,17 @@
       ],
       "promotion_basis": "§79 (85 tests historicos verdes) + §80 por funcion real + §82 ejecucion desde producto; restauracion desde cbac469~1",
       "attestation": "ATT-20260908-A2-SLICE2"
+    },
+    {
+      "epoch": "2026-09-08.3",
+      "event": "PROMOTION_EVENT",
+      "promoted": [
+        "T091",
+        "T094",
+        "T095"
+      ],
+      "promotion_basis": "§79 (26 tests graph verdes) + §80 (T092 monocultivo, T093 GAP, T040-45 sin logica especifica) + §82 ejecucion desde producto",
+      "attestation": "ATT-20260908-A2-SLICE3"
     }
   ],
   "attestations": [
@@ -190,6 +201,29 @@
         "A3.G1_independent_certifier": "NOT_AVAILABLE"
       },
       "REASONS": "Promocion por funcion real (no por parecido nominal): T047/T087-89/T052 quedan PLANNED con gap documentado.",
+      "TIMESTAMP": "2026-09-08"
+    },
+    {
+      "ATTESTATION_ID": "ATT-20260908-A2-SLICE3",
+      "RECOVERY_TX_ID": "slice3-graph",
+      "CAPABILITY_IDS": [
+        "T091",
+        "T094",
+        "T095"
+      ],
+      "PROPOSED_LEVEL": "A2",
+      "CERTIFIER_ROLE": "CI objetivo",
+      "CERTIFIER_RESULT": "PASS",
+      "CERTIFIED_LEVEL": "A2",
+      "gate_vector": {
+        "A1.G2": "PASS",
+        "A1.G3": "PASS (T092/T093/T040-45 NO promovidos)",
+        "A2.G1": "PASS (1141 passed)",
+        "A2.G5_negativos": "PASS (positivo semantico articulacion: linea->b, ciclo->[])",
+        "A2.G6_no_parallel_store": "PASS (SQLiteKnowledgeGraphStore usa IntelligenceStore)",
+        "A3.G1": "NOT_AVAILABLE"
+      },
+      "REASONS": "Triple verificacion semantica: prediccion explicable, comunidades ordenadas, articulacion real (b en linea, vacio en ciclo).",
       "TIMESTAMP": "2026-09-08"
     }
   ],
@@ -420,6 +454,27 @@
       "PREMISE_CEILING": "A2",
       "EFFECTIVE": "A2",
       "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T091": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T094": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
+    },
+    "T095": {
+      "CAPABILITY_STATE": "SHADOW",
+      "LOCAL": "A2",
+      "PREMISE_CEILING": "A2",
+      "EFFECTIVE": "A2",
+      "MAX_RUNTIME_STATE": "SHADOW"
     }
   },
   "raw_counts_disclosure": {
@@ -431,5 +486,5 @@
       "coherencia canon<->dispatch (autoridad: 1, ampliado)"
     ]
   },
-  "cbac469_recovery_status": "SLICE_1_DONE; slices 2-3 DEFER con condiciones de reapertura en docs/recovery/CBAC469_AUDIT.md; NO se declara CBAC469_RECOVERY_DONE (§84)"
+  "cbac469_recovery_status": "SLICES 1-3 COMPLETADOS; triage 100% de los 93 paths con disposicion ejecutada o documentada. Pendiente de CBAC469_RECOVERY_DONE: aceptacion adversarial independiente (infra) + stop-rule P2."
 }

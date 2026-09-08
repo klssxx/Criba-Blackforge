@@ -5,6 +5,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added (2026-09-08 — restauración selectiva cbac469, slice 3)
+- **`graph/` restaurado** (8 módulos + 8 suites, 26 tests verdes sin
+  cambios). Canon `2026-09-08.3`: **29 IMPLEMENTED** (+T091 link
+  prediction, T094 comunidades, T095 bridge-nodes). §78: el graph store se
+  apoya en IntelligenceStore — sin almacenamiento paralelo. §80 estricto:
+  T092 PLANNED (monocultivo con T091), T093 PLANNED (embeddings nunca
+  existió — GAP canónico), T040–T045 PLANNED (infraestructura sin lógica
+  específica). Positivo semántico en tests: línea a-b-c → b articulación,
+  ciclo → vacío.
+
 ### Added (2026-09-08 — restauración selectiva cbac469, slice 2)
 - **`gaps/`, `signals/`, `entities/`, `provenance`, `claims` restaurados**
   (~2.900 LOC + ~1.100 de tests, 85 tests históricos verdes contra
