@@ -259,3 +259,63 @@ def test_slice2_guardrails_still_enforced() -> None:
     # input_contracts honrados: dynamics sin topic → error honrado
     with pytest.raises(ExecutionError, match="topic"):
         execute_technique(registry, "T048", "p", params={"observations": _series()})
+
+
+# ---------------------------------------------------------------------------
+# Slice 3 (canon 2026-09-08.3): graph sobre IntelligenceStore (no store
+# paralelo, §78). Ciclo simple → sin articulation points; grafo con unión
+# → punto de articulación real (positivo semántico, no solo exit 0).
+# ---------------------------------------------------------------------------
+
+def _graph_db(tmp_path, edges) -> str:
+    import itertools
+
+    from criba.intelligence.graph.store import SQLiteKnowledgeGraphStore
+    from criba.intelligence.contracts import EntityNode, RelationEdge
+
+    counter = getattr(_graph_db, "_n", 0) + 1
+    _graph_db._n = counter
+    db = tmp_path / f"g{counter}.sqlite3"
+    store = SQLiteKnowledgeGraphStore(str(db))
+    nodes = sorted({n for e in edges for n in e})
+    for node_id in nodes:
+        store.upsert_node(EntityNode(entity_id=node_id, label=node_id.upper(),
+                                     node_type="Technology"))
+    for src, dst in edges:
+        store.upsert_edge(RelationEdge(src=src, dst=dst, relation="CITES"))
+    return str(db)
+
+
+def test_chain_slice3_t091_t094_t095(tmp_path) -> None:
+    from criba.intelligence.execution import ExecutionError, execute_technique
+
+    registry = TechniqueRegistry(REGISTRY_PATH)
+    cycle = _graph_db(tmp_path, [("a", "b"), ("b", "c"), ("c", "d"), ("d", "a")])
+    # T091 predice el cierre del ciclo con vecinos comunes explicables:
+    prediction = execute_technique(registry, "T091", "p", params={
+        "db_path": cycle, "source": "a", "limit": 5})
+    top = prediction["results"][0]
+    assert top["dst"] == "c" and top["common_neighbors"], "predicción explicable"
+    # T095: un ciclo no tiene puntos de articulación (falsificador de
+    # cualquier analizador que invente nodos críticos):
+    assert execute_technique(registry, "T095", "p", params={"db_path": cycle})["results"] == []
+    # grafo con unión real b—c: b pasa a ser articulación al romper el ciclo
+    bridged = _graph_db(tmp_path, [("a", "b"), ("b", "c")])
+    bridges = execute_technique(registry, "T095", "p", params={"db_path": bridged})
+    assert bridges["results"] == ["b"], "b es articulación del grafo en línea"
+    # T094: comunidades sobre el grafo en línea (componentes conexas)
+    communities = execute_technique(registry, "T094", "p", params={"db_path": bridged})
+    assert communities["results"] == [["a", "b", "c"]]
+
+
+def test_chain_slice3_negativos(tmp_path) -> None:
+    from criba.intelligence.execution import ExecutionError, execute_technique
+
+    registry = TechniqueRegistry(REGISTRY_PATH)
+    cycle = _graph_db(tmp_path, [("a", "b"), ("b", "c"), ("c", "d"), ("d", "a")])
+    with pytest.raises(ExecutionError, match="PLANNED"):
+        execute_technique(registry, "T092", "p", params={"db_path": cycle, "source": "a"})
+    with pytest.raises(ExecutionError, match="PLANNED"):
+        execute_technique(registry, "T093", "p", params={"db_path": cycle})
+    with pytest.raises(ExecutionError, match="source"):
+        execute_technique(registry, "T091", "p", params={"db_path": cycle})

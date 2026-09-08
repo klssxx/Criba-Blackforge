@@ -163,6 +163,38 @@ def _lead_lag_instance() -> Any:
     return LeadLagAnalyzer()
 
 
+def _graph_call(class_path: str, *, required: tuple[str, ...] = (),
+                optional: dict[str, Any] | None = None) -> InputAdapter:
+    """Operadores de grafo: instancia sobre IntelligenceStore (db_path opcional)."""
+    def adapter(problem: str, params: Mapping[str, Any], _docs: list[EvidenceDocument]):
+        import os
+        from importlib import import_module
+        from pathlib import Path as _Path
+
+        module_name, class_name = class_path.rsplit(".", 1)
+        db_path = params.get("db_path") or (
+            _Path(os.environ.get("LOCALAPPDATA") or __import__("pathlib").Path.home())
+            / "CRIBA-Blackforge" / "intelligence.sqlite3"
+        )
+        from .graph.store import SQLiteKnowledgeGraphStore
+
+        graph_store = SQLiteKnowledgeGraphStore(str(db_path))
+        operator = getattr(import_module(module_name), class_name)(graph_store)
+        missing = [k for k in required if k not in params]
+        if missing:
+            raise ExecutionError(f"faltan parámetros canónicos: {', '.join(missing)}")
+        args: list[Any] = [params[k] for k in required]
+        kwargs = {k: params[k] for k in (optional or {})
+                  if k in params and k not in required}
+        if "entity_ids" in params:
+            kwargs["entity_ids"] = params["entity_ids"]
+        args = [operator] + list(args)
+        return (tuple(args), kwargs)
+    return adapter
+
+
+
+
 _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
     "T053": ("criba.intelligence.invention.rare_combinations.detect_rare_combinations",
              _evidence_first()),
@@ -230,7 +262,16 @@ _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
                  (_lead_lag_instance(), _topic_observations(params)),
                  {"leader_topic": str(params.get("leader_topic", "")),
                   "follower_topic": str(params.get("follower_topic", ""))})),
+    # -- slice 3: graph (sobre IntelligenceStore, no store paralelo) -------
+    "T091": ("criba.intelligence.graph.link_prediction.LinkPredictionInterface.predict",
+             _graph_call("criba.intelligence.graph.link_prediction.LinkPredictionInterface",
+                         required=("source",), optional={"limit": 10})),
+    "T094": ("criba.intelligence.graph.communities.CommunityDetector.detect",
+             _graph_call("criba.intelligence.graph.communities.CommunityDetector")),
+    "T095": ("criba.intelligence.graph.bridges.BridgeNodeAnalyzer.articulation_points",
+             _graph_call("criba.intelligence.graph.bridges.BridgeNodeAnalyzer")),
 }
+
 
 
 
