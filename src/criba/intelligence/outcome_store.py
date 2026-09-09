@@ -11,12 +11,29 @@ Reglas de honestidad (patrón supra_dossier, ya probado):
 - El historial ambiguo se EXCLUYE del cálculo con RuntimeWarning (bytes intactos).
 - Una PLANNED con prior alto NUNCA se vuelve ejecutable: el prior solo reordena
   candidatos ya elegibles; el canon sigue decidiendo qué es ejecutable.
-- Sin red, sin modelo, determinista. Mismo seed + mismo estado del store = mismo
-  output (el hash del store se expone para hacerlo comprobable, §15.2).
+- Sin red, sin modelo, determinista. El hash del store se expone para hacerlo
+  comprobable (§15.2).
 
 Señal compuesta etiquetada por fuente (§12.2.3): los canales verdict prior-art,
 score del juez y resultado_observado se guardan por separado — nunca mezclados
 en un solo número (no confundir calidad de generación con novedad).
+
+REPRODUCIBILIDAD (contrato completo, no solo seed+hash): una consulta de prior
+es reproducible SÍ Y SOLO SÍ se fijan los CUATRO factores:
+  1. la semilla del consumidor (lotería/selector);
+  2. el hash del store (mismo contenido);
+  3. la FECHA de evaluación (el prior decae con HALF_LIFE_DAYS: mismo store,
+     distinta fecha => distinto prior; pasar ``now`` explícito para fijarlo);
+  4. la VERSIÓN de la política de prior (el algoritmo UCB/atenúa-negativos:
+     cambia la salida aunque los tres anteriores sean idénticos).
+Afirmar «mismo seed + mismo hash => mismo output» sin fijar fecha y política es
+INCORRECTO y queda aquí desmentido explícitamente (hallazgo 5 de la auditoría).
+
+AGREGADO DE FAMILIA (fuente de verdad): el back-off jerárquico lee registros
+EXPLÍCITOS ``__family__`` escritos por record_family_outcome (inventar los
+emite por cada clase). Los registros finos NO se agregan en lectura: si no hay
+registro ``__family__`` explícito, no hay back-off. Cualquier documentación que
+afirme lo contrario está desactualizada respecto a este código.
 """
 from __future__ import annotations
 
