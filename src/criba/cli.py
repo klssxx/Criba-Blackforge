@@ -455,10 +455,16 @@ def main(argv: Sequence[str] | None = None) -> int:
                 _default_log_path,
                 compare_policies,
                 read_decisions,
+                rehydrate_rewards,
             )
 
             log_path = Path(args.log) if args.log else _default_log_path()
             decisions = read_decisions(log_path)
+            # Rehidratar rewards desde el outcome_store: el sorteo las registra
+            # pendientes (0.0); la evaluación las une al outcome real observado.
+            from .intelligence.outcome_store import default_store as _reh_store
+
+            decisions = rehydrate_rewards(decisions, _reh_store())
 
             if args.boost is None:
                 # Política uniforme (congelada): toda acción con igual propensión.

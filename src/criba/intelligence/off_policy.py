@@ -134,6 +134,56 @@ def log_hash(path: Path | str) -> str:
     return hashlib.sha256(p.read_bytes()).hexdigest()
 
 
+def rehydrate_rewards(
+    decisions: Sequence[LoggedDecision],
+    outcome_store: Any,
+    *,
+    profile: str = "CRIBA",
+    canon_version: str | None = None,
+) -> list[LoggedDecision]:
+    """Une la recompensa real a cada decisión desde el outcome_store.
+
+    El sorteo registra la decisión con reward pendiente (0.0); la evaluación la
+    rehidrata con el prior VERDICT/OBSERVED de su ``technique_id`` — el outcome
+    real observado para ese método. Sin outcome conocido la recompensa queda 0.0
+    (exploración sin señal: honesto, no se inventa resultado).
+
+    Devuelve NUEVAS instancias (LoggedDecision es inmutable); las decisiones con
+    reward ya >0 se respetan (un log curado manualmente no se sobrescribe).
+    """
+    from .outcome_store import CHANNEL_OBSERVED, CHANNEL_VERDICT
+
+    out: list[LoggedDecision] = []
+    for d in decisions:
+        if d.reward > 0.0:
+            out.append(d)
+            continue
+        best = 0.0
+        try:
+            for ch in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
+                prior, n_eff, _ = outcome_store.prior(
+                    profile=d.profile or profile,
+                    family=d.family,
+                    technique_id=d.technique_id,
+                    channel=ch,
+                    canon_version=canon_version,
+                )
+                if n_eff > 0:
+                    best = max(best, prior)
+        except Exception:  # noqa: BLE001 — sin store la recompensa queda 0.0
+            best = 0.0
+        if best != d.reward:
+            out.append(LoggedDecision(
+                technique_id=d.technique_id, family=d.family,
+                propensity=d.propensity, reward=min(1.0, best),
+                profile=d.profile, channel=d.channel, run_id=d.run_id,
+                recorded_at=d.recorded_at,
+            ))
+        else:
+            out.append(d)
+    return out
+
+
 # Política candidata: (technique_id, family, pool_disponible) -> propensión [0,1].
 # Debe devolver >0 para toda acción con pi_b>0 (solape). Se inyecta como callable
 # para no acoplar el estimador a una forma concreta de política.
