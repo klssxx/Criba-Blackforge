@@ -105,8 +105,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         command_parser.add_argument("--current", default="auto")
         command_parser.add_argument("--mode", default="balanced")
         command_parser.add_argument("--supporting-methods", type=int, default=8)
-        command_parser.add_argument("--llm", choices=["none", "offline", "cloud"],
-                                   default="none", help="Modo LLM: none (determinista), offline (Ollama), cloud (API)")
+        command_parser.add_argument("--llm", choices=["none", "offline", "cloud", "nebius"],
+                                   default="none", help="Modo LLM: none (determinista), offline (Ollama), cloud (API), nebius (Token Factory)")
         command_parser.add_argument("--llm-model", default=None, help="Nombre del modelo LLM")
         command_parser.add_argument("--llm-url", default=None, help="URL del servidor LLM (Ollama: http://localhost:11434)")
         command_parser.add_argument("--llm-api-key", default=None, help="API key para modo cloud")
@@ -215,6 +215,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     tecnicas_parser.add_argument(
         "--con-red", action="store_true",
         help="Permite técnicas que requieren red (por defecto solo offline)",
+    )
+    tecnicas_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Suma prior UCB del OutcomeStore al score (opt-in; default congelado)",
     )
     tecnicas_parser.add_argument(
         "--ejecutar", default=None, metavar="TXXX",
@@ -394,12 +398,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return 0
 
             router = TechniqueRouter(registry)
+            outcome_store = None
+            if args.adaptive:
+                from .intelligence.outcome_store import default_store as _outcome_store
+
+                outcome_store = _outcome_store()
             routing = router.select(
                 args.query,
                 profile=args.perfil,
                 max_techniques=args.max,
                 max_per_family=args.max_por_familia,
                 offline_only=not args.con_red,
+                adaptive=args.adaptive,
+                outcome_store=outcome_store,
             )
             print(json.dumps(routing.to_dict(), ensure_ascii=False, indent=2))
             return 0

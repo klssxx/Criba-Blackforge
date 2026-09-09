@@ -499,6 +499,78 @@ def invent(
     return sheet
 
 
+def _entry_technique_ids(entry: dict[str, Any]) -> list[str]:
+    """IDs T0xx que aportaron a un candidato (aportacion_por_tecnica).
+
+    Forma tolerante: acepta dicts con 'tecnica'/'id'/'technique_id' o strings
+    planos. Devuelve IDs únicos normalizados a mayúsculas; nunca inventa IDs.
+    """
+    out: list[str] = []
+    for item in entry.get("aportacion_por_tecnica") or []:
+        tid = ""
+        if isinstance(item, dict):
+            tid = str(item.get("tecnica") or item.get("id") or item.get("technique_id") or "")
+        elif isinstance(item, str):
+            tid = item
+        tid = tid.strip().upper()
+        if tid.startswith("T") and tid not in out:
+            out.append(tid)
+    return out
+
+
+def record_outcomes(
+    sheet: dict[str, Any],
+    store: Any,
+    *,
+    profile: str = "CRIBA",
+    canon_version: str = "",
+) -> int:
+    """Escribe outcomes técnica→resultado en el store (BLUEPRINT §4.4).
+
+    Por candidato y por técnica que aportó: registra el canal verdict (prior-art)
+    y el canal judge (score de la crítica) ETIQUETADOS por separado (§12.2.3) —
+    nunca mezclados. También registra el outcome agregado por clase de pensamiento
+    (familia de la lotería) para el back-off jerárquico (§12.2.1).
+
+    Nunca rompe el loop: cualquier fallo de escritura se ignora (la memoria es
+    aprendizaje, no requisito del resultado). Devuelve el nº de registros.
+    """
+    from .intelligence.outcome_store import CHANNEL_JUDGE, CHANNEL_VERDICT
+
+    written = 0
+    for entry in sheet.get("entries", []):
+        verdict = entry.get("prior_art", {}).get("verdict", "UNRESOLVED")
+        if verdict not in ("SURVIVED_SEARCH", "PARTIAL_PRIOR_ART", "UNRESOLVED"):
+            verdict = "UNRESOLVED"
+        judge_score = entry.get("judge", {}).get("score")
+        classes = [c for c in (entry.get("classes") or []) if c]
+        family = classes[0] if classes else "unknown"
+        run_id = entry.get("run_id", sheet.get("run_id", ""))
+        for tid in _entry_technique_ids(entry):
+            try:
+                store.record(profile=profile, family=family, technique_id=tid,
+                             channel=CHANNEL_VERDICT, outcome=verdict,
+                             canon_version=canon_version, run_id=run_id)
+                written += 1
+                if isinstance(judge_score, (int, float)):
+                    store.record(profile=profile, family=family, technique_id=tid,
+                                 channel=CHANNEL_JUDGE, outcome="score",
+                                 value=float(judge_score),
+                                 canon_version=canon_version, run_id=run_id)
+                    written += 1
+            except Exception:  # noqa: BLE001 — la memoria nunca rompe el loop
+                continue
+        # Nivel agregado para back-off (una clase de pensamiento por candidato).
+        try:
+            store.record_family_outcome(profile=profile, family=family,
+                                        channel=CHANNEL_VERDICT, outcome=verdict,
+                                        canon_version=canon_version, run_id=run_id)
+            written += 1
+        except Exception:  # noqa: BLE001
+            pass
+    return written
+
+
 def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path:
     """Añade el registro completo al ledger append-only (JSONL)."""
     directory = ledger_dir or _ledger_dir()
@@ -525,6 +597,7 @@ def append_ledger(sheet: dict[str, Any], ledger_dir: Path | None = None) -> Path
                 "score_kind": e["score_kind"],
                 "classes": e["classes"],
                 "methods": e["methods"],
+                "technique_ids": _entry_technique_ids(e),  # §4.1: qué T0xx aportó
                 "hipotesis": e["hipotesis"],
                 "prueba_concreta": e["prueba_concreta"],
                 "ruta_desbloqueo": e["ruta_desbloqueo"],
