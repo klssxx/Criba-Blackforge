@@ -192,7 +192,18 @@ class TechniqueRouter:
         max_techniques: int = 6,
         max_per_family: int = 2,
         offline_only: bool = True,
+        adaptive: bool = False,
+        outcome_store: Any | None = None,
+        prior_weight: float = 1.0,
     ) -> SelectionResult:
+        """Selecciona el subconjunto mínimo relevante.
+
+        ``adaptive=False`` (default) es byte-idéntico al comportamiento
+        congelado: prior empírico desactivado, invariante "misma seed = mismo
+        output" intacto. ``adaptive=True`` es opt-in: suma un prior UCB del
+        ``outcome_store`` al score léxico SOLO de candidatos ya elegibles —
+        NUNCA convierte una PLANNED en ejecutable (el canon decide eso).
+        """
         if profile not in _PROFILE_FAMILY_WEIGHTS:
             raise ValueError(f"unknown profile: {profile}")
         # 0/negative limits are caller bugs, not empty queries: an empty
@@ -233,6 +244,18 @@ class TechniqueRouter:
             if technique.family in family_weights:
                 score *= family_weights[technique.family]
                 reasons.append(f"perfil:{profile}:{technique.family}")
+            # Prior empírico (opt-in): solo reordena elegibles, nunca promociona
+            # una PLANNED a ejecutable. Se audita en `reasons` (§13.8).
+            if adaptive and outcome_store is not None:
+                prior, n_eff, label = outcome_store.prior(
+                    profile=profile,
+                    family=technique.family,
+                    technique_id=technique.id,
+                    canon_version=self._registry.canon_version,
+                )
+                if n_eff > 0:
+                    score += prior_weight * prior
+                    reasons.append(f"prior:{label}")
             scored.append(CandidateTechnique(technique, score, tuple(reasons), executable))
 
         selected, gaps = self._diverse_top(

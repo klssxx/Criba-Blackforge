@@ -85,6 +85,45 @@ def _configured_model_settings(args: argparse.Namespace) -> ModelSettings:
     return settings
 
 
+def _normalize_tecnica_id(value: str) -> str:
+    """Normaliza el ID de técnica/método sin destruir IDs no canónicos.
+
+    Los IDs del canon T001-T130 se normalizan a mayúsculas (t059 -> T059).
+    Los IDs de métodos de lotería (p.ej. ``lentes_1_1700_0001``) se preservan
+    tal cual: forzar mayúsculas rompería la coincidencia con el catálogo.
+    """
+    tid = value.strip()
+    import re
+
+    # Canon T001-T130 (case-insensitive): normaliza a mayúsculas. El resto
+    # (métodos de lotería como ``lentes_1_1700_0001``) se preserva tal cual:
+    # forzar mayúsculas rompería la coincidencia exacta con el catálogo.
+    if re.fullmatch(r"[Tt]\d+", tid):
+        return tid.upper()
+    return tid
+
+
+def _inventar_outcome_store(adaptive: bool) -> Any | None:
+    """OutcomeStore para G2 solo cuando --adaptive está activo (opt-in)."""
+    if not adaptive:
+        return None
+    from .intelligence.outcome_store import default_store as _outcome_store
+
+    return _outcome_store()
+
+
+def _inventar_canon_version(adaptive: bool) -> str | None:
+    """Canon vigente para aislar el prior por época (§13.4)."""
+    if not adaptive:
+        return None
+    try:
+        from .intelligence.registry import TechniqueRegistry
+
+        return TechniqueRegistry().canon_version
+    except Exception:  # noqa: BLE001 — sin canon el store aísla por canon_version=None
+        return None
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the CRIBA command-line interface and return a process exit code."""
     parser = argparse.ArgumentParser(
@@ -105,8 +144,8 @@ def main(argv: Sequence[str] | None = None) -> int:
         command_parser.add_argument("--current", default="auto")
         command_parser.add_argument("--mode", default="balanced")
         command_parser.add_argument("--supporting-methods", type=int, default=8)
-        command_parser.add_argument("--llm", choices=["none", "offline", "cloud"],
-                                   default="none", help="Modo LLM: none (determinista), offline (Ollama), cloud (API)")
+        command_parser.add_argument("--llm", choices=["none", "offline", "cloud", "nebius"],
+                                   default="none", help="Modo LLM: none (determinista), offline (Ollama), cloud (API), nebius (Token Factory)")
         command_parser.add_argument("--llm-model", default=None, help="Nombre del modelo LLM")
         command_parser.add_argument("--llm-url", default=None, help="URL del servidor LLM (Ollama: http://localhost:11434)")
         command_parser.add_argument("--llm-api-key", default=None, help="API key para modo cloud")
@@ -178,6 +217,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         default=None,
         help="Directorio de resultados (por defecto, datos locales del usuario)",
     )
+    lottery_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Memoria compartida (G2): pondera el sorteo por prior UCB del OutcomeStore (opt-in; default congelado)",
+    )
 
     serve_parser = sub.add_parser("serve")
     serve_parser.add_argument("--host", default="127.0.0.1")
@@ -204,6 +247,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--dossier", action="store_true",
         help="Prepara dossiers con prueba discriminante (estado SUPRA pendiente, nunca PASS)",
     )
+    inventar_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Memoria compartida (G2): loteria y selector consumen prior UCB del OutcomeStore (opt-in; default congelado)",
+    )
     tecnicas_parser = sub.add_parser(
         "tecnicas",
         help="Router del canon T001-T130: subconjunto mínimo relevante (solo lectura)",
@@ -215,6 +262,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     tecnicas_parser.add_argument(
         "--con-red", action="store_true",
         help="Permite técnicas que requieren red (por defecto solo offline)",
+    )
+    tecnicas_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Suma prior UCB del OutcomeStore al score (opt-in; default congelado)",
     )
     tecnicas_parser.add_argument(
         "--ejecutar", default=None, metavar="TXXX",
@@ -232,6 +283,33 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--desde-almacen", action="store_true",
         help="Alimenta la técnica con evidencia del almacén local (búsqueda por problema)",
     )
+    # retro: canal OBSERVED — registra el resultado observado de una técnica o
+    # candidato (dossier SUPRA / veredicto humano) SIN LLM. Cierra el circuito
+    # de aprendizaje en entornos offline: la memoria se alimenta de la
+    # observación real, no solo del juez automático.
+    retro_parser = sub.add_parser(
+        "retro",
+        help="Registra un outcome OBSERVED (dossier/veredicto humano) en el OutcomeStore",
+    )
+    retro_parser.add_argument(
+        "--tecnica", required=True, metavar="TXXX",
+        help="Técnica (T001-T130) o método de lotería al que se le observó resultado",
+    )
+    retro_parser.add_argument(
+        "--familia", required=True,
+        help="Clase de pensamiento (perspectiva/generacion/ruptura/escape) o familia",
+    )
+    retro_parser.add_argument(
+        "--resultado", required=True,
+        choices=["positivo", "negativo", "indeterminado"],
+        help="Resultado observado (etiquetado OBSERVED, nunca mezclado con verdict/judge)",
+    )
+    retro_parser.add_argument("--perfil", choices=["CRIBA", "BLACKFORGE"], default="CRIBA")
+    retro_parser.add_argument(
+        "--canon", default=None,
+        help="canon_version (por defecto el vigente del registry)",
+    )
+    retro_parser.add_argument("--run-id", default="", help="run_id origen si se conoce")
     args = parser.parse_args(argv)
 
     try:
@@ -305,14 +383,17 @@ def main(argv: Sequence[str] | None = None) -> int:
                 seed=args.seed,
                 query=args.query,
                 output_dir=args.output_dir,
+                adaptive=args.adaptive,
             )
             return 0
 
         if args.command == "inventar":
-            from .inventar import append_ledger, invent, print_sheet
+            from .inventar import append_ledger, invent, print_sheet, record_outcomes
 
             from .intelligence.refresh import default_store
 
+            active_store = _inventar_outcome_store(args.adaptive)
+            canon = _inventar_canon_version(args.adaptive)
             sheet = invent(
                 args.query,
                 seed=args.seed,
@@ -321,6 +402,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 top=args.top,
                 offline=True if args.offline else None,
                 store=default_store(),
+                adaptive=args.adaptive,
+                outcome_store=active_store,
+                canon_version=canon,
             )
             if args.dossier:
                 from .supra_dossier import guardar_dossier, preparar_dossier
@@ -339,6 +423,47 @@ def main(argv: Sequence[str] | None = None) -> int:
             print_sheet(sheet)
             ledger = append_ledger(sheet)
             print(f"Ledger: {ledger}")
+            # Cierra el circuito G1: lo que el loop produjo vuelve al store
+            # como outcomes (verdict prior-art + score juez, etiquetados).
+            # Solo con --adaptive (opt-in): la memoria se alimenta del mismo
+            # canal que la consume, nunca del modo congelado.
+            if active_store is not None:
+                written = record_outcomes(
+                    sheet, active_store, profile="CRIBA",
+                    canon_version=canon or "")
+                print(f"Outcomes registrados en el store: {written}")
+            return 0
+
+        if args.command == "retro":
+            from .intelligence.outcome_store import (
+                CHANNEL_OBSERVED,
+                default_store as _outcome_store,
+            )
+
+            canon = args.canon
+            if canon is None:
+                try:
+                    from .intelligence.registry import TechniqueRegistry
+
+                    canon = TechniqueRegistry().canon_version or ""
+                except Exception:  # noqa: BLE001 — sin canon, etiqueta vacía
+                    canon = ""
+            outcome_store_retro = _outcome_store()
+            rec = outcome_store_retro.record(
+                profile=args.perfil,
+                family=args.familia,
+                technique_id=_normalize_tecnica_id(args.tecnica),
+                channel=CHANNEL_OBSERVED,
+                outcome=args.resultado,
+                canon_version=canon,
+                run_id=args.run_id,
+            )
+            # NO se escribe el agregado __family__ aquí: el back-off jerárquico
+            # del store ya agrega en lectura sobre los registros finos. Escribir
+            # el agregado duplicaría la señal y nivelaría el prior de TODOS los
+            # métodos de la familia al del premiado (anula el aprendizaje).
+            print("Outcome OBSERVED registrado:")
+            print(json.dumps(rec, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "tecnicas":
@@ -394,12 +519,19 @@ def main(argv: Sequence[str] | None = None) -> int:
                 return 0
 
             router = TechniqueRouter(registry)
+            outcome_store = None
+            if args.adaptive:
+                from .intelligence.outcome_store import default_store as _outcome_store
+
+                outcome_store = _outcome_store()
             routing = router.select(
                 args.query,
                 profile=args.perfil,
                 max_techniques=args.max,
                 max_per_family=args.max_por_familia,
                 offline_only=not args.con_red,
+                adaptive=args.adaptive,
+                outcome_store=outcome_store,
             )
             print(json.dumps(routing.to_dict(), ensure_ascii=False, indent=2))
             return 0
