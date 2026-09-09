@@ -32,6 +32,15 @@ class TestRetroCli:
         assert rec["value"] == 1.0
         assert rec["channel"] == CHANNEL_OBSERVED  # etiquetado, nunca mezclado
 
+    def test_retro_metodo_loteria_preserva_minusculas(self, tmp_path, monkeypatch):
+        """Un método de lotería (lentes_...) NO se fuerza a mayúsculas."""
+        monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+        main(["retro", "--tecnica", "lentes_1_1700_0001", "--familia",
+              "perspectiva", "--resultado", "positivo"])
+        store = TechniqueOutcomeStore(_store_path(tmp_path))
+        recs = store._read_valid()
+        assert recs[0]["technique_id"] == "lentes_1_1700_0001"  # preservado
+
     def test_retro_resultado_invalido_rechazado_por_argparse(self, tmp_path, monkeypatch):
         monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
         try:

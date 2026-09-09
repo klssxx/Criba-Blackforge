@@ -166,15 +166,26 @@ def _adaptive_bonus(
     total = 0.0
     n_used = 0
     try:
+        from .intelligence.outcome_store import CHANNEL_OBSERVED, CHANNEL_VERDICT
+
         for tid in tids:
-            prior, n_eff, _label = outcome_store.prior(
-                profile=profile,
-                family=family,
-                technique_id=str(tid),
-                canon_version=canon_version,
-            )
-            if n_eff > 0:
-                total += max(0.0, prior)
+            # Mismo criterio multi-canal que la lotería: VERDICT + OBSERVED
+            # (evidencia de outcome real); el score del juez queda fuera (§12.2.3).
+            best = 0.0
+            used = False
+            for channel in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
+                prior, n_eff, _label = outcome_store.prior(
+                    profile=profile,
+                    family=family,
+                    technique_id=str(tid),
+                    channel=channel,
+                    canon_version=canon_version,
+                )
+                if n_eff > 0:
+                    best = max(best, prior)
+                    used = True
+            if used:
+                total += best
                 n_used += 1
     except Exception:  # noqa: BLE001 — la memoria nunca rompe la selección
         return 0.0, ""

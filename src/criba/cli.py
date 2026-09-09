@@ -85,6 +85,24 @@ def _configured_model_settings(args: argparse.Namespace) -> ModelSettings:
     return settings
 
 
+def _normalize_tecnica_id(value: str) -> str:
+    """Normaliza el ID de técnica/método sin destruir IDs no canónicos.
+
+    Los IDs del canon T001-T130 se normalizan a mayúsculas (t059 -> T059).
+    Los IDs de métodos de lotería (p.ej. ``lentes_1_1700_0001``) se preservan
+    tal cual: forzar mayúsculas rompería la coincidencia con el catálogo.
+    """
+    tid = value.strip()
+    import re
+
+    # Canon T001-T130 (case-insensitive): normaliza a mayúsculas. El resto
+    # (métodos de lotería como ``lentes_1_1700_0001``) se preserva tal cual:
+    # forzar mayúsculas rompería la coincidencia exacta con el catálogo.
+    if re.fullmatch(r"[Tt]\d+", tid):
+        return tid.upper()
+    return tid
+
+
 def _inventar_outcome_store(adaptive: bool) -> Any | None:
     """OutcomeStore para G2 solo cuando --adaptive está activo (opt-in)."""
     if not adaptive:
@@ -434,18 +452,16 @@ def main(argv: Sequence[str] | None = None) -> int:
             rec = outcome_store_retro.record(
                 profile=args.perfil,
                 family=args.familia,
-                technique_id=args.tecnica.strip().upper(),
+                technique_id=_normalize_tecnica_id(args.tecnica),
                 channel=CHANNEL_OBSERVED,
                 outcome=args.resultado,
                 canon_version=canon,
                 run_id=args.run_id,
             )
-            # agregado de familia para el back-off jerárquico (§12.2.1)
-            outcome_store_retro.record_family_outcome(
-                profile=args.perfil, family=args.familia,
-                channel=CHANNEL_OBSERVED, outcome=args.resultado,
-                canon_version=canon, run_id=args.run_id,
-            )
+            # NO se escribe el agregado __family__ aquí: el back-off jerárquico
+            # del store ya agrega en lectura sobre los registros finos. Escribir
+            # el agregado duplicaría la señal y nivelaría el prior de TODOS los
+            # métodos de la familia al del premiado (anula el aprendizaje).
             print("Outcome OBSERVED registrado:")
             print(json.dumps(rec, ensure_ascii=False, indent=2))
             return 0

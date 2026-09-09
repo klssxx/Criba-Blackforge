@@ -206,15 +206,29 @@ class LotteryEngine:
         if self.outcome_store is None:
             return None
         try:
+            # El prior combina los canales de resultado: VERDICT (prior-art
+            # automático) y OBSERVED (dossier SUPRA / veredicto humano via
+            # `criba retro`). Ambos son evidencia de outcome real; JUDGE (score
+            # del crítico) queda fuera del sorteo para no confundir calidad de
+            # generación con resultado observado (§12.2.3). Se toma el máximo:
+            # la señal más fuerte disponible manda, sin doble conteo.
+            from .intelligence.outcome_store import CHANNEL_OBSERVED, CHANNEL_VERDICT
+
             weights: list[float] = []
             for method in pool:
-                prior, _n, _label = self.outcome_store.prior(
-                    profile=self.outcome_profile,
-                    family=str(method.get("thinking_class") or method.get("family") or ""),
-                    technique_id=str(method["id"]),
-                    canon_version=self.outcome_canon_version,
-                )
-                weights.append(1.0 + max(0.0, prior) * ADAPTIVE_BOOST)
+                family = str(method.get("thinking_class") or method.get("family") or "")
+                best = 0.0
+                for channel in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
+                    prior, n_eff, _label = self.outcome_store.prior(
+                        profile=self.outcome_profile,
+                        family=family,
+                        technique_id=str(method["id"]),
+                        channel=channel,
+                        canon_version=self.outcome_canon_version,
+                    )
+                    if n_eff > 0:
+                        best = max(best, prior)
+                weights.append(1.0 + best * ADAPTIVE_BOOST)
             return weights
         except Exception:  # noqa: BLE001 — la memoria nunca rompe el sorteo
             return None
