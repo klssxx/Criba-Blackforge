@@ -265,6 +265,33 @@ def main(argv: Sequence[str] | None = None) -> int:
         "--desde-almacen", action="store_true",
         help="Alimenta la técnica con evidencia del almacén local (búsqueda por problema)",
     )
+    # retro: canal OBSERVED — registra el resultado observado de una técnica o
+    # candidato (dossier SUPRA / veredicto humano) SIN LLM. Cierra el circuito
+    # de aprendizaje en entornos offline: la memoria se alimenta de la
+    # observación real, no solo del juez automático.
+    retro_parser = sub.add_parser(
+        "retro",
+        help="Registra un outcome OBSERVED (dossier/veredicto humano) en el OutcomeStore",
+    )
+    retro_parser.add_argument(
+        "--tecnica", required=True, metavar="TXXX",
+        help="Técnica (T001-T130) o método de lotería al que se le observó resultado",
+    )
+    retro_parser.add_argument(
+        "--familia", required=True,
+        help="Clase de pensamiento (perspectiva/generacion/ruptura/escape) o familia",
+    )
+    retro_parser.add_argument(
+        "--resultado", required=True,
+        choices=["positivo", "negativo", "indeterminado"],
+        help="Resultado observado (etiquetado OBSERVED, nunca mezclado con verdict/judge)",
+    )
+    retro_parser.add_argument("--perfil", choices=["CRIBA", "BLACKFORGE"], default="CRIBA")
+    retro_parser.add_argument(
+        "--canon", default=None,
+        help="canon_version (por defecto el vigente del registry)",
+    )
+    retro_parser.add_argument("--run-id", default="", help="run_id origen si se conoce")
     args = parser.parse_args(argv)
 
     try:
@@ -343,10 +370,12 @@ def main(argv: Sequence[str] | None = None) -> int:
             return 0
 
         if args.command == "inventar":
-            from .inventar import append_ledger, invent, print_sheet
+            from .inventar import append_ledger, invent, print_sheet, record_outcomes
 
             from .intelligence.refresh import default_store
 
+            active_store = _inventar_outcome_store(args.adaptive)
+            canon = _inventar_canon_version(args.adaptive)
             sheet = invent(
                 args.query,
                 seed=args.seed,
@@ -356,8 +385,8 @@ def main(argv: Sequence[str] | None = None) -> int:
                 offline=True if args.offline else None,
                 store=default_store(),
                 adaptive=args.adaptive,
-                outcome_store=_inventar_outcome_store(args.adaptive),
-                canon_version=_inventar_canon_version(args.adaptive),
+                outcome_store=active_store,
+                canon_version=canon,
             )
             if args.dossier:
                 from .supra_dossier import guardar_dossier, preparar_dossier
@@ -376,6 +405,49 @@ def main(argv: Sequence[str] | None = None) -> int:
             print_sheet(sheet)
             ledger = append_ledger(sheet)
             print(f"Ledger: {ledger}")
+            # Cierra el circuito G1: lo que el loop produjo vuelve al store
+            # como outcomes (verdict prior-art + score juez, etiquetados).
+            # Solo con --adaptive (opt-in): la memoria se alimenta del mismo
+            # canal que la consume, nunca del modo congelado.
+            if active_store is not None:
+                written = record_outcomes(
+                    sheet, active_store, profile="CRIBA",
+                    canon_version=canon or "")
+                print(f"Outcomes registrados en el store: {written}")
+            return 0
+
+        if args.command == "retro":
+            from .intelligence.outcome_store import (
+                CHANNEL_OBSERVED,
+                default_store as _outcome_store,
+            )
+
+            canon = args.canon
+            if canon is None:
+                try:
+                    from .intelligence.registry import TechniqueRegistry
+
+                    canon = TechniqueRegistry().canon_version or ""
+                except Exception:  # noqa: BLE001 — sin canon, etiqueta vacía
+                    canon = ""
+            outcome_store_retro = _outcome_store()
+            rec = outcome_store_retro.record(
+                profile=args.perfil,
+                family=args.familia,
+                technique_id=args.tecnica.strip().upper(),
+                channel=CHANNEL_OBSERVED,
+                outcome=args.resultado,
+                canon_version=canon,
+                run_id=args.run_id,
+            )
+            # agregado de familia para el back-off jerárquico (§12.2.1)
+            outcome_store_retro.record_family_outcome(
+                profile=args.perfil, family=args.familia,
+                channel=CHANNEL_OBSERVED, outcome=args.resultado,
+                canon_version=canon, run_id=args.run_id,
+            )
+            print("Outcome OBSERVED registrado:")
+            print(json.dumps(rec, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "tecnicas":
