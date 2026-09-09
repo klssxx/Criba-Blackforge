@@ -158,7 +158,10 @@ def rehydrate_rewards(
         if d.reward > 0.0:
             out.append(d)
             continue
-        best = 0.0
+        # P2: OBSERVED (evidencia práctica) CAPA a VERDICT (teórica). Un fallo
+        # real observado no queda neutralizado por señal de antecedentes.
+        prior_v = prior_o = 0.0
+        n_v = n_o = 0
         try:
             for ch in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
                 prior, n_eff, _ = outcome_store.prior(
@@ -168,9 +171,17 @@ def rehydrate_rewards(
                     channel=ch,
                     canon_version=canon_version,
                 )
-                if n_eff > 0:
-                    best = max(best, prior)
+                if ch == CHANNEL_VERDICT:
+                    prior_v, n_v = prior, n_eff
+                else:
+                    prior_o, n_o = prior, n_eff
         except Exception:  # noqa: BLE001 — sin store la recompensa queda 0.0
+            n_o = n_v = 0
+        if n_o > 0:
+            best = prior_o
+        elif n_v > 0:
+            best = prior_v
+        else:
             best = 0.0
         if best != d.reward:
             out.append(LoggedDecision(
@@ -241,10 +252,21 @@ def evaluate_policy(
 
     Devuelve UNRESOLVED (nunca una mejora inventada) cuando:
     - no hay decisiones;
-    - alguna acción carece de propensión de logging válida (sin contrafactual);
-    - la candidata asigna propensión 0 a una acción tomada (violación de solape);
+    - alguna recompensa cae fuera de [0,1] o una propensión fuera de (0,1];
+    - la candidata da propensión >0 a una acción SIN soporte en el logging
+      (violación de solape en la dirección relevante: lo que la candidata
+      podría elegir debe ser alcanzable por la política histórica);
+    - la candidata concentra todo el peso en acciones jamás tomadas (suma de
+      pesos cero: evidencia insuficiente);
     - el ESS efectivo es demasiado bajo para un IC útil (< MIN_ESS).
+
+    Una candidata DETERMINISTA (propensión 0 a acciones que sí tomó el logging)
+    es VÁLIDA: esas observaciones reciben peso cero y no cuentan (Swaminathan &
+    Joachims 2015). Lo que NO es válido es lo contrario: que la candidata pueda
+    elegir lo que el logging nunca pudo producir.
     """
+    if n_bootstrap < 1:
+        raise ValueError(f"n_bootstrap debe ser >= 1, got {n_bootstrap}")
     if not decisions:
         return OffPolicyEstimate(
             value=None, verdict="UNRESOLVED", n_decisions=0, ess=0.0,
@@ -253,27 +275,50 @@ def evaluate_policy(
         )
 
     pool = sorted({d.technique_id for d in decisions})
+    # Soporte real de la política de logging: acciones que SÍ tomó al menos una
+    # vez (pi_b > 0 sobre ellas por construcción del log).
+    support = {d.technique_id for d in decisions if d.propensity > 0.0}
     weights: list[float] = []
     rewards: list[float] = []
     for d in decisions:
-        if not (0.0 < d.propensity <= 1.0):
-            return OffPolicyEstimate(
-                value=None, verdict="UNRESOLVED", n_decisions=len(decisions),
-                ess=0.0, ci_low=None, ci_high=None,
-                reason=f"decisión sin propensión de logging válida: {d.technique_id}",
-            )
-        pi_e = float(candidate(d.technique_id, d.family, pool))
-        if pi_e <= 0.0:
+        # Validación en frontera de evaluación (no solo en escritura): recompensa
+        # finita en [0,1] y propensión en (0,1]. Fuera de contrato -> UNRESOLVED.
+        if not (0.0 < d.propensity <= 1.0) or not (0.0 <= d.reward <= 1.0):
             return OffPolicyEstimate(
                 value=None, verdict="UNRESOLVED", n_decisions=len(decisions),
                 ess=0.0, ci_low=None, ci_high=None,
                 reason=(
-                    f"violación de solape: la candidata da propensión 0 a "
-                    f"{d.technique_id}, tomada por la política de logging"
+                    f"fuera de contrato: propensity={d.propensity}, "
+                    f"reward={d.reward} (esperado prop en (0,1], reward en [0,1])"
                 ),
             )
+        pi_e = float(candidate(d.technique_id, d.family, pool))
+        if pi_e < 0.0:
+            pi_e = 0.0
         weights.append(pi_e / d.propensity)
         rewards.append(d.reward)
+
+    # Solape en la dirección relevante: toda acción con propensión POSITIVA en la
+    # candidata debe tener soporte en el logging. Lo inverso NO se exige.
+    for tid in pool:
+        pi_e = float(candidate(tid, next(d.family for d in decisions if d.technique_id == tid), pool))
+        if pi_e > 0.0 and tid not in support:
+            return OffPolicyEstimate(
+                value=None, verdict="UNRESOLVED", n_decisions=len(decisions),
+                ess=0.0, ci_low=None, ci_high=None,
+                reason=(
+                    f"violación de solape: la candidata da propensión >0 a "
+                    f"{tid}, que la política de logging nunca produjo"
+                ),
+            )
+
+    total_w = sum(weights)
+    if total_w <= 0.0:
+        return OffPolicyEstimate(
+            value=None, verdict="UNRESOLVED", n_decisions=len(decisions),
+            ess=0.0, ci_low=None, ci_high=None,
+            reason="suma de pesos cero: la candidata no cubre ninguna acción con evidencia",
+        )
 
     ess = _ess(weights)
     value = _snips(weights, rewards)
@@ -310,29 +355,80 @@ def compare_policies(
     n_bootstrap: int = DEFAULT_BOOTSTRAP_SAMPLES,
     seed: int = BOOTSTRAP_SEED,
 ) -> dict[str, Any]:
-    """Compara candidata vs política de logging (la que generó las decisiones).
+    """Compara candidata vs política de logging con DIFERENCIA PAREADA.
 
-    El valor de la política de logging se estima con candidata == política b
-    (razón 1.0 → SNIPS = media simple de rewards). Si los IC se solapan, el
-    veredicto es UNRESOLVED: no se afirma diferencia sin evidencia (honestidad).
+    El valor de la política de logging NO se estima con otra razón de
+    importancia: se calcula con pesos UNITARIOS sobre sus propias decisiones
+    (la media observada, su estimador natural insesgado). Comparar ambas con
+    razón 1/pi_b inflaría artificialmente a una frente a la otra — el defecto
+    que declaraba CANDIDATE_BETTER de una política contra sí misma.
+
+    La diferencia se evalúa PAREADA sobre los mismos remuestreos bootstrap:
+    dif_i = (w_i - 1) * r_i por observación, con w_i = pi_e/pi_b. Si la
+    candidata ES la política de logging, dif_i = 0 para toda i y el IC cubre 0
+    — jamás se declara ganadora de sí misma (invariante de identidad).
     """
     est_candidate = evaluate_policy(
         decisions, candidate, n_bootstrap=n_bootstrap, seed=seed)
-    # Política de logging: propensión candidata = pi_b → razón 1.0.
-    est_logging = evaluate_policy(
-        decisions, lambda t, f, pool: 1.0, n_bootstrap=n_bootstrap, seed=seed)
+    # Política de logging: media observada con pesos unitarios (su estimador
+    # natural insesgado sobre sus propias decisiones), con IC bootstrap.
+    est_logging = OffPolicyEstimate(
+        value=None, verdict="UNRESOLVED", n_decisions=0, ess=0.0,
+        ci_low=None, ci_high=None, reason="sin decisiones",
+    )
+    if decisions:
+        rewards_obs = [d.reward for d in decisions]
+        mean_obs = sum(rewards_obs) / len(rewards_obs)
+        # IC bootstrap de la media observada (pesos unitarios)
+        rng = random.Random(seed)
+        n = len(rewards_obs)
+        boots: list[float] = []
+        for _ in range(n_bootstrap):
+            idx = [rng.randrange(n) for _ in range(n)]
+            boots.append(sum(rewards_obs[i] for i in idx) / n)
+        boots.sort()
+        lo = boots[max(0, int(0.025 * n_bootstrap))]
+        hi = boots[min(n_bootstrap - 1, int(0.975 * n_bootstrap))]
+        est_logging = OffPolicyEstimate(
+            value=round(mean_obs, 6), verdict="ESTIMATED", n_decisions=n,
+            ess=float(n), ci_low=round(lo, 6), ci_high=round(hi, 6),
+            reason="media observada (pesos unitarios) + IC bootstrap 95%",
+        )
+
     verdict = "UNRESOLVED"
-    if (est_candidate.verdict == "ESTIMATED" and est_logging.verdict == "ESTIMATED"
-            and est_candidate.ci_low is not None and est_logging.ci_high is not None
-            and est_logging.ci_low is not None and est_candidate.ci_high is not None):
-        if est_candidate.ci_low > est_logging.ci_high:
+    paired_diff: dict[str, Any] = {}
+    if est_candidate.verdict == "ESTIMATED" and est_logging.verdict == "ESTIMATED":
+        # Diferencia pareada por observación: dif_i = (w_i - 1) * r_i.
+        pool = sorted({d.technique_id for d in decisions})
+        diffs: list[float] = []
+        for d in decisions:
+            pi_e = max(0.0, float(candidate(d.technique_id, d.family, pool)))
+            w = pi_e / d.propensity
+            diffs.append((w - 1.0) * d.reward)
+        mean_diff = sum(diffs) / len(diffs) if diffs else 0.0
+        rng = random.Random(seed)
+        n = len(diffs)
+        boot_d: list[float] = []
+        for _ in range(n_bootstrap):
+            idx = [rng.randrange(n) for _ in range(n)]
+            boot_d.append(sum(diffs[i] for i in idx) / n)
+        boot_d.sort()
+        d_lo = boot_d[max(0, int(0.025 * n_bootstrap))]
+        d_hi = boot_d[min(n_bootstrap - 1, int(0.975 * n_bootstrap))]
+        paired_diff = {
+            "mean_diff": round(mean_diff, 6),
+            "ci_low": round(d_lo, 6),
+            "ci_high": round(d_hi, 6),
+        }
+        if d_lo > 0.0:
             verdict = "CANDIDATE_BETTER"
-        elif est_logging.ci_low > est_candidate.ci_high:
+        elif d_hi < 0.0:
             verdict = "LOGGING_BETTER"
         else:
-            verdict = "UNRESOLVED"  # IC solapados: no se afirma diferencia
+            verdict = "UNRESOLVED"  # IC pareado cubre 0: no se afirma diferencia
     return {
         "verdict": verdict,
         "candidate": est_candidate.to_dict(),
         "logging": est_logging.to_dict(),
+        "paired_diff": paired_diff,
     }

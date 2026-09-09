@@ -169,10 +169,11 @@ def _adaptive_bonus(
         from .intelligence.outcome_store import CHANNEL_OBSERVED, CHANNEL_VERDICT
 
         for tid in tids:
-            # Mismo criterio multi-canal que la lotería: VERDICT + OBSERVED
-            # (evidencia de outcome real); el score del juez queda fuera (§12.2.3).
-            best = 0.0
-            used = False
+            # P2: OBSERVED (evidencia práctica) CAPA a VERDICT (teórica). Un
+            # fallo real no queda neutralizado por señal favorable de
+            # antecedentes. El score del juez queda fuera (§12.2.3).
+            prior_v = prior_o = 0.0
+            n_v = n_o = 0
             for channel in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
                 prior, n_eff, _label = outcome_store.prior(
                     profile=profile,
@@ -181,11 +182,15 @@ def _adaptive_bonus(
                     channel=channel,
                     canon_version=canon_version,
                 )
-                if n_eff > 0:
-                    best = max(best, prior)
-                    used = True
-            if used:
-                total += best
+                if channel == CHANNEL_VERDICT:
+                    prior_v, n_v = prior, n_eff
+                else:
+                    prior_o, n_o = prior, n_eff
+            if n_o > 0:
+                total += prior_o
+                n_used += 1
+            elif n_v > 0:
+                total += prior_v
                 n_used += 1
     except Exception:  # noqa: BLE001 — la memoria nunca rompe la selección
         return 0.0, ""

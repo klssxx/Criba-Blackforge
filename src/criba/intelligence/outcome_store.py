@@ -186,9 +186,23 @@ class TechniqueOutcomeStore:
         canon_version: str | None,
         now: datetime,
     ) -> tuple[float, int]:
-        """Suma ponderada por decaimiento y n efectivo para UNA celda."""
+        """Suma ponderada por decaimiento y n efectivo para UNA celda.
+
+        P3 (idempotencia): una misma observación registrada varias veces NO
+        cuenta como experimentos independientes. La identidad de observación es
+        (technique_id, channel, run_id, outcome, value, canon_version): un
+        reintento de escritura del MISMO resultado se deduplica contando UNA
+        vez (la más reciente). Ensayos DISTINTOS del mismo run con distinto
+        outcome sí cuentan por separado.
+
+        El dedup SOLO se aplica a registros con ``run_id`` NO vacío: sin
+        identidad de ensayo explícita, cada línea es una observación distinta
+        (no se puede afirmar que sea un reintento — sería deduplicar ensayos
+        legítimos).
+        """
         wsum = 0.0
         n_eff = 0
+        seen: dict[tuple[Any, ...], float] = {}  # identidad -> mejor peso (más reciente)
         for rec in records:
             if rec["profile"] != profile or rec["family"] != family:
                 continue
@@ -197,7 +211,24 @@ class TechniqueOutcomeStore:
             if canon_version is not None and rec.get("canon_version") != canon_version:
                 continue  # reset por canon_epoch (§13.4): épocas distintas no heredan
             w = self._decay_weight(_parse_ts(rec.get("recorded_at")), now)
-            wsum += w * float(rec["value"])
+            run_id = str(rec.get("run_id") or "")
+            value = float(rec["value"])
+            if not run_id:
+                # sin identidad de ensayo: cada línea es una observación distinta
+                wsum += w * value
+                n_eff += 1
+                continue
+            identity = (
+                rec["technique_id"], rec["channel"], run_id,
+                rec["outcome"], round(value, 6), rec.get("canon_version"),
+            )
+            # dedup por identidad: conserva el peso MAYOR (el registro más
+            # reciente domina al reintento más antiguo del mismo ensayo).
+            if identity not in seen or w > seen[identity]:
+                seen[identity] = w
+        for value_key, w in ((k, v) for k, v in seen.items()):
+            # value viene codificado en la identidad (posición 4)
+            wsum += w * float(value_key[4])
             n_eff += 1
         return wsum, n_eff
 
@@ -245,6 +276,16 @@ class TechniqueOutcomeStore:
         )
         bonus = exploration_c * math.sqrt(math.log(max(total, 2)) / n_eff)
         prior = mean + bonus
+        # P2: un resultado NEGATIVO debe poder REDUCIR la preferencia, no solo
+        # subirla. Con media < 0.5 (la observada es peor que indeterminada), el
+        # bonus de exploración se ATENÚA por la evidencia negativa acumulada:
+        # explorar fracasos es razonable; tratarlos como incertidumbre favorable
+        # no. Con mean >= 0.5 el bonus UCB se conserva íntegro. El factor nunca
+        # baja de 0: un historial de fallos acerca el prior a la media observada.
+        if mean < 0.5:
+            confidence = min(1.0, n_eff / BACKOFF_MIN_OBS)
+            bonus *= (2.0 * mean) * confidence
+            prior = mean + bonus
         label = f"ucb:{prior:.3f}(n={n_eff},backoff={used_backoff})"
         return prior, n_eff, label
 

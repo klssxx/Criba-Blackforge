@@ -109,17 +109,38 @@ class TestEvaluate:
         assert est.value is None
 
     def test_propension_invalida_unresolved(self):
-        bad = [LoggedDecision("T059", "f", 0.0, 1.0)]  # propensión 0: sin contrafactual
+        bad = [LoggedDecision("T059", "f", 0.0, 1.0)]  # propensión 0: fuera de contrato
         est = evaluate_policy(bad, lambda t, f, pool: 1.0)
         assert est.verdict == "UNRESOLVED"
-        assert "propensión" in est.reason
+        assert "contrato" in est.reason
+
+    def test_reward_fuera_de_contrato_unresolved(self):
+        """B3: reward fuera de [0,1] -> UNRESOLVED (validación en evaluación)."""
+        bad = [LoggedDecision("x", "f", 1.0, 9.0) for _ in range(20)]
+        est = evaluate_policy(bad, lambda *a: 1.0)
+        assert est.verdict == "UNRESOLVED"
+        assert "contrato" in est.reason
 
     def test_violacion_de_solape_unresolved(self):
-        decisions = _decisions(50)
-        # candidata da propensión 0 a 'bad', que la política de logging tomó
-        est = evaluate_policy(decisions, lambda t, f, pool: 1.0 if t == "good" else 0.0)
+        """Candidata que da propensión >0 a acción SIN soporte en el logging
+        -> UNRESOLVED (esa acción no es alcanzable por la histórica: suma de
+        pesos cero sobre la evidencia disponible)."""
+        decisions = [LoggedDecision("good", "f", 0.5, 1.0) for _ in range(50)]
+        decisions += [LoggedDecision("bad", "f", 0.5, 0.0) for _ in range(50)]
+        # candidata concentra todo en 'nueva', fuera del soporte del logging
+        est = evaluate_policy(
+            decisions, lambda t, f, pool: 1.0 if t == "nueva" else 0.0)
         assert est.verdict == "UNRESOLVED"
-        assert "solape" in est.reason
+        assert "pesos cero" in est.reason or "solape" in est.reason
+
+    def test_candidata_determinista_valida(self):
+        """B2: candidata determinista (0 a acciones que SÍ tomó el logging) es
+        VÁLIDA: esas observaciones reciben peso cero y no cuentan."""
+        decisions = [LoggedDecision("good", "f", 0.9, 1.0) for _ in range(90)]
+        decisions += [LoggedDecision("bad", "f", 0.1, 0.0) for _ in range(10)]
+        est = evaluate_policy(decisions, lambda t, f, p: 1.0 if t == "good" else 0.0)
+        assert est.verdict == "ESTIMATED"
+        assert est.value is not None and est.value == pytest.approx(1.0, abs=0.05)
 
     def test_ess_bajo_unresolved(self):
         # pocas decisiones -> ESS < 10 -> UNRESOLVED honesto
@@ -146,10 +167,27 @@ class TestCompare:
         assert result["candidate"]["value"] > result["logging"]["value"]
 
     def test_sin_diferencia_unresolved(self):
-        """Candidata idéntica al logging: IC solapados -> no se afirma mejora."""
+        """Candidata IDÉNTICA al logging (pi_b=0.5): IC pareado cubre 0 -> UNRESOLVED."""
         decisions = _decisions(600)
-        result = compare_policies(decisions, lambda t, f, pool: 1.0)
+        result = compare_policies(decisions, lambda t, f, pool: 0.5)
         assert result["verdict"] == "UNRESOLVED"
+
+    def test_identidad_no_se_gana_a_si_misma(self):
+        """B1 regresión: una política NO puede declararse mejor que sí misma.
+
+        Con logging no uniforme (0.9/0.1) y candidata idéntica, el defecto
+        original declaraba CANDIDATE_BETTER porque la referencia usaba pesos
+        1/pi_b en vez de unitarios. La diferencia pareada debe ser ~0 y el IC
+        cubrir 0.
+        """
+        decisions = [LoggedDecision("good", "f", 0.9, 1.0) for _ in range(900)]
+        decisions += [LoggedDecision("bad", "f", 0.1, 0.0) for _ in range(100)]
+        result = compare_policies(
+            decisions, lambda t, f, p: 0.9 if t == "good" else 0.1, n_bootstrap=100)
+        assert result["verdict"] == "UNRESOLVED", (
+            f"una política no puede ganarse a sí misma: {result['verdict']}"
+        )
+        assert result["paired_diff"]["mean_diff"] == pytest.approx(0.0, abs=1e-6)
 
     def test_log_vacio_compare_unresolved(self):
         result = compare_policies([], lambda t, f, pool: 1.0)

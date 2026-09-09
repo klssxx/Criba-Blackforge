@@ -46,24 +46,42 @@ class TestRecordOutcomes:
         store = TechniqueOutcomeStore(tmp_path / "o.jsonl")
         sheet = _sheet([_entry(aportacion_por_tecnica=[{"tecnica": "T059"}])])
         n = record_outcomes(sheet, store, canon_version="2026-09-08.3")
-        # 1 verdict (técnica) + 1 judge (técnica) + 1 agregado familia
-        assert n == 3
+        # 1 verdict (técnica) + 1 judge (técnica) + 2 agregados familia (P4:
+        # uno por CADA clase del entry: perspectiva y generacion)
+        assert n == 4
         recs = store._read_valid()
         channels = {(r["technique_id"], r["channel"]) for r in recs}
         assert ("T059", CHANNEL_VERDICT) in channels
         assert ("T059", CHANNEL_JUDGE) in channels
         # etiquetados, nunca mezclados: verdict y judge son registros distintos
-        assert len(recs) == 3
+        assert len(recs) == 4
 
     def test_prior_disponible_tras_escritura(self, tmp_path):
-        """El circuito se cierra: lo escrito por record_outcomes lo lee el router."""
+        """El circuito se cierra: lo escrito por record_outcomes lo lee el router.
+
+        Usa run_ids DISTINTOS (ensayos reales independientes). Con el MISMO
+        run_id el store deduplica por idempotencia (P3): reintentos del mismo
+        ensayo cuentan una sola vez.
+        """
         store = TechniqueOutcomeStore(tmp_path / "o.jsonl")
-        for _ in range(3):
-            sheet = _sheet([_entry(aportacion_por_tecnica=[{"tecnica": "T059"}])])
+        for i in range(3):
+            sheet = {"run_id": f"run-{i}",
+                     "entries": [_entry(aportacion_por_tecnica=[{"tecnica": "T059"}],
+                                        run_id=f"run-{i}")]}
             record_outcomes(sheet, store, canon_version="2026-09-08.3")
         prior, n, _ = store.prior(profile="CRIBA", family="perspectiva",
                                   technique_id="T059", canon_version="2026-09-08.3")
         assert n >= 3 and prior > 0.0
+
+    def test_mismo_run_id_deduplica_por_idempotencia(self, tmp_path):
+        """P3: reintentos del MISMO ensayo (mismo run_id) cuentan UNA vez."""
+        store = TechniqueOutcomeStore(tmp_path / "o.jsonl")
+        for _ in range(3):
+            sheet = _sheet([_entry(aportacion_por_tecnica=[{"tecnica": "T059"}])])
+            record_outcomes(sheet, store, canon_version="2026-09-08.3")
+        _, n, _ = store.prior(profile="CRIBA", family="perspectiva",
+                              technique_id="T059", canon_version="2026-09-08.3")
+        assert n == 1  # idempotencia: el mismo run no infla la evidencia
 
     def test_sin_tecnicas_no_escribe_nada(self, tmp_path):
         store = TechniqueOutcomeStore(tmp_path / "o.jsonl")

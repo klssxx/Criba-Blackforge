@@ -217,7 +217,13 @@ class LotteryEngine:
             weights: list[float] = []
             for method in pool:
                 family = str(method.get("thinking_class") or method.get("family") or "")
-                best = 0.0
+                # P2: combinar canales SIN que la señal de antecedentes
+                # (VERDICT) neutralice un FALLO REAL observado (OBSERVED
+                # negativo). Regla: el OBSERVED negativo CAPA la señal — si hay
+                # observación práctica, manda sobre la teórica; si no la hay,
+                # se usa la señal disponible. Nunca max() ciego.
+                prior_v = prior_o = 0.0
+                n_v = n_o = 0
                 for channel in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
                     prior, n_eff, _label = self.outcome_store.prior(
                         profile=self.outcome_profile,
@@ -226,8 +232,18 @@ class LotteryEngine:
                         channel=channel,
                         canon_version=self.outcome_canon_version,
                     )
-                    if n_eff > 0:
-                        best = max(best, prior)
+                    if channel == CHANNEL_VERDICT:
+                        prior_v, n_v = prior, n_eff
+                    else:
+                        prior_o, n_o = prior, n_eff
+                # OBSERVED con datos manda (evidencia práctica > teórica);
+                # sin OBSERVED se usa VERDICT; sin ninguno, 0.
+                if n_o > 0:
+                    best = prior_o
+                elif n_v > 0:
+                    best = prior_v
+                else:
+                    best = 0.0
                 weights.append(1.0 + best * ADAPTIVE_BOOST)
             return weights
         except Exception:  # noqa: BLE001 — la memoria nunca rompe el sorteo

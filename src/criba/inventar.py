@@ -566,31 +566,55 @@ def record_outcomes(
         if verdict not in ("SURVIVED_SEARCH", "PARTIAL_PRIOR_ART", "UNRESOLVED"):
             verdict = "UNRESOLVED"
         judge_score = entry.get("judge", {}).get("score")
-        classes = [c for c in (entry.get("classes") or []) if c]
-        family = classes[0] if classes else "unknown"
         run_id = entry.get("run_id", sheet.get("run_id", ""))
-        for tid in _entry_technique_ids(entry):
+
+        # P4 (atribución): el resultado se vincula al candidato y a los MÉTODOS
+        # REALMENTE sorteados (method_ids), cada uno con SU clase de pensamiento
+        # — no a la primera clase del cruce ni solo a los IDs T-canon del
+        # intérprete (que offline quedan vacíos y rompían el circuito). Si el
+        # intérprete aporta además IDs T-canon, también se registran con la
+        # clase del primer método (aproximación documentada: la clase de un
+        # T-canon no es recuperable sin el intérprete).
+        method_ids = [m for m in (entry.get("method_ids") or []) if m]
+        classes = [c for c in (entry.get("classes") or []) if c]
+        pares = list(zip(method_ids, classes)) if method_ids else []
+        # técnica T-canon aportada por el intérprete (si la hay) -> clase[0]
+        t_ids = _entry_technique_ids(entry)
+        familia_t = classes[0] if classes else "unknown"
+
+        def _escribe(tid: str, familia: str) -> None:
+            nonlocal written
             try:
-                store.record(profile=profile, family=family, technique_id=tid,
+                store.record(profile=profile, family=familia, technique_id=tid,
                              channel=CHANNEL_VERDICT, outcome=verdict,
                              canon_version=canon_version, run_id=run_id)
                 written += 1
                 if isinstance(judge_score, (int, float)):
-                    store.record(profile=profile, family=family, technique_id=tid,
+                    store.record(profile=profile, family=familia, technique_id=tid,
                                  channel=CHANNEL_JUDGE, outcome="score",
                                  value=float(judge_score),
                                  canon_version=canon_version, run_id=run_id)
                     written += 1
             except Exception:  # noqa: BLE001 — la memoria nunca rompe el loop
-                continue
-        # Nivel agregado para back-off (una clase de pensamiento por candidato).
-        try:
-            store.record_family_outcome(profile=profile, family=family,
-                                        channel=CHANNEL_VERDICT, outcome=verdict,
-                                        canon_version=canon_version, run_id=run_id)
-            written += 1
-        except Exception:  # noqa: BLE001
-            pass
+                return
+
+        # 1) métodos sorteados: cada uno con SU clase (atribución correcta).
+        for mid, clase in pares:
+            _escribe(mid, clase)
+        # 2) IDs T-canon del intérprete (circuito G1 original), si existen.
+        for tid in t_ids:
+            _escribe(tid, familia_t)
+        # 3) agregados de familia para back-off: uno por CLASE presente (no solo
+        #    la primera), para que el back-off jerárquico sea coherente con la
+        #    atribución por clase.
+        for clase in dict.fromkeys(classes):
+            try:
+                store.record_family_outcome(profile=profile, family=clase,
+                                            channel=CHANNEL_VERDICT, outcome=verdict,
+                                            canon_version=canon_version, run_id=run_id)
+                written += 1
+            except Exception:  # noqa: BLE001
+                pass
     return written
 
 
