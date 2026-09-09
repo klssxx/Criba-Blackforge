@@ -310,6 +310,22 @@ def main(argv: Sequence[str] | None = None) -> int:
         help="canon_version (por defecto el vigente del registry)",
     )
     retro_parser.add_argument("--run-id", default="", help="run_id origen si se conoce")
+    # evaluar-politica (G3): compara una política candidata contra la de logging
+    # sobre el log de decisiones con propensión. Honesto: UNRESOLVED si el log
+    # está vacío, sin solape o con ESS bajo — nunca afirma mejora sin evidencia.
+    eval_parser = sub.add_parser(
+        "evaluar-politica",
+        help="G3: evaluación off-policy (SNIPS) de una política candidata vs logging",
+    )
+    eval_parser.add_argument(
+        "--log", default=None,
+        help="Ruta al log de decisiones (por defecto el estándar en LOCALAPPDATA)",
+    )
+    eval_parser.add_argument(
+        "--boost", type=float, default=None, metavar="B",
+        help="Evalúa la política adaptativa con ADAPTIVE_BOOST=B sobre el log. "
+             "Sin él, evalúa la política uniforme (congelada).",
+    )
     args = parser.parse_args(argv)
 
     try:
@@ -432,6 +448,56 @@ def main(argv: Sequence[str] | None = None) -> int:
                     sheet, active_store, profile="CRIBA",
                     canon_version=canon or "")
                 print(f"Outcomes registrados en el store: {written}")
+            return 0
+
+        if args.command == "evaluar-politica":
+            from .intelligence.off_policy import (
+                _default_log_path,
+                compare_policies,
+                read_decisions,
+            )
+
+            log_path = Path(args.log) if args.log else _default_log_path()
+            decisions = read_decisions(log_path)
+
+            if args.boost is None:
+                # Política uniforme (congelada): toda acción con igual propensión.
+                def candidata(t: str, f: str, pool: Any) -> float:
+                    return 1.0 / max(1, len(pool))
+            else:
+                # Política adaptativa con ADAPTIVE_BOOST=B: aproxima su propensión
+                # reponderando con el prior OBSERVED/VERDICT del store sobre el log.
+                from .intelligence.outcome_store import (
+                    CHANNEL_OBSERVED,
+                    CHANNEL_VERDICT,
+                    default_store as _ostore,
+                )
+
+                store_eval = _ostore()
+                boost = float(args.boost)
+
+                def candidata(t: str, f: str, pool: Any) -> float:
+                    best = 0.0
+                    for ch in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
+                        prior, n_eff, _ = store_eval.prior(
+                            profile="CRIBA", family=f, technique_id=t, channel=ch)
+                        if n_eff > 0:
+                            best = max(best, prior)
+                    w_t = 1.0 + best * boost
+                    total = 0.0
+                    for other in pool:
+                        b2 = 0.0
+                        for ch in (CHANNEL_VERDICT, CHANNEL_OBSERVED):
+                            p2, n2, _ = store_eval.prior(
+                                profile="CRIBA", family=f, technique_id=other, channel=ch)
+                            if n2 > 0:
+                                b2 = max(b2, p2)
+                        total += 1.0 + b2 * boost
+                    return w_t / max(total, 1e-9)
+
+            eval_result = compare_policies(decisions, candidata)
+            eval_result["log"] = str(log_path)
+            print(json.dumps(eval_result, ensure_ascii=False, indent=2))
             return 0
 
         if args.command == "retro":
