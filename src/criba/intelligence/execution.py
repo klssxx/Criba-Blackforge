@@ -13,6 +13,7 @@ honrado (no se ejecuta a ciegas).
 from __future__ import annotations
 
 import importlib
+import inspect
 from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
@@ -237,10 +238,8 @@ _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
              lambda problem, params, docs: (
                  (docs,), {"space_type": str(params.get("space_type", "")),
                            "topic": str(params.get("topic", ""))})),
-    "T128": ("criba.intelligence.gaps.patent_expiration.analyze_patent_expirations",
-             lambda problem, params, docs: (
-                 (docs,), {"jurisdiction": str(params.get("jurisdiction", "")),
-                           "patent_id": str(params.get("patent_id", ""))})),
+    "T128": ("composite:t128",
+             lambda problem, params, docs: ((docs,), dict(params))),
     # -- slice 2: signals (series/params) ----------------------------------
     "T019": ("criba.intelligence.signals.dynamics.TopicDynamics.acceleration",
              _dynamics_method("acceleration")),
@@ -297,6 +296,37 @@ def _weak_signals(params: Mapping[str, Any]) -> list[Any]:
     return out
 
 
+_COMPOSITE_T128: tuple[tuple[str, str], ...] = (
+    ("criba.intelligence.gaps.patent_expiration", "analyze_patent_expirations"),
+    ("criba.intelligence.gaps.dormant", "detect_dormant_papers"),
+    ("criba.intelligence.gaps.sleeping_beauty", "detect_sleeping_beauties"),
+    ("criba.intelligence.gaps.resurrection", "extract_resurrection_candidates"),
+)
+
+
+def _run_composite(ref: str, args: tuple, kwargs: dict[str, Any]) -> list[Any]:
+    """T128: ejecuta los 4 operadores canon-declarados y etiqueta procedencia.
+
+    Cada operador recibe solo los kwargs de su contrato (el compuesto no
+    colapsa contratos); no añade lógica de técnica.
+    """
+    if ref != "composite:t128":
+        raise ExecutionError(f"compuesto desconocido: {ref}")
+    documents = args[0] if args else []
+    merged: list[Any] = []
+    for module_name, func_name in _COMPOSITE_T128:
+        func = getattr(importlib.import_module(module_name), func_name)
+        # el compuesto no colapsa contratos: solo kwargs que la firma acepta
+        accepted = set(inspect.signature(func).parameters) - {"documents"}
+        op_kwargs = {k: v for k, v in kwargs.items() if k in accepted}
+        results = func(documents, **op_kwargs) if op_kwargs else func(documents)
+        for item in results:
+            if hasattr(item, "to_dict"):
+                item = {**item.to_dict(), "composite_module": module_name.rsplit(".", 1)[-1]}
+            merged.append(item)
+    return merged
+
+
 def execute_technique(
     registry: TechniqueRegistry,
     technique_id: str,
@@ -329,7 +359,10 @@ def execute_technique(
         )
     operator_ref, adapt = adapter
     args, kwargs = adapt(problem or "", params or {}, list(documents or []))
-    output = resolve_callable(operator_ref)(*args, **kwargs)
+    if operator_ref.startswith("composite:"):
+        output = _run_composite(operator_ref, args, kwargs)
+    else:
+        output = resolve_callable(operator_ref)(*args, **kwargs)
     # salida contractual: lista de items o escalar (p. ej. LeadLagResult)
     items_raw = list(output) if isinstance(output, (list, tuple)) else [output]
     items = [item.to_dict() if hasattr(item, "to_dict") else item for item in items_raw]

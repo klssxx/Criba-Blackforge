@@ -154,3 +154,21 @@ genealogía requiere la capa de graph no materializada para ese fin.
 
 Restaurados de soporte: builder/centrality/traversal/store/semantics con
 sus tests (infraestructura compartida auditada una vez, §VELOCIDAD).
+
+
+## Falsación propia bajo criterio estricto (post-slices, 2026-09-08)
+
+Auto-adversarial (rol builder-win; qa-win con dispatch caído — reintentos
+documentados). Muestras y veredictos:
+
+| Técnica | Pregunta de falsación | Veredicto | Acción |
+|---|---|---|---|
+| T128 | ¿ejecutar solo patent_expiration satisface la compuesta de 4 módulos? | **NO** → defecto real | CORREGIDO (564eb1f): compuesto despacha los 4 con procedencia; test exige ≥2 contribuciones |
+| T057 | ¿un catálogo de 40 principios satisface 'TRIZ'? | **SATISFACE-A-LÍMITE**: la minería de contradicciones es T058 (PLANNED) y el propio test prohíbe afirmar la matriz | Documentado en ficha (gap: T08 separado) |
+| T094 | ¿componentes conexas débiles = 'comunidades'? | **SATISFACE-A-LÍMITE**: detecta comunidades en sentido débil, ordenadas y subseteables; sin modularidad | Documentado en ficha |
+| T086 | ¿el detector genérico satisface las variantes T087-89? | **NO para T087-89** (por eso quedan PLANNED con gap); T086 genérica sí | Ya correcto en canon |
+| T019/T049 | ambas → TopicDynamics.acceleration | **MONOCULTIVO FUNCIONAL** declarado: misma función para 'Trend' y 'Topic' acceleration — no contar como 2 capacidades exploratorias independientes | Documentado en fichas + ledger (nota monoculture) |
+
+Nota: T019 usa el mismo método que T049; el canon las declara por
+separado y ambas ejecutan, pero a efectos de diversidad exploratoria
+constituyen UN cluster funcional (FUNCTIONAL_MONOCULTURE_CLUSTER, §constitución).
