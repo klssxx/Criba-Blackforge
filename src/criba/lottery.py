@@ -22,6 +22,14 @@ VALID_LOTTERY_MODES = {"optimized", "associative", "pure", "alternating", "strat
 DRAW_CLASSES = ("perspectiva", "generacion", "ruptura", "escape")
 DOMAIN_CLASS = "dominio"
 
+# G2: escalado del prior UCB en el sorteo estratificado. Con catálogos de miles
+# de métodos por clase (perspectiva ~1700), un prior ~1.4 sin escalar es
+# invisible frente a la masa uniforme; el boost hace efectiva la señal empírica
+# sin excluir a nadie (peso base 1.0 intacto → la exploración nunca muere).
+# Medido sobre el catálogo real: boost=100 → método premiado ~30% de rondas,
+# resto del pool sigue sorteado el ~70% restante. Documentado y ablatable.
+ADAPTIVE_BOOST = 100.0
+
 
 def _console_safe(value: object) -> str:
     """Replace characters unsupported by the active console encoding."""
@@ -42,9 +50,24 @@ def default_output_dir() -> Path:
 
 
 class LotteryEngine:
-    """Select and combine methods without repeating them between rounds."""
+    """Select and combine methods without repeating them between rounds.
 
-    def __init__(self, methods_file: str, seed: int = 42, storage: Storage | None = None):
+    Memoria compartida (G2, BLUEPRINT §12.4): con ``outcome_store`` inyectado el
+    sorteo estratificado dentro de cada clase de pensamiento se pondera por el
+    prior UCB de cada método (memoria técnica→outcome). Sin store (default) el
+    comportamiento es byte-idéntico al congelado: mismo seed = mismo output.
+    El prior nunca excluye un método: pondera el sorteo, no filtra el catálogo.
+    """
+
+    def __init__(
+        self,
+        methods_file: str,
+        seed: int = 42,
+        storage: Storage | None = None,
+        outcome_store: Any | None = None,
+        outcome_profile: str = "CRIBA",
+        outcome_canon_version: str | None = None,
+    ):
         self.methods = self._load_methods(methods_file)
         self.used_combos: set[tuple[str, str]] = set()
         self.used_methods: set[str] = set()
@@ -54,6 +77,9 @@ class LotteryEngine:
         self.rng = random.Random(seed)
         self.round_number = 0
         self.storage = storage
+        self.outcome_store = outcome_store
+        self.outcome_profile = outcome_profile
+        self.outcome_canon_version = outcome_canon_version
         if self.storage is not None:
             self.sync_storage(self.storage)
 
@@ -130,7 +156,13 @@ class LotteryEngine:
 
     @classmethod
     def from_methods(
-        cls, methods: list[dict[str, Any]], seed: int = 42, storage: Storage | None = None
+        cls,
+        methods: list[dict[str, Any]],
+        seed: int = 42,
+        storage: Storage | None = None,
+        outcome_store: Any | None = None,
+        outcome_profile: str = "CRIBA",
+        outcome_canon_version: str | None = None,
     ) -> LotteryEngine:
         """Construye el motor desde una lista de métodos ya cargada en memoria.
 
@@ -148,9 +180,44 @@ class LotteryEngine:
         eng.rng = random.Random(seed)
         eng.round_number = 0
         eng.storage = storage
+        eng.outcome_store = outcome_store
+        eng.outcome_profile = outcome_profile
+        eng.outcome_canon_version = outcome_canon_version
         if eng.storage is not None:
             eng.sync_storage(eng.storage)
         return eng
+
+    # -- memoria compartida (G2, opt-in) ------------------------------------
+    def _adaptive_weights(self, pool: list[dict[str, Any]]) -> list[float] | None:
+        """Pesos UCB del outcome_store para ponderar el sorteo dentro de una clase.
+
+        Devuelve ``None`` cuando la memoria está desactivada o vacía (modo
+        congelado: el llamador usa entonces ``rng.choice`` uniforme, byte-
+        idéntico al comportamiento previo). El prior NUNCA excluye un método:
+        peso mínimo 1.0 (uniforme) + prior UCB ≥ 0 escalado como bonus. Un
+        método sin outcomes queda exactamente como antes (exploración pura),
+        uno con SURVIVED acumulados sube — memoria compartida (§12.4).
+
+        Escalado: con catálogos grandes (miles de métodos por clase) un prior
+        UCB ~1.4 es invisible frente a la masa uniforme. ``ADAPTIVE_BOOST``
+        multiplica el prior para que la señal empírica sea efectiva sin romper
+        la exploración (todo método conserva peso ≥ 1.0 y sigue saliendo).
+        """
+        if self.outcome_store is None:
+            return None
+        try:
+            weights: list[float] = []
+            for method in pool:
+                prior, _n, _label = self.outcome_store.prior(
+                    profile=self.outcome_profile,
+                    family=str(method.get("thinking_class") or method.get("family") or ""),
+                    technique_id=str(method["id"]),
+                    canon_version=self.outcome_canon_version,
+                )
+                weights.append(1.0 + max(0.0, prior) * ADAPTIVE_BOOST)
+            return weights
+        except Exception:  # noqa: BLE001 — la memoria nunca rompe el sorteo
+            return None
 
     def get_available_methods(self) -> list[dict[str, Any]]:
         """Retorna métodos no usados aún."""
@@ -220,7 +287,14 @@ class LotteryEngine:
 
         def _take(class_pool: list[dict[str, Any]]) -> dict[str, Any] | None:
             while class_pool:
-                chosen = self.rng.choice(class_pool)
+                # G2: con memoria el sorteo se pondera por prior UCB (opt-in);
+                # sin ella, rng.choice uniforme — byte-idéntico al congelado.
+                weights = self._adaptive_weights(class_pool)
+                chosen = (
+                    self.rng.choices(class_pool, weights=weights, k=1)[0]
+                    if weights is not None
+                    else self.rng.choice(class_pool)
+                )
                 class_pool.remove(chosen)
                 if str(chosen["id"]) not in selected_ids:
                     return chosen
@@ -472,6 +546,8 @@ class LotteryEngine:
             'description': description,
             'method1': m1['title'][:60],
             'method2': m2['title'][:60],
+            'method1_id': str(m1['id']),
+            'method2_id': str(m2['id']),
             'family1': fam1,
             'family2': fam2,
             'quality': quality,
@@ -665,14 +741,36 @@ class LotteryEngine:
 def run_lottery(methods_file: str | None = None, rounds: int = 20, batch_size: int = 20,
                 mode: str = "alternating", seed: int = 42,
                 query: str | None = None,
-                output_dir: str | Path | None = None) -> dict[str, Any]:
-    """Función principal para ejecutar la lotería."""
+                output_dir: str | Path | None = None,
+                adaptive: bool = False) -> dict[str, Any]:
+    """Función principal para ejecutar la lotería.
+
+    ``adaptive`` (G2, opt-in): abre el OutcomeStore por defecto y pondera el
+    sorteo por prior UCB. ``False`` (default) = comportamiento congelado.
+    """
+    outcome_store = None
+    canon_version = None
+    if adaptive:
+        from .intelligence.outcome_store import default_store as _outcome_store
+        from .intelligence.registry import TechniqueRegistry
+
+        outcome_store = _outcome_store()
+        try:
+            canon_version = TechniqueRegistry().canon_version
+        except Exception:  # noqa: BLE001 — sin canon, aísla por None
+            canon_version = None
     if methods_file is None:
         from .catalog import methods
 
-        engine = LotteryEngine.from_methods(methods(), seed)
+        engine = LotteryEngine.from_methods(
+            methods(), seed, outcome_store=outcome_store,
+            outcome_canon_version=canon_version,
+        )
     else:
-        engine = LotteryEngine(methods_file, seed)
+        engine = LotteryEngine(
+            methods_file, seed, outcome_store=outcome_store,
+            outcome_canon_version=canon_version,
+        )
     summary = engine.run_tournament(rounds, batch_size, mode, query=query)
     destination = Path(output_dir) if output_dir is not None else default_output_dir()
     engine.save_results(destination)

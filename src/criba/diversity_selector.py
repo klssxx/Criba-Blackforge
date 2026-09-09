@@ -141,6 +141,48 @@ def _mechanism(candidate: dict[str, Any]) -> str:
     return ""
 
 
+def _adaptive_bonus(
+    candidate: dict[str, Any],
+    outcome_store: Any | None,
+    profile: str,
+    canon_version: str | None,
+) -> tuple[float, str]:
+    """Bonus UCB agregado de las técnicas que aportaron al candidato (G2, §12.4).
+
+    Suma los priors del outcome_store sobre los ``technique_ids`` del candidato
+    (los que inventar.record_outcomes escribió). Sin store o sin técnicas:
+    bonus 0.0 — el selector queda byte-idéntico al congelado. Nunca negativo:
+    la memoria empuja hacia arriba lo que demostró outcome, no hunde al resto.
+    La familia de consulta usa la clase de pensamiento cuando existe (coherente
+    con la escritura de record_outcomes); de lo contrario, la familia del método.
+    """
+    if outcome_store is None:
+        return 0.0, ""
+    tids = candidate.get("technique_ids") or candidate.get("method_ids") or []
+    if not tids:
+        return 0.0, ""
+    classes = [c for c in (candidate.get("classes") or []) if c]
+    family = classes[0] if classes else str(candidate.get("family") or "unknown")
+    total = 0.0
+    n_used = 0
+    try:
+        for tid in tids:
+            prior, n_eff, _label = outcome_store.prior(
+                profile=profile,
+                family=family,
+                technique_id=str(tid),
+                canon_version=canon_version,
+            )
+            if n_eff > 0:
+                total += max(0.0, prior)
+                n_used += 1
+    except Exception:  # noqa: BLE001 — la memoria nunca rompe la selección
+        return 0.0, ""
+    if not n_used:
+        return 0.0, ""
+    return total, f"memoria:bonus={total:.3f}(tecnicas={n_used})"
+
+
 def _structural_distance(a: dict[str, Any], b: dict[str, Any]) -> float:
     """Distancia estructural [0,1]. Un campo solo compara si AMBOS lados
     llevan información: lo desconocido NO otorga diversidad ni igualdad —
@@ -174,12 +216,20 @@ def select_finalists(
     *,
     quality_floor: float | None = None,
     historical_first_seen: dict[tuple[str, str], str] | None = None,
+    outcome_store: Any | None = None,
+    outcome_profile: str = "CRIBA",
+    outcome_canon_version: str | None = None,
 ) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     """Selección finalista por utilidad marginal. Devuelve (finalistas, informe).
 
     ``historical_first_seen``: primer uso registrado por par de métodos
     (formato combo_key de Storage). Aplica cooldown por decaimiento; nunca
     prohibición permanente.
+
+    ``outcome_store`` (G2, opt-in): suma un bonus UCB por técnica aportante al
+    candidato, sobre el término de calidad. Sin store el resultado es
+    byte-idéntico al congelado. El bonus NUNCA rescata a un candidato bajo el
+    suelo de calidad (§26: la rareza —ni la memoria— sin relevancia no gana).
 
     El informe incluye el estado de diversidad (OK/DIVERSITY_CONSTRAINED) y
     la explicación de cada elección/descarte (trazabilidad §22).
@@ -219,6 +269,12 @@ def select_finalists(
         for candidate in remaining:
             utility = W_QUALITY * float(candidate.get("score", 0.0))
             explain: list[str] = []
+            bonus, bonus_label = _adaptive_bonus(
+                candidate, outcome_store, outcome_profile, outcome_canon_version,
+            )
+            if bonus:
+                utility += bonus
+                explain.append(bonus_label)
             min_distance = min(
                 (_structural_distance(candidate, s) for s in selected),
                 default=NEUTRAL_DISTANCE,

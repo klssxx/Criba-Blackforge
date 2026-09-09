@@ -233,11 +233,19 @@ def invent(
     store: Any | None = None,
     history_storage: Any = True,
     ficha_bloqueo: dict[str, Any] | None = None,
+    adaptive: bool = False,
+    outcome_store: Any | None = None,
+    canon_version: str | None = None,
 ) -> dict[str, Any]:
     """Ejecuta el loop completo y devuelve la ficha de invención.
 
     ``methods``/``sources``/``proponer``/``store`` son inyectables para
     pruebas deterministas.
+
+    ``adaptive`` (G2, opt-in, BLUEPRINT §12.4): con ``outcome_store`` presente
+    la lotería pondera el sorteo por prior UCB y el selector suma el bonus de
+    memoria por técnica aportante. ``adaptive=False`` (default) es byte-
+    idéntico al congelado: mismo seed = mismo output, invariante intacto.
 
     Semilla (megaprompt §31-§33): ``seed=None`` genera una NUEVA semilla
     reproducible con ``secrets.randbits(64)`` (registra seed_source
@@ -286,7 +294,14 @@ def invent(
         except Exception:  # noqa: BLE001 — degradación elegante (DV9)
             first_seen = None
 
-    engine = LotteryEngine.from_methods(methods or catalog_methods(), seed=seed)
+    active_outcome_store = outcome_store if adaptive else None
+    engine = LotteryEngine.from_methods(
+        methods or catalog_methods(),
+        seed=seed,
+        outcome_store=active_outcome_store,
+        outcome_profile="CRIBA",
+        outcome_canon_version=canon_version,
+    )
     for _ in range(rounds):
         engine.run_round(mode="stratified", batch_size=batch_size, query=query)
     domain = engine.draw_domain()
@@ -297,7 +312,14 @@ def invent(
     from .diversity_selector import select_finalists
 
     pool = engine.get_top_ideas(max(top * 6, 12))
-    top_ideas, selection_report = select_finalists(pool, top, historical_first_seen=first_seen)
+    top_ideas, selection_report = select_finalists(
+        pool,
+        top,
+        historical_first_seen=first_seen,
+        outcome_store=active_outcome_store,
+        outcome_profile="CRIBA",
+        outcome_canon_version=canon_version,
+    )
     if history is not None and selection_report.get("pool_size"):
         try:  # registrar los pares de ESTA ejecución (first_seen=ahora)
             history.save_lottery_combinations(
@@ -374,6 +396,7 @@ def invent(
             "score_kind": "heuristica_local",
             "classes": [idea.get("class1", ""), idea.get("class2", "")],
             "methods": [idea.get("method1", ""), idea.get("method2", "")],
+            "method_ids": [idea.get("method1_id", ""), idea.get("method2_id", "")],
             "hipotesis": proposal.get("hipotesis", ""),
             "mecanismo": candidate.mechanism,
             "estado_interpretacion": proposal.get("estado", "PENDIENTE_INTERPRETACION"),

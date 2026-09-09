@@ -85,6 +85,27 @@ def _configured_model_settings(args: argparse.Namespace) -> ModelSettings:
     return settings
 
 
+def _inventar_outcome_store(adaptive: bool) -> Any | None:
+    """OutcomeStore para G2 solo cuando --adaptive está activo (opt-in)."""
+    if not adaptive:
+        return None
+    from .intelligence.outcome_store import default_store as _outcome_store
+
+    return _outcome_store()
+
+
+def _inventar_canon_version(adaptive: bool) -> str | None:
+    """Canon vigente para aislar el prior por época (§13.4)."""
+    if not adaptive:
+        return None
+    try:
+        from .intelligence.registry import TechniqueRegistry
+
+        return TechniqueRegistry().canon_version
+    except Exception:  # noqa: BLE001 — sin canon el store aísla por canon_version=None
+        return None
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     """Run the CRIBA command-line interface and return a process exit code."""
     parser = argparse.ArgumentParser(
@@ -178,6 +199,10 @@ def main(argv: Sequence[str] | None = None) -> int:
         default=None,
         help="Directorio de resultados (por defecto, datos locales del usuario)",
     )
+    lottery_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Memoria compartida (G2): pondera el sorteo por prior UCB del OutcomeStore (opt-in; default congelado)",
+    )
 
     serve_parser = sub.add_parser("serve")
     serve_parser.add_argument("--host", default="127.0.0.1")
@@ -203,6 +228,10 @@ def main(argv: Sequence[str] | None = None) -> int:
     inventar_parser.add_argument(
         "--dossier", action="store_true",
         help="Prepara dossiers con prueba discriminante (estado SUPRA pendiente, nunca PASS)",
+    )
+    inventar_parser.add_argument(
+        "--adaptive", action="store_true",
+        help="Memoria compartida (G2): loteria y selector consumen prior UCB del OutcomeStore (opt-in; default congelado)",
     )
     tecnicas_parser = sub.add_parser(
         "tecnicas",
@@ -309,6 +338,7 @@ def main(argv: Sequence[str] | None = None) -> int:
                 seed=args.seed,
                 query=args.query,
                 output_dir=args.output_dir,
+                adaptive=args.adaptive,
             )
             return 0
 
@@ -325,6 +355,9 @@ def main(argv: Sequence[str] | None = None) -> int:
                 top=args.top,
                 offline=True if args.offline else None,
                 store=default_store(),
+                adaptive=args.adaptive,
+                outcome_store=_inventar_outcome_store(args.adaptive),
+                canon_version=_inventar_canon_version(args.adaptive),
             )
             if args.dossier:
                 from .supra_dossier import guardar_dossier, preparar_dossier
