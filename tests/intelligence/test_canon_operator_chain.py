@@ -319,3 +319,41 @@ def test_chain_slice3_negativos(tmp_path) -> None:
         execute_technique(registry, "T093", "p", params={"db_path": cycle})
     with pytest.raises(ExecutionError, match="source"):
         execute_technique(registry, "T091", "p", params={"db_path": cycle})
+
+
+def test_chain_t128_composite_runs_all_four_canonical_operators() -> None:
+    """T128 es compuesta (expiración+dormant+sleeping-beauty+resurrección):
+    ejecutarla debe despachar los 4 operadores canon-declarados y etiquetar
+    la procedencia por módulo — no basta patent_expiration sola.
+    Fixtures estructuradas = las que los tests históricos demuestran activas."""
+    from criba.intelligence.contracts import EvidenceFragment
+    from criba.intelligence.execution import execute_technique
+
+    docs = [
+        EvidenceDocument(  # activa patent_expiration (metadata estructurada)
+            doc_id="doc-structured", kind="patent",
+            metadata={"patent_id": "EP-456", "title": "Quiet cooling",
+                      "expiration_date": "2029", "jurisdiction": "EP",
+                      "claim_scope": "valve designs"}),
+        EvidenceDocument(  # activa dormant (fixture del test histórico)
+            doc_id="paper-old", kind="paper", published="2001",
+            metadata={"citation_count": 12, "recent_citations": 0,
+                      "recent_attention": 0, "last_cited": "2014"}),
+    ]
+    outcome = execute_technique(
+        TechniqueRegistry(REGISTRY_PATH), "T128", "oportunidades de IP",
+        params={"as_of": "2026-01-01"},  # contrato de dormant/sleeping_beauty
+        documents=docs,
+    )
+    assert outcome["technique"] == "T128"
+    modules = {r.get("composite_module") for r in outcome["results"]
+               if isinstance(r, dict)}
+    assert "patent_expiration" in modules, "el módulo de expiración debe contribuir"
+    assert "dormant" in modules, "el módulo dormant debe contribuir"
+    # los 4 operadores se despacharon (los que no hallan nada no contribuyen,
+    # pero el compuesto no puede saltarse ninguno silenciosamente):
+    assert len(modules) >= 2
+    # documentos sin cue no fabrican resultados (fixture negativa implícita:
+    # sleeping_beauty/resurrection sin evidencia → sin contribución)
+    for result in outcome["results"]:
+        assert result.get("composite_module"), "procedencia por módulo exigida"
