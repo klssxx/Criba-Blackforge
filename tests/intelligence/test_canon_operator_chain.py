@@ -357,3 +357,30 @@ def test_chain_t128_composite_runs_all_four_canonical_operators() -> None:
     # sleeping_beauty/resurrection sin evidencia → sin contribución)
     for result in outcome["results"]:
         assert result.get("composite_module"), "procedencia por módulo exigida"
+
+
+def test_chain_t129_composite_runs_all_four_canonical_operators() -> None:
+    """T129 es compuesta (counterfactual+future_back+bottlenecks+nth_order):
+    misma corrección de clase que T128 — ejecutarla despacha los 4 operadores
+    canon-declarados con procedencia por módulo."""
+    from criba.intelligence.execution import execute_technique
+
+    params = {
+        "scenario_outcomes": {"sin X": ["resultado A", "resultado B"]},
+        "future_steps": {"2030": ["paso 1", "paso 2"]},
+        "bottleneck_probes": {"cuello": ["prueba 1", "prueba 2"]},
+        "intervention_chains": {"medida": [["causa", "efecto1", "efecto2"]]},
+    }
+    outcome = execute_technique(
+        TechniqueRegistry(REGISTRY_PATH), "T129", "problema", params=params,
+    )
+    modules = {r.get("composite_module") for r in outcome["results"]
+               if isinstance(r, dict)}
+    assert modules == {"counterfactual", "future_back", "bottlenecks", "nth_order"}
+    assert outcome["results"], "los 4 generadores deben producir hipótesis"
+    # negativa de contrato: mapeo de forma incorrecta → error honesto del módulo
+    with pytest.raises(TypeError):
+        execute_technique(
+            TechniqueRegistry(REGISTRY_PATH), "T129", "p",
+            params={"bottleneck_probes": ["no soy un mapping"]},
+        )

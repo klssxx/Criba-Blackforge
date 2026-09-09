@@ -220,8 +220,8 @@ _INPUT_ADAPTERS: dict[str, tuple[str, InputAdapter]] = {
                  (problem, list(params.get("capabilities", []))),
                  {"known_combinations": [list(k) for k in params.get("known_combinations", [])]},
              )),
-    "T129": ("criba.intelligence.invention.counterfactual.generate_counterfactual_hypotheses",
-             _problem_only(("temporal_map",))),
+    "T129": ("composite:t129",
+             lambda problem, params, docs: ((problem or "",), dict(params))),
     # -- slice 2: gaps (evidencia primero) --------------------------------
     "T067": ("criba.intelligence.gaps.contradictions.analyze_contradictions",
              lambda problem, params, docs: (
@@ -296,11 +296,19 @@ def _weak_signals(params: Mapping[str, Any]) -> list[Any]:
     return out
 
 
-_COMPOSITE_T128: tuple[tuple[str, str], ...] = (
-    ("criba.intelligence.gaps.patent_expiration", "analyze_patent_expirations"),
-    ("criba.intelligence.gaps.dormant", "detect_dormant_papers"),
-    ("criba.intelligence.gaps.sleeping_beauty", "detect_sleeping_beauties"),
-    ("criba.intelligence.gaps.resurrection", "extract_resurrection_candidates"),
+_COMPOSITE_T128: tuple[tuple[str, str, str], ...] = (
+    # (módulo, función, kwarg propio) — cada operador recibe SOLO su contrato
+    ("criba.intelligence.gaps.patent_expiration", "analyze_patent_expirations", "*"),
+    ("criba.intelligence.gaps.dormant", "detect_dormant_papers", "*"),
+    ("criba.intelligence.gaps.sleeping_beauty", "detect_sleeping_beauties", "*"),
+    ("criba.intelligence.gaps.resurrection", "extract_resurrection_candidates", "*"),
+)
+
+_COMPOSITE_T129: tuple[tuple[str, str, str], ...] = (
+    ("criba.intelligence.invention.counterfactual", "generate_counterfactual_hypotheses", "scenario_outcomes"),
+    ("criba.intelligence.invention.future_back", "generate_future_back_hypotheses", "future_steps"),
+    ("criba.intelligence.invention.bottlenecks", "generate_bottleneck_mapping_hypotheses", "bottleneck_probes"),
+    ("criba.intelligence.invention.nth_order", "generate_nth_order_effect_hypotheses", "intervention_chains"),
 )
 
 
@@ -310,16 +318,23 @@ def _run_composite(ref: str, args: tuple, kwargs: dict[str, Any]) -> list[Any]:
     Cada operador recibe solo los kwargs de su contrato (el compuesto no
     colapsa contratos); no añade lógica de técnica.
     """
-    if ref != "composite:t128":
+    table = {"composite:t128": _COMPOSITE_T128, "composite:t129": _COMPOSITE_T129}
+    if ref not in table:
         raise ExecutionError(f"compuesto desconocido: {ref}")
-    documents = args[0] if args else []
     merged: list[Any] = []
-    for module_name, func_name in _COMPOSITE_T128:
+    for module_name, func_name, own_kwarg in table[ref]:
         func = getattr(importlib.import_module(module_name), func_name)
-        # el compuesto no colapsa contratos: solo kwargs que la firma acepta
-        accepted = set(inspect.signature(func).parameters) - {"documents"}
-        op_kwargs = {k: v for k, v in kwargs.items() if k in accepted}
-        results = func(documents, **op_kwargs) if op_kwargs else func(documents)
+        if own_kwarg == "*":
+            # estilo T128: documentos + solo kwargs que la firma acepta
+            documents = args[0] if args else []
+            accepted = set(inspect.signature(func).parameters) - {"documents"}
+            op_kwargs = {k: v for k, v in kwargs.items() if k in accepted}
+            results = func(documents, **op_kwargs) if op_kwargs else func(documents)
+        else:
+            # estilo T129: (problema, mapeo propio del contrato del módulo)
+            problem = args[0] if args else ""
+            mapping = kwargs.get(own_kwarg) or {}
+            results = func(problem, mapping)
         for item in results:
             if hasattr(item, "to_dict"):
                 item = {**item.to_dict(), "composite_module": module_name.rsplit(".", 1)[-1]}
