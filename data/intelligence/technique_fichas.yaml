@@ -3070,7 +3070,8 @@ fichas:
   - GAP
   status: IMPLEMENTED
   implementation: criba.intelligence.gaps.{patent_expiration,dormant,sleeping_beauty,resurrection}
-  runtime_operator: patent_expiration+dormant+sleeping_beauty+resurrection
+  runtime_operator: composite:t128 — patent_expiration+dormant+sleeping_beauty+resurrection
+    (despacho de los 4)
   integration_path: criba tecnicas --ejecutar (execution.py)
   input_contracts:
   - 'documents: Sequence[EvidenceDocument] con metadata/fragments de expiración, sueño
@@ -3084,7 +3085,7 @@ fichas:
   provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
   gap: null
   remaining_gap: ídem
-  falsifier: expiración sin fecha o FTO afirmado
+  falsifier: expiración sin fecha o FTO afirmado; compuesto que omita un módulo
 - id: T129
   canonical_requirement: Second/N-th order/counterfactual/future-back/bottleneck mapping
   blueprint_72_name: Second-order / N-th-order / counterfactual / future-back / bottleneck
@@ -3098,7 +3099,8 @@ fichas:
   - INVENTION
   status: IMPLEMENTED
   implementation: criba.intelligence.invention.{counterfactual,future_back,bottlenecks,nth_order}
-  runtime_operator: counterfactual/future_back/bottlenecks/nth_order (4 generadores)
+  runtime_operator: composite:t129 — counterfactual+future_back+bottlenecks+nth_order
+    (despacho de los 4)
   integration_path: criba tecnicas --ejecutar (execution.py)
   input_contracts:
   - 'problem: str'
@@ -3113,7 +3115,8 @@ fichas:
   provenance: reg_parts → gen_registry.py (canon) + CBAC469 slices 1-3
   gap: null
   remaining_gap: ídem
-  falsifier: efecto futuro afirmado como ocurrirá; cuello como causal
+  falsifier: efecto futuro afirmado como ocurrirá; cuello como causal; compuesto que
+    omita un módulo
 - id: T130
   canonical_requirement: S-curves/substitution curves/innovation genealogy
   blueprint_72_name: S-curve / substitution curves / innovation genealogy

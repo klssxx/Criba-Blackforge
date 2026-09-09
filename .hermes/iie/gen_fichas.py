@@ -41,7 +41,7 @@ CHECKPOINTS: dict[str, dict] = {
     "T064": {"operator": "first_principles.decompose_first_principles_hypotheses", "falsifier": "ocultar la premisa de la que deriva", "remaining_gap": "ídem"},
     "T065": {"operator": "inversion.generate_constraint_inversion_hypotheses", "falsifier": "afirmar que la restricción desaparece", "remaining_gap": "ídem"},
     "T116": {"operator": "adjacent_possible.generate_adjacent_possible_hypotheses", "falsifier": "proponer par presente en known_combinations", "remaining_gap": "ídem"},
-    "T129": {"operator": "counterfactual/future_back/bottlenecks/nth_order (4 generadores)", "falsifier": "efecto futuro afirmado como ocurrirá; cuello como causal", "remaining_gap": "ídem"},
+    "T129": {"operator": "composite:t129 — counterfactual+future_back+bottlenecks+nth_order (despacho de los 4)", "falsifier": "efecto futuro afirmado como ocurrirá; cuello como causal; compuesto que omita un módulo", "remaining_gap": "ídem"},
     # -- slice 2: gaps/signals ------------------------------------------------
     "T019": {"operator": "signals.dynamics.TopicDynamics.acceleration", "falsifier": "aceleración desalineada a periodos", "remaining_gap": "integración en loop RADAR (no existe aún)"},
     "T048": {"operator": "signals.dynamics.TopicDynamics.velocity", "falsifier": "deltas no alineadas", "remaining_gap": "ídem"},
@@ -57,7 +57,7 @@ CHECKPOINTS: dict[str, dict] = {
     "T098": {"operator": "signals.anomaly.AnomalyDetector.detect", "falsifier": "outlier por media no robusta", "remaining_gap": "ídem"},
     "T099": {"operator": "signals.weak_signals.WeakSignalAggregator.aggregate", "falsifier": "doble conteo de soporte", "remaining_gap": "ídem"},
     "T101": {"operator": "signals.lead_lag.LeadLagAnalyzer.analyze", "falsifier": "lag positivo para el líder", "remaining_gap": "ídem"},
-    "T128": {"operator": "patent_expiration+dormant+sleeping_beauty+resurrection", "falsifier": "expiración sin fecha o FTO afirmado", "remaining_gap": "ídem"},
+    "T128": {"operator": "composite:t128 — patent_expiration+dormant+sleeping_beauty+resurrection (despacho de los 4)", "falsifier": "expiración sin fecha o FTO afirmado; compuesto que omita un módulo", "remaining_gap": "ídem"},
     # -- slice 3: graph -------------------------------------------------------
     "T091": {"operator": "graph.link_prediction.LinkPredictionInterface.predict", "falsifier": "predicción sin vecinos comunes o con enlaces existentes", "remaining_gap": "grafo alimentado desde extracción de entidades en vivo"},
     "T094": {"operator": "graph.communities.CommunityDetector.detect", "falsifier": "comunidad no ordenada o fuera de subset", "remaining_gap": "ídem"},
