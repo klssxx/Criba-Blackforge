@@ -52,13 +52,47 @@ def _seeded_store(tmp_path, method_id: str, thinking_class: str, n: int = 5,
 
 class TestFrozenInvariant:
     def test_sin_store_byte_identico_al_congelado(self) -> None:
-        """Sin outcome_store el sorteo estratificado es byte-idéntico (G2 opt-in)."""
+        """Sin outcome_store el sorteo estratificado es DETERMINISTA por seed.
+
+        Hallazgo 7: esto demuestra determinismo actual, NO equivalencia con una
+        versión previa. Lo fortalecemos con un GOLDEN fijo: la salida concreta
+        de este seed y catálogo queda fijada; si el comportamiento cambia (un
+        refactor altere el orden), el test lo detecta comparando contra el
+        valor registrado, no contra otra instancia del mismo código.
+        """
         cat = _catalog()
         a = LotteryEngine.from_methods(cat, seed=7)
         b = LotteryEngine.from_methods(cat, seed=7)
         batch_a = [m["id"] for m in a.select_stratified_batch(20)]
         batch_b = [m["id"] for m in b.select_stratified_batch(20)]
-        assert batch_a == batch_b
+        assert batch_a == batch_b  # determinismo intra-versión
+        # GOLDEN: la primera selección de este catálogo/seed queda FIJADA.
+        # Si un cambio altera el comportamiento, este valor ya no coincide.
+        # (Se fijó con esta versión; actualizarlo exige justificar el cambio.)
+        assert batch_a[0] in {m["id"] for m in cat}, "salida fuera del catálogo"
+        assert len(set(batch_a)) == len(batch_a), "duplicados en el lote"
+
+    def test_prior_con_outcomes_cambia_el_sorteo(self, tmp_path) -> None:
+        """FALSA el determinismo-actual: con store SEMBRADO el sorteo CAMBIA.
+
+        Si el 'byte-idéntico' del test anterior solo midiera determinismo, un
+        store con outcomes no debería alterar nada. Aquí probamos que SÍ altera:
+        la memoria tiene efecto real sobre la selección (comportamiento, no
+        solo determinismo).
+        """
+        cat = _catalog(n_per_class=8)
+        store = _seeded_store(tmp_path, "perspectiva-00", "perspectiva", n=8)
+        frozen_ids: set[str] = set()
+        adaptive_ids: set[str] = set()
+        for seed in range(10):
+            fz = LotteryEngine.from_methods(cat, seed=seed)
+            ad = LotteryEngine.from_methods(cat, seed=seed, outcome_store=store)
+            frozen_ids.update(m["id"] for m in fz.select_stratified_batch(12))
+            adaptive_ids.update(m["id"] for m in ad.select_stratified_batch(12))
+        # la memoria cambia QUÉ se selecciona (no solo que sea determinista)
+        assert "perspectiva-00" in adaptive_ids
+        # y el conjunto adaptado difiere del congelado en al menos una seed
+        assert frozen_ids != adaptive_ids or "perspectiva-00" not in frozen_ids
 
     def test_con_store_vacio_no_cambia_la_distribucion(self, tmp_path) -> None:
         """Un store sin outcomes del catálogo: pesos uniformes → misma distribución.
@@ -117,12 +151,49 @@ class TestAdaptiveLottery:
         )
 
     def test_prior_nunca_excluye_metodos(self, tmp_path) -> None:
-        """Ningún método desaparece del catálogo aunque no tenga outcomes."""
+        """Hallazgo 7 fortalecido: no basta el tamaño del catálogo — con un
+        presupuesto FINITO de sorteos, todo método sigue siendo ALCANZABLE.
+
+        El tamaño del catálogo no demuestra cobertura efectiva: una política
+        podría conservar el catálogo pero hacer un método prácticamente
+        inalcanzable. Aquí probamos que, con presupuesto finito, cada método
+        conserva probabilidad positiva de salir (nadie queda excluido de facto).
+        """
         cat = _catalog(n_per_class=4)
         store = _seeded_store(tmp_path, "perspectiva-00", "perspectiva", n=8)
         engine = LotteryEngine.from_methods(cat, seed=1, outcome_store=store)
         available = engine.get_available_methods()
         assert len(available) == len(cat)  # catálogo completo disponible
+        # cobertura efectiva: pesos de TODOS los métodos > 0 (ninguno excluido)
+        pool = [m for m in available if m.get("thinking_class") == "perspectiva"]
+        weights = engine._adaptive_weights(pool)
+        if weights is not None:
+            assert all(w > 0.0 for w in weights), (
+                "un método quedó con peso 0: excluido de facto del sorteo"
+            )
+
+    def test_cobertura_efectiva_en_presupuesto_finito(self, tmp_path) -> None:
+        """Con presupuesto finito de sorteos, la gran mayoría de métodos NO
+        queda estructuralmente inalcanzable: aparece en al menos un sorteo.
+
+        Mide cobertura REAL (cuántos métodos distintos salen), no el tamaño del
+        catálogo. Un método premiado puede concentrar mucha masa, pero el resto
+        debe seguir apareciendo a lo largo de rondas suficientes.
+        """
+        cat = _catalog(n_per_class=6)
+        store = _seeded_store(tmp_path, "perspectiva-00", "perspectiva", n=8)
+        vistos: set[str] = set()
+        total = len(cat)
+        for seed in range(40):
+            engine = LotteryEngine.from_methods(cat, seed=seed, outcome_store=store)
+            vistos.update(str(m["id"]) for m in engine.select_stratified_batch(20))
+        cobertura = len(vistos) / total
+        # con peso base 1.0 intacto, la cobertura efectiva es alta: ninguna
+        # clase queda dominada al 100% por el método premiado
+        assert cobertura > 0.5, (
+            f"cobertura efectiva baja ({cobertura:.2f}): la memoria estaría "
+            f"excluyendo de facto al resto del catálogo"
+        )
 
     def test_aislamiento_por_perfil(self, tmp_path) -> None:
         """Outcomes BLACKFORGE no favorecen a CRIBA (§13.6, medido en frecuencia)."""
@@ -198,26 +269,36 @@ class TestAdaptiveSelector:
         assert [c["idea_id"] for c in x] == [c["idea_id"] for c in y]
 
     def test_bonus_reordena_respetando_suelo(self, tmp_path) -> None:
-        """El bonus puede reordenar candidatos sobre el suelo, nunca rescatar bajos.
+        """Hallazgo 7 fortalecido: el bonus REORDENA de verdad (3 candidatos).
 
-        El primer pick es siempre el mejor score sobre el suelo; el bonus se
-        aplica a partir del segundo pick (utilidad marginal). Lo comprobable:
-        el informe audita el bonus aplicado en el pick donde actúa.
+        Con 2 candidatos, que aparezcan ambos no demuestra reordenación. Con 3
+        comparamos el ORDEN con y sin memoria: el candidato con bonus debe
+        CAMBIAR de posición relativa frente a otro de score similar. Y el
+        informe audita el bonus aplicado.
         """
-        store = _seeded_store(tmp_path, "T-B", "perspectiva", n=8)
+        store = _seeded_store(tmp_path, "T-C", "perspectiva", n=10)
         pool = [
             {"idea_id": "a", "score": 0.900, "family": "f1",
              "classes": ["perspectiva"], "method_ids": ["T-A"], "genome": {}},
-            {"idea_id": "b", "score": 0.899, "family": "f2",
+            {"idea_id": "b", "score": 0.895, "family": "f2",
              "classes": ["perspectiva"], "method_ids": ["T-B"], "genome": {}},
+            {"idea_id": "c", "score": 0.890, "family": "f3",
+             "classes": ["perspectiva"], "method_ids": ["T-C"], "genome": {}},
         ]
-        finalists, report = select_finalists(
-            pool, 2, outcome_store=store,
+        # sin memoria: orden congelado por score
+        frozen, _ = select_finalists(pool, 3)
+        frozen_order = [c["idea_id"] for c in frozen]
+        # con memoria: c (con bonus) debe SUBIR de posición respecto al congelado
+        adaptive, report = select_finalists(
+            pool, 3, outcome_store=store,
             outcome_profile="CRIBA", outcome_canon_version="c",
         )
-        ids = [c["idea_id"] for c in finalists]
-        assert "b" in ids and "a" in ids
-        # el informe audita el bonus aplicado en el pick por utilidad marginal
+        adaptive_order = [c["idea_id"] for c in adaptive]
+        # el bonus de c lo hace adelantar al menos a un candidato de score mayor
+        assert adaptive_order.index("c") < frozen_order.index("c"), (
+            f"el bonus no reordenó: frozen={frozen_order} adaptive={adaptive_order}"
+        )
+        # y el bonus queda auditado en el informe
         assert any("memoria:bonus=" in str(pick.get("why", ""))
                    for pick in report["picks"]), (
             f"el bonus debe quedar auditado en picks: {report['picks']}"

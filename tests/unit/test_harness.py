@@ -20,7 +20,13 @@ def test_sin_modelo_status_unavailable() -> None:
 
 
 def test_smoke_sin_llamadas_externas_exporta_json(tmp_path) -> None:
-    """Smoke funcional con modelo stub inyectado: cero red, export JSON."""
+    """Smoke funcional con modelo stub inyectado: cero red, export JSON.
+
+    C_CRIBA usa criba_fn real (loop CRIBA); las condiciones de modelo usan el
+    stub. Hallazgo 6: sin criba_fn, C_CRIBA sería UNAVAILABLE honesto.
+    """
+    from benchmarks.innovation.criba_adapter import criba_fn
+
     def _model_stub(prompt: str) -> list[dict]:
         return [
             {"idea_id": f"c{i}", "score": 0.9 - i * 0.1, "family": f"f{i}",
@@ -30,7 +36,7 @@ def test_smoke_sin_llamadas_externas_exporta_json(tmp_path) -> None:
              "texto": f"respuesta {i}"}
             for i in range(3)
         ]
-    report = run_smoke(model_fn=_model_stub, seed=7)
+    report = run_smoke(model_fn=_model_stub, seed=7, criba_fn=criba_fn)
     assert report["n_problemas"] == 10
     assert len(report["runs"]) == 30  # 10 problemas × 3 condiciones
     assert all(r["status"] == "OK" for r in report["runs"])
