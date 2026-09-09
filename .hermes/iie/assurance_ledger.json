@@ -486,5 +486,16 @@
       "coherencia canon<->dispatch (autoridad: 1, ampliado)"
     ]
   },
-  "cbac469_recovery_status": "SLICES 1-3 COMPLETADOS; triage 100% de los 93 paths con disposicion ejecutada o documentada. Pendiente de CBAC469_RECOVERY_DONE: aceptacion adversarial independiente (infra) + stop-rule P2."
+  "cbac469_recovery_status": "SLICES 1-3 COMPLETADOS; triage 100% de los 93 paths con disposicion ejecutada o documentada. Pendiente de CBAC469_RECOVERY_DONE: aceptacion adversarial independiente (infra) + stop-rule P2.",
+  "functional_monoculture_clusters": [
+    {
+      "cluster": "dynamics-acceleration",
+      "members": [
+        "T019",
+        "T049"
+      ],
+      "reason": "mismo operador TopicDynamics.acceleration con corpora semánticos distintos (trend vs topic); canon las declara separadas — no contar como diversidad independiente",
+      "detected_by": "falsación propia 2026-09-08"
+    }
+  ]
 }
