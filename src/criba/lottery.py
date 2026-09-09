@@ -233,6 +233,33 @@ class LotteryEngine:
         except Exception:  # noqa: BLE001 — la memoria nunca rompe el sorteo
             return None
 
+    def _log_decision(self, chosen: dict[str, Any], propensity: float) -> None:
+        """G3: registra la decisión del sorteo CON su propensión pi_b.
+
+        Append-only en el log estándar de off-policy; la recompensa queda 0.0
+        (pendiente) — se une por ``technique_id`` desde el outcome_store en la
+        evaluación, cuando el outcome ya existe. Nunca rompe el sorteo: cualquier
+        fallo de escritura se ignora (el log es aprendizaje, no requisito).
+        """
+        if propensity <= 0.0:
+            return
+        try:
+            from .intelligence.off_policy import LoggedDecision, append_decision, _default_log_path
+
+            append_decision(
+                _default_log_path(),
+                LoggedDecision(
+                    technique_id=str(chosen["id"]),
+                    family=str(chosen.get("thinking_class") or chosen.get("family") or ""),
+                    propensity=propensity,
+                    reward=0.0,  # pendiente: se une al outcome real en la evaluación
+                    profile=self.outcome_profile,
+                    run_id=f"round-{self.round_number}",
+                ),
+            )
+        except Exception:  # noqa: BLE001 — el log nunca rompe el sorteo
+            return
+
     def get_available_methods(self) -> list[dict[str, Any]]:
         """Retorna métodos no usados aún."""
         return [m for m in self.methods if m['id'] not in self.used_methods]
@@ -309,8 +336,18 @@ class LotteryEngine:
                     if weights is not None
                     else self.rng.choice(class_pool)
                 )
+                # G3: propensión pi_b del elegido ANTES de mutar el pool (el
+                # denominador incluye al elegido). Sin memoria no se registra:
+                # la política uniforme no necesita log off-policy.
+                propensity: float | None = None
+                if weights is not None:
+                    total_w = sum(weights)
+                    idx = class_pool.index(chosen)
+                    propensity = weights[idx] / total_w if total_w > 0 else None
                 class_pool.remove(chosen)
                 if str(chosen["id"]) not in selected_ids:
+                    if propensity is not None:
+                        self._log_decision(chosen, propensity)
                     return chosen
             return None
 
