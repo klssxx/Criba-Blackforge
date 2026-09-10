@@ -326,6 +326,45 @@ class TechniqueOutcomeStore:
             value=value, run_id=run_id, recorded_at=recorded_at,
         )
 
+    def summary(
+        self,
+        *,
+        profile: str | None = None,
+        canon_version: str | None = None,
+    ) -> list[dict[str, Any]]:
+        """Lectura agregada de solo presentación (GUI): fila por celda.
+
+        Celda = (profile, family, technique_id, channel, outcome); ``value``
+        es la media de los valores numéricos si los hay. Orden determinista.
+        No alimenta aprendizaje — solo lo muestra.
+        """
+        cells: dict[tuple[str, str, str, str, str], dict[str, Any]] = {}
+        for r in self._read_valid():
+            if profile is not None and r["profile"] != profile:
+                continue
+            if canon_version is not None and r.get("canon_version") != canon_version:
+                continue
+            key = (r["profile"], r["family"], r["technique_id"],
+                   r["channel"], r["outcome"])
+            cell = cells.setdefault(key, {
+                "profile": r["profile"], "family": r["family"],
+                "technique_id": r["technique_id"], "channel": r["channel"],
+                "outcome": r["outcome"], "n": 0, "value_sum": 0.0, "value_n": 0,
+            })
+            cell["n"] += 1
+            v = r.get("value")
+            if isinstance(v, (int, float)):
+                cell["value_sum"] += float(v)
+                cell["value_n"] += 1
+        out: list[dict[str, Any]] = []
+        for key in sorted(cells):
+            cell = dict(cells[key])
+            value_n = cell.pop("value_n")
+            value_sum = cell.pop("value_sum")
+            cell["value"] = round(value_sum / value_n, 6) if value_n else None
+            out.append(cell)
+        return out
+
     # -- auditoría / invariante (§15.2) ------------------------------------
     def state_hash(self) -> str:
         """SHA-256 del contenido del store: hace comprobable el invariante.
