@@ -909,3 +909,93 @@ def on_desarrollar_supra(win: Any) -> None:
         f"Desarrollar con SUPRA: {len(dossiers)} dossier(s) preparados, "
         f"ejecución pendiente -> {path}",
     )
+
+
+# ---------------------------------------------------------------------------
+# Retro OBSERVED + memoria de outcomes + técnicas del canon (cadena G en UI)
+# ---------------------------------------------------------------------------
+def on_retro(win: Any) -> None:
+    """Registrar un resultado OBSERVED (mismo canal que `criba retro`)."""
+    win.nav["navRetro"].setChecked(True)
+    from .dialogs import ask_retro
+
+    try:
+        data = ask_retro(win)
+    finally:
+        win.nav["navRetro"].setChecked(False)
+    if not data:
+        return
+    _register_retro_for_test(
+        win, tecnica=data["tecnica"], familia=data["familia"],
+        resultado=data["resultado"], perfil=data["perfil"],
+    )
+    _activity(win, "blue", f"Outcome OBSERVED registrado: {data['tecnica']} → {data['resultado']}")
+    _suggest(win, None)
+
+
+def on_memoria(win: Any) -> None:
+    """Panel de solo lectura de la memoria de outcomes."""
+    win.nav["navMemoria"].setChecked(True)
+    from .dialogs import show_outcome_memory
+
+    try:
+        show_outcome_memory(win)
+    finally:
+        win.nav["navMemoria"].setChecked(False)
+    _suggest(win, None)
+
+
+def on_tecnicas(win: Any) -> None:
+    """Router + ejecución de técnicas del canon (mismos servicios que la CLI)."""
+    win.nav["navTecnicas"].setChecked(True)
+    from .dialogs import show_tecnicas
+
+    try:
+        show_tecnicas(win)
+    finally:
+        win.nav["navTecnicas"].setChecked(False)
+    _suggest(win, None)
+
+
+def _register_retro_for_test(
+    _win: Any, *, tecnica: str, familia: str, resultado: str, perfil: str,
+) -> None:
+    """Ruta de trabajo de on_retro separada del diálogo (testeable).
+
+    Misma validación que el CLI: técnica y familia no vacías.
+    """
+    from ..cli import _normalize_tecnica_id
+    from ..intelligence.outcome_store import CHANNEL_OBSERVED, default_store
+
+    if not tecnica.strip() or not familia.strip():
+        raise ValueError("técnica y familia son obligatorias")
+    canon = ""
+    try:
+        from ..intelligence.registry import TechniqueRegistry
+
+        canon = TechniqueRegistry().canon_version or ""
+    except Exception:  # noqa: BLE001 — sin canon, etiqueta vacía (como CLI)
+        canon = ""
+    default_store().record(
+        profile=perfil,
+        family=familia,
+        technique_id=_normalize_tecnica_id(tecnica),
+        channel=CHANNEL_OBSERVED,
+        outcome=resultado,
+        canon_version=canon,
+    )
+
+
+def _memory_rows_for_test(_win: Any) -> list[dict[str, Any]]:
+    from ..intelligence.outcome_store import default_store
+
+    return default_store().summary()
+
+
+def _run_technique_for_test(
+    _win: Any, *, technique_id: str, problem: str, params: dict[str, Any],
+) -> dict[str, Any]:
+    from ..intelligence.execution import execute_technique
+    from ..intelligence.registry import TechniqueRegistry
+
+    return execute_technique(TechniqueRegistry(), technique_id, problem, params=params)

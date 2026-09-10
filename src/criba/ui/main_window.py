@@ -49,6 +49,9 @@ NAV_SPEC = [
     ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
     ("navHibrido", "⚡", "Híbrido", "Pipeline completo: ensemble → cadena → adversarial"),
     ("navBlackforge", "⛨", "Blackforge", "Panel de control BLACKFORCE"),
+    ("navTecnicas", "⌘", "Técnicas", "Canon T001–T130: rutear y ejecutar"),
+    ("navRetro", "↩", "Retro", "Registrar resultado OBSERVED"),
+    ("navMemoria", "☰", "Memoria", "Outcomes aprendidos (solo lectura)"),
 ]
 
 
@@ -227,6 +230,9 @@ class CribaMainWindow(QMainWindow):
         self.nav["navModelos"].clicked.connect(lambda: actions.on_modelos(self))
         self.nav["navBlackforge"].clicked.connect(lambda: actions.on_blackforge(self))
         self.nav["navHibrido"].clicked.connect(lambda: actions.on_hibrido(self))
+        self.nav["navTecnicas"].clicked.connect(lambda: actions.on_tecnicas(self))
+        self.nav["navRetro"].clicked.connect(lambda: actions.on_retro(self))
+        self.nav["navMemoria"].clicked.connect(lambda: actions.on_memoria(self))
         # contorno neón turquesa que respira (3s sube / 3s baja) en bucle
         apply_neon_breath(self.nav["navBlackforge"])
         return sb
