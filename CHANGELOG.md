@@ -3,7 +3,7 @@
 All notable changes to this project are documented here.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## [Unreleased]
+## [0.3.0] - 2026-09-10
 
 ### Added (2026-09-08 — restauración selectiva cbac469, slice 3)
 - **`graph/` restaurado** (8 módulos + 8 suites, 26 tests verdes sin
