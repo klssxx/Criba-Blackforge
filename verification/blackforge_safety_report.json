@@ -12,7 +12,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1507": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -24,7 +25,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0630": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -36,7 +38,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0603": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -48,7 +51,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1506": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -60,7 +64,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0548": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -72,7 +77,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0305": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -84,7 +90,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0503": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -96,7 +103,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-R1000-0314": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -108,7 +116,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1439": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -120,7 +129,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0567": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -132,7 +142,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0576": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -144,7 +155,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1540": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -156,7 +168,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0557": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -168,7 +181,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0603": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -180,7 +194,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0472": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -192,7 +207,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0375": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -204,7 +220,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1514": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -216,7 +233,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1530": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -228,7 +246,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1534": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -240,7 +259,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1536": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -252,7 +272,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0579": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -264,7 +285,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-R1000-0375": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -276,7 +298,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0428": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -288,7 +311,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1544": {
       "decision": "ALLOW_CONCEPTUAL",
@@ -300,7 +324,8 @@
       "unmet_requirements": [],
       "allowed_scope": "analysis_and_ideation",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-L600-1532": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -312,7 +337,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0577": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -324,7 +350,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0872": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -336,7 +363,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0580": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -348,7 +376,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0212": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -360,7 +389,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0792": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -372,7 +402,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0870": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -384,7 +415,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0873": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -396,7 +428,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0874": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -408,7 +441,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0878": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -420,7 +454,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0007": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -432,7 +467,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0359": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -444,7 +480,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-S800-0702": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -456,7 +493,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-R1000-0102": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -468,7 +506,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     },
     "BF-CYB-M800-0309": {
       "decision": "ALLOW_LOCAL_NON_DESTRUCTIVE",
@@ -480,7 +519,8 @@
       "unmet_requirements": [],
       "allowed_scope": "defensive_design_and_local_analysis",
       "session_id": "report",
-      "timestamp": "2025-07-24T02:40:00+00:00"
+      "timestamp": "2025-07-24T02:40:00+00:00",
+      "authorization_state": "pending"
     }
   },
   "decision_distribution_default_context": {

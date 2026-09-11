@@ -42,14 +42,13 @@ NAV_SPEC = [
     ("navNuevaIdea", "◉", "Nueva idea", "Inicia el flujo, pide el problema base"),
     ("navGenerar", "⚙", "Generar", "Ejecuta los 16 operadores"),
     ("navInventar", "✦", "Inventar", "Cruce → hipótesis → antecedentes"),
-    ("navEvaluar", "▥", "Evaluar", "Ranking por value_score"),
-    ("navGuardar", "▣", "Guardar", "Persiste la idea en el catálogo"),
-    ("navActualizar", "↻", "Actualizar fuentes", "Adquisición real: Crossref, GitHub…"),
-    ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
-    ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
-    ("navHibrido", "⚡", "Híbrido", "Pipeline completo: ensemble → cadena → adversarial"),
+    ("navEvaluar", "▥", "Evaluar", "Ranking multicriterio (MCDA)"),
+    ("navRed", "◉", "Red de Ideas", "Grafo de relaciones entre ideas"),
     ("navBlackforge", "⛨", "Blackforge", "Panel de control BLACKFORCE"),
+    ("navSupra", "◈", "SUPRA", "Taskmaster orquestador"),
     ("navTecnicas", "⌘", "Técnicas", "Canon T001–T130: rutear y ejecutar"),
+    ("navModelos", "◇", "Modelos IA", "Añadir GGUF y ajustar reasoning"),
+    ("navHistorial", "◷", "Historial", "Ideas generadas antes"),
     ("navRetro", "↩", "Retro", "Registrar resultado OBSERVED"),
     ("navMemoria", "☰", "Memoria", "Outcomes aprendidos (solo lectura)"),
 ]
@@ -224,13 +223,12 @@ class CribaMainWindow(QMainWindow):
         self.nav["navGenerar"].clicked.connect(lambda: actions.on_generar(self))
         self.nav["navInventar"].clicked.connect(lambda: actions.on_inventar(self))
         self.nav["navEvaluar"].clicked.connect(lambda: actions.on_evaluar(self))
-        self.nav["navGuardar"].clicked.connect(lambda: actions.on_guardar(self))
-        self.nav["navActualizar"].clicked.connect(lambda: actions.on_actualizar(self))
-        self.nav["navHistorial"].clicked.connect(lambda: actions.on_historial(self))
-        self.nav["navModelos"].clicked.connect(lambda: actions.on_modelos(self))
+        self.nav["navRed"].clicked.connect(lambda: actions.on_red(self))
         self.nav["navBlackforge"].clicked.connect(lambda: actions.on_blackforge(self))
-        self.nav["navHibrido"].clicked.connect(lambda: actions.on_hibrido(self))
+        self.nav["navSupra"].clicked.connect(lambda: actions.on_supra(self))
         self.nav["navTecnicas"].clicked.connect(lambda: actions.on_tecnicas(self))
+        self.nav["navModelos"].clicked.connect(lambda: actions.on_modelos(self))
+        self.nav["navHistorial"].clicked.connect(lambda: actions.on_historial(self))
         self.nav["navRetro"].clicked.connect(lambda: actions.on_retro(self))
         self.nav["navMemoria"].clicked.connect(lambda: actions.on_memoria(self))
         # contorno neón turquesa que respira (3s sube / 3s baja) en bucle
