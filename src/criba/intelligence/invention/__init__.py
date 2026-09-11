@@ -22,6 +22,7 @@ from .taxonomy import (
     get_operator,
     operator_definitions,
 )
+from .triz import generate_triz_hypotheses
 
 __all__ = [
     "OPERATORS_BY_KEY",
@@ -41,6 +42,7 @@ __all__ = [
     "generate_morphological_hypotheses",
     "generate_nth_order_effect_hypotheses",
     "generate_scamper_hypotheses",
+    "generate_triz_hypotheses",
     "get_operator",
     "operator_definitions",
     "search_function_to_mechanism_hypotheses",
