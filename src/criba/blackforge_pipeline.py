@@ -17,6 +17,7 @@ Output artifacts (FASE 6):
 from __future__ import annotations
 
 import json
+import math
 import os
 import uuid
 from collections.abc import Mapping
@@ -125,6 +126,12 @@ def run_headless(
             "pipeline_stage": record.get("pipeline_stage"),
             "safety_class": record.get("safety_class"),
             "quality_score_v2": record.get("quality_score_v2", 0),
+            "bypass_probable": record.get("bypass_probable")
+            or record.get("manual_review_reason")
+            or "No evaluado; requiere prueba explícita de bypass.",
+            "residual_risk": record.get("residual_risk")
+            or record.get("risk_level")
+            or "No cuantificado; requiere validación antes de cualquier ejecución.",
             "method1_name": record.get("title", ""),
             "method2_name": record.get("description", "")[:50],
             "method1_desc": record.get("description", ""),
@@ -146,7 +153,8 @@ def run_headless(
     ranked[:] = ranked
     top_ideas = [i["id"] for i in ranked[:3]]
     mean_value = round(
-        sum(i["convergence"]["value_score"] for i in ranked) / max(1, len(ranked)), 4
+        math.fsum(i["convergence"]["value_score"] for i in ranked) / max(1, len(ranked)),
+        4,
     )
 
     # Measurement summary (FASE 6 checks).
@@ -202,8 +210,8 @@ def save_artifacts(packet: dict[str, Any], out_dir: str = "verification") -> dic
     os.makedirs(out_dir, exist_ok=True)
     raw_path = os.path.join(out_dir, "blackforge_headless_output.json")
     norm_path = os.path.join(out_dir, "blackforge_headless_output.normalized.json")
-    with open(raw_path, "w", encoding="utf-8") as f:
+    with open(raw_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(packet, f, ensure_ascii=False, indent=2)
-    with open(norm_path, "w", encoding="utf-8") as f:
+    with open(norm_path, "w", encoding="utf-8", newline="\n") as f:
         json.dump(_stable(packet), f, ensure_ascii=False, indent=2)
     return {"raw": raw_path, "normalized": norm_path}

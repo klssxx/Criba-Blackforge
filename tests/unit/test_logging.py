@@ -232,6 +232,26 @@ class TestPersistence:
         assert recon.read_stream("s1")[0]["event_type"] == "E1"
         assert recon.read_stream("s2")[0]["event_type"] == "E2"
 
+    def test_emitter_restart_resumes_sequence_and_hash(self, tmp_path: Path) -> None:
+        db_path = tmp_path / "restart-chain.sqlite3"
+        first = LogEmitter(Storage(db_path), session_id="restart-chain")
+        event1 = first.emit(event_type="E1")
+        second = LogEmitter(Storage(db_path), session_id="restart-chain")
+        event2 = second.emit(event_type="E2")
+        assert event2["sequence_number"] == 2
+        assert event2["previous_event_hash"] == event1["event_hash"]
+        assert LogReconstructor(Storage(db_path)).verify_chain("restart-chain")["chain_intact"] is True
+
+    def test_idempotency_key_replays_without_duplicate(self, tmp_path: Path) -> None:
+        storage = Storage(tmp_path / "idempotency.sqlite3")
+        emitter = LogEmitter(storage, session_id="idempotent")
+        first = emitter.emit(event_type="E1", payload={"value": 1}, idempotency_key="attempt-1")
+        replay = emitter.emit(event_type="E1", payload={"value": 2}, idempotency_key="attempt-1")
+        events = LogReconstructor(storage).read_stream("idempotent")
+        assert replay == first
+        assert len(events) == 1
+        assert events[0]["idempotency_key"] == "attempt-1"
+        assert LogReconstructor(storage).verify_chain("idempotent")["chain_intact"] is True
 
 class TestStreamMetadata:
     def test_event_count_updated(self, emitter: LogEmitter) -> None:

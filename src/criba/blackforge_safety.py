@@ -24,6 +24,7 @@ from __future__ import annotations
 import time
 from collections.abc import Callable, Mapping
 from dataclasses import dataclass
+from enum import Enum
 from typing import Any
 
 from .blackforge_catalog import load as _load_catalog
@@ -44,6 +45,15 @@ SCOPE_DEFENSIVE = "defensive_design_and_local_analysis"
 SCOPE_NONE = "none"
 
 
+class AuthorizationState(str, Enum):
+    """Lifecycle state required by the Blackforge authorization gate."""
+
+    PENDING = "pending"
+    GRANTED = "granted"
+    DENIED = "denied"
+    EXPIRED = "expired"
+
+
 @dataclass
 class SafetyDecision:
     decision: str
@@ -54,6 +64,7 @@ class SafetyDecision:
     allowed_scope: str
     session_id: str
     timestamp: str
+    authorization_state: AuthorizationState = AuthorizationState.PENDING
 
     def to_dict(self) -> dict[str, Any]:
         return {
@@ -65,6 +76,7 @@ class SafetyDecision:
             "allowed_scope": self.allowed_scope,
             "session_id": self.session_id,
             "timestamp": self.timestamp,
+            "authorization_state": self.authorization_state.value,
         }
 
 
@@ -85,6 +97,16 @@ def evaluate_blackforge_safety(
     safety_class = item.get("safety_class")
     reasons: list[str] = []
     unmet: list[str] = []
+    try:
+        authorization_state = AuthorizationState(ctx.get("authorization_state", AuthorizationState.PENDING))
+    except ValueError:
+        return SafetyDecision(
+            decision=DENY, policy_version=_SAFETY_POLICY_VERSION, item_id=item_id,
+            reasons=["Estado de autorización desconocido; se aplica deny-by-default."],
+            unmet_requirements=["valid_authorization_state"], allowed_scope=SCOPE_NONE,
+            session_id=session_id, timestamp=_iso(clock),
+            authorization_state=AuthorizationState.PENDING,
+        )
 
     # 1) Hard prohibitions -> DENY unconditionally.
     meta, _ = _load_catalog()
@@ -106,6 +128,7 @@ def evaluate_blackforge_safety(
             decision=DENY, policy_version=_SAFETY_POLICY_VERSION, item_id=item_id,
             reasons=reasons, unmet_requirements=unmet, allowed_scope=SCOPE_NONE,
             session_id=session_id, timestamp=_iso(clock),
+            authorization_state=authorization_state,
         )
 
     # 2) Class-based gating.
@@ -115,6 +138,7 @@ def evaluate_blackforge_safety(
             item_id=item_id, reasons=["S0_CONCEPTUAL: solo análisis e ideación; sin ejecución automática."],
             unmet_requirements=[], allowed_scope=SCOPE_ANALYSIS,
             session_id=session_id, timestamp=_iso(clock),
+            authorization_state=authorization_state,
         )
 
     if safety_class == "S1_DEFENSIVE":
@@ -130,6 +154,7 @@ def evaluate_blackforge_safety(
             decision=decision, policy_version=_SAFETY_POLICY_VERSION, item_id=item_id,
             reasons=reasons, unmet_requirements=[], allowed_scope=scope,
             session_id=session_id, timestamp=_iso(clock),
+            authorization_state=authorization_state,
         )
 
     if safety_class == "S2_SANDBOX":
@@ -141,12 +166,14 @@ def evaluate_blackforge_safety(
                 reasons=["S2_SANDBOX: autorizado en sandbox con rollback/logging/stop."],
                 unmet_requirements=[], allowed_scope=SCOPE_DEFENSIVE,
                 session_id=session_id, timestamp=_iso(clock),
+                authorization_state=authorization_state,
             )
         return SafetyDecision(
             decision=DENY, policy_version=_SAFETY_POLICY_VERSION, item_id=item_id,
             reasons=["S2_SANDBOX: requiere autorización explícita + sandbox + rollback + logging + stop_condition."],
             unmet_requirements=missing, allowed_scope=SCOPE_NONE,
             session_id=session_id, timestamp=_iso(clock),
+            authorization_state=authorization_state,
         )
 
     if safety_class == "S3_HIGH_CONTROL":
@@ -159,6 +186,7 @@ def evaluate_blackforge_safety(
                 reasons=["S3_HIGH_CONTROL: aprobación humana + sandbox aislado + logging completo."],
                 unmet_requirements=[], allowed_scope=SCOPE_NONE,
                 session_id=session_id, timestamp=_iso(clock),
+                authorization_state=authorization_state,
             )
         if not auth_scope_ok:
             unmet.append("authorized_scope_confirmed")
@@ -170,6 +198,7 @@ def evaluate_blackforge_safety(
             reasons=["S3_HIGH_CONTROL: nunca habilitado por defecto; requiere aprobación humana + sandbox aislado + logging completo + scope autorizado."],
             unmet_requirements=missing + unmet, allowed_scope=SCOPE_NONE,
             session_id=session_id, timestamp=_iso(clock),
+            authorization_state=authorization_state,
         )
 
     # Unknown safety class -> deny conservatively.
@@ -178,6 +207,7 @@ def evaluate_blackforge_safety(
         reasons=[f"Clase de seguridad desconocida: {safety_class}."],
         unmet_requirements=["valid_safety_class"], allowed_scope=SCOPE_NONE,
         session_id=session_id, timestamp=_iso(clock),
+        authorization_state=authorization_state,
     )
 
 

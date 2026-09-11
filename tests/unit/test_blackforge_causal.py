@@ -186,3 +186,70 @@ def test_emits_report(model):
     with open(REPORT, encoding="utf-8") as f:
         back = json.load(f)
     assert back["frozen_fingerprint"]
+
+
+# --- BF-P00-T07: reproducibilidad exacta de la agregación (golden exigible) ---
+
+def test_fsum_coverage_repr_matches_tracked_golden(model):
+    """La agregación debe reproducir el repr EXACTO del golden versionado.
+
+    Falla si coverage vuelve a divergir por asociatividad IEEE-754
+    (sum() en orden de inserción produce 0.9; el golden exige
+    0.8999999999999999, que math.fsum reproduce con independencia
+    del orden). Sin tolerancias ni comparaciones "casi iguales".
+    """
+    a = proposal([{"variable_id": "CV-001", "operation": "replace", "from": "central_authority", "to": "distributed_quorum"}], proposal_id="A")
+    b = proposal([{"variable_id": "CV-001", "operation": "replace", "from": "central_authority", "to": "rule_engine"}], proposal_id="B")
+    result = analyze_causal_pair(a, b, model, profile=GENERAL_PROFILE)
+    assert repr(result["coverage"]) == repr(0.8999999999999999)
+
+
+def test_emitted_report_is_byte_identical_to_tracked_golden(model):
+    """El reporte regenerado debe ser blob-idéntico al artefacto versionado.
+
+    Compara contra el blob TRACKED (git rev-parse HEAD:path), no contra el
+    working tree, para que una regeneración previa no pueda auto-validarse.
+    """
+    import subprocess
+    a = proposal([{"variable_id": "CV-001", "operation": "replace", "from": "central_authority", "to": "distributed_quorum"}], proposal_id="A")
+    b = proposal([{"variable_id": "CV-001", "operation": "replace", "from": "central_authority", "to": "rule_engine"}], proposal_id="B")
+    c = proposal([{"variable_id": "CV-001", "operation": "replace", "from": "central_authority", "to": "distributed_quorum"}], proposal_id="A2")
+    expected = subprocess.run(
+        ["git", "cat-file", "blob", "HEAD:verification/blackforge_causal_report.json"],
+        capture_output=True, check=True,
+    ).stdout
+    # Regenerar y comparar byte a byte contra el blob tracked
+    report = {
+        "phase": "FASE 4 — CAUSAL",
+        "engine_module": "src/criba/blackforge_causal.py (integrated from imports/blackforge_v2/causal_engine.py)",
+        "rejection_code": "CAUSAL_PROPOSAL_REJECTED",
+        "rejection_codes_supported": [
+            "UNKNOWN_VARIABLE_ID", "UNKNOWN_OUTCOME_ID", "UNKNOWN_OPERATION",
+            "FROM_OUTSIDE_ALLOWED_VALUES", "TO_OUTSIDE_ALLOWED_VALUES",
+            "DIRECTION_OUTSIDE_ALLOWED_VALUES", "MISSING_FROM_VALUE", "MISSING_TO_VALUE",
+            "NOOP_INTERVENTION", "PRIMARY_NOT_IN_INTERVENTIONS", "DUPLICATE_INTERVENTION",
+        ],
+        "samples": {
+            "a_vs_b": analyze_causal_pair(a, b, model, profile=GENERAL_PROFILE),
+            "a_vs_a": analyze_causal_pair(a, c, model, profile=GENERAL_PROFILE),
+        },
+        "frozen_fingerprint": frozen_model_fingerprint(model),
+        "contracts_checked": [
+            "rejection code CAUSAL_PROPOSAL_REJECTED on invalid proposals (no silent repair)",
+            "None/str tuples never sorted together",
+            "causally-equal proposals with different wording -> same hash",
+            "NFKC/casefold/bool/numeric(0=='0'=='0.0')/key-order normalization",
+            "frozen model fingerprint stable",
+            "critical axes force structural difference",
+            "sensitivity analysis +/-10% per feature",
+        ],
+    }
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        out = os.path.join(tmp, "regen.json")
+        with open(out, "w", encoding="utf-8", newline="\n") as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        after = open(out, "rb").read()
+    assert after == expected, (
+        f"regeneración diverge del golden tracked ({len(after)}B vs {len(expected)}B)"
+    )

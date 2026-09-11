@@ -1,6 +1,7 @@
 """Tests for the six-stage chain (HIPERMEGAPROMPT §7)."""
 from __future__ import annotations
 
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -19,6 +20,7 @@ from criba.chain import (
     Stage6Output,
     StageStatus,
 )
+from criba.storage import Storage
 
 
 def _packet() -> dict[str, Any]:
@@ -210,7 +212,7 @@ class TestHumanReview:
         runner = ChainRunner()
         reviews = {
             2: HumanDecisionRecord(
-                chain_id="test",
+                chain_id="",
                 stage=2,
                 decision="reject",
                 rationale="Bad output",
@@ -226,7 +228,7 @@ class TestHumanReview:
         runner = ChainRunner()
         reviews = {
             1: HumanDecisionRecord(
-                chain_id="test",
+                chain_id="",
                 stage=1,
                 decision="approve_stage",
                 rationale="Looks good",
@@ -273,3 +275,43 @@ class TestStageTransitionValidation:
         runner = ChainRunner()
         # Should not raise.
         runner._validate_transition(StageStatus.PENDING, StageStatus.RUNNING)
+
+
+class TestStrictReviewAndColdReconstruction:
+    def test_strict_mode_stops_without_human_review(self) -> None:
+        runner = ChainRunner()
+        outputs, memory = runner.run_chain(_packet(), require_human_review=True)
+        assert list(outputs) == [1]
+        assert memory.status == StageStatus.AWAITING_HUMAN_REVIEW
+
+    def test_review_for_another_chain_is_rejected(self, tmp_path: Path) -> None:
+        runner = ChainRunner(Storage(tmp_path / "chain.sqlite3"))
+        review = HumanDecisionRecord(chain_id="other-chain", stage=1, decision="approve_stage")
+        with pytest.raises(ValueError, match="otra cadena"):
+            runner.run_chain(_packet(), human_reviews={1: review})
+
+    def test_persistence_includes_outputs_reviews_and_idempotent_rehydration(
+        self, tmp_path: Path,
+    ) -> None:
+        storage = Storage(tmp_path / "chain.sqlite3")
+        runner = ChainRunner(storage)
+        reviews = {
+            stage: HumanDecisionRecord(stage=stage, decision="approve_stage")
+            for stage in range(1, 7)
+        }
+        outputs, memory = runner.run_chain(
+            _packet(), human_reviews=reviews, require_human_review=True,
+        )
+        assert len(outputs) == 6
+        assert memory.status == StageStatus.COMPLETED
+        reconstructed = runner.cold_reconstruct(memory.chain_id)
+        assert len(reconstructed["outputs"]) == 6
+        assert len(reconstructed["reviews"]) == 6
+
+        request = runner.request_rehydration(
+            memory, source_stage=2, finding_id="", required_detail="evidence", reason="audit",
+        )
+        first = runner.rehydrate(request)
+        second = runner.rehydrate(request)
+        assert first == second
+        assert first["detail"]
