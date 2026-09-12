@@ -404,12 +404,23 @@ def _compute_metrics(results: Sequence[PersonaResult]) -> EnsembleMetrics:
     # Disagreement value: ratio of unique recommendations.
     unique_recs = len({_recommendation_text(r).strip().casefold() for r in results})
     disagreement_value = unique_recs / len(results) if results else 0.0
-    # Evidence coverage: fraction of personas with evidence.
+    # Evidence coverage: count evidence-bearing contributions from every persona.
+    evidence_fields = (
+        "confirmed_facts",
+        "supporting_evidence",
+        "evidence_status",
+        "evidence_quality",
+        "evidence_required",
+        "validation_needed",
+        "falsification_tests",
+    )
     with_evidence = sum(
-        1 for r in results
-        if hasattr(r.output, "confirmed_facts") and getattr(r.output, "confirmed_facts", [])
+        1
+        for result in results
+        if any(bool(getattr(result.output, field, None)) for field in evidence_fields)
     )
     evidence_coverage = with_evidence / len(results) if results else 0.0
+
     # Hypothesis coverage: fraction of personas with hypotheses.
     with_hypothesis = sum(
         1 for r in results
@@ -463,8 +474,16 @@ def run_ensemble(
     regeneration_triggered = False
     if should_regen and max_regenerations > 0:
         regeneration_triggered = True
-        # Attempt regeneration (one pass; could be extended).
-        results = run_personas(packet, backend=backend)
+        # Change the generation conditions explicitly.  A second call with the
+        # identical packet is not regeneration: deterministic backends would
+        # receive the same prompt and reproduce the same failure.
+        regeneration_packet = dict(packet)
+        regeneration_packet["_regeneration_attempt"] = 1
+        regeneration_packet["_regeneration_instruction"] = (
+            "Busca mecanismos alternativos, incertidumbres explícitas y contraejemplos; "
+            "no repitas la recomendación anterior."
+        )
+        results = run_personas(regeneration_packet, backend=backend)
         protocol_val = validate_team_protocol(results)
         minority_report = _build_minority_report(results, protocol_val)
 

@@ -44,6 +44,19 @@ class TestGenerationBudget:
         budget.spend(tokens=100)
         assert budget.exhausted is True
 
+    def test_overrun_is_atomic(self) -> None:
+        budget = GenerationBudget(maximum_tokens=100, maximum_latency_ms=100)
+        budget.spend(tokens=80, latency_ms=20)
+        with pytest.raises(BudgetExceededError):
+            budget.spend(tokens=21, latency_ms=81)
+        assert budget.tokens_spent == 80
+        assert budget.latency_ms_spent == 20
+
+    def test_negative_spend_is_rejected(self) -> None:
+        budget = GenerationBudget()
+        with pytest.raises(ValueError, match="no puede ser negativo"):
+            budget.spend(tokens=-1)
+
 
 class TestBatchPlan:
     def test_default_batch(self) -> None:
@@ -118,6 +131,15 @@ class TestLatencyScheduler:
         scheduler = LatencyScheduler(budget=GenerationBudget(maximum_tokens=100))
         with pytest.raises(BudgetExceededError):
             scheduler.record_spend(tokens=200)
+
+    def test_percentiles_use_observed_samples(self) -> None:
+        scheduler = LatencyScheduler()
+        for sample in (10.0, 30.0, 20.0):
+            scheduler.record_latency(sample)
+        metrics = scheduler.finalize_metrics()
+        assert metrics.p50_ms == 20.0
+        assert metrics.p95_ms == 30.0
+        assert metrics.p99_ms == 30.0
 
 
 class TestBudgetExceededError:

@@ -19,7 +19,7 @@ from ..engine import activate
 from .ranking import RankingModel
 from .widgets import set_chip
 
-MUTATORS = ("navNuevaIdea", "navGenerar", "navInventar", "navEvaluar", "navGuardar", "navActualizar")
+MUTATORS = ("navNuevaIdea", "navGenerar", "navInventar", "navEvaluar", "navRed")
 
 
 class _Signals(QObject):
@@ -132,10 +132,11 @@ def enter_s1(win: Any) -> None:
             "navGenerar": False,
             "navInventar": False,
             "navEvaluar": False,
-            "navGuardar": False,
-            "navActualizar": True,
+            "navRed": False,
+            "navRed": True,
             "navHistorial": True,
             "navBlackforge": True,
+            "navSupra": True,
         },
     )
     _suggest(win, "navNuevaIdea")
@@ -199,10 +200,10 @@ def _apply_new_problem(win: Any, problem: str) -> None:
             "navGenerar": True,
             "navInventar": True,
             "navEvaluar": False,
-            "navGuardar": False,
-            "navActualizar": True,
+            "navRed": False,
             "navHistorial": True,
             "navBlackforge": True,
+            "navSupra": True,
         },
     )
     _suggest(win, "navGenerar")
@@ -230,6 +231,19 @@ def on_generar(win: Any) -> None:
     win.nav["navGenerar"].set_state("running", "Ejecutando operadores...")
     r["stages"]["stageGenerar"].set_state("active", spinning=True)
     _activity(win, "blue", "Generación iniciada (16 operadores)")
+    
+    # Crear/mostrar label de progreso
+    if not hasattr(win, '_progress_label') or not win._progress_label:
+        from PySide6.QtWidgets import QLabel, QVBoxLayout
+        from PySide6.QtCore import Qt
+        win._progress_label = QLabel("⏳ Generando ideas...")
+        win._progress_label.setObjectName("progressLabel")
+        win._progress_label.setAlignment(Qt.AlignCenter)
+        # Añadir al layout central si existe
+        if hasattr(win, 'content_layout'):
+            win.content_layout.insertWidget(0, win._progress_label)
+    win._progress_label.show()
+    
     worker = Worker(lambda: _generate_criba_packet(win.problem))
     worker.signals.done.connect(lambda packet: _on_generated(win, packet))
     worker.signals.fail.connect(
@@ -246,6 +260,9 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
     r["stages"]["stageGenerar"].set_state("done")
     r["connectors"][1].set_lit(True)
     r["stages"]["stageEvaluar"].set_state("active")
+    # Ocultar spinner de progreso
+    if hasattr(win, '_progress_label') and win._progress_label:
+        win._progress_label.hide()
     r["mOperadores"].set_value("16/16")
     r["mIdeas"].set_value(str(len(ideas)))
     _activity(
@@ -281,8 +298,8 @@ def _on_generated(win: Any, packet: dict[str, Any]) -> None:
             "navGenerar": True,
             "navInventar": True,
             "navEvaluar": True,
-            "navGuardar": False,
-            "navActualizar": True,
+            "navRed": False,
+            "navRed": True,
             "navHistorial": True,
             "navBlackforge": True,
         },
@@ -467,13 +484,13 @@ def _on_evaluated(win: Any, rows: list[dict[str, Any]]) -> None:
             "navGenerar": True,
             "navInventar": True,
             "navEvaluar": True,
-            "navGuardar": True,
-            "navActualizar": True,
+            "navRed": True,
             "navHistorial": True,
             "navBlackforge": True,
+            "navSupra": True,
         },
     )
-    _suggest(win, "navGuardar")
+    _suggest(win, "navRed")
 
 
 def _update_charts(win: Any, rows: list[dict[str, Any]]) -> None:
@@ -528,7 +545,7 @@ def _update_charts(win: Any, rows: list[dict[str, Any]]) -> None:
 # S6 — GUARDADO COMPLETADO
 # ---------------------------------------------------------------------------
 def on_guardar(win: Any) -> None:
-    win.nav["navGuardar"].setChecked(False)
+    win.nav["navRed"].setChecked(False)
     if not win.packet:
         show_error(win, "Guardar", "No hay evaluación que guardar.")
         return
@@ -540,10 +557,10 @@ def on_guardar(win: Any) -> None:
             {"gui": True, "screen": "innovacion"},
         )
     except Exception as exc:  # noqa: BLE001
-        on_operation_error(win, "navGuardar", "stageGuardar", str(exc))
+        on_operation_error(win, "navRed", "stageGuardar", str(exc))
         return
     win.saved_ids.add(ident)
-    win.nav["navGuardar"].set_state("done")
+    win.nav["navRed"].set_state("done")
     r["stages"]["stageGuardar"].set_state("done")
     r["connectors"][3].set_lit(True)
     r["stages"]["stageEvolucionar"].set_state("active")
@@ -552,7 +569,7 @@ def on_guardar(win: Any) -> None:
     model.mark_saved(0)
     title = r["ideaTitle"].text()
     _activity(win, "success", f"Idea guardada en catálogo: {title[:60]}")
-    win.nav["navGuardar"].setEnabled(False)  # OFF† hasta cambiar selección
+    win.nav["navRed"].setEnabled(False)  # OFF† hasta cambiar selección
     _suggest(win, None)
 
 
@@ -613,10 +630,10 @@ def _refresh_queries(problem: str) -> list[str]:
 
 
 def on_actualizar(win: Any) -> None:
-    win.nav["navActualizar"].setChecked(False)
+    win.nav["navRed"].setChecked(False)
     r = win.refs
     _lock_mutators(win)
-    win.nav["navActualizar"].set_state("running", "Adquiriendo fuentes...")
+    win.nav["navRed"].set_state("running", "Adquiriendo fuentes...")
     r["actualizarFuentesBtn"].setEnabled(False)
     r["actualizarFuentesBtn"].setText("Actualizando fuentes...")
 
@@ -637,7 +654,7 @@ def on_actualizar(win: Any) -> None:
     worker = Worker(_job)
     worker.signals.done.connect(lambda report: _on_sources_updated(win, report))
     worker.signals.fail.connect(
-        lambda msg: on_operation_error(win, "navActualizar", None, msg)
+        lambda msg: on_operation_error(win, "navRed", None, msg)
     )
     _start_worker(win, worker)
 
@@ -654,7 +671,7 @@ def _on_sources_updated(win: Any, report: dict[str, Any]) -> None:
         bar = r["sourceBars"].get(summary["source_id"])
         if bar is not None and hasattr(bar, "set_percent"):
             bar.set_percent(min(100, summary["documents"] * 10))
-    win.nav["navActualizar"].set_state("done")
+    win.nav["navRed"].set_state("done")
     r["actualizarFuentesBtn"].setEnabled(True)
     r["actualizarFuentesBtn"].setText("Actualizar fuentes")
     r["staleBand"].hide()
@@ -717,8 +734,8 @@ def _restore_buttons_after_op(win: Any) -> None:
             "navGenerar": has_problem,
             "navInventar": has_problem,
             "navEvaluar": has_packet,
-            "navGuardar": has_packet,
-            "navActualizar": True,
+            "navRed": has_packet,
+            "navRed": True,
             "navHistorial": True,
             "navBlackforge": True,
         },
@@ -732,7 +749,7 @@ def on_hibrido(win: Any) -> None:
     """Ejecuta el pipeline híbrido completo: ensemble → cadena → adversarial."""
     from ..hybrid import run_hybrid
 
-    win.nav["navHibrido"].setChecked(False)
+    win.nav["navSupra"].setChecked(False)
     if not win.problem:
         show_error(win, "Híbrido", "Define primero el problema base (Nueva idea).")
         return
@@ -759,14 +776,14 @@ def on_hibrido(win: Any) -> None:
     r = win.refs
     _lock_mutators(win)
     _suggest(win, None)
-    win.nav["navHibrido"].set_state("running", "Ejecutando pipeline híbrido...")
+    win.nav["navSupra"].set_state("running", "Ejecutando pipeline híbrido...")
     r["stages"]["stageGenerar"].set_state("active", spinning=True)
     _activity(win, "cyan", "Pipeline híbrido iniciado (ensemble → cadena → adversarial)")
 
     worker = Worker(lambda: run_hybrid(packet, storage=win.store))
     worker.signals.done.connect(lambda result: _on_hibrido_done(win, result))
     worker.signals.fail.connect(
-        lambda msg: on_operation_error(win, "navHibrido", "stageGenerar", msg)
+        lambda msg: on_operation_error(win, "navSupra", "stageGenerar", msg)
     )
     _start_worker(win, worker)
 
@@ -781,7 +798,7 @@ def _on_hibrido_done(win: Any, result: Any) -> None:
         return
 
     r = win.refs
-    win.nav["navHibrido"].set_state("done")
+    win.nav["navSupra"].set_state("done")
     r["stages"]["stageGenerar"].set_state("done")
     r["connectors"][1].set_lit(True)
     r["stages"]["stageEvaluar"].set_state("done")
@@ -942,6 +959,42 @@ def on_memoria(win: Any) -> None:
         show_outcome_memory(win)
     finally:
         win.nav["navMemoria"].setChecked(False)
+    _suggest(win, None)
+
+
+def on_red(win: Any) -> None:
+    """Panel de Red de Ideas — grafo de relaciones entre ideas generadas."""
+    win.nav["navRed"].setChecked(True)
+    try:
+        if not win.packet or not win.packet.get("innovation", {}).get("ideas"):
+            show_error(win, "Red de Ideas", "Genera primero ideas (pestaña Generar).")
+            return
+        from ..scoring.network import IdeaNetwork
+        ideas = win.packet["innovation"]["ideas"]
+        network = IdeaNetwork()
+        network.build_from_ideas(ideas)
+        summary = network.summary()
+        win.content_label.setText("Red de Ideas")
+        win.content_sub.setText(
+            f"Nodos: {summary['n_ideas']} | Relaciones: {summary['n_relationships']} | "
+            f"Familias: {summary['n_families']}"
+        )
+    finally:
+        win.nav["navRed"].setChecked(False)
+    _suggest(win, None)
+
+
+def on_supra(win: Any) -> None:
+    """Panel SUPRA — taskmaster orquestador."""
+    win.nav["navSupra"].setChecked(True)
+    try:
+        if not win.problem:
+            show_error(win, "SUPRA", "Define primero el problema base (Nueva idea).")
+            return
+        win.content_label.setText("SUPRA Taskmaster")
+        win.content_sub.setText("Ejecutando pipeline de 5 etapas...")
+    finally:
+        win.nav["navSupra"].setChecked(False)
     _suggest(win, None)
 
 

@@ -23,6 +23,7 @@ import sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "src"))
 
 from criba import blackforge_safety as sf
+from criba.blackforge_safety import AuthorizationState
 from criba.blackforge_catalog import get
 
 ROOT = os.path.join(os.path.dirname(__file__), "..", "..")
@@ -102,6 +103,18 @@ def test_decision_record_has_all_fields():
               "unmet_requirements", "allowed_scope", "session_id", "timestamp"):
         assert f in dct and dct[f] is not None
     assert dct["timestamp"].startswith("2025-07-24")
+
+
+def test_authorization_state_is_enum_and_serialized():
+    item = dict(get("BF-CYB-S800-0670"))
+    d = sf.evaluate_blackforge_safety(
+        item,
+        _ctx(authorization_state="granted"),
+        clock=FIXED_CLOCK,
+        session_id="enum-state",
+    )
+    assert d.authorization_state is AuthorizationState.GRANTED
+    assert d.to_dict()["authorization_state"] == "granted"
 
 
 def test_no_prohibited_action_yields_allow():

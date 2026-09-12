@@ -15,7 +15,9 @@ from criba.gates import (
     G12_output_contract_valid,
     RetryClassification,
     RetryPolicy,
+    ShadowComparison,
     Verdict,
+    compare_shadow_results,
     evaluate_gates,
 )
 from criba.output_format import CribaOutput
@@ -95,6 +97,26 @@ def test_G12_output_limits_valid():
     assert G12_output_contract_valid(CribaOutput()).passed is True
 
 
+def test_shadow_comparison_ignores_only_declared_volatile_fields():
+    baseline = {"activation_id": "a", "timestamp": "t1", "result": {"score": 0.8}}
+    candidate = {"activation_id": "b", "timestamp": "t2", "result": {"score": 0.8}}
+    comparison = compare_shadow_results(baseline, candidate)
+    assert isinstance(comparison, ShadowComparison)
+    assert comparison.equivalent is True
+    assert comparison.baseline_hash == comparison.candidate_hash
+    assert baseline["activation_id"] == "a"
+
+
+def test_shadow_comparison_reports_semantic_difference():
+    comparison = compare_shadow_results(
+        {"result": {"score": 0.8}},
+        {"result": {"score": 0.7}},
+    )
+    assert comparison.equivalent is False
+    assert "result.score" in comparison.differences
+    assert comparison.baseline_hash != comparison.candidate_hash
+
+
 # ---------------------------------------------------------------------------
 # Verdict logic
 # ---------------------------------------------------------------------------
@@ -150,6 +172,7 @@ def test_G04_blackforge_with_authorization_passes():
         "normalized_query": "pentest autorizado de api interna",
         "central_problem": "posible idor en endpoint /account",
         "authorized_environment": True,
+        "authorization_state": "granted",
         "authorization_scope": "lab-interno-api",
         "stop_conditions": ["detener si se degrada producción"],
     }
@@ -157,15 +180,40 @@ def test_G04_blackforge_with_authorization_passes():
     assert res.passed is True
 
 
+def test_G04_explicit_denied_state_fails_closed():
+    ctx = {
+        "context_id": "ctx_bf002-denied", "mode": "blackforge",
+        "authorization_state": "denied",
+        "authorized_environment": True,
+        "authorization_scope": "lab-interno-api",
+        "stop_conditions": ["stop"],
+    }
+    res = G04_authorization_valid(ctx)
+    assert res.passed is False
+
+
+def test_G04_granted_state_still_requires_scope():
+    ctx = {
+        "context_id": "ctx_bf002-granted", "mode": "blackforge",
+        "authorization_state": "granted",
+        "authorized_environment": False,
+        "authorization_scope": "",
+        "stop_conditions": [],
+    }
+    res = G04_authorization_valid(ctx)
+    assert res.passed is False
+
+
 def test_metamorphic_remove_authorization_blocks():
     """Metamorphic test (§10.8): removing authorization must block offensive action."""
     base = {
         "context_id": "ctx_bf003", "mode": "blackforge",
-        "authorized_environment": True, "authorization_scope": "lab",
+        "authorized_environment": True, "authorization_state": "granted", "authorization_scope": "lab",
         "stop_conditions": ["stop"],
     }
     assert G04_authorization_valid(base).passed is True
     no_auth = dict(base, authorized_environment=False, authorization_scope="")
+    no_auth.pop("authorization_state")
     assert G04_authorization_valid(no_auth).passed is False
 
 

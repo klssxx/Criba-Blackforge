@@ -160,3 +160,55 @@ class TestSummarize:
         assert summary["explicit_feedback_count"] == 1
         assert summary["implicit_feedback_count"] == 1
         assert summary["composite"] == 0.0
+
+    def test_explicit_feedback_is_validated_and_recorded(self) -> None:
+        collector = MetricsCollector()
+        collector.record_explicit_feedback(ExplicitFeedback(useful=True, score=0.8))
+        collector.record_implicit_feedback(ImplicitFeedback(idea_opened="idea_1"))
+        assert collector.feedback_signal() == 0.8
+        assert collector.summarize()["feedback_signal"] == 0.8
+
+    def test_invalid_explicit_score_is_rejected(self) -> None:
+        import pytest
+        with pytest.raises(ValueError, match="entre 0 y 1"):
+            ExplicitFeedback(score=1.1)
+
+    def test_implicit_feedback_does_not_improve_quality_signal(self) -> None:
+        collector = MetricsCollector()
+        collector.record_implicit_feedback(ImplicitFeedback(idea_saved="idea_1"))
+        assert collector.feedback_signal() == 0.0
+
+    def test_gate_and_log_evidence_are_ingested(self) -> None:
+        collector = MetricsCollector()
+        collector.ingest_gate_report({
+            "results": [
+                {"gate_id": "G01_schema_valid", "passed": False},
+                {"gate_id": "G10_trace_complete", "passed": False},
+            ]
+        })
+        collector.ingest_log_summary({"integrity": {"chain_intact": False}, "retries": 2})
+        assert collector.process_metrics is not None
+        assert collector.process_metrics.schema_failures == 1
+        assert collector.process_metrics.traceability_failures == 2
+        assert collector.process_metrics.retries == 2
+
+    def test_quality_breakdown_exposes_formula_and_missing_inputs(self) -> None:
+        collector = MetricsCollector()
+        collector.generation_metrics = GenerationMetrics(
+            relevance=0.8, mechanism_specificity=0.6,
+            semantic_diversity=0.7, structural_diversity=0.5,
+        )
+        breakdown = collector.quality_breakdown()
+        assert breakdown["formula_version"] == "quality-score-v1"
+        assert breakdown["components"]["diversity"] == 0.6
+        assert "feasibility" in breakdown["missing_components"]
+        assert 0.0 <= breakdown["score"] <= 1.0
+
+    def test_negative_explicit_feedback_blocks_promotion(self) -> None:
+        collector = MetricsCollector()
+        collector.generation_metrics = GenerationMetrics(semantic_diversity=0.9, relevance=0.9)
+        collector.process_metrics = ProcessMetrics(schema_failures=0)
+        collector.record_explicit_feedback(ExplicitFeedback(useful=False, score=0.1))
+        status, reasons = collector.evaluate_promotion({"semantic_diversity": 0.7})
+        assert status == PromotionStatus.REJECTED
+        assert "negative_explicit_feedback" in reasons
